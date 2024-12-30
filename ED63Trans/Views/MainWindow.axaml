@@ -1,0 +1,201 @@
+<Window
+    x:Class="ED63Trans.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avaloniaEdit="https://github.com/avaloniaui/avaloniaedit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:ED63Trans.Views"
+    xmlns:vm="using:ED63Trans.ViewModels"
+    xmlns:behaviors="clr-namespace:ED63Trans.Behaviors"
+    Title="ED63Trans"
+    Width="1600"
+    Height="900"
+    d:DesignHeight="460"
+    d:DesignWidth="760"
+    x:DataType="vm:MainWindowViewModel"
+    FontFamily="Microsoft YaHei,SimSun"
+    Foreground="#d0d0d0"
+    Icon="/Assets/avalonia-logo.ico"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition MaxWidth="450" />
+        </Grid.ColumnDefinitions>
+        <TabControl>
+            <TabItem Header="字体">
+                <Grid ColumnDefinitions="*,120">
+                    <ScrollViewer>
+                        <Grid>
+                            <StackPanel Margin="5" Spacing="2">
+                                <TextBox
+                                    Text="{Binding FontName}"
+                                    UseFloatingWatermark="True"
+                                    Watermark="字体名称" />
+                                <UniformGrid Columns="6">
+                                    <TextBox
+                                        Text="{Binding HalfCharSize}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="半角字体尺寸" />
+                                    <TextBox
+                                        Margin="2,0"
+                                        Text="{Binding HalfCharWidthScale}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="半角宽度缩放" />
+                                    <TextBox
+                                        Margin="2,0"
+                                        Text="{Binding WideHalfCharWidthScale}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="宽半角宽度缩放(W/M)" />
+                                    <TextBox
+                                        Text="{Binding HalfCharHeightScale}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="半角高度缩放" />
+                                    <TextBox
+                                        Margin="2,0"
+                                        Text="{Binding HalfCharXOffset}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="半角X偏移" />
+                                    <TextBox
+                                        Text="{Binding HalfCharYOffset}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="半角Y偏移" />
+                                </UniformGrid>
+                                <UniformGrid Columns="3">
+                                    <TextBox
+                                        Text="{Binding FontSize}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="全角字体尺寸" />
+                                    <TextBox
+                                        Margin="2,0"
+                                        Text="{Binding CharXOffset}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="全角X偏移" />
+                                    <TextBox
+                                        Text="{Binding CharYOffset}"
+                                        UseFloatingWatermark="True"
+                                        Watermark="全角Y偏移" />
+                                </UniformGrid>
+
+                                <TextBox
+                                    Text="{Binding PixelSize}"
+                                    UseFloatingWatermark="True"
+                                    Watermark="像素尺寸" />
+                                <CheckBox Content="粗体" IsChecked="{Binding IsBold}" />
+                                <DockPanel>
+                                    <views:SoraFontViewer
+                                        Width="{Binding PixelSize}"
+                                        Height="{Binding PixelSize}"
+                                        Margin="0,2,0,0"
+                                        Data="{Binding PreviewData}"
+                                        DockPanel.Dock="Bottom"
+                                        IsHalfChar="{Binding PreviewDataIsHalfChar}"
+                                        PixelSize="{Binding PixelSize}" />
+                                    <Button
+                                        Margin="5,0,0,0"
+                                        Command="{Binding PreviewCommand}"
+                                        CommandParameter="{Binding #previewTextBox.Text}"
+                                        Content="预览"
+                                        DockPanel.Dock="Right" />
+                                    <TextBox
+                                        Name="previewTextBox"
+                                        Text="Ⅹ"
+                                        UseFloatingWatermark="True"
+                                        Watermark="预览文本(单字): " />
+                                </DockPanel>
+                                <Button
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Center"
+                                    Command="{Binding CreateSoraFontCommand}"
+                                    Content="制作Sora字体" />
+                                <Button
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Center"
+                                    Command="{Binding OpenFontDirCommand}"
+                                    Content="打开字体目录" />
+                                <Button
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Center"
+                                    Command="{Binding AddCurrentPixelSizeFontFileToGameCommand}"
+                                    Content="导入当前尺寸字体文件到游戏" />
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                    <Grid
+                        Grid.Column="1"
+                        Margin="4"
+                        RowDefinitions="auto,*,Auto">
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            Foreground="Gray"
+                            Text="{Binding ReplaceCharsLineCount, StringFormat='共{0}行'}" />
+                        <avaloniaEdit:TextEditor Grid.Row="1" Margin="0,2,0,2">
+                            <Interaction.Behaviors>
+                                <behaviors:DocumentTextBindingBehavior Text="{Binding ReplaceChars, Mode=TwoWay}" />
+                            </Interaction.Behaviors>
+                        </avaloniaEdit:TextEditor>
+                        <Button
+                            Grid.Row="2"
+                            Command="{Binding SaveReplaceCharsCommand}"
+                            Content="保存字符替换表" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="翻译" IsSelected="True">
+                <views:TranslatePage />
+            </TabItem>
+            <TabItem Header="Monster" IsSelected="True">
+                <views:MsTransView DataContext="{Binding MsTransViewModel}"/>
+            </TabItem>
+            <TabItem Header="设置">
+                <StackPanel Spacing="2">
+                    <TextBox
+                        Text="{Binding XseedGamePath}"
+                        UseFloatingWatermark="True"
+                        Watermark="XSEED游戏目录" />
+                    <TextBox
+                        Text="{Binding YltScriptPath}"
+                        UseFloatingWatermark="True"
+                        Watermark="娱乐通脚本目录" />
+                    <TextBox
+                        Text="{Binding TransScriptSavePath}"
+                        UseFloatingWatermark="True"
+                        Watermark="翻译脚本保存目录" />
+                    <TextBox
+                        Text="{Binding AureoleToolPath}"
+                        UseFloatingWatermark="True"
+                        Watermark="Aureole工具目录" />
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding SaveSettingsCommand}"
+                        Content="保存设置" />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <TextBox
+            Grid.Column="1"
+            Margin="5"
+            FontSize="12"
+            IsReadOnly="True"
+            Text="{Binding Log}"
+            TextChanged="TextBox_OnTextChanged"
+            UseFloatingWatermark="True"
+            Watermark="日志" />
+        <Button
+            Grid.Column="1"
+            Margin="10"
+            Padding="4,2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Command="{Binding ClearLogCommand}"
+            Content="清空"
+            FontSize="10" />
+    </Grid>
+</Window>
