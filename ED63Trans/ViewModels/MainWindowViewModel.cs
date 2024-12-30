@@ -128,9 +128,30 @@ public partial class MainWindowViewModel : ViewModelBase
             OpenClmFile(file);
         }
 
-        // ConvertSn_2(
-        //     "C:\\Users\\Jelly\\Desktop\\ED6_DT21\\raw_m7408_1.clm",
-        //     "C:\\Users\\Jelly\\Desktop\\ED6_DT21\\m7408_1.clm");
+        // 更改字体尺寸
+        // var files = Directory.EnumerateFiles("C:\\Users\\Jelly\\Desktop\\ED6SCRIPT\\ED6_DT21_初版1", "*.clm");
+        //
+        // foreach (var f in files)
+        // {
+        //     if (f.Contains("raw_"))
+        //         continue;
+        //     
+        //     var text = File.ReadAllText(f);
+        //     if (!Regex.IsMatch(text, "#[4-5]S"))
+        //         continue;
+        //     var new_text= Regex.Replace(text, "#[4-5]S", "#3S");
+        //     var outFile = "C:\\Users\\Jelly\\Desktop\\ED6SCRIPT\\ED6_DT21_尺寸修正2\\"+Path.GetFileName(f);
+        //     File.WriteAllText(outFile,new_text);
+        //     var tool = Path.Combine(AureoleToolPath ?? "", "calmare.exe");
+        //     ExecuteTool(tool, $"\"{outFile}\"");
+        // }
+
+
+
+
+        ConvertSn_2(
+            "C:\\Users\\Jelly\\Desktop\\ED6_DT21\\raw_e1110.clm",
+            "C:\\Users\\Jelly\\Desktop\\ED6_DT21\\e1110.clm");
 
         //foreach (var sn in Directory.EnumerateFiles("C:\\Users\\Jelly\\Desktop\\scena"))
         //{

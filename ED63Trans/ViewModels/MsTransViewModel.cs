@@ -66,6 +66,8 @@ public partial class MsTransViewModel: ViewModelBase
         var f2 = $"E:\\Games\\ED63RD\\ED_SORA3\\ED6_DT30\\{Path.GetFileName(f1)}";
         GetTexts(f1,f2);
     }
+
+    private string str = "";
     [RelayCommand]
     private void NextMs()
     {
@@ -79,6 +81,12 @@ public partial class MsTransViewModel: ViewModelBase
         var f1 = _msDatFiles[index];
         var f2 = $"E:\\Games\\ED63RD\\ED_SORA3\\ED6_DT30\\{Path.GetFileName(f1)}";
         GetTexts(f1,f2);
+        
+        // str = str+CurrentDat+"\n"+XseedText+YltText+"\n";
+        // if (CurrentDat.Contains("32360"))
+        // {
+        //     File.WriteAllText("C:\\Users\\Jelly\\Desktop\\ED6SCRIPT\\ms.txt",str);
+        // }
     }
 
     public void Reset()
@@ -280,7 +288,7 @@ public partial class MsTransViewModel: ViewModelBase
         for (var index = 0; index < xTexts.Count; index++)
         {
             var text = xTexts[index];
-            if (text.Text.Contains("R-Ty") || text.Text.Contains("Rod An") )
+            if (text.Text.Contains("R-Ty") || text.Text.ToLower().Contains("wind f") )
             {
                 //Rod Angel ms14890
                 
@@ -295,7 +303,7 @@ public partial class MsTransViewModel: ViewModelBase
         for (var index = 0; index < yTexts.Count; index++)
         {
             var text = yTexts[index];
-            if (text.Text.Contains("仙女"))
+            if (text.Text.Contains("钢鳞"))
             {
                 
             }

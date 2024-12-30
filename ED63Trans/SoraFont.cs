@@ -216,7 +216,7 @@ public class SoraFont
 
         if (isHalfChar)
         {
-            if (code is 0x2f)
+            if (code is 0x2f)   //  0x2f = /
             {
                 var margin = new SKRect();
                 margin.Left += ((float)pixelSize / 2 - bounds.Width * HalfCharWidthScale) / 2;

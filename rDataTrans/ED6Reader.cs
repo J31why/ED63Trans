@@ -26,7 +26,7 @@ internal class ED6Reader : MemoryStream
     public List<AsmMatch> AsmMatches = [];
     public Section[] Sections = [];
     public int PeEnd = 0;
-
+    public Dictionary<uint, uint> FontAddrs = [];
     public static readonly string[] Pattern =
         [
         "c7 04 24 ?? ?? ?? 00",
@@ -46,18 +46,21 @@ internal class ED6Reader : MemoryStream
 
     static ED6Reader()
     {
-        for (int i = 0; i < Pattern.Length; i++)
+        ConvertPattern(Pattern, ref PatternArray);
+    }
+    private static void ConvertPattern(string[] p,ref  short[][] pArray)
+    {
+        for (int i = 0; i < p.Length; i++)
         {
-            string pattern = Pattern[i].Trim();
+            string pattern = p[i].Trim();
             var hex = pattern.Split(" ");
-            PatternArray[i] = new short[hex.Length];
+            pArray[i] = new short[hex.Length];
             for (int j = 0; j < hex.Length; j++)
             {
-                PatternArray[i][j] = hex[j] == "??" ? (short)-1 : Convert.ToInt16(hex[j], 16);
+                pArray[i][j] = hex[j] == "??" ? (short)-1 : Convert.ToInt16(hex[j], 16);
             }
         }
     }
-
     public ED6Reader(byte[] data) : base(data)
     {
     }
@@ -89,8 +92,73 @@ internal class ED6Reader : MemoryStream
         offset = 0;
         return false;
     }
+    internal bool MatchAddr (short[] pattern,out int offset)
+    {
+        var matchLen = 0;
+        while (Position < Length - 10) 
+        {
+            for (int i = 0; i < pattern.Length; i++)
+            {
+                var b = ReadByte();
+                if (b == pattern[i] || pattern[i] == -1)
+                {
+                    matchLen++;
+                    continue;
+                }
+                break;
+            }
+            if (matchLen == pattern.Length)
+            {
+                offset = (int)Position;
+                return true;
+            }
+            matchLen = 0;
+        }
 
-    internal void MatchAsm()
+        offset = 0;
+        return false;
+    }
+    internal void MatchFontAddrAsm()
+    {
+        string[] FontPattern =
+        [
+        "81 FF C0 00 00 00 75 20 FF B4 24 20 01 00 00 A1",//192
+        ];
+        short[][] FontPatternArray = new short[FontPattern.Length][];
+        ConvertPattern(FontPattern, ref FontPatternArray);
+        var pos = PeEnd;
+        base.Seek(pos, SeekOrigin.Begin);
+        if (!MatchAddr(FontPatternArray[0], out int offset))
+        {
+            return;
+        }
+        FontAddrs[192] = ReadUint();
+        FontAddrs[160] = FontAddrs[192] - 4;
+        FontAddrs[144] = FontAddrs[160] - 4;
+        FontAddrs[128] = FontAddrs[144] - 4;
+        FontAddrs[96] = FontAddrs[128] - 4;
+        FontAddrs[80] = FontAddrs[96] - 4;
+        FontAddrs[72] = FontAddrs[80] - 4;
+        FontAddrs[64] = FontAddrs[72] - 4;
+        FontAddrs[60] = FontAddrs[64] - 4;
+        FontAddrs[54] = FontAddrs[60] - 4;
+        FontAddrs[50] = FontAddrs[54] - 4;
+        FontAddrs[48] = FontAddrs[50] - 4;
+        FontAddrs[44] = FontAddrs[48] - 4;
+        FontAddrs[40] = FontAddrs[44] - 4;
+        FontAddrs[36] = FontAddrs[40] - 4;
+        FontAddrs[30] = FontAddrs[36] - 4;  //
+        FontAddrs[26] = FontAddrs[30] - 4;  //
+        FontAddrs[18] = FontAddrs[26] - 4;  //
+        FontAddrs[32] = FontAddrs[18] - 4;  //
+        FontAddrs[24] = FontAddrs[32] - 4;  //
+        FontAddrs[20] = FontAddrs[24] - 4;
+        FontAddrs[16] = FontAddrs[20] - 4;  //
+        FontAddrs[12] = FontAddrs[16] - 4;
+        FontAddrs[8] = FontAddrs[12] - 4;
+
+    }
+    internal void MatchTextAddrAsm()
     {
         AsmMatches.Clear();
         var pos = PeEnd;

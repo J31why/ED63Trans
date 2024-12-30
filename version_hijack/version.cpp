@@ -175,7 +175,10 @@ BOOL NsLoad()
     LoadLibraryW(L"PYG.DLL");
     return TRUE;
 }
-
+LONG WINAPI MyUnhandledExceptionFilter(EXCEPTION_POINTERS* ExceptionInfo) {
+    // 自定义异常处理逻辑，避免生成 .mdmp 文件
+    return EXCEPTION_CONTINUE_SEARCH;  // 让异常继续传播，或者选择 EXCEPTION_EXECUTE_HANDLER 进行处理
+}
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                       DWORD  ul_reason_for_call,
@@ -190,6 +193,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
             DisableThreadLibraryCalls(hModule);
             if ( !NsLoad() )
                 return FALSE;
+            SetUnhandledExceptionFilter(MyUnhandledExceptionFilter);
             const LPCUWSTR programPath = L"rdata\\rdata.exe";
             STARTUPINFO si = { sizeof(STARTUPINFO) };
             PROCESS_INFORMATION pi;

@@ -20,18 +20,19 @@ public static class Mem
     public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
     [DllImport("kernel32.dll", EntryPoint = "WriteProcessMemory")]
-    public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize,
+    public static extern bool WriteProcessMemory(IntPtr hProcess, uint lpBaseAddress, byte[] lpBuffer, int nSize,
         IntPtr lpNumberOfBytesWritten);
-
+    [DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory")]
+    public static extern bool ReadProcessMemory(IntPtr hProcess, uint lpBaseAddress, ref uint lpBuffer, int nSize, int lpNumberOfBytesRead);
     [DllImport("kernel32.dll")]
     public static extern void CloseHandle(IntPtr hObject);
 
     [DllImport("kernel32.dll", SetLastError = true)]
-    public static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress, uint dwSize, uint flAllocationType, uint flProtect);
+    public static extern IntPtr VirtualAllocEx(IntPtr hProcess, uint lpAddress, uint dwSize, uint flAllocationType, uint flProtect);
 
     [DllImport("KERNEL32.dll", ExactSpelling = true, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    public static extern bool VirtualProtectEx(IntPtr hProcess, IntPtr lpAddress, IntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
+    public static extern bool VirtualProtectEx(IntPtr hProcess, uint lpAddress, IntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     public static extern bool SetWindowText(IntPtr hWnd, string lpString);
@@ -78,25 +79,30 @@ public static class Mem
 
     public static IntPtr Alloc(uint size)
     {
-        return VirtualAllocEx(hProcess, IntPtr.Zero, size, MEM_COMMIT, PAGE_READWRITE);
+        return VirtualAllocEx(hProcess, 0, size, MEM_COMMIT, PAGE_READWRITE);
     }
-
+    public static bool ReadUint(uint addr, out uint result)
+    {
+        uint num = 0;
+        var ret=  ReadProcessMemory(hProcess, addr, ref num, 4, 0);
+        result = num;
+        return ret;
+    }
     public static bool Write(uint addr, byte[] newData, bool changeProtect)
     {
-        var p = new IntPtr(addr);
         bool result;
         uint old = 0;
         if (changeProtect)
         {
-            result = VirtualProtectEx(hProcess, p, newData.Length, PAGE_READWRITE, out old);
+            result = VirtualProtectEx(hProcess, addr, newData.Length, PAGE_READWRITE, out old);
             if (!result)
                 return false;
         }
-        result = WriteProcessMemory(hProcess, p, newData, newData.Length, IntPtr.Zero);
+        result = WriteProcessMemory(hProcess, addr, newData, newData.Length, IntPtr.Zero);
 
         if (changeProtect)
         {
-            VirtualProtectEx(hProcess, p, newData.Length, old, out old);
+            VirtualProtectEx(hProcess, addr, newData.Length, old, out old);
         }
         return result;
     }
