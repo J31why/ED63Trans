@@ -1,0 +1,249 @@
+﻿<UserControl
+    x:Class="ED63Trans.Views.TranslatePage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avaloniaEdit="https://github.com/avaloniaui/avaloniaedit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:ED63Trans.ViewModels"
+    xmlns:behaviors="clr-namespace:ED63Trans.Behaviors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="viewModels:MainWindowViewModel"
+    DropClmCommand="{Binding DropClmFileCommand}"
+    Foreground="#d0d0d0"
+    mc:Ignorable="d">
+	<Grid>
+		<Panel DragDrop.AllowDrop="True" IsVisible="{Binding !IsTranslating}">
+			<Panel.Styles>
+				<Style Selector="Rectangle.drag">
+					<Setter Property="StrokeThickness" Value="2" />
+					<Setter Property="Fill" Value="#06000000" />
+				</Style>
+			</Panel.Styles>
+			<Rectangle
+                Name="dragRect"
+                Margin="4"
+                Fill="Transparent"
+                RadiusX="6"
+                RadiusY="6"
+                Stroke="Gray"
+                StrokeDashArray="2"
+                StrokeDashOffset="2" />
+			<TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Text="拖动clm文件至此" />
+		</Panel>
+		<Grid ColumnDefinitions="*,120" RowDefinitions="Auto,*">
+			<DockPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+				<Button
+                    Margin="1"
+                    Padding="2"
+                    Command="{Binding CloseClmFileCommand}"
+                    Content="关闭文件"
+                    DockPanel.Dock="Right"
+                    FontSize="10" />
+				<Button
+                    Margin="1"
+                    Padding="2"
+                    Command="{Binding LocateClmFileCommand}"
+                    Content="定位源文件"
+                    DockPanel.Dock="Right"
+                    FontSize="10" />
+				<Button
+                    Margin="1"
+                    Padding="2"
+                    Command="{Binding OneKey2TransCommand}"
+                    Content="一键汉化"
+                    DockPanel.Dock="Right" />
+				<RepeatButton
+                    Margin="1"
+                    Padding="2"
+                    Command="{Binding NextClmFileCommand}"
+                    Content="下一个脚本"
+                    DockPanel.Dock="Right" />
+				<RepeatButton
+                    Margin="1"
+                    Padding="2"
+                    Command="{Binding PrevClmFileCommand}"
+                    Content="上一个脚本"
+                    DockPanel.Dock="Right" />
+				<Button
+                    Margin="1"
+                    Padding="2"
+                    Command="{Binding LoadOtherEddCommand}"
+                    Content="载入娱乐通脚本"
+                    DockPanel.Dock="Right" />
+				<Button
+					Margin="1"
+					Padding="2"
+					Command="{Binding SearchEddTextCommand}"
+					Content="搜索娱乐通文本"
+					DockPanel.Dock="Right" ></Button>
+				<TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="12"
+                    Foreground="#777777"
+                    Text="{Binding OpenedClm, StringFormat='当前文件: {0}'}" />
+			</DockPanel>
+			<Grid
+                Grid.Row="1"
+                Grid.Column="0"
+                ColumnDefinitions="*,*"
+                IsVisible="{Binding IsTranslating}"
+                RowDefinitions="Auto,Auto,*,auto,*,Auto">
+				<StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Orientation="Horizontal"
+                    Spacing="2">
+					<TextBlock VerticalAlignment="Center" Text="{Binding ClmCurrentParagraphIndex}" />
+					<TextBlock VerticalAlignment="Center" Text="/" />
+					<TextBlock VerticalAlignment="Center" Text="{Binding ClmMatchCount}" />
+					<RepeatButton
+                        Padding="6,2"
+                        Command="{Binding PrevClmParagraphCommand}"
+                        Content="↑" />
+					<RepeatButton
+                        Padding="6,2"
+                        Command="{Binding NextClmParagraphCommand}"
+                        Content="↓" />
+				</StackPanel>
+				<StackPanel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    Spacing="2">
+					<TextBlock VerticalAlignment="Center" Text="{Binding EddCurrentParagraphIndex}" />
+					<TextBlock VerticalAlignment="Center" Text="/" />
+					<TextBlock VerticalAlignment="Center" Text="{Binding EddMatchCount}" />
+					<RepeatButton
+                        Padding="6,2"
+                        Command="{Binding PrevEddParagraphCommand}"
+                        Content="↑" />
+					<RepeatButton
+                        Padding="6,2"
+                        Command="{Binding NextEddParagraphCommand}"
+                        Content="↓" />
+				</StackPanel>
+				<StackPanel
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    Spacing="2">
+					<StackPanel Spacing="2" Orientation="Horizontal">
+						<TextBlock
+							VerticalAlignment="Center"
+							Foreground="{Binding MatchCountsValidColor}"
+							Text="{Binding MatchCountsValidString}" />
+						<TextBox Name="PageBox" Watermark="跳转页面" />
+						<Button
+							Command="{Binding JmpTranslationMatchCommand}"
+							CommandParameter="{Binding #PageBox.Text}"
+							Content="Go" />
+						<RepeatButton
+							Padding="16,6"
+							Command="{Binding PrevTranslationMatchCommand}"
+							Content="↑" />
+						<RepeatButton
+							Padding="16,6"
+							Command="{Binding NextTranslationMatchCommand}"
+							Content="↓" />
+						<Button
+							Padding="16,6"
+							Command="{Binding SaveTransClmCommand}"
+							Content="1.保存clm文件" />
+						<Button
+							Padding="16,6"
+							Command="{Binding ConvertSnCommand}"
+							Content="2.转为sn文件" />
+						<Button
+							Padding="16,6"
+							Command="{Binding AddSnFileToGameCommand}"
+							Content="3.sn文件替换到游戏" />
+					</StackPanel>
+					<StackPanel Orientation="Horizontal" Spacing="2">
+						
+						<TextBox  Text="{Binding TransParaCount}" Watermark="当前开始汉化段落次数"></TextBox>
+						<Button Command="{Binding BeginTransParaCommand}" Content="开始汉化段落"></Button>
+					</StackPanel>
+				</StackPanel>
+				<TextBox
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="3"
+                    Foreground="#d0d0d0"
+                    IsReadOnly="True"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    Text="{Binding ClmCurrentParagraph}"
+                    UseFloatingWatermark="True"
+                    Watermark="XSEED" />
+				<TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="3"
+                    Foreground="#d0d0d0"
+                    IsReadOnly="True"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    Text="{Binding EddCurrentParagraph}"
+                    UseFloatingWatermark="True"
+                    Watermark="娱乐通" />
+				<StackPanel
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="4,1"
+                    Orientation="Horizontal"
+                    Spacing="10">
+					<Button
+                        Name="transCurrentButton"
+                        Command="{Binding TransCurrentParagraphCommand}"
+                        Content="转换当前文本" />
+					<Button Command="{Binding CheckCurrentTransParagraphCommand}" Content="检查文本" />
+				</StackPanel>
+				<TextBox
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2" 
+                    Margin="3"
+                    AcceptsReturn="True"
+                    AcceptsTab="True"
+                    Foreground="#d0d0d0"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    Text="{Binding TranslatedParagraph}"
+                    TextWrapping="Wrap"
+                    UseFloatingWatermark="True"
+                    Watermark="修改" />
+			</Grid>
+
+			<Grid
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="4,0,0,4"
+                RowDefinitions="Auto,*,Auto">
+				<TextBlock
+                    Grid.Row="0"
+                    FontSize="12"
+                    Foreground="Gray"
+                    Text="{Binding ReplaceCharsLineCount, StringFormat='共{0}行'}" />
+				<avaloniaEdit:TextEditor Grid.Row="1" Margin="0,2,0,2">
+					<Interaction.Behaviors>
+						<behaviors:DocumentTextBindingBehavior Text="{Binding ReplaceChars, Mode=TwoWay}" />
+					</Interaction.Behaviors>
+				</avaloniaEdit:TextEditor>
+
+				<Button
+                    Grid.Row="2"
+                    Command="{Binding SaveReplaceCharsCommand}"
+                    Content="保存字符替换表" />
+			</Grid>
+		</Grid>
+	</Grid>
+</UserControl>

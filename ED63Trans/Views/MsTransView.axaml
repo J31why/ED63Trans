@@ -1,0 +1,55 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:ED63Trans.ViewModels"
+             xmlns:avaloniaEdit="https://github.com/avaloniaui/avaloniaedit"
+             xmlns:behaviors="clr-namespace:ED63Trans.Behaviors"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:DataType="vm:MsTransViewModel"
+             x:Class="ED63Trans.Views.MsTransView">
+        <UserControl.Styles>
+            <Style Selector="ListBox" >
+                <Setter Property="ItemTemplate">
+                    <DataTemplate x:DataType="vm:MsText">
+                       <DockPanel>
+                           <Button DockPanel.Dock="Right" Content="删除" Click="Button_OnClick"></Button>
+                           <TextBlock Text="{Binding Text }"></TextBlock>
+                       </DockPanel>
+                    </DataTemplate>
+                </Setter>
+            </Style>
+        </UserControl.Styles>
+        <Grid RowDefinitions="Auto,*" ColumnDefinitions="0.5*,0.5*,1*">
+            <StackPanel Grid.ColumnSpan="3" Spacing="3" Orientation="Horizontal">
+                <TextBlock Text="{Binding CurrentDat,StringFormat='当前脚本:{0}'}"/>
+                <RepeatButton Content="上一个" Command="{Binding PrevMsCommand}"></RepeatButton>
+                <RepeatButton Content="下一个" Command="{Binding NextMsCommand}"></RepeatButton>
+                <Button Content="转换" Command="{Binding ConvertMyTextCommand}"></Button>
+            </StackPanel>
+            
+            <avaloniaEdit:TextEditor Name="xseedEditor" Grid.Row="1" ShowLineNumbers="True" Grid.Column="0" IsReadOnly="True" >
+                <Interaction.Behaviors>
+                    <behaviors:DocumentTextBindingBehavior Text="{Binding XseedText, Mode=TwoWay}" />
+                </Interaction.Behaviors>
+            </avaloniaEdit:TextEditor>
+            <avaloniaEdit:TextEditor Name="yltEditor" Grid.Row="1" Margin="5 0" ShowLineNumbers="True"  Grid.Column="1" IsReadOnly="True" >
+                <Interaction.Behaviors>
+                    <behaviors:DocumentTextBindingBehavior Text="{Binding YltText, Mode=TwoWay}" />
+                </Interaction.Behaviors>
+            </avaloniaEdit:TextEditor>
+            
+            <!-- <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding XseedList}"> -->
+            <!--      -->
+            <!-- </ListBox> -->
+            <!-- <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding YltList}"> -->
+            <!--      -->
+            <!-- </ListBox> -->
+            
+            <avaloniaEdit:TextEditor Grid.Row="1"  ShowLineNumbers="True"  Grid.Column="2" IsReadOnly="False" WordWrap="True">
+                <Interaction.Behaviors>
+                    <behaviors:DocumentTextBindingBehavior Text="{Binding MyText, Mode=TwoWay}" />
+                </Interaction.Behaviors>
+            </avaloniaEdit:TextEditor>
+        </Grid>
+
+</UserControl>
