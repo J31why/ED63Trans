@@ -1,0 +1,456 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7204.x"
+	town town[1]
+	bgm bgm[223]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14470._ch" "mons2/ch14470p._cp"
+chip[1] "mons2/ch14471._ch" "mons2/ch14471p._cp"
+chip[2] "mons2/ch15050._ch" "mons2/ch15050p._cp"
+chip[3] "mons2/ch15051._ch" "mons2/ch15051p._cp"
+chip[4] "mons2/ch15060._ch" "mons2/ch15060p._cp"
+chip[5] "mons2/ch15061._ch" "mons2/ch15061p._cp"
+chip[6] "mons2/ch14480._ch" "mons2/ch14480p._cp"
+chip[7] "mons2/ch14481._ch" "mons2/ch14481p._cp"
+chip[8] "mons2/ch14490._ch" "mons2/ch14490p._cp"
+chip[9] "mons2/ch14491._ch" "mons2/ch14491p._cp"
+chip[10] "mons2/ch14560._ch" "mons2/ch14560p._cp"
+chip[11] "mons2/ch14561._ch" "mons2/ch14561p._cp"
+chip[12] "mons2/ch14010._ch" "mons2/ch14010p._cp"
+chip[13] "mons2/ch14011._ch" "mons2/ch14011p._cp"
+
+monster char[0]:
+	name ""
+	pos (-15940, 8000, 30500)
+	angle 180deg
+	chip chip[10]
+	flags 0x0141
+	unk2 -1
+	battle battle[505]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (19960, 12000, 68970)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[501]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (28180, 12000, 56370)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[500]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (130, 3550, 41010)
+	radius 1000mm
+	bubble_pos (0, 6550, 42000)
+	flags 0x007C
+	func fn[0,15]
+	unk1 0
+
+fn[0]:
+	if system[66] == 255:
+		switch system[0]:
+			case 100:
+				Event fn[0,2]
+				break
+			case 101:
+				Event fn[0,3]
+				break
+			case 102:
+				Event fn[0,4]
+				break
+			case 103:
+				Event fn[0,6]
+				break
+			case 104:
+				Event fn[0,5]
+				break
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,17]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -103000) "mm7204._ch"
+	_1B look_point[0] fn[0,7]
+	_1B look_point[1] fn[0,8]
+	_1B look_point[2] fn[0,9]
+	_1B look_point[3] fn[0,11]
+	_1B look_point[4] fn[0,10]
+	EffStop eff_instance[129] 0
+	if QuestFlagsGet quest[8] 0x02:
+		EffStop eff_instance[130] 0
+	else:
+		EffStop eff_instance[131] 0
+	char[1].36 = 239
+	Return
+
+fn[2]:
+	Tc_DE 0 35193088
+	system[40] = 65535
+	CharSetPos field_party[0] (-130, -3850, -210) 180deg
+	CharSetPos field_party[1] (-130, -3850, -210) 180deg
+	CharSetPos field_party[2] (-130, -3850, -210) 180deg
+	CharSetPos field_party[3] (-130, -3850, -210) 180deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-130, -3380, -210) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,12]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[3]:
+	Tc_DE 0 35193089
+	system[40] = 65535
+	CharSetPos field_party[0] (50, -4450, -35910) 0deg
+	CharSetPos field_party[1] (50, -4450, -35910) 0deg
+	CharSetPos field_party[2] (50, -4450, -35910) 0deg
+	CharSetPos field_party[3] (50, -4450, -35910) 0deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (50, -4450, -35910) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,12]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[4]:
+	Tc_DE 0 35193090
+	system[40] = 65535
+	CharSetPos field_party[0] (-45920, 7550, 12090) 45deg
+	CharSetPos field_party[1] (-45920, 7550, 12090) 45deg
+	CharSetPos field_party[2] (-45920, 7550, 12090) 45deg
+	CharSetPos field_party[3] (-45920, 7550, 12090) 45deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-45940, 7550, 12020) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,12]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[5]:
+	Tc_DE 0 35193092
+	system[40] = 65535
+	CharSetPos field_party[0] (23940, 3550, -920) 0deg
+	CharSetPos field_party[1] (23940, 3550, -920) 0deg
+	CharSetPos field_party[2] (23940, 3550, -920) 0deg
+	CharSetPos field_party[3] (23940, 3550, -920) 0deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (23940, 3550, -920) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,12]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[6]:
+	Tc_DE 0 35193091
+	system[40] = 65535
+	CharSetPos field_party[0] (90, 11550, 87100) 90deg
+	CharSetPos field_party[1] (90, 11550, 87100) 90deg
+	CharSetPos field_party[2] (90, 11550, 87100) 90deg
+	CharSetPos field_party[3] (90, 11550, 87100) 90deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (90, 11550, 87100) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,12]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[7]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (-130, -3850, -210) 0deg
+	CharSetPos field_party[2] (-130, -3850, -210) 0deg
+	CharSetPos field_party[1] (-130, -3850, -210) 0deg
+	CharSetPos field_party[0] (-130, -3850, -210) 0deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-130, -3850, -210) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,13]
+	NewScene "m7203._sn" 105 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (50, -4450, -35910) 180deg
+	CharSetPos field_party[2] (50, -4450, -35910) 180deg
+	CharSetPos field_party[1] (50, -4450, -35910) 180deg
+	CharSetPos field_party[0] (50, -4450, -35910) 180deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (50, -4450, -35910) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,13]
+	NewScene "m7205._sn" 100 0 0
+	Hcf
+	Return
+
+fn[9]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (-45940, 7550, 12020) 215deg
+	CharSetPos field_party[2] (-45940, 7550, 12020) 215deg
+	CharSetPos field_party[1] (-45940, 7550, 12020) 215deg
+	CharSetPos field_party[0] (-45940, 7550, 12020) 215deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-45940, 7550, 12020) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,13]
+	NewScene "m7205._sn" 101 0 0
+	Hcf
+	Return
+
+fn[10]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (23940, 3550, -920) 180deg
+	CharSetPos field_party[2] (23940, 3550, -920) 180deg
+	CharSetPos field_party[1] (23940, 3550, -920) 180deg
+	CharSetPos field_party[0] (23940, 3550, -920) 180deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (23940, 3550, -920) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,13]
+	NewScene "m7205._sn" 105 0 0
+	Hcf
+	Return
+
+fn[11]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (90, 11550, 87100) 270deg
+	CharSetPos field_party[2] (90, 11550, 87100) 270deg
+	CharSetPos field_party[1] (90, 11550, 87100) 270deg
+	CharSetPos field_party[0] (90, 11550, 87100) 270deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (90, 11550, 87100) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,13]
+	NewScene "m7205._sn" 102 0 0
+	Hcf
+	Return
+
+fn[12]:
+	if system[10] != 255:
+		CharColor field_party[0] 0x00FFFFFF 0ms
+		Fork field_party[0] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[11] != 255:
+		CharColor field_party[1] 0x00FFFFFF 0ms
+		Fork field_party[1] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[12] != 255:
+		CharColor field_party[2] 0x00FFFFFF 0ms
+		Fork field_party[2] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[13] != 255:
+		CharColor field_party[3] 0x00FFFFFF 0ms
+		Fork field_party[3] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	Sleep 800ms
+	ForkQuit field_party[0] fork[1]
+	ForkQuit field_party[1] fork[1]
+	ForkQuit field_party[2] fork[1]
+	ForkQuit field_party[3] fork[1]
+	if system[10] != 255:
+		CharColor field_party[0] 0xFFFFFFFF 0ms
+	if system[11] != 255:
+		CharColor field_party[1] 0xFFFFFFFF 0ms
+	if system[12] != 255:
+		CharColor field_party[2] 0xFFFFFFFF 0ms
+	if system[13] != 255:
+		CharColor field_party[3] 0xFFFFFFFF 0ms
+	Return
+
+fn[13]:
+	Fork field_party[0] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Sleep 1000ms
+	Return
+
+fn[14]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}打开『门』吗？{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"【是】" // 0
+		"【否】" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[15]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (630, 3550, 38730) 0deg
+	CharSetPos field_party[1] (-1090, 3550, 38660) 0deg
+	CharSetPos field_party[2] (380, 3550, 36690) 0deg
+	CharSetPos field_party[3] (-1300, 3550, 36560) 0deg
+	CamLookPos (-110, 3550, 40320) 0ms
+	CamSetDistance 0 6620 -10000 0ms
+	CamZoom 5000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	if !QuestFlagsGet quest[8] 0x02:
+		QuestFlagsSet quest[8] 0x02
+		EffStop eff_instance[130] 2
+		EffPlay eff[131] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99902v{color 5}#40W  汝须将被称为放荡无赖之人，
+		  与立誓打倒怪物之盟友一同
+		　　  引领至吾面前。
+		#500W
+		#40W   如此，则『门』将开启……{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if PartyPosition name[3] != -1 && PartyPosition name[12] != -1:
+		Call fn[0,14]
+		if var[0] == 0:
+			Call fn[0,16]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[16]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[129] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[1] 0
+	ObjPlay object[1] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[1]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 4200 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	SoundStop sound[133]
+	TcEpisodeStart 6 0 0
+	NewScene "p9001._sn" 100 0 0
+	Hcf
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (630, 3550, 38730) 0deg
+	CharSetPos field_party[1] (-1090, 3550, 38660) 0deg
+	CharSetPos field_party[2] (380, 3550, 36690) 0deg
+	CharSetPos field_party[3] (-1300, 3550, 36560) 0deg
+	CamLookPos (-110, 3550, 40320) 0ms
+	CamSetDistance 0 6620 -10000 0ms
+	CamZoom 5000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return

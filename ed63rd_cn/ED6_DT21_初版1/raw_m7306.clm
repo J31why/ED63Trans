@@ -1,0 +1,470 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7306.x"
+	town town[1]
+	bgm bgm[175]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch15180._ch" "mons2/ch15180p._cp"
+chip[1] "mons2/ch15181._ch" "mons2/ch15181p._cp"
+chip[2] "apl2/ch20724._ch" "apl2/ch20724p._cp"
+chip[3] "mons2/ch14440._ch" "mons2/ch14440p._cp"
+chip[4] "mons2/ch14440._ch" "mons2/ch14440p._cp"
+chip[5] "mons2/ch14140._ch" "mons2/ch14140p._cp"
+chip[6] "mons2/ch14140._ch" "mons2/ch14140p._cp"
+chip[7] "mons2/ch14150._ch" "mons2/ch14150p._cp"
+chip[8] "mons2/ch14150._ch" "mons2/ch14150p._cp"
+chip[9] "mons2/ch14090._ch" "mons2/ch14090p._cp"
+chip[10] "mons2/ch14090._ch" "mons2/ch14090p._cp"
+chip[11] "mons2/ch14120._ch" "mons2/ch14120p._cp"
+chip[12] "mons2/ch14120._ch" "mons2/ch14120p._cp"
+
+npc char[0]:
+	name "女性亡灵"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[1]:
+	name ""
+	pos (-21070, 12430, 43920)
+	angle 180deg
+	chip chip[3]
+	flags 0x0141
+	unk2 -1
+	battle battle[702]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-9540, 12430, 56180)
+	angle 180deg
+	chip chip[11]
+	flags 0x0141
+	unk2 -1
+	battle battle[709]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (10440, 18150, 78170)
+	angle 180deg
+	chip chip[7]
+	flags 0x0141
+	unk2 -1
+	battle battle[708]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (2410, 21230, 98750)
+	angle 180deg
+	chip chip[9]
+	flags 0x0141
+	unk2 -1
+	battle battle[706]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (-18070, 16030, 77200)
+	angle 180deg
+	chip chip[3]
+	flags 0x0141
+	unk2 -1
+	battle battle[702]
+	flag flag[0]
+	unk3 0
+
+trigger[0]:
+	pos1 (-4800, 4000, 10010)
+	pos2 (4820, 8000, 12350)
+	flags 0x0000
+	func fn[0,3]
+	unk1 0
+
+look_point[0]:
+	pos (-19970, 16050, 76750)
+	radius 1000mm
+	bubble_pos (-19970, 17050, 76750)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -68000) "mm7306._ch"
+	SoundPlay sound[379] 1 0 100
+	SystemFlagsSet 0x00100000
+	char[2].36 = 239
+	char[3].36 = 223
+	char[4].36 = 239
+	char[4].40 = 8
+	char[4].7 = 2000
+	if !flag[11374]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11374]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[503] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[503]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11374]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[503]}{color 0}。
+				不过现有的数量太多，{item item[503]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	if flag[11278]:
+		Return
+	EventBegin 0
+	ED6LoadChip "npl2/ch04080._ch" "npl2/ch04080p._cp" chip[13]
+	ED6LoadChip "npl2/ch04081._ch" "npl2/ch04081p._cp" chip[14]
+	ED6LoadChip "npl2/ch04082._ch" "npl2/ch04082p._cp" chip[15]
+	ED6LoadChip "npl2/ch04470._ch" "npl2/ch04470p._cp" chip[16]
+	ED6LoadChip "npl2/ch04471._ch" "npl2/ch04471p._cp" chip[17]
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (10, 7030, 23760) 180deg
+	CharColor char[0] 0x00FFFFFF 0ms
+	ForkLoop char[0] fork[3]:
+		CharAnimation self 0 7 1500ms
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 80 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99932v{color 7}#80W………对不起啊…………{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	Emote field_party[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote field_party[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork party[0] fork[1]:
+		CamLookPos (-1090, 7030, 24840) 3500ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 5210 -10000 3500ms
+	Fork party[0] fork[3]:
+		CamZoom 2560 3500ms
+	Fork party[1] fork[1]:
+		CamRotate 315000mdeg 3500ms
+	Fork party[2] fork[2]:
+		CamPers 335 3500ms
+	Fork field_party[0] fork[0]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 100ms
+	CharTurnTo field_party[1] 0deg 400deg/s
+	ForkWait party[0] fork[1]
+	SoundPlay sound[473] 0 0 100
+	CrossFade 1000ms
+	Fork party[0] fork[0]:
+		CamZoom 2300 500ms
+	Fork party[0] fork[1]:
+		CamPers 360 1500ms
+	Fork char[0] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	SoundPlay sound[480] 0 0 100
+	FadeWait
+	ForkWait char[0] fork[1]
+	ForkWait party[0] fork[0]
+	ForkWait party[0] fork[1]
+	SoundStop sound[473]
+	Sleep 1000ms
+	CharSetPos name[8] (1100, 6430, 12160) 0deg
+	CharSetPos name[14] (-670, 6750, 12870) 0deg
+	Fork party[0] fork[1]:
+		CamLookPos (-1940, 7030, 22150) 3000ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 5330 -10000 3000ms
+	Fork party[0] fork[3]:
+		CamZoom 2640 3000ms
+	Fork party[1] fork[1]:
+		CamPers 335 3000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (300, 7030, 17120) 2000mm/s 0
+	Sleep 1000ms
+	Fork name[14] fork[0]:
+		CharWalkToPos self (-1170, 7030, 17040) 2000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait party[0] fork[1]
+	system[28] = 1
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 80 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99933v{color 7}#80W……对不起……凯文………
+		#3040W 
+		#80W……但是……妈妈我………#2800W 
+		#80W已经……精疲力尽了………{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	TextTalk name[8] {
+		#90023v#1847F#6P…………啊…………………{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92716v#1949F#6P难、难道是……！？{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 80 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99934v{color 7}#80W………所以…………#500W
+		#80W…………所以…我说……凯文…………
+		#4158W 
+		#80W……就这样………#1930W 
+		#80W………和妈妈#160W一起…………{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	Sleep 300ms
+	CrossFade 250ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase name[8] chip[13]
+	CharSetChipPattern name[8] 0
+	Sleep 100ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase name[14] chip[16]
+	CharSetChipPattern name[14] 0
+	FadeWait
+	Sleep 300ms
+	Fork party[0] fork[1]:
+		CamLookPos (-1980, 7030, 19170) 300ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 6300 -10000 300ms
+	Fork party[0] fork[3]:
+		CamZoom 2100 300ms
+	Fork party[1] fork[1]:
+		CamPers 300 300ms
+	CharSetChipBase char[0] chip[1]
+	Fork char[0] fork[0]:
+		CharWalkToPos2 self (-510, 7030, 17390) 13000mm/s 0
+	ForkWait party[0] fork[1]
+	ED6Battle battle[718] null 0 0 null
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	system[28] = 0
+	ForkQuit name[8] fork[0]
+	ForkQuit name[14] fork[0]
+	CharFlagsSet char[0] 0x0080
+	CharSetPos name[8] (-40, 7030, 20850) 0deg
+	CharSetPos name[14] (80, 7030, 19060) 0deg
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	CharSetChipBase name[14] chip[65535]
+	CharSetChipPattern name[14] 0
+	CamLookPos (-990, 7030, 18930) 0ms
+	CamSetDistance 0 6350 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 219000mdeg 0ms
+	CamPers 284 0ms
+	Sleep 500ms
+	Fork party[0] fork[3]:
+		CamZoom 2700 2500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait party[0] fork[3]
+	Sleep 500ms
+	TextTalk name[8] {
+		#90024v#1076F#6P#40W……………………………………{wait}
+	} {
+		#90025v#1844F……哈哈………
+		还是饶了我吧……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92717v#1950F#5P#40W凯文……够了……{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#90026v#1071F#6P这个『炼狱』……
+		假如真的是我所希望的话……{wait}
+	} {
+		#90027v那我就是一个……
+		十足的自虐狂啊。{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[14] {
+		#92718v#1954F#5P#3S够了……！
+		这个时候，什么也不要说就行了！{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#90028v#1076F#6P#40W…………抱歉…………………{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork party[0] fork[3]:
+		CamZoom 2600 3000ms
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[2]
+	CharSetChipPattern name[8] 1
+	FadeWait
+	Sleep 500ms
+	ForkFunc name[8] fork[0] fn[0,4]
+	Sleep 500ms
+	Emote name[8] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[8]
+	ForkQuit name[8] fork[0]
+	Sleep 1000ms
+	TextTalk name[8] {
+		#90029v#1065F#6P#40W……在某种意义上，
+		会遇到刚才那幅情景可以说是必然的。{wait}
+	} {
+		#90030v自从那个冬日以来……
+		我一直在不断
+		逃避着妈妈的死亡……{wait}
+	} {
+		#90031v这次……
+		……我终于能够面对这个现实了。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92719v#1955F#5P#40W………凯文……………{wait}
+	}
+	TextWait
+	ForkWait party[0] fork[0]
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 500ms
+	CrossFade 500ms
+	CamLookPos (-1040, 7030, 21200) 0ms
+	CamSetDistance 0 6360 -10000 0ms
+	CamZoom 3100 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 244 0ms
+	CharTurnTo name[8] 180deg 400deg/s
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#90032v#1063F#11P……莉丝。
+		现在我们就加快脚步前进吧。{wait}
+	} {
+		#90033v#1065F不管今后多么哀伤、
+		多么后悔也好。{wait}
+	} {
+		#90034v#1840F一切等到……
+		我们活着离开这里之后再说吧。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92720v#1950F#6P#40W………………………………{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[14] {
+		#92721v#1952F#6P#40W……嗯……我明白了……！{wait}
+	}
+	TextWait
+	FlagSet flag[11278]
+	QuestTaskSet quest[61] 0x0008
+	Sleep 300ms
+	EventEnd 0
+	SystemFlagsSet 0x00100000
+	Return
+
+fn[4]:
+	while 1:
+		CharShake self 15 0 300 3000ms
+		Sleep 1000ms
+		CharShake self 15 0 300 3000ms
+		Sleep 1500ms
+	Return

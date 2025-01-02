@@ -1,0 +1,447 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P0312.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (-2980, 0, 66830)
+	radius 800mm
+	bubble_pos (-2980, 1000, 66830)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+look_point[1]:
+	pos (-5110, 0, 65500)
+	radius 400mm
+	bubble_pos (-5410, 1500, 65800)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+look_point[2]:
+	pos (61880, 0, 6590)
+	radius 1000mm
+	bubble_pos (62860, 1000, 6490)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[3]:
+	pos (63000, 0, -42000)
+	radius 1000mm
+	bubble_pos (63000, 1000, -42000)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,6]
+	if system[0] == 102:
+		if flag[9747] && !flag[9748]:
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	OpLoad "P0312_2"
+	if !flag[9752]:
+		ObjFlagsSet object[0] 0x0004
+		ObjFlagsUnset object[3] 0x0010
+	ObjFlagsUnset object[5] 0x0004
+	if !flag[9749]:
+		LookPointFlagsSet look_point[1] 0x0001
+	if !flag[9874]:
+		ObjFrame object[6] 0
+	else:
+		ObjFrame object[6] 60
+	if !flag[9875]:
+		ObjFrame object[7] 0
+	else:
+		ObjFrame object[7] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[9874]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[6] 60
+		Sleep 500ms
+		if ItemAdd item[508] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[508]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[9874]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[508]}{color 0}。
+				不过现有的数量太多，{item item[508]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[6] 60
+			ObjPlay object[6] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 228 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[9875]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[7] 30
+		ObjWait object[7]
+		ObjFrame object[7] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 300
+		TextMessage null {
+			{color 0}得到了{color 2}３００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[9875]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 229 0
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-3030, 0, 59570) 0deg
+	CharSetPos name[14] (-2610, 0, 58260) 0deg
+	CharSetPos name[6] (-4440, 0, 57860) 0deg
+	CamLookPos (-2250, 0, 59900) 0ms
+	CamSetDistance 0 6010 -10000 0ms
+	CamZoom 2720 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 273 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk name[14] {
+		#91787v#1444F这里是……工房？{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#82493v#063F#6P嗯，是的。{wait}
+	} {
+		#82494v这里是维修班的成员
+		进行工作的地方……{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88471v#1065F#5P一个人都没有。{wait}
+	} {
+		#88472v#1067F真是……
+		到底去了哪里呢。{wait}
+	}
+	TextWait
+	FlagSet flag[9748]
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	CrossFade 500ms
+	CharSetPos name[8] (-3100, 0, 65680) 0deg
+	CharSetPos name[14] (-2420, 0, 64459) 0deg
+	CharSetPos name[6] (-3940, 0, 64099) 0deg
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	CharSetChipBase name[14] chip[65535]
+	CharSetChipPattern name[14] 0
+	CharSetChipBase name[6] chip[65535]
+	CharSetChipPattern name[6] 0
+	CamLookPos (-1970, 0, 66010) 0ms
+	CamSetDistance 0 5320 -10000 0ms
+	CamZoom 2850 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 263 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk name[8] {
+		#88473v#1079F#5P这里……
+		应该是机关室吧。{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#82495v#060F啊，是的。{wait}
+	} {
+		#82496v这里面收纳着
+		埃尔赛尤的主引擎——
+		八台新型引擎『ＸＧ－０２』……{wait}
+	} {
+		#82497v#560F对了对了，
+		让我来看看情况吧！{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 2000ms
+	CharSetPos name[8] (-3700, 0, 63900) 0deg
+	CharSetPos name[14] (-2650, 0, 63440) 0deg
+	CharSetPos name[6] (-3110, 0, 65770) 180deg
+	CamLookPos (-1930, 0, 65600) 0ms
+	CamSetDistance 0 5570 -10000 0ms
+	CamZoom 2850 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 263 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[6] {
+		#82498v#561F#5P……不行……
+		一动也不动。{wait}
+	} {
+		#82499v而且找不到
+		无法启动的原因……{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88474v#1067F#6P唔……原来如此啊。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91788v#1448F#4P……毕竟这里是
+		常识以外的法则在起作用的地方。{wait}
+	} {
+		#91789v机械之类的东西无法运作
+		也不奇怪吧。{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#82500v#562F#5P呜呜……真没面子。{wait}
+	} {
+		#82501v#062F啊，不过不过，
+		预备导力的缆线
+		可以正常使用了！{wait}
+	}
+	TextWait
+	CharTurnTo name[6] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk name[6] {
+		#82502v#560F#5P那边的终端
+		应该可以启动了。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88475v#1840F#6P是吗，真是帮大忙了。{wait}
+	} {
+		#88476v#1078F好，赶快调查看看吧。{wait}
+	}
+	TextWait
+	FlagSet flag[9749]
+	LookPointFlagsUnset look_point[1] 0x0001
+	QuestTaskSet quest[41] 0x0400
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos field_party[0] (-4480, 0, 65340) 0deg
+	CharSetPos field_party[1] (-5500, 0, 65180) 0deg
+	CharSetPos field_party[2] (-4710, 0, 64260) 0deg
+	CharSetPos field_party[3] (-5830, 0, 64099) 0deg
+	CamLookPos (-4250, 0, 66180) 0ms
+	CamSetDistance 0 7500 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	EventEnd 0
+	Return
+
+fn[7]:
+	EventBegin 0
+	CrossFade 1000ms
+	CharSetPos field_party[0] (-4480, 0, 65340) 0deg
+	CharSetPos field_party[1] (-5500, 0, 65180) 0deg
+	CharSetPos field_party[2] (-4710, 0, 64260) 0deg
+	CharSetPos field_party[3] (-5830, 0, 64099) 0deg
+	CamLookPos (-4250, 0, 66180) 0ms
+	CamSetDistance 0 7500 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	SoundPlay sound[157] 0 0 100
+	TextSetName "卡佩尔"
+	TextSetPos 250 78 36 12
+	TextMessage null {
+		{color 2}#1SThe Orbal Calculator
+		CAPEL SYSTEM Ver.8.0
+		MODE:Security Control
+		#200W　#20W
+		MEMORY_CHECK#100W..........#20WOK!
+		#200W　#20W
+		#1S进行紧急状态下的警卫系统的解除。
+		请选择想要解除的区域。{wait}
+	}
+	TextWait
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] 100 80 1
+			"舰桥" // 0
+			"作战会议室" // 1
+			"医务室" // 2
+			"中止操作" // 3
+		MenuWait var[0]
+		system[40] = 65535
+		switch var[0]:
+			case 0:
+				if flag[9750]:
+					TextMessage null {
+						{color 2}#1S已经被解除了。{wait}
+					}
+					TextWait
+					system[40] = 24
+				else:
+					MenuClose menu[1]
+					TextClose 0
+					FadeOut 1000ms 0x00000000 255
+					FadeWait
+					FlagSet flag[9476]
+					NewScene "p0310._sn" 100 0 0
+					Hcf
+				break
+			case 1:
+				if flag[9751]:
+					TextMessage null {
+						{color 2}#1S已经被解除了。{wait}
+					}
+					TextWait
+					system[40] = 24
+				else:
+					MenuClose menu[1]
+					TextClose 0
+					FadeOut 1000ms 0x00000000 255
+					FadeWait
+					FlagSet flag[9476]
+					NewScene "p0311._sn" 100 0 0
+					Hcf
+				break
+			case 2:
+				if flag[9752]:
+					TextMessage null {
+						{color 2}#1S已经被解除了。{wait}
+					}
+					TextWait
+					system[40] = 24
+				else:
+					MenuClose menu[1]
+					TextClose 0
+					FlagSet flag[9752]
+					FadeOut 1000ms 0x00000000 255
+					FadeWait
+					CamLookPos (-1630, 0, -50570) 0ms
+					CamSetDistance 0 6060 -10000 0ms
+					CamZoom 3000 0ms
+					CamRotate 45000mdeg 0ms
+					CamPers 262 0ms
+					FadeIn 1000ms 0x00000000
+					FadeWait
+					Sleep 500ms
+					CrossFade 1000ms
+					SoundPlay sound[156] 0 0 100
+					FadeWait
+					ObjFlagsUnset object[3] 0x0010
+					ObjFrame object[3] 0
+					ObjPlay object[3] 15
+					ObjWait object[3]
+					Sleep 500ms
+					FadeOut 1000ms 0x00000000 255
+					FadeWait
+					ObjFlagsSet object[3] 0x0010
+					FlagSet flag[9476]
+					NewScene "p0312._sn" 100 0 0
+					Hcf
+					EventEnd 0
+				break
+			default:
+				FadeIn 300ms 0x00000000
+				MenuClose menu[1]
+				TextClose 0
+				var[0] = 255
+				break
+	TextSetPos 72 320 56 3
+	EventEnd 0
+	Return
+
+fn[8]:
+	if flag[9748] && !flag[9749]:
+		Call fn[0,5]
+		Return
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}　　 机关室
+		※无关人员禁止入内{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

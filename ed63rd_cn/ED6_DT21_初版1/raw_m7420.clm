@@ -1,0 +1,210 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7420.x"
+	town town[1]
+	bgm bgm[225]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[1] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[2] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[3] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[4] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[5] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[6] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[7] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[8] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[9] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[10] "mons2/ch14610._ch" "mons2/ch14610p._cp"
+chip[11] "mons2/ch14610._ch" "mons2/ch14610p._cp"
+chip[12] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+chip[13] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+
+monster char[0]:
+	name ""
+	pos (-22920, 0, 1630)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[802]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (72250, -6000, -95530)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[801]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (161310, -4000, 2650)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[800]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-22950, 0, 13060)
+	radius 1000mm
+	bubble_pos (-22950, 1000, 13060)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (153050, 0, 13030)
+	radius 1000mm
+	bubble_pos (153050, 1000, 13030)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (163030, -4000, 21030)
+	radius 1000mm
+	bubble_pos (163030, -3000, 21030)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if field_party[0].2 < -3900:
+		Tc_E5_0 255 name[1] 1 0
+		Tc_E5_0 255 name[23] 1 0
+		Tc_E5_1 255 name[2] 1 0
+		Tc_E5_1 255 name[24] 1 0
+	else:
+		Tc_E5_1 255 name[1] 1 0
+		Tc_E5_1 255 name[23] 1 0
+		Tc_E5_0 255 name[2] 1 0
+		Tc_E5_0 255 name[24] 1 0
+	char[0].36 = 223
+	char[1].36 = 223
+	char[2].36 = 223
+	char[0].40 = 8
+	char[1].40 = 8
+	char[2].40 = 8
+	if !flag[11448]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[11449]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[11450]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11448]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 30
+		ObjWait object[0]
+		ObjFrame object[0] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,28]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11448]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11449]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 30
+		ObjWait object[1]
+		ObjFrame object[1] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,28]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11449]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11450]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 30
+		ObjWait object[2]
+		ObjFrame object[2] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,24]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11450]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return

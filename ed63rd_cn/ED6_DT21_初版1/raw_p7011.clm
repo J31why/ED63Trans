@@ -1,0 +1,1541 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P7011.x"
+	town town[1]
+	bgm bgm[211]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	if !flag[11268]:
+		if system[0] == 100:
+			Event fn[0,2]
+		elif system[0] == 101:
+			Event fn[0,7]
+	if !flag[11269]:
+		if system[0] == 114:
+			Event fn[0,12]
+	if !flag[11270]:
+		if system[0] == 110:
+			Event fn[0,17]
+	if !flag[11271]:
+		if system[0] == 112:
+			Event fn[0,22]
+	if !flag[11272]:
+		if system[0] == 111:
+			Event fn[0,27]
+	if !flag[11273]:
+		if system[0] == 113:
+			Event fn[0,32]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (2470, 0, -170) 270deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (2470, 0, -170) 270deg
+		CharSetPos party[2] (2470, 0, -170) 270deg
+		CharSetPos party[3] (2470, 0, -170) 270deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (2470, 0, -170) 270deg
+		CharSetPos party[1] (2470, 0, -170) 270deg
+		CharSetPos party[3] (2470, 0, -170) 270deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (2470, 0, -170) 270deg
+		CharSetPos party[1] (2470, 0, -170) 270deg
+		CharSetPos party[2] (2470, 0, -170) 270deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (840, 0, 410) 0ms
+	CamSetDistance 0 7060 -10000 0ms
+	CamZoom 2750 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 250 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 300ms
+	Fork party[0] fork[3]:
+		CamLookPos (-3510, 0, 3170) 3000ms
+	ForkFunc name[8] fork[0] fn[0,3]
+	Sleep 600ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,4]
+		Sleep 600ms
+		ForkFunc party[2] fork[0] fn[0,5]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,6]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,4]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,5]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,6]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,4]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,5]
+		Sleep 500ms
+		ForkFunc party[2] fork[0] fn[0,6]
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[3]
+	Sleep 300ms
+	if PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81470v#1168F#6P啊，这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79098v#1527F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76840v#1011F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78214v#1500F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84362v#210F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91123v#264F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#83000v#560F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86262v#1310F#6P啊，这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80643v#051F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83773v#070F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85057v#171F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80077v#1540F#6P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85706v#275F#6P……这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#86959v#111F#6P这里是……{wait}
+		}
+		TextWait
+	Fork party[0] fork[0]:
+		CamLookPos (-4070, 0, 11330) 3500ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 7690 -10000 3500ms
+	Fork party[0] fork[2]:
+		CamZoom 2650 3500ms
+	Fork party[0] fork[3]:
+		CamPers 290 3500ms
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	TextTalk name[14] {
+		#92532v#1447F#2P『紫苑之家』的起居室……
+		吃饭之类的事情就在此进行。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CamLookPos (-4100, 0, 3780) 0ms
+	CamSetDistance 0 5630 -10000 0ms
+	CamZoom 2700 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 278 0ms
+	FadeWait
+	Sleep 500ms
+	CharTurnTo name[8] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#89745v#1068F#11P不过，这里并不像
+		特蕾莎老师那里那样给人以温暖的感觉。{wait}
+	} {
+		#89746v#1840F这里的院长是个非常严厉，
+		头脑又很顽固的老修女。{wait}
+	} {
+		#89747v每顿饭之前都要让人祈祷来祈祷去的，
+		要是不遵守的话，就会挨骂甚至挨打。{wait}
+	}
+	TextWait
+	if PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81471v#1165F#6P是这样啊……{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86263v#819F#6P嘿……
+			是这样啊。{wait}
+		}
+		TextWait
+	if PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80078v#1541F#6P哦……
+			那还真是辛苦啊。{wait}
+		}
+		TextWait
+		if PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85707v#278F#6P呵呵，
+				你看起来就像是总被打的那种孩子吧。{wait}
+			}
+			TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76841v#1016F#6P唉……
+			那还真是辛苦啊。{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84363v#210F#6P唔……
+			听起来好像很辛苦啊。{wait}
+		}
+		TextWait
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79099v#1521F#6P不过，
+			教会的孤儿院严厉一些
+			也是理所当然的事情。{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80644v#051F#6P不过，
+			教会的孤儿院严厉一些
+			也是理所当然的事情。{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83774v#070F#6P反正是教会的孤儿院。
+			有这种严厉程度
+			也是理所当然的事情。{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78215v#1513F#6P一般来说
+			教会的孤儿院
+			管得的确很严厉呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85058v#179F#6P一般来说
+			教会的孤儿院
+			管得的确很严厉呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#86960v#119F#6P一般来说
+			教会的孤儿院
+			管得的确很严厉呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91124v#1300F#6P………………………………{wait}
+		}
+		TextWait
+	TextTalk name[14] {
+		#92533v#1446F#6P……凯文，你是自作自受。{wait}
+	} {
+		#92534v#1801F总是不听话，
+		让老师伤透了脑筋。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89748v#1066F#11P哈哈……
+		嗯，那个我承认。{wait}
+	}
+	TextWait
+	FlagSet flag[11268]
+	QuestTaskSet quest[60] 0x0004
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (310, 0, -140) 2000mm/s 0
+	CharWalkToPos self (-2860, 0, 3710) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (330, 0, 270) 2000mm/s 0
+	CharWalkToPos self (-3170, 0, 2190) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[5]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (310, 0, -140) 2000mm/s 0
+	CharWalkToPos self (-3180, 0, 680) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[6]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (330, 0, 270) 2000mm/s 0
+	CharWalkToPos self (-1680, 0, 1100) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-3160, 0, 21490) 180deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-3160, 0, 21490) 180deg
+		CharSetPos party[2] (-3160, 0, 21490) 180deg
+		CharSetPos party[3] (-3160, 0, 21490) 180deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-3160, 0, 21490) 180deg
+		CharSetPos party[1] (-3160, 0, 21490) 180deg
+		CharSetPos party[3] (-3160, 0, 21490) 180deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-3160, 0, 21490) 180deg
+		CharSetPos party[1] (-3160, 0, 21490) 180deg
+		CharSetPos party[2] (-3160, 0, 21490) 180deg
+	CamLookPos (-4250, 0, 20950) 0ms
+	CamSetDistance 0 5770 -10000 0ms
+	CamZoom 2770 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 267 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	ObjFlagsUnset object[1] 0x0010
+	ObjFrame object[1] 0
+	ObjPlay object[1] 15
+	ObjWait object[1]
+	Fork party[0] fork[3]:
+		CamLookPos (-4110, 0, 18840) 3000ms
+	ForkFunc name[8] fork[0] fn[0,8]
+	Sleep 600ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,9]
+		Sleep 600ms
+		ForkFunc party[2] fork[0] fn[0,10]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,11]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,9]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,10]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,11]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,9]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,10]
+		Sleep 500ms
+		ForkFunc party[2] fork[0] fn[0,11]
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ObjFlagsUnset object[1] 0x0800
+	SoundPlay sound[7] 0 0 100
+	ObjFrame object[1] 15
+	ObjPlay object[1] 0
+	ObjWait object[1]
+	ObjFlagsSet object[1] 0x0010
+	ForkWait party[0] fork[3]
+	Sleep 300ms
+	if PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81470v#1168F#11P啊，这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79098v#1527F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76840v#1011F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78214v#1500F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84362v#210F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91260v#264F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#83000v#560F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86262v#1310F#11P啊，这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80643v#051F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83773v#070F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85057v#171F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80077v#1540F#11P这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85706v#275F#11P……这里是……{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#86959v#111F#11P这里是……{wait}
+		}
+		TextWait
+	Sleep 150ms
+	CrossFade 500ms
+	CamLookPos (-4790, 0, 4000) 0ms
+	CamSetDistance 0 7690 -10000 0ms
+	CamZoom 2650 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 290 0ms
+	CamLookPos (-4070, 0, 11330) 4000ms
+	Sleep 500ms
+	TextTalk name[14] {
+		#92532v#1447F#3P『紫苑之家』的起居室……
+		吃饭之类的事情就在此进行。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CamLookPos (-4100, 0, 18800) 0ms
+	CamSetDistance 0 5590 -10000 0ms
+	CamZoom 2770 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 268 0ms
+	FadeWait
+	Sleep 500ms
+	CharTurnTo name[8] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#89745v#1068F#6P不过，这里并不像
+		特蕾莎老师那里那样给人以温暖的感觉。{wait}
+	} {
+		#89746v#1840F这里的院长是个非常严厉，
+		头脑又很顽固的老修女。{wait}
+	} {
+		#89747v每顿饭之前都要让人祈祷来祈祷去的，
+		要是不遵守的话，就会挨骂甚至挨打。{wait}
+	}
+	TextWait
+	if PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81471v#1165F#11P是这样啊……{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86263v#819F#11P嘿……
+			是这样啊。{wait}
+		}
+		TextWait
+	if PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80078v#1541F#11P哦……
+			那还真是辛苦啊。{wait}
+		}
+		TextWait
+		if PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85707v#278F#11P呵呵，
+				你看起来就像是总被打的那种孩子吧。{wait}
+			}
+			TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76841v#1016F#11P唉……
+			那还真是辛苦啊。{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84363v#210F#11P唔……
+			听起来好像很辛苦啊。{wait}
+		}
+		TextWait
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79099v#1521F#11P不过，
+			教会的孤儿院严厉一些
+			也是理所当然的事情。{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80644v#051F#11P不过，
+			教会的孤儿院严厉一些
+			也是理所当然的事情。{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83774v#070F#11P反正是教会的孤儿院。
+			有这种严厉程度
+			也是理所当然的事情。{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78215v#1513F#11P一般来说
+			教会的孤儿院
+			管得的确很严厉呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85058v#179F#11P一般来说
+			教会的孤儿院
+			管得的确很严厉呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#86960v#119F#11P一般来说
+			教会的孤儿院
+			管得的确很严厉呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91124v#1300F#11P………………………………{wait}
+		}
+		TextWait
+	TextTalk name[14] {
+		#92533v#1446F#11P……凯文，你是自作自受。{wait}
+	} {
+		#92534v#1801F总是不听话，
+		让老师伤透了脑筋。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89748v#1066F#6P哈哈……
+		嗯，那个我承认。{wait}
+	}
+	TextWait
+	FlagSet flag[11268]
+	QuestTaskSet quest[60] 0x0004
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[8]:
+	CharWalkToPos2 self (-2710, 0, 16030) 2000mm/s 0
+	Return
+
+fn[9]:
+	CharWalkToPos2 self (-2810, 0, 19970) 2000mm/s 0
+	CharWalkToPos2 self (-2360, 0, 17180) 2000mm/s 0
+	Return
+
+fn[10]:
+	CharWalkToPos2 self (-2810, 0, 19970) 2000mm/s 0
+	CharWalkToPos2 self (-3740, 0, 18190) 2000mm/s 0
+	Return
+
+fn[11]:
+	CharWalkToPos2 self (-2810, 0, 19970) 2000mm/s 0
+	CharWalkToPos2 self (-2120, 0, 18350) 2000mm/s 0
+	Return
+
+fn[12]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (2500, 0, -22240) 270deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (2500, 0, -22240) 270deg
+		CharSetPos party[2] (2500, 0, -22240) 270deg
+		CharSetPos party[3] (2500, 0, -22240) 270deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (2500, 0, -22240) 270deg
+		CharSetPos party[1] (2500, 0, -22240) 270deg
+		CharSetPos party[3] (2500, 0, -22240) 270deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (2500, 0, -22240) 270deg
+		CharSetPos party[1] (2500, 0, -22240) 270deg
+		CharSetPos party[2] (2500, 0, -22240) 270deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (-3060, 0, -16110) 0ms
+	CamSetDistance 0 6650 -10000 0ms
+	CamZoom 2760 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 245 0ms
+	Fork party[0] fork[3]:
+		CamLookPos (-2240, 0, -23650) 5500ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 300ms
+	ForkFunc name[8] fork[0] fn[0,13]
+	Sleep 800ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,14]
+		Sleep 900ms
+		ForkFunc party[2] fork[0] fn[0,15]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,16]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,14]
+		Sleep 900ms
+		ForkFunc party[1] fork[0] fn[0,15]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,16]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,14]
+		Sleep 900ms
+		ForkFunc party[1] fork[0] fn[0,15]
+		Sleep 800ms
+		ForkFunc party[2] fork[0] fn[0,16]
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[3]
+	Sleep 300ms
+	TextTalk name[8] {
+		#89749v#1060F#6P这里是厨房……
+		是年长的孩子做饭的地方。{wait}
+	} {
+		#89750v而且也是莉丝经常
+		偷偷跑进来偷吃的地方。{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#92535v#1441F#11P凯文……！{wait}
+	}
+	TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76842v#1016F#11P哈哈，是这样啊。{wait}
+		} {
+			#76843v#1008F难怪莉丝小姐
+			这么能吃。{wait}
+		}
+		TextWait
+	if PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81472v#1165F#11P呵呵，是这样啊。{wait}
+		} {
+			#81473v#1168F这让我想起了
+			达尼艾尔和波利……{wait}
+		}
+		TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84364v#211F#11P哈哈，是这样吗。{wait}
+		} {
+			#84365v#210F这不是挺可爱的嘛。{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78216v#1501F#11P呵呵……
+			真是意外呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85059v#171F#11P呵呵……
+			听到了意外的事情呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85708v#275F#11P呵呵……
+			听到了意外的事情呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#86961v#111F#11P哈哈……
+			听到了意外的事情呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86264v#1317F#11P潜进厨房偷吃的
+			小时候的莉丝小姐……{wait}
+		} {
+			#86265v#1311F哈哈～只是想象一下
+			我都要激动得晕倒了。{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80079v#1545F#11P潜进厨房偷吃的
+			小时候的莉丝君……{wait}
+		} {
+			#80080v#1547F呵，
+			真是让人窒息的美妙画面啊。{wait}
+		}
+		TextWait
+	if PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#83001v#067F#11P莉丝姐姐，真可爱……{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91125v#261F#11P呵呵……
+			姐姐还真可爱。{wait}
+		}
+		TextWait
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79100v#1521F#11P呵呵……
+			感觉真是怀念啊。{wait}
+		} {
+			#79101v#1527F我也经常
+			偷喝戏团团长的酒，
+			然后被姐姐骂呢。{wait}
+		}
+		TextWait
+		if PartyPosition name[0] != -1:
+			TextTalk name[0] {
+				#76844v#1016F#11P竟然偷喝酒……
+				雪拉姐啊……{wait}
+			}
+			TextWait
+		elif PartyPosition name[3] != -1:
+			TextTalk name[3] {
+				#80081v#1544F#11P竟然偷喝酒……
+				雪拉君……{wait}
+			}
+			TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83775v#071F#11P哈哈……
+			有种怀念的感觉呢。{wait}
+		} {
+			#83776v#070F我以前也经常因为
+			偷吃而被雾香揍呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80645v#556F#11P嘿……
+			感觉真是怀念啊。{wait}
+		} {
+			#80646v我以前也经常因为
+			偷吃东西而惹米夏生气呢。{wait}
+		}
+		TextWait
+	Emote name[14] 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk name[14] {
+		#92536v#1800F#11P真、真是的……大家都……{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89751v#1077F#6P哈哈……
+		算了，这个先不提。{wait}
+	} {
+		#89752v#1840F这里也是露菲娜姐姐的
+		势力范围呢。{wait}
+	} {
+		#89753v她总是在这里给我和莉丝
+		以及其他的小朋友准备温暖的食物……{wait}
+	} {
+		#89754v#1075F自从姐姐当上了骑士，
+		做饭的工作就由我和莉丝接下来了。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92537v#1447F#11P嗯……真怀念。{wait}
+	} {
+		#92538v#1801F……不过，
+		凯文总是随便就溜走了，
+		每次都是我一个人做的。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89755v#1064F#6P呜……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92539v#1801F#11P……一想起这件事
+		我就一肚子火。{wait}
+	} {
+		#92540v你现在立刻给我做饭，
+		请我好好吃一顿。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89756v#1841F#6P知道啦、知道啦。{wait}
+	} {
+		#89757v#1066F有机会的话
+		我就给你露一手。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92541v#1446F#11P……凯文做的约定
+		从来没有兑现过。{wait}
+	} {
+		#92542v#1448F我就不抱什么希望
+		暂且看你怎么办了。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89758v#1840F#6P唉……说不过你。{wait}
+	}
+	TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76845v#1016F#11P哈哈……{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84366v#211F#11P哈哈……{wait}
+		}
+		TextWait
+	if PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#83002v#061F#11P嘻嘻……{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81474v#1165F#11P嘻嘻……{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91126v#1306F#11P嘻嘻……{wait}
+		}
+		TextWait
+	if PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80082v#1541F#11P呵呵……{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78217v#1501F#11P呵呵……{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86266v#811F#11P呵呵……{wait}
+		}
+		TextWait
+	if PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83777v#071F#11P哈哈……{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85060v#171F#11P哈哈……{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#86962v#111F#11P哈哈……{wait}
+		}
+		TextWait
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79102v#1527F#11P哎呀哎呀……{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80647v#556F#11P哎呀哎呀……{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85709v#277F#11P哎呀哎呀……{wait}
+		}
+		TextWait
+	FlagSet flag[11269]
+	QuestTaskSet quest[60] 0x0008
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[13]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (460, 0, -22380) 2000mm/s 0
+	CharTurnTo self 180deg 0deg/s
+	CharWalkToPos2 self (-1230, 0, -26510) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[14]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (460, 0, -22380) 2000mm/s 0
+	CharTurnTo self 180deg 0deg/s
+	CharWalkToPos2 self (-870, 0, -25040) 2000mm/s 0
+	Return
+
+fn[15]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (460, 0, -22380) 2000mm/s 0
+	CharTurnTo self 225deg 0deg/s
+	CharWalkToPos2 self (-1850, 0, -23540) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[16]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (460, 0, -22380) 2000mm/s 0
+	CharTurnTo self 180deg 0deg/s
+	CharWalkToPos2 self (-170, 0, -23950) 2000mm/s 0
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-31690, 0, 6820) 270deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-31690, 0, 6820) 270deg
+		CharSetPos party[2] (-31690, 0, 6820) 270deg
+		CharSetPos party[3] (-31690, 0, 6820) 270deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-31690, 0, 6820) 270deg
+		CharSetPos party[1] (-31690, 0, 6820) 270deg
+		CharSetPos party[3] (-31690, 0, 6820) 270deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-31690, 0, 6820) 270deg
+		CharSetPos party[1] (-31690, 0, 6820) 270deg
+		CharSetPos party[2] (-31690, 0, 6820) 270deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (-36680, 0, 8370) 0ms
+	CamSetDistance 0 6010 -10000 0ms
+	CamZoom 2660 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 257 0ms
+	FadeIn 1000ms 0x00000000
+	Sleep 300ms
+	ForkFunc name[8] fork[0] fn[0,18]
+	Sleep 800ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,19]
+		Sleep 900ms
+		ForkFunc party[2] fork[0] fn[0,20]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,21]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,19]
+		Sleep 900ms
+		ForkFunc party[1] fork[0] fn[0,20]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,21]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,19]
+		Sleep 900ms
+		ForkFunc party[1] fork[0] fn[0,20]
+		Sleep 800ms
+		ForkFunc party[2] fork[0] fn[0,21]
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	FadeWait
+	Sleep 300ms
+	TextTalk name[14] {
+		#92543v#1445F#6P院长老师的房间……
+		谁都不在呢。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89759v#1065F#5P嗯……{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 90deg 400deg/s
+	Sleep 500ms
+	TextTalk name[8] {
+		#89760v#1060F#5P……对了，莉丝。{wait}
+	} {
+		#89761v那之后院长老师怎么样了……？{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92544v#1447F#6P……嗯。
+		那时候受的伤已经没事了。{wait}
+	} {
+		#92545v#1445F不过自从她退休了之后，
+		果然还是没什么精神……{wait}
+	} {
+		#92546v#1802F……她很想
+		跟凯文见一面呢。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89762v#1067F#5P………是吗…………{wait}
+	}
+	TextWait
+	FlagSet flag[11270]
+	QuestTaskSet quest[60] 0x0010
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[18]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-36760, 0, 7080) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[19]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-35170, 0, 7300) 2000mm/s 0
+	Return
+
+fn[20]:
+	CharFlagsSet self 0x0004
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-33740, 0, 6230) 2000mm/s 0
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[21]:
+	CharFlagsSet self 0x0004
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-33590, 0, 7560) 2000mm/s 0
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[22]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-70500, 0, 8010) 90deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-70500, 0, 8010) 90deg
+		CharSetPos party[2] (-70500, 0, 8010) 90deg
+		CharSetPos party[3] (-70500, 0, 8010) 90deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-70500, 0, 8010) 90deg
+		CharSetPos party[1] (-70500, 0, 8010) 90deg
+		CharSetPos party[3] (-70500, 0, 8010) 90deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-70500, 0, 8010) 90deg
+		CharSetPos party[1] (-70500, 0, 8010) 90deg
+		CharSetPos party[2] (-70500, 0, 8010) 90deg
+	CamLookPos (-69000, 0, 8800) 0ms
+	CamSetDistance 0 6150 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 256 0ms
+	FadeIn 1000ms 0x00000000
+	Sleep 500ms
+	ObjFlagsUnset object[4] 0x0010
+	ObjFrame object[4] 0
+	ObjPlay object[4] 15
+	ObjWait object[1]
+	Sleep 300ms
+	Fork party[0] fork[3]:
+		CamLookPos (-66580, 0, 8800) 3000ms
+	ForkFunc name[8] fork[0] fn[0,23]
+	Sleep 600ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,24]
+		Sleep 600ms
+		ForkFunc party[2] fork[0] fn[0,25]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,26]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,24]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,25]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,26]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,24]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,25]
+		Sleep 500ms
+		ForkFunc party[2] fork[0] fn[0,26]
+	Sleep 1000ms
+	SoundPlay sound[7] 0 0 100
+	SoundStop sound[6]
+	ObjFrame object[4] 15
+	ObjPlay object[4] 0
+	SoundStop sound[6]
+	ObjWait object[4]
+	ObjFlagsSet object[4] 0x0010
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[3]
+	Sleep 300ms
+	TextTalk name[8] {
+		#89763v#1060F#12P这里是孩子们的房间……
+		是小鬼们睡觉的地方。{wait}
+	} {
+		#89764v我被收留之后
+		也是睡在这里。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92547v#1447F#5P嗯，但是凯文和
+		其他孩子们一点也不亲近……{wait}
+	} {
+		#92548v#1806F姐姐为了让你们能够好好相处，
+		可是费了很大功夫哦？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89765v#1067F#12P嗯……是啊。{wait}
+	} {
+		#89766v#1841F那时候的我
+		简直就像只刺猬一样，
+		是个一点也不可爱的臭小鬼。{wait}
+	} {
+		#89767v#1840F你能够满不在乎地接近我，
+		我还觉得不可思议呢。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92549v#1447F#5P……我知道你那副样子
+		只不过是在逞强罢了。{wait}
+	} {
+		#92550v#1442F最初被姐姐强行
+		灌下巧克力的时候也是……{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#89768v#1069F#12P#3S停！
+		后面的是禁止事项！{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76846v#1016F#5P（总、总觉得有些在意呢。）{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84367v#210F#5P（总、总觉得有些在意呢。）{wait}
+		}
+		TextWait
+	if PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#83003v#067F#5P（到、到底发生了什么呢……？）{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91127v#1306F#5P（呵呵……
+			  到底发生了什么呢？）{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78218v#1504F#5P（到底发生了什么呢……？）{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86267v#819F#5P（到、到底发生了什么呢……？）{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81475v#1165F#5P（到底发生了什么呢……？）{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79103v#1527F#5P（到底发生了什么呢……？）{wait}
+		}
+		TextWait
+	if PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80083v#1547F#5P（唔……
+			  勾起我的兴趣来了。）{wait}
+		}
+		TextWait
+	FlagSet flag[11271]
+	QuestTaskSet quest[60] 0x0020
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[23]:
+	CharWalkToPos2 self (-63500, 0, 7550) 2000mm/s 0
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[24]:
+	CharWalkToPos2 self (-65120, 0, 7360) 2000mm/s 0
+	Return
+
+fn[25]:
+	CharWalkToPos2 self (-66480, 0, 7040) 2000mm/s 0
+	Return
+
+fn[26]:
+	CharWalkToPos2 self (-66420, 0, 8380) 2000mm/s 0
+	Return
+
+fn[27]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-31770, 0, -21180) 270deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-31770, 0, -21180) 270deg
+		CharSetPos party[2] (-31770, 0, -21180) 270deg
+		CharSetPos party[3] (-31770, 0, -21180) 270deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-31770, 0, -21180) 270deg
+		CharSetPos party[1] (-31770, 0, -21180) 270deg
+		CharSetPos party[3] (-31770, 0, -21180) 270deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-31770, 0, -21180) 270deg
+		CharSetPos party[1] (-31770, 0, -21180) 270deg
+		CharSetPos party[2] (-31770, 0, -21180) 270deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (-36130, 0, -20170) 0ms
+	CamSetDistance 0 5390 -10000 0ms
+	CamZoom 2690 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 264 0ms
+	FadeIn 1000ms 0x00000000
+	Sleep 300ms
+	ForkFunc name[8] fork[0] fn[0,28]
+	Sleep 800ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,29]
+		Sleep 900ms
+		ForkFunc party[2] fork[0] fn[0,30]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,31]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,29]
+		Sleep 900ms
+		ForkFunc party[1] fork[0] fn[0,30]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,31]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,29]
+		Sleep 900ms
+		ForkFunc party[1] fork[0] fn[0,30]
+		Sleep 800ms
+		ForkFunc party[2] fork[0] fn[0,31]
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	FadeWait
+	Sleep 300ms
+	TextTalk name[8] {
+		#89769v#1065F#5P这里是男生的房间……
+		我也是１０岁左右
+		转移到这里的。{wait}
+	} {
+		#89770v#1840F原则上来说，
+		男生和女生都是不能进入异性房间的……{wait}
+	} {
+		#89771v不过你倒是若无其事的进来过吧？{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92551v#1801F#6P……那不是都怪凯文吗。{wait}
+	} {
+		#92552v谁叫你做值日的早晨
+		还若无其事地睡过头。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89772v#1079F#5P那、那种事，
+		只要敲敲门喊两声
+		不就解决了吗。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92553v#1443F#6P那样也会
+		吵醒其他人的嘛。{wait}
+	} {
+		#92554v#1446F总之还是凯文的错。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89773v#1840F#5P……是是。{wait}
+	}
+	TextWait
+	FlagSet flag[11272]
+	QuestTaskSet quest[60] 0x0040
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[28]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-36130, 0, -21800) 2000mm/s 0
+	CharTurnTo self 90deg 400deg/s
+	Return
+
+fn[29]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-33260, 0, -21250) 2000mm/s 0
+	CharTurnTo self 225deg 0deg/s
+	CharWalkToPos2 self (-34430, 0, -22320) 2000mm/s 0
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[30]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-34770, 0, -20520) 2000mm/s 0
+	CharTurnTo self 225deg 400deg/s
+	Return
+
+fn[31]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-33620, 0, -21650) 2000mm/s 0
+	Return
+
+fn[32]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-70500, 0, -22050) 90deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-70500, 0, -22050) 90deg
+		CharSetPos party[2] (-70500, 0, -22050) 90deg
+		CharSetPos party[3] (-70500, 0, -22050) 90deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-70500, 0, -22050) 90deg
+		CharSetPos party[1] (-70500, 0, -22050) 90deg
+		CharSetPos party[3] (-70500, 0, -22050) 90deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-70500, 0, -22050) 90deg
+		CharSetPos party[1] (-70500, 0, -22050) 90deg
+		CharSetPos party[2] (-70500, 0, -22050) 90deg
+	CamLookPos (-69000, 0, -21100) 0ms
+	CamSetDistance 0 5300 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 263 0ms
+	FadeIn 1000ms 0x00000000
+	Sleep 500ms
+	ObjFlagsUnset object[5] 0x0010
+	ObjFrame object[5] 0
+	ObjPlay object[5] 15
+	ObjWait object[5]
+	Sleep 300ms
+	Fork party[0] fork[3]:
+		CamLookPos (-66970, 0, -21510) 3000ms
+	ForkFunc name[8] fork[0] fn[0,33]
+	Sleep 600ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,34]
+		Sleep 600ms
+		ForkFunc party[2] fork[0] fn[0,35]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,36]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,34]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,35]
+		Sleep 500ms
+		ForkFunc party[3] fork[0] fn[0,36]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,34]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,35]
+		Sleep 500ms
+		ForkFunc party[2] fork[0] fn[0,36]
+	Sleep 1000ms
+	SoundPlay sound[7] 0 0 100
+	SoundStop sound[6]
+	ObjFrame object[5] 15
+	ObjPlay object[5] 0
+	SoundStop sound[6]
+	ObjWait object[5]
+	ObjFlagsSet object[5] 0x0010
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[3]
+	Sleep 300ms
+	TextTalk name[8] {
+		#89774v#1840F#12P这边是……
+		女生的房间吧。{wait}
+	} {
+		#89775v露菲娜姐姐
+		一直是在这里生活的啊。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92555v#1442F#5P我有时候
+		还会和姐姐一起睡呢。{wait}
+	} {
+		#92556v#1447F姐姐的床
+		又温暖又有一股香味……{wait}
+	} {
+		#92557v姐姐离开这里之后
+		就是我在用了。{wait}
+	} {
+		#92558v#1448F……羡慕吧？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89776v#1077F#12P哈哈……是啊。{wait}
+	} {
+		#89777v#1078F那个时候
+		确实有点羡慕呢。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92559v#1803F#5P怎么……
+		还以为你会更焦虑呢。{wait}
+	} {
+		#92560v#1446F这么直率的回答真是没劲。{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1200ms
+	TextTalk name[8] {
+		#89778v#1068F#12P……我说你啊。{wait}
+	}
+	TextWait
+	FlagSet flag[11273]
+	QuestTaskSet quest[60] 0x0080
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[33]:
+	CharWalkToPos2 self (-63920, 0, -22860) 2000mm/s 0
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[34]:
+	CharWalkToPos2 self (-65640, 0, -22820) 2000mm/s 0
+	Return
+
+fn[35]:
+	CharWalkToPos2 self (-68510, 0, -22260) 2000mm/s 0
+	CharWalkToPos2 self (-66620, 0, -23480) 2000mm/s 0
+	Return
+
+fn[36]:
+	CharWalkToPos2 self (-66920, 0, -22090) 2000mm/s 0
+	Return

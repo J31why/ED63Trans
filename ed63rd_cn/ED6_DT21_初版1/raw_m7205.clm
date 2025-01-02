@@ -1,0 +1,677 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7205.x"
+	town town[1]
+	bgm bgm[223]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14470._ch" "mons2/ch14470p._cp"
+chip[1] "mons2/ch14471._ch" "mons2/ch14471p._cp"
+chip[2] "mons2/ch15050._ch" "mons2/ch15050p._cp"
+chip[3] "mons2/ch15051._ch" "mons2/ch15051p._cp"
+chip[4] "mons2/ch15060._ch" "mons2/ch15060p._cp"
+chip[5] "mons2/ch15061._ch" "mons2/ch15061p._cp"
+chip[6] "mons2/ch14480._ch" "mons2/ch14480p._cp"
+chip[7] "mons2/ch14481._ch" "mons2/ch14481p._cp"
+chip[8] "mons2/ch14490._ch" "mons2/ch14490p._cp"
+chip[9] "mons2/ch14491._ch" "mons2/ch14491p._cp"
+chip[10] "mons2/ch14560._ch" "mons2/ch14560p._cp"
+chip[11] "mons2/ch14561._ch" "mons2/ch14561p._cp"
+chip[12] "mons2/ch14010._ch" "mons2/ch14010p._cp"
+chip[13] "mons2/ch14011._ch" "mons2/ch14011p._cp"
+
+monster char[0]:
+	name ""
+	pos (-400, -10450, -43830)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[502]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (23540, -18450, -55220)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[504]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (38040, -22650, 5800)
+	angle 180deg
+	chip chip[12]
+	flags 0x0141
+	unk2 -1
+	battle battle[506]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-37510, -22650, 5330)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[502]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (-6940, -6200, 47340)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[500]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (6940, 13800, 46980)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[503]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (0, -10400, -44000)
+	radius 1000mm
+	bubble_pos (0, -9400, -44000)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (25000, -18400, -54000)
+	radius 1000mm
+	bubble_pos (25000, -17400, -54000)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (38000, -22650, 5000)
+	radius 1000mm
+	bubble_pos (38000, -21650, 5000)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (-38000, -22650, 5000)
+	radius 1000mm
+	bubble_pos (-38000, -21650, 5000)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+look_point[4]:
+	pos (5680, 25800, 48000)
+	radius 1000mm
+	bubble_pos (5680, 26800, 48000)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	if system[66] == 255:
+		switch system[0]:
+			case 100:
+				Event fn[0,7]
+				break
+			case 101:
+				Event fn[0,8]
+				break
+			case 102:
+				Event fn[0,10]
+				break
+			case 103:
+				Event fn[0,11]
+				break
+			case 104:
+				Event fn[0,12]
+				break
+			case 105:
+				Event fn[0,9]
+				break
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -109000) "mm7205._ch"
+	_1B look_point[0] fn[0,13]
+	_1B look_point[1] fn[0,14]
+	_1B look_point[2] fn[0,16]
+	_1B look_point[3] fn[0,17]
+	_1B look_point[4] fn[0,18]
+	_1B look_point[5] fn[0,15]
+	char[1].36 = 239
+	if !flag[10912]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	if !flag[10913]:
+		ObjFrame object[3] 0
+	else:
+		ObjFrame object[3] 60
+	if !flag[10914]:
+		ObjFrame object[4] 0
+	else:
+		ObjFrame object[4] 60
+	if !flag[10915]:
+		ObjFrame object[5] 0
+	else:
+		ObjFrame object[5] 60
+	if !flag[10916]:
+		ObjFrame object[6] 0
+	else:
+		ObjFrame object[6] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10912]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[509] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[509]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10912]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[509]}{color 0}。
+				不过现有的数量太多，{item item[509]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 221 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[10913]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[3] 60
+		Sleep 500ms
+		if ItemAdd item[397] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[397]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10913]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[397]}{color 0}。
+				不过现有的数量太多，{item item[397]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[3] 60
+			ObjPlay object[3] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 222 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[10914]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[4] 60
+		Sleep 500ms
+		if ItemAdd item[1459] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[1459]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10914]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[1459]}{color 0}。
+				不过现有的数量太多，{item item[1459]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[4] 60
+			ObjPlay object[4] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 223 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10915]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[5] 30
+		ObjWait object[5]
+		ObjFrame object[5] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 3000
+		TextMessage null {
+			{color 0}得到了{color 2}３０００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10915]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 224 0
+	Return
+
+fn[6]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10916]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[6] 30
+		ObjWait object[6]
+		ObjFrame object[6] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		SepithAdd 0 200
+		SepithAdd 1 200
+		SepithAdd 2 200
+		SepithAdd 3 200
+		SepithAdd 4 200
+		SepithAdd 5 200
+		SepithAdd 6 200
+		TextMessage null {
+			{color 0}得到了：
+			{color 2}#56I地之耀晶片×２００
+			{color 2}#57I水之耀晶片×２００
+			{color 2}#58I火之耀晶片×２００
+			{color 2}#59I风之耀晶片×２００
+			{color 2}#62I时之耀晶片×２００
+			{color 2}#60I空之耀晶片×２００
+			{color 2}#61I幻之耀晶片×２００{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10916]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 225 0
+	Return
+
+fn[7]:
+	Tc_DE 0 35193088
+	system[40] = 65535
+	CharSetPos field_party[0] (36020, -10450, -25020) 225deg
+	CharSetPos field_party[1] (36020, -10450, -25020) 225deg
+	CharSetPos field_party[2] (36020, -10450, -25020) 225deg
+	CharSetPos field_party[3] (36020, -10450, -25020) 225deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (36020, -10450, -25020) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,19]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[8]:
+	Tc_DE 0 35193089
+	system[40] = 65535
+	CharSetPos field_party[0] (-35910, -10450, -25140) 135deg
+	CharSetPos field_party[1] (-35910, -10450, -25140) 135deg
+	CharSetPos field_party[2] (-35910, -10450, -25140) 135deg
+	CharSetPos field_party[3] (-35910, -10450, -25140) 135deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-35910, -10450, -25140) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,19]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[9]:
+	Tc_DE 0 35193093
+	system[40] = 65535
+	CharSetPos field_party[0] (-24550, -18360, -54510) 135deg
+	CharSetPos field_party[1] (-24550, -18360, -54510) 135deg
+	CharSetPos field_party[2] (-24550, -18360, -54510) 135deg
+	CharSetPos field_party[3] (-24550, -18360, -54510) 135deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-24550, -17360, -54510) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,19]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[10]:
+	Tc_DE 0 35193090
+	system[40] = 65535
+	CharSetPos field_party[0] (37890, -18560, 44930) 180deg
+	CharSetPos field_party[1] (37890, -18560, 44930) 180deg
+	CharSetPos field_party[2] (37890, -18560, 44930) 180deg
+	CharSetPos field_party[3] (37890, -18560, 44930) 180deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (37890, -18560, 44930) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,19]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[11]:
+	Tc_DE 0 35193091
+	system[40] = 65535
+	CharSetPos field_party[0] (-38070, -18560, 44870) 180deg
+	CharSetPos field_party[1] (-38070, -18560, 44870) 180deg
+	CharSetPos field_party[2] (-38070, -18560, 44870) 180deg
+	CharSetPos field_party[3] (-38070, -18560, 44870) 180deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-38070, -18560, 44870) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,19]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[12]:
+	Tc_DE 0 35193092
+	system[40] = 65535
+	CharSetPos field_party[0] (-10, -14110, -11990) 0deg
+	CharSetPos field_party[1] (-10, -14110, -11990) 0deg
+	CharSetPos field_party[2] (-10, -14110, -11990) 0deg
+	CharSetPos field_party[3] (-10, -14110, -11990) 0deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-10, -14110, -11990) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,19]
+	EventEnd 0
+	system[49] = 336
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[13]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (36020, -10450, -25020) 45deg
+	CharSetPos field_party[2] (36020, -10450, -25020) 45deg
+	CharSetPos field_party[1] (36020, -10450, -25020) 45deg
+	CharSetPos field_party[0] (36020, -10450, -25020) 45deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (36020, -10450, -25020) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,20]
+	NewScene "m7204._sn" 101 0 0
+	Hcf
+	Return
+
+fn[14]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (-35910, -10450, -25140) 315deg
+	CharSetPos field_party[2] (-35910, -10450, -25140) 315deg
+	CharSetPos field_party[1] (-35910, -10450, -25140) 315deg
+	CharSetPos field_party[0] (-35910, -10450, -25140) 315deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-35910, -10450, -25140) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,20]
+	NewScene "m7204._sn" 102 0 0
+	Hcf
+	Return
+
+fn[15]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (-24550, -18360, -54510) 315deg
+	CharSetPos field_party[2] (-24550, -18360, -54510) 315deg
+	CharSetPos field_party[1] (-24550, -18360, -54510) 315deg
+	CharSetPos field_party[0] (-24550, -18360, -54510) 315deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-24550, -17360, -54510) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,20]
+	NewScene "m7204._sn" 104 0 0
+	Hcf
+	Return
+
+fn[16]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (37890, -18560, 44930) 0deg
+	CharSetPos field_party[2] (37890, -18560, 44930) 0deg
+	CharSetPos field_party[1] (37890, -18560, 44930) 0deg
+	CharSetPos field_party[0] (37890, -18560, 44930) 0deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (37890, -18560, 44930) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,20]
+	NewScene "m7204._sn" 103 0 0
+	Hcf
+	Return
+
+fn[17]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (-38070, -18560, 44870) 0deg
+	CharSetPos field_party[2] (-38070, -18560, 44870) 0deg
+	CharSetPos field_party[1] (-38070, -18560, 44870) 0deg
+	CharSetPos field_party[0] (-38070, -18560, 44870) 0deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-38070, -18560, 44870) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,20]
+	NewScene "m7205._sn" 104 0 0
+	Hcf
+	Return
+
+fn[18]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CharSetPos field_party[3] (-10, -14110, -11990) 180deg
+	CharSetPos field_party[2] (-10, -14110, -11990) 180deg
+	CharSetPos field_party[1] (-10, -14110, -11990) 180deg
+	CharSetPos field_party[0] (-10, -14110, -11990) 180deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp200_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-10, -14110, -11990) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,20]
+	NewScene "m7205._sn" 103 0 0
+	Hcf
+	Return
+
+fn[19]:
+	if system[10] != 255:
+		CharColor field_party[0] 0x00FFFFFF 0ms
+		Fork field_party[0] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[11] != 255:
+		CharColor field_party[1] 0x00FFFFFF 0ms
+		Fork field_party[1] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[12] != 255:
+		CharColor field_party[2] 0x00FFFFFF 0ms
+		Fork field_party[2] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[13] != 255:
+		CharColor field_party[3] 0x00FFFFFF 0ms
+		Fork field_party[3] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	Sleep 800ms
+	ForkQuit field_party[0] fork[1]
+	ForkQuit field_party[1] fork[1]
+	ForkQuit field_party[2] fork[1]
+	ForkQuit field_party[3] fork[1]
+	if system[10] != 255:
+		CharColor field_party[0] 0xFFFFFFFF 0ms
+	if system[11] != 255:
+		CharColor field_party[1] 0xFFFFFFFF 0ms
+	if system[12] != 255:
+		CharColor field_party[2] 0xFFFFFFFF 0ms
+	if system[13] != 255:
+		CharColor field_party[3] 0xFFFFFFFF 0ms
+	Return
+
+fn[20]:
+	Fork field_party[0] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Sleep 1000ms
+	Return

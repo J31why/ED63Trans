@@ -1,0 +1,346 @@
+calmare sc scena
+scena:
+	name "Gaiden3" "M5508.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	if flag[10506] && !flag[10507]:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	_1B look_point[1] fn[0,3]
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-1700, 0, -31490) 0deg
+	CharSetPos name[1] (-360, 0, -31750) 0deg
+	CharSetPos party[2] (-1810, 0, -33150) 0deg
+	CharSetPos party[3] (-440, 0, -33460) 0deg
+	CamLookPos (-800, 20100, -21880) 0ms
+	CamSetDistance 0 6330 -10000 0ms
+	CamZoom 3730 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 293 0ms
+	Fork name[8] fork[1]:
+		CamLookPos (-800, 6500, -20080) 6000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 4600 -10000 6000ms
+	Fork name[8] fork[3]:
+		CamZoom 4000 6000ms
+	Fork name[1] fork[2]:
+		CamPers 293 6000ms
+	FadeIn 2000ms 0x00000000
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-1390, 0, -16570) 2000mm/s 0
+	Sleep 200ms
+	Fork name[1] fork[0]:
+		CharWalkToPos self (-20, 0, -16720) 2000mm/s 0
+	Sleep 230ms
+	Fork party[2] fork[0]:
+		CharWalkToPos self (-1780, 0, -18390) 2000mm/s 0
+	Sleep 150ms
+	Fork party[3] fork[0]:
+		CharWalkToPos self (420, 0, -18720) 2000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait name[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait name[8] fork[1]
+	CrossFade 1000ms
+	CamLookPos (130, 0, -15780) 0ms
+	CamSetDistance 0 7280 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 269 0ms
+	CharSetPos name[8] (-1620, 0, -16239) 0deg
+	CharSetPos name[1] (-100, 0, -16370) 0deg
+	CharSetPos party[2] (-1760, 0, -17880) 0deg
+	CharSetPos party[3] (-180, 0, -17880) 0deg
+	FadeWait
+	Sleep 500ms
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85554v#270F#6P嗯……
+			这是相当正式的设施啊。{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#84878v#178F#6P这是……
+			相当正式的设施啊。{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83586v#073F#6P哦……
+			这可是相当正式啊。{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#89176v#1079F#5P这是……
+			相当正式的设施呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#85960v#1316F#6P嗯，里面结构很复杂，
+			要探索的确挺辛苦的。{wait}
+		} {
+			#85961v#812F还有一片漆黑什么也看不见
+			的为难地方。{wait}
+		}
+		TextWait
+		if PartyPosition name[2] != -1:
+			TextTalk name[2] {
+				#78858v#1525F#6P是啊，
+				我当时也吃够了苦头呢。{wait}
+			}
+			TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#78856v#1525F#6P嗯，里面结构很复杂，
+			我当时也吃够了苦头呢。{wait}
+		} {
+			#78857v#1522F还有一片漆黑什么也看不见
+			的阴险至极的地方呢。{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#77732v#1502F#11P这里大概……
+			是艾丝蒂尔她们进行
+			最终训练的地方吧。{wait}
+		} {
+			#77733v#1505F听说内部很复杂，
+			还有关了灯就什么都看不见的地方。{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#89177v#1067F#5P嗯，
+		似乎应该做好面对陷阱的准备……{wait}
+	} {
+		#89178v#1063F最后的『修炼场』……
+		打起精神冲进去吧！{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#77734v#1502F#11P嗯……！{wait}
+	}
+	TextWait
+	FlagSet flag[10507]
+	QuestTaskSet quest[52] 0x0001
+	QuestTaskSet quest[52] 0x0002
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	SystemFlagsUnset 0x02000000
+	var[3] = 0
+	if flag[10506]:
+		var[3] = 2
+	elif flag[10501]:
+		var[3] = 1
+	SystemFlagsSet 0x00000080
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	switch var[3]:
+		case 0:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP001._CH"
+			break
+		case 1:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP002._CH"
+			break
+		case 2:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP003._CH"
+			break
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisWait vis[0] 3
+	MapColor 0x00000000 0ms
+	var[2] = 255
+	while var[2] == 255:
+		system[40] = 24
+		switch var[3]:
+			case 0:
+				Menu menu[0] 30 80 0
+					"【训练场宿舍】" // 0
+					"【巴斯塔尔水道】" // 1
+				break
+			case 1:
+				Menu menu[0] 30 80 0
+					"【训练场宿舍】" // 0
+					"【巴斯塔尔水道】" // 1
+					"【圣科洛瓦森林】" // 2
+				break
+			case 2:
+				Menu menu[0] 30 80 0
+					"【训练场宿舍】" // 0
+					"【巴斯塔尔水道】" // 1
+					"【圣科洛瓦森林】" // 2
+					"【格林姆瑟尔小要塞】" // 3
+				break
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[0]
+		TextClose 0
+		switch var[0]:
+			case 0:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}要移动至【训练场宿舍】吗？{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"【是】" // 0
+					"【否】" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 0
+						break
+					case 1:
+						break
+				break
+			case 1:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}要移动至【巴斯塔尔水道】吗？{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"【是】" // 0
+					"【否】" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 1
+						break
+					case 1:
+						break
+				break
+			case 2:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}要移动至【圣科洛瓦森林】吗？{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"【是】" // 0
+					"【否】" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 2
+						break
+					case 1:
+						break
+				break
+			case 3:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}要移动至【格林姆瑟尔小要塞】吗？{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"【是】" // 0
+					"【否】" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 3
+						break
+					case 1:
+						break
+				break
+	switch var[2]:
+		case 0:
+			VisSet vis[0] 0 -640000 0 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 1:
+			VisSet vis[0] 0 -358000 -37000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 2:
+			VisSet vis[0] 0 -362000 -266000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 3:
+			VisSet vis[0] 0 -64000 -340000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+	MapColor 0x00FFFFFF 0ms
+	switch var[2]:
+		case 0:
+			if !flag[10510]:
+				NewScene file[0x0021040A] 100 0 0
+				Hcf
+			else:
+				NewScene "snres227.   " 100 0 0
+				Hcf
+			break
+		case 1:
+			NewScene file[0x00210411] 100 0 0
+			Hcf
+			break
+		case 2:
+			NewScene file[0x00210415] 101 0 0
+			Hcf
+			break
+		case 3:
+			NewScene file[0x00210417] 101 0 0
+			Hcf
+			break
+	Return
