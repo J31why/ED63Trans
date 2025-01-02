@@ -1,0 +1,803 @@
+calmare tc scena
+scena:
+	name "Grancel" "C4202.x"
+	town town[1]
+	bgm bgm[31]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons/ch11120._ch" "mons/ch11120p._cp"
+chip[1] "mons/ch11121._ch" "mons/ch11121p._cp"
+chip[2] "mons/ch11110._ch" "mons/ch11110p._cp"
+chip[3] "mons/ch11111._ch" "mons/ch11111p._cp"
+chip[4] "mons/ch11130._ch" "mons/ch11130p._cp"
+chip[5] "mons/ch11131._ch" "mons/ch11131p._cp"
+chip[6] "mons/ch10040._ch" "mons/ch10040p._cp"
+chip[7] "mons/ch10041._ch" "mons/ch10041p._cp"
+chip[8] "mons/ch11140._ch" "mons/ch11140p._cp"
+chip[9] "mons/ch11141._ch" "mons/ch11141p._cp"
+
+npc char[0]:
+	name "黑衣人"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[2]:
+	name ""
+	pos (13590, 0, 67390)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (13650, 0, 73480)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[946]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (13600, 0, 79600)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[947]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (13660, 0, 83670)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[948]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (13620, 0, 90730)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[949]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (60960, 0, 94820)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+monster char[8]:
+	name ""
+	pos (100830, 0, 20580)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[946]
+	flag flag[0]
+	unk3 0
+
+monster char[9]:
+	name ""
+	pos (38210, 0, -520)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[947]
+	flag flag[0]
+	unk3 0
+
+monster char[10]:
+	name ""
+	pos (15760, 0, -10320)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[948]
+	flag flag[0]
+	unk3 0
+
+monster char[11]:
+	name ""
+	pos (34200, 0, 7700)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[949]
+	flag flag[0]
+	unk3 0
+
+monster char[12]:
+	name ""
+	pos (30560, 0, -65610)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (43930, 0, -6210)
+	radius 1000mm
+	bubble_pos (43860, 1500, -5600)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+look_point[1]:
+	pos (41920, 450, 124030)
+	radius 1000mm
+	bubble_pos (41950, 1950, 123110)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+look_point[2]:
+	pos (29340, 0, 130710)
+	radius 1000mm
+	bubble_pos (28570, 1500, 130759)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+look_point[3]:
+	pos (40750, 0, 60500)
+	radius 1000mm
+	bubble_pos (40450, -1000, 56090)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		if !flag[12109]:
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	LookPointFlagsSet look_point[3] 0x0001
+	if !flag[12276]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[12277]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[12278]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	EntranceSetDisabled entrance[21] 1
+	EntranceSetDisabled entrance[22] 0
+	if system[66] == 7:
+		_1B look_point[21] fn[0,6]
+	SoundPlay sound[461] 1 0 100
+	EffStop eff_instance[179] 0
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (86520, 0, 156020) 0ms
+	CamSetDistance 0 5560 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[2] (84560, 0, 155000) 270deg
+	CharSetPos name[80] (87460, 0, 156140) 270deg
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0008
+	CharFlagsSet char[0] 0x0004
+	CharSetPos char[0] (80000, 0, 153080) 90deg
+	ED6LoadChip "apl2/ch20689._ch" "apl2/ch20689p._cp" chip[10]
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (85440, 0, 155000) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	SoundPlay sound[394] 0 0 100
+	Sleep 800ms
+	TextTalk char[0] {
+		#0858v#2P可恶，上锁了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0886v#2P让开，我来！{wait}
+	}
+	TextWait
+	SoundPlay sound[394] 0 0 100
+	Sleep 800ms
+	ForkFunc char[0] fork[3] fn[0,4]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (86560, 0, 156140) 1000mm/s 0
+	ForkWait name[80] fork[1]
+	CharTurnToChar name[80] name[2] 400deg/s
+	Sleep 300ms
+	CrossFade 500ms
+	CharSetChipBase name[80] chip[10]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 315deg 0deg/s
+	Sleep 800ms
+	TextTalk name[80] {
+		#94404v#1652F（……再用一个吗？
+		  还有胡椒味的……）{wait}
+	}
+	TextWait
+	CharTurnToChar name[2] name[80] 400deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#79412v#1643F（胡、胡椒味！？
+		  ……这是自己做的吗！！）{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94405v#1650F（基本上是白烟，
+		  不过我加入了些许
+		  原创的调整。）{wait}
+	} {
+		#94406v（这个则是……）{wait}
+	}
+	TextWait
+	CrossFade 250ms
+	CharSetChipBase name[80] chip[65535]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 225deg 0deg/s
+	Sleep 1000ms
+	CrossFade 250ms
+	CharSetChipBase name[80] chip[10]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 315deg 0deg/s
+	Sleep 500ms
+	TextTalk name[80] {
+		#94407v#1651F（加入了
+		  笑菇的粉末哦。）{wait}
+	} {
+		#94408v（不知道有没有用……）{wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	CharSetChipBase name[80] chip[65535]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 225deg 0deg/s
+	Sleep 500ms
+	ForkLoop name[2] fork[2]:
+		CharTurnToChar self name[80] 400deg/s
+	Fork name[80] fork[1]:
+		CharWalkToPos self (84600, 0, 156140) 1800mm/s 0
+	Sleep 500ms
+	Emote name[2] 0mm 2000mm 40 43 100ms 3
+	Sleep 800ms
+	TextTalk name[2] {
+		#79413v#1644F（住、住手啦！
+		  烟要是飘回来了要怎么办啊！）{wait}
+	}
+	TextWait
+	ForkQuit name[2] fork[2]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (84900, 0, 155500) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	CharTurnTo name[2] 270deg 500deg/s
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (86980, 0, 155500) 1000mm/s 0
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (86680, 0, 156140) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	TextTalk char[0] {
+		#0887v#2P啧，好结实的门……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0888v#2P来人，拿斧头来！
+		把它砸开！{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0859v#2P那个家伙～……！{wait}
+	}
+	TextWait
+	ForkQuit char[0] fork[3]
+	ForkFunc char[0] fork[3] fn[0,5]
+	Sleep 3000ms
+	Sleep 500ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (86500, 0, 155000) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (84560, 0, 155000) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79414v#1645F…………呼……{wait}
+	} {
+		#79415v……这下应该能
+		拖延点时间……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo name[2] 90deg 400deg/s
+	Sleep 500ms
+	TextTalk name[2] {
+		#79416v#1644F我说啊，这么危险的东西
+		不要随便乱用啦！{wait}
+	} {
+		#79417v……不，应该说你就不该做出来。
+		你不是大小姐吗！？{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94409v#1650F#2P但是………………{wait}
+	} {
+		#94410v#1651F派上用场了吧？{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79418v#1645F呜…………
+		这、这我倒不否定……{wait}
+	} {
+		#79419v#1642F真是的，这种伎俩
+		是从哪里学来的啊……{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94411v#1651F#2P呵呵，我祖父是藏书家，
+		家里也有很正规的图书馆
+		给祖父专用……{wait}
+	} {
+		#94412v里面留有许多
+		有用的书哦。{wait}
+	} {
+		#94413v#1650F……雪拉扎德小姐，
+		你看小说吗？{wait}
+	} {
+		#94414v在某部有名的间谍小说里面，
+		有主人公制作
+		发烟筒的场面……{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79420v#1645F（在故事里看到的吗。
+		  这家伙果然是大小姐……）{wait}
+	} {
+		#79421v#1642F……我说，为了你好，
+		我就实话实说了。{wait}
+	} {
+		#79422v刚才那是凑巧。
+		不可能次次通用的。{wait}
+	} {
+		#79423v从书上看到的
+		一知半解的知识，
+		没什么好值得炫耀的。{wait}
+	} {
+		#79424v今后请不要再
+		采取这种轻率的举动。{wait}
+	} {
+		#79425v…………明白吗？{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94415v#1652F#2P嗯、嗯……{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79426v#1646F好了，赶快走吧……{wait}
+	}
+	TextWait
+	Fork char[1] fork[0]:
+		CamLookPos (87520, 0, 158020) 2500ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (84560, 0, 157140) 1500mm/s 0
+	Sleep 500ms
+	ForkLoop name[80] fork[2]:
+		CharTurnToChar self name[2] 400deg/s
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (86340, 0, 158940) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	CharTurnTo name[2] 90deg 400deg/s
+	ForkQuit name[80] fork[2]
+	TextTalk name[2] {
+		#79427v#1646F…………………………{wait}
+	}
+	TextWait
+	BgmStop 3000ms
+	Sleep 500ms
+	Emote name[80] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1500ms
+	Emote name[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[2]
+	TextTalk name[2] {
+		#79428v#1646F（……这么说来当时……）{wait}
+	} {
+		#79429v（好像也是在这种地方
+		  四处逃窜……）{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 3000ms
+	EmoteStop name[2]
+	TextTalk name[80] {
+		#94416v#1653F#4P那，那个……？{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79430v#1648F（感觉……回来了吗。）{wait}
+	} {
+		#79431v…………………………………{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94417v#1652F#4P（我、我说了什么
+		  不好的话吗……？？）{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79432v#1646F…………走吧。{wait}
+	} {
+		#79433v这种程度的门，
+		那些家伙一下就能撬开了。{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos self (87440, 0, 158940) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	TextTalk name[2] {
+		#79434v#1642F这里应该也有魔兽出没。
+		别离我太远。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94418v#1653F#4P嗯、嗯……{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79435v#1648F………………………………{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos self (90640, -2000, 158940) 1500mm/s 0
+	Sleep 100ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (86680, 0, 158840) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (90680, 0, 158840) 1500mm/s 0
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	CharFlagsSet char[0] 0x0080
+	SystemFlagsUnset 0x10000000
+	FlagSet flag[12109]
+	NewScene "c4202._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	while 1:
+		Sleep 2000ms
+		SoundPlay sound[394] 0 0 100
+		Sleep 800ms
+	Return
+
+fn[5]:
+	SoundPlay sound[26] 0 0 100
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 100
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 90
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 90
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 80
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 80
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 70
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 70
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 60
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 60
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 50
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 50
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 40
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 40
+	Sleep 400ms
+	Return
+
+fn[6]:
+	EventBegin 2
+	if flag[12110]:
+		if flag[0]:
+			CharTurnTo name[2] 90deg 500deg/s
+			Sleep 200ms
+			TextTalk name[2] {
+				#79495v#1646F……别走这边。{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo name[2] 90deg 500deg/s
+			Sleep 200ms
+			TextTalk name[2] {
+				#79492v#1642F……别走这边。{wait}
+			} {
+				#79493v穿过地下水道，
+				到西街区去吧。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[0]:
+		CharTurnTo name[2] 90deg 500deg/s
+		Sleep 200ms
+		TextTalk name[2] {
+			#79494v#1646F……赶快走吧。{wait}
+		}
+		TextWait
+	else:
+		CharTurnTo name[2] 90deg 500deg/s
+		Sleep 200ms
+		TextTalk name[2] {
+			#79490v#1642F……赶快走吧。{wait}
+		} {
+			#79491v这种程度的门
+			很快就会被突破的。{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+	_Char90 party[0] 1500 0 0 2000 0
+	EventEnd 2
+	Return
+
+fn[7]:
+	SystemFlagsSet 0x08000000
+	if !flag[12276]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[517] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[517]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12276]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[517]}{color 0}。
+				不过现有的数量太多，{item item[517]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 16 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[8]:
+	SystemFlagsSet 0x08000000
+	if !flag[12277]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[515]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12277]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[515]}{color 0}。
+				不过现有的数量太多，{item item[515]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 17 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[9]:
+	SystemFlagsSet 0x08000000
+	if !flag[12278]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[515]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12278]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[515]}{color 0}。
+				不过现有的数量太多，{item item[515]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 18 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[10]:
+	EventBegin 1
+	TextTalk name[0] {
+		#1001F这里好像可以钓上什么来。{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[1]:
+		CamLookPos (40170, 0, 57370) 1500ms
+	Fork field_party[0] fork[2]:
+		CamSetDistance 0 9500 -10000 1500ms
+	Fork field_party[1] fork[1]:
+		CamZoom 2800 1500ms
+	Fork field_party[1] fork[2]:
+		CamRotate 45000mdeg 1500ms
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 5}钓鱼吗？{color 0}{wait}
+	}
+	system[40] = 24
+	Menu menu[0] 10 32 1
+		"钓鱼" // 0
+		"放弃" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	ForkWait field_party[0] fork[1]
+	if var[0] == 0:
+		Minigame 14 41 40830 0 60500 180 40150 -500 55100
+		FadeWait
+		EventEnd 1
+	elif var[0] != 0:
+		EventEnd 1
+	Return

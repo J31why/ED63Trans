@@ -1,0 +1,590 @@
+calmare sc scena
+scena:
+	name "Zeiss" "C3100.x"
+	town town[1]
+	bgm bgm[16]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01640._ch" "npl/ch01640p._cp"
+chip[1] "npl/ch01310._ch" "npl/ch01310p._cp"
+
+npc char[0]:
+	name "士兵塞缪尔"
+	pos (0, 0, -3230)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "王国军军官"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 18:
+		if flag[9477]:
+			system[1] = 0
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			Event fn[0,5]
+	Return
+
+fn[1]:
+	SoundPlay sound[461] 1 0 90
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos name[9] (420, 0, -55520) 0deg
+	CamLookPos (250, 3770, -2820) 0ms
+	CamSetDistance 0 8930 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 435 0ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}三天之后——{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	BgmPlay bgm[101] 0
+	Fork name[9] fork[0]:
+		CamLookPos (250, 3770, -42460) 6000ms
+	Fork name[9] fork[1]:
+		CharWalkToPos self (320, 0, -41400) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sc_C8 512 70 "C_PLAC10._CH" 0 2000
+	ForkWait name[9] fork[0]
+	CrossFade 500ms
+	CamLookPos (1120, 0, -40520) 0ms
+	CamSetDistance 0 7410 -10000 0ms
+	CamZoom 2580 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 307 0ms
+	FadeWait
+	ForkWait name[9] fork[1]
+	Sleep 500ms
+	TextTalk name[9] {
+		#810F#5P哇、哇啊～……
+		这里就是雷斯顿要塞啊。{wait}
+	} {
+		不愧是王国军的根据地，
+		这规模真是不得了啊。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 2000mm/s 0
+	Sleep 3000ms
+	CrossFade 1000ms
+	CamLookPos (1190, 0, -3550) 0ms
+	CamSetDistance 0 7940 -10000 0ms
+	CamZoom 2810 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 274 0ms
+	FadeWait
+	ForkQuit name[9] fork[0]
+	CharSetPos name[9] (150, 250, -14360) 0deg
+	Sleep 500ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 2000mm/s 0
+	ForkWait name[9] fork[0]
+	TextTalk char[8] {
+		#5P嗯？……有什么事？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F嗯，
+		我想见卡西乌斯准将……{wait}
+	} {
+		请问他现在
+		有没有空呢？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5P哪有这么简单。
+		很不巧，准将是百忙之身。{wait}
+	} {
+		不通过正式途径
+		事先取得联络，
+		是不可能见得到的。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F咦咦！？　怎么这样……{wait}
+	} {
+		好不容易请假
+		来到这里……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5P唔，虽然很遗憾，
+		但我也没有办法。{wait}
+	} {
+		不过，虽说可能没用，
+		我还是听听你有何贵干吧。{wait}
+	} {
+		以防万一，
+		我至少可以通知相关人士。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F是、是……那就拜托了。{wait}
+	} {
+		嗯～其实是这样……{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	CharSetPos name[9] (3380, 250, -9200) 90deg
+	CamLookPos (4950, 250, -8010) 0ms
+	CamSetDistance 0 5710 -10000 0ms
+	CamZoom 2620 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 294 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk name[9] {
+		#810F#5P呼～～……{wait}
+	} {
+		都来到这里了，
+		实在不想空手回去啊。{wait}
+	} {
+		……既然无法会面，
+		就去一趟王都的百货店吧。{wait}
+	} {
+		……嗯，看来只好这样了！{wait}
+	} {
+		要治愈受伤的心灵
+		那就非时尚小饰品莫属了。{wait}
+	}
+	TextWait
+	CharWalkToPos char[8] (820, 0, -5240) 2000mm/s 0
+	TextTalk char[8] {
+		#2P喂，游击士小姑娘。{wait}
+	} {
+		来接你的人已经到了。{wait}
+	}
+	TextWait
+	CharTurnTo name[9] 0deg 400deg/s
+	TextTalk name[9] {
+		#810F#2P咦？{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (70, 0, 4000) 180deg
+	SoundPlay sound[108] 0 0 100
+	ObjFrame object[0] 0
+	ObjPlay object[0] 450
+	CrossFade 500ms
+	CamLookPos (40, 2450, -2700) 0ms
+	CamSetDistance 0 2060 -10000 0ms
+	CamZoom 3580 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 365 0ms
+	CharTurnTo char[8] 0deg 400deg/s
+	FadeWait
+	Sleep 1000ms
+	Fork char[8] fork[3]:
+		CamLookPos (570, 0, -3080) 5000ms
+	Fork name[9] fork[1]:
+		CamSetDistance 0 4600 -10000 5000ms
+	Fork name[9] fork[2]:
+		CamZoom 2580 5000ms
+	Fork name[9] fork[3]:
+		CamPers 327 5000ms
+	ForkFunc char[8] fork[0] fn[0,4]
+	Sleep 1000ms
+	ForkFunc name[9] fork[0] fn[0,3]
+	ObjWait object[0]
+	CharWalkToPos2 char[9] (410, 0, -3550) 3000mm/s 0
+	ForkWait name[9] fork[3]
+	TextTalk char[8] {
+		#2P您辛苦了！{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5P辛苦了。{wait}
+	} {
+		你就是亚妮拉丝小姐？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F是、是的，是我没错。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5P哦～这样的小姑娘
+		竟然是大师的孙女啊……{wait}
+	} {
+		哦，现在不是
+		为这个感动的时候。{wait}
+	} {
+		准将同意见你了。
+		赶快跟我来吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F咦，真的吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5P是啊，
+		他专门为你腾出了时间来。{wait}
+	} {
+		好了，快来吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F是、是！{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 0deg 400deg/s
+	Fork char[8] fork[0]:
+		CamLookPos (80, 0, 4520) 5000ms
+	Fork char[8] fork[1]:
+		CamSetDistance 0 4000 -10000 5000ms
+	Fork char[8] fork[2]:
+		CamZoom 3010 5000ms
+	Fork char[8] fork[3]:
+		CamPers 347 5000ms
+	Fork char[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[8] fork[0]
+	ForkQuit char[8] fork[1]
+	ForkQuit char[8] fork[2]
+	ForkQuit char[8] fork[3]
+	FlagSet flag[9478]
+	NewScene "c3110._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	CharWalkToPos self (300, 210, -7210) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharTurnTo self 270deg 400deg/s
+	CharWalkToPos2 self (2090, 0, -5240) 1500mm/s 0
+	ForkWait self fork[1]
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos name[9] (420, 0, -55520) 0deg
+	CamLookPos (250, 3770, -2820) 0ms
+	CamSetDistance 0 8930 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 435 0ms
+	BgmPlay bgm[101] 0
+	Sc_C8 512 70 "C_PLAC10._CH" 0 2000
+	Fork name[9] fork[0]:
+		CamLookPos (250, 3770, -42460) 6000ms
+	Fork name[9] fork[1]:
+		CharWalkToPos self (320, 0, -41400) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[9] fork[0]
+	CrossFade 500ms
+	CamLookPos (1120, 0, -40520) 0ms
+	CamSetDistance 0 7410 -10000 0ms
+	CamZoom 2580 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 307 0ms
+	FadeWait
+	ForkWait name[9] fork[1]
+	Sleep 500ms
+	TextTalk name[9] {
+		#86412v#1316F#6P呼～终于到了呢。{wait}
+	} {
+		#86413v#816F约定的时间也刚刚好……
+		那就赶快进去吧。{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 3000mm/s 0
+	Sleep 3000ms
+	CrossFade 1000ms
+	CamLookPos (1190, 0, -2550) 0ms
+	CamSetDistance 0 7940 -10000 0ms
+	CamZoom 2810 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 274 0ms
+	ForkQuit name[9] fork[0]
+	CharSetPos name[9] (150, 250, -12360) 0deg
+	FadeWait
+	Sleep 500ms
+	Emote char[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#99473v#5P嗯？……有什么事？{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 3000mm/s 0
+	CamLookPos (1190, 0, -3550) 2300ms
+	ForkWait name[9] fork[0]
+	Sleep 500ms
+	TextTalk name[9] {
+		#86414v#1310F#12P嗯～
+		我叫亚妮拉丝·艾尔菲德，
+		是一名游击士。{wait}
+	} {
+		#86415v今天是来会见
+		卡西乌斯准将的……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99474v#5P啊啊，是你吗……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99475v#5P我听说了。
+		这就联络相关人士。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99476v#5P不过，
+		需要你稍微在这里等一下。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86416v#814F#12P咦？　约定的时间
+		应该是刚刚好的……{wait}
+	} {
+		#86417v发生什么事了吗？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99477v#5P不，
+		详情我也不是很清楚……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99478v#5P准将的工作十分繁忙，
+		这次也是尽量挤出
+		时间来的。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99479v#5P不管如何，我先联络一下，
+		就请你稍等片刻吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86418v#816F#12P是，好的……那就拜托了。{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 2000ms
+	CharSetPos name[9] (3380, 250, -9200) 90deg
+	CamLookPos (4950, 250, -8010) 0ms
+	CamSetDistance 0 5710 -10000 0ms
+	CamZoom 2620 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 294 0ms
+	FadeIn 1500ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[9] {
+		#86419v#813F#5P唔，好慢啊……{wait}
+	} {
+		#86420v难道，
+		会面被取消了吗？{wait}
+	} {
+		#86421v#1316F唉，特地从大老远来到这里，
+		实在不想空手回去啊。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote name[9] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[9]
+	Sleep 500ms
+	TextTalk name[9] {
+		#86422v#816F#5P……如果无法会面的话，
+		就去一趟王都的百货店吧。{wait}
+	} {
+		#86423v现在应该正是新品玩偶
+		快要进货的时期了……{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 2000mm 10 11 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86424v#1311F#5P嗯，买只小熊如何呢？
+		或者偶尔买一个鳄鱼娃娃也不错吧㈱{wait}
+	}
+	TextWait
+	CharWalkToPos char[8] (820, 0, -5240) 2000mm/s 0
+	Sleep 300ms
+	TextTalk char[8] {
+		#99480v#2P喂，游击士小姑娘。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99481v#2P来接你的人已经到了。{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharTurnTo name[9] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk name[9] {
+		#86425v#814F#11P咦？{wait}
+	}
+	TextWait
+	_59
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (0, 0, 4000) 180deg
+	SoundPlay sound[108] 0 0 100
+	ObjFrame object[0] 0
+	ObjPlay object[0] 450
+	CrossFade 500ms
+	CamLookPos (40, 2450, -2700) 0ms
+	CamSetDistance 0 2060 -10000 0ms
+	CamZoom 3580 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 365 0ms
+	CharTurnTo char[8] 0deg 400deg/s
+	FadeWait
+	Sleep 1000ms
+	Fork char[8] fork[3]:
+		CamLookPos (570, 0, -3080) 5000ms
+	Fork name[9] fork[1]:
+		CamSetDistance 0 4600 -10000 5000ms
+	Fork name[9] fork[2]:
+		CamZoom 2580 5000ms
+	Fork name[9] fork[3]:
+		CamPers 327 5000ms
+	ForkFunc char[8] fork[0] fn[0,4]
+	Sleep 1500ms
+	ForkFunc name[9] fork[0] fn[0,3]
+	ObjWait object[0]
+	CharWalkToPos2 char[9] (0, 0, -3550) 3000mm/s 0
+	ForkWait name[9] fork[3]
+	TextTalk char[8] {
+		#99482v#2P您辛苦了！{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99350v#5P辛苦了。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99351v#5P你就是亚妮拉丝小姐吗？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86426v#814F#6P是，是的，我就是。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99352v#5P欢迎光临雷斯顿要塞。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99353v#5P准将正等着呢。
+		那就请跟我来吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86427v#1310F#6P咦，真的吗？{wait}
+	} {
+		#86428v#811F那就是说，
+		可以和卡西乌斯先生见面了吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99354v#5P嗯，让你久等了，
+		真是抱歉。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99355v#5P那么，就请到这边来吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86429v#816F#6P是，知道了！{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 0deg 400deg/s
+	Fork char[8] fork[0]:
+		CamLookPos (80, 0, 4520) 5000ms
+	Fork char[8] fork[1]:
+		CamSetDistance 0 4000 -10000 5000ms
+	Fork char[8] fork[2]:
+		CamZoom 3010 5000ms
+	Fork char[8] fork[3]:
+		CamPers 347 5000ms
+	Fork char[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[8] fork[0]
+	ForkQuit char[8] fork[1]
+	ForkQuit char[8] fork[2]
+	ForkQuit char[8] fork[3]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9478]
+	NewScene "c3110._sn" 100 0 0
+	Hcf
+	Return
