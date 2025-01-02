@@ -1,0 +1,370 @@
+calmare tc scena
+scena:
+	name "Rolent" "T0301.x"
+	town town[15]
+	bgm bgm[84]
+	item fn[0,65535]
+
+entry:
+	pos (2000, 0, -6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+entry:
+	pos (9600, 875, 300)
+	chr 4
+	angle 118deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+entry:
+	pos (9600, 875, 300)
+	chr 4
+	angle 118deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+entry:
+	pos (9600, 875, 300)
+	chr 4
+	angle 118deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02750._ch" "npl/ch02750p._cp"
+chip[1] "apl/ch20011._ch" "apl/ch20011p._cp"
+chip[2] "apl/ch20021._ch" "apl/ch20021p._cp"
+
+npc char[0]:
+	name "约修亚"
+	pos (44200, 240, 18540)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "卡西乌斯"
+	pos (44200, 240, 18540)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "器皿"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 4
+	ch chip[2]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "艾利兹大道方向"
+	pos (4110, -1000, -46140)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 17:
+		if flag[9476]:
+			system[1] = 183
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,3]
+		else:
+			system[1] = 183
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 2
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[0] (-4360, 0, -2200) 0deg
+	CamLookPos (-500, -1000, -18840) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 3490 0ms
+	CamRotate 311000mdeg 0ms
+	CamPers 328 0ms
+	Fork char[3] fork[0]:
+		CamLookPos (-920, 1000, 740) 10000ms
+	Fork char[3] fork[1]:
+		CamRotate 317000mdeg 10000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[3] fork[0]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "t0311._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[0] (-4360, 0, -2200) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (2100, 450, -1510) 180deg
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsSet char[1] 0x0004
+	CharSetPos char[1] (9600, 620, -2310) 90deg
+	CharSetPos char[2] (10000, 1100, -3300) 0deg
+	CharFlagsUnset char[2] 0x0080
+	CamLookPos (2000, 450, -640) 0ms
+	CamSetDistance 0 8540 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 262 0ms
+	Fork char[3] fork[0]:
+		CamLookPos (2000, 0, -2280) 6000ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 6500 -10000 6000ms
+	Fork char[3] fork[2]:
+		CamZoom 2860 6000ms
+	FadeIn 4000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[0] 0x0008
+	ObjFlagsUnset object[0] 0x0010
+	ObjFrame object[0] 0
+	ObjPlay object[0] 29
+	ObjWait object[0]
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (2000, 450, -4350) 1800mm/s 0
+	ForkWait char[0] fork[1]
+	ObjFrame object[0] 29
+	ObjPlay object[0] 0
+	SoundStop sound[6]
+	SoundPlay sound[7] 0 0 100
+	Sleep 500ms
+	TextTalkNamed char[1] "男性的声音" {
+		#87567v…………约修亚。{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (4480, 0, -2420) 3500ms
+	Fork char[3] fork[1]:
+		CamRotate 299000mdeg 3500ms
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#87568v#085F#5P你又睡在外面了？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#78443v#1676F………………………………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#87569v#080F#5P你还是不想
+		和艾丝蒂尔住一个房间吗。{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (7130, 450, -2330) 3000ms
+	Fork char[3] fork[1]:
+		CamRotate 298000mdeg 3000ms
+	Fork char[3] fork[2]:
+		CamZoom 2700 3000ms
+	Fork char[3] fork[3]:
+		CamSetDistance 0 5220 -10000 3000ms
+	CharWalkToPos char[0] (6600, 450, -3680) 1500mm/s 0
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#78444v#1671F#5P……那女孩太多管闲事了。{wait}
+	} {
+		#78445v而且什么也不明白。{wait}
+	} {
+		#78446v#1675F甚至不知道
+		自己在做多么危险的事……{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#78447v#1670F#5P卡西乌斯·布莱特。
+		你应该告诉她吧。{wait}
+	} {
+		#78448v……为什么你什么也不说！{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 1700mm 24 27 250ms 0
+	Sleep 1500ms
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#87570v#085F#6P……艾丝蒂尔旁边的房间，
+		现在还是仓库……{wait}
+	} {
+		#87571v#080F就收拾收拾给你用吧。{wait}
+	} {
+		#87572v记得还有张床呢。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#78449v#1676F#5P…………不用麻烦了。{wait}
+	} {
+		#78450v#1676F我不需要。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#87573v#085F#6P嗯…………{wait}
+	} {
+		#87574v艾丝蒂尔那家伙
+		确实什么事都喜欢出头。{wait}
+	} {
+		#87575v从你的视角来看，
+		实在是单纯得不知世事，
+		只不过是个孩子而已吧。{wait}
+	} {
+		#87576v但是呢，约修亚……{wait}
+	} {
+		#87577v#082F……其实什么也不明白的
+		反而是你才对哦。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#78451v#1678F#5P……………………！！{wait}
+	}
+	Sleep 100ms
+	Shake 0 100 3000 200ms
+	TextWait
+	TextTalk char[1] {
+		#87578v#080F#6P至少那孩子对于自己
+		想要什么、该做什么，
+		有她自己的见解。{wait}
+	} {
+		#87579v这是那孩子
+		之所以有自己特色的
+		必要条件吧。{wait}
+	} {
+		#87580v#083F……虽然我作为父亲
+		还是希望她能
+		更像个女孩子一点……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#78452v#1675F#5P………………………………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#87581v#085F#6P可是，约修亚……{wait}
+	} {
+		#87582v她和连自己想要什么该做什么
+		都不明白的你相比………{wait}
+	} {
+		#87583v#082F到底谁更正确呢？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#78453v#1675F#5P#40W………我………………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#87584v#085F#6P……话说在前头，
+		我并不打算纵容你。{wait}
+	} {
+		#87585v也不会要求你走或者留下来。{wait}
+	} {
+		#87586v#080F你今后要去哪里，
+		想做什么……{wait}
+	} {
+		#87587v以及想成为什么样的人，
+		都由你自己来决定。{wait}
+	} {
+		#87588v#085F因为这是……
+		谁也不知道答案的事情。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#78454v#1675F#5P#40W………………………………{wait}
+	} {
+		#78455v#40W……我………………{wait}
+	} {
+		#78456v#60W（我……到底……？）{wait}
+	}
+	TextWait
+	Fork char[3] fork[2]:
+		CamZoom 2600 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	NewScene "r0201._sn" 100 0 0
+	Hcf
+	Return

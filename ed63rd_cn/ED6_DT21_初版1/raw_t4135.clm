@@ -1,0 +1,731 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4135.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01540._ch" "npl/ch01540p._cp"
+chip[1] "npl/ch01490._ch" "npl/ch01490p._cp"
+chip[2] "npl/ch01660._ch" "npl/ch01660p._cp"
+chip[3] "npl/ch01430._ch" "npl/ch01430p._cp"
+chip[4] null "npl/ch01140p._cp"
+
+npc char[0]:
+	name "莉西娅"
+	pos (4400, 0, -5910)
+	angle 255deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,7]
+
+npc char[1]:
+	name "馆长"
+	pos (-5500, 0, 67620)
+	angle 270deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[2]:
+	name "森特"
+	pos (-69590, 0, -2210)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[3]:
+	name "威尔玛"
+	pos (-69580, 0, -580)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,5]
+
+look_point[0]:
+	pos (2580, 0, -5970)
+	radius 800mm
+	bubble_pos (4400, 1700, -5910)
+	flags 0x007E
+	func fn[0,6]
+	unk1 0
+
+look_point[1]:
+	pos (5090, 0, 2190)
+	radius 800mm
+	bubble_pos (5090, 800, 2190)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+look_point[2]:
+	pos (7840, 4000, 6700)
+	radius 800mm
+	bubble_pos (7840, 5700, 6700)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+look_point[3]:
+	pos (75860, 0, -2000)
+	radius 800mm
+	bubble_pos (75860, 1500, -2000)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+look_point[4]:
+	pos (73200, 0, 710)
+	radius 800mm
+	bubble_pos (73200, 800, 710)
+	flags 0x007C
+	func fn[0,11]
+	unk1 0
+
+look_point[5]:
+	pos (68740, 0, 7310)
+	radius 800mm
+	bubble_pos (68740, 800, 7310)
+	flags 0x007C
+	func fn[0,12]
+	unk1 0
+
+look_point[6]:
+	pos (73480, 0, 6420)
+	radius 800mm
+	bubble_pos (73480, 800, 6420)
+	flags 0x007C
+	func fn[0,13]
+	unk1 0
+
+look_point[7]:
+	pos (75820, 4000, 8010)
+	radius 800mm
+	bubble_pos (75820, 5700, 8010)
+	flags 0x007C
+	func fn[0,14]
+	unk1 0
+
+look_point[8]:
+	pos (71960, 4000, 9290)
+	radius 800mm
+	bubble_pos (71960, 4800, 9290)
+	flags 0x007C
+	func fn[0,15]
+	unk1 0
+
+look_point[9]:
+	pos (-20, 0, 77880)
+	radius 800mm
+	bubble_pos (-20, 1700, 77880)
+	flags 0x007C
+	func fn[0,16]
+	unk1 0
+
+look_point[10]:
+	pos (-770, 0, 72650)
+	radius 800mm
+	bubble_pos (-770, 800, 72650)
+	flags 0x007C
+	func fn[0,17]
+	unk1 0
+
+look_point[11]:
+	pos (7000, 0, 66550)
+	radius 1200mm
+	bubble_pos (7000, 800, 66550)
+	flags 0x007C
+	func fn[0,18]
+	unk1 0
+
+look_point[12]:
+	pos (1770, 0, 66890)
+	radius 800mm
+	bubble_pos (1770, 800, 66890)
+	flags 0x007C
+	func fn[0,19]
+	unk1 0
+
+look_point[13]:
+	pos (-3790, 0, 64959)
+	radius 800mm
+	bubble_pos (-3790, 800, 64959)
+	flags 0x007C
+	func fn[0,20]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		CharFlagsSet char[2] 0x0010
+	Return
+
+fn[1]:
+	OpLoad "t4135_n"
+	ObjFlagsSet object[1] 0x0004
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12107]:
+		if flag[1]:
+			CharTurnTo self 270deg 0deg/s
+			TextTalk self {
+				对了，森特最近
+				也要出差去参加学术研究会了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				这也就意味着这里的研究员
+				只剩下我一个人了吗……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				在这儿的学术人员里面，
+				威尔玛是最优秀的呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				不过她很快就要被调到
+				外国的研究机构去了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				虽然感觉会变得有点寂寞了，
+				但是我应该为她加油才行。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12106]:
+		if flag[1]:
+			TextTalk self {
+				利贝尔的考古学资料
+				还真是数不胜数呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				不仅从瓦雷利亚湖中发现了那么多文物，
+				而且连亚宁堡长城其实也是一个遗迹。{wait}
+			}
+			TextWait
+			TextTalk self {
+				只是知道这一点的人并不多。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				这个壶是上个月
+				刚从瓦雷利亚湖打捞上来的。{wait}
+			}
+			TextWait
+			TextTalk self {
+				这种花纹……
+				很可能是中世纪的东西。{wait}
+			}
+			TextWait
+			TextTalk self {
+				呵呵，
+				一看到这东西，
+				连我这把老骨头也不住地激动。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12107]:
+		if flag[2]:
+			TextTalk self {
+				『四轮之塔』在外国
+				并没有很高的知名度……{wait}
+			}
+			TextWait
+			TextTalk self {
+				这篇论文
+				会不会得到认可呢……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				这篇论文
+				真的没问题吗。{wait}
+			}
+			TextWait
+			TextTalk self {
+				现在开始觉得心理有些不踏实了。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12106]:
+		if flag[2]:
+			TextTalk self {
+				如果能再多收集一些资料
+				就好了啊……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				怎、怎么样，前辈。{wait}
+			}
+			TextWait
+			TextTalk self {
+				嗯～
+				感觉说服力还是不太充分……{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12107]:
+		if flag[3]:
+			TextTalk self {
+				今年的考古学术研究会
+				在奥雷德自治州召开。{wait}
+			}
+			TextWait
+			TextTalk self {
+				唉，我也好想去哦～{wait}
+			}
+			TextWait
+			TextTalk self {
+				可现在还有事务缠身，
+				今年只有放弃了吧。{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo self 180deg 0deg/s
+			TextTalk self {
+				哼，谁会紧张啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				我才没有那么紧张呢。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12106]:
+		if flag[3]:
+			TextTalk self {
+				森特，很快你就要
+				去参加人生中第一次学术研究会了哦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				不过这次
+				我不能陪你去了。{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo self 180deg 0deg/s
+			TextTalk self {
+				对了，
+				论据似乎还有一些薄弱。{wait}
+			}
+			TextWait
+			TextTalk self {
+				虽然应该已经有不少资料了，
+				不过还是再借一些吧。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd self
+	Return
+
+fn[6]:
+	Call fn[0,7]
+	Return
+
+fn[7]:
+	TextStart char[0]
+	if flag[12112]:
+	elif flag[12107]:
+		if flag[0]:
+			TextTalk char[0] {
+				威尔玛下个月
+				就要去外国了。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				有点寂寞呢……{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				威尔玛学员
+				从下个月开始
+				就要去外国的研究机构了。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				………………………………{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				算了，这也是没办法的。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				因为他们
+				都很有才能嘛……{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12106]:
+		TextTalk char[0] {
+			欢迎光临，
+			这里是历史资料馆。{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			请务必好好参观一下。{wait}
+		}
+		TextWait
+	TextEnd char[0]
+	Return
+
+fn[8]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【『四轮之塔』的外壁】
+		　　　　　　　　　　　年代：七耀历以前？
+		　　这块朴素的石壁，是从『大崩坏』后所建
+		的『四轮之塔』上作为研究资料切割出来的。
+		其上所绘制的纹样是同时代建筑物中的典型，
+		据说描述的是持杖的祭司，以及展翅的神祗的
+		身姿。关于其与七耀教会成立之后的代表神格
+		『空之女神』的关系，各方面的研究仍在进行
+		中。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[9]:
+	FadeOut 300ms 0x00000000 100
+	if system[66] == 7:
+		TextSetName ""
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 5}【七耀历１１５０～１２００年
+			　　　　　　　～导力革命以后的世界～】
+			　　Ｃ·爱普斯泰恩博士发明导力器后不到五
+			十年。世界以惊人的速度进步着，接连不断地
+			开拓岀导力技术新的应用领域。堪称其象征的
+			就是飞艇。
+			　　
+			　　利贝尔王国定期飞艇的运航已经成为国民
+			们习以为常的交通方式，近年来埃雷波尼亚帝
+			国等其它国家也开始致力于研发商用基准的飞
+			艇。{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		TextSetPos 72 320 56 3
+	else:
+		TextSetName ""
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 5}【七耀历１１５０～１２００年
+			　　　　　　　～导力革命以后的世界～】
+			　　Ｃ·爱普斯泰恩博士发明导力器后仅仅五
+			十年。世界以惊人的速度进步着，接连不断地
+			开拓岀导力技术新的应用领域。堪称其象征的
+			就是飞艇。
+			　　
+			　　利贝尔王国定期飞艇的运航已经成为国民
+			们习以为常的交通方式，近年来埃雷波尼亚帝
+			国等其它国家也开始正式引进飞艇制造业，使
+			得飞艇级的船体逐步实用化。
+			　　{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[10]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【七耀历以前
+		　　　　　～古代塞姆里亚文明～】
+		　　距今约１２００年前，当时繁荣绝顶的塞
+		姆里亚文明突然迎来了终结，失去了文明的人
+		们开始度过漫长的暗黑时代。
+		　　
+		　　第一层的展示物据考证是『大崩坏』之后
+		所制造的遗物。虽然据判断并非古代文明的直
+		接遗物，但因受到其深刻影响，学术方面的价
+		值极高。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[11]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【古代的照明器具】
+		　　　　　　　　　　　年代：七耀历以前？
+		　　专用于焚烧篝火的容器。在塔之类被认为
+		与祭祀仪式有关联的建筑物中频繁被使用，其
+		具体用途不仅仅是照明，在宗教上可能也拥有
+		某种程度的意义。当然这点目前还只是推测罢
+		了。  {wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[12]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【浮雕石柱】
+		　　　　　　　　　　　年代：七耀历以前？
+		　　刻有优美雕刻的石柱。在瓦雷利亚湖的湖
+		底被打捞上来，可以看出与『四轮之塔』的壁
+		画类似的纹样在其上也被反复使用。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[13]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【瓷工艺的地板】
+		　　　　　　　　　　　年代：七耀历以前？
+		　　遗迹内部彩色镶嵌的瓷工艺地板。将破碎
+		的天然石块巧妙拼接，作出朴素而美妙的花纹
+		样式。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[14]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【七耀历１～５００年左右
+		　　　　　　　　～暗黑时代的到来～】
+		　　由于『大崩坏』而导致文明尽失，世界陷
+		入了长期的混乱时代。
+		　　大小各异的国家、势力使得无尽的战争持
+		续了约５００年间，后世称此时代为『暗黑时
+		代』。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[15]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【骑士们的武具】
+		　　　　　　　　年代：七耀历５００年左右
+		　　日夜征战的时代中，战士们的集团拥有社
+		会性的强大影响力，最终成长为特权的骑士阶
+		级。
+		　　他们佩戴着如展品所示的武具投身沙场，
+		获得战利品和领土，势力不断扩大。
+		　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[16]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【七耀历５００～１１００年左右
+		　　　　　　～七耀教会带来的安定期～】
+		　　七耀教会登上历史舞台，正值暗黑时代末
+		期，七耀历５００年左右。
+		　　以『空之女神』为中心所整理的教义，通
+		过教会救济民众的社会活动，瞬间深入人心。
+		　　它的权威很快成长到连贵族、骑士阶级也
+		无法忽视的地步，其后以教会为中心的新秩序
+		便逐步形成了。
+		　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[17]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【古代文明的遗物——
+		　　　　　　　　『古代遗物』】
+		　　　　　　　　　　　　　　　年代：不明
+		　　『古代遗物』是从各地发现的古代遗迹中
+		出土的诸如器物、杖等形态各异、不可思议的
+		遗物。
+		　　在七耀教会的教义中，作为与女神赐予的
+		『七至宝』相关的物品，其回收成为教会必须
+		履行的义务之一。展品的『古代遗物』也是教
+		会所回收的物品。
+		　　许多传闻称其拥有超常的力量，但此展品
+		已经失去能力，无法启动。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[18]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【七耀教会的祭具】
+		　　　　　　　　年代：七耀历９００年左右
+		　　七耀教会创造岀种种的宗教艺术，由此开
+		始教会开拓出一个稳定的时代。据考证，『空
+		之女神』的圣像也是由此时起被塑造为现今的
+		姿态。此外，现在所使用的祭祀道具多数也是
+		在这个时代被定型的。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[19]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【七耀教会圣典的抄本】
+		　　　　　　　　年代：七耀历５００年左右
+		　　暗黑时代末期的原始七耀教会所使用的圣
+		典抄本。中世纪没有印刷技术，因此这本书是
+		由人手工抄写在兽皮制的纸张上的。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[20]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}【中世纪的纺纱机】
+		　　　　　　　　年代：七耀历９００年左右
+		　　纺纱用的手工机械。到了稳定的中世纪，
+		农民的生活逐渐富裕，作为商品作物的棉花栽
+		培日渐繁盛。为了收入货币，这个时代的手工
+		业也开始发展。
+		　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

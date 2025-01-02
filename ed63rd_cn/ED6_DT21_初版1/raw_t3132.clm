@@ -1,0 +1,223 @@
+calmare fc scena
+scena:
+	name "Zeiss" "T3132.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[1] "npl/ch01350._ch" "npl/ch01350p._cp"
+chip[2] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[3] "npl/ch01140._ch" "npl/ch01140p._cp"
+
+npc char[0]:
+	name "玛尔奇娜主管"
+	pos (-1700, 0, 2400)
+	angle 192deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[1]:
+	name "艾玛"
+	pos (68290, 0, 91600)
+	angle 90deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[2]:
+	name "东杰"
+	pos (68100, 0, 56310)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,6]
+
+look_point[0]:
+	pos (-1290, 0, 550)
+	radius 400mm
+	bubble_pos (-1700, 1500, 2400)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (-4000, 0, 4000)
+	radius 800mm
+	bubble_pos (-4000, 1000, 4000)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[8] 0x0080
+		CharFlagsUnset char[9] 0x0080
+		CharFlagsUnset char[10] 0x0080
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (67200, null, 90290) (68610, null, 92730) 2000mm/s
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Return
+
+fn[4]:
+	TextStart char[8]
+	if flag[12165]:
+		if flag[0]:
+			TextTalk char[8] {
+				最近这段时间，
+				从共和国来的客人
+				好不容易有所增加……{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				艾玛却是那副样子，
+				真担心会不会
+				给客人添麻烦啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				……刚才我去
+				储物室看了一下……{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				架子下面
+				藏了好多油灯。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				……一定是艾玛干的。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				真是的，
+				买那么多到底打算干什么嘛。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd char[8]
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				就算导力灯无法使用
+				也绝对没问题……对吧！？{wait}
+			}
+			TextWait
+			TextTalk self {
+				好，要努力工作哦～！{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				前些天，
+				导力灯怎么都点不着，
+				真是头疼呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				所以我吸取教训，
+				能买多少油灯
+				就买了多少。{wait}
+			}
+			TextWait
+			TextTalk self {
+				这下就应该可以
+				绝对放心了……对吧！？{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12165]:
+		if flag[2]:
+			TextTalk self {
+				嗯，这次应该
+				不会发生那种麻烦了……{wait}
+			}
+			TextWait
+			TextTalk self {
+				商谈似乎
+				也进展顺利呢。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				我主要是做
+				导力器买卖的。{wait}
+			}
+			TextWait
+			TextTalk self {
+				但是，之前来的时候
+				城里的导力都停了……{wait}
+			}
+			TextWait
+			TextTalk self {
+				结果只好
+				空手而归了。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[7]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}　　　　　　　储物室　　　　　　　
+		      ※非工作人员禁止入内。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

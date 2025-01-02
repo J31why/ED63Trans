@@ -1,0 +1,332 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4138.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02190._ch" "npl/ch02190p._cp"
+chip[1] "npl/ch00030._ch" "npl/ch00030p._cp"
+chip[2] file[0x002701EF] file[0x002701F4]
+
+npc char[0]:
+	name "穆拉少校"
+	pos (1160, 4000, 16920)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "奥利维尔"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "达维尔大使"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 0
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	if system[66] != 255:
+		OpLoad "t4138_n"
+	else:
+		OpLoad "t4138_y"
+	if system[66] != 255:
+		EffStop eff_instance[128] 0
+		LookPointFlagsSet look_point[1] 0x0001
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	Sleep 500ms
+	BgmPlay bgm[17] 0
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}《輝く環》の事件が
+		終結してからしばらく後――{wait}
+	} {
+		新たな人生へと旅立って行った
+		仲間たちの後を追うように――{wait}
+	} {
+		ここにまた１人の青年が、
+		リベールを離れようとしていた。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[8] (2610, 0, 72170) 225deg
+	CharSetPos char[9] (1380, 0, 72520) 180deg
+	CharSetPos char[10] (1430, 0, 70600) 0deg
+	CamLookPos (3610, 0, 73730) 0ms
+	CamSetDistance 0 4450 -10000 0ms
+	CamZoom 2940 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 277 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[10] {
+		#97354v#1100Fま、まさか君が――{wait}
+	} {
+		#97355v――い、いや！　あなた様が
+		オリヴァルト皇子であったとは。{wait}
+	} {
+		#97356vご尊顔に拝する
+		機会がなかったとはいえ、
+		数々の無礼をお許しください。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#5Pはっはっはっ。
+		そう恐縮しないでくれたまえ。{wait}
+	} {
+		それは身分をいつわった
+		このボクに帰すべき罪であり
+		大使には何の責任もない。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#97357v#1100Fか、かたじけないお言葉――{wait}
+	} {
+		#97358vそれにしても、ご身分を隠し
+		王国内をご遊行などとは……{wait}
+	} {
+		#97359vご無事であったから良いものを
+		危うく国際問題となる所です。{wait}
+	} {
+		#97360vいや、お恨みしますぞ――皇子。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#5Pフッ、しかしそのおかげで、
+		書物からでは決して得られぬ
+		生きた知恵を学ぶことができたわけさ。{wait}
+	} {
+		まあ、これからも折りに触れて
+		ちょくちょく足を運ぶ予定だから、
+		その時にはよろしくお願いするよ。{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#97361v#1100Fな、なんですと！？{wait}
+	}
+	TextWait
+	Emote char[9] 0mm 2000mm 38 39 250ms 2
+	Sleep 1000ms
+	TextTalk char[9] {
+		#030F#5Pどうせなら一緒に
+		温泉にでも繰り出そうじゃないか。{wait}
+	} {
+		フッ、共和国のエルザ大使を
+		お誘いするのも悪くはないねえ……{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[10] {
+		#97362v#1100Fお、皇子……{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 2000mm 14 15 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#270F#2Pゴホン、大使……{wait}
+	} {
+		いちいち真に受けていたら
+		日が暮れてしまいますよ。{wait}
+	} {
+		それより、先ほどお願いした
+		我々の帰国についてですが。{wait}
+	}
+	TextWait
+	CharTurnTo char[10] 45deg 400deg/s
+	TextTalk char[10] {
+		#97363v#1100Fあ、ああ……
+		すぐに飛行艇を手配しよう。{wait}
+	} {
+		#97364v外交官用の高速艇なら
+		明日には用意できると思う。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#5Pフッ、感謝するよ。{wait}
+	}
+	TextWait
+	CharTurnTo char[10] 0deg 400deg/s
+	TextTalk char[10] {
+		#97365v#1100Fいえ、皇子のお役に立つことは
+		むしろ私の喜びとするところです。{wait}
+	} {
+		#97366vしかも、折しも国境で
+		あのような緊張が高まった直後……{wait}
+	} {
+		#97367v皇子の仰る通り、
+		ここは軍用艇を用いない方が
+		懸命かも知れませんからな……{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharFlagsSet char[10] 0x0080
+	CharSetPos char[9] (61690, 0, 10180) 90deg
+	CharSetPos char[8] (59140, 0, 10300) 90deg
+	CamLookPos (61850, 0, 11710) 0ms
+	CamSetDistance 0 4780 -10000 0ms
+	CamZoom 2940 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 277 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	TextTalk char[8] {
+		#270F#6Pと、大使は言っていたが……{wait}
+	} {
+		本当のところ……
+		何を警戒しているんだ？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2Pフフ、不慮の事故の可能性を
+		前もって排除しておいたまでさ。{wait}
+	} {
+		今回のボクの行動で
+		帝国軍主戦派の面目は丸つぶれだ。{wait}
+	} {
+		彼らの掌中にあっては
+		何を仕掛けて来ても不思議はない。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#270F#6P事故にみせかけた謀殺――{wait}
+	} {
+		それもあり得るというわけか。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2Pあの辛抱強い宰相殿が、
+		そこまで短気とも思えないがね。{wait}
+	} {
+		だが、もしボクが彼の立場なら
+		この機会を利用するかも知れない。{wait}
+	} {
+		――ふと、そう思ったわけさ。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#270F#6P……………………………{wait}
+	} {
+		俺の所属する第７師団は
+		お前の味方だ……{wait}
+	} {
+		有事の際にはすぐさま
+		行動を起こす用意はできている。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2Pそれは頼もしいかぎりだが……{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#030F#2Pしかし、我が友よ……
+		ここで下手に動いては
+		敵の思うつぼというものさ。{wait}
+	} {
+		街角のケンカだって
+		先に刃物を出した方が悪い。{wait}
+	} {
+		ボクが実力部隊に泣きついたら
+		反乱謀議そのものだからねえ。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#270F#6Pそうだな……{wait}
+	} {
+		自衛のための根回しが過ぎて、
+		かえって追い込まれんとも限らん。{wait}
+	} {
+		何もしないことが、
+		最高の自衛という場合もあるか。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2Pフッ、まさにその通りだよ。{wait}
+	} {
+		こちらの方針が判らなければ
+		敵だって対処のしようがない。{wait}
+	} {
+		まずは帝都に帰還し、
+		リベールで見た事件の真相を
+		皇帝陛下にご奏上する……{wait}
+	} {
+		その後の策は
+		出方を見てからとしよう。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	Sleep 500ms
+	FlagSet flag[9477]
+	NewScene file[0x0021019E] 100 0 0
+	Hcf
+	Return

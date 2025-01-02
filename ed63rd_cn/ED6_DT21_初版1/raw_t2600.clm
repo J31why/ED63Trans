@@ -1,0 +1,522 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2600.x"
+	town town[1]
+	bgm bgm[32]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02900._ch" "npl/ch02900p._cp"
+chip[1] "apl2/ch20783._ch" "apl2/ch20783p._cp"
+chip[2] "npl/ch01080._ch" "npl/ch01080p._cp"
+
+npc char[0]:
+	name "安敦"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[1]:
+	name "利库斯"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0195
+	init fn[65535,65535]
+	talk fn[0,5]
+
+npc char[2]:
+	name "米克"
+	pos (0, 0, 800)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,3]
+	talk fn[0,6]
+
+npc char[3]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "王立学院·小道"
+	pos (170, 0, -16239)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (0, 1000, 9720)
+	radius 800mm
+	bubble_pos (0, 2000, 9720)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+fn[0]:
+	if system[66] == 8:
+		if flag[12143]:
+			CharFlagsUnset char[0] 0x0080
+			CharFlagsUnset char[1] 0x0080
+			CharSetPos char[0] (200, 500, 4560) 180deg
+			CharSetPos char[1] (-640, 750, 5900) 180deg
+		elif flag[12142]:
+		elif flag[12140]:
+			CharFlagsUnset char[2] 0x0080
+		elif flag[12139]:
+			CharFlagsUnset char[0] 0x0080
+			CharFlagsUnset char[1] 0x0080
+			CharSetPos char[0] (200, 500, 4560) 0deg
+			CharSetPos char[1] (-640, 750, 5900) 180deg
+		elif flag[12133]:
+			CharFlagsUnset char[0] 0x0080
+			CharFlagsUnset char[1] 0x0080
+			CharSetPos char[0] (200, 500, 4560) 0deg
+			CharSetPos char[1] (-550, 750, 5900) 180deg
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -106000) "mt2600._ch"
+	ObjFlagsUnset object[0] 0x0010
+	ObjFlagsSet object[2] 0x0000
+	ObjFlagsSet object[2] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	while 1:
+		CharIdle self (-1300, null, 1420) (1300, null, -1760) 2000mm/s
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12143]:
+		if flag[0]:
+			TextTalk self {
+				现在感觉非常爽朗啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				早安，太阳！{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				昨天晚上，
+				我找到了一朵绽放在月光下的小花。{wait}
+			}
+			TextWait
+			TextTalk self {
+				虽然这么小，
+				却健康地展开花瓣。{wait}
+			}
+			TextWait
+			TextTalk self {
+				看到这情景，
+				仿佛心灵都被洗涤了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				啊啊，我在烦恼什么呢。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12142]:
+	elif flag[12140]:
+	elif flag[12139]:
+		CharTurnTo self 0deg 0deg/s
+		if flag[0]:
+			TextTalk self {
+				利库斯总是
+				故意岔开谈话重点。{wait}
+			}
+			TextWait
+			TextTalk self {
+				一定是在心里
+				嘲笑我吧！{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				喂，利库斯，你倒是说点什么啊！{wait}
+			}
+			TextWait
+			TextTalk self {
+				就这样下去我们没问题吗！？{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				哎，冷静点安敦。{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				从刚才开始
+				你说话就语无伦次的。{wait}
+			}
+			TextWait
+			TextTalk self {
+				利库斯总是
+				像这样岔开话题……{wait}
+			}
+			TextWait
+			TextTalk self {
+				这是错误的！{wait}
+			}
+			TextWait
+			TextTalk self {
+				这样做的话
+				会变得很差劲的！{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12133]:
+		if flag[12134]:
+			if flag[0]:
+				TextTalk self {
+					我总觉得事情的发展
+					有点太顺利了……{wait}
+				}
+				TextWait
+				TextTalk self {
+					……唉，如果那时候不入学
+					就不会有这样的经历了。{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					唉，决定入学的时候
+					还高兴得跟什么似的……{wait}
+				}
+				TextWait
+				TextTalk self {
+					我一定是被捉弄了。{wait}
+				}
+				TextWait
+				TextTalk self {
+					…………被命运玩弄于股掌之中……{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			Call fn[0,7]
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12143]:
+		if flag[1]:
+			TextTalk self {
+				安敦不知道什么时候
+				就回来了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				还说着什么
+				『终于想开了』……{wait}
+			}
+			TextWait
+			TextTalk self {
+				哈哈，
+				结果什么都没变嘛。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				呵啊～…………{wait}
+			}
+			TextWait
+			TextTalk self {
+				呀，天气真好呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				今天要做什么呢。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12142]:
+	elif flag[12140]:
+	elif flag[12139]:
+		if flag[1]:
+			TextTalk self {
+				镇定下来啦，安敦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				那样大吵大闹
+				也不是办法啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				安敦那家伙
+				又开始叫唤了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				这么做
+				也不是办法啊。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12133]:
+		if flag[1]:
+			TextTalk self {
+				安敦那家伙
+				去专攻社会系课程了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				哈哈，我都说那种要背
+				超多东西的课程还是放弃算了。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				呀，你好像很着急呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				咦？　在找社会系的人吗？{wait}
+			}
+			TextWait
+			TextTalk self {
+				这么说来，安敦也是社会系的吧。{wait}
+			}
+			TextWait
+			TextTalk self {
+				怎么想他都不适合啊。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12140]:
+		if flag[2]:
+			TextTalk self {
+				最近感觉好像给艾福托老师
+				逼得紧紧的呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				嘁，被盯上了吗……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				好久没偷懒了，
+				正打算放松一下。{wait}
+			}
+			TextWait
+			TextTalk self {
+				可是半路上有艾福托老师在。{wait}
+			}
+			TextWait
+			TextTalk self {
+				这样可没法回去啊。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[7]:
+	EventBegin 0
+	Sc_C4Set 536870912
+	CharTurnTo char[0] 0deg 0deg/s
+	CrossFade 1000ms
+	CharSetChipPattern char[0] 0
+	CamLookPos (1330, 250, 4710) 0ms
+	CamSetDistance 0 6320 -10000 0ms
+	CamZoom 3190 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 252 0ms
+	CharSetPos name[4] (200, 250, 3320) 0deg
+	Sleep 1000ms
+	TextTalk char[0] {
+		#99562v#11P我说利库斯……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99563v#11P我们为什么
+		会在这种地方呢。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99564v#11P春天已经来了。
+		然而我的心却仍留在冬天。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99565v#11P唉，
+		为什么事事都不顺心呢……{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81628v#044F#12P那个～
+		不好意思……{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[0] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#99566v#5P咦，你是……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99567v#5P记得是一年级的插班生吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99568v#5P唉，真羡慕啊～……
+		像你这么聪明的人。{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 2000mm 40 43 100ms 3
+	TextTalk name[4] {
+		#81629v#043F#12P那、那个……{wait}
+	} {
+		#81630v#045F这个是碧欧拉老师
+		让我发的……{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}把资料交给安敦。{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	FadeWait
+	TextTalk char[0] {
+		#99569v#5P…………………………{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99570v#5P我…………
+		又留级了……{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81631v#044F#12P哎…………？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99571v#5P又要读一遍三年级了。
+		唉，真是糟透了……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99572v#5P我一年级的时候
+		也是充满希望的啊……{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81632v#043F#12P那、那个……{wait}
+	} {
+		#81633v#540F（要、要怎么
+		　安慰他才好呢……）{wait}
+	}
+	TextWait
+	FlagSet flag[12134]
+	EventEnd 0
+	Return
+
+fn[8]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}门上了锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

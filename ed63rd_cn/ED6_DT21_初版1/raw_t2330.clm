@@ -1,0 +1,306 @@
+calmare fc scena
+scena:
+	name "Ruan" "T2330.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+	scp 0 file[0x0021010D]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01270._ch" "npl/ch01270p._cp"
+chip[1] "npl/ch01030._ch" "npl/ch01030p._cp"
+
+npc char[0]:
+	name "雷克斯"
+	pos (-25500, 0, 43210)
+	angle 270deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "卡拉"
+	pos (-37500, 0, 44500)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,5]
+
+look_point[0]:
+	pos (-37020, 0, 42970)
+	radius 400mm
+	bubble_pos (-37500, 1500, 44500)
+	flags 0x007E
+	func fn[0,4]
+	unk1 0
+
+look_point[1]:
+	pos (-26870, 0, 42820)
+	radius 400mm
+	bubble_pos (-25500, 1500, 43210)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	TextStart char[8]
+	if flag[12066]:
+		if flag[0]:
+			TextTalk char[8] {
+				玩的时候注意别受伤哦。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				咦？　波利呢？{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				在和克拉姆他们一块玩吗？{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				虽然有精神是好事，
+				但要注意别受伤哦。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12065]:
+		if flag[0]:
+			TextTalk char[8] {
+				一会儿得去看看才行呢。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				好东西是不是
+				都已经卖掉了呢？{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				咦，你们好像很开心呢。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				是不是在义卖会
+				找到什么好东西了？{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1711F这是秘密——！{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1732F是秘密——！{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				啊哈哈，
+				看来一会儿得去看看才行呢。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12064]:
+		if flag[12097]:
+			if flag[0]:
+				TextTalk char[8] {
+					卢西亚应该也在义卖会帮忙吧。
+					如果有空的话就去看看吧。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[8] {
+					你知道吗？
+					今天开始要举办义卖会呢。{wait}
+				}
+				TextWait
+				TextTalk char[8] {
+					虽然『义卖会』听起来挺土的，
+					不过村子里还真有节日的气氛啊。{wait}
+				}
+				TextWait
+				TextTalk char[8] {
+					卢西亚应该也去义卖会帮忙了吧。
+					如果有空的话就去看看吧。{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			TextTalk char[8] {
+				哎呀，
+				这不是玛丽和波利吗。{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1718F啊，雷克斯先生，
+				您好～。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				谢谢你经常
+				陪我家的卢西亚玩。{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1732F不客气～。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				哈哈，
+				你们还是那么精神呢。{wait}
+			}
+			TextWait
+			FlagSet flag[12097]
+	elif flag[12055]:
+	TextEnd char[8]
+	Return
+
+fn[4]:
+	Call fn[0,5]
+	Return
+
+fn[5]:
+	TextStart char[9]
+	if flag[12066]:
+		if flag[12098]:
+			if flag[1]:
+				TextTalk char[9] {
+					天黑之前要回去哦。{wait}
+				} {
+					老师会担心的。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					回去太晚
+					特蕾莎老师就会担心的。{wait}
+				}
+				TextWait
+				TextTalk char[9] {
+					玩得差不多了就要早点回去哦？{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1713F……好。{wait}
+				}
+				TextWait
+				FlagSet flag[1]
+		else:
+			TextTalk char[9] {
+				哎呀？　玛丽就你一个人？{wait}
+			} {
+				……波利呢？{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1713F那、那个，
+				和克拉姆他们在一起……{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				是吗，玩的时候要小心哦。{wait}
+			} {
+				别太靠近悬崖边上。{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1712F……是、是！{wait}
+			}
+			TextWait
+			FlagSet flag[12098]
+	elif flag[12065]:
+		if flag[1]:
+			TextTalk char[9] {
+				下次要再来和卢西亚玩哦。{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				那孩子
+				也非常开心呢。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[9] {
+				哎呀？　好像很开心呢。{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				发生什么好事情了吗？{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1711F没什么——！{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1732F没什么啦——！{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				呵呵，异口同声啊～。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12064]:
+		if flag[1]:
+			TextTalk char[9] {
+				卢西亚也很喜欢参加活动呢～。{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				这点到底是像谁呢？{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[9] {
+				哎呀，玛丽和波利，
+				欢迎光临！{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				要找卢西亚的话，
+				她在义卖会帮忙呢。{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				那孩子也很喜欢参加活动呢～。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12055]:
+	TextEnd char[9]
+	Return

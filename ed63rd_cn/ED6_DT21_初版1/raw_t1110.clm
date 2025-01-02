@@ -1,0 +1,303 @@
+calmare sc scena
+scena:
+	name "Bose" "T1110.x"
+	town town[1]
+	bgm bgm[11]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01690._ch" "npl/ch01690p._cp"
+chip[1] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[2] "npl/ch01680._ch" "npl/ch01680p._cp"
+chip[3] "npl/ch01030._ch" "npl/ch01030p._cp"
+chip[4] "npl/ch01480._ch" "npl/ch01480p._cp"
+chip[5] "npl/ch01220._ch" "npl/ch01220p._cp"
+chip[6] "npl/ch01010._ch" "npl/ch01010p._cp"
+chip[7] "npl/ch01000._ch" "npl/ch01000p._cp"
+chip[8] "npl/ch01183._ch" "npl/ch01183p._cp"
+chip[9] "npl/ch01230._ch" "npl/ch01230p._cp"
+chip[10] "npl/ch01200._ch" "npl/ch01200p._cp"
+chip[11] "npl/ch01140._ch" "npl/ch01140p._cp"
+chip[12] "npl/ch01143._ch" "npl/ch01143p._cp"
+chip[13] "npl2/ch03090._ch" "npl2/ch03090p._cp"
+
+npc char[0]:
+	name "莫德娜"
+	pos (-18730, 70, 33060)
+	angle 270deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x01D5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "特里诺"
+	pos (-21100, 0, 33600)
+	angle 180deg
+	x 0
+	cp chip[10]
+	frame 0
+	ch chip[10]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "亚妮拉丝"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[13]
+	frame 0
+	ch chip[13]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 19:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			system[1] = 191
+			SystemFlagsSet 0x10000000
+			Event fn[0,6]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Call fn[6,2]
+	Return
+
+fn[3]:
+	while 1:
+		CharIdle self (26200, null, 71400) (28400, null, 72600) 2000mm/s
+	Return
+
+fn[4]:
+	while 1:
+		CharIdle self (17430, null, 68790) (23880, null, 64870) 1500mm/s
+	Return
+
+fn[5]:
+	while 1:
+		CharWalkToPos self (-22800, 0, 72500) 2000mm/s 0
+		CharTurnTo self 0deg 400deg/s
+		Sleep 3000ms
+		CharWalkToPos self (-21620, 0, 72500) 2000mm/s 0
+		CharWalkToPos self (-21020, 0, 72800) 2000mm/s 0
+		CharWalkToPos self (-20800, 0, 72800) 2000mm/s 0
+		CharTurnTo self 0deg 400deg/s
+		Sleep 3000ms
+		CharWalkToPos self (-21020, 0, 72800) 2000mm/s 0
+		CharWalkToPos self (-21620, 0, 72500) 2000mm/s 0
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-19160, 0, 34000) 0ms
+	CamSetDistance 0 6520 -10000 0ms
+	CamZoom 2820 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[10] (-20640, 0, 31700) 0deg
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#86576v{color 0}#4S#15A证言③{0x18}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 1500ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[8] {
+		#99627v#11P最近，
+		和市长家的莉拉小姐在一起的人……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99628v#11P啊啊，
+		这么说来我和老公一起
+		去超市的时候看到过。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99629v#11P两个人好像
+		在一起挑选特产之类的商品……{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99071v#5P呵呵，我也记得呢。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99072v#5P那可真是
+		亲密无间呢。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99073v#5P让人觉得
+		简直像新婚夫妇一样呢。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#86577v#814F#12P已、已经这么……？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99630v#11P哎……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99631v#11P这人说话
+		总是很夸张，
+		不用太在意啦。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99074v#5P呵呵，
+		这种事说夸张一点比较有趣嘛。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#86578v#819F#12P啊哈哈……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99632v#11P不过，
+		我的确记得见过那个男人呢。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99633v#11P唔，叫什么来着……
+		你记得吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99075v#5P说什么傻话，当然记得了。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99076v#5P我啊，
+		只要打过交道的人都不会忘记的哦。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99077v#5P那个人……
+		应该是叫做雷纳德吧。{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#86579v#814F#12P说到雷纳德先生……{wait}
+	} {
+		#86580v#1310F难不成，是那个『川蝉亭』的？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99078v#5P……怎么，原来你知道啊。
+		真没意思。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#86581v#819F#12P啊哈哈，
+		我经常因为工作去那个旅馆，
+		所以至少知道长相和名字……{wait}
+	} {
+		#86582v#816F不过特里诺先生，
+		你是不是和雷纳德先生有私交啊。{wait}
+	} {
+		#86583v……他是怎样的人
+		能不能告诉我呢？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99079v#5P这倒没问题……
+		不过接下来要收情报费哦？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#86584v#1317F#12P#3S呃。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99634v#11P哎～，老公啊！
+		别开玩笑啦。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99635v#11P这可是一直
+		关照我们的游击士哦。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99080v#5P哇哈哈，抱歉抱歉。
+		一不小心老毛病又犯了。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#86585v#819F#12P啊哈哈……{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#99081v#5P说起来啊，
+		雷纳德可是非常正直的人……{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	Fork char[9] fork[1]:
+		CamZoom 3120 3000ms
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9478]
+	NewScene "t1101._sn" 100 0 0
+	Hcf
+	Return

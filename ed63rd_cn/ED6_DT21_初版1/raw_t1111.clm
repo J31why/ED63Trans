@@ -1,0 +1,1127 @@
+calmare tc scena
+scena:
+	name "Bose" "T1111.x"
+	town town[1]
+	bgm bgm[11]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02360._ch" "npl/ch02360p._cp"
+chip[1] "npl/ch02370._ch" "npl/ch02370p._cp"
+chip[2] "npl/ch01350._ch" "npl/ch01350p._cp"
+chip[3] "npl/ch02363._ch" "npl/ch02363p._cp"
+chip[4] "npl/ch01560._ch" "npl/ch01560p._cp"
+chip[5] "npl2/ch03090._ch" "npl2/ch03090p._cp"
+
+npc char[0]:
+	name "梅贝尔市长"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "莉拉"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "萨拉"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "管家门特斯"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "亚妮拉丝"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 19:
+		if flag[9479]:
+			FlagUnset flag[9479]
+			SystemFlagsSet 0x10000000
+			Event fn[0,8]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet char[3] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[0] (-120710, 200, 68600) 180deg
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (-120260, 0, 65470) 0deg
+	CamLookPos (-121830, 0, 68600) 0ms
+	CamSetDistance 0 4550 -10000 0ms
+	CamZoom 2550 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 322 0ms
+	Sleep 1000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk char[3] {
+		#6P那么……{wait}
+	} {
+		……你想问莉拉的情况？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94733v#610F#2P有没有什么值得注意的地方？{wait}
+	} {
+		#94734v比如……
+		和没见过的人在一起之类的。{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#6P唔，
+		这个的话我有印象。{wait}
+	} {
+		那是前几天，
+		我拜访特里诺先生家的时候……{wait}
+	} {
+		我亲眼看见
+		莉拉和一个陌生的男人
+		并肩走在一起。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94735v#610F#2P那，他是怎样的人呢？{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#6P好像是某家店的侍应生……
+		大概就是这种感觉吧。{wait}
+	} {
+		感觉是一位
+		正直的好青年。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[0] 0x0004
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[0] (-62700, -3000, 65960) 270deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-64050, -3000, 65990) 90deg
+	CharFlagsSet char[3] 0x0080
+	CamLookPos (-64500, -3000, 66970) 0ms
+	CamSetDistance 0 5580 -10000 0ms
+	CamZoom 2750 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 275 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk char[2] {
+		#5P啊，这么说来……{wait}
+	} {
+		以前那个人
+		送莉拉回过家哦。{wait}
+	} {
+		还有，
+		两个人还一起买过东西……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610F是吗……{wait}
+	} {
+		#94736v看来不会有错了。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5P啊……
+		难、难不成？{wait}
+	} {
+		那、那个人
+		莫非就是莉拉的？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94737v#610F萨拉……
+		现在只要默默支持她就好了。{wait}
+	} {
+		#94738v我也打算这样做。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5P好、好的……我明白了。{wait}
+	} {
+		哎～
+		不过那个莉拉竟然……{wait}
+	} {
+		呼，
+		真是世事难料啊～。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t1101._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	SoundPlay sound[6] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-118040, 0, 64269) 1500mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharWalkToPos self (-119830, 0, 65660) 1500mm/s 0
+	Return
+
+fn[4]:
+	Fork self fork[2]:
+		CharWalkToPos self (-118040, 0, 64269) 1500mm/s 0
+	ForkWait self fork[2]
+	CharTurnTo self 180deg 400deg/s
+	Sleep 300ms
+	SoundPlay sound[6] 0 0 100
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117780, 0, 62500) 1500mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharFlagsSet self 0x0080
+	Return
+
+fn[5]:
+	CharTurnTo self 90deg 400deg/s
+	CharWalkToPos2 self (-117840, 0, 64440) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Sleep 300ms
+	SoundPlay sound[6] 0 0 100
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117910, 0, 62510) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	CharFlagsSet self 0x0080
+	SoundPlay sound[7] 0 0 100
+	Return
+
+fn[6]:
+	SoundPlay sound[6] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117780, 0, 64519) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharWalkToPos self (-119260, 0, 64519) 2000mm/s 0
+	CharWalkToPos self (-120260, 0, 65519) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[7]:
+	Emote self 0mm 2000mm 40 43 100ms 3
+	Fork self fork[2]:
+		CharWalkToPos self (-118040, 0, 64269) 4000mm/s 0
+	ForkWait self fork[2]
+	CharTurnTo self 180deg 500deg/s
+	Sleep 200ms
+	SoundPlay sound[6] 0 0 100
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117780, 0, 62500) 4000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharFlagsSet self 0x0080
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharSetPos field_party[0] (-120000, 0, 65800) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[0] (-120710, 200, 68600) 180deg
+	CharColor char[3] 0x00FFFFFF 0ms
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsSet char[3] 0x0040
+	CharSetPos char[3] (-115800, 0, 60820) 0deg
+	CharFlagsUnset char[4] 0x0080
+	CharSetPos char[4] (-120510, 0, 66280) 0deg
+	CamLookPos (-122340, 0, 69030) 0ms
+	CamSetDistance 0 4550 -10000 0ms
+	CamZoom 2850 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 322 0ms
+	FadeIn 2000ms 0x00000000
+	CamZoom 2550 2000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#94664v#615F#11P原来如此……
+		是『川蝉亭』的雷纳德先生啊。{wait}
+	} {
+		#94665v#610F莉拉真是的，
+		什么时候认识他的……{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86586v#814F#6P咦，
+		市长也知道
+		雷纳德先生的事吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94666v#610F#11P虽然没有直接见过面，
+		但名字还是知道的。{wait}
+	} {
+		#94667v说到湖畔的『川蝉亭』，
+		那可是最近突然热门起来的知名旅馆嘛。{wait}
+	} {
+		#94668v#615F这几年似乎收益颇丰，
+		作为投资对象可是
+		无可挑剔的优秀呢。{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86587v#816F#6P嗯、嗯嗯……
+		特里诺先生也这么说。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94669v#615F#11P看了相关的报告书，
+		他交涉的手段也十分
+		正规和适当呢……{wait}
+	} {
+		#94670v#611F对他本人的评价
+		应该是相当优秀吧？{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86588v#819F#6P嗯嗯，那是当然。{wait}
+	} {
+		#86589v#1310F他妹妹索菲娜小姐
+		也是非常大方开朗的人。{wait}
+	} {
+		#86590v#811F就算莉拉小姐嫁过去
+		也不必担心吧？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94671v#611F#11P这、这实在是
+		有点言之过早……{wait}
+	} {
+		#94672v#618F不过，是啊……
+		说不定什么时候
+		就会发展成这样呢。{wait}
+	} {
+		#94673v#617F呵呵……虽然开心，
+		但另一方面还是有点寂寞呢。{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86591v#1314F#6P市长……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94674v#615F#11P……总而言之，
+		调查辛苦你了。{wait}
+	} {
+		#94675v#611F我已经知道了
+		莉拉的确有
+		看男人的眼光……{wait}
+	} {
+		#94676v之后就耐心等待
+		本人的报告了。{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86592v#819F#6P呵呵，是啊。
+		我也觉得这样不错。{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[113] 0 0 100
+	Sleep 800ms
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[0] fork[1]:
+		CamLookPos (-121020, 0, 68070) 1200ms
+	Fork char[4] fork[2]:
+		CharTurnTo self 135deg 400deg/s
+	Sleep 200ms
+	CharSetChipPattern char[0] 1
+	ForkWait char[0] fork[1]
+	Sleep 300ms
+	CharColor char[1] 0x00FFFFFF 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-115800, 0, 60820) 0deg
+	TextTalkNamed char[1] "莉拉的声音" {
+		#94760v#2P……小姐，
+		我是莉拉。{wait}
+	} {
+		#94761v能不能
+		占用您一点时间？{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86593v#814F#5P啊……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94677v#617F#5P呵呵……
+		真是说到就到呢。{wait}
+	} {
+		#94678v#611F难不成……
+		她终于打算
+		跟我说明情况了吗。{wait}
+	}
+	TextWait
+	CharTurnToChar char[4] char[0] 500deg/s
+	Sleep 300ms
+	TextTalk char[4] {
+		#86594v#819F#6P呵呵……
+		很有可能呢。{wait}
+	} {
+		#86595v#1310F嗯，
+		那我就不打扰你们，
+		先告辞了。{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CharSetChipPattern char[0] 0
+	Sleep 200ms
+	TextTalk char[0] {
+		#94679v#615F#11P不……
+		如果愿意的话，
+		希望你也留下来。{wait}
+	} {
+		#94680v#610F如果她要说这件事的话，
+		我也不打算隐瞒
+		调查她的事情的。{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86596v#814F#6P啊……{wait}
+	} {
+		#86597v#816F我明白了。
+		既然这样的话……{wait}
+	}
+	TextWait
+	TextTalkNamed char[1] "莉拉的声音" {
+		#94762v#2P……小姐？{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CharSetChipPattern char[0] 1
+	Sleep 200ms
+	TextTalk char[0] {
+		#94681v#610F#5P啊，对不起。{wait}
+	} {
+		#94682v……可以了，莉拉。
+		你进来吧。{wait}
+	}
+	TextWait
+	TextTalkNamed char[1] "莉拉的声音" {
+		#94763v#2P打扰了……{wait}
+	}
+	TextWait
+	_59
+	Fork char[0] fork[1]:
+		CamLookPos (-121830, 0, 68600) 3000ms
+	CharSetPos char[1] (-117780, 0, 62500) 0deg
+	ForkFunc char[1] fork[0] fn[0,3]
+	Sleep 200ms
+	ForkLoop char[4] fork[2]:
+		CharTurnToChar self char[1] 500deg/s
+	Sleep 300ms
+	Fork char[4] fork[1]:
+		CharWalkToPos2 self (-122000, 0, 66020) 1500mm/s 0
+	Sleep 1500ms
+	CharSetChipPattern char[0] 0
+	ForkWait char[1] fork[0]
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnToChar char[1] char[4] 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#94764v#622F#12P啊……亚妮拉丝小姐？{wait}
+	} {
+		#94765v#623F非常抱歉。
+		没想到你们正在谈话……{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86598v#819F#5P啊，
+		请别介意我的事。{wait}
+	} {
+		#86599v#816F我只是来
+		向市长汇报委托的。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94766v#622F#12P哦……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94683v#615F#11P别管这个了……
+		什么事，莉拉？{wait}
+	} {
+		#94684v#610F难不成……
+		是有什么事要和我商量吗？{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#94767v#620F#6P商量……
+		倒是不太一样。{wait}
+	} {
+		#94768v我是有件事
+		想和小姐谈一谈……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94685v#617F#11P哎、哎呀……
+		是什么事呢……？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94769v#621F#6P嗯，
+		其实是关于湖畔的『川蝉亭』的事……{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94686v#610F#11P啊……{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86600v#816F#5P果然是……{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk char[1] {
+		#94770v#622F#6P……小姐？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94687v#617F#11P哼哼……{wait}
+	} {
+		#94688v#611F莉拉，
+		你以为我什么也没发觉吗？{wait}
+	} {
+		#94689v我已经全都知道了。{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[1] {
+		#94771v#625F#6P咦……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94690v#615F#11P虽然对你有点抱歉，
+		其实我拜托亚妮拉丝小姐
+		已经帮我调查过了。{wait}
+	} {
+		#94691v因为最近你的样子
+		有点奇怪……{wait}
+	} {
+		#94692v#618F……对不起，莉拉。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94772v#621F#6P是这样吗……{wait}
+	} {
+		#94773v#620F哪里，
+		是我做出让您误解的事，
+		该我道歉才对。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94693v#613F#11P对、对了，那个……{wait}
+	} {
+		#94694v#617F雷纳德先生
+		对你还好吗？{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[4] {
+		#86601v#1317F#5P（市、市长……）{wait}
+	} {
+		#86602v#819F（再怎么说
+		  这也太直接了吧……）{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94774v#622F#6P嗯，是个很亲切的人……
+		他怎么了？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94695v#618F#11P不、不是这个意思……
+		真是让人心急啊。{wait}
+	} {
+		#94696v#612F你应该还有……
+		还有别的什么话要说吧？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94775v#623F#6P是……{wait}
+	} {
+		#94776v#621F那就商量一下
+		关于具体日程的事……{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Sleep 300ms
+	TextTalk char[4] {
+		#86603v#1317F#5P#4S咦咦！？{wait}
+	}
+	Shake 0 500 3000 100ms
+	TextWait
+	TextTalk char[0] {
+		#94697v#613F#11P日、日程是指……{wait}
+	} {
+		#94698v#614F#3S难道已经进展到这一步了吗！？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94777v#620F#6P是的，本来打算一直保密到最后
+		给小姐一个惊喜的。{wait}
+	} {
+		#94778v在研究了日程表之后，
+		已经设定好了大致的日期……{wait}
+	} {
+		#94779v#621F……我就这样
+		接着说可以吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94699v#618F#11P#40W…………………………………{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	ForkQuit char[4] fork[255]
+	Emote char[4] 0mm 2000mm 40 43 100ms 3
+	CharTurnToChar char[4] char[0] 500deg/s
+	Sleep 400ms
+	CharTurnToChar char[4] char[1] 500deg/s
+	Sleep 200ms
+	TextTalk char[4] {
+		#86604v#819F#5P哎，这个，那个……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94780v#622F#6P……小姐？{wait}
+	}
+	TextWait
+	EmoteStop char[0]
+	Sleep 300ms
+	TextTalk char[0] {
+		#94700v#618F#11P#60W#1S……莉拉………笨…………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94781v#625F#6P咦……{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#94701v#616F#11P#5S莉拉大笨蛋！{wait}
+	}
+	Shake 0 500 3000 100ms
+	TextWait
+	TextTalk char[1] {
+		#94782v#628F#6P#3S！！！{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94702v#618F#11P虽、虽然
+		不是不能理解
+		想让我大吃一惊的心情……！{wait}
+	} {
+		#94703v#619F就算如此……
+		没想到都进展到
+		这种地步了……！{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94783v#625F#6P那个，小姐……？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94704v#616F#11P莉拉的确
+		可以有自己的隐私，
+		这是理所应当的！{wait}
+	} {
+		#94705v但是，这么重要的事
+		至今为止一点商量都没有
+		就决定了，实在是……！{wait}
+	} {
+		#94706v#619F我、我和你的关系
+		就只是这种程度而已吗……！？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94784v#622F#6P…………………………………{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94707v#618F#11P而、而且……
+		你们两个，
+		开始交往才一个月而已吧！？{wait}
+	} {
+		#94708v这实在是……
+		再怎么说也太快了吧！{wait}
+	} {
+		#94709v#619F莉拉，你明白吗！？{wait}
+	} {
+		#94710v对女孩子来说……
+		这可是一生中最重要的事啊！？{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86605v#1317F#5P市、市长……
+		您冷静点……！{wait}
+	} {
+		#86606v莉、莉拉小姐
+		说不定也是经过很多烦恼
+		才决定的……！{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94785v#627F#6P那个……{wait}
+	} {
+		#94786v#625F难不成，
+		这里面有什么重大的误会？{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86607v#814F#5P咦……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94711v#618F#11P#40W……莉……拉…………？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94787v#621F#6P……我说的日程
+		是关于小姐的休假。{wait}
+	} {
+		#94788v最近，您一直忙于工作，
+		也该好好休息一下了，
+		所以我就擅自进行了安排。{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 24 27 250ms 0
+	Emote char[0] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[4]
+	EmoteStop char[0]
+	Sleep 300ms
+	TextTalk char[4] {
+		#1317F#1P#3S哎！？{wait}
+	}
+	TextTalk char[0] {
+		#94712v#613F#2P#3S呃！？{wait}
+	}
+	TextClose 1
+	_59
+	TextWait
+	Sleep 300ms
+	TextTalk char[1] {
+		#94789v#627F#6P最近很热门的『川蝉亭』，
+		以前小姐曾经说过
+		想要去一次的……{wait}
+	} {
+		#94790v于是就趁着雷纳德先生
+		来柏斯超市购物的时候
+		和他商量这件事……{wait}
+	} {
+		#94791v#623F……看来造成了
+		重大的误解呢。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94713v#613F#11P……………………………………{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86609v#819F#5P啊、啊哈哈……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94792v#625F#6P呼……
+		真拿小姐没办法呢。{wait}
+	} {
+		#94793v#624F首先，
+		如果是这种事情的话，
+		比起我来小姐应该更优先考虑吧。{wait}
+	} {
+		#94794v来说媒的人
+		已经多如繁星了，
+		却总是因为工作无法顾及……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94714v#618F#11P呜，那个是……
+		因为太忙所以就……{wait}
+	} {
+		#94715v#617F话、话说回来……
+		你和雷纳德先生真的什么也没有？{wait}
+	} {
+		#94716v谈了这么多次，
+		没有产生好感之类的……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94795v#623F#6P他确实是个
+		亲切又令人
+		产生好感的人……{wait}
+	} {
+		#94796v但是我从来没有
+		把他作为那种对象来考虑。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94717v#612F#11P为、为什么？{wait}
+	} {
+		#94718v那个，你也是年轻女孩，
+		如果没有这种经验……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94797v#621F#6P……趁此机会
+		我就说清楚好了。{wait}
+	} {
+		#94798v对我莉拉来说，
+		小姐的幸福是比任何事都优先的。{wait}
+	} {
+		#94799v这才是我无可替代的
+		喜悦和生存意义。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94719v#613F#11P啊……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94800v#621F#6P至少在小姐的亲事
+		定下来之前，我丝毫没有
+		考虑自己对象的念头。{wait}
+	} {
+		#94801v#623F……所以小姐。{wait}
+	} {
+		#94802v如果要担心莉拉的话，
+		请先考虑一下
+		自己的幸福吧。{wait}
+	} {
+		#94803v#627F就算不提这件事，
+		最近小姐也实在太过操劳，
+		太不爱惜自己了……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94720v#616F#11P啊啊真是的，我知道啦！{wait}
+	} {
+		#94721v相、相亲就不提了，
+		我会多少照顾一下自己的！{wait}
+	} {
+		#94722v日程什么的都交给你，
+		休假的事你就继续安排好了！{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#94804v#621F#6P呵呵，我明白了。{wait}
+	} {
+		#94805v#620F那么我就先退下了……{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] char[4] 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#94806v#621F#12P亚妮拉丝小姐，失礼了。{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86610v#814F#5P啊……{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 135deg 400deg/s
+	ForkLoop char[4] fork[2]:
+		CharTurnToChar self char[1] 400deg/s
+	Fork char[0] fork[1]:
+		CamLookPos (-121430, 0, 68300) 2000ms
+	ForkFunc char[1] fork[0] fn[0,4]
+	Sleep 1500ms
+	CharSetChipPattern char[0] 1
+	ForkWait char[1] fork[0]
+	ForkQuit char[4] fork[2]
+	Sleep 1000ms
+	Fork char[0] fork[1]:
+		CamLookPos (-122340, 0, 69030) 1200ms
+	ForkQuit char[4] fork[255]
+	CharTurnToChar char[4] char[0] 400deg/s
+	ForkWait char[0] fork[1]
+	Sleep 300ms
+	TextTalk char[4] {
+		#86611v#1317F#5P呃，嗯……{wait}
+	} {
+		#86612v#1316F对不起……
+		看来是我调查不足呢。{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CharSetChipPattern char[0] 0
+	Sleep 300ms
+	TextTalk char[0] {
+		#94723v#617F#11P哪、哪里……
+		亚妮拉丝小姐的报告书
+		完全没有任何问题。{wait}
+	} {
+		#94724v#618F要说有问题，
+		都怪我胡思乱想……{wait}
+	} {
+		#94725v唉……
+		又被莉拉说教了。{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86613v#819F#5P啊哈哈……别难过了。{wait}
+	} {
+		#86614v#1314F……不过……
+		我好羡慕你们呢。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94726v#613F#11P咦……{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#86615v#1310F#5P嗯，
+		那么我也先告辞了。{wait}
+	} {
+		#86616v#819F承蒙款待了！{wait}
+	}
+	TextWait
+	CharTurnTo char[4] 135deg 500deg/s
+	Fork char[0] fork[1]:
+		CamLookPos (-121430, 0, 68300) 1200ms
+	ForkFunc char[4] fork[0] fn[0,7]
+	Sleep 500ms
+	ForkFunc char[0] fork[0] fn[0,9]
+	TextTalk char[0] {
+		#94727v#613F#5P#25A啊……{wait}
+	}
+	TextWait
+	ForkWait char[4] fork[0]
+	Sleep 300ms
+	Fork char[0] fork[0]:
+		CamLookPos (-122700, 0, 70040) 1500ms
+	ForkWait char[0] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#94728v#618F#5P哎、哎呀……
+		亚妮拉丝小姐真是的……{wait}
+	} {
+		#94729v#615F………………………………{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 300ms
+	CharSetChipPattern char[0] 0
+	Sleep 500ms
+	TextTalk char[0] {
+		#94730v#617F#11P呵呵……话说回来。{wait}
+	} {
+		#94731v知道真相之后
+		竟然感到如此安心，
+		我也真是不成熟啊……{wait}
+	} {
+		#94732v#618F唉……
+		我到什么时候
+		才能不再依靠莉拉呢。{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	Fork char[0] fork[0]:
+		CamZoom 2350 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 9 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『操之过急的父母心』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[11] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[11] 0x10
+		QuestFlagsSet quest[11] 0x20
+		ItemAdd item[495] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[495]}{color 0}。{wait}
+		}
+		TextWait
+		if ItemHas item[525] 0 != 0:
+			if RecipeLearn 68:
+			else:
+				SoundPlay sound[17] 0 0 100
+				TextMessage null {
+					{item item[495]}{color 0}的制作方法已经记下了。{wait}
+				}
+				TextWait
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 50000
+		MiraAdd 50000
+		SoundPlay sound[17] 0 0 100
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{color 2}１０００００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9478]
+	NewScene "u2512._sn" 109 0 0
+	Hcf
+	Return
+
+fn[9]:
+	CharSetChipPattern char[0] 0
+	Sleep 1000ms
+	CharSetChipPattern char[0] 1
+	Return

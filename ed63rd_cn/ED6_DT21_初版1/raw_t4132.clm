@@ -1,0 +1,241 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4132.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01220._ch" "npl/ch01220p._cp"
+chip[1] "npl/ch01660._ch" "npl/ch01660p._cp"
+
+npc char[0]:
+	name "福立兹"
+	pos (6940, 0, 3300)
+	angle 166deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "尼尔森"
+	pos (-24500, 0, 113310)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+look_point[0]:
+	pos (7060, 0, 1700)
+	radius 800mm
+	bubble_pos (6940, 1500, 3300)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (7000, 0, 4890)
+	radius 800mm
+	bubble_pos (7000, 1000, 4890)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	OpLoad "t4132_n"
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	TextStart char[8]
+	if flag[12112]:
+		if flag[0]:
+			TextTalk char[8] {
+				前几天有一些
+				穿黑衣的人来过……{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				好像是在找人呢。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				唔，有点不放心啊……{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				哦？客人，要住店吗？{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				十分抱歉。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				本酒店的入住手续
+				是从三点以后开始办理的。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd char[8]
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12112]:
+		if flag[12121]:
+			if flag[1]:
+				TextTalk self {
+					#99774v这么说来，
+					刚才有一些奇怪的男人来过……{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99775v感觉好像很凶恶……{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99776v……不，不会吧………{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					#99769v我和别人
+					约在这里见面。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99770v顺便也打算
+					在利贝尔采访一下。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99771v因为利贝尔王国
+					可是以击退强国埃雷波尼亚
+					而闻名的啊。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99772v其『底蕴』
+					到底在哪里呢…………{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99773v呵呵，我很有兴趣。{wait}
+				}
+				TextWait
+				FlagSet flag[1]
+		else:
+			CharTurnTo self 0deg 0deg/s
+			TextTalk self {
+				#99763v哦，你们是……？{wait}
+			}
+			TextWait
+			CharTurnToChar self name[2] 500deg/s
+			Sleep 300ms
+			TextTalk self {
+				#99764v这脚步声我没听过。
+				是第一次见面吗？{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#79236v#1643F嗯、嗯。
+				应该是的……{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#94272v#1653F请问，难道说……{wait}
+			} {
+				#94273v#1650F您的眼睛
+				不方便吗？{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99765v嗯嗯，正是这样。
+				我双目完全失明了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99766v不过……真是有趣的组合啊。
+				其中一位是游击士吧？{wait}
+			}
+			TextWait
+			Emote name[2] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 50ms
+			Emote name[80] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk self {
+				#99767v哈哈，我知道的。
+				感觉很像我认识的游击士。{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99768v失去了光芒，
+				反而能清楚地看到原本看不见的东西。{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#79237v#1643F哎～……{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#94274v#1650F是这样吗……{wait}
+			}
+			TextWait
+			FlagSet flag[12121]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[5]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}　　　　　　　事务室
+		※无关人员请勿入内。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

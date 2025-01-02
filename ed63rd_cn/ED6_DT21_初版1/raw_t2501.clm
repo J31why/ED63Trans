@@ -1,0 +1,119 @@
+calmare fc scena
+scena:
+	name "Ruan" "T2501.x"
+	town town[1]
+	bgm bgm[32]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01460._ch" "npl/ch01460p._cp"
+
+npc char[0]:
+	name "艾福托老师"
+	pos (127010, 0, 27720)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "杰尼丝王立学院"
+	pos (101330, 0, 28090)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "王立学院·旧校舍"
+	pos (154530, 0, 28060)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 8:
+		if flag[12143]:
+		elif flag[12142]:
+		elif flag[12140]:
+			CharFlagsUnset char[8] 0x0080
+		elif flag[12139]:
+		elif flag[12133]:
+			if flag[12134] && flag[12135] && flag[12136] && flag[12137]:
+	Return
+
+fn[1]:
+	MapSet 4000 (0, null, -100000) file[0x0023004D]
+	OpLoad "t2501_n"
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (129120, null, 25960) (125080, null, 29610) 2000mm/s
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12140]:
+		if flag[0]:
+			TextTalk self {
+				雷克特那家伙，
+				难道去了旧校舍……{wait}
+			}
+			TextWait
+			TextTalk self {
+				不不，
+				那里的钥匙是我在保管的……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				我正在追
+				雷克特那家伙……{wait}
+			}
+			TextWait
+			TextTalk self {
+				但是在这附近跟丢了……{wait}
+			}
+			TextWait
+			TextTalk self {
+				真是的，
+				那家伙简直让人毫无办法……！！{wait}
+			}
+			TextWait
+			TextTalk name[4] {
+				#045F（哈、哈哈……
+				  实在抱歉……）{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return

@@ -1,0 +1,114 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2810.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (51020, 0, 31860)
+	radius 800mm
+	bubble_pos (51020, 1500, 31860)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (51030, 0, 2090)
+	radius 400mm
+	bubble_pos (51030, 800, 2090)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (59060, 0, 2090)
+	radius 400mm
+	bubble_pos (59060, 800, 2090)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if system[66] == 8:
+		if flag[12142]:
+			ObjFlagsUnset object[0] 0x0010
+			ObjFlagsUnset object[4] 0x0010
+	Return
+
+fn[2]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}　　走　
+		　　廊　
+		　　里　
+		　　请　
+		　　安　
+		　学静　
+		　生！　
+		　指　　
+		　导　　
+		　部　　{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[3]:
+	if flag[0]:
+		TextTalk name[4] {
+			#81999v#047F…………………………{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[4] {
+			#81997v#047F…………………………{wait}
+		} {
+			#81998v没有什么要事吧。{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+	TextEnd null
+	Return
+
+fn[4]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}门上了锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	Return

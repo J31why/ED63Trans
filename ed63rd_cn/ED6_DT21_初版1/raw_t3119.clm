@@ -1,0 +1,908 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3119.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 0 "t3119._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02020._ch" "npl/ch02020p._cp"
+chip[1] "npl/ch02620._ch" "npl/ch02620p._cp"
+chip[2] "npl/ch01190._ch" "npl/ch01190p._cp"
+chip[3] "npl/ch01540._ch" "npl/ch01540p._cp"
+chip[4] "npl/ch01450._ch" "npl/ch01450p._cp"
+chip[5] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+chip[6] "npl2/ch03980._ch" "npl2/ch03980p._cp"
+
+npc char[0]:
+	name "拉赛尔博士"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "艾莉卡"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "丹"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "特莱斯主任"
+	pos (-440, 0, 10490)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[4]:
+	name "威尔姆"
+	pos (4650, 1000, 6180)
+	angle 90deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[5]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (-106990, 0, -550)
+	pos2 (1000, 2250, 0)
+	flags 0x0041
+	func fn[0,11]
+	unk1 0
+
+look_point[0]:
+	pos (-540, 0, 6300)
+	radius 800mm
+	bubble_pos (-540, 900, 6300)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[3] 0x0080
+		CharFlagsUnset char[4] 0x0080
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,5]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0004
+	ObjFlagsSet object[18] 0x0004
+	ObjFlagsSet object[21] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 8
+	switch var[1]:
+		case 0:
+			CharAnimation self 0 7 1450ms
+			break
+		case 1:
+			CharAnimation self 0 7 1550ms
+			break
+		case 2:
+			CharAnimation self 0 7 1600ms
+			break
+		case 3:
+			CharAnimation self 0 7 1400ms
+			break
+		case 4:
+			CharAnimation self 0 7 1650ms
+			break
+		case 5:
+			CharAnimation self 0 7 1350ms
+			break
+		case 6:
+			CharAnimation self 0 7 1500ms
+			break
+		default:
+			CharAnimation self 0 7 1500ms
+			break
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12165]:
+		if flag[0]:
+			TextTalk self {
+				其实艾莉卡博士也提出了
+				卡佩尔计划的概要书呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				但是因为和拉赛尔博士打赌输了，
+				所以不得不撤下自己的计划。{wait}
+			}
+			TextWait
+			TextTalk self {
+				反正无论谁掌主导权，
+				我们都会一样辛苦……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				哎呀哎呀，
+				正想着卡佩尔系统修复工作终于结束了……{wait}
+			}
+			TextWait
+			TextTalk self {
+				又有别的新发明了吗。{wait}
+			}
+			TextWait
+			TextTalk self {
+				真是的，
+				拉赛尔家人的精力就是不一样啊。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				这个系统
+				是由许多单元
+				组合起来的。{wait}
+			}
+			TextWait
+			TextTalk self {
+				虽然卡佩尔本体没问题，
+				但系统数据的恢复和调整
+				还是要花两个月以上呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				那种奇怪的现象
+				最好别再出现了…………{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				………………喏，
+				就是那个导力停止现象啦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				在那之后启动卡佩尔系统时，
+				好像就发生误操作了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				…………所有数据
+				都被删除了！！{wait}
+			}
+			TextWait
+			TextTalk self {
+				修复就花了两个月以上时间，
+				真是可恶啊！{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (820, 0, 12190) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 37000mdeg 0ms
+	CamPers 280 0ms
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsUnset object[21] 0x0004
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[0] 0x0040
+	CharFlagsSet char[1] 0x0040
+	CharFlagsSet char[2] 0x0040
+	CharSetPos char[1] (-430, 0, 10460) 0deg
+	CharSetPos name[6] (-1670, 0, 2060) 0deg
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#97937v#1452F…………这就是
+		『帕蒂尔·玛蒂尔』……{wait}
+	} {
+		#97938v看起来，
+		发挥出来的实力还不到１０％……{wait}
+	} {
+		#97939v#1457F原来如此，
+		的确是强悍的规格啊……{wait}
+	}
+	TextWait
+	SoundPlay sound[109] 0 0 100
+	Sleep 500ms
+	TextTalk name[6] {
+		#83201v#061F#1P妈妈！{wait}
+	}
+	TextWait
+	_59
+	Sleep 500ms
+	CharSetPos name[6] (950, 0, 2620) 0deg
+	Fork name[6] fork[1]:
+		CharWalkToPos self (950, 0, 7960) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-430, 0, 8950) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	CharTurnTo name[6] 0deg 500deg/s
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83202v#064F#12P咦，这是……{wait}
+	} {
+		#83203v帕蒂尔·玛蒂尔的数据？{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnToChar char[1] name[6] 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#97940v#1450F#5P哎呀提妲，来得正好。{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-430, 0, 10060) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	TextTalk char[1] {
+		#97941v#1456F#5P那个，提妲。
+		你看过这东西的实体吧。{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83204v#560F#12P咦…………？
+		嗯、嗯……{wait}
+	} {
+		#83205v看倒是看过……？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97942v#1451F#5P实物是怎样的感觉呢！？{wait}
+	} {
+		#97943v喂，告诉我告诉我～！！{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-430, 0, 9700) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	Fork name[6] fork[2]:
+		CharShake self 15 0 1000 2000ms
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83206v#067F#12P嗯………………
+		嗯，那个……{wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83207v#561F#12P我、我不太清楚……
+		就是很大很大……{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-430, 0, 10060) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	TextTalk char[1] {
+		#97944v#1833F#5P啊……确实是啊。{wait}
+	} {
+		#97945v#1833F你这身高抬头看
+		也看不清楚呢……{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83208v#0564F#12P那个，妈妈……{wait}
+	} {
+		#83209v你为什么在看
+		帕蒂尔·玛蒂尔的数据呢？{wait}
+	} {
+		#83210v那个，新发明是……？{wait}
+	}
+	TextWait
+	CharTurnTo name[6] 270deg 500deg/s
+	Sleep 600ms
+	CharTurnTo name[6] 80deg 500deg/s
+	Sleep 600ms
+	CharTurnTo name[6] 0deg 500deg/s
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop name[6]
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83211v#064F#12P难、难不成……！？{wait}
+	}
+	TextWait
+	CharSetPos char[0] (-1670, 0, 2060) 0deg
+	TextTalkNamed char[0] "声音" {
+		#96601v#1P一点不错。{wait}
+	}
+	TextWait
+	_59
+	BgmStop 3000ms
+	CharSetPos char[0] (-170, 0, 500) 0deg
+	CharSetPos char[2] (-910, 0, -210) 0deg
+	Fork char[1] fork[2]:
+		CharTurnTo self 180deg 500deg/s
+	Fork name[6] fork[2]:
+		CharTurnTo self 180deg 500deg/s
+	Fork char[5] fork[0]:
+		CamLookPos (-430, 0, 8650) 2500ms
+	Fork char[5] fork[1]:
+		CamRotate 0mdeg 2500ms
+	Fork char[5] fork[2]:
+		CamSetDistance 0 5540 -10000 2500ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-170, 0, 4380) 2000mm/s 0
+	Sleep 500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-910, 0, 3600) 2000mm/s 0
+	ForkWait char[5] fork[0]
+	ForkWait char[2] fork[1]
+	Sleep 300ms
+	TextTalk char[2] {
+		#98242v#1460F#6P这边已经准备完毕。
+		随时可以开始作业。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97946v#1456F#5P好，看来人已经齐了呢。{wait}
+	} {
+		#97947v#1457F……现在我们
+		开始着手开发
+		能够对抗帕蒂尔·玛蒂尔的人形兵器。{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#97948v#1455F#3S『导力装甲』计划，启动！！#2S{wait}
+	}
+	Shake 0 400 4000 300ms
+	TextWait
+	Emote name[6] 0mm 1700mm 40 43 100ms 0
+	Sleep 500ms
+	CharTurnToChar name[6] char[1] 600deg/s
+	Sleep 500ms
+	EmoteStop name[6]
+	TextTalk name[6] {
+		#83212v#065F#6P#3S咦咦～～～！！？{wait}
+	}
+	Shake 0 300 3000 300ms
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	Fork name[6] fork[3]:
+		CamZoom 3200 3000ms
+	FadeWait
+	ForkQuit char[0] fork[255]
+	ForkQuit char[1] fork[255]
+	ForkQuit char[2] fork[255]
+	CharFlagsSet char[0] 0x0080
+	CharFlagsSet char[1] 0x0080
+	CharFlagsSet char[2] 0x0080
+	Sleep 3000ms
+	CamLookPos (820, 0, 12190) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 37000mdeg 0ms
+	CamPers 280 0ms
+	CharSetPos name[6] (-430, 0, 10460) 0deg
+	BgmPlay bgm[83] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83213v#062F#40W『帕蒂尔·玛蒂尔』……{wait}
+	} {
+		#83214v为什么，为什么……{wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	CharTurnTo name[6] 180deg 400deg/s
+	Sleep 300ms
+	Fork name[6] fork[2]:
+		CamLookPos (630, 0, 11140) 2000ms
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-430, 0, 8720) 1000mm/s 0
+	ForkWait name[6] fork[1]
+	ForkWait name[6] fork[2]
+	Sleep 300ms
+	TextTalk name[6] {
+		#83215v#063F#5P（每次听到有新发明，
+		  我总是感到非常高兴。）{wait}
+	} {
+		#83216v（然后忘记一切，
+		  和爷爷一起
+		  投入其中……）{wait}
+	} {
+		#83217v（但是今天，
+		  却感到有一点点悲伤…………）{wait}
+	}
+	TextWait
+	Sleep 500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS583._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	TextTalk name[6] {
+		#83218v#562F#5P……这样，真的好吗……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[6] fork[2]:
+		CamLookPos (630, 0, 12500) 1500ms
+	Fork name[6] fork[3]:
+		CamSetDistance 0 4500 -10000 1500ms
+	CharTurnTo name[6] 0deg 300deg/s
+	ForkWait name[6] fork[2]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83219v#063F#12P#40W玲…………{wait}
+	}
+	TextWait
+	Fork char[5] fork[3]:
+		CamZoom 2900 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	FlagSet flag[9476]
+	NewScene "t3115._sn" 104 0 0
+	Hcf
+	Return
+
+fn[6]:
+	CharTurnTo char[0] 180deg 500deg/s
+	Emote char[0] 0mm 2000mm 8 9 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-270, 0, 1130) 2500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-840, 0, 430) 2500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-840, 0, -1430) 2500mm/s 0
+	Return
+
+fn[7]:
+	CharTurnTo char[2] 180deg 500deg/s
+	Sleep 300ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-910, 0, -1490) 2000mm/s 0
+	Return
+
+fn[8]:
+	Emote char[1] 0mm 2000mm 8 9 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1820, 0, 8820) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1820, 0, 1500) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1020, 0, 700) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1020, 0, -1490) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Return
+
+fn[9]:
+	Emote name[6] 0mm 1700mm 40 43 100ms 3
+	Sleep 300ms
+	CharTurnTo name[6] 0deg 600deg/s
+	Sleep 1000ms
+	CharTurnTo name[6] 180deg 600deg/s
+	Return
+
+fn[10]:
+	SystemFlagsUnset 0x00000001
+	EventBegin 0
+	CamLookPos (-200, 0, 7100) 1000ms
+	FadeOut 300ms 0x00000000 100
+	SoundPlay sound[157] 0 0 100
+	TextSetName "CAPEL"
+	TextSetPos 250 78 36 12
+	TextMessage null {
+		{color 2}#1SThe Orbal Calculator
+		CAPEL SYSTEM Ver.7.0
+		Copyright(C)Z.C.F. 1197-1202
+		MODE:Information Retrieval
+		#200W　#20W
+		MEMORY_CHECK#100W..........#20WOK!
+		#200W　#20W
+		#1S已连接到数据库。
+		请选择要搜索的内容。{wait}
+	}
+	TextWait
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		var[0] = 0
+		Menu menu[0] 55 80 1
+			"【中央工房相关】　　" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				while var[0] != 255:
+					var[0] = 0
+					Menu menu[1] 55 153 1
+						"【设立·沿革】" // 0
+						"【技术一览】" // 1
+						"【相关信息搜索】　　" // 2
+					MenuWait var[0]
+					switch var[0]:
+						case 0:
+							TextMessage null {
+								{color 2}#1S【Ｓ１１５４】（Ｓ…七耀历）
+								Ｃ·爱普斯泰恩博士于列曼自治州去世。
+								【Ｓ１１５５】
+								Ａ·拉赛尔博士回到利贝尔王国。
+								回国后提倡普及导力器技术，
+								但是没得到世人的认可和支持。
+								【Ｓ１１５７】
+								拉赛尔博士带领蔡斯的钟表工匠普及导力器。
+								同年，『蔡斯技术工房』（即之后的中央工房）设立。
+								【Ｓ１１６０】
+								埃德佳Ⅲ世在视察蔡斯技术工房后提供巨额资金建设工
+								房。拉赛尔博士出任首任工房长。{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S【Ｓ１１６２】
+								埃德佳Ⅲ世去世。艾莉茜雅Ⅱ世即位。
+								【Ｓ１１６４】
+								『伦格兰德大桥』落成。
+								【Ｓ１１６８】
+								首部导力飞艇『加拉托拉巴号』诞生。
+								（经过３９次飞行实验失败后的产物）
+								【Ｓ１１７３】
+								蔡斯技术工房开始对共和国乌尔努社和帝国莱恩福尔特
+								社输出导力器技术。工房改名为『中央工房』。
+								【Ｓ１１７５】
+								飞艇公社设立。定期船『林德号』开始服役。{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S【Ｓ１１７７】
+								定期船『赛希莉亚号』开始服役。
+								【Ｓ１１７８】
+								移动工房船『莱普尼兹号』开始服役。
+								【Ｓ１１８０】
+								中央工房搬迁（即现在的建筑物）。
+								开掘卡鲁迪亚平原丘陵的一角，地下工房建成。
+								【Ｓ１１８２】
+								拉赛尔工房长退休。
+								玛多克技术主任出任第二任工房长。
+								【Ｓ１１８５】
+								自然科学和医学研究部门设立。{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S【Ｓ１１８７】
+								客船『埃迪鲁那号』在卡尔瓦德领海沉没。
+								尤迪斯王太子夫妇去世。
+								【Ｓ１１９０】
+								与爱普斯泰恩财团合作，
+								发表了『导力网络』的构想。
+								【Ｓ１１９２】
+								『百日战役』爆发。
+								中央工房被埃雷波尼亚帝国接管。
+								拉赛尔博士在雷斯顿要塞开发出警备飞艇，
+								并将其用于反攻作战中，取得了显赫的战功，
+								从此警备飞艇作为王国军的主力兵器而被使用。{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S【Ｓ１１９３】
+								利贝尔王国和埃雷波尼亚帝国缔结和平条约。
+								战后，王国再次向帝国输出导力器。
+								【Ｓ１１９７】
+								导力演算器『卡佩尔』Ver.1完成。
+								【Ｓ１１９９】
+								高速巡洋舰『埃尔赛尤号』开发工程开始。
+								【Ｓ１２０２】
+								高速巡洋舰『埃尔赛尤号』竣工，进入试飞阶段。{wait}
+							}
+							TextWait
+							break
+						case 1:
+							while var[0] != 255:
+								var[0] = 0
+								if QuestTaskGet quest[108] 0x0004 && !QuestTaskGet quest[108] 0x0008 && !QuestFlagsGet quest[108] 0x40:
+									Menu menu[2] 55 259 1
+										"【导力器】" // 0
+										"【结晶回路】" // 1
+										"【七耀石】" // 2
+										"【导力飞艇】" // 3
+										"【导力兵器】" // 4
+										"【战术导力器】" // 5
+										"【游击士协会招牌】" // 6
+								else:
+									Menu menu[2] 55 259 1
+										"【导力器】" // 0
+										"【结晶回路】" // 1
+										"【七耀石】" // 2
+										"【导力飞艇】" // 3
+										"【导力兵器】" // 4
+										"【战术导力器】" // 5
+								MenuWait var[0]
+								switch var[0]:
+									case 0:
+										TextMessage null {
+											{color 2}#1S项目：导力器（Orbment）
+											在半世纪前由Ｃ·爱普斯泰恩博士所发明，是能从七耀
+											石中提取导力，从而引发各种各样现象的机械装置的总
+											称。导力器内部的构造和齿轮的运动，使加工七耀石而
+											成的结晶回路相互干涉，可以引发丰富多彩的现象。导
+											力器的实用性，除了能产生丰富现象以外，还在于拥有
+											『经过一段时间内部的导力可以自然恢复』这种特异的
+											便利性。另外，经济效率也要远远地领先于各种外燃、
+											内燃引擎设备。{wait}
+										}
+										TextWait
+										break
+									case 1:
+										TextMessage null {
+											{color 2}#1S项目：结晶回路（Quartz）
+											将七耀石的碎片（耀晶片，Sepith）精制、加工而成的
+											具有结晶构造的回路。作为能量源的同时，本身还是引
+											起各种各样现象的装置。但结晶回路必须安装在导力器
+											内才可以发挥作用。{wait}
+										}
+										TextWait
+										break
+									case 2:
+										TextMessage null {
+											{color 2}#1S项目：七耀石（Septium）
+											是在大陆全土分布的７种贵重矿石的总称。因被人们称
+											为『古代的宝石』、『神秘的象征』而变得珍重。近代
+											一种将体积过小不能成为宝石的碎片（耀晶片）精制加
+											工制作出结晶回路的技术被发明出来，因此导致七耀石
+											资源的重要性在大陆诸国一夜之间变得十分重要。{wait}
+										}
+										TextWait
+										break
+									case 3:
+										TextMessage null {
+											{color 2}#1S项目：导力飞艇
+											导力飞艇可以称得上是导力技术精华凝聚而成的结晶。
+											集合了用于重力制御的大型飞翔装置和供给大量能量的
+											导力引擎两大技术，使得如此大的飞艇在空中飞行成为
+											可能。
+											为了实现高效率的导力传送和十分复杂的船体控制，最
+											新的飞艇大多搭载了高性能的导力演算器。２０亚矩以
+											上的大型飞艇又被称为『飞船』。{wait}
+										}
+										TextWait
+										break
+									case 4:
+										TextMessage null {
+											{color 2}#1S项目：导力兵器
+											即以导力枪、导力炮作为代表，使用导力技术的兵器体
+											系。现在已成为大多数国家军队的主力装备。
+											导力枪枪管内具有能将能量按照螺旋线聚集并高速射出
+											豆粒大小的金属子弹的构造，与发射火药的枪相比，填
+											弹量大幅增加，而且还能够调节枪的威力。
+											导力炮则可以发射封装了能量的炮弹（导力弹）并产生
+											爆炸，与发射火药的炮相比，其后坐力小，而且也可以
+											自由调节威力大小。
+											　{wait}
+										}
+										TextWait
+										break
+									case 5:
+										TextMessage null {
+											{color 2}#1S项目：战术导力器
+											可以发动导力魔法的导力器。大小和怀表差不多，内部
+											构造则相当精致优雅。
+											战术导力器具有安装结晶回路后能够提高持有者能力的
+											设计，使内部结晶回路与持有者达到同步，引发出『共
+											鸣现象』，以代替传统释放魔法所需的复杂的齿轮和驱
+											动装置，使持有者能够发动各种导力魔法。
+											而且，根据复数结晶回路属性和性能的组合不同，持有
+											者能够使用的导力魔法也会发生变化，具有相当的灵活
+											性。
+											　{wait}
+										}
+										TextWait
+										TextMessage null {
+											{color 2}#1S追加：新型战术导力器
+											作为战术导力器的开发者，爱普斯泰恩财团对过去的型号进
+											行大幅改良，并且成功投入实用的新规格战术导力器。和过
+											去只有六个结晶回路插槽的旧型号相比，这种新型号则具备
+											了七个结晶回路插槽，可以实现更为灵活的结晶回路组合。
+											新型号不仅使可以使用的魔法变得多元化，而且使其威力也
+											得到了飞跃性的提升。但是，由于新型号和过去型号的基本
+											构造有很大的不同，新型战术导力器也有着无法互换结晶回
+											路的缺陷。
+											　{wait}
+										}
+										TextWait
+										break
+									case 6:
+										QuestTaskSet quest[108] 0x0008
+										TextMessage null {
+											{color 2}#1S内容：游击士协会招牌
+											这就是英俊潇洒的怪盗绅士布卢布兰凭借其天才般的超级无
+											敌手腕从傻瓜般的超级无能游击士协会之一的蔡斯支部的檐
+											头偷走的金属招牌。虽然没什么经济价值，不过给予协会相
+											关人员的打击是无穷的，正在读此文的诸位想必也强烈地感
+											受到了屈辱感吧。好了，闲话到此为止。该是时候给出下一
+											个提示了。
+											　
+											　　┌──────────────────┐　　
+											　　│　　　　第３把钥匙再次位于市内。　　│　
+											　　│      抬头看那『尖帽子三兄弟』吧。  │　　
+											　　└──────────────────┘
+											　※另外，这个记录会自动删除。　　　　
+											　　所以再次极力推荐诸位赶快做好应做的笔记！　{wait}
+										}
+										TextWait
+										break
+									default:
+										var[0] = 255
+										break
+							var[0] = 0
+							MenuClose menu[2]
+							break
+						case 2:
+							while var[0] != 255:
+								var[0] = 0
+								Menu menu[2] 55 255 1
+									"【内燃引擎设备】" // 0
+									"【汽油】" // 1
+									"【运输车】" // 2
+								MenuWait var[0]
+								switch var[0]:
+									case 0:
+										TextMessage null {
+											{color 2}#1S项目：内燃引擎设备
+											在机关装置内燃烧燃料以获得能量的动力源。与导力机
+											关相比经济效率低下，而且还会产生噪音、废气等各种
+											问题，因此已经停止开发和生产。
+
+											『内燃引擎设备』
+											库存量：１台
+											管理责任人：格斯塔夫维修长{wait}
+										}
+										TextWait
+										break
+									case 1:
+										TextMessage null {
+											{color 2}#1S项目：汽油
+											将天然产生的液态碳氢化合物（石油）分馏、精制而成
+											的液体。常作为内燃引擎设备的燃料以及工业生产的溶
+											剂使用。
+
+											库存：中型桶×４０
+											保管地点：导力器生产工场{wait}
+										}
+										TextWait
+										break
+									case 2:
+										QuestTaskSet quest[41] 0x8000
+										TextMessage null {
+											{color 2}#1S项目：运输车
+											使用导力引擎驱动的各种车辆的总称。因为乘坐的舒适
+											度较差，速度也很慢，所以基本不用于客运方面，而主
+											要用来进行中短距离的货物运输。
+
+											『运输车用驱动导力器』
+											库存量：不明
+											保管地点：地下工场搬入口{wait}
+										}
+										TextWait
+										break
+									default:
+										var[0] = 255
+										break
+							var[0] = 0
+							MenuClose menu[2]
+							break
+						default:
+							var[0] = 255
+							break
+				var[0] = 0
+				MenuClose menu[1]
+				break
+			default:
+				var[0] = 255
+				break
+	TextSetPos 72 320 56 3
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	EventEnd 1
+	Return
+
+fn[11]:
+	PlaceSetName town[154]
+	Return

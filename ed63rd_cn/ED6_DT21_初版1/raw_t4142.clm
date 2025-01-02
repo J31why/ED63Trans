@@ -1,0 +1,839 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4142.x"
+	town town[1]
+	bgm bgm[34]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01100._ch" "npl/ch01100p._cp"
+chip[1] "npl/ch01150._ch" "npl/ch01150p._cp"
+chip[2] "npl/ch01023._ch" "npl/ch01023p._cp"
+chip[3] "npl/ch02060._ch" "npl/ch02060p._cp"
+chip[4] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[5] "npl/ch01143._ch" "npl/ch01143p._cp"
+chip[6] "npl/ch01620._ch" "npl/ch01620p._cp"
+chip[7] "apl/ch20020._ch" "apl/ch20020p._cp"
+chip[8] "apl/ch20021._ch" "apl/ch20021p._cp"
+chip[9] "npl2/ch03233._ch" "npl2/ch03233p._cp"
+chip[10] "apl2/ch20692._ch" "apl2/ch20692p._cp"
+
+npc char[0]:
+	name "科蕾蒂"
+	pos (4560, 0, 2500)
+	angle 186deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "彭萨"
+	pos (4500, 100, -3850)
+	angle 90deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "克鲁茨"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "古拉斯"
+	pos (5080, 4700, 1340)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 5
+	ch chip[8]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "古拉斯"
+	pos (5000, 4700, 440)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 5
+	ch chip[8]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (60700, 0, 550)
+	radius 400mm
+	bubble_pos (61020, 1500, 2490)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (4530, 0, 590)
+	radius 400mm
+	bubble_pos (4560, 1500, 2500)
+	flags 0x007E
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		SystemFlagsSet 0x10000000
+		system[1] = 15
+		Event fn[0,6]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	Return
+
+fn[4]:
+	Call fn[0,5]
+	Return
+
+fn[5]:
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SystemFlagsUnset 0x02000000
+	CamLookPos (1320, 0, -2340) 0ms
+	CamSetDistance 0 5840 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 25000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsSet name[2] 0x0004
+	CharFlagsSet name[2] 0x0040
+	CharFlagsSet name[80] 0x0004
+	CharFlagsSet name[80] 0x0040
+	CharSetPos name[2] (5300, 4100, -400) 0deg
+	CharSetPos name[80] (5200, 4100, 2320) 180deg
+	CharSetChipBase name[2] chip[9]
+	CharSetChipPattern name[2] 0
+	CharSetChipBase name[80] chip[10]
+	CharSetChipPattern name[80] 0
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	Fork char[5] fork[0]:
+		CamLookPos (6420, 4000, 1900) 5000ms
+	Fork char[5] fork[1]:
+		CamZoom 2700 5000ms
+	Fork char[5] fork[2]:
+		CamRotate 45000mdeg 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[5] fork[0]
+	Sleep 500ms
+	TextTalk name[2] {
+		#1641F#3S……干杯！#2S{wait}
+	}
+	TextTalk name[80] {
+		#94580v#1651F#3S#1P……干杯！#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextClose 1
+	_59
+	SoundPlay sound[178] 0 0 100
+	TextTalk name[80] {
+		#94581v#1654F#1P咕嘟咕嘟。{wait}
+	}
+	TextWait
+	SoundPlay sound[178] 0 0 100
+	TextTalk name[2] {
+		#79677v#1646F咕嘟咕嘟咕嘟……{wait}
+	} {
+		#79678v#1641F#3S呼啊～……！#2S{wait}
+	}
+	TextWait
+	CrossFade 500ms
+	CharSetChipPattern char[3] 1
+	CharSetChipPattern char[4] 1
+	FadeWait
+	TextTalk name[2] {
+		#79679v#1640F可是，把所有的钱全捐出去了
+		是不是有些太夸张了？{wait}
+	} {
+		#79680v你难道没有考虑
+		自己的生活费吗。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94582v#1650F#1P是啊……一般情况下
+		是不会这么做的。{wait}
+	} {
+		#94583v#1654F不过，
+		这是我一开始就决定了的。{wait}
+	} {
+		#94584v我想要的
+		并不是那样的东西……{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk name[80] {
+		#94585v#1651F#1P呵呵，雪拉扎德也
+		晋升为正游击士了，恭喜你。{wait}
+	} {
+		#94586v虽然我还不太明白
+		那和准游击士有什么区别。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79681v#1640F这个啊，权利和责任
+		都随之增加了嘛。{wait}
+	} {
+		#79682v我所想要的，
+		也并不只是正游击士的徽章而已。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94587v#1653F#1P啊呀，是吗？{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79683v#1641F是啊～{wait}
+	}
+	TextWait
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[2] 0x0008
+	CharSetPos char[2] (2820, 4000, 4780) 90deg
+	TextTalkNamed char[2] "青年的声音" {
+		#94149v#2P……这样我就放心了。{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 50ms
+	Emote name[80] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharFlagsUnset char[2] 0x0008
+	CharSetPos char[2] (-4220, 2000, 4780) 90deg
+	ForkFunc char[2] fork[3] fn[0,7]
+	Fork char[5] fork[0]:
+		CamLookPos (3420, 4000, 4900) 1500ms
+	ForkWait char[5] fork[0]
+	Sleep 2000ms
+	Fork char[5] fork[0]:
+		CamLookPos (6420, 4000, 1900) 3000ms
+	ForkWait char[5] fork[0]
+	ForkWait char[2] fork[3]
+	TextTalk char[2] {
+		#94150v#840F看来你已经领会
+		游击士的心得了，
+		雪拉扎德。{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 40 43 100ms 3
+	TextTalk name[2] {
+		#79684v#1643F哇，克鲁茨前辈。{wait}
+	} {
+		#79685v#1646F哎呀～那个，这酒是……
+		……那、那个叫什么来着……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94151v#840F……因为是祝酒的缘故，
+		今晚我就睁一只眼闭一只眼了。{wait}
+	} {
+		#94152v不过，要控制在
+		不影响工作的程度才行。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79686v#1645F好～{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94153v#843F………………………………{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79687v#1641F怎～么～了？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94154v#843F雪拉扎德，
+		你既然已经是正游击士了……{wait}
+	} {
+		#94155v像往常那样
+		在白天工作时偷跑去喝酒，
+		或者夜里溜出去畅饮……{wait}
+	} {
+		#94156v还有趁我在忙的时候酒后闹事，
+		这些都收敛一下吧。{wait}
+	}
+	TextWait
+	Fork name[2] fork[2]:
+		CharShake self 20 0 1000 2000ms
+	TextTalk name[2] {
+		#79688v#1645F呜呜……{wait}
+	}
+	TextWait
+	CharSetChipPattern name[80] 0
+	Sleep 100ms
+	TextTalk name[80] {
+		#94588v#1653F#1P雪拉扎德，
+		你竟然会做这样的事啊？{wait}
+	} {
+		#94589v简直是个坏孩子。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79689v#1645F不说了，不说了……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94157v#843F要慎重行事啊。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79690v#1643F#3S好、好的！#2S{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk char[2] {
+		#94158v#840F还有……
+		你不需要再用尊称和我谈话了。{wait}
+	} {
+		#94159v现在你已经和我一样是正游击士了。
+		我希望我们能以同事的身份相待。{wait}
+	} {
+		#94160v#841F我毕竟也还是个新人。{wait}
+	}
+	TextWait
+	CharSetChipPattern name[80] 1
+	Sleep 1000ms
+	TextTalk name[2] {
+		#1648F……我可看不出来。{wait}
+	}
+	TextTalk name[80] {
+		#94590v#1653F#1P……是吗？{wait}
+	}
+	TextClose 1
+	_59
+	Emote char[2] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1500ms
+	CharTurnTo char[2] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#94161v#843F…………进入正题。{wait}
+	} {
+		#94162v#842F爱娜小姐，
+		关于你伯父的事情……{wait}
+	} {
+		#94163v游击士协会方面
+		能够为你尽量申诉减刑。{wait}
+	} {
+		#94164v#844F不过雇佣猎兵团
+		本来是很严重的罪行……{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 30ms
+	Emote name[80] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79692v#1643F#3S猎、猎兵团！？#2S{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk name[80] {
+		#94591v#1653F#1P这个……
+		莫非是那些黑衣人吗？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94165v#842F嗯，是在利贝尔国内
+		已经确认了的猎兵团之一。{wait}
+	} {
+		#94166v最近在利贝尔也有
+		大大小小的许多猎兵团混入，
+		并且也都能找到主顾。{wait}
+	} {
+		#94167v当然这是违法的行为……
+		但军队似乎没有意愿采取行动。{wait}
+	} {
+		#94168v#843F……不过正好趁这个机会清扫了，
+		所以现在应该看不到那些家伙了。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79693v#1643F清、清扫……{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79694v#1642F（是这样啊，
+		  前辈那时恰好出现并非偶然……）{wait}
+	} {
+		#79695v（原来是对王国中的猎兵团
+		  进行的调查及剿灭作战。）{wait}
+	} {
+		#79696v（#1645F难怪最近一段时间
+		  他好像都很忙碌的样子……）{wait}
+	}
+	TextWait
+	EmoteStop name[2]
+	TextTalk char[2] {
+		#94169v#843F潜入国内的猎兵团瞄准了富裕阶层，
+		与他们结成了契约，
+		把老百姓卷入进来……{wait}
+	} {
+		#94170v#842F最近各地
+		都频繁爆发这类事件。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94592v#1654F#1P这、这样啊……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94171v#843F这次的事情
+		始作俑者好像也是猎兵团的人。{wait}
+	} {
+		#94172v…………虽然发生了这样的事情，
+		但你的伯父或许也可以
+		称得上是被害人之一。{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 30ms
+	Emote name[80] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[80] {
+		#94593v#1653F#1P咦……………………{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79697v#1642F前、前辈……
+		这是什么意思！？{wait}
+	}
+	TextWait
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79698v#1644F克鲁茨前辈…………
+		如果那个大叔也是被害人之一的话，
+		也就意味着他无罪了！？{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79699v#1644F#3S这种情况
+		爱娜能接受吗！？{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk name[2] {
+		#79700v#1647F#3S那家伙可是
+		意图杀死爱娜的啊！！{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk char[2] {
+		#94173v#843F……雪拉，不用再叫我前辈了。{wait}
+	} {
+		#94174v#842F而且也不用这么大的声音。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79701v#1647F好、好的。可是……！！{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94175v#843F他不可能没有罪。{wait}
+	} {
+		#94176v#845F只是，
+		如果爱娜愿意的话，
+		就有希望争取减刑。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79702v#1643F这、这个…………{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop name[2]
+	TextTalk name[2] {
+		#79703v#1645F……这、这样啊。
+		吓我一跳……{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94594v#1654F#1P…………………………{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94177v#843F……不必急于作出回答。{wait}
+	} {
+		#94178v因为调查取证
+		还要一周左右的时间。{wait}
+	} {
+		#94179v#840F你不需要
+		承担任何的责任，
+		也没有必要想得太多。{wait}
+	} {
+		#94180v只需要记住
+		你有宽恕他的选择
+		就可以了。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94595v#1652F#1P……好的。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94181v#840F那么……
+		如果今后有什么困难的话，
+		不必犹豫，直接来找游击士协会就可以。{wait}
+	} {
+		#94182v我们绝非万能，
+		但一定可以助你一臂之力。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94596v#1650F#1P我明白了。{wait}
+	} {
+		#94597v对不起，这次委托
+		是我没有把事情先说清楚……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94183v#843F不，如果把我放到你的位置，
+		那就可以理解了。{wait}
+	} {
+		#94184v而且…………{wait}
+	}
+	TextWait
+	CharTurnToChar char[2] name[2] 500deg/s
+	Sleep 200ms
+	TextTalk char[2] {
+		#94185v#842F独当一面的游击士
+		就算是对于语焉不详的委托，
+		也会对其实质内容一目了然。{wait}
+	} {
+		#94186v而绝不会不假思索地
+		随便将遇到困难的人赶回去。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79704v#1642F唔…………{wait}
+	} {
+		#79705v#1645F我的经验还是
+		远远不足啊……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94187v#841F保持进取的精神就行了。{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 0deg 500deg/s
+	Sleep 200ms
+	TextTalk char[2] {
+		#94188v#840F那么，我这就告辞了。{wait}
+	}
+	TextWait
+	Fork char[2] fork[1]:
+		CharWalkToPos self (6880, 4000, 3500) 2000mm/s 0
+	Sleep 300ms
+	CharSetChipPattern name[2] 0
+	Sleep 300ms
+	TextTalk name[2] {
+		#79706v#1643F啊，等一下……{wait}
+	} {
+		#79707v今天至少陪我
+		喝一杯吧！{wait}
+	}
+	TextWait
+	ForkWait char[2] fork[1]
+	TextTalk char[2] {
+		#94189v#843F#3P不了，
+		我还要担任接待的职位。{wait}
+	} {
+		#94190v#845F……雪拉，
+		记得不要喝太多了。{wait}
+	}
+	TextWait
+	_59
+	CharTurnTo char[2] 315deg 500deg/s
+	Fork char[2] fork[1]:
+		CharWalkToPos self (5880, 4000, 4500) 2200mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-1220, 4000, 4500) 2200mm/s 0
+	Sleep 500ms
+	CharSetChipPattern name[80] 0
+	ForkWait char[2] fork[1]
+	TextTalk name[2] {
+		#79708v#1645F哼……这个老顽固。{wait}
+	} {
+		#79709v#1640F啊，对～了。{wait}
+	} {
+		#79710v爱娜能喝酒吗？
+		陪我喝一点怎么样～⊙{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94598v#1650F#1P嗯、嗯……好吧。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79711v#1643F这、这个。
+		……你真的没问题吗？{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94599v#1650F#1P你已经关照我
+		那么多了……{wait}
+	} {
+		#94600v#1651F稍微来一点没问题㈱{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 10 11 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79712v#1640F呵呵呵，
+		那今晚就一醉方休。{wait}
+	} {
+		#79713v#1641F（气质这么高雅的爱娜
+		  醉倒之后会是什么模样呢～……）{wait}
+	} {
+		#79714v#3S（啊，真·期·待！）#2S{wait}
+	}
+	TextWait
+	Emote name[80] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[249] 0 0 100
+	CrossFade 1000ms
+	CharSetChipPattern char[3] 5
+	CharSetChipPattern char[4] 5
+	FadeWait
+	Sleep 300ms
+	TextTalk name[2] {
+		#79715v#1641F#3S那，我们来干杯！#2S{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#79716v{0x18}{color 12}#40W温暖的金发、白皙的肌肤、湛蓝的眼眸――……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79717v{0x18}{color 12}#40W我曾经看到，对面那个世界的街区。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79718v{0x18}{color 12}#40W穿着美丽衣服的孩子们。受到祝福的孩子们。
+		幸福的孩子们绽放着天使般的笑容。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79719v{0x18}{color 12}#40W……为什么，我不属于那个世界？{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		#79720v{0x18}{color 12}#40W我的心中一直抱有这个疑问。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79721v{0x18}{color 12}#40W交织着嫉恨的羡慕。
+		掺杂着焦虑和拒绝的心情。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79722v{0x18}{color 12}#40W可是我明明很清楚答案，那唯一的答案。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79723v{0x18}{color 12}#40W为了生存而不断降低自己的底线，
+		明明自己已经陷入了那样的绝望之中。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79724v{0x18}{color 12}#40W却一直在心中的某一处。
+		…………相信着。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		#79725v{0x18}{color 12}#40W终有一日，会迎来发自内心的微笑。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79726v{0x18}{color 12}#40W终有一日，会原谅曾经沦为那样的自己。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetName ""
+	TextMessage null {
+		#79727v{0x18}{color 12}#40W――翌日，爱娜去了游击士协会
+		为伯父写了减刑请愿书。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79728v{0x18}{color 12}#40W……而被她灌得烂醉的我
+		只能错过到场的机会了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	BgmStop 4000ms
+	BgmWait
+	Sc_C4Unset 536870912
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	ScAchievement 10 2 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『委托人』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Tc_C2 1 0
+	PartyClear
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_E6_1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[4] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[4] 0x10
+		QuestFlagsSet quest[4] 0x20
+		ItemAdd item[726] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[726]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 4000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}４０００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	if flag[9999]:
+		NewScene "u4123._sn" 100 0 0
+		Hcf
+	else:
+		NewScene "u4121._sn" 100 0 0
+		Hcf
+	Return
+
+fn[7]:
+	Fork char[2] fork[1]:
+		CharWalkToPos self (5880, 4000, 4780) 2200mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (6880, 4000, 3780) 2200mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (6880, 4000, 1160) 2200mm/s 0
+	Sleep 800ms
+	CharSetChipPattern name[2] 2
+	Sleep 100ms
+	CharSetChipPattern name[80] 1
+	ForkWait char[2] fork[1]
+	CharTurnToChar char[2] name[2] 400deg/s
+	Sleep 300ms
+	Return

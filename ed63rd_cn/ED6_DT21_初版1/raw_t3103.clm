@@ -1,0 +1,167 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3103.x"
+	town town[1]
+	bgm bgm[84]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9480]:
+		FlagUnset flag[9480]
+		SystemFlagsSet 0x10000000
+		Event fn[0,5]
+	if flag[9476]:
+		system[1] = 15
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,3]
+	Return
+
+fn[1]:
+	ForkFunc char[0] fork[0] fn[0,2]
+	Return
+
+fn[2]:
+	ObjFlagsUnset object[16] 0x0020
+	ObjFlagsUnset object[14] 0x0020
+	while 1:
+		ObjFrame object[16] 40
+		ObjPlay object[16] 0
+		ObjFrame object[14] 0
+		ObjPlay object[14] 40
+		ObjWait object[16]
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[5] (25470, 0, 59050) 90deg
+	CamLookPos (25030, 3200, 74910) 0ms
+	CamSetDistance 0 6650 -10000 0ms
+	CamZoom 4370 0ms
+	CamRotate 318000mdeg 0ms
+	CamPers 328 0ms
+	FadeIn 2000ms 0x00000000
+	ForkFunc name[5] fork[0] fn[0,4]
+	Fork char[1] fork[0]:
+		CamLookPos (46980, 3200, 59210) 6000ms
+	Fork char[1] fork[1]:
+		CamSetDistance 0 7340 -10000 6000ms
+	Fork char[1] fork[2]:
+		CamZoom 4370 6000ms
+	Fork char[1] fork[3]:
+		CamRotate 221000mdeg 12000ms
+	Fork char[0] fork[0]:
+		CamPers 305 6000ms
+	Sleep 5000ms
+	Fork char[1] fork[0]:
+		CamLookPos (56530, 3200, 24210) 8000ms
+	ForkWait char[1] fork[0]
+	ForkWait char[1] fork[1]
+	ForkWait char[1] fork[2]
+	ForkWait char[1] fork[3]
+	Fork char[1] fork[2]:
+		CamZoom 4000 3000ms
+	Sleep 1000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[1] fork[2]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "t3172._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	CharWalkToPos self (58860, 0, 58830) 2000mm/s 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet name[6] 0x0080
+	CamLookPos (53060, 0, 18180) 0ms
+	CamSetDistance 0 7870 -10000 0ms
+	CamZoom 4040 0ms
+	CamRotate 224000mdeg 0ms
+	CamPers 362 0ms
+	Fork name[6] fork[0]:
+		CamLookPos (55050, 0, 14970) 5000ms
+	Fork name[6] fork[1]:
+		CamSetDistance 0 7920 -10000 5000ms
+	Fork name[6] fork[2]:
+		CamZoom 4180 5000ms
+	Fork name[6] fork[3]:
+		CamRotate 188000mdeg 5000ms
+	SoundPlay sound[224] 1 0 70
+	ForkFunc char[0] fork[0] fn[0,6]
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkWait name[6] fork[0]
+	Sleep 1000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9481]
+	NewScene "t3172._sn" 100 0 0
+	Hcf
+	Return
+
+fn[6]:
+	while 1:
+		SoundPlay sound[159] 0 0 50
+		Sleep 800ms
+		SoundStop sound[159]
+		Sleep 500ms
+		SoundPlay sound[159] 0 0 50
+		Sleep 1000ms
+		SoundStop sound[159]
+		Sleep 500ms
+		SoundPlay sound[159] 0 0 50
+		Sleep 600ms
+		SoundStop sound[159]
+		Sleep 500ms
+		SoundPlay sound[159] 0 0 50
+		Sleep 1500ms
+		SoundStop sound[159]
+		Sleep 500ms
+	Return
