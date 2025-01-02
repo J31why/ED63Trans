@@ -1,0 +1,3638 @@
+calmare tc scena
+scena:
+	name "Event" "E1000.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 "e1000._sn"
+	scp 1 "e1000_1._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03600._ch" "npl2/ch03600p._cp"
+chip[1] "apl2/ch20305._ch" "apl2/ch20305p._cp"
+
+npc char[0]:
+	name "肯帕雷拉"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	Event fn[0,2]
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,15]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	FadeOut 0ms 0x00000000 255
+	if system[66] == 10:
+		Call fn[0,3]
+	elif system[66] == 11:
+		Call fn[0,9]
+	elif system[66] == 12:
+		Call fn[0,12]
+	elif system[66] == 15:
+		Call fn[0,14]
+	elif system[66] == 30:
+		Call fn[0,16]
+	elif system[66] == 31:
+		Call fn[0,17]
+	elif system[66] == 32:
+		Call fn[1,2]
+	elif system[66] == 33:
+		Call fn[1,3]
+	elif system[66] == 34:
+		Call fn[1,4]
+	else:
+	var[0] = 0
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	SystemFlagsSet 0x00000010
+	Fog 0xFF000000 4100 13000 0
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (0, 80000, 1000) 0ms
+	CamSetDistance 0 9300 -10000 0ms
+	CamZoom 1000 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 665 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (0, 80000, 0) 180deg
+	if flag[12052]:
+		ED6_12 12900 25000 0
+		FadeIn 4000ms 0x00000000
+		FadeWait
+		Sleep 200ms
+		TextTalk char[0] {
+			#90462v#5P#850F哟，是你啊。
+			又来了吗。{wait}
+		} {
+			#90463v#5P是来玩问答游戏的吗？{wait}
+		}
+		TextWait
+		TextClose 0
+	else:
+		FlagSet flag[12052]
+		CharSetPos char[0] (0, 80000, 0) 0deg
+		FadeIn 4000ms 0x00000000
+		FadeWait
+		Sleep 200ms
+		TextSetPos -1 80 -1 -1
+		TextSetName "妖气的声音"
+		TextMessage null {
+			#90447v{color 0}哟，最近过得还不错吧？{wait}
+		}
+		TextWait
+		TextClose 0
+		ED6_12 12900 25000 2500
+		FadeWait
+		Sleep 2500ms
+		CharTurnTo char[0] 180deg 400deg/s
+		Sleep 800ms
+		TextTalk char[0] {
+			#90448v#5P#850F呵呵，是我、是我啊。
+			可别说你已经把我忘了哦。{wait}
+		}
+		TextWait
+		Sleep 1000ms
+		CrossFade 100ms
+		CharFlagsUnset char[0] 0x0002
+		CharSetChipBase char[0] chip[1]
+		CharSetChipPattern char[0] 0
+		FadeWait
+		CharAnimation char[0] 0 3 1000ms
+		Sleep 500ms
+		TextTalk char[0] {
+			#90449v#5P#853F竟能来到这种地方，欢迎至极。{wait}
+		} {
+			#90450v#854F呵呵，
+			今天大家就来欢庆一场吧⊙{wait}
+		}
+		TextWait
+		Sleep 1500ms
+		Emote char[0] 0mm 2000mm 38 38 250ms 1
+		Sleep 1200ms
+		CrossFade 700ms
+		CharFlagsUnset char[0] 0x0002
+		CharSetChipBase char[0] chip[0]
+		CharSetChipPattern char[0] 0
+		FadeWait
+		Sleep 500ms
+		TextTalk char[0] {
+			#90451v#5P#850F……哎，
+			为什么我会在这里？{wait}
+		} {
+			#90452v#851F呵呵，真讨厌……
+			按照惯例不是不能问这种问题的吗㈱{wait}
+		} {
+			#90453v#5P#853F这事暂且不提……
+			今天，我为你
+			准备了一个珍藏的计划。{wait}
+		} {
+			#90454v#850F这名字就是『轨迹之PONG』。#2700W 
+			#20W就是所谓的
+			回答问题游戏啦……{wait}
+		} {
+			#90455v要不要来和我玩玩呢？{wait}
+		}
+		TextWait
+	Sc_C4Unset 536870912
+	Sleep 300ms
+	TextSetPos -1 80 -1 -1
+	TextMessage null {
+		{0x18}{color 5}挑战猜谜游戏吗？{wait}
+	}
+	var[0] = 0
+	system[40] = 24
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"【 挑战 】" // 0
+			"【 放弃 】" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		switch var[0]:
+			case 0:
+				if QuestFlagsGet quest[65] 0x20:
+					system[40] = 24
+					var[0] = 0
+					Menu menu[1] 380 330 1
+						"★【 简单 】" // 0
+						"★【 稍难 】" // 1
+						"★【 极难 】" // 2
+						"★【 狂热 】" // 3
+					MenuWait var[0]
+					MenuClose menu[0]
+					MenuClose menu[1]
+					system[40] = 65535
+					switch var[0]:
+						case 0:
+							var[0] = 101
+							break
+						case 1:
+							var[0] = 102
+							break
+						case 2:
+							var[0] = 103
+							break
+						case 3:
+							var[0] = 104
+							break
+						default:
+							var[0] = 255
+							break
+				elif QuestFlagsGet quest[27] 0x20:
+					system[40] = 24
+					var[0] = 0
+					Menu menu[1] 380 330 1
+						"★【 简单 】" // 0
+						"★【 稍难 】" // 1
+						"★【 极难 】" // 2
+						"  【 狂热 】" // 3
+					MenuWait var[0]
+					MenuClose menu[0]
+					MenuClose menu[1]
+					system[40] = 65535
+					switch var[0]:
+						case 0:
+							var[0] = 101
+							break
+						case 1:
+							var[0] = 102
+							break
+						case 2:
+							var[0] = 103
+							break
+						case 3:
+							var[0] = 104
+							break
+						default:
+							var[0] = 255
+							break
+				elif QuestFlagsGet quest[26] 0x20:
+					system[40] = 24
+					var[0] = 0
+					Menu menu[1] 380 330 1
+						"★【 简单 】" // 0
+						"★【 稍难 】" // 1
+						"  【 极难 】" // 2
+					MenuWait var[0]
+					MenuClose menu[0]
+					MenuClose menu[1]
+					system[40] = 65535
+					switch var[0]:
+						case 0:
+							var[0] = 101
+							break
+						case 1:
+							var[0] = 102
+							break
+						case 2:
+							var[0] = 103
+							break
+						default:
+							var[0] = 255
+							break
+				elif QuestFlagsGet quest[25] 0x20:
+					system[40] = 24
+					var[0] = 0
+					Menu menu[1] 380 330 1
+						"★【 简单 】" // 0
+						"  【 稍难 】" // 1
+					MenuWait var[0]
+					MenuClose menu[0]
+					MenuClose menu[1]
+					system[40] = 65535
+					switch var[0]:
+						case 0:
+							var[0] = 101
+							break
+						case 1:
+							var[0] = 102
+							break
+						default:
+							var[0] = 255
+							break
+				else:
+					system[40] = 65535
+					TextClose 0
+					MenuClose menu[0]
+					var[0] = 101
+				if var[0] != 255:
+					TextClose 0
+					TextTalk char[0] {
+						#90456v#5P#853F呵呵，我就知道你会接受的。{wait}
+					} {
+						#90457v#5P#850F好了，
+						那我去换身衣服……{wait}
+					} {
+						#90458v#851F稍微等一下哦⊙{wait}
+					}
+					TextWait
+					TextClose 0
+					FadeOut 300ms 0x00000000 255
+					FadeWait
+				switch var[0]:
+					case 101:
+						Call fn[0,4]
+						break
+					case 102:
+						Call fn[0,5]
+						break
+					case 103:
+						Call fn[0,6]
+						break
+					case 104:
+						Call fn[0,7]
+						break
+					case 255:
+						var[0] = 0
+						break
+				break
+			case 1:
+				MenuClose menu[0]
+				TextClose 0
+				TextTalk char[0] {
+					#90459v#5P#855F唉～好无聊啊。{wait}
+				} {
+					#90460v#5P#850F不过，也罢。
+					改变主意的话，随时都可以来哦。{wait}
+				} {
+					#90461v#5P那么，拜拜～{wait}
+				}
+				TextWait
+				TextClose 0
+				Sleep 200ms
+				FadeOut 2000ms 0x00000000 255
+				FadeWait
+				TcEpisodeEnd 0
+				Fog 0xFF000000 1000000 2000000 0
+				FlagSet flag[9477]
+				NewScene "m5402._sn" 102 0 0
+				Hcf
+				break
+	Return
+
+fn[4]:
+	Sleep 1000ms
+	BgmPlay bgm[25] 0
+	ImageShow "c_vis501._ch" 0 0 500ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"【　开始　】" // 0
+			"【　说明　】" // 1
+			"【　结束　】" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		switch var[0]:
+			case 0:
+				var[0] = 255
+				break
+			case 1:
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+
+					　一共有十个谜题，请选择正确答案。
+					　谜题的形式都是４选１，各有限制时间。
+
+					　选择错误答案，或者超过限制时间
+					　就会计算一次『失误』。
+					　『失误』达到三次时，
+					　游戏将以失败告终，请注意。
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				TcEpisodeEnd 0
+				Fog 0xFF000000 1000000 2000000 0
+				FlagSet flag[9477]
+				NewScene "m5402._sn" 102 0 0
+				Hcf
+				break
+	BgmStop 1000ms
+	ImageHide 500ms
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	BgmWait
+	var[0] = Minigame 26 0 0 0 0 0 0 0 0
+	EventBegin 0
+	BgmStop 2000ms
+	BgmWait
+	QuestFlagsSet quest[25] 0x10
+	FadeIn 4000ms 0x00000000
+	if var[0] == 0:
+		FadeWait
+		Sleep 200ms
+		TextTalk char[0] {
+			#90464v#5P#853F呵呵，真是遗憾啊。{wait}
+		} {
+			#90465v#854F那么，你打算怎么办呢。
+			再挑战一次吗？{wait}
+		}
+		TextWait
+		TextSetPos -1 80 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}再挑战一次谜题吗？{wait}
+		}
+		var[0] = 0
+		Return
+	FadeWait
+	Sleep 200ms
+	TextTalk char[0] {
+		#90466v#5P#853F呵呵，恭喜顺利过关⊙{wait}
+	} {
+		#90467v#850F好了……
+		已经玩够了，
+		我也差不多要回去了。{wait}
+	} {
+		#90468v嗯，有心情的话再来玩哦。
+		我随时欢迎。{wait}
+	} {
+		#90469v#851F好了，拜拜～⊙{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	ScAchievement 11 5 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『轨迹之PONG』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TcEpisodeEnd 0
+	Call fn[0,8]
+	if !QuestFlagsGet quest[25] 0x20:
+		QuestFlagsSet quest[25] 0x20
+		QuestFlagsSet quest[26] 0x02
+		ItemAdd item[486] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[486]}{color 0}。{wait}
+		}
+		TextWait
+		if ItemHas item[525] 0 != 0:
+			if RecipeLearn 69:
+			else:
+				SoundPlay sound[17] 0 0 100
+				TextMessage null {
+					{item item[486]}{color 0}的制作方法已经记下了。{wait}
+				}
+				TextWait
+		Sleep 1000ms
+		SoundPlay sound[23] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}追加了难易度『稍难』。{wait}
+		}
+		TextWait
+		TextMessage null {
+			{color 5}进入太阳之房间后，
+			可以从选项中选择难度挑战。{wait}
+		}
+		TextWait
+		TextClose 0
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene "m5402._sn" 102 0 0
+	Hcf
+	Return
+
+fn[5]:
+	QuestFlagsSet quest[26] 0x08
+	Sleep 1000ms
+	BgmPlay bgm[25] 0
+	ImageShow "c_vis502._ch" 0 0 500ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"【　开始　】" // 0
+			"【　说明　】" // 1
+			"【　结束　】" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		switch var[0]:
+			case 0:
+				var[0] = 255
+				break
+			case 1:
+				TextSetPos -1 85 55 10
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+
+					　一共有十个谜题，请选择正确答案。
+					　谜题的形式都是４选１，各有限制时间。
+
+					　选择错误答案，或者超过限制时间
+					　就会计算一次『失误』。
+					　『失误』达到三次时，
+					　游戏将以失败告终，请注意。
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				TcEpisodeEnd 0
+				Fog 0xFF000000 1000000 2000000 0
+				FlagSet flag[9477]
+				NewScene "m5402._sn" 102 0 0
+				Hcf
+				break
+	BgmStop 1000ms
+	ImageHide 500ms
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	BgmWait
+	var[0] = Minigame 26 1 0 0 0 0 0 0 0
+	EventBegin 0
+	BgmStop 2000ms
+	BgmWait
+	QuestFlagsSet quest[26] 0x10
+	FadeIn 4000ms 0x00000000
+	if var[0] == 0:
+		FadeWait
+		Sleep 200ms
+		TextTalk char[0] {
+			#90464v#5P#853F呵呵，真是遗憾啊。{wait}
+		} {
+			#90465v#854F那么，你打算怎么办呢。
+			再挑战一次吗？{wait}
+		}
+		TextWait
+		TextSetPos -1 80 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}再挑战一次谜题吗？{wait}
+		}
+		var[0] = 0
+		Return
+	FadeWait
+	Sleep 200ms
+	TextTalk char[0] {
+		#90470v#5P#853F呵呵，恭喜顺利过关⊙{wait}
+	} {
+		#90471v#850F好了……
+		已经玩够了，
+		我也差不多要回去了。{wait}
+	} {
+		#90472v嗯，有心情的话再来玩哦。
+		我随时欢迎。{wait}
+	} {
+		#90473v#851F好了，拜拜～⊙{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	ScAchievement 11 5 1
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『轨迹之PONG』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TcEpisodeEnd 0
+	Call fn[0,8]
+	if !QuestFlagsGet quest[26] 0x20:
+		QuestFlagsSet quest[26] 0x20
+		QuestFlagsSet quest[27] 0x02
+		if RecipeLearn 8:
+		else:
+			TextSetPos -1 -1 -1 -1
+			SoundPlay sound[17] 0 0 100
+			TextMessage null {
+				{0x6}{color 2}暗汁『混沌』{color 0}的制作方法已经记下了。{wait}
+			}
+			TextWait
+			TextSetPos 72 320 56 3
+		Sleep 1000ms
+		SoundPlay sound[23] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}追加了难易度『极难』。{wait}
+		}
+		TextWait
+		TextMessage null {
+			{color 5}进入太阳之房间后，
+			可以从选项中选择难度挑战。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		Sleep 2000ms
+	FlagSet flag[9477]
+	NewScene "m5402._sn" 102 0 0
+	Hcf
+	Return
+
+fn[6]:
+	QuestFlagsSet quest[27] 0x08
+	Sleep 1000ms
+	BgmPlay bgm[25] 0
+	ImageShow "c_vis503._ch" 0 0 500ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"【　开始　】" // 0
+			"【　说明　】" // 1
+			"【　结束　】" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		switch var[0]:
+			case 0:
+				var[0] = 255
+				break
+			case 1:
+				TextSetPos -1 85 55 10
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+
+					　一共有十个谜题，请选择正确答案。
+					　谜题的形式都是４选１，各有限制时间。
+
+					　选择错误答案，或者超过限制时间
+					　就会计算一次『失误』。
+					　『失误』达到三次时，
+					　游戏将以失败告终，请注意。
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				TcEpisodeEnd 0
+				Fog 0xFF000000 1000000 2000000 0
+				FlagSet flag[9477]
+				NewScene "m5402._sn" 102 0 0
+				Hcf
+				break
+	BgmStop 1000ms
+	ImageHide 500ms
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	BgmWait
+	var[0] = Minigame 26 2 0 0 0 0 0 0 0
+	EventBegin 0
+	BgmStop 2000ms
+	BgmWait
+	QuestFlagsSet quest[27] 0x10
+	FadeIn 4000ms 0x00000000
+	if var[0] == 0:
+		FadeWait
+		Sleep 200ms
+		TextTalk char[0] {
+			#90464v#5P#853F呵呵，真是遗憾啊。{wait}
+		} {
+			#90465v#854F那么，你打算怎么办呢。
+			再挑战一次吗？{wait}
+		}
+		TextWait
+		TextSetPos -1 80 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}再挑战一次谜题吗？{wait}
+		}
+		var[0] = 0
+		Return
+	FadeWait
+	Sleep 200ms
+	TextTalk char[0] {
+		#90474v#5P#854F哦～竟然能通过这个……
+		你还真是钻研得够深啊。{wait}
+	} {
+		#90475v#853F好了……
+		已经玩够了，
+		我也差不多要回去了。{wait}
+	} {
+		#90476v#850F如果有兴趣了就再来玩。
+		我随时欢迎。{wait}
+	} {
+		#90477v#851F好了，拜拜～⊙{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	ScAchievement 11 5 2
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『轨迹之PONG』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TcEpisodeEnd 0
+	Fog 0xFF000000 1000000 2000000 0
+	Call fn[0,8]
+	if !QuestFlagsGet quest[27] 0x20:
+		QuestFlagsSet quest[27] 0x20
+		QuestFlagsSet quest[65] 0x02
+		ItemAdd item[745] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[745]}{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		Sleep 1000ms
+		SoundPlay sound[23] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}追加了难易度『狂热』。{wait}
+		}
+		TextWait
+		TextMessage null {
+			{color 5}进入太阳之房间后，
+			可以从选项中选择难度挑战。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		Sleep 2000ms
+	TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m5402._sn" 102 0 0
+	Hcf
+	Return
+
+fn[7]:
+	QuestFlagsSet quest[65] 0x08
+	Sleep 1000ms
+	BgmPlay bgm[25] 0
+	ImageShow "c_vis504._ch" 0 0 500ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"【　开始　】" // 0
+			"【　说明　】" // 1
+			"【　结束　】" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		switch var[0]:
+			case 0:
+				var[0] = 255
+				break
+			case 1:
+				TextSetPos -1 85 55 10
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+
+					　一共有十个谜题，请选择正确答案。
+					　谜题的形式都是４选１，各有限制时间。
+
+					　选择错误答案，或者超过限制时间
+					　就会计算一次『失误』。
+					　游戏将以失败告终，请注意。
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				TcEpisodeEnd 0
+				Fog 0xFF000000 1000000 2000000 0
+				FlagSet flag[9477]
+				NewScene "m5402._sn" 102 0 0
+				Hcf
+				break
+	BgmStop 1000ms
+	ImageHide 500ms
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	BgmWait
+	var[0] = Minigame 26 3 0 0 0 0 0 0 0
+	EventBegin 0
+	BgmStop 2000ms
+	BgmWait
+	QuestFlagsSet quest[65] 0x10
+	FadeIn 4000ms 0x00000000
+	if var[0] == 0:
+		FadeWait
+		Sleep 200ms
+		TextTalk char[0] {
+			#90464v#5P#853F呵呵，真是遗憾啊。{wait}
+		} {
+			#90465v#854F那么，你打算怎么办呢。
+			再挑战一次吗？{wait}
+		}
+		TextWait
+		TextSetPos -1 80 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}再挑战一次谜题吗？{wait}
+		}
+		var[0] = 0
+		Return
+	FadeWait
+	Sleep 200ms
+	TextTalk char[0] {
+		#90478v#5P#854F太令人惊讶了。
+		你居然通过了『狂热』难度。
+		那你肯定是狂热粉丝吧。㈱{wait}
+	} {
+		#90479v#853F不过，到此为止了。
+		迄今为止你让我很开心。{wait}
+	} {
+		#90480v#850F嗯，有心情的话再来玩哦。
+		我随时欢迎。{wait}
+	} {
+		#90481v#851F好了，拜拜～⊙{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	ScAchievement 11 5 3
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『轨迹之PONG』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TcEpisodeEnd 0
+	Fog 0xFF000000 1000000 2000000 0
+	Call fn[0,8]
+	if !QuestFlagsGet quest[65] 0x20:
+		QuestFlagsSet quest[65] 0x20
+		ItemAdd item[750] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[740]}{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+	TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m5402._sn" 102 0 0
+	Hcf
+	Return
+
+fn[8]:
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	SoundPlay sound[17] 0 0 100
+	if var[0] == 1:
+		MiraAdd 1
+		TextMessage null {
+			{color 0}[Rank 10] {color 0}得到了{color 2}１米拉{color 0}。{wait}
+		}
+	elif var[0] == 2:
+		MiraAdd 10
+		TextMessage null {
+			{color 0}[Rank 9] {color 0}得到了{color 2}１０米拉{color 0}。{wait}
+		}
+	elif var[0] == 3:
+		MiraAdd 100
+		TextMessage null {
+			{color 0}[Rank 8] {color 0}得到了{color 2}１００米拉{color 0}。{wait}
+		}
+	elif var[0] == 4:
+		MiraAdd 500
+		TextMessage null {
+			{color 0}[Rank 7] {color 0}得到了{color 2}５００米拉{color 0}。{wait}
+		}
+	elif var[0] == 5:
+		MiraAdd 1000
+		TextMessage null {
+			{color 0}[Rank 6] {color 0}得到了{color 2}１０００米拉{color 0}。{wait}
+		}
+	elif var[0] == 6:
+		MiraAdd 2000
+		TextMessage null {
+			{color 0}[Rank 5] {color 0}得到了{color 2}２０００米拉{color 0}。{wait}
+		}
+	elif var[0] == 7:
+		MiraAdd 3000
+		TextMessage null {
+			{color 0}[Rank 4] {color 0}得到了{color 2}３０００米拉{color 0}。{wait}
+		}
+	elif var[0] == 8:
+		MiraAdd 4000
+		TextMessage null {
+			{color 0}[Rank 3] {color 0}得到了{color 2}４０００米拉{color 0}。{wait}
+		}
+	elif var[0] == 9:
+		MiraAdd 5000
+		TextMessage null {
+			{color 0}[Rank 2] {color 0}得到了{color 2}５０００米拉{color 0}。{wait}
+		}
+	elif var[0] == 10:
+		MiraAdd 10000
+		TextMessage null {
+			{color 0}[Rank 1] {color 0}得到了{color 2}１００００米拉{color 0}。{wait}
+		}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Return
+
+fn[9]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	if QuestFlagsGet quest[31] 0x20:
+		BgmPlay bgm[191] 0
+		TextSetPos -1 60 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}THE CASINO　赌博师杰克{wait}
+		}
+		system[40] = 24
+		Menu menu[0] -1 160 0
+			"【  从最初开始  】" // 0
+			"【从杰克篇开始】" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[0]
+		TextClose 0
+		Sleep 100ms
+		if var[0] == 0:
+			BgmStop 2000ms
+			BgmWait
+			Call fn[0,10]
+		else:
+			Call fn[0,11]
+	else:
+		Call fn[0,10]
+	Return
+
+fn[10]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	BgmPlay bgm[1] 0
+	Sc_C4Set 2048
+	system[40] = 65535
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS511._CH"
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}──卡尔瓦德共和国。{wait}
+		这个国家里，有一条从东方来的移民
+		由于思念故乡而仿照故乡建造而成的街道。{wait}
+		　
+		以『东方人街』之名为人熟知，
+		东西贯通，人物交错——{wait}
+		　
+		这条街的北端，
+		有一家破旧狭小的酒馆。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}在激荡黑暗世界的
+		世纪赌博对决之后数月——{wait}
+		现在，这酒馆里有了两位本领高强的赌博高手。{wait}
+		　
+		战胜过去的『胜利之杰克』，
+		和死缠着他的少女哈璐——{wait}
+		　
+		围绕着两人的日子，
+		喧扰而又平静地过去——{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}而今天店门也发出呻吟般的声音，
+		为酒馆带来新的客人——{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmStop 2000ms
+	BgmWait
+	BgmPlay bgm[191] 0
+	SoundPlay sound[234] 1 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+	Sleep 3000ms
+	Sc_C4Unset 2048
+	SoundPlay sound[375] 0 0 100
+	Sleep 2500ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 600ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 600ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 600ms
+	Sleep 1000ms
+	TextSetPos 340 120 -1 -1
+	TextSetName "粗鲁的声音"
+	TextMessage null {
+		#0814v{color 12}……啊？{wait}
+	} {
+		#0815v这人是谁啊！？{wait}
+	}
+	TextWait
+	TextSetPos 40 80 -1 -1
+	TextSetName "不怀好意的声音"
+	TextMessage null {
+		#0819v{color 12}……这不是肥鸭吗，肥鸭。{wait}
+	} {
+		#0820v不过看起来，
+		倒是没背着葱来当香料嘛，嘎哈哈。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "少女的声音"
+	TextMessage null {
+		#98657v{color 0}各、各位，等等!
+		不要这样就突然缠上别人啊……！{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	SoundPlay sound[234] 1 0 0
+	VisShow vis[1] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	VisShow vis[3] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS551._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 1500ms 0 0
+	VisSet vis[1] 4 0 0 0 0
+	Sleep 2500ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98658v{color 0}呼，对不起。
+		让你吓了一跳吧？{wait}
+	} {
+		#98659v虽然看上去这个样子，
+		不过他们绝不是坏人……{wait}
+	} {
+		#98660v你……是客人吧……？{wait}
+	} {
+		#98661v我来带路，跟我来吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0x00FFFFFF 1200ms 0 0
+	Sleep 1000ms
+	ForkFunc field_party[0] fork[0] fn[0,19]
+	Sleep 2000ms
+	TextSetPos 150 -1 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98662v{color 0}#1911F呵呵，真是挺稀奇的。{wait}
+	} {
+		#98663v这么破烂的酒吧……
+		大白天的也会有客人过来。{wait}
+	} {
+		#98664v#1915F啊，但是请不要误会。
+		这儿并不是什么不好的店。{wait}
+	} {
+		#98665v虽然这屋子破烂不堪，
+		常来的客人品行也不能说很好……{wait}
+	} {
+		#98666v#1910F该怎么说呢，这儿很暖和……{wait}
+	} {
+		#98667v而且单品料理和套餐
+		的确相当的美味。{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkQuit field_party[0] fork[0]
+	Sleep 700ms
+	SoundPlay sound[364] 0 0 150
+	Sleep 200ms
+	TextSetPos 150 -1 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98668v{color 0}#1913F啊，小心脚下。
+		这里的地板快要崩落了。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 600ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 600ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98669v{color 0}#1910F……快坐下吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[366] 0 0 100
+	Sleep 700ms
+	SoundPlay sound[209] 0 0 100
+	Sleep 500ms
+	Sleep 1000ms
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	VisSet vis[3] 3 0x00FFFFFF 500ms 0 0
+	Sleep 800ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98670v{color 0}那么，想点些什么？{wait}
+	} {
+		#98671v看来你也不是打算
+		到这里来喝酒的样子……{wait}
+	} {
+		#98672v对了，那就给你推荐……
+		火龙东央贡汤，怎么样？{wait}
+	} {
+		#98673v辣乎乎的味道和
+		恰到好处的酸味，挺不错的。
+		是这里最受欢迎的菜了。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98674v{color 0}好吧，那就点这个了。{wait}
+	} {
+		#98675v饮料……水就可以了吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[3] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS553._CH"
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	VisSet vis[1] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98676v{color 0}……咦？你说什么？{wait}
+	} {
+		#98677v——杰克？{wait}
+	} {
+		#98678v杰克吗，现在这个时候
+		我猜他正在里面什么地方睡觉……{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[1] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[3] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98679v{color 0}……你……不会是
+		来和杰克一决胜负的吧？{wait}
+	} {
+		#98680v你又订桌子
+		又点菜的，
+		我根本没想到会是……{wait}
+	} {
+		#98681v……嗯，好吧。
+		我去帮你问一下。{wait}
+	} {
+		#98682v如果他心情好的话
+		也许能陪你玩一会儿。{wait}
+	} {
+		#98683v那么，请稍等一下。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0x00FFFFFF 1200ms 0 0
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[234] 1 0 100
+	Sleep 2000ms
+	TextSetPos 340 80 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0823v{color 12}……喂，听到了吗？{wait}
+	} {
+		#0824v那边的那个家伙，
+		居然想向杰克挑战。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 40 120 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0828v{color 12}啊，的确是这样。{wait}
+	} {
+		#0829v嘿嘿，
+		或许又有好戏看了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 160 20 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0835v{color 12}……哼，难说。{wait}
+	} {
+		#0836v想让杰克亮出真功夫，
+		简直难于登天。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[234] 1 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2000ms
+	SoundPlay sound[367] 0 0 100
+	Sleep 500ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98684v{color 0}来了，
+		这是您点的火龙东央贡汤。{wait}
+	} {
+		#98685v最好趁热
+		一口气喝完哦。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	VisShow vis[3] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS554._CH"
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[1] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98686v{color 0}对了，关于和杰克对局的事情……
+		他说这次就免了。{wait}
+	} {
+		#98687v好像是因为
+		昨天的酒还没醒的样子。
+		而且他也懒得起来。{wait}
+	} {
+		#98688v……对不起，
+		难得你特意过来一趟……{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	VisShow vis[1] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[3] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98689v{color 0}……好吧！
+		你看这么办行吗？{wait}
+	} {
+		#98690v如果你胜了我的话，
+		我就再去帮你恳请一次。{wait}
+	} {
+		#98691v要是能打败我的话，
+		那家伙应该也会对你有兴趣的。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#98692v{color 0}……觉得意外吗？
+		别看我这个样子，我也能来两下呢。{wait}
+	} {
+		#98693v我叫哈璐——
+		传说中的赌博师『王』的女儿。{wait}
+	} {
+		#98694v虽然并不广为人知，
+		但在这一行也算相当有名哦。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[3] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS555._CH"
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	VisSet vis[1] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98695v{color 0}当然，我不会手下留情。{wait}
+	} {
+		#98696v如果你输了，那就马上给我回去——{wait}
+	} {
+		#98697v只要你同意这条件，我们这就开始吧？{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	SoundPlay sound[368] 0 0 100
+	Sleep 800ms
+	VisShow vis[1] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS551._CH"
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[3] 3 0x00FFFFFF 500ms 0 0
+	VisShow vis[3] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS555._CH"
+	TextSetPos -1 300 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98698v{color 0}呵呵，你是说ＯＫ吗？{wait}
+	} {
+		#98699v那我们这就换个地方
+		准备开始吧。{wait}
+	} {
+		#98700v我们来比――
+		『二十一点』如何？{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	VisSet vis[0] 3 0x00FFFFFF 1500ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1600ms
+	var[0] = 0
+	var[2] = 0
+	while var[0] != 255:
+		ImageShow "c_vis509._ch" 0 0 500ms
+		VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+		TextSetPos -1 100 -1 -1
+		TextSetName ""
+		var[0] = 0
+		while var[0] != 255:
+			system[40] = 24
+			Menu menu[0] -1 330 0
+				"【　开始　】" // 0
+				"【　说明　】" // 1
+				"【　结束　】" // 2
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[255]
+			switch var[0]:
+				case 0:
+					var[0] = 255
+					break
+				case 1:
+					TextSetPos -1 -1 -1 -1
+					TextSetName ""
+					TextMessage null {
+						{color 5}#0W―――――――――《   规则说明   》―――――――――
+						　
+						　用『二十一点』与哈璐进行一对一决战。
+						　采用七局四胜制，
+						　谁先胜出四盘就结束。
+						　游戏内各项指令的说明如下。
+						　
+						　【ＨＩＴ】　　：抽取一张牌。
+						　　　　　　　　　在BURST（牌面的合计值超过２１）之前
+						　　　　　　　　　最多可以抽取７张。
+						　
+						　【ＳＴＡＮＤ】：用当前手中的卡片进行较量。
+						　
+						―――――――――――――――――――――――――――#20W{wait}
+					}
+					TextWait
+					TextClose 0
+					TextSetPos 72 320 56 3
+					TextSetPos -1 -1 -1 -1
+					TextSetName ""
+					TextMessage null {
+						{color 5}#0W―――――――――《   规则说明   》―――――――――
+						　
+						　合计值在２１以下，而且手上的牌数达到７张，
+						　就成为『７小龙』的牌型，
+						　这是比『二十一点（卡片的合计值为２１）』
+						　还要强的牌型。
+						　
+						　除此之外没有其它任何牌型。
+						　无论如何，就以２１为目标抽牌吧。
+						　
+						　
+						　
+						　
+						―――――――――――――――――――――――――――#20W{wait}
+					}
+					TextWait
+					TextClose 0
+					TextSetPos 72 320 56 3
+					break
+				case 2:
+					ImageHide 500ms
+					MenuClose menu[0]
+					TextClose 0
+					system[40] = 65535
+					Sleep 1000ms
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					NewScene "m7203._sn" 102 0 0
+					Hcf
+					break
+		var[0] = 0
+		ImageHide 500ms
+		TextSetPos 72 320 56 3
+		system[40] = 24
+		var[0] = Minigame 29 2 0 0 0 0 0 0 0
+		EventBegin 1
+		system[40] = 65535
+		BgmStop 2000ms
+		BgmWait
+		if var[0] == 1:
+			break
+		Sleep 1000ms
+		BgmPlay bgm[191] 0
+		SoundPlay sound[234] 1 0 100
+		VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+		Sleep 3000ms
+		VisShow vis[1] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS556._CH"
+		VisSet vis[1] 3 0xFFFFFFFF 1500ms 0 0
+		VisSet vis[1] 4 0 0 0 0
+		Sleep 2000ms
+		TextSetPos -1 300 -1 -1
+		TextSetName "哈璐"
+		TextMessage null {
+			#98701v{color 0}唉，只有这种程度吗……
+			真是让人失望。{wait}
+		} {
+			#98702v嗯，只靠这点本事
+			就算和杰克交手也只会输。{wait}
+		} {
+			#98703v虽然有些残酷，不过规则就是规则。
+			之前说好了，今天就请回吧。{wait}
+		} {
+			#98704v呵呵，
+			下次可要好好练习后再来哦。{wait}
+		}
+		TextWait
+		TextClose 0
+		VisSet vis[0] 3 0xFF888888 500ms 0 0
+		VisSet vis[1] 3 0xFF888888 500ms 0 0
+		VisWait vis[0] 3
+		VisWait vis[1] 3
+		TextSetPos -1 100 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}再度挑战小游戏吗？{wait}
+		}
+		if var[2] < 2:
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"【降低难度后挑战】" // 0
+				"【不改变难度继续挑战】" // 1
+				"【放弃】" // 2
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			TextSetPos 72 320 56 3
+			switch var[0]:
+				case 0:
+					VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+					var[0] = 0
+					if var[2] < 2:
+						var[2] = var[2] + 1
+					break
+				case 1:
+					VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+					var[0] = 0
+					break
+				case 2:
+				default:
+					BgmStop 2000ms
+					VisSet vis[0] 3 0x00FFFFFF 1500ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 1500ms 0 0
+					BgmWait
+					VisWait vis[0] 3
+					VisWait vis[1] 3
+					VisHide vis[255] 0
+					Sleep 1000ms
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					NewScene "m7203._sn" 102 0 0
+					Hcf
+					break
+		else:
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"【 是 】" // 0
+				"【 否 】" // 1
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			TextSetPos 72 320 56 3
+			switch var[0]:
+				case 0:
+					VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+					var[0] = 0
+					break
+				case 1:
+				default:
+					BgmStop 2000ms
+					VisSet vis[0] 3 0x00FFFFFF 1500ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+					BgmWait
+					VisWait vis[0] 3
+					VisWait vis[1] 3
+					VisHide vis[255] 0
+					Sleep 1000ms
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					NewScene "m7203._sn" 102 0 0
+					Hcf
+					break
+	if !QuestFlagsGet quest[31] 0x20:
+		Sleep 2000ms
+		QuestFlagsSet quest[31] 0x10
+		QuestFlagsSet quest[31] 0x20
+		QuestFlagsSet quest[32] 0x02
+		if RecipeLearn 2:
+		else:
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextMessage null {
+				{0x6}{color 2}火龙东央贡汤{color 0}的制作方法已经记下了。{wait}
+			}
+			TextWait
+			TextSetPos 72 320 56 3
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 0}得到了{color 2}５０００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	Call fn[0,11]
+	Return
+
+fn[11]:
+	QuestFlagsSet quest[32] 0x08
+	EventBegin 1
+	Sc_C4Set 536870912
+	system[40] = 65535
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS511._CH"
+	VisShow vis[1] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	Sleep 1000ms
+	BgmPlay bgm[191] 0
+	SoundPlay sound[234] 1 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+	Sleep 3000ms
+	VisSet vis[1] 3 0xFFFFFFFF 1500ms 0 0
+	VisSet vis[1] 4 0 0 0 0
+	Sleep 2000ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98705v{color 0}……真让人吃惊，你挺行的嘛。{wait}
+	} {
+		#98706v好吧，那我就
+		把你的事情和杰克说一下。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0x00FFFFFF 1200ms 0 0
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	Sleep 500ms
+	SoundPlay sound[234] 1 0 100
+	Sleep 1000ms
+	TextSetPos 340 120 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0825v{color 12}看，那家伙……
+		居然胜了哈璐。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 40 80 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0830v{color 12}……好像是的。{wait}
+	} {
+		#0831v这下说不定
+		有好戏看了。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	SoundPlay sound[234] 1 0 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName "沙哑的声音"
+	TextMessage null {
+		#98804v{color 0}呵啊～我还没睡够呢。{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[28] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[28] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[28] 0 0 100
+	Sleep 500ms
+	VisShow vis[2] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS560._CH"
+	VisSet vis[2] 3 0xFFFFFFFF 1500ms 0 0
+	VisSet vis[2] 4 0 0 0 0
+	Sleep 2000ms
+	TextSetPos -1 280 -1 -1
+	TextSetName "衣衫不整的男人"
+	TextMessage null {
+		#98805v{color 0}哦，有个陌生面孔呢。{wait}
+	} {
+		#98806v难道这就是
+		哈璐说的那个人吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[4] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS567._CH"
+	VisSet vis[4] 4 0 0 0 0
+	VisSet vis[4] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[2] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 280 -1 -1
+	TextSetName "衣衫不整的男人"
+	TextMessage null {
+		#98807v{color 0}#51A痛痛痛……
+		脑袋里面一跳一跳地痛#150W……{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName "衣衫不整的男人"
+	TextMessage null {
+		#98808v{color 0}#5A#20W哇！？{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[369] 0 0 100
+	VisSet vis[4] 3 0x00FFFFFF 500ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98707v{color 0}#1914F唉～糟了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 40 120 -1 -1
+	TextSetName "不怀好意的声音"
+	TextMessage null {
+		#0821v{color 12}哈哈哈，瞧。
+		正如我说的吧？{wait}
+	} {
+		#0822v杰克这家伙，
+		结果还是把这破地板踏穿了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 340 80 -1 -1
+	TextSetName "粗鲁的声音"
+	TextMessage null {
+		#0816v{color 12}呵呵，的确如此。{wait}
+	} {
+		#0817v除了玩牌之外，
+		这家伙真是
+		丝毫运气都没有啊。{wait}
+	} {
+		#0818v……或者该说他只是迟钝而已吗。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[2] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS562._CH"
+	VisSet vis[2] 3 0xFFFFFFFF 1500ms 0 0
+	VisSet vis[2] 4 0 0 0 0
+	Sleep 1500ms
+	TextSetPos -1 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98809v{color 0}啊！？刚才的话是不是你说的？{wait}
+	} {
+		#98810v喂，想打架啊，随时奉陪！{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos 240 180 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98708v{color 0}#1916F……好了好了，到此为止。
+		想打架就到外面去打。{wait}
+	} {
+		#98709v如果把这酒店弄得更加破落
+		那谁来负这个责？{wait}
+	} {
+		#98710v#1915F还有，杰克……
+		这地板就由你来修理吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98811v{color 0}为、为什么是我……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	TextSetPos 240 180 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98711v{color 0}#1912F（瞪……！）{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[4] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS564._CH"
+	VisSet vis[4] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[4] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[2] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98812v{color 0}……哼，知道了。{wait}
+	} {
+		#98813v嘁，真是麻烦。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos 360 220 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0826v{color 12}呵呵，自从哈璐来了之后，
+		杰克这家伙安静多了，
+		真是帮了大忙啊。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 10 110 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0832v{color 12}啊，说的没错。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[2] 0 0 512 512 0 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS562._CH"
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[2] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[4] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos -1 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98814v{color 0}……………………{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	VisSet vis[2] 0 -110000 0 1000ms 0
+	VisSet vis[1] 0 110000 0 0ms 0
+	VisShow vis[1] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 1500ms 0 0
+	VisSet vis[1] 4 0 0 0 0
+	Sleep 1500ms
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98712v{color 0}……不好意思，让你久等了。
+		我按照约定把杰克带来了。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[4] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS560._CH"
+	VisSet vis[4] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[4] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[2] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98815v{color 0}……那么。{wait}
+	} {
+		#98816v想和我一决胜负的
+		就是眼前这家伙吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98713v{color 0}是，你猜对了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98817v{color 0}嗯，乍一看
+		也没啥了不起的样子。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98714v{color 0}呵呵，可不要麻痹大意
+		到头来被人家踩个粉碎哦。{wait}
+	} {
+		#98715v就像刚才的地板一样。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98818v{color 0}哼………{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[366] 0 0 100
+	Sleep 200ms
+	Sleep 500ms
+	SoundPlay sound[209] 0 0 100
+	Sleep 500ms
+	VisShow vis[2] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS561._CH"
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[2] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[4] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98819v{color 0}忘了做自我介绍了――
+		我叫杰克，请多关照。{wait}
+	} {
+		#98820v……好了，不管其它的，
+		先来点酒。{wait}
+	} {
+		#98821v喂，哈璐，拿威士忌来！
+		当然是要纯的。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[3] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS554._CH"
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	VisSet vis[1] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98716v{color 0}啊，杰克……
+		你不是从昨天就开始醉了吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98822v{color 0}啊，那个没有关系。
+		昨天的酒现在刚醒。{wait}
+	} {
+		#98823v喂，哈璐，快点啦。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98717v{color 0}真是个无可救药的家伙。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[3] 3 0x00FFFFFF 1200ms 0 0
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 2000ms
+	VisShow vis[4] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS560._CH"
+	VisSet vis[4] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[4] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[2] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98824v{color 0}怎么，你觉得哈璐很奇怪吗？{wait}
+	} {
+		#98825v虽然现在一点姿色都没有，
+		不过，将来一定会是位十分出众的姑娘。{wait}
+	} {
+		#98826v不知为何突然心血来潮，
+		提出要到这种
+		脏兮兮的地方来干活……{wait}
+	} {
+		#98827v……好了，这些都无关紧要。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[2] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS565._CH"
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[2] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[4] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98828v{color 0}不过，你的胆子
+		也真是够大的啊。{wait}
+	} {
+		#98829v居然敢一个人跑到
+		这种偏僻的破酒吧来……{wait}
+	} {
+		#98830v像你这种人，还真是少见啊。{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[26] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[26] 0 0 100
+	Sleep 500ms
+	VisShow vis[1] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[1] 4 0 0 0 0
+	Sleep 1500ms
+	SoundPlay sound[367] 0 0 100
+	Sleep 500ms
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98718v{color 0}你们好像跑题了吧。
+		给，我拿来了。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[4] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS560._CH"
+	VisSet vis[4] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[4] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[2] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98831v{color 0}哦哦，谢了。{wait}
+	} {
+		#98832v对了，你不用回去工作吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98719v{color 0}呵呵，这么有趣的事情摆在面前
+		谁还有心情去管店里的事啊。{wait}
+	} {
+		#98720v我已经告诉过店长了，
+		就让我参观一下嘛。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98833v{color 0}唉，真是够随便的店啊。{wait}
+	} {
+		#98834v也罢，赶快开始吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[2] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS561._CH"
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[2] 4 0 0 0 0
+	Sleep 800ms
+	VisSet vis[4] 3 0x00FFFFFF 0ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98835v{color 0}哟，这可是你挑起的对决。{wait}
+	} {
+		#98836v那就让我来决定
+		用什么来比试吧。{wait}
+	} {
+		#98837v用我最擅长的游戏――
+		『扑克』来一决胜负！{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	VisSet vis[0] 3 0x00FFFFFF 1500ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1600ms
+	var[0] = 0
+	var[2] = 0
+	while var[0] != 255:
+		BgmPlay bgm[191] 0
+		ImageShow "c_vis510._ch" 0 0 500ms
+		TextSetPos -1 100 -1 -1
+		TextSetName ""
+		var[0] = 0
+		while var[0] != 255:
+			system[40] = 24
+			Menu menu[0] -1 330 0
+				"【　开始　】" // 0
+				"【　说明　】" // 1
+				"【　结束　】" // 2
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[255]
+			switch var[0]:
+				case 0:
+					var[0] = 255
+					break
+				case 1:
+					TextSetPos -1 -1 -1 -1
+					TextSetName ""
+					TextMessage null {
+						{color 5}#0W―――――――――――《   规则说明   》―――――――――――
+						　
+						　用变化了规则的『扑克』与杰克进行一对一的较量。
+						　在这种规则下，桌子中间的三张牌会作为『公用牌』，
+						　玩家和杰克都可以将他们组合到『牌型』中。
+						　
+						　再加上分配的其它三张『手牌』，
+						　最后要从这六张牌中选出五张形成『牌型』。
+						　
+						　胜负以争夺星（☆）的方式来进行。
+						　玩家开始拥有三颗星，
+						　如果能增加到七个即为胜利。
+						　相反玩家的星全部失去就是杰克获胜，游戏结束。
+						　
+						　
+						―――――――――――――――――――――――――――――――#20W{wait}
+					}
+					TextWait
+					TextClose 0
+					TextSetPos 72 320 56 3
+					TextSetPos -1 -1 -1 -1
+					TextSetName ""
+					TextMessage null {
+						{color 5}#0W―――――――――――《   规则说明   》―――――――――――
+						　
+						　游戏内各种命令的说明如下。
+						　
+						　【CHANGE】 ：将『HOLD状态』以外的牌换掉，
+						　　　　　　　　然后决定胜负。（最多只能换掉一次）
+						　【ALLHOLD】：将所有的卡片都设定为『HOLD状态』。
+						　【RAISE】　：将所押的星数增加为两个。（通常为一个）
+						　【FOLD】 　：将『公用牌』与『手牌』进行交换。
+						　　　　　　　（每次对决只能交换一次）
+						　
+						　※设定『HOLD状态』时
+						　  可直接单击牌进行切换。
+						　　若一张牌也想不交换，
+						　　请将所有手牌设为『HOLD状态』。
+						―――――――――――――――――――――――――――――――#20W{wait}
+					}
+					TextWait
+					TextClose 0
+					TextSetPos 72 320 56 3
+					TextSetPos -1 -1 -1 -1
+					TextSetName ""
+					TextMessage null {
+						{color 5}#0W―――――――――――《   规则说明   》―――――――――――
+						　
+						　『牌型』的说明如下。
+						　越往下的『牌型』就越强。
+						　
+						　【NO PAIR】　　　：没有形成下列任何一种『牌型』。
+						　【1 PAIR】　　　 ：相同数字的牌有２张。
+						　【2 PAIR】　　　 ：有两组1 PAIR。
+						　【3 OF A KIND】　：相同数字的牌有３张。
+						　【STRAIGHT】　　 ：５张牌的数字是连续的。
+						　【FLUSH】　　　　：５张牌的花色相同。
+						　【FULLHOUSE】　　：同时形成3 OF A KIND和1 PAIR。
+						　【4 OF A KIND】　：相同数字的牌有４张。
+						　【STRAIGHTFLUSH】：同时形成STRAIGHT和FLUSH。
+						　【ROYALFLUSH】　 ：10，Ｊ，Ｑ，Ｋ，Ａ的STRAIGHTFLUSH。
+						―――――――――――――――――――――――――――――――#20W{wait}
+					}
+					TextWait
+					TextClose 0
+					TextSetPos 72 320 56 3
+					break
+				case 2:
+					ImageHide 500ms
+					MenuClose menu[0]
+					TextClose 0
+					system[40] = 65535
+					Sleep 1000ms
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					NewScene "m7203._sn" 102 0 0
+					Hcf
+					break
+		var[0] = 0
+		ImageHide 500ms
+		TextSetPos 72 320 56 3
+		system[40] = 24
+		var[0] = Minigame 28 2 0 0 0 0 0 0 0
+		EventBegin 1
+		system[40] = 65535
+		BgmStop 2000ms
+		BgmWait
+		if var[0] == 1:
+			break
+		BgmPlay bgm[191] 0
+		SoundPlay sound[234] 1 0 100
+		VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+		Sleep 3000ms
+		VisShow vis[1] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+		VisShow vis[2] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS560._CH"
+		VisSet vis[1] 4 0 0 0 0
+		VisSet vis[1] 3 0xFFFFFFFF 1500ms 0 0
+		VisSet vis[2] 3 0xFFFFFFFF 1500ms 0 0
+		Sleep 2000ms
+		TextSetPos 30 270 -1 -1
+		TextSetName "杰克"
+		TextMessage null {
+			#98838v{color 0}唉，我真是看错人了。{wait}
+		} {
+			#98839v既然打败了哈璐，
+			我还以为你会更强一些呢。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 350 310 -1 -1
+		TextSetName "哈璐"
+		TextMessage null {
+			#98721v{color 0}嗯～我可是觉得
+			刚才那应该不是碰巧……{wait}
+		}
+		TextWait
+		TextClose 0
+		Sleep 500ms
+		TextSetPos 30 270 -1 -1
+		TextSetName "杰克"
+		TextMessage null {
+			#98840v{color 0}……唉，算了。
+			还真是扫兴。{wait}
+		} {
+			#98841v下次再来的时候，
+			记得给我看点更强的招数啊。{wait}
+		}
+		TextWait
+		TextClose 0
+		VisSet vis[0] 3 0xFF888888 500ms 0 0
+		VisSet vis[1] 3 0xFF888888 500ms 0 0
+		VisSet vis[2] 3 0xFF888888 500ms 0 0
+		VisWait vis[0] 3
+		VisWait vis[1] 3
+		VisWait vis[2] 3
+		TextSetPos -1 100 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}再度挑战小游戏吗？{wait}
+		}
+		TextWait
+		if var[2] < 2:
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"【降低难度后挑战】" // 0
+				"【不改变难度继续挑战】" // 1
+				"【放弃】" // 2
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			TextSetPos 72 320 56 3
+			switch var[0]:
+				case 0:
+					VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[2] 3 0x00FFFFFF 0ms 0 0
+					var[0] = 0
+					if var[2] < 2:
+						var[2] = var[2] + 1
+					break
+				case 1:
+					VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[2] 3 0x00FFFFFF 0ms 0 0
+					var[0] = 0
+					break
+				case 2:
+				default:
+					BgmStop 2000ms
+					VisSet vis[0] 3 0x00FFFFFF 1500ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+					VisSet vis[2] 3 0x00FFFFFF 1000ms 0 0
+					BgmWait
+					VisWait vis[0] 3
+					VisWait vis[1] 3
+					VisWait vis[2] 3
+					VisHide vis[255] 0
+					Sleep 1000ms
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					NewScene "m7203._sn" 102 0 0
+					Hcf
+					break
+		else:
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"【 是 】" // 0
+				"【 否 】" // 1
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			switch var[0]:
+				case 0:
+					VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+					VisSet vis[2] 3 0x00FFFFFF 0ms 0 0
+					var[0] = 0
+					break
+				case 1:
+					BgmStop 2000ms
+					VisSet vis[0] 3 0x00FFFFFF 1500ms 0 0
+					VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+					VisSet vis[2] 3 0x00FFFFFF 1000ms 0 0
+					BgmWait
+					VisWait vis[0] 3
+					VisWait vis[1] 3
+					VisWait vis[2] 3
+					VisHide vis[255] 0
+					Sleep 1000ms
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					NewScene "m7203._sn" 102 0 0
+					Hcf
+					break
+	BgmPlay bgm[191] 0
+	VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+	Sc_C4Set 536870912
+	Sleep 3000ms
+	VisShow vis[1] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	VisShow vis[2] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS560._CH"
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 1500ms 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2000ms
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98842v{color 0}……原来如此，
+		本事不错嘛。{wait}
+	} {
+		#98843v我会老实认输的。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	SoundPlay sound[234] 1 0 100
+	Sleep 1000ms
+	TextSetPos 360 220 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0827v{color 12}喂，不会吧……
+		杰克居然被打败了。{wait}
+	}
+	TextWait
+	TextSetPos 80 260 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0833v{color 12}笨蛋，你没看出来
+		杰克根本就没有认真玩吗。{wait}
+	} {
+		#0834v……嗯，不过说不定
+		对手也是一样啦。{wait}
+	}
+	TextWait
+	TextSetPos 280 280 -1 -1
+	TextSetName "窃窃私语"
+	TextMessage null {
+		#0837v{color 12}是、是啊……
+		总之，还真是场精彩的比赛啊。{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[234] 1 0 0
+	Sleep 1000ms
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98722v{color 0}呵呵，真是引人注目呢。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[4] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS565._CH"
+	VisSet vis[4] 4 0 0 0 0
+	VisSet vis[4] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[2] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98844v{color 0}嗯，既然有这种本事，
+		已经足够去独闯天下了。{wait}
+	} {
+		#98845v虽然输了是不甘心，
+		不过我也很久没有这样
+		纯粹地享受赌博的乐趣了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98723v{color 0}确实哦，只是在一旁看着，
+		就连我都想玩扑克了哦。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[2] 0 0 512 512 -110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS560._CH"
+	VisSet vis[2] 4 0 0 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[4] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98846v{color 0}嗯，那个……{wait}
+	} {
+		#98847v只要愿意的话，随时都可以来哦。
+		到时我们再来比试比试。{wait}
+	} {
+		#98848v话说在前头，我的实力
+		可远不止这样而已哦。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[3] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS551._CH"
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[1] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98724v{color 0}呵呵，竟敢说这种话……{wait}
+	} {
+		#98725v引火上身的，
+		不正是杰克你吗。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98849v{color 0}哦，还真敢说。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[1] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS557._CH"
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[3] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98726v{color 0}呵呵……那个就暂且不提了。
+		我和杰克的心情是一样的。{wait}
+	} {
+		#98727v无论何时都欢迎你到这里来。
+		然后，再来切磋一番。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[3] 0 0 512 512 110 0 768 512 0 0 512 512 0x00FFFFFF 0 "C_VIS550._CH"
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 800ms
+	VisSet vis[1] 3 0x00FFFFFF 500ms 0 0
+	TextSetPos 30 270 -1 -1
+	TextSetName "杰克"
+	TextMessage null {
+		#98850v{color 0}就这么定了，好吗。
+		你可不能赢了就跑哦。{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundStop sound[234]
+	VisSet vis[0] 3 0x00FFFFFF 5000ms 0 0
+	FadeOut 5000ms 0x00FFFFFF 255
+	FadeWait
+	Sleep 1500ms
+	TextSetPos 350 310 -1 -1
+	TextSetName "哈璐"
+	TextMessage null {
+		#98728v{color 0}那么，你这就要回去了。{wait}
+	} {
+		#98729v呵呵，再见……
+		期待有机会能再见面。{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 536870912
+	VisSet vis[3] 3 0x00FFFFFF 2000ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 2000ms 0 0
+	Sleep 2000ms
+	BgmStop 4000ms
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 11 4 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『THE CASINO～赌博师杰克～』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[32] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[32] 0x10
+		QuestFlagsSet quest[32] 0x20
+		ItemAdd item[355] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[355]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 10000
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 0}得到了{color 2}１００００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7203._sn" 102 0 0
+	Hcf
+	Return
+
+fn[12]:
+	Return
+
+fn[13]:
+	SoundSetVolume sound[451] 90
+	Sleep 200ms
+	SoundSetVolume sound[451] 80
+	Sleep 200ms
+	SoundSetVolume sound[451] 70
+	Sleep 200ms
+	SoundSetVolume sound[451] 60
+	Sleep 200ms
+	SoundSetVolume sound[451] 50
+	Sleep 200ms
+	SoundSetVolume sound[451] 40
+	Sleep 200ms
+	SoundSetVolume sound[451] 30
+	Sleep 200ms
+	SoundSetVolume sound[451] 20
+	Sleep 200ms
+	SoundSetVolume sound[451] 10
+	Sleep 200ms
+	SoundSetVolume sound[451] 0
+	SoundStop sound[451]
+	Return
+
+fn[14]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	BgmPlay bgm[100] 0
+	Sc_C4Set 2048
+	system[40] = 65535
+	Sleep 3000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}夜空中布满了星星，仿佛就要飘落下来——{wait}
+		夜风吹拂，森林轻摇——
+		忽然，一线流星从夜空中划过。{wait}
+		　
+		绽放着七耀的光辉从天而降
+		仿如空之女神落下的泪滴。{wait}
+	}
+	TextWait
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}——不可思议的事情随之而来。{wait}
+		　
+		流星本应放射出瞬间的光辉，其后悄然消逝
+		然而它却在漆黑的空中放射出眩目的闪光——{wait}
+		然后分散成数条光线，
+		划出轨道落向地面。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}其在分开时变成16条线
+		分别降临在16个人的面前。{wait}
+		　
+		接下的事令人惊异——。
+		七耀的光辉将他们包围，
+		分别向他们讲述。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}『人啊……人之子啊………
+		  听得见我的声音吗……』{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}『你被授予参加试炼……
+		  请环游王国一周，造访王城吧。』{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}『追寻在同一天空下生活的
+		  各种各样的人们那多姿多彩的人生……
+		  追寻那无数相互交织的思想之轨迹。』{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}『人啊……人之子啊………』{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}『当你完成之时，
+		  我将赐予你祝福。』{wait}
+	}
+	TextWait
+	Sleep 1000ms
+	TextClose 0
+	Sc_C4Unset 2048
+	FadeOut 300ms 0x00000000 255
+	FadeWait
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	global[5] = Minigame 25 0 0 0 0 0 0 0 0
+	FlagSet flag[9476]
+	NewScene "e1000._sn" 0 0 0
+	Hcf
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	if global[5] == 255:
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene "u5110._sn" 0 0 0
+	Hcf
+	Return
+
+fn[16]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sc_C4Set 2048
+	Sleep 3500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0128v{color 0}#2S#80W诺桑比亚旧大公国由于『盐之桩』所造成的损害情况。#20W{wait}
+		#0129v　　　　　 #80W以及有关『桩』的研究报告――#20W{wait}
+		#0130v　
+		　　　　　　　　　　　　　　　#80W亚尔特利亚法典国·封圣省。#20W{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmPlay bgm[110] 0
+	Sleep 1500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS328._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 3500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[18] 0 0 100
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0131v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		谨以本报告，向作为众生之母的女神之座前，最可敬的导师，
+		至高的法王阁下复命#150W…………#20W{wait}
+		#0132v　
+		　
+		机密#150W…………#20W{wait}
+		#0133v本报告书仅限枢密院内阅览。{wait}
+		#0134v然则，关于一部分秘匿事项的文字已被涂抹掉。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0119v{color 0}#2S『桩』出现的事件经过――{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextMessage null {
+		#0135v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		#150W七耀历１１７８年７月１日，上午５时４５分――#20W{wait}
+		#0136v　
+		　
+		塞姆里亚大陆北部诺桑比亚旧大公国（※现为自治州）
+		哈利亚斯科大圣堂发布紧急消息。　{wait}
+		#0137v内容为：旧公都哈利亚斯科近郊，
+		出现『直冲云霄的白色巨柱』。{wait}
+		#0138v　
+		　
+		报告者阿雷克赛司教表现相当惊慌――{wait}
+		#0139v受审问会紧急命令，在邻国执行其它任务的
+		星杯骑士２名（第八位『吼天狮子』与随从骑士一名）
+		被派遣到当地。#20W{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0140v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		星杯骑士驾驶当时刚刚投入应用的
+		特殊作战艇『梅尔卡瓦』八号机，急速赶往当地。{wait}
+		#0141v　
+		　
+		同日上午６时２２分。{wait}
+		#0142v该事件已得到确认#150W…………#20W{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS331._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2000ms
+	TextSetPos -1 416 52 2
+	TextSetName ""
+	TextMessage null {
+		#0120v{color 0}#2S――现在被称为『盐之桩』的物体。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos -1 416 52 2
+	TextMessage null {
+		#0121v{color 0}#2S虽被命名为『桩』，
+		但最初发现时，总高度已超过数百亚矩――{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 416 52 2
+	TextMessage null {
+		#0122v{color 0}#2S――其气势之宏伟，几可称之为矗立于大地之上的巨塔。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 416 52 2
+	TextMessage null {
+		#0123v{color 0}#2S关于当时的状况，星杯骑士作了如下报告――{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 416 52 2
+	TextMessage null {
+		#0124v{color 0}#2S『公都哈利亚斯科方向吹来混乱交错的猛烈逆风――
+		  最后我发现那不是冰，而是盐的碎片。』{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 416 52 2
+	TextMessage null {
+		#0125v{color 0}#2S『物体的表面已被盐所覆盖而不可见――{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 416 52 2
+	TextMessage null {
+		#0126v{color 0}#2S  周围的空气化为盐的微粒逐渐沉降，
+		  其姿态正如在冻原上缓缓飘落的雪花。』{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0143v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		这种可被称为『盐化』的现象进行速度极其惊人，
+		损害在瞬间扩大――{wait}
+		#0144v　
+		　
+		星杯骑士到达时旧公都全域都化成了盐，
+		确认已有大量来不及逃避的市民（包括司教）遇难。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0145v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		出现后一昼夜――{wait}
+		#0146v旧公都北部延伸开来的广大针叶林带也因结晶化而崩毁。{wait}
+		#0147v桥梁倒塌，主要街道全部无法通行。{wait}
+		#0148v（※当时的元首巴尔蒙特大公
+		    此时已转移到邻国避难。）{wait}
+		#0149v　
+		　
+		出现后２日――{wait}
+		#0150v国土约一半化为盐海。{wait}
+		#0151v居民大多数转移到受格雷布河所遮蔽的南部地域避难。{wait}
+		#0152v　
+		　
+		出现后３日拂晓――{wait}
+		#0153v『盐化』的进行终于停止。
+		星杯骑士开始为调查旧公都哈利亚斯科而前进。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0154v{color 0}#2S同日下午，星杯骑士到达『盐之桩』――{wait}
+		#0155v但其姿态已与发现当时截然迥异。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS330._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0156v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		在『盐化』现象的中心地发现的『桩』
+		总高度仅２．５亚矩有余――{wait}
+		#0157v表面发现有像被某种东西划过的条状痕迹。{wait}
+		#0158v　
+		　
+		（※以下为审问会注记）{wait}
+		#0159v推测伴随『盐化』现象的进行，
+		『桩』本体的质量也会减少（※注记完毕）――{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0160v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		虽然失去了将大地化为盐的压倒性力量，
+		但『桩』本体至今仍然残留有『盐化』的能力――{wait}
+		#0161v其中隐藏着严重的威胁，
+		就算仅仅是『直接』接触，
+		任何对象都会在片刻之间变成盐的结晶。{wait}
+		#0162v　
+		　
+		其后星杯骑士使用本院转交的
+		圣器『克雷普尼尔』之力，以非接触的形式将其回收――{wait}
+		#0163v自此至今日为止
+		『盐之桩』都被严密封印在本院深处。{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0164v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		虽然回收顺利完成――
+		但『桩』在该国造成了巨大的损害。{wait}
+		#0165v　
+		　
+		虽然对临近诸国无任何损害――
+		但从结果上来说，５个行政区有３个（包括旧公都）都遭到毁灭。{wait}
+		#0166v包括外国来的旅行者等在内，
+		遇难者的数量在总人口的１／３以上。{wait}
+		#0167v　
+		　
+		突如其来的灾祸
+		给人们带来了巨大的不安与恐慌――{wait}
+		#0168v从信仰上的观点来看
+		由七耀教会进行事后处理已刻不容缓。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0169v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		因此，审问会立即
+		决定派遣相关人员前往当地救援――{wait}
+		#0170v致力于在当地重建礼拜堂
+		及治愈身心皆疲的国民。{wait}
+		#0171v　
+		　
+		同时，失去容身之处，
+		成为孤儿的孩子们将被托付于福音设施，
+		其将来的各方各面都会得到悉心照料。{wait}
+		#0172v（※此外，大片盐化的北部地域
+		　  在事件以后已置于教会的严格管理之下，
+		　  一般人等严禁入内。）{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS352._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0173v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		附记――{wait}
+		#0174v　
+		一段时间之后，该国前元首
+		巴尔蒙特原大公虽意图重建国政――{wait}
+		#0175v　
+		　
+		但在紧急事态下
+		只顾自保的元首早已权威尽失――{wait}
+		#0176v翌年民众群起武装反抗，
+		诺桑比亚大公国分崩离析。　{wait}
+		#0177v　
+		　
+		其后，通过选举
+		选出代表的民主议会成立，
+		至此，大公国重生为自治州。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0178v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		同时，旧军部作为自警团
+		重新编制――{wait}
+		#0179v　
+		　
+		然而在贫穷的自治州，
+		其中大半人都想尽快赚取外快――{wait}
+		#0180v　
+		　
+		结果，被称为『北之猎兵』的
+		大规模佣兵部队诞生了。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	ImageHide 150ms
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0181v{color 0}#2S就这样，事件在『世俗面』迎来了结局――{wait}
+		#0182v但还残留有数个包括教义性问题的重大谜团。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0183v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		到底『桩』是从何而来#150W…………#20W{wait}
+		#0184v　
+		　
+		超过数百亚矩的巨大物体
+		出现在都市的近郊暂且不论，
+		关于其出现瞬间的情报还完全无法获得。{wait}
+		#0185v　
+		　
+		虽然利用『空间转移』等类似现象
+		出现在旧公都近郊的想法是比较有说服力的，
+		但仍纯粹停留在类推的阶段上。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0186v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		更为重大的是『桩』在教义上的立场所在。{wait}
+		#0187v　
+		　
+		『盐之桩』与『古代遗物』是截然不同的存在，
+		是更本源性的『女神创造力的显现』（审问会答复）――{wait}
+		#0188v虽然不得不如此考虑，但现状已超越了我们知识的界限。{wait}
+		#0189v　
+		　
+		也有相反说法认为『桩』是『七至宝』之一，
+		但并未发现其与圣典或传承的相似之处。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0190v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		为了终有一天解决这些难题，
+		封圣省管内现在仍在继续对『桩』的研究――{wait}
+		#0191v　
+		　
+		其中，甚至有将『桩』视为女神的恩恵，
+		认为其应当被用于教会使命的考量。{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS329._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0192v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		用高压水流加工『桩』的碎片而成的圣器――
+		是现在实践性最高的计划。{wait}
+		#0193v　
+		　
+		装配使用以盐的结晶所制造的筒
+		便可避免直接接触而将『桩』投射向目标。{wait}
+		#0194v　
+		　
+		#2S攻击对象如果是人类，
+		在数秒内就会全身结晶化至死――{wait}
+		#0195v使用任何手段都无法复生。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0196v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		在『桩』的实体尚未被解明的现状下
+		的确不应该轻率使用，
+		从人道上的观点来看也有问题被指出――{wait}
+		#0197v　
+		　
+		但是，当存在确定应被抹消的对象的情况下
+		可以说这是极其有效的圣器。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0127v{color 0}#2S――研究预计今后仍将继续进行。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 4000ms 0 0
+	SoundPlay sound[18] 0 0 100
+	BgmStop 4000ms
+	BgmWait
+	VisHide vis[0] 0
+	Sleep 800ms
+	TextMessage null {
+		#0198v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		有关本圣器的追记――{wait}
+		#0199v　
+		＊＊年＊月，开始仅限非公开活动中本圣器的试用。{wait}
+		#0200v＊＊年＊月，针对抹杀＊＊＊的行动，审问会下令使用。{wait}
+		#0201v＊＊年＊月，在抹杀＊＊＊时使用（以弩枪投射）。{wait}
+		#0202v　　　　　　结果极其良好，毫无对周边的损害……{wait}
+		#0203v　　　　　　将对象＊＊＊完全抹消成功。{wait}
+	}
+	TextWait
+	Sleep 1000ms
+	TextClose 0
+	_59
+	TextMessage null {
+		#0204v{color 0}#2S　　　　　　　　　　　　　　　　　　　
+		※注记：关于抹消者＊＊＊{wait}
+		#0205v　
+		＊＊＊是『盐之桩』事件的受灾孤儿。{wait}
+		#0206v以下略历――{wait}
+		#0207v　
+		Ｓ１１８０年　皈依七耀教会。{wait}
+		#0208vＳ１１８５年　进入封圣省。就任圣务官。{wait}
+		#0209vＳ１１９０年　升迁为司教。{wait}
+		#0210vＳ１１９５年　被认定为异端。逐出教会。{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	Sleep 2000ms
+	TextClose 0
+	_59
+	Sleep 2000ms
+	ScAchievement 9 2 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『盐之桩』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_C4Unset 2048
+	VisHide vis[255] 0
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[19] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[19] 0x10
+		QuestFlagsSet quest[19] 0x20
+		ItemAdd item[639] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[639]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 3500
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}３５００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9478]
+	if flag[9999]:
+		NewScene "u4134._sn" 112 0 0
+		Hcf
+	else:
+		NewScene "u4131._sn" 112 0 0
+		Hcf
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sc_C4Set 2048
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS332._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	BgmPlay bgm[110] 0
+	Sleep 2000ms
+	VisSet vis[0] 3 0xFFFFFFFF 4000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 4000ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0416v{color 0}#2S#80W『怪盗Ｂ』调查报告――{wait}
+		#0417v关于其犯罪历史以及经历的考察。#20W{wait}
+		#0418v　　　　　　　　#80W《帝国时报社》调查小组编#20W{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS333._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 3500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0419v{color 0}正如我们所收集的大量资料显示――
+		『怪盗Ｂ』在帝国的活跃表现极其华丽。{wait}
+		#0420v　
+		以帝国美术馆收藏的几幅画为首――{wait}
+		#0421v到税关仓库的七耀石结晶、{wait}
+		#0422v帝国军研究设施的新型战车……{wait}
+		#0423v他盯上的东西没有一样幸免于难。{wait}
+		#0424v（最后甚至化身青年将校潜入舞会，
+		  跟某个侯爵夫人私奔了。）{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0425v{color 0}但话虽如此，他似乎却并不以此牟利。
+		（这也是最不可理解的地方）{wait}
+		#0426v　
+		因为大部分情况下，他所拿到的物品
+		都会被丢弃在失主看见会晕倒的
+		极其诡异的地方――{wait}
+		#0427v　
+		换成米拉在贫民街某处
+		下场金币雨，也是常用的套路。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0428v{color 0}但是，可别搞错了――{wait}
+		#0429v怪盗Ｂ决不是单纯的侠盗。{wait}
+		#0430v　
+		最好的例子就是刚才说的侯爵夫人。{wait}
+		#0431v私奔至今约过了半年多――
+		其行踪依然不明。{wait}
+		#0432v　
+		――像这种他盯上的猎物
+		从来没回来的例子也时常发生。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0433v{color 0}有如神助的偷盗技术
+		以及对赃物所显示出的毫无常理的态度――{wait}
+		#0434v　
+		乍一看好像是心血来潮的犯罪，
+		但观察怪盗Ｂ的目标物品
+		却发现一个共同的思想。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0435v{color 0}例如从美术馆盗走的画
+		虽然全都是出于名匠之手的杰作――{wait}
+		#0436v――但对贵族阶级爱好者来说太难懂而评价不好，
+		都是失去展示机会不受欢迎的作品。{wait}
+		#0437v　
+		同样，仓库的七耀石被税关没收以后，
+		一直保管在不见天日的地方――{wait}
+		#0438v　
+		帝国军的新型战车，也是以高性能为傲
+		却停止开发而被尘封的东西。{wait}
+		#0439v（顺带一提那个侯爵夫人也是类似的状态。{wait}
+		#0440v　她丈夫侯爵只为小妾着迷，
+		　对妻子则完全置之不理。）{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0441v{color 0}找出世上被遗弃的『美』，
+		将其从愚蠢的物主手中救出――{wait}
+		#0442v怪盗Ｂ的脑中毫无疑问存在这种理念。{wait}
+		#0443v　
+		『美的解放』――{wait}
+		#0444v装饰在他的预告卡片上的话语，正是其佐证。{wait}
+		#0445v　
+		――不为金钱而为理念犯罪的怪盗。{wait}
+		#0446v恐怕在面具下隐藏的他的真面目
+		就潜藏在这种独特的美学之中吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS334._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 3500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0447v{color 0}关于怪盗Ｂ的真面目
+		虽然已有数种说法――{wait}
+		#0448v　
+		但遗憾的是仅仅是数量众多，
+		实际上却没有任何一种有决定性证据。{wait}
+		#0449v（甚至最近，还有声称「自己就是怪盗Ｂ」，
+		  故意送上门来的疯狂假货出现。）{wait}
+		#0450v　
+		话虽如此，
+		却也并不是说这些传言全都毫无根据。{wait}
+		#0451v在此介绍最近坊间
+		流传甚广的三种说法吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0403v{color 0}《案例１：『多情的欺诈师Ｘ』》{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0404v{color 0}经历――{wait}
+		#0452v　
+		『Ｘ』不断伪造身份，
+		频频与贵族阶级小姐们发生风流韵事，
+		是个绝代的欺诈师。{wait}
+		#0453v他容颜秀丽，
+		是个相当高傲的人物。{wait}
+		#0454v　
+		生于温暖南方贫穷家庭的Ｘ
+		为了赚取零花钱，
+		从小就养成了偷盗的恶习。{wait}
+		#0455v（证言来源于当时的同伴，
+		　据说Ｘ一次也没因「偷盗」
+		　而被逮捕过。）{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0456v{color 0}――Ｘ成为欺诈师的契机，
+		是一次与身份悬殊的
+		美丽小姐『坠入爱河』。{wait}
+		#0457v当时在Ｘ的国家，贵族处于绝对的统治地位，
+		身份悬殊的恋爱不可能有结果――{wait}
+		#0458v因此他就开始伪造身份。{wait}
+		#0459v　
+		一度伪造过身份的Ｘ，
+		也开始尝试其它各种禁断之恋。{wait}
+		#0460v在１０年前因伪造经历嫌疑被捕，
+		其后奇迹般地成功逃狱，
+		至今行踪不明。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0405v{color 0}考察――{wait}
+		#0461v　
+		无可比拟的偷盗技术，{wait}
+		#0462v加上与贵族小姐的禁断之恋――{wait}
+		#0463v这些都感觉像是怪盗Ｂ的关键词。{wait}
+		#0464v　
+		而值得一提的是，Ｘ对她们家里的
+		财产完全没有兴趣这点。{wait}
+		#0465vＸ与她们交往，
+		并没有任何金钱利益。{wait}
+		#0466v　
+		――由于身份这等身外之物
+		而无法谱出恋曲令『Ｘ』感到忧虑。{wait}
+		#0467v而他的想法，似乎与怪盗Ｂ所倡导的
+		美的标准有何种相似之处。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0406v{color 0}《案例２：『悲剧的画家Ｙ』》{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0407v{color 0}经历――{wait}
+		#0468v　
+		『Ｙ』是个富于悲剧色彩的画家。{wait}
+		#0469v出生于北方中流家庭的Ｙ，
+		在某个有势力的贵族支持下成为画家，
+		留下众多传世名作。{wait}
+		#0470v（――稍后也得知，这段时间
+		　Ｙ也向世间输送了众多『赝品』。{wait}
+		#0471v　当时，那贵族让Ｙ描画赝品
+		　以此牟取非法利益。）{wait}
+		#0472v　
+		然而，某时Ｙ突然离开了那个贵族。{wait}
+		#0473v（详细的理由至今未明。）{wait}
+		#0474v――然后，悲剧开始了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0475v{color 0}突如其来的讣告――{wait}
+		#0476vＹ刚刚离开贵族，
+		他的恋人，一位良家女孩
+		就因交通事故而一命呜呼。{wait}
+		#0477v（虽然没有证据，
+		　但传闻这位女孩的死
+		　或许和贵族有所关联。）{wait}
+		#0478v　
+		最后被人目击到在恋人沉眠的墓地出现之后，
+		Ｙ就断绝了消息，此后
+		作为悲剧的画家为人所传诵。{wait}
+		#0479v而数年后，
+		贵族惨遭不明人士杀害，
+		使这个事件迎来了终结。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0408v{color 0}考察――{wait}
+		#0480v　
+		围绕Ｙ的事件至今迷雾重重，
+		在各种推测流传之下，
+		成为怪盗的真面目说之一浮上水面。{wait}
+		#0481v　
+		此外，这个案例还有一个具体的关联。{wait}
+		#0482v那就是，怪盗Ｂ时常将赝品作为『虚伪的美』
+		从这个世上埋葬这一事实。{wait}
+		#0483v也就是说，
+		这种行为被认为是――
+		「Ｙ亲手消灭自己的赝品」的行为。{wait}
+		#0484v（同时，实际追寻怪盗Ｂ所埋葬的画作线索时，{wait}
+		#0485v　发现确实是『Ｙ』的赝品。）{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0409v{color 0}《案例３：『华丽的武术家Ｚ』》{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0410v{color 0}经历――{wait}
+		#0411v　
+		最后介绍的『Ｚ』
+		与之前稍微有点不同――
+		可称得上是『奇谈』。{wait}
+		#0486v　
+		Ｚ是生于遥远的东方之地
+		历史悠久的武家名门的男子。{wait}
+		#0487v容貌端丽体格健壮，
+		同时又拥有禀异天赋，
+		是英名垂手可得的绝代武术家。{wait}
+		#0488v另传言他头脑清晰，
+		略带自我陶醉的气质。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0489v{color 0}家世、才能、容貌――{wait}
+		#0490v拥有这一切的Ｚ
+		开始对世间感到无聊。{wait}
+		#0491v（而且，似乎还常以这种思想
+		　向别人发牢骚。）{wait}
+		#0492v　
+		然后某时，他没有告诉任何人，
+		也没留下任何书信就忽然消失了踪影。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0412v{color 0}考察――{wait}
+		#0493v　
+		人们认为这是天才的奇怪行动。{wait}
+		#0494v此外，有证言说Ｚ所使用的技术动作
+		和怪盗Ｂ所使用的诡异奇术
+		有一致之处――{wait}
+		#0495v但在可靠性上
+		与其它众多轶闻无太大区别。{wait}
+		#0413v　
+		然而，那面具下隐藏着东方系的人物
+		这种想法本身非常有趣，
+		引人遐思。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	BgmStop 3000ms
+	BgmWait
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0496v{color 0}以上是三种方向各异的说法。{wait}
+		#0497v　
+		Ｘ、Ｙ或是Ｚ，其中有一个会是Ｂ吗――{wait}
+		#0498v还是说有完全不同的Ａ这个人物存在――{wait}
+		#0499v　
+		除了询问怪盗Ｂ本人
+		别无确认的手段了吧――{wait}
+		#0414v　
+		只不过前提是，他口中说出的『真相』
+		真的能作为真相为人所接受。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0500v{color 0}追记――{wait}
+		#0501v　
+		当这篇报道问世之后，
+		一枚怪盗Ｂ发来的卡片送到了本社。{wait}
+		#0502v以下是其内容――{wait}
+		#0503v　{color 12}
+		「诸位已经得知我的真面目――
+		　我的『数字』将指示『真相』。」{wait}
+		#0504v　{color 0}
+		根据这文字，我们已经
+		掌握了怪盗Ｂ的真面目――{wait}
+		#0505v但遗憾的是，从目前
+		本杂志所持的情报看来还无法判断。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0415v{color 0}――究竟是否有人
+		能找出这个问题的答案呢？{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 536870912
+	Sleep 1000ms
+	ScAchievement 9 11 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『『怪盗Ｂ』调查报告』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_C4Unset 2048
+	VisHide vis[255] 0
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[20] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[20] 0x10
+		QuestFlagsSet quest[20] 0x20
+		ItemAdd item[302] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[302]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 10000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}１００００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m5610._sn" 130 0 0
+	Hcf
+	Return
+
+fn[18]:
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[1] 4 0 0 0 0
+	Sleep 1000ms
+	while 1:
+		Sleep 200ms
+		VisSet vis[1] 3 0x00FFFFFF 500ms 0 0
+		Sleep 1000ms
+		if flag[0]:
+			break
+		Sleep 200ms
+		VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+		Sleep 1000ms
+	Return
+
+fn[19]:
+	while 1:
+		SoundPlay sound[26] 0 0 100
+		Sleep 500ms
+		SoundPlay sound[27] 0 0 100
+		Sleep 500ms
+		SoundPlay sound[26] 0 0 100
+		Sleep 500ms
+		SoundPlay sound[28] 0 0 100
+		Sleep 500ms
+	Return

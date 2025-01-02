@@ -1,0 +1,217 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4132.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (67050, 0, -2510)
+	radius 1000mm
+	bubble_pos (67000, 1000, -3250)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-24840, 0, 52550)
+	radius 1000mm
+	bubble_pos (-24950, 1000, 53250)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (34990, 0, 114350)
+	radius 1000mm
+	bubble_pos (34900, 1000, 115070)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (99160, 0, 114590)
+	radius 1000mm
+	bubble_pos (99120, 1000, 115300)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if flag[10017]:
+		OpLoad "U4132_y"
+	else:
+		OpLoad "U4132_n"
+	if !flag[10126]:
+		ObjFrame object[8] 0
+	else:
+		ObjFrame object[8] 60
+	if !flag[10127]:
+		ObjFrame object[9] 0
+	else:
+		ObjFrame object[9] 60
+	if !flag[10128]:
+		ObjFrame object[10] 0
+	else:
+		ObjFrame object[10] 60
+	if !flag[10129]:
+		ObjFrame object[11] 0
+	else:
+		ObjFrame object[11] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10126]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[8] 60
+		Sleep 500ms
+		if ItemAdd item[360] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[360]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10126]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[360]}{color 0}。
+				不过现有的数量太多，{item item[360]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[8] 60
+			ObjPlay object[8] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 263 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10127]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[9] 30
+		ObjWait object[9]
+		ObjFrame object[9] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 500
+		TextMessage null {
+			{color 0}得到了{color 2}５００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10127]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 264 0
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10128]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[10] 30
+		ObjWait object[10]
+		ObjFrame object[10] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 500
+		TextMessage null {
+			{color 0}得到了{color 2}５００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10128]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 265 0
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10129]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[11] 30
+		ObjWait object[11]
+		ObjFrame object[11] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 500
+		TextMessage null {
+			{color 0}得到了{color 2}５００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10129]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 266 0
+	Return

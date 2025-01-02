@@ -1,0 +1,353 @@
+calmare sc scena
+scena:
+	name "Grancel" "T4203.x"
+	town town[1]
+	bgm bgm[84]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01300._ch" "npl/ch01300p._cp"
+chip[1] "npl/ch02060._ch" "npl/ch02060p._cp"
+chip[2] "npl/ch02070._ch" "npl/ch02070p._cp"
+chip[3] "apl/ch20122._ch" "apl/ch20122p._cp"
+
+npc char[0]:
+	name "士兵丹"
+	pos (-790, 0, 41980)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[0,2]
+
+npc char[1]:
+	name "士兵阿尔兹"
+	pos (950, 0, 41980)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[0,3]
+
+npc char[2]:
+	name "奈尔"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "朵洛希"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "王都格兰赛尔·北街区"
+	pos (0, 0, -22550)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 5:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 0
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -112000) "mt4200._ch"
+	Return
+
+fn[2]:
+	TextStart self
+	TextEnd self
+	Return
+
+fn[3]:
+	TextStart self
+	TextEnd self
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	Sleep 1500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#93642v{color 0}{0x18}#20W#5S#20A号外！！{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#93643v{color 0}#20W       #4S利贝尔通讯　特别号#3S
+		 
+		『浮游都市崩坏！　王国危机消散！』#2S
+		 
+		  成功阻止空前阴谋！　多亏了年轻游击士！{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	ItemUse item[806] null
+	Sleep 2000ms
+	SoundPlay sound[460] 1 0 100
+	BgmPlay bgm[17] 0
+	CamLookPos (3000, 0, -9940) 0ms
+	CamSetDistance 0 9120 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[10] 0x0080
+	CharFlagsSet char[10] 0x0040
+	CharSetPos char[10] (3000, 0, -20900) 0deg
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	Fork char[10] fork[1]:
+		CharWalkToPos self (3000, 0, 12000) 4500mm/s 0
+	Sleep 1000ms
+	Fork char[12] fork[0]:
+		CamLookPos (3000, 0, 12200) 6300ms
+	Fork char[12] fork[1]:
+		CamSetDistance 0 5500 -10000 6300ms
+	Fork char[12] fork[2]:
+		CamRotate 0mdeg 6300ms
+	Fork char[12] fork[3]:
+		CamZoom 3300 6300ms
+	Sleep 1000ms
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	Sleep 2000ms
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	Sleep 2000ms
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	ForkWait char[10] fork[1]
+	Sleep 300ms
+	Fork char[10] fork[0]:
+		CharShake self 10 0 1000 2000ms
+	TextTalk char[10] {
+		#93644v#145F#5P#40W呼啊、呼啊、呼啊…………{wait}
+	}
+	TextWait
+	Fork char[12] fork[0]:
+		CamLookPos (4200, 0, 12200) 1000ms
+	Fork char[12] fork[1]:
+		CamSetDistance 0 6020 -10000 1000ms
+	Fork char[12] fork[2]:
+		CamRotate 50000mdeg 1000ms
+	Fork char[12] fork[3]:
+		CamZoom 3200 1000ms
+	CharTurnTo char[10] 180deg 300deg/s
+	Sleep 300ms
+	TextTalk char[10] {
+		#93645v#144F#5P#3S朵洛希，你在干什么！#2S{wait}
+	} {
+		#93646v#3S不管你了！！#2S{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsSet char[11] 0x0040
+	CharSetPos char[11] (3000, 0, 1100) 0deg
+	Fork char[11] fork[1]:
+		CharWalkToPos self (3000, 0, 6000) 1500mm/s 0
+	ForkWait char[11] fork[1]
+	TextTalk char[11] {
+		#93766v#152F#3P等、等等我～啊……
+		奈尔前～辈……！{wait}
+	}
+	TextWait
+	Fork char[11] fork[1]:
+		CharWalkToPos self (3000, 0, 8200) 1500mm/s 0
+	ForkWait char[11] fork[1]
+	Sleep 300ms
+	Fork char[11] fork[1]:
+		CharWalkToPos self (3000, 0, 10500) 1500mm/s 0
+	ForkWait char[11] fork[1]
+	Sleep 300ms
+	TextTalk char[10] {
+		#93647v#144F#5P不要磨磨蹭蹭的了！
+		庆祝会马上就要开始了！{wait}
+	} {
+		#93648v#142F这可是艾莉茜雅女王
+		为了庆贺『异变』的平息
+		而主办的特别宴会啊！{wait}
+	} {
+		#93649v这样的大事件，
+		是绝对不能迟到的！{wait}
+	}
+	TextWait
+	TextTalk char[11] {
+		#93767v#156F#12P#40W可、可是我
+		已经饿得肚子咕咕叫了……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[352] 0 0 100
+	Sleep 1000ms
+	CrossFade 250ms
+	SoundPlay sound[524] 0 0 100
+	CharSetChipBase char[11] chip[3]
+	CharSetChipPattern char[11] 0
+	CharFlagsSet char[11] 0x0020
+	Sleep 1200ms
+	Fork char[11] fork[0]:
+		CharShake self 10 0 1000 2000ms
+	TextTalk char[11] {
+		#93768v#152F#12P#40W一步也走不动了……{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[10]
+	Sleep 300ms
+	TextTalk char[10] {
+		#93650v#145F#5P难道说你…………{wait}
+	} {
+		#93651v#142F为了把肚子留给宴会，
+		白天连一点饭都没吃吗……
+		只有这种可能了吧？{wait}
+	}
+	TextWait
+	TextTalk char[11] {
+		#93769v#154F#12P不只是今天白天，
+		从昨天开始就没有吃饭了。{wait}
+	} {
+		#93770v#152F已经绝食超过３０小时了，
+		呜，眼前好多星星啊……{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#93652v#144F#5P#3S朵洛希，你这家伙
+		到底在想些什么啊………！{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk char[11] {
+		#93771v#152F#12P奈尔前辈，
+		背背我吧～！{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#93653v#145F#5P唉，你知不知道！！{wait}
+	}
+	TextWait
+	Fork char[10] fork[1]:
+		CharWalkToPos self (3000, 0, 11200) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	Sleep 200ms
+	CharTurnTo char[10] 0deg 400deg/s
+	Sleep 500ms
+	TextTalk char[10] {
+		#93654v#144F#5P难得今天整个王国
+		有名的人士齐聚一堂。
+		给我坚持住！！{wait}
+	} {
+		#93655v#141F首先要给女王陛下
+		和科洛蒂娅殿下
+		拍一张宝贵的照片……{wait}
+	}
+	TextWait
+	Fork char[10] fork[1]:
+		CharWalkToPos self (3000, 0, 13000) 1200mm/s 0
+	Fork char[11] fork[1]:
+		CharWalkToPos self (3000, 0, 12300) 1200mm/s 0
+	ForkWait char[10] fork[1]
+	TextTalk char[11] {
+		#93772v#152F#12P#40W呜呜呜呜…………{wait}
+	}
+	TextWait
+	Emote char[11] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[11] {
+		#93773v#153F#12P咦、咦～？{wait}
+	} {
+		#93774v#151F也许会很有意思呢～㈱{wait}
+	}
+	TextWait
+	Fork char[10] fork[1]:
+		CharWalkToPos self (3000, 0, 32200) 1800mm/s 0
+	Fork char[11] fork[1]:
+		CharWalkToPos self (3000, 0, 22500) 1800mm/s 0
+	Sleep 300ms
+	Emote char[10] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	Emote char[11] 0mm 1700mm 8 9 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Sleep 1000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "sn_res72.   " 100 0 0
+	Hcf
+	Return

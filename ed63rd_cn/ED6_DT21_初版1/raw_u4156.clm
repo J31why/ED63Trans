@@ -1,0 +1,112 @@
+calmare fc scena
+scena:
+	name "gaiden2" "U4156.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] file[0x0029061B] file[0x0029061F]
+chip[1] file[0x0029061C] file[0x00290620]
+chip[2] file[0x00290733] file[0x00290737]
+chip[3] file[0x00290733] file[0x00290737]
+chip[4] file[0x0029076F] file[0x00290773]
+chip[5] file[0x00290770] file[0x00290774]
+
+monster char[0]:
+	name ""
+	pos (50880, 0, 122190)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (58590, 0, 142390)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[216]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (60040, -3000, 160180)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[215]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (86370, 1500, 142850)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (53710, 250, 137720)
+	radius 800mm
+	bubble_pos (53710, 2450, 137720)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-43000, null, 29000) file[0x0023005F]
+	char[8].36 = 239
+	char[11].36 = 239
+	Return
+
+fn[2]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}定期船起降坪
+		≡　前往洛连特市
+		≡　前往蔡斯市
+		≡　前往卡尔瓦德共和国{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}※请勿携带易燃物和危险品
+		　　　　　利贝尔飞艇公社{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

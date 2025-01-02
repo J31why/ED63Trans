@@ -1,0 +1,822 @@
+calmare fc scena
+scena:
+	name "Gaiden2" "U7003.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	if flag[11296]:
+		field_party[0].5 = char[18].4
+		char[18].5 = char[18].4
+		TextStart char[18]
+		CharFlagsUnset char[18] 0x0010
+		CharTurnToChar char[18] field_party[0] 0deg/s
+		char[18].4 = (char[18].4 + 360) % 360
+		char[18].4 = char[18].4 + 360 - char[18].5
+		char[18].5 = char[18].4 / 180
+		if char[18].4 <= 45 | char[18].4 >= 315 && char[18].4 <= 405 | char[18].4 >= 675:
+		elif char[18].5 < 1:
+			char[18].8 = 2
+		elif char[18].5 > 2:
+			char[18].8 = 1
+		else:
+			char[18].8 = char[18].5
+		char[18].4 = field_party[0].5
+		field_party[0].5 = 0
+		char[18].5 = 0
+		CharFlagsSet char[18] 0x0010
+		if !flag[13]:
+			TextTalk char[18] {
+				#83798v#074F只要离开这个庭院，
+				就无法返回了。{wait}
+			} {
+				#83799v#072F大概也没有能够
+				补充装备的地方吧。{wait}
+			} {
+				#83800v#070F趁现在做好万全的准备吧。{wait}
+			}
+			TextWait
+			if !flag[11297]:
+				TextTalk char[18] {
+					#83804v#073F啊啊，还有……{wait}
+				} {
+					#83805v#070F刚才始祖大人
+					似乎发现了新的领域。{wait}
+				} {
+					#83806v最好去问问她
+					详细情况。{wait}
+				}
+				TextWait
+			FlagSet flag[13]
+		elif !flag[11297]:
+			TextTalk char[18] {
+				#83807v#074F装备、道具的调配
+				以及导力盘的调整……
+				全都来自『庭院』的力量。{wait}
+			} {
+				#83808v#070F只要离开这里，
+				大概就无法享受这些恩惠了。{wait}
+			} {
+				#83809v趁现在做好万全的准备吧。{wait}
+			} {
+				#83810v#573F还有……刚才始祖大人
+				似乎发现了新的领域。{wait}
+			} {
+				#83811v#070F最好去问问她
+				详细的情况。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[18] {
+				#83801v#074F装备、道具的调配
+				以及导力盘的调整……
+				全都来自『庭院』的力量。{wait}
+			} {
+				#83802v#070F只要离开这里，
+				大概就无法享受这些恩惠了。{wait}
+			} {
+				#83803v趁现在做好万全的准备吧。{wait}
+			}
+			TextWait
+		CharSetChipPattern char[18] 0
+		TextEnd char[18]
+	elif flag[11051]:
+		if !flag[13]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[18] {
+				#83755v#074F………………………………{wait}
+			} {
+				#83756v呼，还是弄不清楚怎么回事。{wait}
+			} {
+				#83757v#072F如果一切的元凶都是『影之王』……
+				他到底是怎么打算的？{wait}
+			} {
+				#83758v#074F能够满足人们愿望的世界……
+				在这以上还能希望什么呢……{wait}
+			}
+			TextWait
+			FlagSet flag[13]
+		else:
+			TextStart self
+			TextTalk char[18] {
+				#83759v#075F呼，费脑子的事
+				本来就不是我的任务。{wait}
+			} {
+				#83760v#070F如果有雾香在的话，
+				一定会得到不少帮助的……{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#76825v#1001F啊哈哈，没错……{wait}
+				}
+				TextWait
+			elif PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#78040v#1501F的确是这样呢……{wait}
+				}
+				TextWait
+			elif PartyPosition name[2] != -1:
+				TextTalk name[2] {
+					#79078v#1536F呵呵，说的没错。{wait}
+				}
+				TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11040]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[13]:
+			if !flag[11049]:
+				TextTalk char[18] {
+					#83722v#074F卡西乌斯大人的战斗能力
+					远远超过一般人……{wait}
+				} {
+					#83723v#072F但是，他强大的真正理由是
+					能够看穿事物本质。{wait}
+				} {
+					#83724v所以不管是作为游击士
+					还是军队的司令官，
+					都能够完全发挥其所有的力量。{wait}
+				} {
+					#83725v#573F简直是将『理』
+					臻至完美的人。{wait}
+				}
+				TextWait
+				if PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#78193v#1513F没错呢……{wait}
+					}
+					TextWait
+				elif PartyPosition name[12] != -1:
+					TextTalk name[12] {
+						#85668v#278F原来如此……可以说是不同次元的吗。{wait}
+					}
+					TextWait
+			elif flag[9799]:
+				TextTalk char[18] {
+					#83728v#074F瓦鲁特那家伙……
+					现在到底在哪里干什么呢。{wait}
+				} {
+					#83729v#070F不过似乎他也在
+					打听雾香的消息……{wait}
+				} {
+					#83730v#573F唉，如果有想说的话，
+					自己直接说不就行了。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[18] {
+					#83731v#572F是吗，瓦鲁特那家伙……{wait}
+				} {
+					#83732v#075F呼，
+					他现在到底在哪里干什么呢。{wait}
+				}
+				TextWait
+			FlagSet flag[13]
+		elif !flag[11049]:
+			TextTalk char[18] {
+				#83726v#074F要是我想到达那种境地，
+				需要花费多少功夫呢……{wait}
+			} {
+				#83727v#070F哎呀，还得进一步努力呢。{wait}
+			}
+			TextWait
+		elif PartyPosition name[1] != -1:
+			TextTalk char[18] {
+				#83733v#074F嗯，接下来就是
+				第四名『守护者』了吗……{wait}
+			} {
+				#83734v#070F……约修亚。
+				鼓足干劲冲吧。{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#78041v#1500F…………是！{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[18] {
+				#83735v#070F嗯，接下来就是
+				第四名『守护者』了吗……{wait}
+			} {
+				#83736v#573F呼，都来到这里了，
+				就算再说什么
+				也是毫无用处的。{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[11029]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[13]:
+			if flag[9793]:
+				TextTalk char[18] {
+					#83688v#075F呼，唉…………{wait}
+				} {
+					#83689v我总有种回去之后一定会被
+					雾香那家伙大骂一顿的预感……
+					……是太过敏感了吗。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[18] {
+					#83692v#573F……你们和雾香战斗过了吗。{wait}
+				} {
+					#83693v#070F呵呵，她很强吧。{wait}
+				} {
+					#83694v一旦她拿起擅长的武器，
+					就比瓦鲁特更难对付。{wait}
+				} {
+					#83695v#075F就算不继承泰斗流的话，
+					估计也很难嫁得出去……{wait}
+				}
+				TextWait
+			FlagSet flag[13]
+		elif flag[9793]:
+			TextTalk char[18] {
+				#83690v#074F雾香这个人
+				也是不肯认输的……{wait}
+			} {
+				#83691v#075F以后一定会伺机报复。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[18] {
+				#83696v#070F本来以为她这么长时间
+				都在专心担当协会的接待，{wait}
+			} {
+				#83697v战斗力应该会有所减弱……{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89514v#1068F……唉，还真是不可小看啊。{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10501]:
+		TextStart self
+		if !flag[13]:
+			TextTalk char[18] {
+				#83562v#074F在帝国和共和国
+				都存在协会的设施。{wait}
+			} {
+				#83563v不过，竟然连卢·洛克尔的
+				训练场都再现得一模一样……{wait}
+			} {
+				#83564v#072F也许是故意选中那些
+				与我们关系密切的场所吧。{wait}
+			}
+			TextWait
+			FlagSet flag[13]
+		else:
+			TextTalk char[18] {
+				#83565v#572F列曼自治州
+				距离利贝尔相当遥远……{wait}
+			} {
+				#83566v#074F嗯，也许是故意选中那些
+				与我们关系密切的场所吧。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10496]:
+		TextStart self
+		if !flag[9825]:
+			CharTurnToChar self name[1] 0deg/s
+			TextTalk char[18] {
+				#83540v#070F说起来，约修亚……
+				我们好像很久都没见了呢。{wait}
+			} {
+				#83541v你好像去过克洛斯贝尔，
+				不想来卡尔瓦德参观一下吗？{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#77645v#1513F嗯，有机会的话
+				我一定会去的。{wait}
+			} {
+				#77646v#1503F不过，
+				现在我正和艾丝蒂尔在找人……{wait}
+			}
+			TextWait
+			TextTalk char[18] {
+				#83542v#074F唔……好像发生了很多事呢。{wait}
+			}
+			TextWait
+			Emote name[1] 0mm 2000mm 38 38 250ms 1
+			Sleep 1000ms
+			TextTalk name[1] {
+				#77647v#1504F说起来……
+				雪拉姐姐的信里面提到过，
+				雾香小姐已经回国去了吧。{wait}
+			} {
+				#77648v#1500F好像是受到了共和国政府的征召，
+				辞去了协会的工作。{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89073v#1079F雾香小姐，
+				是蔡斯支部的那位吗……{wait}
+			} {
+				#89074v#1078F哎……有这回事啊。{wait}
+			}
+			TextWait
+			TextTalk char[18] {
+				#83543v#070F是啊……
+				她好像正忙于新的工作呢。{wait}
+			} {
+				#83544v#075F……以她的性格，
+				无论如何都不会偷懒的。{wait}
+			} {
+				#83545v她那么精明强干，
+				肯定已经让同事和部下佩服得五体投地了。{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#77649v#1509F哈哈……
+				真像雾香小姐的作风啊。{wait}
+			}
+			TextWait
+			FlagSet flag[9825]
+		elif !flag[13]:
+			TextTalk char[18] {
+				#83546v#074F可是，没想到
+				这样的事也能发生于现实之中……{wait}
+			} {
+				#83547v#070F不过，
+				多亏了你们的努力，
+				已经弄清了一些事情。{wait}
+			} {
+				#83548v现在也只有以这些为线索
+				继续前进了。{wait}
+			}
+			TextWait
+			FlagSet flag[13]
+		else:
+			TextTalk char[18] {
+				#83549v#070F多亏了你们的努力，
+				已经弄清了一些事情。{wait}
+			} {
+				#83550v现在也只有以这些为线索
+				继续前进了。{wait}
+			}
+			TextWait
+		TextEnd self
+	Return
+
+fn[3]:
+	if flag[11051]:
+		TextStart self
+		if !flag[10]:
+			TextTalk char[23] {
+				#86942v#119F呵呵……
+				我也不能输给大家。{wait}
+			} {
+				#86943v#110F对现在的我来说，
+				有非完成不可的事情……{wait}
+			} {
+				#86944v差不多该和『影之王』
+				一决胜负了。{wait}
+			}
+			TextWait
+			FlagSet flag[10]
+		else:
+			TextTalk char[23] {
+				#86945v#110F经过与『黑骑士』的战斗后……
+				所有的棋子应该都已经用完了。{wait}
+			} {
+				#86946v#115F差不多该和『影之王』
+				一决胜负了。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11040]:
+		if !flag[10]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[23] {
+				#86918v#115F………………是你们啊。{wait}
+			}
+			TextWait
+			CharTurnToChar self field_party[0] 400deg/s
+			Sleep 300ms
+			TextTalk char[23] {
+				#86919v#110F我必须得
+				好好感谢你们才行。{wait}
+			} {
+				#86920v多亏了你们，
+				我才能够越过一道巨大的障碍。{wait}
+			} {
+				#86921v#111F……那么，继续前进吧。{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[10]
+			TextEnd self
+		else:
+			TextStart self
+			TextTalk char[23] {
+				#86922v#115F……自从那次事件以来，
+				我一直踌躇不定。{wait}
+			} {
+				#86923v#116F也许是因为
+				我对准将的敬佩之心
+				导致我无法找到属于自己的答案。{wait}
+			} {
+				#86924v#110F不过，障碍已经越过了……
+				大家一起继续前进吧。{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[11016]:
+		TextStart self
+		if !flag[10]:
+			if flag[9792]:
+				TextTalk char[23] {
+					#86786v#115F菲利普大人退役
+					应该是２０多年前的事了，
+					但现在他的功夫还那么厉害……{wait}
+				} {
+					#86787v#111F呵呵，很久没有如此振奋了。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[23] {
+					#86788v#110F在情报部的时候，
+					我也调查过菲利普大人的经历。{wait}
+				} {
+					#86789v拥有五种神技的『剑狐』……{wait}
+				} {
+					#86790v#119F他大展身手的时候，
+					已经是２０多年前了。{wait}
+				}
+				TextWait
+			FlagSet flag[10]
+		else:
+			TextTalk char[23] {
+				#86791v#115F菲利普大人很久之前
+				为了专心照顾杜南公爵阁下
+				而选择了退役……{wait}
+			} {
+				#86792v不过现在的身手依然不减当年呢。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11008]:
+		TextStart self
+		if !flag[10]:
+			TextTalk char[23] {
+				#86768v#115F凯文神父……{wait}
+			} {
+				#86769v你的身体已经没事了吧？{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89380v#1060F嗯，没什么问题了。{wait}
+			} {
+				#89381v#1840F让你们这么担心，
+				真是不好意思。{wait}
+			}
+			TextWait
+			TextTalk char[23] {
+				#86770v#111F不，这样就好了。{wait}
+			} {
+				#86771v#110F因为你倒下的时候
+				我不在现场，
+				所以只是有点在意而已。{wait}
+			}
+			TextWait
+			FlagSet flag[10]
+		else:
+			TextTalk char[23] {
+				#86772v#115F呼，不过，
+				赛雷斯托大人也不知道那些蒙面人
+				是如何进到这里来的吗……{wait}
+			} {
+				#86773v现在就算我们怎么推测，
+				也不可能明白事实的。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		if !flag[9835]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[23] {
+				#86748v#115F（…………没错，
+				  我还远没有成熟。）{wait}
+			} {
+				#86749v#116F（总是抱着
+				  这样的心态
+				  是不行的……）{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#76524v#1015F上校，你怎么了？{wait}
+			}
+			TextWait
+			Emote self 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			CharTurnToChar self name[0] 400deg/s
+			Sleep 300ms
+			if PartyPosition name[15] != -1:
+				TextTalk char[23] {
+					#86750v#110F……没什么，稍微想点事情。{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90845v#260F呵呵，
+					你还在意着刚才的话吧？{wait}
+				}
+				TextWait
+				TextTalk char[23] {
+					#86751v#111F哈哈，
+					玲的洞察力还真是惊人。{wait}
+				} {
+					#86752v#110F……怎么样，
+					不想来我们的公司吗？{wait}
+				} {
+					#86753v像你这样能看透人心思的人才
+					我们十分欢迎。{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90846v#267F唔，这么说的话……{wait}
+				} {
+					#90847v#260F如果你愿意和玲再玩一次的话，
+					我就考虑考虑。{wait}
+				} {
+					#90848v#261F在格兰赛尔城的那次
+					最后没分出胜负呢。{wait}
+				}
+				TextWait
+				if PartyPosition name[6] != -1:
+					Emote name[6] 0mm 2000mm 40 43 100ms 3
+					Sleep 1000ms
+					TextTalk name[6] {
+						#82827v#562F玲……{wait}
+					}
+					TextWait
+				if PartyPosition name[4] != -1:
+					TextTalk name[4] {
+						#81295v#1165F（说、说起来
+						  在结社袭击王都的时候，
+						  他们两个曾经对决过呢……）{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76525v#1016F（啊……嗯，好像是……）{wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#77899v#1514F（对了，执行者袭击王都的时候，
+						  他们两个……）{wait}
+					}
+					TextWait
+				else:
+					TextTalk name[0] {
+						#76526v#1016F（说、说起来
+						  这两个人在结社袭击王都的时候
+						  曾经交过一次手呢……）{wait}
+					}
+					TextWait
+				TextTalk char[23] {
+					#86754v#111F哈、哈哈哈……
+					拜托你手下留情。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[23] {
+					#86757v#111F……没什么，稍微想点事情。{wait}
+				} {
+					#86758v#110F执行者Ｎｏ．ⅩⅤ，
+					『歼灭天使』玲……{wait}
+				} {
+					#86759v虽然以前也听说过传言，
+					不过洞察力还真非同寻常……{wait}
+				} {
+					#86760v#115F呼，
+					真希望她能加入我们公司啊。{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76527v#1016F啊哈哈…………{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9835]
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[23] {
+				#86755v#115F（…………没错，
+				  我还远没有成熟。）{wait}
+			} {
+				#86756v#116F（这样的心，
+				  这样的心态
+				  是不行的……）{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif !flag[9834]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		TextTalk char[23] {
+			#86712v#115F……呼………………
+			的确到处都是奇妙的东西呢。{wait}
+		} {
+			#86713v……果然是异空间吗………{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76437v#1011F那个，
+			上校你不相信吗……？{wait}
+		}
+		TextWait
+		Emote self 0mm 2000mm 38 38 250ms 1
+		Sleep 1000ms
+		CharTurnToChar self name[0] 400deg/s
+		TextTalk char[23] {
+			#86714v#110F艾丝蒂尔……{wait}
+		} {
+			#86715v#119F不好意思，
+			我还一直没有摸着头脑。{wait}
+		} {
+			#86716v要想找到有效的攻略法，
+			还需要一些时间。{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76438v#1016F攻、攻略法……{wait}
+		} {
+			#76439v不愧是上校，还能这么冷静。{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#86717v#495F哎呀，
+			都说我已经不是上校了。{wait}
+		} {
+			#86718v……我已经从军队中退伍了。{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76440v#1015F啊，说起来……{wait}
+		} {
+			#76441v好像是在经营一家
+			民间的调查公司对吧。{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#86719v#111F嗯，
+			虽然还算不上什么大公司……{wait}
+		} {
+			#86720v#110F现在只是在卢安
+			拥有一家小型的事务所。{wait}
+		} {
+			#86721v一切事务都由我和凯诺娜
+			两个人来处理。{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76442v#1004F咦…………？
+			那个凯诺娜上尉吗！？{wait}
+		} {
+			#76443v#1007F唔，
+			真是想象不出来……！{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#86722v#111F哈哈哈……
+			也许正如你所说的那样。{wait}
+		} {
+			#86723v#119F……不过，
+			她也已经有所改变了。{wait}
+		} {
+			#86724v现在总算能
+			无拘无束地悠闲一下了。{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76444v#1008F是吗……{wait}
+		} {
+			#76445v#1012F嗯，我觉得上校
+			给人的感觉也和以前不一样了。{wait}
+		} {
+			#76446v#1001F也许的确比较适合
+			开这样的民间公司吧。{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#86725v#111F呵呵，如果是这样就好了……{wait}
+		}
+		TextWait
+		Sleep 300ms
+		TextTalk char[23] {
+			#86726v#110F……不过这样一来
+			我们就更不能一直待在这里。{wait}
+		} {
+			#86727v要早点回去才行。{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76447v#1006F…………嗯。{wait}
+		} {
+			#76448v#1018F那就请多关照了，上校。{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#86728v#495F（都说不是上校了……）{wait}
+		}
+		TextWait
+		CharFlagsUnset self 0x0010
+		FlagSet flag[9834]
+		TextEnd self
+	else:
+		TextStart self
+		if !flag[10]:
+			FlagSet flag[10]
+			TextTalk char[23] {
+				#86729v#115F『影之国』……{wait}
+			} {
+				#86730v因为这种地方存在特定的『规则』，
+				所以一定是基于某种目的
+				而人为创造出来的。{wait}
+			} {
+				#86731v#110F如果能知道那个目的，
+				也许就能找到有效的攻略法……{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[23] {
+				#87251v#115F『影之国』的『规则』……{wait}
+			} {
+				#87252v如果能弄清楚这一点，
+				也许就能找到有效的攻略法……{wait}
+			}
+			TextWait
+		TextEnd self
+	Return
