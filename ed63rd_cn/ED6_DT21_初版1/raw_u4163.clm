@@ -1,0 +1,955 @@
+calmare tc scena
+scena:
+	name "gaiden2" "U4163.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00030._ch" "npl/ch00030p._cp"
+chip[1] "npl2/ch03570._ch" "npl2/ch03570p._cp"
+chip[2] "npl2/ch03713._ch" "npl2/ch03713p._cp"
+chip[3] "apl2/ch20805._ch" "apl2/ch20805p._cp"
+chip[4] "npl/ch00033._ch" "npl/ch00033p._cp"
+
+npc char[0]:
+	name "达维尔大使"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "奥利维特皇子"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "穆拉少校"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "雷克特书记官"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (4970, 0, 76130)
+	radius 1000mm
+	bubble_pos (4970, 1000, 76130)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[1]:
+	pos (54740, 0, 65190)
+	radius 1000mm
+	bubble_pos (54740, 1000, 65190)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 6:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			system[1] = 0
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	if !flag[10174]:
+		ObjFrame object[23] 0
+	else:
+		ObjFrame object[23] 60
+	if !flag[10175]:
+		ObjFrame object[24] 0
+	else:
+		ObjFrame object[24] 60
+	if system[66] == 6:
+		ObjFlagsSet object[23] 0x0004
+		ObjFlagsSet object[24] 0x0004
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sleep 2000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W自从利贝尔方舟崩坏已经一个月……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W当格兰赛尔城举办的庆祝会过后，
+		以艾丝蒂尔为首的伙伴们
+		纷纷离开王都的时候……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W帝国大使馆的办公室内，
+		出现了奥利维尔，也就是
+		奥利维特·莱泽·亚诺尔的身影。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	CamLookPos (1000, 0, 75500) 0ms
+	CamSetDistance 0 5950 -10000 0ms
+	CamZoom 3140 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharSetPos field_party[0] (-4460, 0, 78260) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsSet char[1] 0x0004
+	CharSetPos char[1] (-4600, 200, 71920) 180deg
+	CharSetChipBase char[1] chip[4]
+	CharSetChipPattern char[1] 0
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-4460, 200, 68060) 0deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-5440, 0, 73080) 180deg
+	Sleep 1000ms
+	Sleep 1000ms
+	TextSetPos 250 250 -1 -1
+	TextSetName "男子的声音"
+	TextMessage null {
+		#97326v没、没想到你是……{wait}
+	} {
+		#97327v不、不对！
+		您是奥利维特皇子殿下……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	BgmPlay bgm[84] 0
+	Sleep 500ms
+	Fork char[4] fork[0]:
+		CamLookPos (-2500, 0, 72000) 4000ms
+	Fork char[4] fork[1]:
+		CamSetDistance 0 4950 -10000 4000ms
+	Fork char[4] fork[2]:
+		CamRotate 45000mdeg 4000ms
+	Fork char[4] fork[3]:
+		CamZoom 3128 4000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[4] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#80193v#030F#5P呵呵，你不记得身为庶出的
+		我的相貌也是正常的。{wait}
+	} {
+		#80194v我几乎不怎么在宫廷里露面，
+		在社交界内也是无人知晓……{wait}
+	} {
+		#80195v#031F是个至少对自己的发迹
+		完全派不上用场的人吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97328v#1102F#12P哈、哈哈……请您别开玩笑……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80196v#035F#5P哈哈，不必这么紧张。{wait}
+	} {
+		#80197v#030F话说回来，
+		我还要好好感谢大使您才行。{wait}
+	} {
+		#80198v#031F『稍微也表现出点帝国人的样子』、
+		『不要沉溺于玩乐赶快回国工作去吧』之类的，
+		您给了我各种各样的忠告呢。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97329v#1103F#12P#3S哇……！{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	Sleep 300ms
+	Emote char[0] 0mm 1700mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk char[0] {
+		#97330v#1101F#12P那、那是因为……！{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85861v#272F#5P……皇子，适可而止吧。{wait}
+	} {
+		#85862v#276F不管怎么说，
+		大使也只是按照常理来处理而已。{wait}
+	} {
+		#85863v反过来说，隐藏身份的我们
+		就算被责怪也是理所应当的。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97331v#1100F#12P穆、穆拉君。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80199v#031F#5P呵呵，没错……
+		那我就不再追究了。{wait}
+	} {
+		#80200v#030F其实这一个多月，
+		你的工作的确很出色。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97332v#1101F#12P咦……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80201v#035F#5P与国内保持紧密联络，
+		保障侨居在此的帝国人的安全，
+		以及协助国际定期船重新展开运营。{wait}
+	} {
+		#80202v此外对其它方面的各类案件
+		也进行了妥善的处理。{wait}
+	} {
+		#80203v#030F真是辛苦你了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97333v#1102F#12P实、实在不敢当……{wait}
+	} {
+		#97334v#1100F殿下您才是辛苦了，
+		竟然去担任了那样危险的视察工作。{wait}
+	} {
+		#97335v看来这次的事件在国内
+		也引起了相当大的骚动。{wait}
+	} {
+		#97336v在向他们传达危机已平息的消息后，
+		大家似乎都已经放下心来……{wait}
+	} {
+		#97337v#1102F这些也全都是拜殿下
+		英明决断所赐啊。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80204v#035F#5P哈哈……
+		你就别给我戴高帽子了。{wait}
+	} {
+		#80205v#030F我不过是在自己力所能及的范围内
+		做了些理所应当的事情而已。{wait}
+	} {
+		#80206v而且还不仅仅是靠自己的力量，
+		而是利用了周边的状况。{wait}
+	} {
+		#80207v#031F这么来看的话，
+		朴实刚健的帝国人气质
+		还是与我有天壤之别吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97338v#1102F#12P哈哈……
+		虽然我也明白这么说有些失礼，
+		但实际的确是如此呢。{wait}
+	} {
+		#97339v#1100F不过关于这次的事件，
+		正是殿下灵活的想法
+		将结果引导到了好的方向。{wait}
+	} {
+		#97340v今后的帝国……
+		恐怕正是需要
+		像殿下这样的人啊。{wait}
+	} {
+		#97341v#1102F……采用与宰相大人
+		不同的处事方法……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85864v#276F#5P大使……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80208v#033F#5P哦，
+		我还一直以为你肯定是
+		『铁血宰相』大人的支持者呢……{wait}
+	} {
+		#80209v#030F果然你是因为出身贵族，
+		所以才反对宰相大人的改革路线吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97342v#1102F#12P哈哈，虽说是贵族，
+		也只不过是不值一提的男爵而已。{wait}
+	} {
+		#97343v其实我基本上还是支持
+		奥斯本大人的改革路线的。{wait}
+	} {
+		#97344v#1100F只不过……
+		看来利贝尔这个国家
+		让我中毒太深了。{wait}
+	} {
+		#97345v有时候，我也会对
+		宰相大人的铁腕政策感到恐惧。{wait}
+	} {
+		#97346v#1102F到底……
+		他会将埃雷波尼亚这旧帝国
+		带向何方呢。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80210v#032F#5P……原来如此。{wait}
+	} {
+		#80211v#035F…………………………………{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97347v#1100F#12P……殿下？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80212v#035F#5P没什么，最后能与你
+		进行这么有意义的谈话真是太好了。{wait}
+	} {
+		#80213v#030F如果今后你也能为各国的和平作出贡献
+		那是再好不过的事情。{wait}
+	} {
+		#80214v#031F我还希望你能尽量和爱尔莎大使合作。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97348v#1102F#12P哈哈……
+		这真是给我出了一道难题啊。{wait}
+	} {
+		#97349v#1100F的确，自从签订了停战条约以来，
+		克洛斯贝尔问题还是首次出现
+		能够取得具体进展的曙光。{wait}
+	} {
+		#97350v既然倡导者是利贝尔，
+		那么我的任务就会比预想中还重要……{wait}
+	} {
+		#97351v#1102F您就是这个意思吧？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80215v#031F#5P呵呵，
+		看来我白担心一场了。{wait}
+	} {
+		#80216v#030F这样一来我回帝都时
+		就可以毫无牵挂了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97352v#1102F#12P请放心交给我吧。{wait}
+	} {
+		#97353v#1100F我也很期待今后
+		殿下能够更为活跃呢。{wait}
+	}
+	TextWait
+	Fork char[4] fork[0]:
+		CamZoom 2940 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1500ms
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-41290, 0, 15350) 0ms
+	CamSetDistance 0 4350 -10000 0ms
+	CamZoom 5360 0ms
+	CamRotate 35000mdeg 0ms
+	CamPers 164 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharSetPos field_party[0] (-64260, 0, 6540) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-52700, 0, 13800) 0deg
+	CharSetChipBase char[1] chip[0]
+	CharSetChipPattern char[1] 0
+	CharFlagsSet char[0] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-50940, 0, 13800) 270deg
+	Fork char[4] fork[0]:
+		CamLookPos (-50290, 0, 15350) 5000ms
+	Fork char[4] fork[1]:
+		CamZoom 5160 5000ms
+	Fork char[4] fork[2]:
+		CamRotate 45000mdeg 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[4] fork[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#80217v#035F#6P呵呵……
+		利贝尔这地方真是可怕啊。{wait}
+	} {
+		#80218v没想到竟然能从帝国贵族口中
+		听到这样的话呢。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85865v#277F#11P是啊，
+		我还以为他是个更加顽固的人呢。{wait}
+	} {
+		#85866v#278F这个国家的空气
+		的确拥有能使人改变的力量呢。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80219v#030F#6P呵呵，
+		这么说来，你展现出
+		温柔表情的场合也变多了呢。{wait}
+	} {
+		#80220v#031F看起来不也是
+		受到了相当的影响吗？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85867v#278F#11P哼……
+		虽然这并不是我本来的意愿。{wait}
+	} {
+		#85868v#270F话说回来，
+		你才是应当多学习一下
+		这个国家的品位和规范啊。{wait}
+	} {
+		#85869v#274F真是的，
+		你就只有『灵活』这一点在无限延伸……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80221v#035F#6P呵呵，那个可以说是
+		我唯一的武器啊。{wait}
+	} {
+		#80222v#032F哪怕只有一点点可能，
+		也要与那个『铁血宰相』对抗的武器。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85870v#276F#11P……………………………………{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] char[2] 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#80223v#032F#6P……计划有没有生变？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85871v#270F#11P到现在为止都很顺利。{wait}
+	} {
+		#85872v#272F宰相阁下在三天前
+		出发到东部各州进行视察去了。{wait}
+	} {
+		#85873v利用这个时间差，
+		你明天乘坐『埃尔赛尤号』回归帝都。{wait}
+	} {
+		#85874v各方面的铺垫也都准备好了。{wait}
+	} {
+		#85875v#277F你这次的凯旋
+		一定会造成相当轰动的。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80224v#035F#6P阻碍因素呢？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85876v#272F#11P情报局的第四科
+		似乎有一些活动的样子。{wait}
+	} {
+		#85877v#276F不过因为有『埃尔赛尤号』的出动，
+		他们也许会慎重行事……{wait}
+	} {
+		#85878v#277F而且更有可能的是，
+		说不定这次回国在他们眼中
+		只是放荡皇子不值一提的表演而已。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80225v#034F#6P实际上也的确如此～{wait}
+	} {
+		#80226v#030F不过，就算是表演，
+		也是别无他法，只能就此开始了。{wait}
+	} {
+		#80227v#031F那何不让我尽情
+		华丽地舞蹈一番呢。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85879v#278F#11P……是啊。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (-45500, -500, 10100) 270deg
+	CharColor char[3] 0x00FFFFFF 0ms
+	SoundPlay sound[113] 0 0 100
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[2] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[4] fork[0]:
+		CamLookPos (-47780, 0, 13150) 1500ms
+	Fork char[4] fork[1]:
+		CamSetDistance 0 3750 -10000 1500ms
+	Fork char[4] fork[2]:
+		CamRotate 58000mdeg 1500ms
+	ForkLoop char[1] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	Sleep 50ms
+	ForkLoop char[2] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	ForkWait char[4] fork[0]
+	Sleep 500ms
+	TextTalkNamed char[3] "青年的声音" {
+		#97555v#5P——皇子殿下。
+		抱歉在深夜前来打扰。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青年的声音" {
+		#97556v#5P因为收到了帝都方面发来的联络，
+		现在可以向您报告吗？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80228v#030F#6P是吗……
+		知道了，请进来吧。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青年的声音" {
+		#97557v#5P……失礼了。{wait}
+	}
+	TextWait
+	_59
+	ObjFlagsUnset object[4] 0x0010
+	ObjPlay object[4] 60
+	ObjWait object[4]
+	Fork char[4] fork[0]:
+		CamLookPos (-48660, 0, 14480) 3500ms
+	Fork char[4] fork[2]:
+		CamRotate 62000mdeg 3500ms
+	CharSetPos char[3] (-44500, 0, 10000) 270deg
+	Fork char[3] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-47000, 0, 10000) 2000mm/s 0
+	Sleep 1000ms
+	ObjFlagsUnset object[4] 0x0800
+	ObjFrame object[4] 60
+	SoundPlay sound[7] 0 0 100
+	ObjPlay object[4] 0
+	ForkWait char[3] fork[1]
+	ForkLoop char[3] fork[2]:
+		CharTurnToChar self char[1] 0deg/s
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-49840, 0, 12400) 2000mm/s 0
+	ForkWait char[3] fork[1]
+	ForkQuit char[3] fork[2]
+	ForkWait char[4] fork[2]
+	TextTalk char[1] {
+		#80229v#031F#6P哎呀，雷克特。{wait}
+	} {
+		#80230v#030F今天你都没出现，
+		我还以为发生什么事了呢。{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97558v#1885F#11P那是因为从早上开始
+		我就一直在进行各种联络业务。{wait}
+	} {
+		#97559v#1880F明天您就要出发了，
+		如果我再不来打声招呼的话
+		就太不懂礼貌了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80231v#035F#6P呵呵，不用介意。{wait}
+	} {
+		#80232v#037F不过……干脆这样吧。
+		难得你来一次，
+		不如我们三人就这样亲密到早上……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85880v#270F#5P那么书记官。
+		帝都的联络是什么内容呢？{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97560v#1884F#11P那边已经接到了
+		皇子殿下传达的命令。{wait}
+	} {
+		#97561v#1887F不过，从王都到帝都
+		只需要不到半天时间，
+		大大出乎了他们的意料……{wait}
+	} {
+		#97562v现在他们似乎在慌忙准备着
+		明天的庆典。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85881v#278F#5P原来如此，不愧是『埃尔赛尤号』，
+		速度的确让人难以想象。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80233v#034F#6P呜呜……{wait}
+	} {
+		#80234v#030F唉，那个暂且不说，
+		舞台至少是已经准备好了。{wait}
+	} {
+		#80235v#031F呵呵，
+		那就为明天准备一件
+		让大家大吃一惊的衣服吧。{wait}
+	} {
+		#80236v#037F比如一块白色的兜档布，
+		再加上闪闪发光的外套怎么样。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85882v#274F#5P……………………………{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97563v#1881F#11P哈哈，
+		这还真是颇具冲击力啊。{wait}
+	} {
+		#97564v如果我能够同行的话，
+		一定得亲眼参观一下才行呢。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85883v#276F#5P书记官……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80237v#031F#6P呵，你这么年轻，
+		却大有前途呢。{wait}
+	} {
+		#80238v#030F怎么样，雷克特。
+		和我一起乘坐
+		『埃尔赛尤号』回帝都怎么样？{wait}
+	} {
+		#80239v你在王国的工作
+		也差不多都完成了吧？{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97565v#1885F#11P哈哈……
+		虽然我也很向往『埃尔赛尤号』，
+		不过下一件工作还在等着我呢。{wait}
+	} {
+		#97566v#1887F您的美意
+		我只有心领了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80240v#035F#6P哎呀，那还真是遗憾。{wait}
+	} {
+		#80241v#030F那你就努力去做好
+		『下一件工作』吧。{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97567v#1885F#11P谢谢。
+		那我这就告辞了……{wait}
+	}
+	TextWait
+	Sleep 150ms
+	CharTurnTo char[3] 90deg 400deg/s
+	Sleep 300ms
+	Fork char[4] fork[0]:
+		CamLookPos (-47780, 0, 13150) 3000ms
+	Fork char[4] fork[2]:
+		CamRotate 58000mdeg 3000ms
+	Fork char[3] fork[1]:
+		CharWalkToPos2 self (-47000, 0, 10000) 2000mm/s 0
+	ForkWait char[3] fork[1]
+	CharTurnTo char[3] 90deg 400deg/s
+	Sleep 500ms
+	ObjFlagsSet object[4] 0x0800
+	ObjFrame object[4] 0
+	ObjPlay object[4] 60
+	ObjWait object[4]
+	Sleep 500ms
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-45500, 0, 10000) 2000mm/s 0
+	Fork char[3] fork[2]:
+		CharColor self 0x00FFFFFF 1000ms
+	ForkWait char[3] fork[1]
+	Sleep 300ms
+	ObjFlagsUnset object[4] 0x0800
+	ObjFrame object[4] 60
+	SoundPlay sound[7] 0 0 100
+	ObjPlay object[4] 0
+	Sleep 1000ms
+	ForkQuit char[1] fork[2]
+	ForkQuit char[2] fork[2]
+	CharTurnTo char[2] 135deg 0deg/s
+	Fork char[4] fork[0]:
+		CamLookPos (-50290, 0, 15350) 2000ms
+	Fork char[4] fork[1]:
+		CamSetDistance 0 4350 -10000 2000ms
+	Fork char[4] fork[2]:
+		CamRotate 45000mdeg 2000ms
+	Sleep 1000ms
+	CharTurnToChar char[1] char[2] 400deg/s
+	ForkWait char[4] fork[0]
+	Sleep 500ms
+	CharTurnToChar char[2] char[1] 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#85884v#272F#11P二等书记官，
+		雷克特·亚兰德尔。{wait}
+	} {
+		#85885v#276F……他果然是宰相的手下吗？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80242v#031F#6P八成是这样的。{wait}
+	} {
+		#80243v#030F他徒步通过哈肯大门
+		来到大使馆赴任是在一个月前。{wait}
+	} {
+		#80244v与我们乘坐
+		『埃尔赛尤号』前往浮游都市
+		正好是同一时段。{wait}
+	} {
+		#80245v#035F怎么想这也不应该是偶然。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85886v#272F#11P……是啊。{wait}
+	} {
+		#85887v#276F目前能想到的情况大概也就是
+		他是情报局派来的人而已……{wait}
+	} {
+		#85888v……这样好吗？
+		留着这样的人不管。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80246v#035F#6P那是另外一回事。
+		我也想知道
+		宰相大人的态度。{wait}
+	} {
+		#80247v#030F如果让他通报给宰相大人的话，
+		迟早他们会有所行动的。{wait}
+	} {
+		#80248v#031F在东部各州的视察结束后……
+		大概会在两个星期之后吧。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85889v#278F#11P唔，原来是这么打算的吗。{wait}
+	} {
+		#85890v#277F我知道了，
+		那么我也按照这种情况做准备吧。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80249v#031F#6P嗯，那就拜托你了。{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo char[1] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#80250v#033F#6P哦……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85891v#273F#11P怎么了？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80251v#030F#6P没什么……
+		只是看到月亮出来了而已。{wait}
+	} {
+		#80252v#031F这满月真是漂亮啊。{wait}
+	}
+	TextWait
+	Fork char[4] fork[0]:
+		CamLookPos (-49620, 0, 17860) 3000ms
+	Fork char[4] fork[1]:
+		CamZoom 5060 3000ms
+	Fork char[4] fork[2]:
+		CamRotate 28000mdeg 3000ms
+	FadeOut 1500ms 0x00000000 255
+	FadeWait
+	ForkQuit char[4] fork[255]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "e0811._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[10174]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[23] 60
+		Sleep 500ms
+		if ItemAdd item[1553] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[1553]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10174]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[1553]}{color 0}。
+				不过现有的数量太多，{item item[1553]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[23] 60
+			ObjPlay object[23] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 291 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[10175]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[24] 60
+		Sleep 500ms
+		if ItemAdd item[502] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[502]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10175]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[502]}{color 0}。
+				不过现有的数量太多，{item item[502]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[24] 60
+			ObjPlay object[24] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 292 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

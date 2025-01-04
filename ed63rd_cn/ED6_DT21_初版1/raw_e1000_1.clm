@@ -1,0 +1,1232 @@
+calmare tc scena
+scena:
+	name "Event" "E1000.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 "e1000._sn"
+	scp 1 "e1000_1._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03600._ch" "npl2/ch03600p._cp"
+chip[1] "apl2/ch20305._ch" "apl2/ch20305p._cp"
+
+npc char[0]:
+	name "肯帕雷拉"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	Event fn[0,2]
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,15]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sc_C4Set 2048
+	Sleep 1000ms
+	BgmPlay bgm[33] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS336._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0240v{color 0}导力器（Orbment）――{wait}
+		#0241v　
+		利用七耀石所带有的『导力』
+		引起各种现象的装置――{wait}
+		#0242v　
+		它被发明以来仅过了半个多世纪，
+		却名副其实地改变了世界。{wait}
+	}
+	TextWait
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0243v{color 0}从供暖、照明等日用功能，
+		到支撑国防的战车和大炮等兵器――{wait}
+		#0244v　
+		当今社会，导力器已不可或缺。{wait}
+		#0245v　
+		肩担其普及和发展大任的――{wait}
+		#0246v就是我们『爱普斯泰恩财团』。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0247v{color 0}本财团设立于Ｓ１１５５年――{wait}
+		#0248v　
+		继承前年去世的爱普斯泰恩博士的遗志，
+		由其数名优秀的弟子所成立。{wait}
+		#0249v　
+		本部设在博士的故乡列曼自治州，
+		目前也以此处为据点持续活动。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0250v{color 0}设立当初本财团规模很小，
+		虽然在各地进行导力器普及活动
+		其反应却并不乐观。{wait}
+		#0251v　
+		为了打破这种局面，
+		出现了意求以自己的力量为导力技术播种
+		而离开列曼自治州的研究者们。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0252v{color 0}其中之一是Ｇ·施密特博士――{wait}
+		#0253v作为机械工学的权威,
+		鼎鼎大名的博士，访问各国企业
+		游说导力器的益处。{wait}
+		#0254v　
+		其次是Ｌ·汉密顿博士――{wait}
+		#0255v博士看到了技术上的差距，从一开始
+		就认为『边境更需要导力器』――{wait}
+		#0256v与本已交情深厚的
+		游击士协会一同，
+		组成了以振兴偏远地区技术为目的的派遣团。{wait}
+		#0257v其自身也在各地域往来巡察，
+		打下了普及、启蒙活动的基础。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0258v{color 0}而最后是现在
+		被称为『导力革命之父』的
+		Ａ·拉赛尔博士――{wait}
+		#0259v　
+		博士回到故乡，
+		为提高祖国利贝尔的技术而竭尽全力――{wait}
+		#0260v归国后仅１年
+		就设立了蔡斯技术工房（※后来的中央工房），
+		首次在列曼自治州以外成功制造出导力器。{wait}
+		#0261v　
+		更在三年后，
+		受到来访视察工房的当时的利贝尔国王
+		埃德佳Ⅲ世巨额的资金援助――{wait}
+		#0262v利贝尔王国瞬间被导力器所渗透，
+		展示出他国艳羡不已的繁荣。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0263v{color 0}在王国的成功，
+		使得原本对导力器印象不佳的
+		人们完全改变了认识――{wait}
+		#0264v　
+		此后，各国要求本财团
+		提供技术的呼声不断，
+		财团的经济基础也日益稳固。{wait}
+		#0265v　
+		广泛的呼吁和坚定确实的研究活动――{wait}
+		#0266v正因为先导们的努力，
+		才促成了日后被称为『导力革命』的
+		导力器急速普及运动。{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS337._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 3500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0267v{color 0}本财团的活动有以下３大支柱――{wait}
+		#0268v　
+		　１．导力器的基础性研究{wait}
+		#0269v　２．导力器的普及与启蒙活动{wait}
+		#0270v　３．通过技术对世界和平的寄望{wait}
+		#0271v　
+		　　以下将对各种活动进行介绍。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0235v{color 0}【１．导力器的基础性研究】{wait}
+		#0236v　
+		本财团最为重要的使命，
+		当然是导力器的改良与进一步的发展。{wait}
+		#0272v　
+		虽然导力器的运作原理是不变的，
+		但被称为『基本体系』的内部构造
+		迄今为止进行过多次的大幅改良。{wait}
+		#0273v　
+		所谓基本体系，是指由齿轮和螺丝这种
+		机械部件所组成的结构，
+		随着工学与技术的进步还有很大的改良余地。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0274v{color 0}这种基础研究虽然能获得重大成果，
+		但另一方面研究所需的时间之长也可想而知，
+		因此重视收益性的企业有敬而远之的倾向。{wait}
+		#0275v　
+		本财团率先推进此领域中的研究
+		从公益性的观点来看可说是极其重要的。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0237v{color 0}【２．导力器的普及与启蒙活动】{wait}
+		#0276v　
+		导力器的普及以及在世上传播其正确使用方法
+		也是本财团的重要使命。{wait}
+		#0277v　
+		虽然在先进国家已成为日常的工具，
+		但在边境和山岳地带等尚未都市化的地域
+		导力器至今仍未得到充分普及。{wait}
+		#0278v　
+		本财团为了提高这些地区的生活水平
+		几度组成了包括游击士和技术人员的
+		地域派遣团，不断前往进行技术支援。{wait}
+		#0279v　
+		此外也协助七耀教会的运动，
+		通过在主日学校教程中加入『导力』科目等方式，
+		着力于技术性的知识渗透。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0238v{color 0}【３．通过技术对世界和平的寄望】{wait}
+		#0280v　
+		对世界和平的寄望――{wait}
+		#0281v为了这个崇高的使命，本财团从设立之初开始
+		就与游击士协会保持着密切的关系。{wait}
+		#0282v　
+		该协会作为国际性治安维持组织而设立，
+		是进行从中立的立场调停国际纷争等活动，
+		维持今日世界稳定不可或缺的组织。{wait}
+		#0283v　
+		本财团除提供资金援助以外，
+		也作为世界上唯一的战术导力器产地
+		在装备方面支援着该协会。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0284v{color 0}在其过程中所获得的实战经验，
+		毫无疑问也在战术导力器的改良方面
+		发挥了重大的作用。{wait}
+		#0285v　
+		无论是怎样的机械，
+		在其最终成形的背后
+		都隐藏着漫长艰苦的历程。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0286v{color 0}Ｓ１１９０年――{wait}
+		#0287v　
+		面向导力文明的未来，
+		本财团与蔡斯中央工房共同
+		发表了『导力网络』的构想。{wait}
+		#0288v　
+		这个将大陆全土都以导力通信的网络
+		连成一体的宏大计划，
+		寄托了我们的希望。{wait}
+		#0289v　
+		――那就是对通过对话来实现和平的探索。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0290v{color 0}近年来，导力器与『和平』的关系
+		变得前所未有的复杂。{wait}
+		#0291v　
+		『能够实现无限
+		　能量循环的导力器
+		　才能为世界带来恒久的安定』――{wait}
+		#0292v仿佛故意违背爱普斯泰恩博士的话语一般，
+		导力革命之后世界走上了迷茫的道路。{wait}
+		#0293v　
+		在埃雷波尼亚帝国与利贝尔王国的纷争中，
+		飞艇首次作为导力兵器投入使用。{wait}
+		#0294v　
+		兵器导力化的潮流今后也将继续推进，
+		使得战争的结果更为悲剧化。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0295v{color 0}在这种现实面前，
+		如何才能构筑和平的世界――{wait}
+		#0296v　
+		导力通信将开拓的未来――{wait}
+		#0297v超越国境和人种将人们融为一体的力量，
+		或许才是解决这问题的关键。{wait}
+		#0298v　
+		超越国家的界限让人们相互交流，加深理解，
+		共同构筑没有纷争的世界――{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0239v{color 0}――对未来理想世界的挑战
+		现在才刚刚开始。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	Sleep 1000ms
+	VisHide vis[0] 0
+	_59
+	BgmStop 2000ms
+	BgmWait
+	VisHide vis[255] 0
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	ScAchievement 9 7 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『爱普斯泰恩财团』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[21] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[21] 0x10
+		QuestFlagsSet quest[21] 0x20
+		ItemAdd item[748] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[748]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 7000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}７０００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sc_C4Set 2048
+	Sleep 1500ms
+	BgmPlay bgm[56] 0
+	Sleep 1500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS340._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 2500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0552v{color 0}　　　　　　　　　　　　　　　　　　　
+		　
+		　
+		#80W《关于帝国游击士协会支部袭击事件的报告》{wait}
+		#0553v　
+		　
+		　
+		　
+		　
+		　
+		　
+		　
+		　
+		　
+		　#20W
+		Ｓ１２０２年，发生了埃雷波尼亚帝国各地
+		协会支部相继受到袭击的事件。{wait}
+		#0554v　
+		武装集团实体不明――{wait}
+		#0555v帝国内的协会相关人员陷入了混乱。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0556v{color 0}　　　　　　　　　　　　　　　　　　　
+		很快数量众多的导力通信在帝都空中交错――{wait}
+		#0557v　　　　　　　　　　使得事态严峻程度急速加剧。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[195] 0 0 100
+	Sleep 3000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0588v『昨日凌晨，游击士协会帝都支部
+		　受到高性能炸药攻击而完全破坏――{wait}
+		#0589v　根据第二科的分析，
+		　爆炸物是通过下水道
+		　设置在该设施正下方的可能性很高。』{wait}
+		#0590v『从实行方法、使用的炸药种类看来
+		　推测为专门组织的作战。{wait}
+		#0591v　当前正在咨询对外情报负责人，
+		　确认国内危险人物的位置――』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 20 240 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第三科　寄往：第一科》{wait}
+		#0621v『非法入境的嫌疑人中
+		　发现有人与『猎兵团』有关。{wait}
+		#0622v　已查明是『杰斯塔猎兵团』兵站负责人。{wait}
+		#0623v　潜伏于国内的该猎兵团动静已受到侦察――』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 420 20 -1 -1
+	TextMessage null {
+		{color 4}《帝国游击士协会：致利贝尔王国王都支部。》{wait}
+		#0624v『本日临晨，帝都支部受到了袭击。{wait}
+		#0625v　支部负责人至今联络不上。{wait}
+		#0626v　请求高等级游击士的支援。
+		　至急、至急、至急――』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 420 240 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0592v『帝国游击士协会发出
+		　致利贝尔王国王都支部的通信。{wait}
+		#0593v　由通信文章内容看来，
+		　近日预计将会有高等级游击士入境。{wait}
+		#0594v　请求相关机关对其进行追踪、监视。』{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS341._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[18] 0 0 100
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0558v{color 0}事件发生２日后――{wait}
+		#0559v卡西乌斯·布莱特（Ｓ级）到达帝都，{wait}
+		#0560v就任该国游击士协会临时代表。{wait}
+		#0561v　
+		临时代表确认了支部的受损状況，
+		发出指示让分散的游击士到边境集中。{wait}
+		#0562v　
+		同时为防备敌方势力的谍报活动
+		将导力通信完全封锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0563v{color 0}已经有６个都市的支部遭受袭击，
+		帝国内的协会逐渐失去作用。{wait}
+		#0564v　
+		目前还存在的支部
+		申请了来自帝国军的严密警备――{wait}
+		#0565v　
+		然而，帝国军反应迟钝，
+		明显无法得到预期的效果。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0566v{color 0}另一方面临时代表根据敌方势力的动向
+		推测出了他们的补给据点――{wait}
+		#0567v　
+		选拔出熟悉当地情况的游击士们，
+		前往其潜伏地点搜索。{wait}
+		#0568v　
+		这是出于在出入境管理严格的帝国进行作战
+		必定会先设立国内补给据点的判断。{wait}
+		#0569v　
+		『肉斩骨断』作战
+		取得了立竿见影的成果。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0595v『确认增援游击士为卡西乌斯·布莱特。{wait}
+		#0596v　卡西乌斯·布莱特（Ｓ级游击士）――{wait}
+		#0597v　在本科人物档案的评定中位列仅次于最高级的『ＬＶ４』。{wait}
+		#0598v　之前的百日战役中，
+		　以飞行警备艇
+		　指挥反攻作战而闻名的人物。{wait}
+		#0599v　视情况可能成为安全保障上的障碍――{wait}
+		#0600v　现在正在详细追查其动向。』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	Sleep 1000ms
+	TextSetPos 20 240 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0601v『对目标Ｃ·Ｂ的跟踪失败。{wait}
+		#0602v　至今下落不明……{wait}
+		#0603v　但是，按本部指示
+		　未停止警戒态势，
+		  继续维持现阶段状况。』{wait}
+		#0604v『多名游击士在沿铁路移动中。{wait}
+		#0605v　推测是某种作战行动。』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0606v『６名游击士急袭猎兵团据点。{wait}
+		#0607v　拘捕内部的武装集团成员。{wait}
+		#0608v　根据本科要员的对照
+		　确定为「杰斯塔猎兵团」成员。』{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS342._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[18] 0 0 100
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0570v{color 0}由于据点被揭发，
+		确定实行犯是『杰斯塔猎兵团』。{wait}
+		#0571v　
+		然而，敌方集团行动变得消极化，
+		此后演化成相互静观其变的状况。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0572v{color 0}胶着状态持续了两个月左右――{wait}
+		#0573v　
+		临时代表利用这段时间
+		与帝国军情报部进行接触――{wait}
+		#0574v　
+		――着手进行后来解决事件的
+		作战准备。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0609v『对象Ｃ·Ｂ与本科要员接触。{wait}
+		#0610v　现在确认中――』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 20 240 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0611v『对象Ｃ·Ｂ提出共同作战。{wait}
+		#0612v　预定在指定日期再度接触――』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS343._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[18] 0 0 100
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0575v{color 0}～游击士协会支部袭击事件的战术性分析～{wait}
+		#0576v　　　　　　　　　　　　　　　情报局第二科{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0577v{color 0}　
+		――打破胶着战局的，
+		是临时代表Ｃ·Ｂ的巧妙诱导。{wait}
+		#0578v　
+		接触本科要员的Ｃ·Ｂ――
+		预测敌方势力会进行监听
+		而向参谋部发来了联络。{wait}
+		#0579v　
+		监听了联络内容的敌方势力
+		得知下次接触的时间和地点，
+		计划将Ｃ·Ｂ抹杀――{wait}
+		#0580v　
+		――然而这正是他的目的。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0581v{color 0}与Ｃ·Ｂ接触的本科要员
+		也收到了经过暗号化的文章――{wait}
+		#0582v　
+		其中周密计划了
+		以帝国军部队歼灭
+		受伪装情报诱导的敌方集团的作战。{wait}
+		#0583v　
+		参谋部认可了这个作战计划。{wait}
+		#0584v而同游击士协会共同作战的结果――{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0585v{color 0}就是完全包围了为抹杀Ｃ·Ｂ而集结的
+		敌方集团――并成功解除其武装。{wait}
+		#0586v　
+		潜伏于其它据点的残存势力，
+		也在俘虏的协助下各个击破――{wait}
+		#0587v　
+		　
+		――从事件发生以来经过数月，
+		『杰斯塔猎兵团』就此解体。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	BgmStop 2500ms
+	BgmWait
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0613v『卡西乌斯·布莱特（Ｓ级游击士）的
+		　威胁度评定于本日有所变更――』{wait}
+		#0614v『――从『ＬＶ４』类
+		　更改为最大评定『ＬＶ５』类。{wait}
+		#0615v　国家安全保障上的重大威胁――{wait}
+		#0616v　入境时需要彻底监视。』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 420 240 -1 -1
+	TextMessage null {
+		{color 12}《发自：帝国军情报局第一科　寄往：参谋本部》{wait}
+		#0617v『本日，确认监视对象出境。{wait}
+		#0618v　出境时无任何混乱――{wait}
+		#0619v　以后的任务移交至在外机关。{wait}
+		#0620v　　　　　――以上，通信完毕。』{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 3000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}《发自：参谋本部特别调查室　寄往：帝国政府宰相阁下》{wait}
+		#0627v『……同样确认Ｃ·Ｂ出境。{wait}
+		#0628v  虽有继续追踪，但此时
+		　尚未出现任何可疑动向。』{wait}
+		#0629v『同时，与『演奏家』的接触尚未确认。{wait}
+		#0630v　今后两者的动向都将继续详细调查。』{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 536870912
+	Sc_C4Unset 2048
+	VisHide vis[255] 0
+	Sleep 2000ms
+	Sleep 1000ms
+	ScAchievement 9 13 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『帝国游击士协会连续袭击事件』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[22] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[22] 0x10
+		QuestFlagsSet quest[22] 0x20
+		ItemAdd item[1566] 1
+		SoundPlay sound[17] 0 0 100
+		FadeOut 300ms 0x00000000 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[1566]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 10000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}１００００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5404._sn" 103 0 0
+	Hcf
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sleep 2000ms
+	SoundPlay sound[156] 0 0 100
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0339v{color 5}读取中#200W　＞　＞　＞　＞　＞　#20W结束{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	BgmPlay bgm[61] 0
+	Sleep 1500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS344._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	SoundPlay sound[157] 0 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[156] 0 0 100
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0370v{color 0}『十三工房』——{wait}
+		#0371v极限级战略人形兵器开发计划{wait}
+	} {
+		#0372v代号：『帕蒂尔·玛蒂尔』{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"开发计划概要" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0373v{color 0}开发目标——{wait}
+		#0374v沿袭极限级系列的设计理念，
+		完成搭载更高级控制系统的新型机器。{wait}
+	} {
+		#0375v除过往型号所重视的战略性运用以外，
+		让精密灵活的战术性运用成为可能
+		也是本计划核定的目标。{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[2] 210 280 0
+		"作战行动半径" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0340v{color 0}以整个大陆区域为作战范围。{wait}
+	} {
+		#0341v为应对出现无补给的数年持续作战，
+		而装备主副两个系统的高功率导力引擎。{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[3] 340 280 0
+		"自动战斗能力" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0342v{color 0}通过装载集成化导力计算机『战神』，
+		让高级的目标评定及自动战斗能力成为可能——{wait}
+	} {
+		#0343v更在这种控制中
+		活用操纵者的神经系统，
+		以实现反射性和本能性动作为目标。{wait}
+	} {
+		#0344v此外，与操纵者的思想沟通为非接触式，
+		从候补者之中选定和采用合适的素材。{wait}
+	}
+	TextWait
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[3]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[2]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[1]
+	Sleep 400ms
+	Sleep 400ms
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"机体各参数" // 0
+	MenuWait var[0]
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 65535
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[184] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS345._CH"
+	SoundPlay sound[157] 0 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 30 280 0
+		"大略尺寸及重量" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 220 290 48 4
+	TextMessage null {
+		#0376v{color 0}  总高度：１５．５亚矩{wait}
+		#0377v本体重量：５５托里姆
+		（※完全武装时６８托里姆）{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[2] 30 340 0
+		"搭载装备" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0345v{color 0}除以导力能量炮为主体的
+		各种导力兵器外，
+		还装备有备用的数种火药兵器。{wait}
+	} {
+		#0346v此外，为了防止操纵者可能发生的危险，
+		还搭载了运用战术导力器的
+		治愈和复苏能量产生装置——『复苏系统』。{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[3] 30 400 0
+		"装甲材料" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0347v{color 0}装甲板所采用的材质是
+		一种被称为『导金』的合金。{wait}
+	} {
+		#0348v这种合金在各个方面
+		都堪称现时性能最高的合金。{wait}
+	} {
+		#0349v有关各种性能强度的详细数据，
+		请参阅『福音』计划。{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[3]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[2]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 400ms
+	Sleep 400ms
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 30 280 0
+		"计划各部分的进展状况" // 0
+	MenuWait var[0]
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 65535
+	Sleep 1500ms
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 260 310 0
+		"新型导力引擎" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 310 360 -1 -1
+	TextMessage null {
+		#0350v{color 0}以诺华提斯博士的设计为基础，
+		开发进展顺利。{wait}
+	} {
+		#0351v为各部分的促动器提供导力的
+		测试也已经成功。{wait}
+	} {
+		#0352v然而，对于飞行引擎反应性的糟糕表现，
+		博士也面露难色。
+		（※特别是反重力发生引擎的反应性过低。）{wait}
+	} {
+		#0353v据判断，在现状下不可能进行战术性运用。
+		除使用飞行引擎的飘浮展开方法之外，
+		是否以助推器追加推进力也在研究之中——{wait}
+	}
+	TextWait
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 40 255 0
+		"各部分促动器" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 120 295 -1 -1
+	TextMessage null {
+		#0354v{color 0}促动器开发陷入了困境。
+		因为无法从现有的人形兵器移用。{wait}
+	} {
+		#0355v主兵器装备的大型化使得战斗重量增大，
+		特别是腿部关节的耐用性测试仍存有问题。{wait}
+	} {
+		#0356v在避免精密控制的负荷过于集中这一方面，
+		预测可能得到改善——{wait}
+	}
+	TextWait
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 20 75 0
+		"主兵器装备" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 20 115 -1 -1
+	TextMessage null {
+		#0357v{color 0}主兵器装备导力能量炮
+		已经完成了实战测试。{wait}
+	} {
+		#0358v然而，根据诺华提斯博士的指示，
+		同轴化仍在研究中，实际装载将被推迟。{wait}
+	} {
+		#0359v预计随之而来的必要输出功率增加
+		将被包括在新型导力引擎的输出功率之内。{wait}
+	}
+	TextWait
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 200 75 0
+		"控制系统" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 220 115 -1 -1
+	TextMessage null {
+		#0360v{color 0}控制系统现时仍在实验之中——{wait}
+	} {
+		#0361v实验结果详情可参阅其它项目。{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[2] 340 75 0
+		"控制测试结果" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[2]
+	MenuClose menu[1]
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[184] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS346._CH"
+	SoundPlay sound[157] 0 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0362v{color 0}使用神经系统的控制测试
+		现时仍在持续实施之中——{wait}
+	} {
+		#0363v然而，时至今日
+		仍未达到理想的精密度。{wait}
+	} {
+		#0364v迄今为止诺华提斯博士小组得到的主要测试结果，
+		可阅览上述条目。{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"测试结果阅览" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextClose 0
+	MenuClose menu[1]
+	TextSetPos 310 40 -1 -1
+	TextMessage null {
+		#0378v{color 0}受试者：代号Ａ１　………{wait}
+		#0379v　　在连接第２状态时反应异常、丧失意识{wait}
+		#0380v受试者：代号Ｂ３　………{wait}
+		#0381v　　在连接第３状态时反应异常、心跳停止{wait}
+		#0382v受试者：代号Ｃ１　………{wait}
+		#0383v　　在连接第１状态时反应异常、心神错乱{wait}
+		#0384v受试者：代号Ｄ７　………{wait}
+		#0385v　　在连接第２状态时反应异常、丧失意识{wait}
+		#0386v受试者：代号Ｅ３　………{wait}
+		#0387v　　在连接第２状态时反应异常、心跳停止{wait}
+		#0388v受试者：代号Ｆ２　………{wait}
+		#0389v　　在连接第２状态时反应异常、丧失意识{wait}
+		#0390v受试者：代号Ｇ４　………{wait}
+		#0391v　　在连接第３状态时反应异常、丧失意识{wait}
+		#0392v受试者：代号Ｈ１　………{wait}
+		#0393v　　在连接第２状态时反应异常、丧失意识{wait}
+		#0394v受试者：代号Ｉ６　………{wait}
+		#0395v　　在连接第４状态时反应异常、精神崩溃{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0365v{color 0}——所有受试者接连以失败告终。{wait}
+	} {
+		#0366v预定今后将由『结社』提供受试者，
+		继续进行实验——{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"今后的开发计划" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextClose 0
+	MenuClose menu[1]
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[184] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	SoundPlay sound[156] 0 0 100
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0367v{color 0}——『结社』发来暂时冻结的通知。{wait}
+	} {
+		#0368v理由是不能确认控制系统是否稳定。{wait}
+	} {
+		#0369v今后，参加连接试验的受试者
+		将限定于『结社』所选拔产生的候选人。{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmStop 3000ms
+	BgmWait
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS347._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	SoundPlay sound[156] 0 0 100
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0396v{color 5}受试者：代号Ｒ３——{wait}
+		#0397v经过第４状态的连接测试，依然生存。{wait}
+		#0398v※然而，存在轻度的神经反射现象。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	SoundPlay sound[156] 0 0 100
+	TextMessage null {
+		#0399v{color 5}受试者：代号Ｒ３——{wait}
+		#0400v与『帕蒂尔·玛蒂尔』的意识沟通成功。{wait}
+	} {
+		#0401v向『结社』建议开发重新开始——
+		代号Ｒ３已在实际演习中成功。{wait}
+	} {
+		#0402v向『结社』建议开发重新开始——{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 536870912
+	VisSet vis[0] 3 0x00FFFFFF 2500ms 0 0
+	Sleep 3000ms
+	Sleep 1500ms
+	TcEpisodeEnd 0
+	VisHide vis[255] 0
+	Sleep 1000ms
+	ScAchievement 9 10 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『极限级实验计划书』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[23] 0x10:
+		Sleep 1000ms
+		QuestFlagsSet quest[23] 0x10
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 10000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}１００００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5612._sn" 130 0 0
+	Hcf
+	Return

@@ -1,0 +1,225 @@
+calmare sc scena
+scena:
+	name "Grancel" "C4200.x"
+	town town[1]
+	bgm bgm[31]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	if system[66] == 7:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	LookPointFlagsSet look_point[3] 0x0001
+	EntranceSetDisabled entrance[15] 1
+	EntranceSetDisabled entrance[16] 0
+	SoundPlay sound[461] 1 0 100
+	if system[66] == 7:
+		if !flag[12111]:
+			FlagSet flag[12111]
+		if flag[12111]:
+			_1B look_point[13] fn[0,5]
+		_1B look_point[15] fn[0,2]
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sleep 2000ms
+	BgmStop 2000ms
+	Sleep 2000ms
+	CamLookPos (46500, 0, -7000) 0ms
+	CamSetDistance 0 8020 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[2] (49340, -2000, -7440) 270deg
+	CharFlagsSet name[80] 0x0040
+	CharSetPos name[80] (49340, -2000, -7440) 270deg
+	ForkFunc name[2] fork[3] fn[0,3]
+	ForkFunc name[80] fork[3] fn[0,4]
+	Fork name[2] fork[2]:
+		CamLookPos (50200, 0, -12660) 7000ms
+	Fork name[80] fork[2]:
+		CamSetDistance 0 6900 -10000 7000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[2] fork[3]
+	ForkWait name[80] fork[3]
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 1000ms
+	TextTalk name[80] {
+		#94431v#1652F门上了锁呢……{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79496v#1646F#12P……我知道。{wait}
+	} {
+		#79497v#1642F你别出声。
+		会分心的。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94432v#1653F啊，是。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79498v#1648F#12P………………………………{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}雪拉扎德取出一根针，
+		插入钥匙孔。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	SoundPlay sound[115] 0 0 100
+	Sleep 120ms
+	SoundPlay sound[115] 0 0 100
+	Sleep 250ms
+	SoundPlay sound[115] 0 0 100
+	Sleep 400ms
+	ObjPlay object[3] 80
+	SoundPlay sound[110] 0 0 100
+	ObjWait object[3]
+	Sleep 300ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (51500, 0, -13160) 2000mm/s 0
+	Sleep 500ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (51500, 0, -12900) 2000mm/s 0
+	Sleep 500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t4102._sn" 103 0 0
+	Hcf
+	Return
+
+fn[3]:
+	Fork name[2] fork[1]:
+		CharWalkToPos self (45000, 0, -7440) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (45000, 0, -11300) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (46860, 0, -13160) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (48860, 0, -13160) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Return
+
+fn[4]:
+	Sleep 700ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (45000, 0, -7440) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (45000, 0, -11300) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (46600, 0, -12900) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (47440, 0, -12900) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Return
+
+fn[5]:
+	EventBegin 2
+	if flag[0]:
+		CharTurnTo name[2] 270deg 500deg/s
+		Sleep 200ms
+		TextTalk name[2] {
+			#79488v#1646F……回头很危险。{wait}
+		} {
+			#79489v#1642F赶快前进吧。{wait}
+		}
+		TextWait
+	else:
+		CharTurnTo name[2] 270deg 500deg/s
+		Sleep 200ms
+		TextTalk name[2] {
+			#79486v#1646F入口处的门
+			差不多该被突破了……{wait}
+		} {
+			#79487v#1642F赶快前进吧。{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+	_Char90 party[0] -1500 0 0 2000 0
+	EventEnd 2
+	Return
+
+fn[6]:
+	Return
+
+fn[7]:
+	Return
+
+fn[8]:
+	Return
+
+fn[9]:
+	EventBegin 1
+	TextTalk name[0] {
+		#1001F这里好像可以钓上什么来。{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[1]:
+		CamLookPos (-12420, 0, 1330) 1500ms
+	Fork field_party[0] fork[2]:
+		CamSetDistance 0 9500 -10000 1500ms
+	Fork field_party[1] fork[1]:
+		CamZoom 2800 1500ms
+	Fork field_party[1] fork[2]:
+		CamRotate 45000mdeg 1500ms
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 5}钓鱼吗？{color 0}{wait}
+	}
+	system[40] = 24
+	Menu menu[0] 10 32 1
+		"钓鱼" // 0
+		"放弃" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	ForkWait field_party[0] fork[1]
+	if var[0] == 0:
+		Minigame 14 42 -11850 0 4500 180 -13240 0 -470
+		FadeWait
+		EventEnd 1
+	elif var[0] != 0:
+		EventEnd 1
+	Return

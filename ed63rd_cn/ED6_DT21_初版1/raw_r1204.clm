@@ -1,0 +1,3823 @@
+calmare tc scena
+scena:
+	name "Bose" "R1204.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03510._ch" "npl2/ch03510p._cp"
+chip[1] "npl2/ch03511._ch" "npl2/ch03511p._cp"
+chip[2] "apl2/ch20662._ch" "apl2/ch20662p._cp"
+chip[3] "apl2/ch20288._ch" "apl2/ch20288p._cp"
+
+npc char[0]:
+	name "玲"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "帕蒂尔·玛蒂尔"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 3:
+		var[2] = 0
+		if flag[9482]:
+			system[1] = 178
+			FlagUnset flag[9482]
+			SystemFlagsSet 0x10000000
+			var[2] = 6
+			Event fn[0,2]
+		elif flag[9481]:
+			FlagUnset flag[9481]
+			SystemFlagsSet 0x10000000
+			var[2] = 5
+			Event fn[0,2]
+		elif flag[9480]:
+			system[1] = 175
+			FlagUnset flag[9480]
+			SystemFlagsSet 0x10000000
+			var[2] = 4
+			Event fn[0,2]
+		elif flag[9479]:
+			FlagUnset flag[9479]
+			SystemFlagsSet 0x10000000
+			var[2] = 3
+			Event fn[0,2]
+		elif flag[9478]:
+			FlagUnset flag[9478]
+			SystemFlagsSet 0x10000000
+			var[2] = 2
+			Event fn[0,2]
+		elif flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			var[2] = 1
+			Event fn[0,2]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			var[2] = 0
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EffLoad eff[0] "map\\\\mp207_00.eff"
+	EffLoad eff[1] "map\\\\mp207_01.eff"
+	EffLoad eff[2] "map\\\\mp207_02.eff"
+	EffLoad eff[3] "map\\\\mp207_03.eff"
+	CamLookPos (0, 0, 10000000) 0ms
+	CamSetDistance 0 0 -30000 0ms
+	CamZoom 1000 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 276 0ms
+	if var[2] == 0:
+		Call fn[0,3]
+	if var[2] == 1:
+		Call fn[0,4]
+	if var[2] == 2:
+		Call fn[0,5]
+	if var[2] == 3:
+		Call fn[0,6]
+	if var[2] == 4:
+		Call fn[0,7]
+	if var[2] == 5:
+		Call fn[0,8]
+	EffUnload eff[0]
+	EffUnload eff[1]
+	EffUnload eff[2]
+	if var[2] == 6:
+		Call fn[0,15]
+	Return
+
+fn[3]:
+	EventBegin 1
+	CamLookPos (0, 0, 10000000) 0ms
+	CamSetDistance 0 0 -30000 0ms
+	CamZoom 1000 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 276 0ms
+	Sc_C4Set 536870912
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	Sleep 1000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91263v#0C#40W超然于善恶生死之处，
+		我淡然走过。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91264v#0C#40W无幸无厄。无悲无喜。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91265v#0C#40W黑白将我撕裂，天地将我捉弄，
+		我变得污秽不堪。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91266v#0C#40W何处为始，何处为终。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91267v#0C#40W我无处容身。
+		也未曾前行。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91268v#0C#40W然而，世界依然转动。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91269v#20A#0C#4S１．乐园#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[175] 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos 80 110 -1 -1
+	TextSetName "声音"
+	TextMessage null {
+		#0992v#12C请问您想要几号呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 280 -1 -1
+	TextSetName "声音"
+	TextMessage null {
+		#1006v#12C１５号吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 110 -1 -1
+	TextSetName "声音"
+	TextMessage null {
+		#0993v#12C明白了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0994v#12C『玲』，这次轮到你了。
+		别让客人失望啊。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91270v#0C那里是被称作『乐园』的地方。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91271v#0C此馆本身大概也有名字，
+		只是没有告诉我们。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91272v#0C当然，乐园的所在之处，
+		我们所做为何事，#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91273v#0C甚至为何在这里，也都无人知晓。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "声音"
+	TextMessage null {
+		#1010v#12C早上好。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 300 -1 -1
+	TextSetName "？？？"
+	TextMessage null {
+		#91274v#12C……………………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName "声音"
+	TextMessage null {
+		#1011v#12C早上好，１５号。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 300 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91275v#12C…………？？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 3000ms 0 0
+	ForkFunc char[0] fork[3] fn[0,14]
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sleep 3500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "少年"
+	TextMessage null {
+		#1012v#12C呀，你终于起来了呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 320 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91276v#12C…………『克洛斯』#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1013v#12C嘻嘻……{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1014v#12C欢迎来到乐园，『玲』#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91277v#0C…………欢迎，来到『乐园』。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	Sc_C4Unset 2048
+	FadeIn 0ms 0x00000000
+	FadeWait
+	VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 3000ms 0 0
+	FadeOut 3000ms 0x00FFFFFF 255
+	FadeWait
+	Sleep 500ms
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1015v#12C玲，我去工作了。
+		又被指名了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91278v#12C克洛斯，又要去工作？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1016v#12C没事的，玲。
+		很快就能再见的。{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1017v#12C在那之前
+		你可要乖乖待着哦？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	FadeIn 2000ms 0x00FFFFFF
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	FadeIn 1ms 0x00000000
+	FadeWait
+	Sc_C4Set 2048
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91279v#0C名为克洛斯的少年，
+		和平时一样忙着出去工作了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91280v#0C在我所不知道的地方，
+		他似乎每天都重复着悲惨的工作。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91281v#0C不，其他的孩子也都一样。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91282v#0C在我所不知道的地方，
+		孩子们都在工作着。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	EffStop eff_instance[0] 0
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS576._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91283v#0C不知为何，我却没有工作。
+		是的，我一次也没有接到过工作。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91284v#0C其他的孩子们都逐渐变得衰弱和瘦小，
+		只有我吃着好吃的东西，
+		每天玩着洋娃娃即可。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91285v#0C只有我，是特别的。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91286v#0C……克洛斯他，叫我『公主殿下』。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	VisSet vis[0] 3 0x00888888 1000ms 0 0
+	Sleep 2000ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS573._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 290 -1 -1
+	TextSetName "少女"
+	TextMessage null {
+		#1046v#12C早上好，玲。今天也是好天气呢。
+		不过这里有些通风不畅。开开窗户吧！#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Set 2048
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91287v#0C这个爽朗的孩子名叫艾塔。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91288v#0C总是面带笑容，而且好奇心旺盛，
+		喜欢在房间里到处跑来跑去，常常惹克洛斯生气。{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 290 -1 -1
+	TextSetName "艾塔"
+	TextMessage null {
+		#1047v#12C我说，玲。一起玩吧？
+		我也想玩洋娃娃呢～。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91289v#12C好啊，艾塔。不过你的工作呢？
+		今天不用穿那身奇怪的洋装吗？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 290 -1 -1
+	TextSetName "艾塔"
+	TextMessage null {
+		#1048v#12C今天休息啊。
+		因为克洛斯去做了嘛。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1049v#12C嘻嘻，那孩子最近被指名的次数增加了哦。
+		是不是社会性需要呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91290v#0C艾塔有些老成。
+		面对无聊的玩笑，
+		她习惯呵呵笑着掩饰过去。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS572._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91291v#0C阿洁是个惹人怜爱又成熟的女孩子。
+		所以常常被大叔们指名。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91292v#0C但是阿洁绝不会露出厌恶的表情。
+		总能巧妙地应付好工作。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91293v#12C阿洁，你不喜欢这工作吧？
+		很痛的吧？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 280 -1 -1
+	TextSetName "阿洁"
+	TextMessage null {
+		#1054v#12C……没关系。
+		玲不用介意的。{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1055v#12C其实有不少技巧的。
+		处理得好的话就很简单了。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1056v#12C玲不用担心这种事情的。
+		玲一直都会幸福的。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91294v#12C…………嗯。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 280 -1 -1
+	TextSetName "阿洁"
+	TextMessage null {
+		#1057v#12C这样就够了。
+		因为只要玲幸福的话，我也就幸福了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS574._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91295v#0C卡托鲁是个经常挨打的男孩子。
+		可能是因为他身材瘦小，
+		总是被人当玩偶一样耍弄。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91296v#12C喂，卡托鲁、卡托鲁啊。
+		你又被欺负了吗？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "卡托鲁"
+	TextMessage null {
+		#1062v#12C嗯、嗯……
+		搞不懂……#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1063v#12C说是新的游戏。
+		我完全搞不懂啊……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91297v#12C…………………………………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "卡托鲁"
+	TextMessage null {
+		#1064v#12C啊，没关系的，玲。
+		我没事，一点事都没有啦。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1065v#12C这是常有的事，我一点也不觉得痛的。
+		有玲在我就完全不觉得痛苦。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91298v#0C卡托鲁总是在
+		别人看不到的地方流血。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91299v#0C我想，这可能也是一种魔咒。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91300v#0C美丽的人，一定会流出美丽的血。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 1500ms
+	SoundPlay sound[7] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	VisShow vis[0] -320 -480 320 0 320 480 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1018v#12C我回来了，玲。
+		这次稍微晚了一会儿。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91301v#0C还有克洛斯。
+		他是我们的领袖。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1000ms
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS572._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS573._CH"
+	VisShow vis[4] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS574._CH"
+	VisSet vis[0] 1 800 800 0ms 0
+	VisSet vis[2] 1 600 600 0ms 0
+	VisSet vis[3] 1 700 700 0ms 0
+	VisSet vis[4] 1 500 500 0ms 0
+	VisSet vis[2] 0 300000 200000 0ms 0
+	VisSet vis[3] 0 -120000 150000 0ms 0
+	VisSet vis[4] 0 50000 250000 0ms 0
+	VisSet vis[3] 4 0 0 0 0
+	Sleep 1000ms
+	VisSet vis[3] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 500ms
+	VisSet vis[2] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 500ms
+	VisSet vis[4] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 500ms
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	VisSet vis[2] 3 0xFF888888 500ms 0 0
+	VisSet vis[3] 3 0xFF888888 500ms 0 0
+	VisSet vis[4] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91302v#0C克洛斯、艾塔、阿洁、卡托鲁，
+		还有我——玲……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91303v#0C我们都是住在同一个房间，
+		是无可替代的伙伴……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91304v#0C好像还有些其他的孩子在这里工作，
+		不过那些人都无所谓。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91305v#0C只有我们五个人住在乐园里。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00888888 2000ms 0 0
+	VisSet vis[1] 3 0x00888888 2000ms 0 0
+	VisSet vis[2] 3 0x00888888 2000ms 0 0
+	VisSet vis[3] 3 0x00888888 2000ms 0 0
+	VisSet vis[4] 3 0x00888888 2000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	VisWait vis[3] 3
+	VisWait vis[4] 3
+	VisHide vis[255] 0
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	var[2] = 1
+	Return
+
+fn[4]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91306v#20A#0C#4S２．公主殿下#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	_59
+	Sleep 500ms
+	BgmPlay bgm[183] 0
+	Sleep 500ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91307v#12C克洛斯，其他人呢？#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91308v#12C为什么屋子里
+		只有玲和克洛斯啊？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisHide vis[0] 0
+	VisShow vis[0] -320 -480 320 0 320 480 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1019v#12C啊哈哈，你说什么呢，玲。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1020v#12C这里一开始就只有我们俩。
+		只有我们俩住在这里啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91309v#12C……是，是吗……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1021v#12C是啊。
+		从一开始，这里就是只有我们的世界啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91310v#0C后来我才发觉，
+		是克洛斯把其他人藏起来了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91311v#0C是为了不让我担心，
+		或者是因为现在的情况已不容我正视。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91312v#0C克洛斯总是遮蔽我的视线，
+		注意着不让我看到任何东西。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS573._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	Sc_C4Unset 2048
+	TextSetPos -1 290 -1 -1
+	TextSetName "艾塔"
+	TextMessage null {
+		#1050v#12C玲，我教你点好东西。
+		叫做『好，非常乐意』。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1051v#12C这样对方就会非常高兴了。
+		『好，非常乐意』
+		『好，非常乐意』#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1052v#12C无论被怎样对待都要说『好，非常乐意』，
+		这样大家都会很高兴的。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1053v#12C嘻嘻，很奇怪吧？
+		高兴的明明只有客人嘛。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS572._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 280 -1 -1
+	TextSetName "阿洁"
+	TextMessage null {
+		#1058v#12C我也再教你一个。
+		这可是珍藏的秘诀。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1059v#12C就是呀，要想像对方的感觉。
+		对方一定很舒服啦，
+		现在一定很有感觉啦，等等。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1060v#12C虽然疼痛无法忍耐，
+		但讨厌的感觉就会消失了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1061v#12C不能勉强乱来。
+		怎样做对方才会高兴，
+		一定要好好考虑。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS574._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "卡托鲁"
+	TextMessage null {
+		#1066v#12C那，我、我也说说……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1067v#12C那就是，绝对不能说声『对不起』
+		然后就哭起来。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1068v#12C一说『对不起』，
+		就会更加被欺负。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1069v#12C无论多疼痛多伤心都不能哭。
+		因为就算说『对不起』
+		也不会得到原谅的。{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisSet vis[1] 3 0x00FFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS592._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	TextSetPos -1 330 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91313v#12C大家，谢谢你们。
+		不过玲应该不需要这些的。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91314v#12C玲都没有工作嘛。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91315v#12C总是在这里抱着娃娃。
+		玲要一直待在这里。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 80 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1022v#12C是呢，玲。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1023v#12C你是我们的公主殿下。
+		是最重要最重要的人。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1000ms
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#1024v#12C#40W我们会守护你。
+		所以你不用看任何东西。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1025v#12C#40W『玲』#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	VisHide vis[255] 0
+	var[2] = 2
+	Return
+
+fn[5]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91316v#20A#0C#4S３．游戏#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[174] 0
+	Sleep 500ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1026v#12C玲，你在干什么？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91317v#12C画画啦。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91318v#12C看，这是怪兽。
+		把我们关起来的怪兽哦。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91319v#12C金色的眼睛漆黑的鳞。
+		嘴巴被那些被它吃掉的人
+		的血染红了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1027v#12C罪恶的颜色吗。画得真棒。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91320v#12C不过肚子一定是纯白色的。
+		不然的话就不知道
+		哪边是前面了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1028v#12C哈哈，是啊。
+		肚子一定是纯白色的呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91321v#12C………………？#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91322v#12C对了克洛斯。其他人呢？
+		大家都去工作了吗？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1029v#12C……玲。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1030v#12C这里一开始就只有我们俩。
+		只有我们俩住在这里啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	TextSetPos 100 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91323v#12C……是这样吗……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1031v#12C是啊。
+		从一开始，这里就是只有我们的世界啊。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1032v#12C这里只有我们两个人。
+		来，继续画画吧。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1033v#12C接下来就画公主殿下的画吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91324v#0C克洛斯虽然很擅长隐瞒，
+		但我还是渐渐看到了一些东西。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91325v#0C克洛斯好像累了。
+		这也是因为『其他人』都不见了的缘故吗。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91326v#0C所有的工作都由克洛斯一个人承担了。
+		而克洛斯，也开始渐渐地消失了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisHide vis[255] 0
+	VisShow vis[0] 0 0 640 480 0 25 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS578._CH"
+	VisShow vis[1] 0 0 640 480 0 25 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS580._CH"
+	VisShow vis[2] 0 0 640 480 0 25 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS579._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisSet vis[3] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos 380 50 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1034v#12C玲，我来帮你擦拭身体吧。
+		今天脏得这么厉害啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 330 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91327v#12C谢谢你经常照顾我。
+		克洛斯好温柔。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 50 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1035v#12C……玲。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1036v#12C对不起，玲。
+		都怪我做得不好。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1037v#12C明明决定要守护你的……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 330 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91328v#12C克洛斯？　……怎么了？
+		你脸色好差哦？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 50 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1038v#12C没什么。
+		没什么啦。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 330 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91329v#12C…………克洛斯？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 50 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1039v#12C………………。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1040v#12C我说了，什么事也没有！#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#1041v#12C#40W…………都是你不好。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 4 0 0 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 330 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91330v#12C…………克洛斯……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 300 75 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1042v#12C#40W都是你不好。
+		一切的一切，都是因为你。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 800ms
+	TextSetPos 50 120 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1043v#12C#40W其他人很快就被杀了。
+		为什么只有我还活着啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 800ms
+	TextSetPos -1 200 -1 -1
+	TextSetName "克洛斯"
+	TextMessage null {
+		#1044v#2C都是你不好。都怪你没有杀了我。
+		都是你不好。都怪你没有杀了我。
+		都是你不好。都怪你没有杀了我。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 1000ms 0 0
+	VisSet vis[3] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[2] 3
+	BgmStop 3000ms
+	BgmWait
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#1045v#2C#40W我明明已经，死了很久了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	VisHide vis[255] 0
+	var[2] = 3
+	Return
+
+fn[6]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91331v#20A#0C#4S４．玲#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91332v#0C然后，『第一件工作』来了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91333v#0C这里，已经没有任何人了。
+		没有任何人可以代替我去了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91334v#0C所以玲必须去工作了。
+		……玲第一次，来到外面。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[175] 0
+	Sleep 500ms
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS571._CH"
+	VisShow vis[0] 0 0 640 480 0 50 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS580._CH"
+	VisShow vis[1] 0 0 640 480 0 50 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS577._CH"
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisSet vis[2] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos 60 60 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		#0995v#12C玲，到你出场了。
+		别对客人无礼啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91335v#12C……………………………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 60 60 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		#0996v#12C怎么了，玲。
+		就和平时一样做啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91336v#12C……………………………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 50 -1 -1
+	TextSetName "客人"
+	TextMessage null {
+		#1007v#12C喂，怎么和宣传说的不一样啊。
+		１５号不是最特别的吗？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 60 60 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		#0997v#12C真奇怪。
+		平时真得是很乖的孩子啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0998v#12C能满足客人们的任何要求，
+		是珍藏的天使哦。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0999v#12C喂，玲，快打招呼啊。
+		就像平时那样。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1000v#12C今天要扮演哪个角色呢？
+		楚楚可怜的人偶？
+		还是酷酷的男孩子？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91337v#12C……不是我。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 60 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		#1001v#12C咦……？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91338v#12C不是我。
+		不是我。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 350 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91339v#12C#3S不是我、不是我！#2S#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91340v#12C#3S那不是我！#2S#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91341v#12C#3S那不是我啊！！#2S#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	Sleep 1000ms
+	EffStop eff_instance[0] 0
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91342v#0C#40W有人在说着什么。我和平常一样塞住耳朵。
+		有人在做着什么。我和平常一样闭上眼睛。
+		我就和平常一样。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91343v#0C#60W我就和平常一样。
+		我就和平常一样。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91344v#0C#80W我就和平常一样，去工作了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 1ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	SoundPlay sound[357] 0 0 100
+	Sleep 1000ms
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91345v#0C啊啊，是生命之水。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91346v#0C克洛斯说过。
+		即使快死的人喝了也能恢复精神。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91347v#0C克洛斯经常喝的。
+		有着非常甜美、蜜糖一般的味道……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	TextSetPos 80 110 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		#1002v#12C来，玲。
+		今天放了很多蜜糖哦。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1003v#12C慢慢喝掉吧。
+		慢慢地慢慢地，对了对了。
+		别洒出来哦。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1004v#12C慢慢喝掉，一点也别剩下哦。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#1005v#12C……那么，请慢用。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91348v#0C#40W主管人离开的时候，头好像偏了一下。
+		是因为上了年纪呢，还是想故意掩饰什么。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91349v#0C#60W…………啊啊，药起效了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	FadeIn 3000ms 0x00FFFFFF
+	VisSet vis[2] 3 0xFFFFFFFF 3000ms 0 0
+	Sleep 1000ms
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	VisWait vis[2] 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TextSetPos 330 100 -1 -1
+	TextSetName "客人"
+	TextMessage null {
+		#1008v#12C来，小玲。
+		我们坐下谈谈吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 280 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91350v#12C好，非常乐意。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 80 -1 -1
+	TextSetName "客人"
+	TextMessage null {
+		#1009v#12C嗯嗯，回答得非常好。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91351v#0C#40W好，非常乐意。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91352v#0C#40W好，非常乐意。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91353v#0C好，非常乐意。好，非常乐意。
+		好，非常乐意。好，非常乐意。
+		好，非常乐意。好，非常乐意。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	var[4] = 70
+	ForkFunc char[3] fork[0] fn[0,10]
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91354v#50W#0C早上好，玲。今天也是好天气呢。
+		#40W不过这里有些通风不畅。开开窗户吧！
+		#30W我说，玲。一起玩吧？
+		#20W我也想玩洋娃娃呢～。今天休息啊。
+		#10W因为克洛斯去做了嘛。
+		嘻嘻，那孩子最近被指名的次数增加了哦。
+		是不是社会性需要呢。玲，我教你点好
+		东西。叫做『好，非常乐意』。
+		这样对方就会非常高兴了。
+		『好，非常乐意』『好，非常乐意』
+		无论被怎样对待都要说『好，非常乐意』。
+		这样大家都会很高兴的。嘻嘻，
+		很奇怪吧？高兴的明明只有客人嘛。
+		我们会守护你。所以你不用看
+		任何东西。         『玲』 {wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91355v#50W#0C没关系。玲不用介意的。其实有
+		#40W不少技巧的。处理得好的话就很
+		#30W简单了。玲不用担心这种事情的。
+		#20W玲一直都会幸福的。这样就够了。
+		#10W因为只要玲幸福的话，我也就幸福了。
+		我也再教你一个。这可是珍藏的秘诀。
+		就是呀，要想像对方的感觉。对方一定
+		很舒服啦，现在一定很有感觉啦，等等。
+		虽然疼痛无法忍耐，但讨厌的感觉
+		就会消失了。不能勉强乱来。
+		怎样做对方才会高兴，一定要好好考虑。
+		我们会守护你。所以你不用看
+		任何东西。          『玲』
+		　{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91356v#50W#0C嗯、嗯……搞不懂……说是
+		#40W新的游戏。我完全搞不懂啊……
+		#30W啊，没关系的，玲。我没事。
+		#20W一点事都没有啦。这是常有的事，
+		#10W我一点也不觉得痛的。有玲在我就
+		完全不觉得痛苦。那，我、我也
+		说说……那就是，绝对不能说声
+		『对不起』然后就哭起来。一说
+		『对不起』，就会更加被欺负。
+		无论多疼痛多伤心都不能哭。因
+		为就算说『对不起』也不会得到
+		原谅的。我们会守护你。所以你
+		不用看任何东西。      『玲』{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91357v#40W#0C玲，你在干什么？罪恶的颜色吗。
+		#30W画得真棒。哈哈，是啊。肚子一定
+		#20W是纯白色的呢。……玲。这里一开
+		#10W始就只有我们俩。只有我们俩住在
+		这里啊。是啊。从一开始，就是只
+		有我们的世界啊。这里只有我们两
+		#5W个人。来，继续画画吧。…………
+		#5W………。我说了，什么事也没有！
+		…………都是你不好。都是你不好。
+		一切的一切，都是因为你。其他人
+		很快就被杀了。为什么只有我还活
+		着啊。都是你不好。都怪你没有杀了
+		我。都是你不好。都怪你没有杀了我。
+		都是你不好。都怪你没有杀了我。我
+		明明已经，死了很久了。#60W  『玲』{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundStop sound[398]
+	EffStop eff_instance[0] 0
+	ForkQuit char[3] fork[0]
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91358v#2C大家，都不见了呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[193] 0 0 100
+	VisSet vis[2] 3 0x00FFFFFF 100ms 0 0
+	Sleep 2000ms
+	VisHide vis[255] 0
+	var[2] = 4
+	Return
+
+fn[7]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	Sleep 500ms
+	SoundPlay sound[135] 0 0 100
+	Sleep 2000ms
+	ForkFunc char[0] fork[1] fn[0,23]
+	Sleep 2000ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS581._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	ForkFunc char[0] fork[3] fn[0,14]
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	EffPlay eff[201] eff_instance[1] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 5000ms
+	Tc_E7 vis[0] 1 0x00000000 0ms
+	Tc_E7 vis[0] 1 0xFFFFFFFF 1500ms
+	Sleep 1000ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 1000ms
+	ForkQuit char[0] fork[1]
+	SoundPlay sound[550] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[911] 0 0 100
+	SoundPlay sound[524] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[550] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 1000ms
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Tc_E7 vis[0] 1 0x00000000 1000ms
+	VisWait vis[0] 3
+	SoundSetVolume sound[135] 95
+	Sleep 100ms
+	SoundSetVolume sound[135] 90
+	Sleep 100ms
+	SoundSetVolume sound[135] 85
+	Sleep 100ms
+	SoundSetVolume sound[135] 80
+	Sleep 100ms
+	SoundSetVolume sound[135] 75
+	Sleep 100ms
+	SoundSetVolume sound[135] 70
+	Sleep 1500ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS582._CH"
+	VisSet vis[0] 3 0xFF777777 2000ms 0 0
+	EffStop eff_instance[1] 0
+	EffPlay eff[202] eff_instance[1] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 5000ms
+	Tc_E7 vis[0] 1 0x00000000 0ms
+	Tc_E7 vis[0] 1 0xFFFFFFFF 1500ms
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos 380 220 -1 -1
+	TextSetName "银发的青年"
+	TextMessage null {
+		#87390v#12C这是……#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#87391v#12C……那些卑鄙的家伙。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 350 -1 -1
+	TextSetName "黑发的少年"
+	TextMessage null {
+		#78795v#12C………………………………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#78796v#12C……即使变成这样，
+		人还能继续生存下去吗……？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#78797v#12C…………变成这样，
+		还能称之为活着吗……？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 220 -1 -1
+	TextSetName "银发的青年"
+	TextMessage null {
+		#87392v#12C………………………………#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#87393v#12C……这无数的十字伤
+		应该都是自己划下的。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#87394v#12C恐怕只有这样，
+		才能够保持自我吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 350 -1 -1
+	TextSetName "黑发的少年"
+	TextMessage null {
+		#78798v#12C………………………………#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#78799v#12C……即使如此，还是想生存下去吗……#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#78800v#12C（这就是，活着的人……）#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0x00FFFFFF 3000ms 0 0
+	Fork char[3] fork[0]:
+		Tc_E7 vis[0] 1 0x00000000 3000ms
+	ForkFunc char[0] fork[3] fn[0,13]
+	SoundPlay sound[358] 0 0 100
+	SoundSetVolume sound[135] 60
+	Sleep 100ms
+	SoundSetVolume sound[135] 50
+	Sleep 100ms
+	SoundSetVolume sound[135] 40
+	Sleep 100ms
+	SoundSetVolume sound[135] 30
+	Sleep 100ms
+	SoundSetVolume sound[135] 25
+	Sleep 100ms
+	SoundSetVolume sound[135] 10
+	Sleep 100ms
+	SoundStop sound[135]
+	Sleep 7000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "黑发的少年"
+	TextMessage null {
+		#78801v#12C……莱维，我想看到
+		这孩子真正活着的样子。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#78802v#12C『结社』能接管她吗？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	VisHide vis[255] 0
+	EffStop eff_instance[0] 0
+	EffStop eff_instance[1] 0
+	var[2] = 5
+	Return
+
+fn[8]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91359v#20A#0C#4S５．梦的延续#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[178] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91360v#0C#40W玲很强。
+		有一天约修亚这么说。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91361v#0C#40W…………这是我所不知道的话语。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS583._CH"
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS584._CH"
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS585._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS586._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91362v#0C#40W玲很强。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextMessage null {
+		#91363v#0C#40W是的。玲很强。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 4 0 0 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextMessage null {
+		#91364v#0C玲很强。玲很强。
+		玲很强。玲很强。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextMessage null {
+		#91365v#0C玲很强。玲是很强的！#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91366v#0C执行者候补『玲』
+		优秀得无与伦比。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[3] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	VisWait vis[3] 3
+	VisHide vis[255] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91367v#0C#40W而不知不觉中，
+		约修亚不见了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91368v#0C#40W世界，依然不变地转动。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 5000ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS587._CH"
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS588._CH"
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS589._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS590._CH"
+	VisShow vis[4] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS591._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	Sc_C4Unset 2048
+	TextSetPos 80 200 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91369v#12C呼……约修亚真是的，
+		跑到哪里去了呢。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91370v#12C虽然说是去工作，
+		不过怎么花了这么长时间呢。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91371v#12C玲好不容易才当上
+		正式的『执行者』……#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91372v#12C而且……
+		还想介绍真正的
+		『爸爸和妈妈』给他……#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91373v#12C……………………………#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91374v#12C……嘻嘻，不过没关系。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91375v#12C约修亚一定会回来的。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91376v#12C回来以后……
+		就让他给我讲讲旅行的见闻吧。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91377v#12C是的……
+		……只要他愿意的话，随时都可以………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,9]
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos 400 160 -1 -1
+	TextSetName "小婴儿"
+	TextMessage null {
+		#0721v#12C……呜哇………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0722v#12C呜哇！　呜哇！#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 200 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91378v#12C…………小婴儿？#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91379v#12C嘻嘻，好可爱……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextWait
+	var[4] = 100
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1500ms
+	TextSetPos 80 200 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91380v#12C#40W……真的，好漂亮呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91381v#0C#40W……这是崭新的生命。
+		纯白而纯粹，是美丽无比的存在。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91382v#0C#40W那孩子一定会是个正直的孩子吧。
+		会健康成长，成为出色的大人吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91383v#0C#40W虽然我是不可能了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91384v#0C#40W虽然我已经是不可能的了。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91385v#0C#40W不知名的小婴儿，
+		请你一定要幸福。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TextSetPos 80 200 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91386v#12C#40W……………………………………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextWait
+	var[4] = 70
+	TextSetPos 80 200 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91387v#12C#60W………………………………
+		……为……什么…………？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextWait
+	ForkQuit char[0] fork[3]
+	VisSet vis[2] 4 0 0 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	TextSetPos 400 180 -1 -1
+	TextSetName "似曾相识的男性"
+	TextMessage null {
+		#97437v#12C好可爱呢。
+		简直长得和你一摸一样。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#97438v#12C喏～好乖好乖……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 250 -1 -1
+	TextSetName "似曾相识的女性"
+	TextMessage null {
+		#97445v#12C呵呵，
+		虽然在前一个孩子身上发生了那种事……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#97446v#12C不过太好了。
+		女神并没有
+		舍弃我们呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 400 180 -1 -1
+	TextSetName "似曾相识的男性"
+	TextMessage null {
+		#97439v#12C喂喂。
+		不是说好不提那件事的吗？#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#97440v#12C以前的事情就忘了吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 250 -1 -1
+	TextSetName "似曾相识的女性"
+	TextMessage null {
+		#97447v#12C嗯嗯……虽然可怜，
+		但那样做也是为了那孩子好啊。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 230 220 -1 -1
+	TextSetName "小婴儿"
+	TextMessage null {
+		#0723v#12C呜哇、呜哇……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 250 -1 -1
+	TextSetName "似曾相识的女性"
+	TextMessage null {
+		#97448v#12C哦哦～好好，乖宝宝哦～。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 3 0xFF888888 500ms 0 0
+	Sleep 800ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91388v#0C#40W『玲』
+		已不再纯洁的孩子。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	var[4] = 30
+	Sc_C4Unset 2048
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91389v#0C#40W以前的事。
+		『发生那种事情』的前一个孩子。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91390v#0C#40W原来，是这样。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91391v#0C#40W玲　原来　是这样的啊。
+		从一开始就是。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	var[4] = 20
+	TextMessage null {
+		#91392v#0C#60W玲是#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91393v#0C#40W玲是
+		#40W玲是
+		#40W玲从#150W　生　下　　来　　就　　　是#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 500ms
+	Sc_C4Unset 2048
+	TextSetPos 200 350 -1 -1
+	TextSetName "青年的声音"
+	TextMessage null {
+		#87395v#12C………玲。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkQuit char[3] fork[0]
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	TextSetPos 380 250 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91394v#12C#40W……啊……………#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91395v#12C#40W………莱维………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 200 -1 -1
+	TextSetName "剑帝莱维"
+	TextMessage null {
+		#87396v#12C………………………………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#87397v#12C我们『执行者』
+		所有的行动都是被允许的。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#87398v#12C要怎么处置他们……
+		随你自己的意思就行。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#87399v#12C虽然，
+		我怀疑他们是否有值得我们动手的价值……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[3] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	VisWait vis[3] 3
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91396v#0C#40W超然于善恶生死之处，
+		我淡然走过。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91397v#0C#40W无幸无厄。无悲无喜。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91398v#0C#40W黑白将我撕裂，天地将我捉弄，
+		我变得污秽不堪。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91399v#0C#40W何处为始，何处为终。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91400v#0C#40W我无处容身。
+		也未曾前行。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91401v#0C#40W然而，世界依然转动。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91402v#0C#40W在我所不知道的地方，只有世界在……#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#91403v#0C#40W那么──就这样吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91404v#0C#40W世界永远
+		都是为玲而转动的。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#91405v#0C#40W所以……
+		没什么好伤心的。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sleep 500ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91406v#12C……嘻………#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisSet vis[4] 4 0 0 0 0
+	VisSet vis[4] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos 380 250 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		#91407v#12C嘻嘻……
+		我才不管那些假货。#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#91408v#12C真正的爸爸和妈妈在别的地方呢。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[4] 3 0x00FFFFFF 2000ms 0 0
+	VisWait vis[4] 3
+	VisHide vis[255] 0
+	EffStop eff_instance[0] 0
+	EffStop eff_instance[1] 0
+	EffStop eff_instance[2] 0
+	EffStop eff_instance[3] 0
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	Sc_C4Unset 16
+	NextFrame
+	var[2] = 6
+	Return
+
+fn[9]:
+	while 1:
+		SoundPlay sound[388] 0 0 100
+		Sleep 1000ms
+		SoundPlay sound[388] 0 0 90
+		Sleep 1100ms
+		SoundPlay sound[388] 0 0 100
+		Sleep 1000ms
+		SoundPlay sound[388] 0 0 100
+		Sleep 1200ms
+		SoundPlay sound[388] 0 0 90
+		Sleep 1000ms
+		SoundPlay sound[388] 0 0 90
+		Sleep 1300ms
+	Return
+
+fn[10]:
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 2500ms
+	while 1:
+		ForkFunc char[0] fork[0] fn[0,12]
+		EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+		var[3] = random % var[4]
+		if var[3] < 5:
+			Sleep 250ms
+		elif var[3] < 10:
+			Sleep 400ms
+		elif var[3] < 15:
+			Sleep 700ms
+		elif var[3] < 20:
+			Sleep 1000ms
+		elif var[3] < 35:
+			Sleep 1500ms
+		elif var[3] < 40:
+			Sleep 2000ms
+		elif var[3] < 60:
+			Sleep 3000ms
+		elif var[3] < 80:
+			Sleep 4000ms
+		else:
+			Sleep 5000ms
+	Return
+
+fn[11]:
+	SoundPlay sound[960] 0 0 100
+	Sleep 500ms
+	SoundStop sound[960]
+	Return
+
+fn[12]:
+	SoundPlay sound[960] 0 0 50
+	Sleep 500ms
+	SoundStop sound[960]
+	Return
+
+fn[13]:
+	SoundSetVolume sound[398] 90
+	Sleep 300ms
+	SoundSetVolume sound[398] 80
+	Sleep 300ms
+	SoundSetVolume sound[398] 70
+	Sleep 300ms
+	SoundSetVolume sound[398] 60
+	Sleep 300ms
+	SoundSetVolume sound[398] 50
+	Sleep 300ms
+	SoundSetVolume sound[398] 40
+	Sleep 300ms
+	SoundSetVolume sound[398] 30
+	Sleep 300ms
+	SoundSetVolume sound[398] 20
+	Sleep 300ms
+	SoundSetVolume sound[398] 10
+	Sleep 300ms
+	SoundSetVolume sound[398] 0
+	SoundStop sound[398]
+	Return
+
+fn[14]:
+	SoundPlay sound[398] 1 0 0
+	SoundSetVolume sound[398] 0
+	Sleep 50ms
+	SoundSetVolume sound[398] 10
+	Sleep 50ms
+	SoundSetVolume sound[398] 20
+	Sleep 50ms
+	SoundSetVolume sound[398] 30
+	Sleep 50ms
+	SoundSetVolume sound[398] 40
+	Sleep 50ms
+	SoundSetVolume sound[398] 50
+	Sleep 50ms
+	SoundSetVolume sound[398] 60
+	Sleep 50ms
+	SoundSetVolume sound[398] 70
+	Sleep 50ms
+	SoundSetVolume sound[398] 80
+	Sleep 50ms
+	SoundSetVolume sound[398] 90
+	Sleep 50ms
+	SoundSetVolume sound[398] 100
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	EffLoad eff[0] "map\\mp014_00.eff"
+	EffLoad eff[1] "map\\mp295_00.eff"
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0002
+	CharFlagsSet char[0] 0x0800
+	CharSetPos char[0] (-54650, 100, 42240) 180deg
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[1] (-52420, 100, 44100) 180deg
+	CharAttachObj char[1] object[0]
+	CamLookPos (-55520, 100, 44450) 0ms
+	CamSetDistance 0 5260 -10000 0ms
+	CamZoom 2720 0ms
+	CamRotate 327000mdeg 0ms
+	CamPers 370 0ms
+	Sc_D8 object[0] 500
+	ObjFlagsUnset object[0] 0x0020
+	ObjFrame object[0] 520
+	ObjPlay object[0] 520
+	Sleep 1000ms
+	EffPlay eff[0] eff_instance[255] null 0 (-54650, 100, 42240) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[457] 0 0 100
+	Sleep 1000ms
+	FadeIn 3000ms 0x00000000
+	CamZoom 2520 3000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#91409v#1309F#40W#6P……啊………………{wait}
+	}
+	TextWait
+	Fork char[0] fork[2]:
+		CamZoom 2320 30000ms
+	char[0].8 = 38
+	Sleep 250ms
+	char[0].8 = 39
+	Sleep 300ms
+	char[0].8 = 38
+	Sleep 300ms
+	char[0].8 = 0
+	Sleep 300ms
+	CharAnimation char[0] 0 6 1000ms
+	char[0].8 = 6
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 18
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 6
+	Sleep 200ms
+	Sleep 300ms
+	CharShake char[0] 15 0 300 4000ms
+	Sleep 1000ms
+	TextTalk char[0] {
+		#91410v#268F#6P#40W……好冷………{wait}
+	}
+	TextWait
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[397] 1 0 100
+	EffPlay eff[1] eff_instance[1] char[1] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 2000ms
+	char[0].8 = 11
+	Sleep 200ms
+	char[0].8 = 12
+	Sleep 200ms
+	Sleep 1000ms
+	TextTalk char[0] {
+		#91411v#264F#6P……………………………………{wait}
+	} {
+		#91412v#261F谢谢，『爸爸、妈妈』。{wait}
+	}
+	TextWait
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	EffStop eff_instance[1] 2
+	ForkFunc char[0] fork[0] fn[0,17]
+	Sleep 1000ms
+	Emote char[0] 0mm 1200mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#91413v#263F#6P是啊，这也不错。
+		这也不错嘛。{wait}
+	} {
+		#91414v#265F玲一直都很幸福。
+		一直都很快乐。{wait}
+	} {
+		#91415v#261F所以玲……{wait}
+	}
+	TextWait
+	FadeOut 500ms 0x00000000 255
+	FadeWait
+	Sc_C4Set 2048
+	TextSetPos 300 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#77437v#5C世界不是以玲
+		为中心而转动的。{wait}
+	} {
+		#77438v不会为了玲
+		而做什么改变。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos 100 250 -1 -1
+	TextMessage null {
+		#77439v#5C呵呵，这还用说吗。
+		因为我喜欢玲嘛。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#77440v#5C我什么也不会说……{wait}
+	} {
+		#77441v……玲就照自己心里
+		真实的感觉去判断吧。#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 2048
+	CharSetChipPattern char[0] 21
+	EffLoad eff[1] "map\\mp021_00.eff"
+	EffLoad eff[2] "map\\mp064_01.eff"
+	EffLoad eff[3] "map\\mp065_01.eff"
+	EffLoad eff[4] "map\\mp064_00.eff"
+	EffLoad eff[5] "map\\mp065_00.eff"
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	TextTalk char[0] {
+		#91416v#1309F#6P……………………{wait}
+	}
+	TextWait
+	Sleep 500ms
+	CrossFade 500ms
+	SoundPlay sound[143] 0 0 100
+	CharFlagsUnset char[0] 0x0002
+	CharFlagsUnset char[0] 0x0800
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 1500ms
+	TextTalk char[0] {
+		#91417v#1300F#6P……差不多要天亮了呢。{wait}
+	} {
+		#91418v#1302F走吧。
+		『帕蒂尔·玛蒂尔』。{wait}
+	}
+	TextWait
+	_59
+	ForkQuit char[0] fork[2]
+	Fork char[2] fork[0]:
+		CamLookPos (-55140, 740, 45990) 5000ms
+	Fork char[2] fork[2]:
+		CamZoom 2370 5000ms
+	Fork char[2] fork[1]:
+		CamPers 398 5000ms
+	SoundPlay sound[275] 1 0 60
+	SoundPlay sound[276] 0 0 100
+	EffPlay eff[1] eff_instance[0] char[1] 0 (0, -800, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[204] 0 0 100
+	EffPlay2 eff[4] eff_instance[1] object[0] "Frame86__jet_0" 0 (0, -500, 0) 60 -90 180 1000 1000 1000 0ms
+	EffPlay2 eff[4] eff_instance[2] object[0] "Frame87__jet_1" 0 (0, -500, 0) 30 70 -180 1000 1000 1000 0ms
+	Sleep 1000ms
+	Fork char[1] fork[0]:
+		CharWalkToPos2 self (-52420, 1200, 44100) 1000mm/s 0
+	Sleep 500ms
+	ObjFlagsUnset object[0] 0x0020
+	_ObjB0 object[0] 20
+	ObjFrame object[0] 521
+	ObjPlay object[0] 560
+	ObjWait object[0]
+	CrossFade 500ms
+	EffPlay eff[5] eff_instance[1] char[1] 0 (4950, 2800, 0) 0 0 20 1000 1000 1000 null (0, 0, 0) 1000ms
+	EffPlay eff[5] eff_instance[2] char[1] 0 (-4950, 2800, 0) 0 0 340 1000 1000 1000 null (0, 0, 0) 1000ms
+	Sc_D8 object[0] 1500
+	ObjFlagsSet object[0] 0x0020
+	ObjFrame object[0] 1
+	ObjPlay object[0] 40
+	Fork char[1] fork[0]:
+		CharWalkToPos2 self (-52420, 100, 44100) 1000mm/s 0
+	ForkWait char[1] fork[0]
+	SoundPlay sound[236] 0 0 100
+	Shake 0 200 3000 100ms
+	SoundPlay sound[273] 0 0 100
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1500
+	_ObjB0 object[0] 10
+	ObjFrame object[0] 461
+	ObjPlay object[0] 480
+	ObjWait object[0]
+	ForkWait char[1] fork[0]
+	ForkFunc char[0] fork[0] fn[0,16]
+	ObjFrame object[0] 401
+	ObjPlay object[0] 420
+	ObjWait object[0]
+	ObjFlagsSet object[0] 0x0020
+	ObjFrame object[0] 381
+	ObjPlay object[0] 420
+	ForkWait char[0] fork[0]
+	Sleep 300ms
+	CharFlagsUnset char[0] 0x0010
+	CharFlagsSet char[0] 0x0002
+	CharFlagsSet char[0] 0x0020
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharTurnTo char[0] 0deg 0deg/s
+	Sleep 200ms
+	CharSetChipPattern char[0] 1
+	Sleep 200ms
+	Fork char[0] fork[2]:
+		CharAnimation char[0] 2 7 1000ms
+	Fork char[2] fork[0]:
+		CamLookPos (-54290, 2720, 43500) 1000ms
+	SoundPlay sound[163] 0 0 100
+	_Char96 char[0] (-55190, 3500, 42110) 4000 8000
+	CharFlagsUnset char[0] 0x0004
+	Sc_CF char[0] 0 "Frame85__ren"
+	ForkWait char[0] fork[0]
+	SoundPlay sound[164] 0 0 100
+	char[0].36 = 165
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	CharTurnTo char[0] 315deg 400deg/s
+	ForkWait char[0] fork[0]
+	Sleep 500ms
+	SoundPlay sound[276] 0 0 100
+	EffPlay eff[2] eff_instance[1] char[1] 0 (4600, 2600, 0) 0 0 18 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[2] char[1] 0 (-4600, 2600, 0) 0 0 342 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	Fork char[2] fork[0]:
+		CamLookPos (-52190, 1000, 47820) 4500ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 6920 -10000 4500ms
+	Fork char[2] fork[2]:
+		CamZoom 2860 4500ms
+	Fork char[2] fork[3]:
+		CamRotate 23000mdeg 4500ms
+	Fork char[0] fork[3]:
+		CamPers 407 4500ms
+	ForkFunc char[1] fork[0] fn[0,21]
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2500, 40850) 500mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2500, 40850) 750mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2500, 40850) 1000mm/s 0
+	SoundSetVolume sound[275] 80
+	Sleep 2000ms
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1500
+	ObjFrame object[0] 241
+	ObjPlay object[0] 260
+	ForkWait char[2] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#91419v#1304F#5P目的地是克洛斯贝尔……{wait}
+	} {
+		#91420v到达一定高度以后
+		就关掉推进器
+		切换到飞翔引擎吧。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	EffStop eff_instance[0] 2
+	Sleep 1000ms
+	SoundSetVolume sound[275] 90
+	Sleep 100ms
+	SoundSetVolume sound[275] 100
+	ForkWait char[1] fork[1]
+	ForkWait char[1] fork[0]
+	CrossFade 500ms
+	CamLookPos (-62040, 1600, 39420) 0ms
+	CamSetDistance 0 4990 -10000 0ms
+	CamZoom 2600 0ms
+	CamRotate 271000mdeg 0ms
+	CamPers 440 0ms
+	Fork char[2] fork[2]:
+		CamZoom 2890 8000ms
+	Fog 0xFFB4E6F0 85000 139000 0
+	FadeWait
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 261
+	ObjPlay object[0] 280
+	SoundPlay sound[278] 0 0 100
+	ObjWait object[0]
+	ObjFlagsSet object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 281
+	ObjPlay object[0] 300
+	EffPlay eff[3] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[276] 0 0 100
+	Sleep 2000ms
+	EffPlay eff[2] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffStop eff_instance[1] 2
+	EffStop eff_instance[2] 2
+	Fork char[2] fork[0]:
+		CamLookPos (-70410, 6250, 39710) 4000ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 6070 -10000 4000ms
+	Fork char[2] fork[2]:
+		CamZoom 3440 6000ms
+	Fork char[2] fork[3]:
+		CamRotate 283000mdeg 6000ms
+	Fork char[0] fork[0]:
+		CamPers 420 6000ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 3000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 4000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 8000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 10000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 13000mm/s 0
+	Sleep 100ms
+	FadeOut 2000ms 0x00000000 255
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 18000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 23000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 28000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 33000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 38000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 43000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 48000mm/s 0
+	FadeWait
+	ForkQuit char[1] fork[1]
+	SystemFlagsSet 0x02000000
+	SystemFlagsSet 0x00100000
+	FlagSet flag[9476]
+	NewScene "e0811._sn" 100 0 0
+	Hcf
+	ForkFunc char[0] fork[0] fn[0,19]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkFunc char[0] fork[1] fn[0,20]
+	BgmStop 5000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 15 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『乐园的少女』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[15] 0x10:
+		Sleep 1000ms
+		QuestFlagsSet quest[15] 0x10
+		QuestFlagsSet quest[15] 0x20
+		ItemAdd item[744] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[744]}{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7313._sn" 100 0 0
+	Hcf
+	Return
+
+fn[16]:
+	CharTurnTo char[0] 90deg 400deg/s
+	Sleep 300ms
+	CharWalkToPos2 char[0] (-52610, 100, 41240) 2000mm/s 0
+	Return
+
+fn[17]:
+	SoundSetVolume sound[397] 90
+	Sleep 150ms
+	SoundSetVolume sound[397] 80
+	Sleep 150ms
+	SoundSetVolume sound[397] 70
+	Sleep 150ms
+	SoundSetVolume sound[397] 60
+	Sleep 150ms
+	SoundSetVolume sound[397] 50
+	Sleep 150ms
+	SoundSetVolume sound[397] 40
+	Sleep 150ms
+	SoundSetVolume sound[397] 30
+	Sleep 150ms
+	SoundSetVolume sound[397] 20
+	Sleep 150ms
+	SoundSetVolume sound[397] 10
+	Sleep 150ms
+	SoundSetVolume sound[397] 0
+	SoundStop sound[397]
+	Return
+
+fn[18]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sleep 500ms
+	BgmPlay bgm[110] 0
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}耸立在巨大都市的角落，
+		地主馆风格的坚实宅邸――{wait}
+	} {
+		大理石装饰的外表，
+		沐浴在冰冷的月光下
+		在幽深的黑暗中熠熠生辉――{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}这里是某个组织
+		所运营的黑暗世界的社交场――{wait}
+	} {
+		白色的牢狱中
+		囚禁着小男孩少女――{wait}
+	} {
+		供给怀着无尽欲望者
+		作为邪恶的飨宴――{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	ImageShow "c_vis302._ch" 0 0 500ms
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}承受着肉体、精神的沉重，
+		许多孩子都日渐衰弱――{wait}
+	} {
+		但其中有一位少女，保持了精神上的平衡
+		熬过了苦难的岁月――{wait}
+	} {
+		不过才5岁的少女，
+		也是被父母舍弃来到馆邸的
+		可怜人之一。{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}然后，随着黑暗降临
+		馆邸的门扉再度开启――{wait}
+	} {
+		政府高官乘坐的马车，
+		横在宅邸之前。{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[250] 0 0 100
+	Sleep 3000ms
+	TextSetPos 300 250 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		{color 0}阁下……
+		好久不见。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 100 -1 -1
+	TextSetName "高官"
+	TextMessage null {
+		{color 0}唔……马上带路。{wait}
+	} {
+		主管人啊……
+		今晚心情特别好。{wait}
+	} {
+		因为我期待着
+		特别的招待呢。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 300 250 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		{color 0}是，我明白了{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 1500ms
+	TextSetPos 200 200 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		{color 0}来，玲……{wait}
+	} {
+		……向你最喜欢的
+		叔叔打声招呼吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS303._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos 50 300 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		{color 0}………………………………{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 200 60 -1 -1
+	TextSetName "高官"
+	TextMessage null {
+		{color 0}哦哦……
+		这真是太棒了……{wait}
+	} {
+		来，玲……
+		来这边吧。{wait}
+	} {
+		这可爱的脸蛋
+		可要让我好好看看。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 300 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		{color 0}………………………………{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 200 60 -1 -1
+	TextSetName "高官"
+	TextMessage null {
+		{color 0}呼呼呼……
+		没什么好怕的。{wait}
+	} {
+		只要忍耐一小会儿，
+		乖乖待着就行……{wait}
+	} {
+		那样的话
+		下次睁开眼睛的时候……{wait}
+	} {
+		……所有的一切，
+		都会结束了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 300 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		{color 0}咦……！？{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmStop 2000ms
+	SoundPlay sound[581] 0 0 100
+	SoundPlay sound[556] 0 0 100
+	VisSet vis[0] 0 0 10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 -10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 -10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 -10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 3 0x00FFFFFF 200ms 0 0
+	Sleep 1000ms
+	BgmPlay bgm[41] 0
+	ForkFunc field_party[0] fork[1] fn[0,23]
+	Sleep 1000ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 1000ms
+	ForkQuit field_party[0] fork[1]
+	SoundPlay sound[550] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	TextSetPos 300 150 -1 -1
+	TextSetName "男人的惨叫"
+	TextMessage null {
+		{color 0}#3S啊啊！　{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[911] 0 0 100
+	TextSetPos 100 250 -1 -1
+	TextSetName "男人的惨叫"
+	TextMessage null {
+		{color 0}#3S呜哇！！　{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[524] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[135] 0 0 100
+	Sleep 1000ms
+	TextSetPos 200 200 -1 -1
+	TextSetName "主管人"
+	TextMessage null {
+		{color 0}怎、怎么了！？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 200 80 -1 -1
+	TextSetName "高官"
+	TextMessage null {
+		{color 0}发生了什么事……{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos 200 80 -1 -1
+	TextSetName "高官"
+	TextMessage null {
+		{color 0}#3S……呜、呜！！{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[550] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 1000ms
+	ImageHide 1500ms
+	Sleep 500ms
+	ImageShow "c_vis304._ch" 0 0 500ms
+	Sleep 1000ms
+	TextSetPos 330 300 -1 -1
+	TextSetName "莱维"
+	TextMessage null {
+		{color 0}……又肥又胖的猪。{wait}
+	} {
+		不仅是样子丑陋，
+		连叫声都那么难听……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 180 -1 -1
+	TextSetName "约修亚"
+	TextMessage null {
+		{color 0}……一楼处理完了。{wait}
+	} {
+		剩下的敌人团体
+		好像撤退到2楼了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "莱维"
+	TextMessage null {
+		{color 0}瓮中之鳖啊……{wait}
+	} {
+		……麻烦带路。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 180 -1 -1
+	TextSetName "约修亚"
+	TextMessage null {
+		{color 0}明白……　　{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 2000ms
+	BgmStop 2000ms
+	SoundSetVolume sound[135] 90
+	Sleep 150ms
+	SoundSetVolume sound[135] 80
+	Sleep 150ms
+	SoundSetVolume sound[135] 70
+	Sleep 150ms
+	SoundSetVolume sound[135] 60
+	Sleep 150ms
+	SoundSetVolume sound[135] 50
+	Sleep 150ms
+	SoundSetVolume sound[135] 40
+	Sleep 150ms
+	SoundSetVolume sound[135] 30
+	Sleep 150ms
+	SoundSetVolume sound[135] 20
+	Sleep 150ms
+	SoundSetVolume sound[135] 10
+	Sleep 150ms
+	SoundSetVolume sound[135] 0
+	SoundStop sound[135]
+	Sleep 500ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}袭击馆邸的，
+		是『结社』所属的两名战斗人员。{wait}
+	} {
+		光凭这两人
+		就将组织的人杀个片甲不留。{wait}
+	} {
+		作为对黑暗街市的示威
+		『结社』进行了敌对势力的排除――{wait}
+	} {
+		――由于馆邸是其对象
+		少女勉强得以幸存。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	BgmPlay bgm[115] 0
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}被『结社』接收的少女
+		在各方面都发挥出惊人的才能――{wait}
+	} {
+		很快就作为干部候补
+		接受了正式的训练。{wait}
+	} {
+		从那地狱将其救出的
+		约修亚和莱维成为其兄长。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}约修亚因为特殊任务
+		长期离开『结社』――{wait}
+	} {
+		消息传来时，
+		少女才刚刚
+		投身『结社』不久。{wait}
+	} {
+		心中怀着一缕寂寥，
+		她时隔多日再度来到城市。{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageShow "c_vis305._ch" 0 0 500ms
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}此时映入
+		少女眼帘的――{wait}
+	} {
+		消息传来时，
+		是抱着刚刚出生的婴儿，
+		似曾相识的男女的身影。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 100 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		{color 0}………………………………{wait}
+	} {
+		……爸……爸……妈妈……{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 400 80 -1 -1
+	TextSetName "莱维"
+	TextMessage null {
+		{color 0}那么……
+		你打算怎么办？{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS306._CH"
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS348._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1000ms
+	TextSetPos 380 60 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		{color 0}莱维……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 200 -1 -1
+	TextSetName "莱维"
+	TextMessage null {
+		{color 0}虽然有没有被杀的价值还是个问题……{wait}
+	} {
+		要怎么处理他们
+		是你的自由……{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 500ms
+	TextSetPos 350 60 -1 -1
+	TextSetName "玲"
+	TextMessage null {
+		{color 0}……不，算了。{wait}
+	} {
+		那些假货
+		怎样都无所谓。{wait}
+	} {
+		真正的爸爸和妈妈
+		在别的地方呢。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	BgmStop 2000ms
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1000ms
+	VisHide vis[255] 0
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-54650, 100, 42240) 180deg
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[1] (-52420, 100, 44100) 180deg
+	CharAttachObj char[1] object[0]
+	CamLookPos (-55520, 100, 44450) 0ms
+	CamSetDistance 0 5260 -10000 0ms
+	CamZoom 2520 0ms
+	CamRotate 327000mdeg 0ms
+	CamPers 370 0ms
+	Sleep 1000ms
+	EffLoad eff[0] "map\\\\mp014_00.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-54650, 100, 42240) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[457] 0 0 100
+	BgmPlay bgm[84] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	TextTalk char[0] {
+		#260F#6P……啊…………{wait}
+	}
+	TextWait
+	char[0].8 = 38
+	Sleep 250ms
+	char[0].8 = 39
+	Sleep 300ms
+	char[0].8 = 38
+	Sleep 300ms
+	char[0].8 = 0
+	Sleep 300ms
+	CharAnimation char[0] 0 6 1000ms
+	char[0].8 = 6
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 18
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 6
+	Sleep 200ms
+	Sleep 300ms
+	CharShake char[0] 15 0 300 4000ms
+	Sleep 1000ms
+	TextTalk char[0] {
+		#260F#6P是了……{wait}
+	} {
+		我说怎么这么冷，
+		原来下雨了啊……{wait}
+	}
+	TextWait
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 500
+	ObjFrame object[0] 461
+	ObjPlay object[0] 480
+	ObjWait object[0]
+	Sc_D8 object[0] 500
+	ObjFlagsSet object[0] 0x0020
+	ObjFrame object[0] 381
+	ObjPlay object[0] 420
+	Sleep 1000ms
+	char[0].8 = 11
+	Sleep 200ms
+	char[0].8 = 12
+	Sleep 200ms
+	Sleep 300ms
+	TextTalk char[0] {
+		#260F#6P呵呵，谢谢。
+		『帕蒂尔·玛蒂尔』。{wait}
+	} {
+		那么，我们走吧。{wait}
+	}
+	TextWait
+	_59
+	CrossFade 500ms
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 300ms
+	CharWalkToPos2 char[0] (-55170, 60, 39450) 2000mm/s 0
+	Fork field_party[0] fork[0]:
+		CamLookPos (-55780, 1980, 44190) 1000ms
+	Sleep 300ms
+	SoundPlay sound[163] 0 0 100
+	CharSetChipPattern char[0] 0
+	CharSetChipBase char[0] chip[1]
+	Fork char[0] fork[2]:
+		CharAnimation char[0] 0 2 2500ms
+	CharFlagsSet char[0] 0x0004
+	_Char96 char[0] (-55190, 3500, 42110) 4000 8000
+	CharFlagsUnset char[0] 0x0004
+	Sc_CF char[0] 0 "Frame85__ren"
+	CharSetChipPattern char[0] 0
+	CharSetChipBase char[0] chip[0]
+	SoundPlay sound[164] 0 0 100
+	CharFlagsSet char[0] 0x0010
+	CharTurnTo char[0] 180deg 0deg/s
+	Sleep 500ms
+	CharTurnTo char[0] 0deg 400deg/s
+	CharFlagsUnset char[0] 0x0010
+	ForkWait field_party[0] fork[0]
+	EffLoad eff[1] "map\\\\mp021_00.eff"
+	EffLoad eff[2] "map\\\\mp064_01.eff"
+	EffLoad eff[3] "map\\\\mp065_01.eff"
+	EffLoad eff[4] "map\\\\mp064_00.eff"
+	EffLoad eff[5] "map\\\\mp065_00.eff"
+	Sleep 500ms
+	SoundPlay sound[275] 1 0 70
+	SoundPlay sound[276] 0 0 100
+	EffPlay eff[1] eff_instance[0] char[1] 0 (0, -500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[204] 0 0 100
+	EffPlay eff[4] eff_instance[1] char[1] 0 (4950, 2800, 0) 0 0 20 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[2] char[1] 0 (-4950, 2800, 0) 0 0 340 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 2000ms
+	EffPlay eff[2] eff_instance[1] char[1] 0 (5000, 2500, 0) 0 0 20 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[2] char[1] 0 (-4900, 2500, 0) 0 0 340 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (-52190, 710, 47820) 4500ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 6920 -10000 4500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2860 4500ms
+	Fork field_party[0] fork[3]:
+		CamRotate 23000mdeg 4500ms
+	Fork field_party[1] fork[1]:
+		CamPers 407 4500ms
+	ForkFunc char[1] fork[0] fn[0,21]
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 500mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 750mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 1000mm/s 0
+	SoundSetVolume sound[275] 80
+	Sleep 100ms
+	Sleep 2000ms
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 500
+	ObjFrame object[0] 241
+	ObjPlay object[0] 260
+	EffStop eff_instance[0] 2
+	Sleep 50ms
+	EffPlay eff[2] eff_instance[1] char[1] 0 (4600, 2600, 0) 0 0 18 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[2] char[1] 0 (-4600, 2600, 0) 0 0 342 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 750mm/s 0
+	SoundSetVolume sound[275] 90
+	Sleep 100ms
+	SoundSetVolume sound[275] 100
+	ForkWait char[1] fork[1]
+	ForkWait char[1] fork[0]
+	ForkWait field_party[0] fork[0]
+	CrossFade 500ms
+	CamLookPos (-62040, 1600, 39420) 0ms
+	CamSetDistance 0 4990 -10000 0ms
+	CamZoom 2890 0ms
+	CamRotate 271000mdeg 0ms
+	CamPers 440 0ms
+	Fog 0xFFB4E6F0 85000 139000 0
+	FadeWait
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 261
+	ObjPlay object[0] 280
+	SoundPlay sound[278] 0 0 100
+	ObjWait object[0]
+	ObjFlagsSet object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 281
+	ObjPlay object[0] 300
+	EffPlay eff[3] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[276] 0 0 100
+	Sleep 2000ms
+	EffPlay eff[2] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffStop eff_instance[1] 2
+	EffStop eff_instance[2] 2
+	Fork field_party[0] fork[0]:
+		CamLookPos (-62040, 2500, 39670) 4000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 3700 -10000 4000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 4050 4000ms
+	Fork field_party[0] fork[3]:
+		CamPers 382 4000ms
+	Sleep 500ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 3000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 4000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 8000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 10000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 13000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 18000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 23000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 28000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 33000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 38000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 43000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 48000mm/s 0
+	ForkWait char[1] fork[1]
+	ForkFunc char[0] fork[0] fn[0,19]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkFunc char[0] fork[1] fn[0,20]
+	BgmStop 2000ms
+	Sleep 2000ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[15] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[15] 0x10
+		ItemAdd item[744] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[744]}{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7313._sn" 100 0 0
+	Hcf
+	Return
+
+fn[19]:
+	SoundSetVolume sound[275] 90
+	Sleep 200ms
+	SoundSetVolume sound[275] 80
+	Sleep 200ms
+	SoundSetVolume sound[275] 70
+	Sleep 200ms
+	SoundSetVolume sound[275] 60
+	Sleep 200ms
+	SoundSetVolume sound[275] 50
+	Sleep 200ms
+	SoundSetVolume sound[275] 40
+	Sleep 200ms
+	SoundSetVolume sound[275] 30
+	Sleep 200ms
+	SoundSetVolume sound[275] 20
+	Sleep 200ms
+	SoundSetVolume sound[275] 10
+	Sleep 200ms
+	SoundSetVolume sound[275] 0
+	SoundStop sound[275]
+	Return
+
+fn[20]:
+	SoundSetVolume sound[457] 90
+	Sleep 200ms
+	SoundSetVolume sound[457] 80
+	Sleep 200ms
+	SoundSetVolume sound[457] 70
+	Sleep 200ms
+	SoundSetVolume sound[457] 60
+	Sleep 200ms
+	SoundSetVolume sound[457] 50
+	Sleep 200ms
+	SoundSetVolume sound[457] 40
+	Sleep 200ms
+	SoundSetVolume sound[457] 30
+	Sleep 200ms
+	SoundSetVolume sound[457] 20
+	Sleep 200ms
+	SoundSetVolume sound[457] 10
+	Sleep 200ms
+	SoundSetVolume sound[457] 0
+	SoundStop sound[457]
+	Return
+
+fn[21]:
+	Sleep 1000ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 10deg/s
+	Sleep 200ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 15deg/s
+	Sleep 200ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 20deg/s
+	Sleep 500ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 30deg/s
+	Sleep 100ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 40deg/s
+	Return
+
+fn[22]:
+	CharWalkToPos2 self (-55170, 60, 39450) 2000mm/s 0
+	Sleep 300ms
+	SoundPlay sound[163] 0 0 100
+	CharSetChipPattern self 0
+	CharSetChipBase self chip[1]
+	Fork self fork[2]:
+		CharAnimation self 0 2 2500ms
+	_Char96 self (-55190, 3050, 42110) 3500 8000
+	Sc_CF self 0 "Frame85__ren"
+	CharSetChipPattern self 0
+	CharSetChipBase self chip[0]
+	SoundPlay sound[164] 0 0 100
+	Sleep 300ms
+	CharFlagsSet self 0x0010
+	CharTurnTo self 180deg 400deg/s
+	CharFlagsUnset self 0x0010
+	Return
+
+fn[23]:
+	while 1:
+		SoundPlay sound[565] 0 0 80
+		Sleep 1000ms
+		SoundPlay sound[503] 0 0 80
+		Sleep 1000ms
+		SoundPlay sound[503] 0 0 80
+		Sleep 500ms
+		SoundPlay sound[565] 0 0 80
+		Sleep 800ms
+	Return

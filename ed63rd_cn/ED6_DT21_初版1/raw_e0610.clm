@@ -1,0 +1,346 @@
+calmare tc scena
+scena:
+	name "Event" "E0610.x"
+	town town[1]
+	bgm bgm[1]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20396._ch" "apl2/ch20396p._cp"
+chip[1] "apl2/ch20760._ch" "apl2/ch20760p._cp"
+
+npc char[0]:
+	name "强化猎兵"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "强化猎兵"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "强化猎兵"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "基尔巴特"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 1:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			system[1] = 0
+			Event fn[0,3]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			system[1] = 82
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	SoundPlay sound[122] 1 0 70
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundSetVolume sound[122] 70
+	CamLookPos (-72100, 1000, 980) 0ms
+	CamSetDistance 0 5680 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 320000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[3] (-70600, 1200, -160) 270deg
+	CharSetPos char[1] (-70600, 1200, 2150) 270deg
+	CharSetPos char[2] (-70600, 1200, -2500) 270deg
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[3] 0x0004
+	CharFlagsSet char[1] 0x0004
+	CharFlagsSet char[2] 0x0004
+	CharSetChipPattern char[3] 0
+	CharSetChipPattern char[1] 0
+	CharSetChipPattern char[2] 0
+	CharFlagsSet char[3] 0x0002
+	_76 4 0 1 -6 -3 0 0 0
+	_76 4 1 1 -8 -5 0 0 0
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	FadeIn 1500ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[2] {
+		#99712v#6P是帝国莱恩福尔特社
+		制造的『山猫号』……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#99713v#6P是认识的船吗？{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96039v啊，是老相识了。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96040v话说回来……
+		这个资料，很有意思呢。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96041v『卡普亚特急便』……
+		那些空贼们现在
+		弄起了物流公司呢。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96042v哎呀哎呀……
+		还真是小家子气啊。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99702v哼，不管怎样，
+		那边好像没什么战斗的意思。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99703v就这样先放着吧。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96043v……等等。
+		忘了我们的任务了吗？{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96044v那不是正适合充当
+		这次测试的对手吗？{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[39] 0 0 100
+	Emote char[2] 200mm 1700mm 2 7 100ms 1
+	Sleep 50ms
+	SoundPlay sound[39] 0 0 100
+	Emote char[1] 200mm 1700mm 2 7 100ms 1
+	Sleep 1000ms
+	CharSetChipPattern char[1] 1
+	Sleep 50ms
+	CharSetChipPattern char[2] 2
+	Sleep 300ms
+	TextTalk char[1] {
+		#99704v难道……
+		你想和他们交手？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#99714v#6P不管怎么说，
+		这次的计划只有测试运行而已。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96045v哼，就是因为你老说这种话
+		才一直升不了官。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96046v对手是王国军的话则另当别论……{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96047v那些家伙们可没有任何背景。
+		攻击他们不会冒任何风险。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99705v那、那倒也是……{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96048v而且『十三工房』
+		也正期待着精确的实战数据。{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "青发的猎兵" {
+		#96049v所以我们只会得到表扬，
+		不用担心被处罚啦。{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 0
+	Sleep 300ms
+	TextTalk char[1] {
+		#99706v……明白了，既然你都说到这份上了。{wait}
+	}
+	TextWait
+	CharSetChipPattern char[2] 0
+	Sleep 300ms
+	TextTalk char[2] {
+		#99715v#6P但是，责任你来承担哦。{wait}
+	}
+	TextWait
+	system[28] = 1
+	ForkLoop char[0] fork[3]:
+		Shake 50 50 3000 1000ms
+	SoundSetVolume sound[122] 80
+	Sleep 200ms
+	SoundSetVolume sound[122] 90
+	Sleep 200ms
+	SoundSetVolume sound[122] 100
+	Sleep 600ms
+	Fork char[4] fork[0]:
+		CamLookPos (-32100, 1000, 980) 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	system[28] = 0
+	FlagSet flag[9477]
+	NewScene "e0110._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundSetVolume sound[122] 70
+	CamLookPos (-72100, 1000, 980) 0ms
+	CamSetDistance 0 5680 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 320000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[1] (-70600, 1200, 2150) 270deg
+	CharSetPos char[2] (-70600, 1200, -2500) 270deg
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[1] 0x0004
+	CharFlagsSet char[2] 0x0004
+	CharSetChipPattern char[1] 0
+	CharSetChipPattern char[2] 0
+	_76 4 0 1 -6 -3 0 0 0
+	_76 4 1 1 -8 -5 0 0 0
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	Emote char[2] 200mm 1500mm 24 27 250ms 0
+	Emote char[1] 200mm 1500mm 24 27 250ms 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EmoteStop char[2]
+	EmoteStop char[1]
+	Sleep 500ms
+	CharSetChipPattern char[2] 2
+	Sleep 300ms
+	TextTalk char[2] {
+		#99716v#6P……怎么办？要把他回收吗？{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 1
+	Sleep 300ms
+	TextTalk char[1] {
+		#99707v哎？啊啊……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99708v不回收应该没什么关系的吧？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#99717v#6P但是，肯帕雷拉大人
+		好像挺中意那个家伙呢。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99709v所以最好还是……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99710v更何况，
+		肯帕雷拉大人的性情又那么特别。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99711v要是如实报告，
+		他说不定会更高兴呢。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#99718v#6P…………………………{wait}
+	}
+	TextWait
+	CharSetChipPattern char[2] 0
+	Sleep 500ms
+	TextTalk char[2] {
+		#99719v#6P……说的也是。{wait}
+	}
+	TextWait
+	_59
+	CharSetChipPattern char[1] 0
+	Sleep 300ms
+	Fork char[4] fork[0]:
+		CamLookPos (-32100, 1000, 980) 7000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9479]
+	NewScene "e0810._sn" 100 0 0
+	Hcf
+	Return

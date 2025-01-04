@@ -1,0 +1,462 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4110.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01030._ch" "npl/ch01030p._cp"
+chip[1] "npl/ch01043._ch" "npl/ch01043p._cp"
+chip[2] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[3] "npl/ch01490._ch" "npl/ch01490p._cp"
+chip[4] "npl/ch01180._ch" "npl/ch01180p._cp"
+chip[5] "npl/ch01460._ch" "npl/ch01460p._cp"
+chip[6] "npl/ch01140._ch" "npl/ch01140p._cp"
+
+npc char[0]:
+	name "西加罗"
+	pos (7220, 200, 53570)
+	angle 269deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[0,8]
+
+npc char[1]:
+	name "芭蒂"
+	pos (-29600, 4000, 1830)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[2]:
+	name "拉尔夫"
+	pos (-27310, 0, -4370)
+	angle 81deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[3]:
+	name "比尔爷爷"
+	pos (26900, 4000, -470)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,5]
+
+npc char[4]:
+	name "伊鲁妮婆婆"
+	pos (26830, 4000, -1620)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,6]
+
+npc char[5]:
+	name "丹克"
+	pos (91740, 0, -1110)
+	angle 23deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,7]
+
+npc char[6]:
+	name "梅洛涅"
+	pos (51810, 0, 56250)
+	angle 225deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,10]
+
+npc char[7]:
+	name "贝斯卡"
+	pos (51250, 0, 55180)
+	angle 270deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,9]
+
+fn[0]:
+	if system[66] == 7:
+		CharFlagsSet char[11] 0x0010
+		CharFlagsSet char[12] 0x0010
+	Return
+
+fn[1]:
+	OpLoad "t4110_n"
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (-30880, null, 4000) (-29430, null, 0) 2000mm/s
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[0]:
+			TextTalk self {
+				我那么说了之后，
+				他就在王都买了房子……{wait}
+			}
+			TextWait
+			TextTalk self {
+				我真是倍受宠爱啊～㈱{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				说要住在大都市的
+				是我啦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				因为是难得的新居嘛。
+				要心满意足才行呢。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[0]:
+			TextTalk self {
+				嗯，大都市真是好啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				买东西也很方便。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				嘻嘻，
+				我缠着老公买了房子呢㈱{wait}
+			}
+			TextWait
+			TextTalk self {
+				住在王都，
+				是不是比较浪漫呢？{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[1]:
+			TextTalk self {
+				总感觉这好像是
+				拿妻子的任性
+				没办法的结果。{wait}
+			}
+			TextWait
+			TextTalk self {
+				今天也是，
+				把家务都推给我……{wait}
+			}
+			TextWait
+			TextTalk self {
+				这样好吗……？{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				最近房地产的价格
+				也上涨了呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				虽然我也觉得
+				是买房的时候了……{wait}
+			}
+			TextWait
+			TextTalk self {
+				可总感觉这好像是
+				拿妻子的任性
+				没办法的结果……{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[1]:
+			TextTalk self {
+				一忍不住
+				就买下了这栋房子呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				…………好贵啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				怎样，不错的房子吧。{wait}
+			}
+			TextWait
+			TextTalk self {
+				我们买下来了哦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				………………一忍不住就……{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		TextTalk self {
+			老太婆啊，
+			差不多该去艾尔贝离宫了吧。{wait}
+		}
+		TextWait
+		TextTalk self {
+			那里最适合散步了。{wait}
+		}
+		TextWait
+	elif flag[12107]:
+	elif flag[12106]:
+		TextTalk self {
+			啊啊，天气真好。{wait}
+		}
+		TextWait
+		TextTalk self {
+			今天也是
+			平静的一天呢。{wait}
+		}
+		TextWait
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		TextTalk self {
+			嗯嗯，
+			那个地方很漂亮的。{wait}
+		}
+		TextWait
+		TextTalk self {
+			不过老头子，
+			你可别太勉强哦。{wait}
+		}
+		TextWait
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[2]:
+			TextTalk self {
+				能从那场战争灾祸中恢复过来，
+				都是多亏了女王陛下啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				我从内心
+				对她充满感激。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				嗯嗯，和平是最重要的了。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[12112]:
+		if flag[4]:
+			TextTalk self {
+				我在港口工作哦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				今天天气很好，
+				说不定可以看见海市蜃楼哦。{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo self 23deg 0deg/s
+			TextTalk self {
+				好～
+				房子漏水的地方也修好了……{wait}
+			}
+			TextWait
+			TextTalk self {
+				嘿～
+				今天也要打起精神干活啊！{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12112]:
+		if flag[5]:
+			TextTalk self {
+				很快就该到
+				大主教大人讲话的时间了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				大主教大人的讲话，
+				可真让人受益匪浅啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				你们也一起来听听怎么样？{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				哎呀，很快就该到
+				大主教大人讲话的时间了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				要赶快
+				去大圣堂才行呢。{wait}
+			}
+			TextWait
+			FlagSet flag[5]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12112]:
+		if flag[6]:
+			TextTalk self {
+				看，
+				这个是很有前途的品种吧？{wait}
+			}
+			TextWait
+			TextTalk self {
+				啊啊，
+				真想借个真正的农场做实验啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				我正在研究
+				农作物的栽培技术。{wait}
+			}
+			TextWait
+			TextTalk self {
+				……话虽如此，
+				也只不过是凭兴趣随便弄弄而已。{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12112]:
+		if flag[7]:
+			TextTalk self {
+				因为我喜欢过
+				被绿色围绕的生活嘛。{wait}
+			}
+			TextWait
+			TextTalk self {
+				……能和这个人在一起
+				真是太好了。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				呵呵，
+				我丈夫兴趣很奇怪吧？{wait}
+			}
+			TextWait
+			TextTalk self {
+				不过我觉得
+				那是个很不错的兴趣。{wait}
+			}
+			TextWait
+			TextTalk self {
+				因为，
+				被绿色围绕的生活，
+				不是很棒吗？{wait}
+			}
+			TextWait
+			FlagSet flag[7]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return

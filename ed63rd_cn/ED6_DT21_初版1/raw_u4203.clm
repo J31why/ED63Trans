@@ -1,0 +1,562 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4203.x"
+	town town[1]
+	bgm bgm[230]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+trigger[0]:
+	pos1 (-5190, -1000, 30500)
+	pos2 (4870, 4000, 32610)
+	flags 0x0000
+	func fn[0,3]
+	unk1 0
+
+trigger[1]:
+	pos1 (-4830, -1000, 39930)
+	pos2 (5050, 4000, 42840)
+	flags 0x0000
+	func fn[0,4]
+	unk1 0
+
+trigger[2]:
+	pos1 (-4730, -1000, 44380)
+	pos2 (5040, 4000, 45860)
+	flags 0x0000
+	func fn[0,9]
+	unk1 0
+
+trigger[3]:
+	pos1 (-12200, -1000, -12000)
+	pos2 (11280, 4000, -9690)
+	flags 0x0000
+	func fn[0,10]
+	unk1 0
+
+look_point[0]:
+	pos (7050, 0, 11870)
+	radius 1000mm
+	bubble_pos (8000, 3000, 12000)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,8]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -112000) "mt4200._ch"
+	SoundPlay sound[460] 1 0 100
+	if !flag[10005]:
+		system[1] = 221
+		SystemFlagsSet 0x02000000
+	if flag[10005]:
+		ObjFlagsUnset object[0] 0x0010
+		ObjFlagsUnset object[0] 0x0008
+		ObjFrame object[0] 450
+	if flag[10004]:
+		ObjFlagsSet object[10] 0x0004
+		ObjFlagsSet object[11] 0x0004
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[13] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (0, 7700, 16000) 0ms
+	CamSetDistance 0 8600 -10000 0ms
+	CamZoom 2260 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 346 0ms
+	Fork name[8] fork[0]:
+		CamLookPos (0, 7500, 35300) 5500ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 3640 -10000 5500ms
+	Fork name[8] fork[2]:
+		CamZoom 2440 5500ms
+	Fork name[14] fork[1]:
+		CamPers 325 5500ms
+	FadeIn 2000ms 0x00000000
+	ForkWait name[8] fork[0]
+	Sleep 500ms
+	CrossFade 1000ms
+	Fork name[8] fork[2]:
+		CamZoom 2200 2000ms
+	SoundPlay sound[279] 0 0 100
+	ObjFlagsSet object[10] 0x0004
+	ObjFlagsSet object[11] 0x0004
+	FadeWait
+	Sleep 1500ms
+	BgmStop 1000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	SoundStop sound[460]
+	BgmWait
+	FlagSet flag[9482]
+	NewScene "u7000._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	if flag[10005]:
+		Return
+	if !flag[10004]:
+		Return
+	EventBegin 0
+	BgmStop 2000ms
+	SoundPlay sound[210] 0 0 100
+	Sleep 500ms
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CrossFade 1000ms
+	CamLookPos (0, 4300, 25980) 0ms
+	CamSetDistance 0 2470 -10000 0ms
+	CamZoom 2730 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 375 0ms
+	CharSetPos name[8] (-470, 0, 27000) 0deg
+	CharSetPos name[14] (1000, 0, 26800) 0deg
+	CharSetPos party[2] (-1080, 0, 24890) 0deg
+	CharSetPos party[3] (1480, 0, 24640) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	Fork name[8] fork[0]:
+		CamLookPos (0, 4650, 43280) 10000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 1000 -10000 10000ms
+	Fork name[8] fork[2]:
+		CamZoom 1800 14000ms
+	Fork name[14] fork[1]:
+		CamPers 580 14000ms
+	SoundPlay sound[133] 1 0 100
+	ObjFlagsUnset object[0] 0x0020
+	ObjFlagsUnset object[0] 0x0010
+	_ObjB0 object[0] 35
+	ObjFrame object[0] 0
+	ObjPlay object[0] 450
+	ObjWait object[0]
+	SoundStop sound[133]
+	SoundPlay sound[200] 0 0 100
+	Shake 10 10 5000 300ms
+	Sleep 1000ms
+	ForkWait name[8] fork[2]
+	BgmPlay bgm[230] 0
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CharSetPos name[8] (-320, 0, 40870) 0deg
+	CharSetPos name[14] (1220, 0, 40770) 0deg
+	CharSetPos party[2] (-480, 0, 38690) 0deg
+	CharSetPos party[3] (1110, 0, 38690) 0deg
+	CamLookPos (-190, 1750, 39470) 0ms
+	CamSetDistance 0 4430 -10000 0ms
+	CamZoom 2850 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 309 0ms
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	if PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#82612v#065F#6P哇、哇啊……{wait}
+		}
+		TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84035v#212F#6P呜……{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#88707v#1068F#6P哈哈，怎么说呢……
+		真是让人毛骨悚然啊。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91918v#1446F#5P因为是很古旧的城堡，
+		真是气氛十足啊。{wait}
+	} {
+		#91919v#1443F只是有点做作的感觉。{wait}
+	}
+	TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#84708v#175F#6P哼……
+			怎么可以这样！{wait}
+		} {
+			#84709v#178F凯文神父！
+			我们赶快进去吧！{wait}
+		}
+		TextWait
+		Fork name[8] fork[0]:
+			CharTurnTo self 180deg 400deg/s
+		Sleep 100ms
+		CharTurnTo name[14] 180deg 400deg/s
+		TextTalk name[8] {
+			#88708v#1065F#5P嗯，我知道了。{wait}
+		} {
+			#88709v#1063F那就……
+			做好准备往里面冲吧！{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] == -1:
+		if PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85450v#270F#6P凯文神父……
+				我们现在进去吗？{wait}
+			}
+			TextWait
+			Fork name[8] fork[0]:
+				CharTurnTo self 180deg 400deg/s
+			Sleep 100ms
+			CharTurnTo name[14] 180deg 400deg/s
+			TextTalk name[8] {
+				#88710v#1065F#5P……不。
+				最好带上尤莉亚小姐
+				一起进去。{wait}
+			} {
+				#88711v#1063F她一直担心着
+				王城里面的人，
+				而且对城里也很熟悉。{wait}
+			}
+			TextWait
+			TextTalk name[12] {
+				#85451v#277F#6P是啊……你说的没错。{wait}
+			}
+			TextWait
+		elif PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#77523v#1502F#6P……怎么办？
+				就这样继续往里走吗？{wait}
+			}
+			TextWait
+			Fork name[8] fork[0]:
+				CharTurnTo self 180deg 400deg/s
+			Sleep 100ms
+			CharTurnTo name[14] 180deg 400deg/s
+			TextTalk name[8] {
+				#88712v#1065F#5P……不。
+				最好带上尤莉亚小姐
+				一起进去。{wait}
+			} {
+				#88713v#1063F她一直担心着
+				王城里面的人，
+				而且对城里也很熟悉。{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#77524v#1500F#6P没错……{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#82613v#063F#6P那个……
+				我们现在就要进去吗？{wait}
+			}
+			TextWait
+			Fork name[8] fork[0]:
+				CharTurnTo self 180deg 400deg/s
+			Sleep 100ms
+			CharTurnTo name[14] 180deg 400deg/s
+			TextTalk name[8] {
+				#88714v#1065F#5P……不。
+				最好带上尤莉亚小姐
+				一起进去。{wait}
+			} {
+				#88715v#1063F她一直担心着
+				王城里面的人，
+				而且对城里也很熟悉。{wait}
+			}
+			TextWait
+			TextTalk name[6] {
+				#82614v#560F#6P是、是啊……
+				那就这样办吧。{wait}
+			}
+			TextWait
+		TextTalk name[14] {
+			#91920v#1448F#5P我们先回据点一趟
+			把她带过来吧。{wait}
+		}
+		TextWait
+		QuestTaskSet quest[45] 0x0008
+	Sleep 300ms
+	Fork name[8] fork[0]:
+		CamZoom 3050 3000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[8] fork[0]
+	FlagSet flag[10005]
+	QuestTaskSet quest[45] 0x0004
+	CharSetPos field_party[0] (200, 0, 38220) 180deg
+	CharSetPos field_party[1] (200, 0, 38220) 180deg
+	CharSetPos field_party[2] (200, 0, 38220) 180deg
+	CharSetPos field_party[3] (200, 0, 38220) 180deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	if PartyPosition name[13] != -1:
+		CharTurnTo field_party[0] 0deg 0deg/s
+		CharTurnTo field_party[1] 0deg 0deg/s
+		CharTurnTo field_party[2] 0deg 0deg/s
+		CharTurnTo field_party[3] 0deg 0deg/s
+	CamLookPos (200, 0, 38220) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CamLookChar field_party[0] 0ms
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[4]:
+	if system[4] >= 3:
+		Return
+	if !flag[10004]:
+		Return
+	if PartyPosition name[13] != -1:
+		Return
+	EventBegin 1
+	CrossFade 500ms
+	CharSetPos name[8] (210, 0, 40660) 0deg
+	CharSetPos name[14] (230, 0, 38940) 0deg
+	CharSetPos party[2] (-790, 0, 37610) 0deg
+	CharSetPos party[3] (1120, 0, 37800) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookPos (1480, 0, 40650) 0ms
+	CamSetDistance 0 7020 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk name[8] {
+		#88716v#1063F#5P（……进城之前
+		  还是先把尤莉亚小姐带来吧。）{wait}
+	} {
+		#88717v（她一直担心得不得了，
+		  而且对里面也很熟悉。）{wait}
+	}
+	TextWait
+	Sleep 300ms
+	QuestTaskSet quest[45] 0x0008
+	CrossFade 500ms
+	CharSetPos field_party[0] (200, 0, 38220) 180deg
+	CharSetPos field_party[1] (200, 0, 38220) 180deg
+	CharSetPos field_party[2] (200, 0, 38220) 180deg
+	CharSetPos field_party[3] (200, 0, 38220) 180deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookPos (200, 0, 38220) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	Sleep 50ms
+	EventEnd 4
+	Return
+
+fn[5]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}打开『门』吗？{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"【是】" // 0
+		"【否】" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[6]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (5590, 0, 12650) 90deg
+	CharSetPos field_party[1] (5450, 0, 10750) 90deg
+	CharSetPos field_party[2] (3540, 0, 12510) 90deg
+	CharSetPos field_party[3] (3520, 0, 10430) 90deg
+	CamLookPos (5630, 0, 11740) 0ms
+	CamSetDistance 0 6820 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	if !QuestFlagsGet quest[13] 0x02:
+		QuestFlagsSet quest[13] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99891v{color 5}#40W　　　汝须将王宫守护之刀，
+		　  与侍奉皇室之钢剑一同
+		　　   引领至吾面前。
+		#500W
+		#40W   如此，则『门』将开启……{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if PartyPosition name[13] != -1 && PartyPosition name[12] != -1:
+		Call fn[0,5]
+		if var[0] == 0:
+			Call fn[0,7]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[7]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[12] 0
+	ObjPlay object[12] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[12]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2830 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 0 0 0
+	NewScene "p9001._sn" 100 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (5590, 0, 12650) 90deg
+	CharSetPos field_party[1] (5450, 0, 10750) 90deg
+	CharSetPos field_party[2] (3540, 0, 12510) 90deg
+	CharSetPos field_party[3] (3520, 0, 10430) 90deg
+	CamLookPos (5630, 0, 11740) 0ms
+	CamSetDistance 0 6820 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return
+
+fn[9]:
+	SystemFlagsSet 0x02000000
+	Return
+
+fn[10]:
+	SystemFlagsUnset 0x02000000
+	Return

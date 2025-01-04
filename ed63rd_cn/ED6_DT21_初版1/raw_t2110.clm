@@ -1,0 +1,1233 @@
+calmare fc scena
+scena:
+	name "Ruan" "T2110.x"
+	town town[1]
+	bgm bgm[12]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01230._ch" "npl/ch01230p._cp"
+chip[1] file[0x002603E4] file[0x002603E9]
+chip[2] "npl/ch01200._ch" "npl/ch01200p._cp"
+chip[3] "npl/ch01233._ch" "npl/ch01233p._cp"
+chip[4] file[0x002602F6] file[0x002602FB]
+chip[5] "apl/ch20021._ch" "apl/ch20021p._cp"
+chip[6] file[0x002603E5] file[0x002603EA]
+chip[7] file[0x00260099] file[0x0026009E]
+
+npc char[0]:
+	name "米拉诺"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "秘书凯诺娜"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "诺曼市长"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "资料１"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 26
+	ch chip[5]
+	flags 0x01F6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "资料２"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 28
+	ch chip[5]
+	flags 0x01F6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "资料２"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[7]
+	frame 2
+	ch chip[7]
+	flags 0x01F6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "信"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 17
+	ch chip[5]
+	flags 0x01F6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[7]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 20:
+		if flag[9478]:
+			FlagUnset flag[9478]
+			SystemFlagsSet 0x10000000
+			FlagSet flag[0]
+			system[1] = 84
+			Event fn[0,18]
+		elif flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			FlagSet flag[0]
+			system[1] = 15
+			Event fn[0,15]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,5]
+	Return
+
+fn[1]:
+	if system[66] == 20:
+		if flag[0]:
+			FlagUnset flag[0]
+			OpLoad "T2110_1"
+		else:
+			OpLoad "T2110_0"
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	while 1:
+		CharIdle self (-6630, null, 65280) (-3270, null, 67330) 1000mm/s
+	Return
+
+fn[4]:
+	while 1:
+		CharIdle self (-2620, null, 970) (1167, null, -2110) 3000mm/s
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-34700, 0, 70780) 0ms
+	CamSetDistance 0 5480 -10000 0ms
+	CamZoom 3260 0ms
+	CamRotate 328000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsSet char[8] 0x0004
+	CharSetChipBase char[8] chip[3]
+	CharSetChipPattern char[8] 0
+	CharSetPos char[8] (-26820, 140, 63060) 0deg
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (-25760, 0, 68260) 180deg
+	CharFlagsSet name[11] 0x0004
+	CharSetPos name[11] (-26680, 200, 66900) 180deg
+	CharSetChipBase name[11] chip[4]
+	CharSetChipPattern name[11] 0
+	CharFlagsUnset char[11] 0x0080
+	CharSetPos char[11] (-27060, 540, 64580) 0deg
+	Emote char[8] 0mm 2000mm 24 27 250ms 0
+	Fork char[15] fork[0]:
+		CamLookPos (-28500, 0, 67500) 4000ms
+	Fork char[15] fork[1]:
+		CamRotate 315000mdeg 4000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 2000ms
+	EmoteStop char[8]
+	Sleep 500ms
+	TextTalk char[8] {
+		#99603v#6P原来如此啊，
+		是这样吗……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99604v#6P竟然把销售渠道
+		弄得那样清楚明了。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99605v#6P这下很快就能打入帝都市场了。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87081v#11P#1850F因为您委托的内容是
+		查明帝国导力器的
+		交易现状……{wait}
+	} {
+		#87082v就以当地的专卖店
+		为中心展开了调查。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99606v#6P嗯，收集得非常齐全呢。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99607v#6P话虽如此……
+		问题在于利贝尔的货源啊。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99608v#6P国际定期航班
+		被博尔德那大叔所控制……{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87083v#11P#1855F是啊，
+		国际定期航班载货量的４０％
+		都是博尔德家的优先合约。{wait}
+	} {
+		#87084v#1850F不过，最近除了定期航班以外
+		也有个体运输业者……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharSetChipPattern name[11] 1
+	Sleep 400ms
+	CharTurnTo char[9] 0deg 400deg/s
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-25760, 0, 68700) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	Sleep 1500ms
+	CharTurnTo char[9] 135deg 400deg/s
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-24900, 0, 67800) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	CharSetChipPattern name[11] 0
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-24900, 0, 64540) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	CharTurnTo char[9] 225deg 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#97036v#1862F呵呵，
+		这个是附加资料呢。{wait}
+	}
+	TextWait
+	SoundPlay sound[18] 0 0 100
+	CrossFade 500ms
+	CharFlagsSet char[13] 0x0800
+	CharFlagsUnset char[13] 0x0080
+	CharSetPos char[13] (-26220, -50, 64450) 0deg
+	FadeWait
+	Sleep 300ms
+	TextTalk char[8] {
+		#99609v#6P哦，准备得很充分嘛。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87085v#11P#1851F哈哈，
+		因为这次的调查时间延长了一点。{wait}
+	} {
+		#87086v这算是那部分的附赠。
+		请一起拿去吧。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99610v#6P你还是那么有先见之明啊。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99611v#6P怎么样，要不要跳槽来我们这里？
+		薪水很高哦～！{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87087v#11P#1850F承蒙米拉诺小姐
+		如此夸奖……{wait}
+	} {
+		#87088v#1859F但是，
+		我想唯利是图的商业世界
+		并不适合我。{wait}
+	} {
+		#87089v因为我生性谨慎。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99612v#6P啊哈哈，你真会开玩笑。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99613v#6P也罢。
+		你慢慢考虑就是了。{wait}
+	}
+	TextWait
+	_59
+	CrossFade 500ms
+	CharFlagsUnset char[8] 0x0004
+	CharSetPos char[8] (-26820, 0, 63660) 0deg
+	CharSetChipBase char[8] chip[0]
+	CharSetChipPattern char[8] 0
+	FadeWait
+	CrossFade 250ms
+	SoundPlay sound[143] 0 0 100
+	CharFlagsSet char[11] 0x0080
+	CharFlagsSet char[13] 0x0080
+	FadeWait
+	Sleep 300ms
+	TextTalk char[9] {
+		#97037v#1862F辛苦了。{wait}
+	}
+	TextWait
+	ForkFunc char[8] fork[3] fn[0,6]
+	Sleep 600ms
+	ForkFunc char[9] fork[3] fn[0,7]
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase name[11] chip[65535]
+	CharSetChipPattern name[11] 0
+	CharFlagsUnset name[11] 0x0004
+	CharSetPos name[11] (-26680, 0, 66240) 180deg
+	Sleep 250ms
+	ForkLoop name[11] fork[2]:
+		CharTurnToChar self char[8] 500deg/s
+	Sleep 2700ms
+	ForkQuit name[11] fork[2]
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-27860, 0, 66240) 1000mm/s 0
+	ForkWait name[11] fork[1]
+	CharTurnTo name[11] 315deg 400deg/s
+	ForkWait char[8] fork[3]
+	Emote char[8] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	TextTalk char[8] {
+		#99614v啊，这么说来所长先生……{wait}
+	}
+	TextWait
+	CharTurnTo char[8] 135deg 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#99615v下次调查也要拜托你们了。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99616v虽然我让西蒙去做了，
+		但总觉得不大放心。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87090v#1850F#6P嗯嗯，没问题。{wait}
+	} {
+		#87091v还是国外市场的调查吗？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99617v对对……{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo char[8] 225deg 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#99618v哦，这个东西不错嘛。{wait}
+	}
+	TextWait
+	Fork char[15] fork[0]:
+		CamLookPos (-36660, 0, 66240) 4000ms
+	Fork char[15] fork[1]:
+		CamSetDistance 0 4500 -10000 4000ms
+	Fork char[15] fork[2]:
+		CamRotate 306000mdeg 4000ms
+	Fork char[15] fork[3]:
+		CamZoom 3340 4000ms
+	ForkFunc char[8] fork[3] fn[0,8]
+	Sleep 1000ms
+	ForkFunc char[9] fork[3] fn[0,10]
+	Sleep 200ms
+	ForkFunc name[11] fork[3] fn[0,9]
+	ForkWait char[8] fork[3]
+	ForkWait char[9] fork[3]
+	ForkWait name[11] fork[3]
+	TextTalk char[8] {
+		#99619v#5P…………是这里。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87092v#1853F奥雷德自治州……是吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#97038v#1864F#2P啊，要在那么小的地方……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99620v#5P就是因为地方小，
+		才能获得市场占有率嘛。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99621v#5P那里也有国际定期船，
+		而且还没有任何人出手呢。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87093v#1859F原来如此，
+		要查明市场规模的可能性……
+		……是这样吧。{wait}
+	} {
+		#87094v#1850F调查的目标
+		仅限于导力器市场吗？
+		还是市场全体……？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99622v#5P要全体的调查。{wait}
+	}
+	TextWait
+	CharTurnTo char[8] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#99623v#5P……怎么样，能办到吗？{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87095v#1850F交给我们吧。{wait}
+	} {
+		#87096v我先联络一下
+		附近的常驻人员好了。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99624v#5P好，就这么定了。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99625v#5P下周我还会再来的，
+		详细情况到时候再说吧。{wait}
+	}
+	TextWait
+	Fork char[15] fork[0]:
+		CamLookPos (-35190, 0, 67100) 1500ms
+	ForkLoop name[11] fork[2]:
+		CharTurnToChar self char[8] 500deg/s
+	ForkLoop char[9] fork[2]:
+		CharTurnToChar self char[8] 500deg/s
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-33400, 0, 66400) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	CharTurnTo char[8] 90deg 400deg/s
+	Sleep 500ms
+	TextTalk char[8] {
+		#99626v#11P…………回见啦！{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87097v#1850F#5P恭候光临。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#97039v#1862F#5P路上小心。{wait}
+	}
+	TextWait
+	Fork char[15] fork[0]:
+		CamLookPos (-33510, 0, 68790) 1500ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-29480, 0, 66400) 2500mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-29480, 0, 68460) 2500mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-33480, -2000, 68460) 2500mm/s 0
+	ForkWait char[8] fork[1]
+	CharFlagsUnset char[8] 0x0080
+	ForkQuit name[11] fork[2]
+	ForkQuit char[9] fork[2]
+	Sleep 1000ms
+	CharTurnTo name[11] 215deg 400deg/s
+	Fork char[15] fork[0]:
+		CamLookPos (-36660, 0, 66240) 2500ms
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-35000, 0, 64519) 1200mm/s 0
+	ForkWait name[11] fork[1]
+	CharTurnTo name[11] 215deg 400deg/s
+	ForkWait char[15] fork[0]
+	Sleep 300ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87098v#1855F#6P奥雷德自治州吗……
+		……有点偏内陆啊。{wait}
+	} {
+		#87099v#1850F记得那边应该是
+		雷因兹兄弟负责的吧。{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#97040v#1860F#11P嗯嗯，稍后我会联络他们的。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87100v#1850F#6P拜托你了。{wait}
+	}
+	TextWait
+	Emote name[11] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[11]
+	Sleep 500ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87101v#1859F#6P呵呵，
+		真不愧是柏斯商人啊。{wait}
+	} {
+		#87102v米拉诺小姐的委托
+		很具有前瞻性，而且挺有趣的。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#97041v#1861F#11P虽然和所长相比
+		还有很大差距。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87103v#1851F#6P哈哈，你太抬举我了。{wait}
+	}
+	TextWait
+	CharTurnToChar name[11] char[9] 400deg/s
+	Sleep 300ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87104v#1850F#6P……凯诺娜，请下一位。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#97042v#1862F#11P明白了。{wait}
+	}
+	TextWait
+	ForkLoop name[11] fork[2]:
+		CharTurnToChar self char[9] 400deg/s
+	CharTurnTo char[9] 90deg 400deg/s
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-29000, 0, 66200) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	ForkQuit name[11] fork[2]
+	ForkFunc name[11] fork[3] fn[0,11]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-29000, 0, 68700) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-33400, -2000, 68700) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Sleep 1500ms
+	Fork char[15] fork[0]:
+		CamLookPos (-34360, 0, 68540) 3500ms
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[10] (-33400, -2000, 68460) 90deg
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-28300, 0, 68700) 2000mm/s 0
+	Sleep 600ms
+	Fork char[10] fork[1]:
+		CharWalkToPos self (-29480, 0, 68460) 2000mm/s 0
+	Sleep 1000ms
+	ForkFunc name[11] fork[3] fn[0,14]
+	ForkWait char[9] fork[1]
+	CharTurnTo char[9] 215deg 400deg/s
+	ForkWait char[10] fork[1]
+	CharTurnTo char[10] 215deg 400deg/s
+	ForkWait name[11] fork[3]
+	TextTalk char[10] {
+		#99468v#11P哎呀，所长先生，
+		一直给你添麻烦。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#99469v#11P这次又有点关于
+		市里财政的事想和你商量……{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87105v#1851F#5P好的，乐意效劳。{wait}
+	} {
+		#87106v请坐下吧。{wait}
+	}
+	TextWait
+	Fork char[15] fork[0]:
+		CamLookPos (-28500, 0, 67500) 5000ms
+	Fork char[15] fork[1]:
+		CamSetDistance 0 5480 -10000 5000ms
+	Fork char[15] fork[2]:
+		CamRotate 315000mdeg 5000ms
+	Fork char[15] fork[3]:
+		CamZoom 3260 5000ms
+	ForkLoop name[11] fork[2]:
+		CharTurnToChar self char[10] 500deg/s
+	CharTurnTo char[9] 270deg 500deg/s
+	CharTurnTo char[10] 90deg 400deg/s
+	Sleep 500ms
+	CharFlagsSet char[9] 0x0004
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-28300, 0, 62500) 2000mm/s 0
+	Sleep 700ms
+	ForkFunc char[10] fork[3] fn[0,12]
+	Sleep 800ms
+	ForkQuit name[11] fork[2]
+	ForkFunc name[11] fork[3] fn[0,13]
+	ForkWait char[9] fork[1]
+	ForkLoop char[9] fork[2]:
+		CharTurnToChar self char[10] 600deg/s
+	ForkWait char[10] fork[3]
+	ForkQuit char[9] fork[2]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-28300, 0, 68260) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-25760, 0, 68260) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	CharTurnTo char[9] 180deg 500deg/s
+	ForkWait name[11] fork[3]
+	TextTalkNamed name[11] "理查德所长" {
+		#87107v#1850F#11P那么，
+		今天有什么事……？{wait}
+	}
+	TextWait
+	Fork char[15] fork[0]:
+		CamZoom 3160 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	BgmWait
+	FlagSet flag[9477]
+	NewScene file[0x002100F1] 100 0 0
+	Hcf
+	Return
+
+fn[6]:
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-28580, 0, 63660) 1500mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-28580, 0, 68460) 1500mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-29480, 0, 68460) 1500mm/s 0
+	ForkWait char[8] fork[1]
+	Return
+
+fn[7]:
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-24900, 0, 68400) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-28100, 0, 68400) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	Return
+
+fn[8]:
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-29480, 0, 66400) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-33400, 0, 66400) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-35400, 0, 64400) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	CharTurnTo char[8] 215deg 400deg/s
+	Return
+
+fn[9]:
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-33860, 0, 66240) 2000mm/s 0
+	ForkWait name[11] fork[1]
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-33860, 0, 64519) 2000mm/s 0
+	ForkWait name[11] fork[1]
+	CharTurnTo name[11] 270deg 400deg/s
+	Return
+
+fn[10]:
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-29000, 0, 68400) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-29000, 0, 66200) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-35000, 0, 66200) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	CharTurnTo char[9] 180deg 400deg/s
+	Return
+
+fn[11]:
+	CharFlagsSet name[11] 0x0004
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-35060, 0, 63900) 1500mm/s 0
+	ForkWait name[11] fork[1]
+	CharTurnTo name[11] 120deg 400deg/s
+	Return
+
+fn[12]:
+	CharFlagsSet char[10] 0x0004
+	Fork char[10] fork[1]:
+		CharWalkToPos self (-28300, 0, 67400) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	Fork char[10] fork[1]:
+		CharWalkToPos self (-28300, 0, 63660) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	Fork char[10] fork[1]:
+		CharWalkToPos self (-26820, 0, 63660) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	CharTurnTo char[10] 0deg 400deg/s
+	CrossFade 250ms
+	CharSetChipBase char[10] chip[6]
+	CharSetChipPattern char[10] 0
+	CharSetPos char[10] (-26820, 140, 63060) 0deg
+	FadeWait
+	Return
+
+fn[13]:
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-26680, 0, 66240) 1500mm/s 0
+	ForkWait name[11] fork[1]
+	CharTurnTo name[11] 180deg 400deg/s
+	CrossFade 250ms
+	CharSetChipBase name[11] chip[4]
+	CharSetChipPattern name[11] 0
+	CharFlagsSet name[11] 0x0004
+	CharSetPos name[11] (-26680, 200, 66900) 180deg
+	FadeWait
+	Return
+
+fn[14]:
+	Emote name[11] 0mm 2000mm 38 38 250ms 1
+	CharTurnTo name[11] 45deg 500deg/s
+	Sleep 500ms
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-33740, 0, 65700) 2000mm/s 0
+	ForkWait name[11] fork[1]
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-31980, 0, 65700) 2000mm/s 0
+	ForkWait name[11] fork[1]
+	CharTurnTo name[11] 45deg 500deg/s
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SystemFlagsUnset 0x02000000
+	CamLookPos (-5980, 0, 65300) 0ms
+	CamSetDistance 0 6180 -10000 0ms
+	CamZoom 3020 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos name[11] (-4880, -500, 60500) 0deg
+	CharSetPos char[9] (-4880, -500, 60500) 0deg
+	CharColor name[11] 0x00FFFFFF 0ms
+	CharColor char[9] 0x00FFFFFF 0ms
+	CharFlagsUnset char[14] 0x0080
+	CharSetPos char[14] (-7600, 500, 64400) 0deg
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	Fork name[11] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-4880, 0, 64239) 1700mm/s 0
+	Sleep 1100ms
+	Fork char[9] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	ForkFunc char[9] fork[3] fn[0,17]
+	ForkWait name[11] fork[1]
+	Emote name[11] 0mm 2000mm 38 38 250ms 1
+	Sleep 300ms
+	CharTurnTo name[11] 270deg 400deg/s
+	Sleep 300ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87114v#1853F#11P嗯……？{wait}
+	}
+	TextWait
+	Fork char[15] fork[0]:
+		CamLookPos (-7800, 0, 65300) 2000ms
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-6600, 0, 64239) 1200mm/s 0
+	ForkWait name[11] fork[1]
+	Sleep 500ms
+	CrossFade 500ms
+	SoundPlay sound[18] 0 0 80
+	CharFlagsSet char[14] 0x0080
+	FadeWait
+	Sleep 500ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87115v#1852F#5P（………这封信是……………）{wait}
+	}
+	TextWait
+	Emote name[11] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	CharTurnToChar char[9] name[11] 400deg/s
+	Sleep 300ms
+	Emote char[9] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1500ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-6440, 0, 63120) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	CharTurnTo char[9] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#97049v#1864F#6P…………所长？{wait}
+	} {
+		#97050v您怎么了？{wait}
+	}
+	TextWait
+	EmoteStop name[11]
+	Sleep 500ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87116v#1855F#11P……………………没什么……{wait}
+	} {
+		#87117v#1850F好像又有一封
+		错送到这里来的
+		寄给市长的邮件。{wait}
+	} {
+		#87118v这家事务所
+		本来是他的家，
+		也难怪会这样……{wait}
+	}
+	TextWait
+	CharTurnTo name[11] 135deg 400deg/s
+	Sleep 300ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87119v#1850F#5P唉，我给他送去吧。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[360] 60 0 100
+	ForkLoop char[9] fork[2]:
+		CharTurnToChar self name[11] 500deg/s
+	Fork name[11] fork[1]:
+		CharWalkToPos2 self (-5150, 0, 63090) 1500mm/s 0
+	ForkWait name[11] fork[1]
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-4880, 0, 62340) 1500mm/s 0
+	Sleep 300ms
+	TextTalk char[9] {
+		#97051v#1864F#5P咦，现在吗？{wait}
+	} {
+		#97052v但是，外面都快下雨了……{wait}
+	}
+	TextWait
+	ForkWait name[11] fork[1]
+	TextTalkNamed name[11] "理查德所长" {
+		#87120v#1859F#11P没什么，就在附近嘛。
+		就算下起来也不用担心的。{wait}
+	} {
+		#87121v#1850F定期联络那边就拜托你了。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#97053v#1864F#5P是、是……{wait}
+	}
+	TextWait
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	Fork name[11] fork[2]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-4880, -500, 60500) 1500mm/s 0
+	ForkWait name[11] fork[1]
+	ForkQuit char[9] fork[2]
+	Fork char[9] fork[2]:
+		CharTurnTo char[9] 180deg 400deg/s
+	SoundPlay sound[7] 0 0 100
+	BgmStop 4000ms
+	Fork char[15] fork[0]:
+		CamLookPos (-7800, 0, 62300) 4000ms
+	ForkFunc char[15] fork[3] fn[0,16]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmWait
+	ForkWait char[15] fork[3]
+	FlagSet flag[9478]
+	NewScene file[0x002100F1] 100 0 0
+	Hcf
+	Return
+
+fn[16]:
+	SoundSetVolume sound[360] 90
+	Sleep 100ms
+	SoundSetVolume sound[360] 80
+	Sleep 100ms
+	SoundSetVolume sound[360] 70
+	Sleep 100ms
+	SoundSetVolume sound[360] 60
+	Sleep 100ms
+	SoundSetVolume sound[360] 50
+	Sleep 100ms
+	SoundSetVolume sound[360] 40
+	Sleep 100ms
+	SoundSetVolume sound[360] 30
+	Sleep 100ms
+	SoundSetVolume sound[360] 20
+	Sleep 100ms
+	SoundSetVolume sound[360] 10
+	Sleep 100ms
+	SoundSetVolume sound[360] 0
+	SoundStop sound[360]
+	Return
+
+fn[17]:
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-4880, 0, 62520) 1700mm/s 0
+	ForkWait char[9] fork[1]
+	Sleep 300ms
+	CharTurnTo char[9] 180deg 500deg/s
+	Sleep 300ms
+	SoundPlay sound[7] 0 0 100
+	Return
+
+fn[18]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SystemFlagsUnset 0x00100000
+	SoundSetVolume sound[457] 60
+	CamLookPos (-5860, 0, 66040) 0ms
+	CamSetDistance 0 4920 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 335000mdeg 0ms
+	CamPers 262 0ms
+	CamLookPos (-8560, 0, 69400) 0ms
+	CamSetDistance 0 4920 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos name[11] (-5460, -500, 60500) 0deg
+	CharColor name[11] 0x00FFFFFF 0ms
+	CharSetPos char[9] (-4500, -500, 60500) 0deg
+	CharColor char[9] 0x00FFFFFF 0ms
+	Fork char[15] fork[0]:
+		CamLookPos (-5860, 0, 66040) 3500ms
+	Fork char[15] fork[1]:
+		CamRotate 335000mdeg 3500ms
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	Fork name[11] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-5460, 0, 63100) 1500mm/s 0
+	Sleep 800ms
+	Fork char[9] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-4500, 0, 62880) 1500mm/s 0
+	Sleep 700ms
+	SoundPlay sound[7] 0 0 100
+	ForkWait name[11] fork[1]
+	Sleep 300ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87202v#1859F#5P哎呀哎呀，
+		浑身都湿透了。{wait}
+	}
+	TextWait
+	CharTurnTo name[11] 90deg 400deg/s
+	Sleep 300ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87203v#1850F#5P凯诺娜，没事吧？{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#97061v#1861F#4P嗯嗯，
+		我一点事也没有。{wait}
+	} {
+		#97062v#1860F这让我想起
+		士官学校时代的
+		生存训练了。{wait}
+	} {
+		#97063v倒是所长，
+		您还是请赶快换衣服吧。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87204v#1850F#5P啊，我也没事。{wait}
+	} {
+		#87205v生存训练
+		我可是挺擅长的呢。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#97064v#1864F#4P我、我不是这个意思，可是……{wait}
+	}
+	TextWait
+	SoundPlay sound[195] 1 0 50
+	Sleep 800ms
+	Emote name[11] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Emote char[9] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 800ms
+	Fork name[11] fork[2]:
+		CharTurnTo self 0deg 500deg/s
+	CharTurnTo char[9] 0deg 500deg/s
+	Sleep 500ms
+	SoundStop sound[195]
+	SoundPlay sound[131] 0 0 50
+	Sleep 500ms
+	SoundPlay sound[699] 1 0 50
+	Sleep 2200ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87206v#1852F#5P……是暗号通信呢。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#97065v#1860F#6P在定期报告里，
+		迪兰斯说有些情报值得注意。{wait}
+	} {
+		#97066v说不定是收到相关情报了。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87207v#1850F#5P原来如此……{wait}
+	} {
+		#87208v#1855F……这么说来，
+		是共和国方面发生了什么事吗。{wait}
+	}
+	TextWait
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-5460, 2000, 70500) 3000mm/s 0
+	Sleep 400ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-4500, 2000, 70500) 3000mm/s 0
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[11] fork[255]
+	ForkQuit char[9] fork[255]
+	CamLookPos (-35000, 0, 67900) 0ms
+	CamSetDistance 0 5640 -10000 0ms
+	CamZoom 2960 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	EffLoad eff[0] "map\\mp001_00.eff"
+	EffLoad eff[1] "map\\mp001_01.eff"
+	EffPlay eff[0] eff_instance[0] null 0 (-35480, 2120, 67780) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	CharSetPos name[11] (-33500, -2000, 69060) 90deg
+	CharSetPos char[9] (-33500, -2000, 69060) 90deg
+	SoundSetVolume sound[699] 60
+	Sleep 200ms
+	SoundSetVolume sound[699] 70
+	ForkFunc name[11] fork[3] fn[0,19]
+	ForkFunc char[9] fork[3] fn[0,20]
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[11] fork[3]
+	SoundStop sound[699]
+	SoundPlay sound[131] 0 0 100
+	EffStop eff_instance[0] 0
+	EffPlay eff[1] eff_instance[1] null 0 (-35480, 2120, 67780) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 500ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87209v#1850F#20W……啊啊，是我。{wait}
+	} {
+		#87210v#1499F#20W都说别叫我上校了……{wait}
+	} {
+		#87211v#1855F#20W…………啊啊…………{wait}
+	} {
+		#87212v#20W……啊啊…………
+		……………啊啊…………{wait}
+	} {
+		#87213v#20W东方人街吗…………{wait}
+	} {
+		#87214v#20W那里还没有
+		设置情报所呢……{wait}
+	} {
+		#87215v#1850F#20W……啊啊，知道了。
+		我们这边也会调查看看。{wait}
+	} {
+		#87216v#20W嗯，你也不要鲁莽行事哦。{wait}
+	}
+	TextWait
+	SoundPlay sound[131] 0 0 100
+	EffStop eff_instance[1] 0
+	Sleep 500ms
+	ForkWait char[9] fork[3]
+	Sleep 500ms
+	CharTurnTo name[11] 180deg 400deg/s
+	Sleep 300ms
+	Fork char[15] fork[0]:
+		CamLookPos (-35000, 0, 66900) 1500ms
+	ForkFunc name[11] fork[1] fn[0,21]
+	ForkLoop char[9] fork[2]:
+		CharTurnToChar self name[11] 400deg/s
+	ForkWait char[15] fork[0]
+	TextTalk char[9] {
+		#97067v#1864F有什么情况吗……？{wait}
+	}
+	TextWait
+	ForkWait name[11] fork[1]
+	ForkQuit char[9] fork[2]
+	Sleep 300ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87217v#1852F#5P东方人街
+		似乎又有猎兵团入驻了。{wait}
+	} {
+		#87218v猎兵团『赤色星座』。
+		是个相当庞大的组织。{wait}
+	}
+	TextWait
+	CharTurnTo name[11] 225deg 400deg/s
+	Sleep 100ms
+	Fork char[9] fork[2]:
+		CamLookPos (-35920, 0, 65780) 2500ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-34400, 0, 65360) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	ForkWait char[9] fork[2]
+	CharTurnTo char[9] 225deg 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#97068v#1863F#12P最近一阵子，
+		活动似乎变得频繁了。{wait}
+	}
+	TextWait
+	TextTalkNamed name[11] "理查德所长" {
+		#87219v#1855F#5P至少会有使黑社会势力
+		抗争激化的可能性。{wait}
+	} {
+		#87220v光使用旧情报部的情报网
+		似乎无法掌握情况……{wait}
+	}
+	TextWait
+	Emote name[11] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[11]
+	Sleep 500ms
+	TextTalkNamed name[11] "理查德所长" {
+		#87221v#1850F#5P唔…………{wait}
+	} {
+		#87222v#1859F………………看来
+		我还是去一趟比较好。{wait}
+	}
+	TextWait
+	Fork char[15] fork[0]:
+		CamZoom 3060 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene file[0x002100F2] 100 0 0
+	Hcf
+	Return
+
+fn[19]:
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-29020, 0, 69060) 3000mm/s 0
+	ForkWait name[11] fork[1]
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-29020, 0, 66120) 3000mm/s 0
+	ForkWait name[11] fork[1]
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-35000, 0, 66120) 3000mm/s 0
+	ForkWait name[11] fork[1]
+	Fork name[11] fork[1]:
+		CharWalkToPos self (-35000, 0, 67900) 3000mm/s 0
+	ForkWait name[11] fork[1]
+	CharTurnTo name[11] 270deg 400deg/s
+	Sleep 500ms
+	Return
+
+fn[20]:
+	Sleep 1000ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-29020, 0, 69060) 3000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-29020, 0, 66120) 3000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-31900, 0, 66120) 3000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-31900, 0, 66500) 3000mm/s 0
+	ForkWait char[9] fork[1]
+	Sleep 2500ms
+	CharTurnTo char[9] 180deg 500deg/s
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-32159, 0, 64500) 1500mm/s 0
+	ForkWait char[9] fork[1]
+	CrossFade 250ms
+	CharFlagsUnset char[12] 0x0080
+	CharSetPos char[12] (-32180, 700, 63400) 0deg
+	FadeWait
+	Sleep 1800ms
+	CharTurnTo char[9] 0deg 500deg/s
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-31900, 0, 66500) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Return
+
+fn[21]:
+	Fork name[11] fork[2]:
+		CharWalkToPos self (-35000, 0, 64500) 2000mm/s 0
+	ForkWait name[11] fork[2]
+	CharTurnTo name[11] 225deg 400deg/s
+	Return

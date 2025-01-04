@@ -1,0 +1,153 @@
+calmare tc scena
+scena:
+	name "gaiden2" "U4169.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (56170, 0, 56850)
+	radius 1000mm
+	bubble_pos (55000, 3000, 57000)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,5]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[28] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	Return
+
+fn[2]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}打开『门』吗？{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"【是】" // 0
+		"【否】" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (57660, 0, 57470) 270deg
+	CharSetPos field_party[1] (57780, 0, 55980) 270deg
+	CharSetPos field_party[2] (59360, 0, 57190) 270deg
+	CharSetPos field_party[3] (59250, 0, 56020) 270deg
+	CamLookPos (56850, 0, 56780) 0ms
+	CamSetDistance 0 5030 -10000 0ms
+	CamZoom 3620 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	if !QuestFlagsGet quest[28] 0x02:
+		QuestFlagsSet quest[28] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99915v{color 5}#40W   汝须将无比热爱钓鱼之少女
+		　　  引领至吾面前。
+		#500W
+		#40W   如此，则『门』将开启……{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if PartyPosition name[0] != -1:
+		Call fn[0,2]
+		if var[0] == 0:
+			Call fn[0,4]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[4]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[3] 0
+	ObjPlay object[3] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[3]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3070 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 12 0 0
+	NewScene "p9002._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (57660, 0, 57470) 270deg
+	CharSetPos field_party[1] (57780, 0, 55980) 270deg
+	CharSetPos field_party[2] (59360, 0, 57190) 270deg
+	CharSetPos field_party[3] (59250, 0, 56020) 270deg
+	CamLookPos (56850, 0, 56780) 0ms
+	CamSetDistance 0 5030 -10000 0ms
+	CamZoom 3620 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return

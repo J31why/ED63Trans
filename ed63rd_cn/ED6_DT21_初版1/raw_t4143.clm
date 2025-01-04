@@ -1,0 +1,673 @@
+calmare sc scena
+scena:
+	name "Grancel" "T4143.x"
+	town town[1]
+	bgm bgm[84]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 7:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 178
+			Event fn[0,7]
+		elif !flag[12112]:
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[2] (540, -250, -3300) 180deg
+	CharSetPos name[80] (-540, -250, -3100) 180deg
+	CamLookPos (760, -250, -5360) 0ms
+	CamSetDistance 0 5700 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	Fork char[8] fork[0]:
+		CamLookPos (1760, -250, -1360) 4000ms
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	Emote name[80] 0mm 2000mm 24 27 250ms 0
+	Emote name[2] 0mm 2000mm 24 27 250ms 0
+	FadeWait
+	ForkWait char[8] fork[0]
+	EmoteStop name[2]
+	EmoteStop name[80]
+	Sleep 500ms
+	TextTalk name[2] {
+		#79528v#1642F#2P嘁，数量丝毫不减……{wait}
+	} {
+		#79529v#1647F如果不赶快
+		去协会的话……！{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94447v#1654F……没办法了。
+		今晚就在这里休息吧。{wait}
+	}
+	TextWait
+	Fork name[2] fork[2]:
+		CharTurnToChar self name[80] 400deg/s
+	Sleep 100ms
+	Fork name[80] fork[2]:
+		CharTurnToChar self name[2] 400deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#79530v#1642F#2P只是这些人的话
+		突破还是没问题的。{wait}
+	} {
+		#79531v只要见缝插针就可以……{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94448v#1652F不行哦，别太勉强了。
+		该休息的时候就得休息。{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79532v#1647F#2P（嗯…………
+		  倒是也有道理……）{wait}
+	} {
+		#79533v#1646F（不、不行不行。
+		  不能冲动行事……！）{wait}
+	}
+	TextWait
+	_59
+	ForkFunc name[80] fork[3] fn[0,3]
+	CharTurnTo name[2] 180deg 400deg/s
+	Sleep 300ms
+	ForkFunc name[2] fork[3] fn[0,4]
+	TextTalk name[2] {
+		#79534v#1646F#2P他们早晚
+		会闯到这里来。{wait}
+	} {
+		#79535v#1642F还是不要冒险了，
+		到协会去避难吧。
+		肯定比这里要安全。{wait}
+	}
+	TextWait
+	_59
+	ForkWait name[2] fork[3]
+	CharTurnTo name[2] 270deg 400deg/s
+	Emote name[2] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	Fork char[8] fork[0]:
+		CamLookPos (400, 2500, 1060) 2000ms
+	Fork char[8] fork[2]:
+		CamZoom 2900 2000ms
+	Sleep 1000ms
+	CharTurnTo name[2] 0deg 400deg/s
+	ForkWait char[8] fork[0]
+	Emote name[2] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	ForkWait name[80] fork[3]
+	TextTalk name[2] {
+		#79536v#1644F啊，喂！
+		不要擅自行动！{wait}
+	}
+	TextWait
+	_59
+	ForkFunc name[2] fork[3] fn[0,6]
+	Sleep 1000ms
+	ForkFunc name[80] fork[3] fn[0,5]
+	Fork char[8] fork[0]:
+		CamLookPos (1220, 4000, 5340) 3000ms
+	ForkWait name[80] fork[3]
+	TextTalk name[80] {
+		#94449v#1650F在二层休息吧。{wait}
+	} {
+		#94450v万一他们闯进来了，
+		也比较容易逃跑。{wait}
+	} {
+		#94451v……就在这里吧。{wait}
+	}
+	TextWait
+	ForkWait name[2] fork[3]
+	TextTalk name[2] {
+		#79537v#1642F#1P给我等一下啊。{wait}
+	} {
+		#79538v#1642F这可是为了
+		你的安全着想……{wait}
+	}
+	TextWait
+	CharTurnToChar name[80] name[2] 500deg/s
+	Sleep 300ms
+	TextTalk name[80] {
+		#94452v#1654F那些黑衣人
+		在大半夜里
+		也一本正经地在巡逻。{wait}
+	} {
+		#94453v所以我觉得
+		不太可能让我们找到机会。{wait}
+	} {
+		#94454v#1650F既然好不容易到了这里……
+		今晚就好好休息，
+		明天再努力好吗？{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79539v#1646F#1P……………………………………{wait}
+	} {
+		#79540v#1648F………………努什么力呢？{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94455v#1653F咦？{wait}
+	}
+	TextWait
+	ForkLoop name[80] fork[2]:
+		CharTurnToChar self name[2] 500deg/s
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-60, 4000, 3540) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	CharTurnTo name[2] 90deg 500deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#79541v#1646F#3P你啊，
+		一定还隐瞒了什么吧。{wait}
+	} {
+		#79542v你说你是第一次来王都。
+		可是你对这里的地形却很清楚。{wait}
+	} {
+		#79543v而且对于黑衣人的行动
+		也是相当了解的样子。{wait}
+	} {
+		#79544v#1648F……到底出于什么目的？{wait}
+	}
+	TextWait
+	Sleep 500ms
+	Sleep 500ms
+	ForkQuit name[80] fork[2]
+	CharTurnTo name[2] 135deg 400deg/s
+	Fork name[2] fork[1]:
+		CharWalkToPos self (1000, 4000, 2480) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (2040, 4000, 2480) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	Sleep 300ms
+	TextTalk name[2] {
+		#79545v#1646F好像并不只是单纯地
+		想从黑衣人眼皮下逃走。{wait}
+	} {
+		#79546v还特意提出了
+		『想要参观王都』这样的委托。{wait}
+	}
+	TextWait
+	CharTurnTo name[2] 270deg 500deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#79547v#1648F你究竟是在打什么主意？{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos self (1000, 4000, 2480) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	Sleep 300ms
+	Fork char[8] fork[0]:
+		CamLookPos (2120, 4000, 3940) 1500ms
+	Fork char[8] fork[1]:
+		CamZoom 2700 1500ms
+	Fork char[8] fork[2]:
+		CamRotate 50000mdeg 1500ms
+	CharTurnTo name[2] 0deg 400deg/s
+	ForkWait char[8] fork[0]
+	Sleep 500ms
+	TextTalk name[2] {
+		#79548v#1648F#4P……答案呢？{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94456v#1656F#5P…………………………{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79549v#1646F#4P…………委托以信用为第一。{wait}
+	} {
+		#79550v情况都不说清楚，
+		是无法让人接受委托的。{wait}
+	} {
+		#79551v#1642F所谓遗产之类的，
+		其实只是谎言对吧？{wait}
+	} {
+		#79552v从逃跑的时候……
+		不，从你刚来协会的时候
+		我就觉得有点不对劲。{wait}
+	} {
+		#79553v#1648F……说啊。
+		为什么要撒谎……？{wait}
+	}
+	TextWait
+	BgmStop 2000ms
+	Sleep 500ms
+	TextTalk name[80] {
+		#94457v#1654F#5P这、这个…………{wait}
+	} {
+		#94458v遗产继承是真的……{wait}
+	} {
+		#94459v#1652F我、我…………
+		我想去格兰赛尔王城。{wait}
+	}
+	TextWait
+	_59
+	Emote name[80] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop name[80]
+	Sleep 200ms
+	BgmPlay bgm[178] 0
+	Sleep 500ms
+	TextTalk name[80] {
+		#94460v#1652F#5P…………我是遗产继承人
+		这件事是千真万确的。{wait}
+	} {
+		#94461v但是，正式的继承手续
+		还没有办好。{wait}
+	} {
+		#94462v#1654F继承手续必须
+		要去格兰赛尔城的
+		行政区域提出办理才行…………{wait}
+	} {
+		#94463v但是那边的黑衣人相当多，
+		防守得很严密。{wait}
+	} {
+		#94464v#1656F因为继承的手续
+		我的亲戚们都知道……{wait}
+	} {
+		#94465v所以就……
+		……不让我接近王城………{wait}
+	} {
+		#94466v………………………………{wait}
+	} {
+		#94467v#1652F但是，我一定要一步一步接近才行……{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79554v#1648F#4P……嗯………………{wait}
+	} {
+		#79555v好吧。
+		我暂且相信你。{wait}
+	} {
+		#79556v#1646F……为什么直到现在
+		才告诉我呢？{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94468v#1656F#5P这………………{wait}
+	} {
+		#94469v#1655F这、这是……{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79557v#1646F#4P如果对我全盘托出，
+		那么我肯定会被金钱迷惑……{wait}
+	} {
+		#79558v只要正式手续还没有办好，
+		就有无数的机会。{wait}
+	} {
+		#79559v#1642F你认为我会
+		对遗产见财起意？{wait}
+	}
+	TextWait
+	_59
+	Sleep 300ms
+	TextTalk name[2] {
+		#79560v#1644F#4P#3S你认为我就是
+		那样的人！？#2S{wait}
+	}
+	Shake 150 150 3000 200ms
+	TextWait
+	CharTurnToChar name[80] name[2] 500deg/s
+	TextTalk name[80] {
+		#94470v#1652F#3S#5P不、不是！！#2S{wait}
+	}
+	Shake 150 150 3000 100ms
+	TextWait
+	_59
+	Sleep 500ms
+	TextTalk name[80] {
+		#94471v#1652F#5P……不是的。{wait}
+	} {
+		#94472v自从祖父过世之后
+		我就一直一个人生活。{wait}
+	} {
+		#94473v#1654F可是遗书公布之后，
+		就有许多人蜂拥而来。{wait}
+	} {
+		#94474v#1656F……就是像你说的那种
+		觊觎遗产的人。{wait}
+	}
+	TextWait
+	Fork char[8] fork[1]:
+		CamZoom 2900 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9477]
+	NewScene "t4152._sn" 110 0 0
+	Hcf
+	Return
+
+fn[3]:
+	Sleep 1000ms
+	CharTurnTo name[80] 0deg 400deg/s
+	Sleep 300ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (-540, 0, -1000) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (-3740, 0, 0) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (-3740, 2000, 4800) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (-600, 4000, 4800) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Return
+
+fn[4]:
+	Sleep 5000ms
+	Return
+
+fn[5]:
+	CharTurnTo name[80] 0deg 400deg/s
+	Sleep 500ms
+	CharTurnTo name[80] 180deg 400deg/s
+	Sleep 500ms
+	CharTurnTo name[80] 90deg 400deg/s
+	Sleep 200ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (520, 4000, 5040) 1000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (1000, 4000, 3540) 1000mm/s 0
+	ForkWait name[80] fork[1]
+	CharTurnTo name[80] 180deg 400deg/s
+	Return
+
+fn[6]:
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-140, 0, -1000) 2500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-3740, 0, 0) 2500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-3740, 2000, 5000) 2500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-60, 4000, 5000) 2500mm/s 0
+	ForkWait name[2] fork[1]
+	CharTurnTo name[2] 180deg 400deg/s
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (2120, 4000, 3940) 0ms
+	CamSetDistance 0 5700 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 50000mdeg 0ms
+	CamPers 280 0ms
+	CharSetPos name[2] (1000, 4000, 2480) 0deg
+	CharSetPos name[80] (1000, 4000, 3540) 180deg
+	Fork char[8] fork[1]:
+		CamZoom 2700 3000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[8] fork[1]
+	TextTalk name[80] {
+		#94487v#1652F#5P为此我才委托了
+		值得信赖的人。{wait}
+	} {
+		#94488v我怎么可能
+		不相信你呢。{wait}
+	} {
+		#94489v#1656F……只不过………………{wait}
+	} {
+		#94490v#1655F参观王都的话是在撒谎。
+		……请原谅我的谎言。{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 2500ms
+	EmoteStop name[2]
+	TextTalk name[2] {
+		#79561v#1645F呼……………………
+		……………………没话可说了。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94491v#1656F#5P………………嗯……{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79562v#1642F为什么
+		不一开始就说出来嘛。{wait}
+	} {
+		#79563v如果知道是这样的情况，
+		我们这边就会采取正式的护卫工作。{wait}
+	} {
+		#79564v只要藏在协会里面
+		就是最安全的了。{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94492v#1653F#5P啊…………唔…………{wait}
+	} {
+		#94493v………………………………{wait}
+	} {
+		#94494v#1656F我还是……
+		……有些害怕……{wait}
+	} {
+		#94495v那天，我看到了。{wait}
+	} {
+		#94496v蜂拥而来的
+		那些人的眼睛……{wait}
+	}
+	TextWait
+	CharTurnTo name[80] 0deg 400deg/s
+	Sleep 300ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (1000, 4000, 4540) 1000mm/s 0
+	ForkWait name[80] fork[1]
+	Sleep 300ms
+	TextTalk name[80] {
+		#94497v#1654F#5P当宣读遗书的时候，
+		好多人的眼神瞬间就变了。{wait}
+	} {
+		#94498v那种疯狂，那种杀意……{wait}
+	} {
+		#94499v简直无法形容……
+		难以说清道明的感觉……{wait}
+	} {
+		#94500v并且转眼之间
+		就被掩饰得不留痕迹……{wait}
+	} {
+		#94501v但那种深藏着的眼神
+		是绝对抹消不了的。{wait}
+	} {
+		#94502v#1656F…………那一定是
+		人的本性。{wait}
+	} {
+		#94503v无论是谁，都会在某个地方
+		………………潜藏着残酷的一面。{wait}
+	}
+	TextWait
+	Sleep 1000ms
+	TextTalk name[80] {
+		#94504v#1654F#5P……这样的人，我害怕。{wait}
+	} {
+		#94505v所以我并不是
+		不相信游击士。{wait}
+	} {
+		#94506v#1656F而是，而是……{wait}
+	} {
+		#94507v……害怕………{wait}
+	} {
+		#94508v#1654F…………………………………{wait}
+	}
+	TextWait
+	Sleep 500ms
+	CharTurnTo name[80] 180deg 500deg/s
+	Sleep 300ms
+	TextTalk name[80] {
+		#94509v#1652F#5P对、对不起！{wait}
+	} {
+		#94510v#1656F果然没有意义呢……
+		这样的委托……{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79565v#1646F………………………………{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94511v#1656F#5P这、这个……{wait}
+	} {
+		#94512v#1655F雪拉扎德小姐，在您那么忙的时候
+		还把您卷入到这样的麻烦……{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94513v#1655F#5P#20A这个委托就…………{wait}
+	}
+	Sleep 2000ms
+	TextTalk name[2] {
+		#79566v#1646F#7A……我啊。{wait}
+	}
+	_59
+	TextTalk name[80] {
+		#94514v#1653F#5P………………咦？{wait}
+	}
+	TextWait
+	CharTurnTo name[2] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#79567v#1646F我可是一个不管什么样的任务
+		都不会应付了事的人。{wait}
+	} {
+		#79568v……别把我看扁了。{wait}
+	}
+	TextWait
+	BgmStop 3000ms
+	Emote name[80] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[80]
+	Sleep 500ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (1000, 4000, 3540) 1000mm/s 0
+	ForkWait name[80] fork[1]
+	Emote name[80] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo name[2] 180deg 400deg/s
+	Sleep 1000ms
+	ForkLoop name[80] fork[2]:
+		CharTurnToChar self name[2] 500deg/s
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (1940, 4000, 2480) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	CharTurnTo name[2] 275deg 400deg/s
+	Sleep 800ms
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (1000, 4000, 3540) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (-60, 4000, 2480) 2000mm/s 0
+	ForkWait name[80] fork[1]
+	CharTurnTo name[2] 95deg 400deg/s
+	Sleep 500ms
+	FadeOut 2000ms 0x00000000 255
+	Sleep 1000ms
+	EmoteStop name[2]
+	FadeWait
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#79569v{0x18}{color 12}应该道歉的，其实是我。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79570v{0x18}{color 12}我想正大光明地挺起胸膛生活。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79571v{0x18}{color 12}这种心情并不是一时心血来潮，
+		而且之前我一直都在拼尽全力。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79572v{0x18}{color 12}不过还是有一些不一样。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79573v{0x18}{color 12}我………再次感受到了。
+		我想正大光明地挺起胸膛生活。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79574v{0x18}{color 12}……所以，这个任务
+		我会坚持到最后，圆满完成。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 100ms
+	Sc_C4Unset 2048
+	Sleep 2000ms
+	SystemFlagsUnset 0x02000000
+	FlagSet flag[9479]
+	FlagSet flag[12112]
+	NewScene "t4102._sn" 100 0 0
+	Hcf
+	Return

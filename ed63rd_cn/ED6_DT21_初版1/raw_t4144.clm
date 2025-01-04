@@ -1,0 +1,1194 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4144.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+chip[1] "npl2/ch03590._ch" "npl2/ch03590p._cp"
+chip[2] "apl2/ch20607._ch" "apl2/ch20607p._cp"
+chip[3] "apl2/ch20622._ch" "apl2/ch20622p._cp"
+
+npc char[0]:
+	name "艾莉卡博士"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "希德中校"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "雷克鲁斯方石"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "雷克鲁斯方石"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9479]:
+		FlagUnset flag[9479]
+		SystemFlagsSet 0x10000000
+		system[1] = 210
+		Event fn[0,3]
+	elif flag[9478]:
+		FlagUnset flag[9478]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset name[8] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[8] (-280, 0, 310) 0deg
+	CharSetPos char[1] (460, 0, -2310) 0deg
+	CharSetPos char[0] (-780, 0, -1580) 0deg
+	CamLookPos (-1630, -1000, 27520) 0ms
+	CamSetDistance 0 8029 -10000 0ms
+	CamZoom 6000 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 354 0ms
+	Fork name[8] fork[2]:
+		CamZoom 7650 6000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sc_C8 512 70 "C_PLAC31._CH" 0 1000
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-70, -1000, 18210) 2000mm/s 0
+	Sleep 50ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-720, -1000, 16300) 2000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (610, -1000, 16180) 2000mm/s 0
+	ForkWait name[8] fork[2]
+	Sleep 2000ms
+	CrossFade 1000ms
+	CamLookPos (1280, -1000, 18410) 0ms
+	CamSetDistance 0 5460 -10000 0ms
+	CamZoom 3600 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 226 0ms
+	FadeWait
+	ForkWait name[8] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#97766v#1459F#6P这、这里是……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97113v#703F#4P令人惊讶……{wait}
+	} {
+		#97114v#701F没想到大圣堂地下
+		还会有这样的地方。{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 180deg 400deg/s
+	TextTalk name[8] {
+		#87992v#1060F#5P简而言之，
+		此处是根据利贝尔王家
+		和七耀教会的盟约而建造的。{wait}
+	} {
+		#87993v#1065F修建这里的目的只有一个……{wait}
+	} {
+		#87994v#1063F抑制古代遗物的力量和机能，
+		防止其向外扩散。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97767v#1457F#6P……原来如此。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97115v#701F#4P也就是与你们星杯骑士团的
+		使命有着直接关系的地方对吧。{wait}
+	} {
+		#97116v这么说来，在利贝尔之外也有
+		与此处相类似的地方了。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87995v#1075F#5P嗯，的确如此。{wait}
+	} {
+		#87996v#1060F我等将此地
+		称为『始源之地』。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97768v#1458F#6P『始源之地』……
+		实在是意味深长啊。{wait}
+	} {
+		#97769v#1456F归根究底，这里所参照的原型
+		还是在亚尔特利亚吧？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87997v#1064F#5P…………………………………{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97770v#1450F#6P哎呀，猜中了？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87998v#1066F#5P不……怎么说呢。{wait}
+	} {
+		#87999v我只是在想，真不愧是
+		拉赛尔博士的女儿。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97771v#1457F#6P请不要将我和
+		那个秃子相提并论。{wait}
+	} {
+		#97772v#1456F基础理论姑且不论，
+		应用工学方面我可是技高一筹。{wait}
+	} {
+		#97773v『卡佩尔』和『埃尔赛尤』的
+		基本系统可是
+		由我担任主设计的。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88000v#1060F#5P哦～原来如此啊。{wait}
+	} {
+		#88001v#1064F……哦哦，
+		话题扯远了。{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 0deg 400deg/s
+	Fork char[0] fork[0]:
+		CamLookPos (1480, -1000, 24030) 2000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 5460 -10000 2000ms
+	Fork char[0] fork[2]:
+		CamZoom 3850 2000ms
+	Fork char[0] fork[3]:
+		CamPers 254 2000ms
+	ForkWait char[0] fork[0]
+	Sleep 800ms
+	Fork name[8] fork[1]:
+		CamLookPos (1840, -1000, 29250) 4000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 4570 -10000 4000ms
+	Fork name[8] fork[3]:
+		CamZoom 3790 4000ms
+	Fork char[0] fork[1]:
+		CamPers 229 4000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-240, -1000, 26900) 2000mm/s 0
+	Sleep 150ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-1020, -1000, 24980) 2000mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (450, -1000, 25170) 2000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[0]
+	ForkWait name[8] fork[1]
+	Sleep 300ms
+	TextTalk name[8] {
+		#88002v#1063F#6P──这，就是那件东西吗。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97117v#703F#4P嗯，没错──{wait}
+	} {
+		#97118v#700F三天前从浮游都市
+		沉没地点打捞上来的
+		类似古代遗物的东西。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	BgmStop 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmWait
+	FlagSet flag[9476]
+	NewScene "e0900._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	EventBegin 0
+	SystemFlagsUnset 0x02000000
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset name[8] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[8] (-240, -1000, 26900) 0deg
+	CharSetPos char[1] (450, -1000, 25170) 0deg
+	CharSetPos char[0] (-1020, -1000, 24980) 0deg
+	TcTeamMemberEnable name[14]
+	TcTeamClear 255
+	TcTeamAddMember 0 name[8]
+	TcTeamAddMember 0 name[14]
+	PartyClear
+	PartyAdd name[8] party[0] 255
+	PartyAdd name[14] party[1] 255
+	Call fn[6,9]
+	CharFlagsUnset name[14] 0x0080
+	CharSetPos name[14] (240, -1000, 15420) 0deg
+	FlagSet flag[9685]
+	CamLookPos (1930, -1000, 30500) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 4000 0ms
+	CamZoom 3800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 229 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[8] fork[0]
+	Sleep 300ms
+	TextTalk name[8] {
+		#88003v#1065F#6P原来如此……
+		大致情况我已明白了。{wait}
+	} {
+		#88004v#1067F……可是这个东西……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97799v#1457F#6P嗯，如你所见。{wait}
+	} {
+		#97800v这个物体的
+		导力反应已经消失了。{wait}
+	} {
+		#97801v#1452F知道这意味着什么吗？{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamLookPos (1200, -1000, 27440) 1500ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 4650 -10000 1500ms
+	Fork name[8] fork[2]:
+		CamZoom 4000 1500ms
+	Fork name[8] fork[3]:
+		CamPers 229 1500ms
+	CharTurnTo name[8] 180deg 400deg/s
+	ForkWait name[8] fork[0]
+	TextTalk name[8] {
+		#88005v#1065F#5P失去了导力的古代遗物，
+		根据盟约而言是不在交还范围内的……{wait}
+	} {
+		#88006v#1060F原来如此，
+		我明白博士等我来的理由了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97802v#1456F#6P哼哼。
+		这样就不用我多费口舌了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97136v#703F#4P实际上，导力反应是在
+		将要送到这个大圣堂之前才消失的。{wait}
+	} {
+		#97137v虽然暂时是存放在了这里，
+		但在没有正式达成交还意见之前，
+		所有权的归属问题并不明确。{wait}
+	} {
+		#97138v#700F那么……
+		这种情况下究竟应该怎么做呢？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88007v#1067F#5P……唔……
+		真是击中我的软肋了。{wait}
+	} {
+		#88008v#1063F作为利贝尔的代表，
+		你们是想得到此物的所有权吧？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97139v#701F#4P此次为了见证,
+		我才随同一起来到了这里。{wait}
+	} {
+		#97140v也就是说提出这个主张的
+		正是艾莉卡博士。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97803v#1450F#6P原本就是由中央工房在
+		沉没遗迹打捞的过程中发现的物品。{wait}
+	} {
+		#97804v理所当然具有这样的权利不是吗？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88009v#1065F#5P……失效的古代遗物
+		就完全成为了黑匣子。{wait}
+	} {
+		#88010v不管采用何种手段
+		也不可能进行分析的。{wait}
+	} {
+		#88011v#1840F即便如此也要将其保留吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97805v#1450F#6P嗯，没错。{wait}
+	} {
+		#97806v#1457F请你设身处地的想一想。
+		这可是在那样的事件后留下的呢。{wait}
+	} {
+		#97807v我当时虽然没能亲身经历，
+		但我们的常识或多或少
+		已经被一样东西彻底颠覆了──{wait}
+	} {
+		#97808v#1452F──七耀教会历经千年
+		极尽所能掩盖的真相。{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#88012v#1063F#5P……………………………{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97809v#1453F#6P名为『噬身之蛇』的
+		不明身份的结社也是一样。{wait}
+	} {
+		#97810v越是听到关于他们的事情，
+		就越觉得他们的技术简直不可想象。{wait}
+	} {
+		#97811v#1457F真相究竟是怎样的，
+		又有什么样的事情会发生……{wait}
+	} {
+		#97812v包括我在内的大多数人
+		已不能再对其不闻不问了。{wait}
+	} {
+		#97813v#1459F正因如此，有了这样的线索
+		当然想要竭尽所能地进行调查。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88013v#1067F#5P…………………………………{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#97141v#701F#2P博士，到此为止吧。{wait}
+	} {
+		#97142v对他个人进行追问
+		也不能解决问题。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97814v#1457F#6P……也是。{wait}
+	}
+	TextWait
+	Fork char[1] fork[0]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 400ms
+	TextTalk char[0] {
+		#97815v#1450F#6P总之……
+		我们已经将事情说明了。{wait}
+	} {
+		#97816v这个古代遗物──
+		不，仅仅是个金属块。{wait}
+	} {
+		#97817v是交给我们，还是不交？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88014v#1067F#5P#40W………这………………{wait}
+	}
+	TextWait
+	BgmStop 2000ms
+	TextTalkNamed name[14] "少女的声音" {
+		#91421v#1P『不盈一握之迷惘
+		  由此孕育出邪念──』{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[0] fork[1]:
+		CharTurnTo self 180deg 400deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 180deg 400deg/s
+	BgmPlay bgm[183] 0
+	CrossFade 1000ms
+	CamLookPos (0, -1000, 223790) 0ms
+	CamSetDistance 0 5270 -10000 0ms
+	CamZoom 2910 0ms
+	CamRotate 180000mdeg 0ms
+	CamPers 294 0ms
+	CharSetPos name[14] (0, -1000, 212020) 0deg
+	CharSetChipBase name[14] chip[2]
+	CharSetChipPattern name[14] 0
+	CharSetPos name[8] (-90, -1000, 227080) 180deg
+	CharSetPos char[1] (610, -1000, 225560) 180deg
+	CharSetPos char[0] (-760, -1000, 225640) 180deg
+	Fork name[8] fork[0]:
+		CamLookPos (0, -1000, 211000) 4000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 3600 -10000 4000ms
+	Fork name[8] fork[2]:
+		CamZoom 3000 4000ms
+	Fork name[8] fork[3]:
+		CamPers 294 4000ms
+	FadeWait
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#97143v#702F#5P！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97818v#1454F#5P这……{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88015v#1079F#5P（咦………………）{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalkNamed name[14] "身着修女服的少女" {
+		#91422v#1446F#5P『爬过旷野，翻越山丘，
+		  播撒灾厄于长空…………』{wait}
+	} {
+		#91423v──圣典第二节，
+		《被解放的灾厄》如是说……{wait}
+	}
+	TextWait
+	ForkWait name[8] fork[0]
+	Sleep 200ms
+	CharSetChipPattern name[14] 1
+	Sleep 200ms
+	CharSetChipPattern name[14] 2
+	Sleep 300ms
+	CrossFade 250ms
+	SoundPlay sound[143] 0 0 100
+	CharSetChipBase name[14] chip[65535]
+	CharSetChipPattern name[14] 0
+	FadeWait
+	Sleep 500ms
+	CrossFade 500ms
+	CamLookPos (1650, -1000, 210300) 0ms
+	CamSetDistance 0 4080 -10000 0ms
+	CamZoom 3020 0ms
+	CamRotate 134000mdeg 0ms
+	CamPers 299 0ms
+	Fork name[14] fork[0]:
+		CharWalkToPos self (-30, -1000, 222300) 2000mm/s 0
+	Fork name[8] fork[0]:
+		CamLookPos (1430, -1000, 222830) 5000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 4350 -10000 5000ms
+	Fork name[8] fork[2]:
+		CamZoom 2700 5000ms
+	Fork name[8] fork[3]:
+		CamPers 320 5000ms
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	Sleep 500ms
+	TextTalkNamed name[14] "身着修女服的少女" {
+		#91424v#1440F#11P格拉汉姆阁下，我迟来了一步。{wait}
+	} {
+		#91425v七耀教会星杯骑士团所属
+		随从骑士莉丝·亚尔珍特。{wait}
+	} {
+		#91426v以后还请您多加指教。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88016v#1064F#5P#6P………………………（目瞪口呆）{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97819v#1452F#6P……又突然出现了个怪人。{wait}
+	} {
+		#97820v#1454F等、等一下，你……！？{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1500ms
+	TextTalk name[14] {
+		#91427v#1444F#11P…………怎么了？{wait}
+	}
+	TextWait
+	CharShake char[0] 15 0 300 3000ms
+	Emote char[0] 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97821v#1830F#6P唔……
+		骗不了我的！{wait}
+	} {
+		#97822v就算你这个样子
+		也不要想蒙骗我!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91428v#1802F#11P？？？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97823v#1457F#6P可、可怕的星杯骑士团……{wait}
+	} {
+		#97824v竟然派了这样的少女来
+		想要挫我方的锐气……{wait}
+	} {
+		#97825v#1834F不、不过！
+		我也有坚强的后盾哟！{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97826v#1455F#6P#4S好好看看这个吧！{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	SoundPlay sound[143] 0 0 100
+	ImageShow "c_vis402._ch" 150 120 500ms
+	Sleep 1500ms
+	CharTurnTo char[1] 270deg 400deg/s
+	TextSetPos 100 60 -1 -1
+	TextSetName "希德中校"
+	TextMessage null {
+		#97144v{color 0}#702F博士，这是……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 70 300 -1 -1
+	TextSetName "凯文神父"
+	TextMessage null {
+		#88017v{color 0}#1064F提妲的照片？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 350 50 -1 -1
+	TextSetName "莉丝修女"
+	TextMessage null {
+		#91429v{color 0}#1442F…………真可爱。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	ImageHide 500ms
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97827v#1834F#6P你刚才说了真可爱吧！？
+		你说了真可爱对吧！？{wait}
+	} {
+		#97828v#1831F对吧，对吧！
+		这娇小玲珑的脸蛋
+		真是太让人喜欢了！{wait}
+	} {
+		#97829v嗯～果然没错，
+		可爱之人必然知晓可爱之处所在！{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 24 27 250ms 0
+	Emote name[14] 0mm 2000mm 24 27 250ms 0
+	Emote char[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 1500ms
+	Emote char[0] 0mm 2000mm 38 38 250ms 1
+	Sleep 1500ms
+	Emote char[0] 0mm 2000mm 40 43 100ms 3
+	CharTurnTo char[0] 90deg 600deg/s
+	Sleep 400ms
+	CharTurnTo char[0] 0deg 600deg/s
+	Sleep 400ms
+	CharTurnTo char[0] 90deg 600deg/s
+	CharTurnTo char[0] 180deg 600deg/s
+	EmoteStop name[8]
+	EmoteStop name[14]
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[0] {
+		#97830v#1457F#6P咳咳，因此……{wait}
+	} {
+		#97831v#1452F不论你有多么可爱，
+		对于已经有了免疫力的我
+		是无效的，明白吗?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91430v#1802F#11P请问……
+		刚才您所说的话
+		我不太明白。{wait}
+	} {
+		#91431v可爱……
+		说的是我吗？{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97832v#1451F#6P#4S那是当然！#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 300ms
+	TextTalk char[0] {
+		#97833v#1831F#6P清冷秀美
+		却透着童稚的姣好容颜！{wait}
+	} {
+		#97834v将出浴少女般
+		柔嫩欲滴的玉体轻裹
+		的修女装！{wait}
+	} {
+		#97835v哇，这是何等的杀伤力呀……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91432v#1805F#11P………………………………{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97836v#1836F#6P呼……
+		这样不对吧～！{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91433v#1446F#11P……格拉汉姆阁下。
+		请问这两位是？{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharTurnTo self 180deg 400deg/s
+	Sleep 100ms
+	TextTalk name[8] {
+		#88018v#1064F#6P啊、啊啊……{wait}
+	} {
+		#88019v#1065F他们是中央工房的
+		艾莉卡·拉赛尔博士和
+		王国军的希德中校。{wait}
+	} {
+		#88020v#1063F不过，你为什么
+		称呼我格拉汉姆阁下……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91434v#1440F#11P原来如此……
+		是遗物发现者的代表。{wait}
+	} {
+		#91435v#1446F……辛苦你们了。
+		接下来的事情就交给我们吧。{wait}
+	} {
+		#91436v还请你们将其归还。
+		（点头）{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97837v#1454F#6P啊……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97145v#702F#5P什么……{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[8] {
+		#88021v#1064F#6P等、等等！
+		怎么能擅自就这样决定了！{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91437v#1446F#11P……只是为格拉汉姆阁下
+		省去一些不必要的工夫。{wait}
+	} {
+		#91438v#1443F即便已经完全失效，
+		却终究是和『七至宝』相关的遗物……{wait}
+	} {
+		#91439v怎么能轻易
+		交给普通人呢……？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88022v#1063F#6P这、这个……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97838v#1458F#6P呼，哼哼～
+		真是伶牙俐齿啊。{wait}
+	} {
+		#97839v#1456F不过很可惜，
+		没有了盟约作为绝对的标准，
+		你们也就没有法律依据了对吧？{wait}
+	} {
+		#97840v是打算要无理取闹吗？{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91440v#1447F#11P……说到没有法律依据
+		你们不也一样吗。{wait}
+	} {
+		#91441v#1448F如果以盟约为绝对标准，
+		那么失效的古代遗物
+		是谁也不能据为己有的。{wait}
+	} {
+		#91442v只能弃之不管。
+		除此之外，别无他法。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97841v#1459F#6P也就是说……
+		你们不但是要将其夺走
+		而且还不许我们有半点怨言？{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91443v#1446F#11P的确如此。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97842v#1457F#6P哼，很好……{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamLookPos (1430, -1000, 223800) 800ms
+	Fork char[0] fork[0]:
+		CharTurnTo self 0deg 500deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 315deg 400deg/s
+	ForkWait name[8] fork[0]
+	TextTalk char[0] {
+		#97843v#1455F#11P凯文·格拉汉姆！
+		你看该怎么办吧！？{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91444v#1443F#11P……该怎么办？{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[8] {
+		#88023v#1064F#6P我、我吗！？
+		怎么突然就把矛头指向了我……{wait}
+	} {
+		#88024v#1068F……说实话
+		我是非常希望将其回收。{wait}
+	} {
+		#88025v#1066F可是，在利贝尔
+		我得到了许多的协助。
+		不留情面的话也有些过意不去……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97146v#703F#5P呼，从双方的角度而言
+		都缺少了决定性的东西。{wait}
+	} {
+		#97147v#701F这可就麻烦了啊。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88026v#1068F#6P我说中校……
+		你怎么一副事不关己的样子。{wait}
+	}
+	TextWait
+	BgmStop 0ms
+	SoundPlay sound[351] 0 0 100
+	Sc_C4Set 1024
+	Sleep 500ms
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#88027v#1064F#6P咦……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91445v#1444F#11P啊……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	Sc_C4Unset 1024
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 50ms
+	Emote char[0] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[0] 180deg 400deg/s
+	TextTalk char[1] {
+		#97148v#702F#5P怎么回事？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97844v#1452F#6P你们俩……
+		为什么突然瞠目结舌了？{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88028v#1067F#6P为、为什么……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91446v#1443F#11P……刚才的，
+		难道没有听到吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97845v#1459F#6P到底
+		听到了什么啊──{wait}
+	}
+	TextWait
+	_59
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[0] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#97846v#1454F#11P咦……{wait}
+	}
+	TextWait
+	Fork name[8] fork[1]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 0deg 400deg/s
+	TextTalk name[14] {
+		#91447v#1444F#11P啊……{wait}
+	}
+	TextWait
+	_59
+	BgmPlay bgm[184] 0
+	EffLoad eff[0] "map\\mp256_00.eff"
+	EffLoad eff[1] "map\\mp252_01.eff"
+	EffLoad eff[2] "map\\mp256_01.eff"
+	SoundPlay sound[326] 1 0 50
+	EffPlay eff[2] eff_instance[0] null 0 (0, 400, 230000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[1] null 0 (0, 400, 30000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Tc_E5_0 10 name[0] 0 4
+	Tc_E5_0 10 name[1] 0 4
+	Tc_E5_0 10 name[2] 0 4
+	Tc_E5_0 10 name[3] 0 4
+	Tc_E5_0 10 name[4] 0 4
+	Tc_E5_0 10 name[5] 0 4
+	Tc_E5_0 10 name[6] 0 4
+	Tc_E5_0 10 name[7] 0 4
+	Tc_E5_0 10 name[8] 0 4
+	Tc_E5_0 10 name[9] 0 4
+	Tc_E5_0 10 name[10] 0 4
+	Tc_E5_0 11 name[0] 0 4
+	Tc_E5_0 11 name[1] 0 4
+	Tc_E5_0 11 name[2] 0 4
+	Tc_E5_0 11 name[3] 0 4
+	Tc_E5_0 11 name[4] 0 4
+	Tc_E5_0 11 name[5] 0 4
+	Tc_E5_0 11 name[6] 0 4
+	Tc_E5_0 11 name[7] 0 4
+	Tc_E5_0 11 name[8] 0 4
+	Tc_E5_0 11 name[9] 0 4
+	Tc_E5_0 11 name[10] 0 4
+	Tc_E5_2 10 name[0] 700
+	Tc_E5_2 10 name[1] 700
+	Tc_E5_2 10 name[2] 700
+	Tc_E5_2 10 name[3] 700
+	Tc_E5_2 10 name[4] 700
+	Tc_E5_2 10 name[5] 700
+	Tc_E5_2 10 name[6] 700
+	Tc_E5_2 10 name[7] 700
+	Tc_E5_2 10 name[8] 700
+	Tc_E5_2 10 name[10] 700
+	Tc_E5_2 11 name[0] 700
+	Tc_E5_2 11 name[1] 700
+	Tc_E5_2 11 name[2] 700
+	Tc_E5_2 11 name[3] 700
+	Tc_E5_2 11 name[4] 700
+	Tc_E5_2 11 name[5] 700
+	Tc_E5_2 11 name[6] 700
+	Tc_E5_2 11 name[7] 700
+	Tc_E5_2 11 name[8] 700
+	Tc_E5_2 11 name[10] 700
+	Sleep 1000ms
+	CrossFade 1000ms
+	CamLookPos (-130, -1000, 30000) 0ms
+	CamSetDistance 0 3500 -10000 0ms
+	CamZoom 3870 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 208 0ms
+	CharSetPos name[8] (-60, -1000, 25760) 0deg
+	CharSetPos char[1] (670, -1000, 24300) 0deg
+	CharSetPos char[0] (-780, -1000, 23650) 0deg
+	CharSetPos name[14] (-60, -1000, 20930) 0deg
+	Fork name[8] fork[0]:
+		CamLookPos (0, -1650, 32000) 8000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 7700 -10000 8000ms
+	Fork name[8] fork[2]:
+		CamZoom 3080 8000ms
+	Fork name[8] fork[3]:
+		CamPers 176 8000ms
+	Sleep 500ms
+	_ObjB0 object[10] 15
+	_ObjB0 object[11] 15
+	ObjFrame object[10] 1
+	ObjPlay object[10] 105
+	ObjFrame object[11] 1
+	ObjPlay object[11] 105
+	ForkWait name[8] fork[0]
+	ObjWait object[10]
+	ObjWait object[11]
+	EffStop eff_instance[0] 2
+	EffStop eff_instance[1] 2
+	ForkFunc char[1] fork[0] fn[0,4]
+	Sleep 1000ms
+	_ObjB0 object[10] 15
+	_ObjB0 object[11] 15
+	ObjFrame object[10] 105
+	ObjPlay object[10] 180
+	ObjFrame object[11] 105
+	ObjPlay object[11] 180
+	Fork name[8] fork[0]:
+		CamLookPos (0, -1050, 34120) 6000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 4700 -10000 6000ms
+	Fork name[8] fork[2]:
+		CamZoom 2350 6000ms
+	ObjWait object[10]
+	ObjWait object[11]
+	ObjFlagsSet object[10] 0x0020
+	ObjFlagsSet object[11] 0x0020
+	ObjFrame object[10] 181
+	ObjPlay object[10] 300
+	ObjFrame object[11] 181
+	ObjPlay object[11] 300
+	Sleep 300ms
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (0, 1000, 230000) 30deg
+	CharColor char[2] 0x00FFFFFF 0ms
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (0, 1000, 30000) 30deg
+	CharColor char[3] 0x00FFFFFF 0ms
+	Sleep 300ms
+	SoundPlay sound[201] 0 0 100
+	EffPlay eff[1] eff_instance[2] char[2] 0 (0, 0, 0) 30 30 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[1] eff_instance[3] char[3] 0 (0, 0, 0) 30 30 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ForkWait name[8] fork[0]
+	ForkWait name[8] fork[0]
+	Sleep 1000ms
+	TextTalk char[1] {
+		#97149v#702F#5P这、这是……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97847v#1455F#5P难、难以置信……{wait}
+	} {
+		#97848v导力反应明明已经
+		完全消失了的啊！？{wait}
+	} {
+		#97849v可是为什么……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91448v#1443F#5P………………………………{wait}
+	} {
+		#91449v#1446F……一锤定音了。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88029v#1065F#5P啊……{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CrossFade 500ms
+	CamLookPos (-2130, -1000, 28840) 0ms
+	CamSetDistance 0 4570 -10000 0ms
+	CamZoom 3780 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 225 0ms
+	FadeWait
+	Fork name[14] fork[0]:
+		CamLookPos (-2050, -1000, 31170) 2000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (0, -1000, 28090) 1000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	Sleep 500ms
+	TextTalk name[8] {
+		#88030v#1063F#6P立方体的古代遗物……{wait}
+	} {
+		#88031v至今为止从未出现
+		也从未听说过的种类。{wait}
+	} {
+		#88032v那就将其命名为
+		『方石』吧。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 1000ms
+	ObjFlagsUnset object[10] 0x0020
+	ObjFlagsUnset object[11] 0x0020
+	ObjFrame object[10] 301
+	ObjPlay object[10] 301
+	ObjFrame object[11] 301
+	ObjPlay object[11] 301
+	EffStop eff_instance[2] 0
+	EffStop eff_instance[3] 0
+	SoundPlay sound[143] 0 0 100
+	EffPlay eff[1] eff_instance[1] name[8] 0 (270, 1250, 100) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	CharSetChipBase name[8] chip[3]
+	CharSetChipPattern name[8] 0
+	CharFlagsSet name[8] 0x0020
+	Fork name[14] fork[0]:
+		CamLookPos (-1950, -1000, 30670) 1000ms
+	FadeWait
+	Sleep 1500ms
+	FadeOut 300ms 0x00000000 100
+	ImageShow "c_vis405._ch" 190 130 500ms
+	Sleep 1500ms
+	TextClose 2
+	ImageHide 500ms
+	FadeIn 300ms 0x00000000
+	Sleep 1000ms
+	Sleep 1000ms
+	CrossFade 1000ms
+	EffStop eff_instance[1] 2
+	SoundStop sound[201]
+	Tc_E5_2 10 name[0] 0
+	Tc_E5_2 10 name[1] 0
+	Tc_E5_2 10 name[2] 0
+	Tc_E5_2 10 name[3] 0
+	Tc_E5_2 10 name[4] 0
+	Tc_E5_2 10 name[5] 0
+	Tc_E5_2 10 name[6] 0
+	Tc_E5_2 10 name[7] 0
+	Tc_E5_2 10 name[8] 0
+	Tc_E5_2 10 name[10] 0
+	Tc_E5_2 11 name[0] 0
+	Tc_E5_2 11 name[1] 0
+	Tc_E5_2 11 name[2] 0
+	Tc_E5_2 11 name[3] 0
+	Tc_E5_2 11 name[4] 0
+	Tc_E5_2 11 name[5] 0
+	Tc_E5_2 11 name[6] 0
+	Tc_E5_2 11 name[7] 0
+	Tc_E5_2 11 name[8] 0
+	Tc_E5_2 11 name[10] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97850v#1454F#5P啊……{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88033v#1065F#5P……………………………{wait}
+	}
+	TextWait
+	Fork name[14] fork[0]:
+		CamLookPos (-2050, -1000, 28810) 1000ms
+	CharTurnTo name[8] 180deg 400deg/s
+	ForkWait name[14] fork[0]
+	Sleep 500ms
+	TextTalk name[8] {
+		#88034v#1075F#11P希德中校……
+		艾莉卡·拉赛尔博士。{wait}
+	} {
+		#88035v谨遵盟约，以星杯骑士团
+		凯文·格拉汉姆之名
+		将该古代遗物予以回收。{wait}
+	} {
+		#88036v#1060F对两位以及与之相关的人员
+		致以诚挚的感谢。{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamZoom 4200 4000ms
+	FadeOut 3000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	ItemAdd item[808] 1
+	ForkQuit name[8] fork[0]
+	FlagSet flag[9477]
+	Sleep 3000ms
+	NewScene "t4152._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[4]:
+	SoundSetVolume sound[326] 40
+	Sleep 200ms
+	SoundSetVolume sound[326] 30
+	Sleep 200ms
+	SoundSetVolume sound[326] 20
+	Sleep 200ms
+	SoundSetVolume sound[326] 10
+	Sleep 200ms
+	SoundSetVolume sound[326] 0
+	SoundStop sound[326]
+	Return

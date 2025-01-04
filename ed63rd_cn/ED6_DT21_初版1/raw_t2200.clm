@@ -1,0 +1,150 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2200.x"
+	town town[1]
+	bgm bgm[12]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "卢安市·南街区"
+	pos (68010, 0, 21970)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 8:
+		SystemFlagsSet 0x10000000
+		Event fn[0,4]
+	Return
+
+fn[1]:
+	SoundPlay sound[453] 1 0 100
+	Return
+
+fn[2]:
+	while 1:
+		CharWalkToPos self (98790, 0, 19040) 3000mm/s 0
+		CharTurnTo self 90deg 400deg/s
+		Sleep 1000ms
+		CharWalkToPos self (98500, 0, 17600) 3000mm/s 0
+		CharTurnTo self 90deg 400deg/s
+		Sleep 1000ms
+		CharWalkToPos self (97040, 0, 17100) 3000mm/s 0
+		CharTurnTo self 180deg 400deg/s
+		Sleep 1000ms
+		CharWalkToPos self (96920, 0, 18630) 3000mm/s 0
+		CharTurnTo self 120deg 400deg/s
+		Emote self 0mm 2000mm 24 27 250ms 0
+		Sleep 3000ms
+		EmoteStop self
+	Return
+
+fn[3]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[4] (90300, 0, 18000) 90deg
+	CamLookPos (82160, 0, 21800) 0ms
+	CamSetDistance 0 4560 -10000 0ms
+	CamZoom 2320 0ms
+	CamRotate 90000mdeg 0ms
+	CamPers 406 0ms
+	ForkFunc name[4] fork[3] fn[0,5]
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Fork char[0] fork[0]:
+		CamLookPos (111300, 1000, 23740) 9500ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 7320 -10000 9500ms
+	Fork char[0] fork[2]:
+		CamRotate 45000mdeg 9500ms
+	ForkWait name[4] fork[3]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	NewScene "t2210._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	Fork name[4] fork[1]:
+		CharWalkToPos self (98680, 0, 18000) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (98680, 0, 22000) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (111300, 2000, 22000) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	ObjFlagsUnset object[0] 0x0010
+	ObjPlay object[0] 30
+	ObjWait object[0]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (113400, 2000, 22000) 2000mm/s 0
+	Return

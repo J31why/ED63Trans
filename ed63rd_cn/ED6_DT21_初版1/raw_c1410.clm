@@ -1,0 +1,327 @@
+calmare fc scena
+scena:
+	name "Bose" "C1410.x"
+	town town[62]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01680._ch" "npl/ch01680p._cp"
+chip[1] "npl/ch00050._ch" "npl/ch00050p._cp"
+
+npc char[0]:
+	name "维姆拉"
+	pos (3200, 0, 33900)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "阿加特"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 13:
+	if system[66] == 13:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 22
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SystemFlagsUnset 0x02000000
+	CamLookPos (3000, 1500, 39360) 0ms
+	CamSetDistance 0 5300 -10000 0ms
+	CamZoom 3140 0ms
+	CamRotate 50000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsSet char[9] 0x0040
+	CharSetPos char[9] (2800, 0, 38100) 270deg
+	CharSetPos char[8] (3140, 0, 36980) 270deg
+	CharSetPos name[17] (540, 0, 37040) 90deg
+	CharSetPos name[16] (440, 0, 37840) 90deg
+	CharSetPos name[18] (340, 0, 38640) 90deg
+	Fork char[10] fork[0]:
+		CamLookPos (3000, 0, 39360) 3000ms
+	Fork char[10] fork[1]:
+		CamSetDistance 0 4800 -10000 3000ms
+	FadeIn 2000ms 0x00000000
+	ForkWait char[10] fork[0]
+	Sleep 500ms
+	TextTalk name[16] {
+		#95480v#1749F#6P说是要离开卢安，
+		本来我还有点期待……{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95613v#1765F#6P哼，
+		没想到竟然被带到这种
+		满是雾气的山谷里的小屋来。{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95722v#1755F#6P仔细想想，
+		我们好像还是第一次离开卢安吧？{wait}
+	} {
+		#95723v#1754F结果竟然一上来
+		就来到这么隐秘的地方呢～{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#95481v#1744F#6P唉，不管怎么说
+		这只是为了考试。{wait}
+	} {
+		#95482v#1740F心存期待
+		反而不合情理了。{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95724v#1751F#6P哦，迪恩还挺老练的嘛。{wait}
+	}
+	TextWait
+	Fork char[10] fork[0]:
+		CamLookPos (3500, 0, 39360) 2000ms
+	Emote char[9] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	ForkWait char[10] fork[0]
+	EmoteStop char[9]
+	Sleep 500ms
+	TextTalk char[9] {
+		#80997v#051F#11P哼，
+		这不是明白得很吗。{wait}
+	} {
+		#80998v#053F看你们这么多嘴，
+		本来还打算呵斥一下来着……{wait}
+	} {
+		#80999v#050F总之，
+		聊天就到此为止了。{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#95483v#1742F#6P是、是……大哥。{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95614v#1763F#6P啧，自以为是……{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#81000v#053F#11P好了，
+		接下来终于要进行
+		事关游击士资格的最终考试了。{wait}
+	} {
+		#81001v通过这个考试
+		你们就能成为准游击士……{wait}
+	} {
+		#81002v#051F在这之前……{wait}
+	} {
+		#81003v你们直到今天都没掉队，
+		就暂且先表扬一下吧。{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[18] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[16] {
+		#95484v#1743F#6P表、表扬……？{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95725v#1753F#6P这、这是
+		吹的什么风啊？{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95615v#1764F#6P哼，真恶心啊。{wait}
+	}
+	TextWait
+	Emote char[9] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[9] {
+		#81004v#555F#11P……我说你们，
+		到底当我是什么人啊。{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95616v#1761F总之，
+		赶快说明考试内容吧。{wait}
+	} {
+		#95617v我们想早点活动一下身体，
+		都等得不耐烦了。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#81005v#051F#11P哼，说话还是
+		那么没大没小。{wait}
+	} {
+		#81006v#053F算了，
+		那我这就开始说明吧。{wait}
+	} {
+		#81007v#050F考试内容简单明了——
+		就是通过有魔兽徘徊的洞窟。{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#95485v#1743F#6P洞、洞窟？{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95726v#1753F#6P还要赶路吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#81008v#051F#11P别担心。
+		地方离这里不远。{wait}
+	} {
+		#81009v#053F总之，
+		你们要进入那个洞窟，
+		并且走到最深处。{wait}
+	} {
+		#81010v虽然没有什么时间限制，
+		不过我会在最里面等着，
+		你们还是尽快赶来吧。{wait}
+	} {
+		#81011v#050F——说明完毕。
+		有什么问题尽管提吧。{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#95486v#1744F#6P穿过洞窟啊……{wait}
+	} {
+		#95487v#1741F关键在于一边打退魔兽
+		一边前进吧。{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95727v#1756F#6P这么简单，
+		而且感觉正适合我们，对吧？{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95618v#1761F#6P嘿嘿，应该不会无聊了。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#81012v#551F#11P……看来没问题了。{wait}
+	}
+	TextWait
+	CharTurnToChar char[9] char[8] 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#81013v#051F#5P那么，维姆拉大叔。{wait}
+	} {
+		#81014v后方支援就拜托您了。{wait}
+	}
+	TextWait
+	CharTurnToChar char[8] char[9] 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#99545v#12P这倒好说……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99546v#12P让他们去真的没问题吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#81015v#053F#5P交给我吧，大叔。{wait}
+	} {
+		#81016v#051F那么，
+		就赶快去考试现场吧。{wait}
+	}
+	TextWait
+	Fork char[9] fork[1]:
+		CharWalkToPos self (140, 0, 35960) 2000mm/s 0
+	Sleep 300ms
+	ForkLoop name[16] fork[2]:
+		CharTurnToChar self char[9] 400deg/s
+	ForkLoop name[17] fork[2]:
+		CharTurnToChar self char[9] 400deg/s
+	ForkLoop name[18] fork[2]:
+		CharTurnToChar self char[9] 400deg/s
+	Fork name[17] fork[1]:
+		CharWalkToPos2 self (0, 0, 37010) 1000mm/s 0
+	Sleep 600ms
+	FadeOut 2000ms 0x00000000 255
+	ForkFunc char[8] fork[3] fn[0,4]
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-5400, 0, 35960) 2000mm/s 0
+	FadeWait
+	Sleep 1000ms
+	FlagSet flag[9476]
+	NewScene file[0x002100A8] 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	Fork char[8] fork[1]:
+		CharWalkToPos self (1340, 0, 36980) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (140, 0, 35960) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-5400, 0, 35960) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Return

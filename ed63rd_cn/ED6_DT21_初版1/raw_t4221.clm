@@ -1,0 +1,805 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4221.x"
+	town town[1]
+	bgm bgm[17]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] file[0x00270044] file[0x00270049]
+chip[1] file[0x002701D2] file[0x002701D7]
+chip[2] file[0x00270220] file[0x00270225]
+chip[3] file[0x00270046] file[0x0027004B]
+chip[4] file[0x002603F0] file[0x002603F5]
+chip[5] "apl/ch20020._ch" "apl/ch20020p._cp"
+
+npc char[0]:
+	name "奥利维特皇子"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "穆拉少校"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "奥斯本宰相"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "水壶"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 26
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "红茶"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 25
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "红茶"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 25
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 6:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 230
+			Event fn[0,3]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 230
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	OpLoad "t4221_n"
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (67000, 0, 7200) 180deg
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsSet char[8] 0x0004
+	CharSetPos char[8] (28000, 250, 53040) 90deg
+	CharSetChipBase char[8] chip[3]
+	CharSetChipPattern char[8] 0
+	CharFlagsUnset char[10] 0x0080
+	CharFlagsSet char[10] 0x0004
+	CharSetPos char[10] (30820, 300, 52900) 270deg
+	CharSetChipBase char[10] chip[4]
+	CharSetChipPattern char[10] 0
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharSetPos char[11] (29500, 300, 52600) 0deg
+	CharSetPos char[12] (29900, 300, 53140) 0deg
+	CharSetPos char[13] (28900, 300, 53140) 0deg
+	CamLookPos (84260, 0, 8440) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 280 0ms
+	Fork char[14] fork[0]:
+		CamLookPos (68220, 0, 8440) 8000ms
+	Fork char[14] fork[2]:
+		CamRotate 45000mdeg 8000ms
+	Fork char[14] fork[3]:
+		CamZoom 2800 8000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[14] fork[0]
+	Sleep 500ms
+	Fork char[14] fork[0]:
+		CamLookPos (67820, 0, 18440) 6000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[14] fork[255]
+	CamLookPos (37490, 0, 59950) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Fork char[14] fork[0]:
+		CamLookPos (31190, 0, 54740) 5000ms
+	Fork char[14] fork[1]:
+		CamSetDistance 0 5160 -10000 5000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[14] fork[0]
+	Sleep 500ms
+	TextTalk char[10] {
+		#98458v#1485F#11P……呼。{wait}
+	} {
+		#98459v女王陛下不愧是
+		红茶的爱好者啊。{wait}
+	} {
+		#98460v香气、温度、味道……
+		每一项都无可挑剔。{wait}
+	} {
+		#98461v#1480F呵呵，就算我是喜好咖啡，
+		也希望能天天喝到这样的好茶啊。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80297v#1551F#6P……虽然我也同意你的意见，
+		不过还是赶快进入正题吧。{wait}
+	} {
+		#80298v#1542F你到底想和我说什么？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98462v#1485F#11P呵呵……{wait}
+	} {
+		#98463v#1481F看来在利贝尔的这段时间
+		对殿下来说
+		还真是有非同一般的意义啊。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80299v#1543F#6P……什么……………{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98464v#1480F#11P以前见面的时候，
+		您给我的印象就是
+		一个十分灵活聪明的人……{wait}
+	} {
+		#98465v不过现在的殿下
+		更添了几分坚强。{wait}
+	} {
+		#98466v#1485F想必陛下也会为此感到高兴吧。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80300v#1545F#6P呵呵，这么说的话，
+		阁下才是一如既往的大胆呢。{wait}
+	} {
+		#80301v#1540F不，应该说是气势
+		比以前更有压迫感了呢。{wait}
+	} {
+		#80302v#1541F是因为不满足当前吞并的领土面积,
+		因而怀恨在心吧。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98467v#1481F#11P呵呵，真是不客气啊。{wait}
+	} {
+		#98468v#1485F不过，如果可以的话
+		希望您使用『合并』这个词。{wait}
+	} {
+		#98469v自从『百日战役』以来，
+		帝国军队还从来没有过
+		侵略其它国家的行为。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80303v#1545F#6P的确如此。{wait}
+	} {
+		#80304v#1540F──至少在表面看来是这样的。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98470v#1483F#11P……呵。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80305v#1544F#6P被合并的小国和自治州
+		各自都存在着或多或少的问题。{wait}
+	} {
+		#80306v#1542F然后问题会逐渐激化，
+		随之而来的就是猎兵团的入侵，
+		使社会治安极度恶化……{wait}
+	} {
+		#80307v然后受到穷困的当地政府邀请，
+		帝国军队前往介入，
+		接着便不明不白地决定合并。{wait}
+	} {
+		#80308v#1551F这一过程简直如出一辙。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98471v#1480F#11P唔，
+		的确有这样的共通之处。{wait}
+	} {
+		#98472v#1485F但是这也是动荡的时代
+		所产生的必然吧。{wait}
+	} {
+		#98473v说到底，帝国军队也只不过是
+		为了祖国而尽可能采取措施
+		实现周边地区的安定而已。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80309v#1540F#6P这一点的确非常出色。{wait}
+	} {
+		#80310v#1541F不过……
+		我还是有些在意情报局的人员
+		被过多地派往周边地区的情况呢。{wait}
+	} {
+		#80311v而且，被派去的时机
+		居然是在问题激化之前。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98474v#1485F#11P呵呵，
+		我并不想知道您是从哪里
+		得到的这样的情报。{wait}
+	} {
+		#98475v#1481F这是为了贯彻危机管理的思想。{wait}
+	} {
+		#98476v正因为如此，
+		之前的数次事件
+		才能够防范于未然。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80312v#1544F#6P这是以周边地区的怨恨
+		以及遭受恐怖袭击的危险为代价的啊。{wait}
+	} {
+		#80313v#1542F老实说，
+		我现在还有些不敢相信
+		你会这样独自来访利贝尔。{wait}
+	} {
+		#80314v现在的埃雷波尼亚，
+		最容易成为恐怖袭击目标的
+		恐怕就是你了啊。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98477v#1485F#11P呵呵，不敢当。{wait}
+	} {
+		#98478v#1480F不过，请放心。{wait}
+	} {
+		#98479v托优秀部下的福，
+		应付恐怖活动的对策万无一失。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80363v#1543F#6P优秀部下……{wait}
+		#80364v#1542F是说那个雷克特吗。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98480v#1485F#11P呵呵，虽然他是个奇怪的人，
+		不过工作做得相当出色。{wait}
+	} {
+		#98481v从这次日程的调整到对恐怖分子的防范
+		都是他一手包办的。{wait}
+	} {
+		#98482v#1480F因此一会儿我也能够安心地
+		前往克洛斯贝尔了。{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1200ms
+	TextTalk char[8] {
+		#80315v#1543F#6P#3S什么……！？{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk char[10] {
+		#98483v#1480F#11P我接下来的预定是要与
+		克洛斯贝尔的代表进行机密会谈。{wait}
+	} {
+		#98484v最近因为共和国的资金流入，
+		感觉有些被对抗势力压制住的倾向。{wait}
+	} {
+		#98485v#1485F反正那里也是我早就想去的地方，
+		就趁此机会拜访一下吧。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80316v#1550F#6P怎、怎么可以……{wait}
+	} {
+		#80317v#1544F现在的克洛斯贝尔
+		正处于错综复杂的各国势力支配中！{wait}
+	} {
+		#80318v缓冲地带暂且不说，
+		那里正在成为恐怖组织
+		和犯罪组织的温床……{wait}
+	} {
+		#80319v#1542F就算是非正式访问，
+		帝国宰相前往那种地方也太……！？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98486v#1481F#11P这么说的话，
+		殿下您不也是一样吗。{wait}
+	} {
+		#98487v登上那个浮游都市，
+		圆满完成视察任务
+		顺利回到地面。{wait}
+	} {
+		#98488v#1485F呵呵，
+		与您做的事情相比，
+		我去访问克洛斯贝尔如同儿戏一般。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80320v#1542F#6P…………………………………{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98489v#1480F#11P现在在国内
+		大家都把殿下当成英雄看待。{wait}
+	} {
+		#98490v殿下乘坐号称『洁白之翼』的
+		『埃尔赛尤号』回归帝都。{wait}
+	} {
+		#98491v与以『帝国时报社』为首的
+		各方面联络也万无一失……{wait}
+	} {
+		#98492v#1485F您所期待的华丽凯旋
+		一定会顺利进行吧。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80321v#1549F#6P………哼………………{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98493v#1485F#11P呵呵，
+		您就尽量活用这次机会，
+		稳固自己的立足之地吧。{wait}
+	} {
+		#98494v#1481F殿下，
+		我对您可是抱有很大的期望啊。{wait}
+	}
+	TextWait
+	Fork char[14] fork[0]:
+		CamZoom 3500 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsUnset 0x02000000
+	FlagSet flag[9476]
+	NewScene file[0x0021019F] 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (67000, 0, 7200) 180deg
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsSet char[8] 0x0004
+	CharSetPos char[8] (28000, 250, 53040) 90deg
+	CharSetChipBase char[8] chip[3]
+	CharSetChipPattern char[8] 0
+	CharFlagsUnset char[10] 0x0080
+	CharFlagsSet char[10] 0x0004
+	CharSetPos char[10] (30820, 300, 52900) 270deg
+	CharSetChipBase char[10] chip[4]
+	CharSetChipPattern char[10] 0
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharSetPos char[11] (29500, 300, 52600) 0deg
+	CharSetPos char[12] (29900, 300, 53140) 0deg
+	CharSetPos char[13] (28900, 300, 53140) 0deg
+	CamLookPos (31190, 0, 54740) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Fork char[14] fork[0]:
+		CamZoom 3000 2000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[14] fork[0]
+	Sleep 500ms
+	TextTalk char[8] {
+		#80322v#1542F#6P……期望吗。{wait}
+	} {
+		#80323v#1545F哈哈………
+		这还真是出乎意料啊。{wait}
+	} {
+		#80324v#1540F我还以为你肯定只是
+		特地来找碴的呢。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98495v#1483F#11P怎么会呢……
+		为什么会有这样的想法？{wait}
+	} {
+		#98496v#1481F我与殿下您
+		本来就是站在同一个立场上的。{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#80325v#1543F#6P什么……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CharSetPos char[10] (30820, 300, 53040) 270deg
+	CamLookPos (37270, 0, 54090) 0ms
+	CamSetDistance 0 5370 -26010 0ms
+	CamZoom 1800 0ms
+	CamRotate 82000mdeg 0ms
+	CamPers 190 0ms
+	Fork char[14] fork[0]:
+		CamZoom 1600 36000ms
+	FadeWait
+	Sleep 1000ms
+	TextTalk char[10] {
+		#98497v#1484F#5P……殿下。
+		你本来应该是相当憎恨
+		埃雷波尼亚这个旧帝国的。{wait}
+	} {
+		#98498v憎恨这个由多数贵族所支配，
+		被愚蠢的陈规陋习
+		所束缚的旧体制。{wait}
+	} {
+		#98499v#1481F我说的没错吧？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80326v#1542F#6P…………………………………{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98500v#1480F#5P虽说我被大家尊称为
+		『铁血宰相』……{wait}
+	} {
+		#98501v但是我在帝国的立场
+		还并不够稳固。{wait}
+	} {
+		#98502v#1485F虽然我在帝都有很多支持者，
+		但在诸侯依旧有着深重影响的地方上
+		支持率还远远不够。{wait}
+	} {
+		#98503v就算是在公认很有影响力的帝国军中，
+		也只不过是七成的程度……{wait}
+	} {
+		#98504v剩下的都在诸侯支配之下，
+		如果再加上他们自己的私设军队，
+		恐怕形势就要完全逆转了。{wait}
+	} {
+		#98505v#1481F……我现在也只是处在
+		围绕帝国主导权的争夺
+		激战正酣的风头浪尖上啊。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80327v#1551F#6P所以才在帝国全境铺设了铁路网，
+		为各地注入新鲜血液……{wait}
+	} {
+		#80328v并通过扩张领土
+		获得新的发言权吗……{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98506v#1485F#5P呵呵，
+		您不愧是最了解我的人啊。{wait}
+	} {
+		#98507v#1482F我再说一次──
+		请协助我吧，殿下。{wait}
+	} {
+		#98508v如果得到您的协助，
+		我的改革就会如虎添翼。{wait}
+	} {
+		#98509v这样一来
+		腐败的贵族势力来不及
+		互相勾结就会土崩瓦解……{wait}
+	} {
+		#98510v#1485F──这也是您
+		最希望看到的事情吧。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80329v#1551F#6P…………………………………{wait}
+	} {
+		#80330v#1542F……宰相。
+		我只想问一句话。{wait}
+	} {
+		#80331v『结社』和你究竟有什么关系？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98511v#1485F#5P呵呵，您在说什么，
+		我完全不明白……{wait}
+	} {
+		#98512v#1481F不过，
+		为了改革而利用一切可利用的要素……{wait}
+	} {
+		#98513v这是我的政治理念。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80332v#1541F#6P……我明白了。
+		我们的确很合得来。{wait}
+	} {
+		#80333v#1540F但正因为如此……
+		我拒绝你的邀请。{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#98514v#1483F#5P哦……？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80334v#1551F#6P腐败的贵族势力
+		的确不合我的胃口……{wait}
+	} {
+		#80335v不，正如你所说的，
+		应该是十分憎恨他们吧。{wait}
+	} {
+		#80336v#1542F但是……比起这个来，
+		你的做法更让我感到可怕。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98515v#1480F#5P……………………………………{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80337v#1540F#6P恐怕你是要通过
+		制造某种幻想，
+		而让整个国家陷入一种狂热之中吧。{wait}
+	} {
+		#80338v在这种狂热之中，
+		旧势力的确没有生存空间。{wait}
+	} {
+		#80339v#1551F但是……只要齿轮开始转动
+		就无法再停下来了。{wait}
+	} {
+		#80340v它会把一切都卷入其中……
+		毫无界限地成长下去吧。{wait}
+	} {
+		#80341v#1542F……宰相。
+		你明白这一点吗？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#98516v#1486F#5P哈哈，那是当然。{wait}
+	} {
+		#98517v#1481F──因为这只不过是
+		我改革的第一阶段。{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#80342v#1549F#6P………哼……………{wait}
+	}
+	TextWait
+	_59
+	CrossFade 1000ms
+	ForkQuit char[14] fork[255]
+	CamLookPos (31190, 0, 54740) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[10] (30820, 300, 52900) 270deg
+	FadeWait
+	Sleep 500ms
+	TextTalk char[10] {
+		#98518v#1485F#11P以后的事情……
+		如果殿下愿意和我携手的话，
+		请随时来告诉我。{wait}
+	} {
+		#98519v#1480F在您想通之前，
+		就请稳固自己的立足之地吧。{wait}
+	} {
+		#98520v……为此大概需要
+		先驯服那些你所厌恶的
+		贵族势力吧。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80343v#1545F#6P哼……
+		都被你看透了呢。{wait}
+	}
+	TextWait
+	Sleep 150ms
+	ForkFunc char[8] fork[3] fn[0,4]
+	Sleep 1200ms
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[10] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#98521v#1485F#11P是正午的钟声……
+		船也该快到了吧。{wait}
+	}
+	TextWait
+	_59
+	CrossFade 500ms
+	CharSetPos char[10] (30540, 0, 52900) 270deg
+	CharSetChipBase char[10] chip[2]
+	CharSetChipPattern char[10] 0
+	FadeWait
+	Sleep 500ms
+	Fork char[14] fork[0]:
+		CamLookPos (31500, 0, 54300) 1500ms
+	Fork char[10] fork[1]:
+		CharWalkToPos self (30540, 0, 51400) 1500mm/s 0
+	CharSetChipPattern char[8] 2
+	ForkWait char[10] fork[1]
+	CharTurnTo char[10] 270deg 400deg/s
+	Sleep 500ms
+	TextTalk char[10] {
+		#98522v#1480F#11P──那么，殿下。
+		我就先行一步了。{wait}
+	} {
+		#98523v#1485F两个星期之后……
+		我们在帝都再见吧。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo char[10] 90deg 400deg/s
+	Fork char[14] fork[0]:
+		CamLookPos (34750, 0, 54160) 3000ms
+	Fork char[14] fork[1]:
+		CamZoom 3200 3000ms
+	Fork char[10] fork[1]:
+		CharWalkToPos self (34840, 0, 51200) 2000mm/s 0
+	Sleep 800ms
+	Emote char[8] 0mm 1700mm 24 27 250ms 0
+	ForkWait char[10] fork[1]
+	Fork char[10] fork[1]:
+		CharWalkToPos self (34800, 0, 50200) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	Fork char[10] fork[2]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork char[10] fork[1]:
+		CharWalkToPos self (34800, 0, 48500) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	CharFlagsSet char[10] 0x0080
+	SoundPlay sound[7] 0 0 100
+	Sleep 2000ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	CharColor char[9] 0x00FFFFFF 0ms
+	CharSetPos char[9] (34800, 0, 48500) 0deg
+	Fork char[9] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (34630, 0, 50730) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[14] fork[0]:
+		CamLookPos (30890, 0, 55120) 4000ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (31970, 0, 54300) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (30540, 0, 54300) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	CharTurnToChar char[9] char[8] 400deg/s
+	EmoteStop char[8]
+	Sleep 500ms
+	ForkWait char[14] fork[0]
+	TextTalk char[9] {
+		#85900v#276F#5P谈话结束了吧。{wait}
+	} {
+		#85901v#270F……怎么了？
+		看你的表情这么疲劳。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#80344v#1544F#6P不，没事……{wait}
+	}
+	TextWait
+	Sleep 150ms
+	CharSetChipPattern char[8] 0
+	Sleep 500ms
+	TextTalk char[8] {
+		#80345v#1540F#6P我只是——
+		再次体会到了自己所面对的
+		是怎样的一个怪物而已。{wait}
+	}
+	TextWait
+	Fork char[14] fork[0]:
+		CamZoom 3500 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9477]
+	NewScene file[0x0021019F] 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	while 1:
+		SoundPlay sound[181] 0 0 90
+		Sleep 2500ms
+	Return

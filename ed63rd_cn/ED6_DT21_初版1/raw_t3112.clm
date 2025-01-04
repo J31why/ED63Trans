@@ -1,0 +1,343 @@
+calmare fc scena
+scena:
+	name "Zeiss" "T3112.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 0
+			Event fn[0,2]
+		else:
+			Event fn[0,4]
+	else:
+		Event fn[0,4]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	BgmPlay bgm[83] 0
+	CamLookPos (1780, 0, 2220) 0ms
+	CamSetDistance 0 4520 -10000 0ms
+	CamZoom 3030 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[6] (-40, 0, -1160) 0deg
+	CharColor name[6] 0x00FFFFFF 0ms
+	CharFlagsSet name[6] 0x0004
+	Sleep 2000ms
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	SoundPlay sound[109] 0 0 100
+	Sleep 500ms
+	Fork char[8] fork[0]:
+		CamLookPos (1600, 0, 2860) 1500ms
+	ForkFunc name[6] fork[0] fn[0,3]
+	ForkWait name[6] fork[0]
+	ForkWait char[8] fork[0]
+	CharTurnTo name[6] 270deg 400deg/s
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83278v#561F#40W……这种事，我知道的啊。{wait}
+	} {
+		#83279v就算妈妈不说，
+		这点事我也知道……{wait}
+	} {
+		#83280v#069F但是……但是………！{wait}
+	} {
+		#83281v这样的话，我到底算是什么啊！？{wait}
+	} {
+		#83282v#068F什么也做不到……！{wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83283v#561F#40W………………对了。
+		去和爸爸商量看看吧。{wait}
+	} {
+		#83284v如果是爸爸的话
+		说不定会理解我……{wait}
+	}
+	TextWait
+	Sleep 400ms
+	CharTurnTo name[6] 90deg 400deg/s
+	Fork char[8] fork[0]:
+		CamLookPos (2500, 0, 2870) 1500ms
+	Fork name[6] fork[1]:
+		CharWalkToPos self (1680, 0, 1400) 1800mm/s 0
+	ForkWait name[6] fork[1]
+	ForkWait char[8] fork[0]
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}提妲在槽中插入认证卡片。{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	SoundPlay sound[156] 0 0 100
+	MapColor 0x006464FF 0ms
+	Sleep 1500ms
+	FadeOut 2000ms 0x00000000 255
+	SoundPlay sound[103] 0 0 100
+	CamLookPos (2500, 11900, 2870) 2000ms
+	FadeWait
+	Sleep 800ms
+	SoundStop sound[103]
+	Sleep 500ms
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene file[0x0021012F] 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 600ms
+	Fork self fork[2]:
+		CharWalkToPos2 self (90, 0, 1570) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[109] 0 0 100
+	Return
+
+fn[4]:
+	SystemFlagsUnset 0x00000001
+	EventBegin 1
+	CamSetDistance 0 6000 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamLookPos (1400, 0, 4500) 0ms
+	CharSetPos field_party[0] (1750, 0, 1370) 90deg
+	CharSetPos field_party[1] (1280, 0, 2600) 180deg
+	if system[12] != 255:
+		CharSetPos field_party[2] (70, 0, 1470) 180deg
+	if system[13] != 255:
+		CharSetPos field_party[3] (-50, 0, 2600) 180deg
+	if system[14] != 255:
+		CharSetPos field_party[4] (-1380, 0, 1470) 180deg
+	if system[15] != 255:
+		CharSetPos field_party[5] (-1380, 0, 2600) 180deg
+	Sleep 200ms
+	system[40] = 24
+	var[0] = 0
+	if system[0] == 100:
+		Menu menu[0] 10 10 0
+			"　【 顶楼 】" // 0
+			"　【 ５层 】" // 1
+			"　【 ４层 】" // 2
+			"　【 ３层 】" // 3
+			"　【 ２层 】" // 4
+			"　【 １层 】" // 5
+			"★【 Ｂ１ 】" // 6
+			"　【 离开 】" // 7
+		var[2] = 0
+	elif system[0] == 101:
+		Menu menu[0] 10 10 0
+			"　【 顶楼 】" // 0
+			"　【 ５层 】" // 1
+			"　【 ４层 】" // 2
+			"　【 ３层 】" // 3
+			"　【 ２层 】" // 4
+			"★【 １层 】" // 5
+			"　【 Ｂ１ 】" // 6
+			"　【 离开 】" // 7
+		var[2] = 1
+	elif system[0] == 102:
+		Menu menu[0] 10 10 0
+			"　【 顶楼 】" // 0
+			"　【 ５层 】" // 1
+			"　【 ４层 】" // 2
+			"　【 ３层 】" // 3
+			"★【 ２层 】" // 4
+			"　【 １层 】" // 5
+			"　【 Ｂ１ 】" // 6
+			"　【 离开 】" // 7
+		var[2] = 2
+	elif system[0] == 103:
+		Menu menu[0] 10 10 0
+			"　【 顶楼 】" // 0
+			"　【 ５层 】" // 1
+			"　【 ４层 】" // 2
+			"★【 ３层 】" // 3
+			"　【 ２层 】" // 4
+			"　【 １层 】" // 5
+			"　【 Ｂ１ 】" // 6
+			"　【 离开 】" // 7
+		var[2] = 3
+	elif system[0] == 104:
+		Menu menu[0] 10 10 0
+			"　【 顶楼 】" // 0
+			"　【 ５层 】" // 1
+			"★【 ４层 】" // 2
+			"　【 ３层 】" // 3
+			"　【 ２层 】" // 4
+			"　【 １层 】" // 5
+			"　【 Ｂ１ 】" // 6
+			"　【 离开 】" // 7
+		var[2] = 4
+	elif system[0] == 105:
+		Menu menu[0] 10 10 0
+			"　【 顶楼 】" // 0
+			"★【 ５层 】" // 1
+			"　【 ４层 】" // 2
+			"　【 ３层 】" // 3
+			"　【 ２层 】" // 4
+			"　【 １层 】" // 5
+			"　【 Ｂ１ 】" // 6
+			"　【 离开 】" // 7
+		var[2] = 5
+	elif system[0] == 106:
+		Menu menu[0] 10 10 0
+			"★【 顶楼 】" // 0
+			"　【 ５层 】" // 1
+			"　【 ４层 】" // 2
+			"　【 ３层 】" // 3
+			"　【 ２层 】" // 4
+			"　【 １层 】" // 5
+			"　【 Ｂ１ 】" // 6
+			"　【 离开 】" // 7
+		var[2] = 6
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	if var[0] >= 0 && var[0] <= 6:
+		var[0] = 6 - var[0]
+	if var[0] == 7:
+	elif var[2] < var[0]:
+		FadeOut 2000ms 0x00000000 255
+		SoundPlay sound[103] 0 0 100
+		CamLookPos (1400, -11900, 4500) 2000ms
+		FadeWait
+		Sleep 800ms
+		SoundStop sound[103]
+	elif var[2] > var[0]:
+		FadeOut 2000ms 0x00000000 255
+		SoundPlay sound[103] 0 0 100
+		CamLookPos (1400, 11900, 4500) 2000ms
+		FadeWait
+		Sleep 800ms
+		SoundStop sound[103]
+	if var[0] == 7:
+		switch var[2]:
+			case 0:
+				NewScene file[0x0021014F] 106 0 0
+				Hcf
+				break
+			case 1:
+				NewScene file[0x0021014F] 101 0 0
+				Hcf
+				break
+			case 2:
+				NewScene file[0x0021015C] 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene file[0x0021015C] 106 0 0
+				Hcf
+				break
+			case 4:
+				NewScene file[0x0021015C] 112 0 0
+				Hcf
+				break
+			case 5:
+				NewScene file[0x00210161] 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene file[0x00210148] 104 0 0
+				Hcf
+				break
+	else:
+		switch var[0]:
+			case 0:
+				SoundPlay sound[14] 0 0 100
+				Sleep 500ms
+				NewScene file[0x0021014F] 106 0 0
+				Hcf
+				break
+			case 1:
+				SoundPlay sound[14] 0 0 100
+				Sleep 500ms
+				NewScene file[0x0021014F] 101 0 0
+				Hcf
+				break
+			case 2:
+				SoundPlay sound[14] 0 0 100
+				Sleep 500ms
+				NewScene file[0x0021015C] 100 0 0
+				Hcf
+				break
+			case 3:
+				SoundPlay sound[14] 0 0 100
+				Sleep 500ms
+				NewScene file[0x0021015C] 106 0 0
+				Hcf
+				break
+			case 4:
+				SoundPlay sound[14] 0 0 100
+				Sleep 500ms
+				NewScene file[0x0021015C] 112 0 0
+				Hcf
+				break
+			case 5:
+				SoundPlay sound[14] 0 0 100
+				Sleep 500ms
+				NewScene file[0x00210161] 100 0 0
+				Hcf
+				break
+			case 6:
+				SoundPlay sound[14] 0 0 100
+				Sleep 500ms
+				NewScene file[0x00210148] 104 0 0
+				Hcf
+				break
+	Return

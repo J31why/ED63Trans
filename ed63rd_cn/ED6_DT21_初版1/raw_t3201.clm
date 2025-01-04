@@ -1,0 +1,821 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3201.x"
+	town town[1]
+	bgm bgm[84]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00070._ch" "npl/ch00070p._cp"
+chip[1] "npl/ch02610._ch" "npl/ch02610p._cp"
+
+npc char[0]:
+	name "金"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "雾香"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "目标用摄像机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 2:
+		if flag[9479]:
+			FlagUnset flag[9479]
+			SystemFlagsSet 0x10000000
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (50900, 2500, -2400) 0deg
+	CamLookPos (50730, 2500, 2180) 0ms
+	CamSetDistance 0 7220 -10000 0ms
+	CamZoom 2830 0ms
+	CamRotate 141000mdeg 0ms
+	CamPers 411 0ms
+	Fork field_party[0] fork[0]:
+		CamPers 324 5000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkWait field_party[0] fork[0]
+	CrossFade 1000ms
+	CamLookPos (51440, 2500, -3490) 0ms
+	CamSetDistance 0 5710 -10000 0ms
+	CamZoom 2570 0ms
+	CamRotate 141000mdeg 0ms
+	CamPers 298 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk char[1] {
+		#790F#5P…………………………{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ObjFlagsUnset object[6] 0x0008
+	ObjFlagsUnset object[6] 0x0010
+	ObjFrame object[6] 0
+	ObjPlay object[6] 29
+	ObjWait object[6]
+	Sleep 200ms
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (60800, 2500, -3050) 270deg
+	Fork char[0] fork[1]:
+		CharWalkToPos self (54840, 2500, -2850) 2000mm/s 0
+	Fork field_party[0] fork[0]:
+		CamLookPos (54110, 2500, -4810) 3000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 4019 -10000 3000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2710 3000ms
+	Fork field_party[0] fork[3]:
+		CamPers 313 3000ms
+	Sleep 1000ms
+	ObjFrame object[6] 29
+	ObjPlay object[6] 0
+	SoundStop sound[6]
+	SoundPlay sound[7] 0 0 100
+	ForkWait field_party[0] fork[0]
+	ForkWait char[0] fork[1]
+	CharTurnTo char[1] 90deg 400deg/s
+	Sleep 200ms
+	TextTalk char[1] {
+		#790F#4P好快啊，这就出来了？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P喂喂，快什么啊……{wait}
+	} {
+		我都已经泡了
+		一个小时了啊？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4P是吗……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P怎么了，
+		难得看到你在深思啊。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (53380, 2500, -5270) 2000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 4490 -10000 2000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2760 2000ms
+	Fork field_party[0] fork[3]:
+		CamPers 325 2000ms
+	ForkFunc char[0] fork[0] fn[0,3]
+	ForkWait char[0] fork[0]
+	ForkWait field_party[0] fork[0]
+	CharTurnTo char[1] 0deg 400deg/s
+	TextTalk char[1] {
+		#790F嗯嗯……{wait}
+	} {
+		……就差一步了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P是吗……{wait}
+	}
+	TextWait
+	Sleep 200ms
+	CharTurnTo char[0] 0deg 400deg/s
+	Sleep 1500ms
+	TextTalk char[0] {
+		#070F#5P师父去世后，都过了六年了吗。{wait}
+	} {
+		你似乎经过了漫长的旅途啊。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F是走过不少地方了呢……{wait}
+	} {
+		不过，
+		并不是旅行这么轻松的事情。{wait}
+	} {
+		只不过是在大陆上随波逐流，
+		偶尔停留在某个角落……{wait}
+	} {
+		就像河流中的落叶一样。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P原来如此啊……{wait}
+	} {
+		不过，要是这样的话，
+		你也差不多该和其他人一样……{wait}
+	} {
+		开始寻找
+		自己的道路怎么样？{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 90deg 400deg/s
+	TextTalk char[1] {
+		#790F#4P哎呀……{wait}
+	} {
+		难不成
+		你是打算对我说教吗？{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 315deg 400deg/s
+	TextTalk char[0] {
+		#070F#5P啧……
+		抱歉我嘴这么笨。{wait}
+	} {
+		总、总而言之
+		我想说的就是啊……{wait}
+	} {
+		我们已经花费了
+		足够的时间。{wait}
+	} {
+		要治愈过去的伤痛，
+		这段时间已经足够了……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4P嗯嗯……是啊。{wait}
+	} {
+		或许是这样……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo char[1] 0deg 400deg/s
+	Sleep 2000ms
+	TextTalk char[1] {
+		#790F我说，金。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P嗯？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F我要是回国你会高兴吗？{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[0] {
+		#070F#5P怎、怎么了，突然这么问。{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#790F#4P别管了，你回答我就是。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P嗯，唔……那当然。{wait}
+	} {
+		一定要说的话，
+		当然是高兴的了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4P……………………………{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P那、那又怎么样？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4P不……{wait}
+	} {
+		总统的邀请，
+		我决定接受了。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#070F#5P喂、喂！？{wait}
+	} {
+		也别因为我就……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4P不要误会。{wait}
+	} {
+		我只是需要一个
+		终结旅程的契机而已。{wait}
+	} {
+		还有一个更能发挥
+		自己能力的地方……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	Sleep 2000ms
+	FlagSet flag[9480]
+	NewScene "t3200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	CharWalkToPos self (51900, 2500, -3000) 1500mm/s 0
+	CharTurnTo self 315deg 400deg/s
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundPlay sound[463] 0 0 100
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (50900, 2500, -2400) 0deg
+	CamLookPos (48910, 380, 2620) 0ms
+	CamSetDistance 0 5410 -10000 0ms
+	CamZoom 1660 0ms
+	CamRotate 143000mdeg 0ms
+	CamPers 731 0ms
+	ED6_12 200 120000 0
+	Fork char[2] fork[0]:
+		CamLookPos (53710, 380, -6310) 6000ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 5410 -10000 6000ms
+	Fork char[2] fork[2]:
+		CamZoom 1400 6000ms
+	Fork char[2] fork[3]:
+		CamRotate 143000mdeg 6000ms
+	Fork char[1] fork[1]:
+		CamPers 731 6000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[2] fork[0]
+	Sleep 1000ms
+	TextTalk char[1] {
+		#96836v#793F#11P………………………………{wait}
+	}
+	TextWait
+	ObjFlagsUnset object[6] 0x0008
+	ObjFlagsUnset object[6] 0x0010
+	ObjFrame object[6] 0
+	ObjPlay object[6] 29
+	ObjWait object[6]
+	Sleep 300ms
+	CharFlagsUnset char[0] 0x0080
+	CharColor char[0] 0x00FFFFFF 0ms
+	CharSetPos char[0] (60800, 2500, -3050) 270deg
+	Fork char[0] fork[1]:
+		CharWalkToPos self (54840, 2500, -2850) 2000mm/s 0
+	Fork char[0] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[2] fork[0]:
+		CamLookPos (54110, 2500, -4810) 3000ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 4019 -10000 3000ms
+	Fork char[2] fork[2]:
+		CamZoom 1430 3000ms
+	Fork char[1] fork[1]:
+		CamPers 720 3000ms
+	Sleep 1000ms
+	ObjFlagsUnset object[6] 0x0800
+	ObjFrame object[6] 29
+	ObjPlay object[6] 0
+	SoundPlay sound[7] 0 0 100
+	ForkWait char[2] fork[0]
+	ForkWait char[0] fork[1]
+	CharTurnTo char[1] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#96837v#791F#12P好快啊，这就出来了？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83902v#073F#5P喂喂……这还叫快？{wait}
+	} {
+		#83903v#070F我都已经泡了
+		一个小时了啊。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96838v#792F#12P是吗……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83904v#070F#5P怎么了，
+		难得看到你在深思啊。{wait}
+	}
+	TextWait
+	Fork char[2] fork[0]:
+		CamLookPos (52580, 2500, -4620) 3000ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 3840 -10000 3000ms
+	Fork char[2] fork[2]:
+		CamZoom 1260 3000ms
+	Fork char[1] fork[1]:
+		CamPers 731 3000ms
+	ForkFunc char[0] fork[0] fn[0,3]
+	ForkWait char[0] fork[0]
+	ForkWait char[2] fork[0]
+	CharTurnTo char[1] 0deg 400deg/s
+	Sleep 500ms
+	TextTalk char[1] {
+		#96839v#792F#6P嗯嗯……{wait}
+	} {
+		#96840v#793F……就差一步了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83905v#074F#5P是吗……{wait}
+	}
+	TextWait
+	BgmStop 2000ms
+	CharTurnTo char[0] 0deg 300deg/s
+	BgmWait
+	BgmPlay bgm[183] 0
+	Sleep 500ms
+	TextTalk char[0] {
+		#83906v#074F#5P自龙牙师父去世后，
+		已经过了六年了吗……{wait}
+	} {
+		#83907v#070F你似乎经过了漫长的旅途啊。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96841v#791F嗯嗯，是走过不少地方呢……{wait}
+	} {
+		#96842v#792F不过，
+		并不是旅行这么轻松的事情。{wait}
+	} {
+		#96843v只不过是在大陆上随波逐流，
+		偶尔停留在某个角落……{wait}
+	} {
+		#96844v#793F就像河流中的落叶一样。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83908v#074F#5P…………………………{wait}
+	} {
+		#83909v#070F……那么，
+		看来你找到之前所说的答案了？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96845v#792F呵呵，
+		答案这种东西现在还没找到呢。{wait}
+	} {
+		#96846v#794F一定要说的话，就是……{wait}
+	} {
+		#96847v可能是找到
+		所谓的『结论』了吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83910v#072F#5P结论……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96848v#791F我说，金……{wait}
+	} {
+		#96849v我不直接参加战斗而去当接待员，
+		你对此有什么看法？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83911v#073F#5P这个啊……{wait}
+	} {
+		#83912v#573F……不想走上和
+		我或瓦鲁特一样傻的道路。{wait}
+	} {
+		#83913v#070F大概，就是这个原因吧？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96850v#794F呵呵……{wait}
+	} {
+		#96851v#792F关于你们是傻瓜这一点，
+		我倒是不否定。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 14 15 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#83914v#075F#5P喂！
+		这点姑且给我否定吧。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96852v#793F………………………………{wait}
+	} {
+		#96853v#792F我啊，是想确定一下。
+		父亲所说的『活人拳』的意义。{wait}
+	} {
+		#96854v通过战斗彼此提高，
+		这种理念的意义。{wait}
+	} {
+		#96855v#793F的确……这种理念
+		或许接近理想状态。{wait}
+	} {
+		#96856v#790F……但是，
+		以战斗为前提我却不敢苟同。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83915v#072F#5P嗯………{wait}
+	}
+	TextWait
+	Fork char[2] fork[2]:
+		CamZoom 1210 30000ms
+	Sleep 500ms
+	TextTalk char[1] {
+		#96857v#792F我知道作为一名武者
+		其人生完整的意义。{wait}
+	} {
+		#96858v也理解在此基础上
+		即使死也在所不惜的心情。{wait}
+	} {
+		#96859v关于这种想法，
+		我至今也没有改变。{wait}
+	} {
+		#96860v#793F但是……在父亲去世、
+		瓦鲁特离开时，
+		我无意中想到。{wait}
+	} {
+		#96861v#794F不通过战斗而救人……
+		如果有这样的道路，
+		不是更好吗。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83916v#073F#5P……………………………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96862v#793F我寻求着答案，
+		在大陆各地彷徨。{wait}
+	} {
+		#96863v然后，
+		在旅途中多次目睹纷争暴力，
+		深感自己的无力。{wait}
+	} {
+		#96864v#792F……这时闯入我生活的是在
+		利贝尔看到的游击士协会。{wait}
+	} {
+		#96865v任何时候都以民众安全
+		为第一要务而行动的组织理念……{wait}
+	} {
+		#96866v在这种理念下工作
+		我或许能够找到答案。{wait}
+	} {
+		#96867v#794F但是……结果却还是
+		无法逃离战斗。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83917v#572F#5P#572F……………………………{wait}
+	} {
+		#83918v#074F『人既生为人，
+		  何时何地都会伴随斗争。』{wait}
+	} {
+		#83919v『那么，要如何才能通过
+		　战斗来消灭纷争呢。』{wait}
+	} {
+		#83920v『看清了「现实」的我产生了
+		  这样一个「理想」。』{wait}
+	} {
+		#83921v#072F……这是师父说过的话吧。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96868v#791F嗯嗯……{wait}
+	} {
+		#96869v#793F从这个意义上来说……{wait}
+	} {
+		#96870v#792F……我只不过是将视线
+		从现实上逃避开了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83922v#075F#5P喂喂……{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 315deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#83923v#072F#5P话虽如此，
+		你自己也知道
+		并不是这么回事吧。{wait}
+	} {
+		#83924v师父所说的『现实』，
+		并不完全是
+		仅仅指战斗啊。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96871v#792F……不，
+		这是两个问题。{wait}
+	} {
+		#96872v#793F这几年来……
+		我完全没有
+		用自己的脚去走路。{wait}
+	} {
+		#96873v新的救人之道……
+		我以寻找这种道路为借口，
+		实际上是放弃了它。{wait}
+	} {
+		#96874v#794F……在协会舒适的气氛中
+		变得娇气了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83925v#572F#5P……………………………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96875v#794F从这个意义上来说……
+		我大概是父亲的弟子中
+		最落后的一个吧。{wait}
+	} {
+		#96876v#792F且不论方式的对错……{wait}
+	} {
+		#96877v无论是你还是瓦鲁特
+		都选择了自己的道路，并不断前行。{wait}
+	} {
+		#96878v直面父亲所教导的活人拳，
+		找到了自己的答案。{wait}
+	} {
+		#96879v并且，
+		都以自己的方式
+		面对世界这个『现实』……{wait}
+	} {
+		#96880v#793F结果……
+		只有我停滞不前。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83926v#074F#5P……………………………{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#83927v#573F#5P#070F不……#1140W 
+		#20W你确实前进了。{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[1] 90deg 500deg/s
+	TextTalk char[1] {
+		#96881v#790F咦？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83928v#573F#5P只不过……
+		那是为他人而开拓的道路。{wait}
+	} {
+		#83929v你在协会里
+		为了踏平别人前进的道路
+		而努力的前进着。{wait}
+	} {
+		#83930v#070F而这个……
+		我想正是救人之道。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96882v#790F………………………………{wait}
+	} {
+		#96883v#792F呵呵……{wait}
+	} {
+		#96884v#794F难不成
+		这是在安慰我？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83931v#072F#5P呜……抱歉我嘴这么笨。{wait}
+	} {
+		#83932v#074F总、总而言之
+		我想说的就是啊……{wait}
+	} {
+		#83933v#072F你实在是太要强，
+		而且太认真了。{wait}
+	} {
+		#83934v而这种要强和认真
+		在我看来却束缚了你自己。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96885v#793F啊……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83935v#573F#5P所以……雾香。
+		稍微放松点吧。{wait}
+	} {
+		#83936v一点点……只要一点点就好。{wait}
+	} {
+		#83937v#070F这样的话，
+		你应该能看透很多事情。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96886v#792F#6P………………………………{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 0deg 300deg/s
+	Sleep 500ms
+	Emote char[1] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#96887v#792F………我说，金。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83938v#070F#5P嗯，怎么？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96888v#791F我要是回国，你会高兴吗？{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[0] {
+		#83939v#073F#5P怎、怎么了，突然这么问。{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 90deg 400deg/s
+	TextTalk char[1] {
+		#96889v#790F#6P别管了，你回答我就是。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83940v#073F#5P嗯，唔……那当然。{wait}
+	} {
+		#83941v#074F一定要说的话，
+		当然是高兴的了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96890v#792F#6P……………………………{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#83942v#072F#5P那、那又怎么样？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96891v#792F#6P没什么……{wait}
+	} {
+		#96892v#791F总统的邀请，
+		我决定接受了。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#83943v#073F#5P喂、喂！？{wait}
+	} {
+		#83944v这到底是什么意思……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#96893v#792F#6P不要误会。{wait}
+	} {
+		#96894v我只是需要一个
+		终结旅程的契机而已。{wait}
+	} {
+		#96895v#791F还有一个更能发挥
+		自己能力的地方……{wait}
+	}
+	TextWait
+	Fork char[2] fork[2]:
+		CamZoom 1180 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	SoundSetVolume sound[463] 90
+	Sleep 400ms
+	SoundSetVolume sound[463] 80
+	Sleep 400ms
+	SoundSetVolume sound[463] 70
+	Sleep 400ms
+	SoundSetVolume sound[463] 60
+	Sleep 400ms
+	SoundSetVolume sound[463] 50
+	Sleep 400ms
+	SoundSetVolume sound[463] 40
+	Sleep 400ms
+	SoundSetVolume sound[463] 30
+	Sleep 400ms
+	SoundSetVolume sound[463] 20
+	Sleep 400ms
+	SoundSetVolume sound[463] 10
+	Sleep 400ms
+	SoundStop sound[463]
+	BgmWait
+	FlagSet flag[9480]
+	NewScene "t3200._sn" 100 0 0
+	Hcf
+	Return

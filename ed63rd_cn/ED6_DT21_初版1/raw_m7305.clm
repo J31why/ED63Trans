@@ -1,0 +1,235 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7305.x"
+	town town[1]
+	bgm bgm[175]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14720._ch" "mons2/ch14720p._cp"
+chip[1] "mons2/ch14721._ch" "mons2/ch14721p._cp"
+chip[2] "mons2/ch14440._ch" "mons2/ch14440p._cp"
+chip[3] "mons2/ch14440._ch" "mons2/ch14440p._cp"
+chip[4] "mons2/ch14760._ch" "mons2/ch14760p._cp"
+chip[5] "mons2/ch14761._ch" "mons2/ch14761p._cp"
+chip[6] "mons2/ch14770._ch" "mons2/ch14770p._cp"
+chip[7] "mons2/ch14771._ch" "mons2/ch14771p._cp"
+chip[8] "mons2/ch14340._ch" "mons2/ch14340p._cp"
+chip[9] "mons2/ch14340._ch" "mons2/ch14340p._cp"
+chip[10] "mons2/ch14140._ch" "mons2/ch14140p._cp"
+chip[11] "mons2/ch14140._ch" "mons2/ch14140p._cp"
+chip[12] "mons2/ch14150._ch" "mons2/ch14150p._cp"
+chip[13] "mons2/ch14150._ch" "mons2/ch14150p._cp"
+
+monster char[0]:
+	name ""
+	pos (-320, 8730, 23090)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[705]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-17410, 14500, 39590)
+	angle 180deg
+	chip chip[10]
+	flags 0x0141
+	unk2 -1
+	battle battle[707]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-16710, 17630, 60390)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[700]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-100, 21600, 75480)
+	angle 180deg
+	chip chip[12]
+	flags 0x0141
+	unk2 -1
+	battle battle[708]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (17290, 17630, 59940)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[703]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (17580, 14500, 39730)
+	angle 180deg
+	chip chip[10]
+	flags 0x0141
+	unk2 -1
+	battle battle[707]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-33250, 21000, 77780)
+	radius 1000mm
+	bubble_pos (-33250, 22000, 77780)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (32650, 21000, 76670)
+	radius 1000mm
+	bubble_pos (32650, 22000, 76670)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -88000) "mm7305._ch"
+	SoundPlay sound[379] 1 0 100
+	SystemFlagsSet 0x00100000
+	char[0].36 = 239
+	char[1].36 = 223
+	char[3].36 = 223
+	char[4].36 = 223
+	char[5].36 = 223
+	if !flag[11372]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[11373]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11372]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[386] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[386]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11372]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[386]}{color 0}。
+				不过现有的数量太多，{item item[386]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11373]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[509] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[509]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11373]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[509]}{color 0}。
+				不过现有的数量太多，{item item[509]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

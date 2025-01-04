@@ -1,0 +1,1135 @@
+calmare tc scena
+scena:
+	name "event" "E1210.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20610._ch" "apl2/ch20610p._cp"
+chip[1] "apl2/ch20744._ch" "apl2/ch20744p._cp"
+
+npc char[0]:
+	name "随从骑士玛卡斯"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "随从骑士塞萨尔"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "瑟尔纳特总长"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "随从骑士"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "随从骑士"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "随从骑士"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		Event fn[0,4]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	if flag[9602] && system[4] == 8:
+		system[1] = 0
+	SoundPlay sound[122] 1 0 70
+	if flag[9602] && system[4] == 8:
+		SoundStop sound[451]
+		system[1] = 0
+		SoundStop sound[122]
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-160, 200, 6650) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-3150, 200, 6970) 315deg
+	CharSetPos name[8] (-210, 1500, -4500) 0deg
+	CharColor name[8] 0x00FFFFFF 0ms
+	CamLookPos (4150, 0, 6650) 0ms
+	CamSetDistance 0 4870 -10000 0ms
+	CamZoom 3140 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 305 0ms
+	ForkLoop name[8] fork[3]:
+		Shake 1 1 2000 100ms
+	_76 255 7 1 -6 -3 0 0 0
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	SoundPlay sound[109] 0 0 100
+	Sleep 500ms
+	ForkFunc name[8] fork[0] fn[0,3]
+	Sleep 500ms
+	Fork char[0] fork[0]:
+		CamLookPos (-30, 1500, 5630) 3500ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 6180 -10000 3500ms
+	Fork char[0] fork[2]:
+		CamZoom 2600 3500ms
+	Fork char[0] fork[3]:
+		CamPers 325 3500ms
+	ForkWait name[8] fork[0]
+	ForkWait char[0] fork[0]
+	CharSetChipPattern char[1] 1
+	Sleep 100ms
+	CharSetChipPattern char[0] 1
+	Sleep 150ms
+	TextTalk char[1] {
+		#99790v#5P#100P格拉汉姆大人。
+		今天辛苦您了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99805v#5P#100P您辛苦了。{wait}
+	} {
+		#99806v这次的行动
+		做得十分干净利落。{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87850v#1075F嗯，比平时要轻松，
+		真是让我松了一口气。{wait}
+	} {
+		#87851v#1066F唉～～
+		如果时间允许的话，
+		还能和有闲阶级的女士风花雪月一场呢。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99791v#5P#100P又说那样的话了……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99807v#5P#100P做事太过招摇的话，
+		可是会被总长盯上的哦。{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87852v#1060F是、是。
+		你们也太不懂开玩笑了。{wait}
+	} {
+		#87853v真不明白，
+		为什么你们两个会被分派到
+		像我这样随便的家伙身边。 {wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99792v#5P#100P呵呵……
+		毕竟，
+		您好歹也是个『守护骑士』啊。{wait}
+	} {
+		#99793v包括这部
+		『梅尔卡瓦』在内，
+		总不能没有相应的后援吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99808v#5P#100P随从骑士的人数
+		也比核定的数目要少很多了。{wait}
+	} {
+		#99809v要不，干脆趁这个机会
+		申请增加一些人手如何？{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87854v#1068F要是那样做的话，
+		一个人行动时就更麻烦了啊。{wait}
+	} {
+		#87855v#1066F请容我回绝吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99810v#5P#100P真是……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99794v#5P#100P您要是能让我们多做点活儿，
+		我们也会比较放心啊……{wait}
+	} {
+		#99795v半年前那件事也是，
+		除了帮忙搬运『盐之桩』之外，
+		我们什么忙也没帮上。{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87856v#1065F说到那玩意，
+		光是搬运也已经是很重大的任务啦……{wait}
+	} {
+		#87857v#1072F（要是随便行动，
+		  让那家伙警戒起来
+		  可就糟了啊……）{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99796v#5P#100P哎……？{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87858v#1075F不，没什么。{wait}
+	} {
+		#87859v#1060F——按照预定计划，
+		就这样回亚尔特利亚吧。{wait}
+	} {
+		#87860v明天……不，已经是今天了吗。
+		争取午后就能到达。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99811v#5P明白。{wait}
+	}
+	TextWait
+	EffLoad eff[0] "map\\mp001_00.eff"
+	EffPlay eff[0] eff_instance[0] null 0 (-4400, 1150, 6600) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[171] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[171] 0 0 100
+	Sleep 500ms
+	EffStop eff_instance[0] 0
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote char[1] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	CharSetChipPattern char[1] 0
+	Sleep 50ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	CharSetChipPattern char[0] 0
+	Sleep 1000ms
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87861v#1063F从哪里来的？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99797v#5P亚尔特利亚——{wait}
+	} {
+		#99798v从瑟尔纳特总长那里
+		直接发来的联络。{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87862v#1064F哎，真的？{wait}
+	} {
+		#87863v#1068F（在这种时候，
+		  那个人发联络过来，
+		  肯定没什么好事啊……）{wait}
+	} {
+		#87864v#1060F没办法……接通吧。{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 1
+	Sleep 150ms
+	TextTalk char[1] {
+		#99799v#5P#100P了解。{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 0
+	Sleep 150ms
+	SoundPlay sound[156] 0 0 100
+	Sleep 500ms
+	Fork char[1] fork[0]:
+		CamLookPos (1250, 2000, 3510) 3000ms
+	Fork char[1] fork[1]:
+		CamSetDistance 0 5340 -10000 3000ms
+	Fork char[1] fork[2]:
+		CamZoom 3140 3000ms
+	Fork char[1] fork[3]:
+		CamRotate 45000mdeg 3000ms
+	Fork char[0] fork[1]:
+		CamPers 262 3000ms
+	_ObjB0 object[0] 10
+	ObjFrame object[0] 0
+	ObjPlay object[0] 30
+	Sleep 300ms
+	SoundPlay sound[295] 0 0 100
+	Fork name[8] fork[0]:
+		CharTurnTo self 90deg 400deg/s
+	ObjWait object[0]
+	ForkWait char[1] fork[0]
+	Sleep 500ms
+	SoundPlay sound[157] 0 0 100
+	Sleep 200ms
+	CrossFade 500ms
+	_74 0 6 1
+	FadeWait
+	Sleep 500ms
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98543v{color 5}哟，凯文。
+		辛苦了。{wait}
+	} {
+		#98544v情况如何？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87865v#1060F#6P#100P啊啊，很顺利。{wait}
+	} {
+		#87866v猎物是『愚者挂坠』。{wait}
+	} {
+		#87867v虽然我感到了『蛇』的气息，
+		但恐怕只是他们可以随意割掉的尾巴而已。{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98545v{color 5}是吗……
+		大致上和预计的一样。{wait}
+	} {
+		#98546v辛苦了。
+		回来后好好休息——
+		虽然我是想这么说。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87868v#1068F#6P#100P（果然来了……）{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98547v{color 5}哦？怎么了？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87869v#1061F#6P#100P没什么、没什么。
+		请继续。 {wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98548v{color 5}嗯，虽然你刚刚完成任务，
+		现在就这么说有点对不住……{wait}
+	} {
+		#98549v不过……
+		有件事想拜托你。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87870v#1065F#6P#100P唔……{wait}
+	} {
+		#87871v#1063F……和『异端』有关吗？{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98550v{color 5}不，只是『回收物品』而已。{wait}
+	} {
+		#98551v那东西目前应该被暂时保管在
+		格兰赛尔大圣堂的地下。{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87872v#1063F#6P#100P格兰赛尔……！{wait}
+	} {
+		#87873v原来如此，
+		可能跟『环』有关吗……{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98552v{color 5}可能性很高吧。{wait}
+	} {
+		#98553v怎样，能帮忙吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87874v#1065F#6P#100P……明白。{wait}
+	} {
+		#87875v#1060F这边还有护送的任务，
+		我就让『梅尔卡瓦』
+		直接回亚尔特利亚去吧。{wait}
+	} {
+		#87876v格兰赛尔我一个人去就行了。{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98554v{color 5}嗯，拜托你了。{wait}
+	} {
+		#98555v对了，关于这件事，
+		我还派了一个新的随从骑士过去。{wait}
+	} {
+		#98556v对你的新手下
+		可要好好关照哦。{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Emote name[8] 0mm 2000mm 40 43 100ms 3
+	Sleep 300ms
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87877v#1064F#6P#100P等……
+		等一下！{wait}
+	} {
+		#87878v新手下……
+		怎么又这么突然就……！{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98557v{color 5}呵呵，
+		女神安排的机缘总是很唐突的。{wait}
+	} {
+		#98558v那个随从骑士的训练成绩很优秀，
+		应该不会拖你的后腿的。{wait}
+	} {
+		#98559v那么，祝你一路顺风。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	SoundPlay sound[157] 0 0 100
+	Sleep 200ms
+	CrossFade 500ms
+	_74 0 6 0
+	FadeWait
+	Sleep 500ms
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87879v#1064F#6P#100P………………（无语）{wait}
+	}
+	TextWait
+	Fork char[0] fork[0]:
+		CamLookPos (-30, 1500, 5630) 2000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 6180 -10000 2000ms
+	Fork char[0] fork[2]:
+		CamZoom 2600 2000ms
+	Fork char[0] fork[3]:
+		CamRotate 45000mdeg 2000ms
+	Fork char[1] fork[3]:
+		CamPers 325 2000ms
+	ForkWait char[0] fork[0]
+	CharSetChipPattern char[1] 1
+	Sleep 100ms
+	CharSetChipPattern char[0] 1
+	Sleep 150ms
+	TextTalk char[1] {
+		#99800v#5P#100P哈哈……
+		那个，怎么说呢。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99812v#5P#100P不、不是挺好的嘛。
+		有新人要来了。{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 0deg 400deg/s
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87880v#1068F这算什么好事啊！{wait}
+	} {
+		#87881v#1067F唉，
+		那家伙还真是老样子……{wait}
+	} {
+		#87882v真想不明白，
+		她怎么能当上那小说的原型。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99813v#5P#100P啊啊……
+		是那部《红耀石》对吧。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99801v#5P#100P咦，这样好吗？{wait}
+	} {
+		#99802v这样不是会把我们『骑士团』的存在
+		暴露给世间所知道……{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87883v#1060F那么戏剧性的内容
+		反而会成为很好的障眼法。{wait}
+	} {
+		#87884v女主角最终还死掉了，
+		也可以适当地扰乱敌人的情报。{wait}
+	} {
+		#87885v#1068F……若是认得本人的话，
+		马上就会知道她根本不是
+		那种可以如此简单死掉的家伙。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99803v#5P#100P哈哈……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99814v#5P#100P唉，算了。
+		对别人的评价就先到此为止吧。{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87886v#1060F总之……
+		事情就是这样。{wait}
+	} {
+		#87887v这次的后续工作
+		就完全交给你们了。{wait}
+	} {
+		#87888v金钱的流向也清查一下为妙，
+		感觉他应该还有其它的隐藏账户。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99804v#5P#100P原来如此……
+		一切包在我们身上吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99815v#5P#100P那我们这就
+		返回亚尔特利亚……{wait}
+	} {
+		#99816v您准备怎么办？{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "凯文·格拉汉姆" {
+		#87889v#1075F嗯……
+		就找个合适的自治州降落吧。{wait}
+	} {
+		#87890v#1060F可以的话，
+		尽可能在有国际定期船出入的城市附近。{wait}
+	}
+	TextWait
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	TextTalk char[0] {
+		#99817v#5P#100P收到。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharSetChipPattern char[0] 0
+	Sleep 150ms
+	TextTalk char[0] {
+		#99818v#5P#100P哎呀……
+		差不多要天亮了呢。{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 2
+	Sleep 100ms
+	Sleep 500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "e0811._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-140, 1500, -930) 2000mm/s 0
+	SoundPlay sound[109] 0 0 100
+	CharWalkToPos2 self (-800, 2000, 1450) 2000mm/s 0
+	CharWalkToPos2 self (-850, 2000, 2790) 2000mm/s 0
+	ForkWait self fork[1]
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (-160, 200, 6650) 0deg
+	CharFlagsUnset char[4] 0x0080
+	CharSetPos char[4] (-3150, 200, 6970) 315deg
+	CharFlagsUnset char[5] 0x0080
+	CharSetPos char[5] (2920, 200, 6830) 45deg
+	CharFlagsSet char[2] 0x0004
+	CharFlagsSet char[2] 0x0002
+	CharFlagsSet char[2] 0x0001
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-100, 2200, 2400) 0deg
+	CharSetChipBase char[2] chip[1]
+	CharSetChipPattern char[2] 0
+	ForkFunc char[2] fork[0] fn[0,5]
+	ObjFlagsUnset object[2] 0x0004
+	ObjFrame object[0] 30
+	ObjFlagsUnset object[0] 0x0008
+	_74 0 6 3
+	ForkLoop char[3] fork[3]:
+		Shake 1 1 2000 100ms
+	_76 2 0 1 -3 -2 0 0 0
+	_76 2 1 1 -6 -3 0 0 0
+	_76 2 2 1 -8 -4 0 0 0
+	CamLookPos (4300, 0, 6750) 0ms
+	CamSetDistance 0 4870 -10000 0ms
+	CamZoom 3320 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 325 0ms
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98627v{color 0}——原来如此。
+		我已经了解了大致的情况。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 500ms
+	BgmPlay bgm[118] 0
+	FadeIn 2000ms 0x00000000
+	CamZoom 3090 2000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[2] {
+		#98628v#1824F#6P关于你打听的人物，
+		已经确认完毕了。{wait}
+	} {
+		#98629v奥利维特皇子。
+		穆拉·范德尔。{wait}
+	} {
+		#98630v金·瓦赛克。
+		乔丝特·卡普亚。{wait}
+	} {
+		#98631v艾丝蒂尔·布莱特。
+		约修亚·布莱特。{wait}
+	} {
+		#98632v#1820F──以上６人
+		已经确认平安归还。{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90357v{color 5}是吗……那我就放心了。{wait}
+	} {
+		#90358v利贝尔国内的人
+		我已经确认过了……{wait}
+	} {
+		#90359v剩下的只有『蛇』的两个人，
+		不过，那边也不需要确认吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98633v#1825F#6P呵呵，真有你的。{wait}
+	} {
+		#98634v#1822F不过……事发这么突然，
+		还真是难以置信啊。{wait}
+	} {
+		#98635v『影之国』──
+		至宝所留下的负面遗产吗。{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90360v{color 5}嗯嗯……{wait}
+	} {
+		#90361v……不过，详细情况
+		等回去了之后再报告吧。{wait}
+	} {
+		#90362v善后处理似乎
+		也需要花点时间。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98636v#1825F#6P啊啊，那就拜托你了。{wait}
+	}
+	TextWait
+	ForkQuit char[2] fork[0]
+	char[2].8 = 0
+	Sleep 100ms
+	char[2].8 = 4
+	Sleep 100ms
+	char[2].8 = 5
+	Sleep 100ms
+	char[2].8 = 6
+	Sleep 300ms
+	Sleep 300ms
+	TextTalk char[2] {
+		#98637v#1826F#6P……话说回来，
+		你给人的感觉好像不太一样了啊。{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90363v{color 5}咦……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98638v#1825F#6P要是以前的你，
+		对相关人等的安危
+		可不至于这么关心。{wait}
+	} {
+		#98639v不……
+		应该说是刻意压抑自己的关心吧。{wait}
+	} {
+		#98640v#1820F看来在那什么『影之国』里
+		经历了不少事吧？{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90364v{color 5}哈哈……
+		说起经历还真是多到让人厌烦啊。{wait}
+	} {
+		#90365v包括这些在内，
+		都等我回去再报告吧。{wait}
+	} {
+		#90366v……我个人也有些事
+		想和总长谈谈。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98641v#1823F#6P怎么，真是意味深长啊。{wait}
+	} {
+		#98642v#1825F不过，
+		能和莉丝一起平安归来比什么都好。{wait}
+	} {
+		#98643v#1821F等你们回来了，
+		我们三个一起去喝酒吧。{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90367v{color 5}哈哈，真让人期待呢。{wait}
+	} {
+		#90368v……对了总长。
+		有件事想打听一下。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98644v#1820F#6P是什么？{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90369v{color 5}嗯，那个……{wait}
+	} {
+		#90370v『守护骑士』的诨名
+		以后还能不能改啊？{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote char[2] 150mm 1500mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[2] fork[1]:
+		CharAnimation self 6 9 1800ms
+	Sleep 500ms
+	TextTalk char[2] {
+		#98645v#1823F#6P…………啊……………？{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90371v{color 5}其实除了『异端制裁』之外，
+		我还有些其它的事情想做……{wait}
+	} {
+		#90372v当然我依然会好好完成
+		守护骑士的任务的。{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote char[2] -50mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	char[2].8 = 10
+	Sleep 80ms
+	char[2].8 = 11
+	Sleep 80ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	TextTalk char[2] {
+		#98646v#1825F#6P#40W……呼呼呼……哈哈哈……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CamLookPos (4300, 0, 6900) 0ms
+	CharFlagsUnset char[2] 0x0800
+	CharFlagsUnset char[2] 0x0001
+	CharSetPos char[2] (-250, 2000, 2600) 45deg
+	CharSetChipPattern char[2] 16
+	FadeWait
+	ForkFunc char[2] fork[0] fn[0,6]
+	ForkQuit char[3] fork[3]
+	TextTalk char[2] {
+		#98647v#1827F#6P#4S哈哈哈哈哈哈哈哈哈哈！{wait}
+	}
+	Shake 50 50 3000 500ms
+	TextWait
+	ForkLoop char[3] fork[3]:
+		Shake 1 1 2000 100ms
+	Emote char[3] 0mm 1700mm 40 43 100ms 3
+	Emote char[4] 0mm 1700mm 40 43 100ms 3
+	Emote char[5] 0mm 1700mm 40 43 100ms 3
+	Sleep 1000ms
+	CharSetChipPattern char[4] 1
+	Sleep 100ms
+	CharSetChipPattern char[3] 1
+	Sleep 150ms
+	TextTalk char[4] {
+		#99960v#2P总、总长……？{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90373v{color 5}唉……
+		果然是不行啊？{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	char[2].8 = 21
+	Sleep 100ms
+	char[2].8 = 22
+	Sleep 200ms
+	Sleep 300ms
+	TextTalk char[2] {
+		#98648v#1825F#6P呵呵呵……
+		守护骑士竟想改变
+		自己曾经取好的『诨名』吗。{wait}
+	} {
+		#98649v这在骑士团千年历史中
+		也是相当稀奇的事啊。{wait}
+	} {
+		#98650v#1821F……不过，并非没有先例。{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90374v{color 5}那么……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98651v#1826F#6P呵呵，
+		在下次见面之前，
+		你就想个更响亮的诨名吧。{wait}
+	} {
+		#98652v要是没想出来，
+		作为惩罚就让我来给你随便起个怪名字好了。{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90375v{color 5}怎么能这样，
+		这又不是什么惩罚游戏。{wait}
+	} {
+		#90376v算了，
+		我会努力想个酷一点的名字的。{wait}
+	} {
+		#90377v像『苍之流星』啦，
+		『黑色箭矢』什么的。{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	char[2].8 = 22
+	Sleep 120ms
+	char[2].8 = 23
+	Sleep 120ms
+	char[2].8 = 24
+	Sleep 120ms
+	char[2].8 = 25
+	Sleep 120ms
+	Sleep 300ms
+	Emote char[3] 0mm 1700mm 24 27 250ms 0
+	Emote char[4] 0mm 1700mm 24 27 250ms 0
+	Emote char[5] -150mm 1700mm 24 27 250ms 0
+	Emote char[2] -360mm 2200mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[2]
+	EmoteStop char[3]
+	EmoteStop char[4]
+	EmoteStop char[5]
+	Sleep 500ms
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90378v{color 5}那、那个……我说错了什么话吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	char[2].8 = 24
+	Sleep 120ms
+	char[2].8 = 23
+	Sleep 120ms
+	char[2].8 = 22
+	Sleep 120ms
+	Sleep 300ms
+	TextTalk char[2] {
+		#98653v#1824F#6P……凯文·格拉汉姆。{wait}
+	} {
+		#98654v#1821F作为你的原教官
+		我只给你一个忠告。{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "凯文的声音"
+	TextMessage null {
+		#90379v{color 5}哦……{wait}
+	}
+	TextWait
+	TextClose 0
+	Fork party[0] fork[2]:
+		CamZoom 3000 2000ms
+	Fork party[0] fork[2]:
+		CamZoom 2900 2000ms
+	FadeOut 2000ms 0x00000000 255
+	SoundSetVolume sound[122] 60
+	Sleep 200ms
+	SoundSetVolume sound[122] 50
+	Sleep 200ms
+	SoundSetVolume sound[122] 40
+	Sleep 200ms
+	SoundSetVolume sound[122] 30
+	Sleep 200ms
+	SoundSetVolume sound[122] 20
+	Sleep 200ms
+	SoundSetVolume sound[122] 10
+	Sleep 200ms
+	SoundStop sound[122]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9477]
+	NewScene "e0810._sn" 100 0 0
+	Hcf
+	ForkWait party[0] fork[2]
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "瑟尔纳特总长"
+	TextMessage null {
+		#98655v{color 0}如果你不想
+		今后丢更多丑的话……{wait}
+	} {
+		#98656v就不要说胡话了。
+		还是和莉丝商量一下再决定吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	BgmStop 5000ms
+	BgmWait
+	Sleep 3000ms
+	BgmPlay bgm[1] 0
+	VisShow vis[0] 0 0 640 1024 0 0 1024 1024 0 0 640 1024 0x00FFFFFF 0 "C_VIS477._CH"
+	VisShow vis[1] 0 0 640 480 150 120 768 512 0 0 640 480 0x00FFFFFF 1 "C_VIS478._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 7 0 -320000 7000 0
+	VisWait vis[0] 0
+	Sleep 2000ms
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 3000ms
+	TextClose 2
+	VisSet vis[0] 3 0x00FFFFFF 2500ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 3000ms 0 0
+	Sleep 4000ms
+	FlagSet flag[11303]
+	FlagSet flag[9602]
+	Sc_C4Set 16
+	system[40] = 24
+	system[49] = 349
+	FlagSet flag[9474]
+	ScAchievement 8 0 0
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}保存通关数据吗？{0x18}{wait}
+	}
+	Menu menu[0] -1 180 0
+		"【是】" // 0
+		"【否】" // 1
+	MenuWait var[0]
+	MenuClose menu[0]
+	if var[0] == 0:
+		TcTeamUse 3
+		Save
+		EventBegin 4
+	system[40] = 65535
+	Sc_C4Unset 16
+	FlagUnset flag[9602]
+	FadeOut 0ms 0x00000000 255
+	TextClose 0
+	BgmStop 3000ms
+	BgmWait
+	Sleep 3000ms
+	ReturnToTitle 1
+	Return
+
+fn[5]:
+	while 1:
+		char[2].8 = 0
+		Sleep 300ms
+		char[2].8 = 1
+		Sleep 300ms
+		char[2].8 = 2
+		Sleep 300ms
+		char[2].8 = 1
+		Sleep 300ms
+	Return
+
+fn[6]:
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	Return

@@ -1,0 +1,700 @@
+calmare tc scena
+scena:
+	name "Grancel" "C4203.x"
+	town town[1]
+	bgm bgm[31]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01230._ch" "npl/ch01230p._cp"
+chip[1] "mons/ch11120._ch" "mons/ch11120p._cp"
+chip[2] "mons/ch11121._ch" "mons/ch11121p._cp"
+chip[3] "mons/ch11110._ch" "mons/ch11110p._cp"
+chip[4] "mons/ch11111._ch" "mons/ch11111p._cp"
+chip[5] "mons/ch11130._ch" "mons/ch11130p._cp"
+chip[6] "mons/ch11131._ch" "mons/ch11131p._cp"
+chip[7] "mons/ch10040._ch" "mons/ch10040p._cp"
+chip[8] "mons/ch10041._ch" "mons/ch10041p._cp"
+chip[9] "mons/ch11140._ch" "mons/ch11140p._cp"
+chip[10] "mons/ch11141._ch" "mons/ch11141p._cp"
+
+npc char[0]:
+	name "诺琪"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[1]:
+	name ""
+	pos (-47360, 0, 42620)
+	angle 180deg
+	chip chip[1]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-121330, 0, 50600)
+	angle 180deg
+	chip chip[5]
+	flags 0x0141
+	unk2 -1
+	battle battle[947]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-88180, 0, 51510)
+	angle 180deg
+	chip chip[9]
+	flags 0x0141
+	unk2 -1
+	battle battle[949]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-91330, 0, 60050)
+	radius 1000mm
+	bubble_pos (-91210, 1500, 60790)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,3]
+	Return
+
+fn[1]:
+	LookPointFlagsSet look_point[1] 0x0001
+	ObjFlagsUnset object[0] 0x0010
+	if !flag[12279]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if system[66] == 7:
+		SoundPlay sound[461] 1 0 100
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[12279]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[515]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12279]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[515]}{color 0}。
+				不过现有的数量太多，{item item[515]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 19 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_D6 0
+	TcEpisodeStart 12 1 0
+	PartyClear
+	PartyAdd name[0] party[0] 255
+	QuestFlagsSet quest[29] 0x08
+	Call fn[0,4]
+	Call fn[0,5]
+	Return
+
+fn[4]:
+	BgmStop 0ms
+	SoundStop sound[461]
+	Sc_C4Set 536870912
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-60570, 0, 90980) 90deg
+	CharSetPos char[0] (-59240, 0, 90940) 270deg
+	CamLookPos (-59750, 200, 90940) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	MapColor 0x0070B0EE 0ms
+	EffStop eff_instance[164] 0
+	EffStop eff_instance[166] 0
+	_75 object[255] 0 5
+	_75 object[255] 1 5
+	Sc_C4Set 2048
+	system[40] = 65535
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}#15A～第２章　王都逸事～{0x05}{wait}
+	}
+	TextWait
+	Sleep 2000ms
+	TextClose 0
+	Sleep 500ms
+	BgmResume
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	FadeOut 1000ms 0x00000000 80
+	Sleep 2000ms
+	TextMessage null {
+		{color 0}王都格兰赛尔地下水路，北部区域――{wait}
+		艾丝蒂尔为了剿灭通缉魔兽，
+		进入了这条水道。{wait}
+		　
+		艾丝蒂尔正在探索目标――{wait}
+		这时在她面前突然出现了一位淑女。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}『你、你在这种地方干什么？』{wait}
+		　
+		『干什么，当然是钓鱼了。』{wait}
+		丂
+		这是『钓公师团』的成员之一，
+		名为诺琪的淑女。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}『那、那也不必在这种地方……
+		  被魔兽袭击了可怎么办啊。』{wait}
+		丂
+		艾丝蒂尔说着便想带她走――{wait}
+		然而，诺琪却充耳不闻――{wait}
+		丂
+		两人渐渐起了争执――{wait}
+		这时，艾丝蒂尔怀中的『银色钓钩』掉落了出来。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[461] 1 0 100
+	FadeIn 1000ms 0x00000000
+	Sc_C4Unset 2048
+	Sleep 500ms
+	MapColor 0x00FFFFFF 2500ms
+	_75 object[255] 0 1
+	_75 object[255] 1 1
+	Sleep 4000ms
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#0724v啊，这是三种钓具之一
+		『银色钓钩』对吧！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0725v你是从哪里得到的……{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77407v#1015F三、三种钓具是……
+		是说这钓钩吗？{wait}
+	} {
+		#77408v这是和罗伊德先生
+		比赛钓鱼赢来的……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0726v！！！{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0727v你是说爆钓比赛吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0728v我本来打算向
+		罗伊德先生挑战的，
+		没想到在这之前他居然败给别人……{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77409v#1011F咦……？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0729v……好，我向你
+		挑战爆钓十回合决胜赛！{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77410v#1019F十、十回合决胜赛～！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0730v多说无用！
+		马上来堂堂正正的比试一场吧！！{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77411v#1004F等、等一下……{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	SoundStop sound[461]
+	Sleep 300ms
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	EffPlay eff[164] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[166] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	BgmStop 3000ms
+	BgmWait
+	Return
+
+fn[5]:
+	BgmPlay bgm[192] 0
+	ImageShow "c_vis506._ch" 0 0 500ms
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"【　开始　】" // 0
+			"【　说明　】" // 1
+			"【　结束　】" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		TextSetPos 72 320 56 3
+		switch var[0]:
+			case 0:
+				ImageHide 500ms
+				Sleep 1000ms
+				Call fn[0,6]
+				BgmPlay bgm[192] 0
+				ImageShow "c_vis506._ch" 0 0 500ms
+				var[0] = 0
+				break
+			case 1:
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+					　
+					  艾丝蒂尔和诺琪将进行一对一的钓鱼对决。
+					  游戏是１０次对战的回合制，由玩家和
+					  对战对手交替行动来进行。
+					　
+					  轮到自己的回合时，首先选择要使用的钓竿和鱼饵。
+					　（※能够使用的鱼饵因钓竿而异。）
+					　
+					  选择鱼饵后，即开始钓鱼游戏。
+					　鱼上钩时，将显示[ ！]标志，
+					  请迅速按下决定按钮，把鱼钓上来。
+					　
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+					　
+					  能钓到的鱼根据鱼饵的种类而变化，
+					  而且钓到的鱼也可能用作鱼饵。
+					　
+					  钓到的鱼各自有设定分数，
+					  最后获得分数多的一方获胜。
+					　
+					  此外，大鱼可能会逃走，
+					  请不要放弃多试几次。
+					　
+					　
+					　
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9477]
+				if flag[9999]:
+					NewScene "u4169._sn" 105 0 0
+					Hcf
+				else:
+					NewScene "u4121._sn" 110 0 0
+					Hcf
+				break
+	Return
+
+fn[6]:
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	CamLookPos (-65390, 0, 88950) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-65820, 0, 90500) 180deg
+	CharSetPos char[0] (-58350, 0, 90510) 180deg
+	NextFrame
+	ItemAdd item[591] 1
+	ItemAdd item[592] 1
+	ItemAdd item[590] 1
+	ItemAdd item[595] 1
+	ItemAdd item[980] 3
+	ItemAdd item[981] 3
+	ItemAdd item[982] 3
+	ItemAdd item[983] 3
+	SoundPlay sound[461] 1 0 100
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	if Minigame 27 1 -2960 -2000 32500 180 -2980 -3000 29380:
+		var[0] = 0
+	else:
+		var[0] = 1
+	EventBegin 0
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-60570, 0, 90980) 90deg
+	CharSetPos char[0] (-59240, 0, 90940) 270deg
+	CamLookPos (-59750, 200, 90940) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Sleep 3000ms
+	switch var[0]:
+		case 1:
+			FadeIn 1000ms 0x00000000
+			BgmResume
+			Sleep 1000ms
+			TextTalk name[0] {
+				#77412v#1003F输、输掉了……{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#0731v哦呵呵呵呵！
+				这个银色钓钩是我的了。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#0732v我超越团长的日子
+				看来也不远了。{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#77413v#1009F呜～真是不甘心啊。{wait}
+			}
+			TextWait
+			FadeOut 1000ms 0x00000000 255
+			BgmStop 2000ms
+			FadeWait
+			SoundStop sound[461]
+			Sleep 1000ms
+			TextSetPos -1 80 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{0x18}{color 5}再度挑战小游戏吗？{wait}
+			}
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"【 再挑战 】" // 0
+				"【回到门前】" // 1
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			TextSetPos 72 320 56 3
+			Sleep 1000ms
+			switch var[0]:
+				case 1:
+					Sc_D6 1
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					if flag[9999]:
+						NewScene "u4169._sn" 105 0 0
+						Hcf
+					else:
+						NewScene "u4121._sn" 110 0 0
+						Hcf
+					break
+				case 0:
+					Sc_D6 1
+					Sc_D6 0
+					var[0] = 0
+					Return
+		case 0:
+			break
+	FadeIn 1000ms 0x00000000
+	BgmResume
+	Sc_C4Set 536870912
+	Sleep 1000ms
+	TextTalk char[0] {
+		#0733v怎、怎么会这样。
+		我居然会输……{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77414v#1000F呼，这下你满意了？{wait}
+	} {
+		#77415v好了，总之快回城里去吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0734v比起胜负，
+		你更关心我的安危……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0735v呵呵，真是败给你了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0736v来，
+		请收下这个吧。{wait}
+	}
+	TextWait
+	CharWalkToPos char[0] (-59910, 0, 90890) 2000mm/s 0
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	FadeWait
+	SoundPlay sound[17] 0 0 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}从诺琪处得到了金色钓竿。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	CharWalkToPos2 char[0] (-59240, 0, 90940) 2000mm/s 0
+	Sleep 500ms
+	TextTalk name[0] {
+		#77416v#1004F哇，闪闪发亮！{wait}
+	} {
+		#77417v#1008F……这个给我没问题吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0737v当然了。
+		这也是比赛的规定嘛。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0738v……不过，
+		你可不能大意哦。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0739v还有我们的首领
+		『团长』在呢。{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77418v#1011F团、团长……？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0740v对，身为钓公师团的创始者，
+		拥有最强的本领的
+		费瑟尔团长。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0741v即使你不在意输赢，
+		这两种钓具也会唤来团长……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#0742v就算你不答应，
+		和团长决一胜负的时刻也必然会来临。{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77419v#1015F嗯、嗯～……
+		是这样吗？{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	SoundStop sound[461]
+	BgmStop 3000ms
+	Sleep 3000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}――名叫费瑟尔的人
+		究竟有怎样的本事呢。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}艾丝蒂尔一方面虽然觉得麻烦，
+		另一方面又无法否定
+		想要挑战试试的心情。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[29] 0x20:
+		Sleep 3000ms
+		QuestFlagsSet quest[29] 0x10
+		QuestFlagsSet quest[29] 0x20
+		QuestFlagsSet quest[30] 0x02
+		ItemAdd item[427] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[427]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}５０００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	Sleep 2000ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 5}继续进入第三章吗？{wait}
+	}
+	Sleep 1000ms
+	system[40] = 24
+	Menu menu[0] -1 200 0
+		"【进入第三章】" // 0
+		"【 回到门前 】" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 1000ms
+	switch var[0]:
+		case 1:
+			FlagSet flag[9477]
+			if flag[9999]:
+				NewScene "u4169._sn" 105 0 0
+				Hcf
+			else:
+				NewScene "u4121._sn" 110 0 0
+				Hcf
+			break
+		case 0:
+			FlagSet flag[9476]
+			NewScene "r2201._sn" 100 0 0
+			Hcf
+			break
+	Return
+
+fn[7]:
+	EventBegin 1
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}门紧紧地关着。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	_Char90 field_party[0] 0 0 1500 3000 0
+	Sleep 50ms
+	EventEnd 4
+	Return
+
+fn[8]:
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}机关门被封得很紧。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	Return

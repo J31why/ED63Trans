@@ -1,0 +1,324 @@
+calmare fc scena
+scena:
+	name "Gaiden3" "M4308.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+trigger[0]:
+	pos1 (-3000, -1000, 156000)
+	pos2 (3000, 1500, 0)
+	flags 0x0040
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		Event fn[0,8]
+	if flag[10013] && !flag[10014]:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	EntranceSetDisabled entrance[18] 0
+	EntranceSetDisabled entrance[21] 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-3150, 0, 144900) 0deg
+	CharSetPos name[14] (-3150, 0, 144900) 0deg
+	CharSetPos party[2] (-3150, 0, 144900) 0deg
+	CharSetPos party[3] (-3150, 0, 144900) 0deg
+	CharColor name[8] 0x00FFFFFF 0ms
+	CharColor name[14] 0x00FFFFFF 0ms
+	CharColor party[2] 0x00FFFFFF 0ms
+	CharColor party[3] 0x00FFFFFF 0ms
+	CamLookPos (-2270, 0, 146900) 0ms
+	CamSetDistance 0 7460 -10000 0ms
+	CamZoom 3120 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	ForkFunc name[8] fork[0] fn[0,3]
+	ForkFunc name[14] fork[0] fn[0,4]
+	ForkFunc party[2] fork[0] fn[0,5]
+	ForkFunc party[3] fork[0] fn[0,6]
+	Fork name[8] fork[2]:
+		CamLookPos (-2670, 0, 148880) 3000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait name[8] fork[2]
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[13] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	if PartyPosition name[1] != -1:
+		Sleep 50ms
+		Emote name[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif PartyPosition name[6] != -1:
+		Sleep 50ms
+		Emote name[6] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#88753v#1064F#5P哎……{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#84742v#173F#6P什……！？{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamLookPos (-3110, 300, 155720) 3000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 10740 -10000 3000ms
+	Fork name[8] fork[2]:
+		CamZoom 3560 4000ms
+	Fork name[8] fork[3]:
+		CamRotate 45000mdeg 3000ms
+	Fork name[14] fork[1]:
+		CamPers 305 3000ms
+	ForkWait name[8] fork[0]
+	ForkWait name[8] fork[2]
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (-2340, 0, 149550) 0ms
+	CamSetDistance 0 6600 -10000 0ms
+	CamZoom 3150 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Emote name[14] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnToChar name[14] name[8] 400deg/s
+	Sleep 300ms
+	TextTalk name[14] {
+		#91943v#1444F#5P……有什么问题？{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1 | PartyPosition name[6] != -1:
+		TextTalk name[8] {
+			#88754v#1841F#5P这已经不只是问题了…… {wait}
+		}
+		TextWait
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#77535v#1503F#6P这是……
+				遗迹的结构改变了？{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#82625v#065F#6P那、那个……
+				遗迹的构造好像改变了……{wait}
+			}
+			TextWait
+	else:
+		TextTalk name[8] {
+			#88755v#1841F#5P这已经不只是问题了……{wait}
+		} {
+			#88756v#1063F这是，
+			遗迹的结构完全改变了不是吗？{wait}
+		}
+		TextWait
+	TextTalk name[13] {
+		#84743v#176F#6P啊啊……不会错。{wait}
+	} {
+		#84744v#178F这个地方
+		应该有路通往
+		开始的三岔路……{wait}
+	} {
+		#84745v可为什么……{wait}
+	}
+	TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84048v#215F#6P好像……
+			不是错觉呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85459v#270F#6P好像……
+			不是错觉啊。{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[14] {
+			#91944v#1802F#5P好像……
+			不是错觉呢。{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#88757v#1067F#5P………………………………{wait}
+	} {
+		#88758v#1075F……原来如此。
+		是这么回事啊。{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#77536v#1502F#6P嗯嗯……
+			很有这种可能。{wait}
+		}
+		TextWait
+		CharTurnTo name[8] 90deg 400deg/s
+		CharTurnTo name[8] 180deg 400deg/s
+		Sleep 300ms
+		TextTalk name[8] {
+			#88759v#1840F#5P哦……
+			约修亚也发觉了吗。{wait}
+		} {
+			#88760v那或许就能确定了。{wait}
+		}
+		TextWait
+		TextTalk name[13] {
+			#84746v#173F#6P你们俩……
+			发现了什么？{wait}
+		}
+		TextWait
+	else:
+		if PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#82626v#064F#6P凯、凯文哥哥？{wait}
+			}
+			TextWait
+		elif PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#84049v#212F#6P怎、怎么啦。
+				一个人想明白了什么似的。{wait}
+			}
+			TextWait
+		elif PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85460v#273F#6P唔……？{wait}
+			}
+			TextWait
+		TextTalk name[13] {
+			#84747v#173F#6P凯文神父……
+			你发现了什么？{wait}
+		}
+		TextWait
+		CharTurnTo name[8] 90deg 400deg/s
+		CharTurnTo name[8] 180deg 400deg/s
+		Sleep 300ms
+	TextTalk name[8] {
+		#88761v#1060F#5P不……
+		总之先用这个下去吧。{wait}
+	} {
+		#88762v前面应该就有
+		答案等着我们了。{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#84748v#178F#6P是吗……我知道了。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91945v#1446F#5P……看来有必要
+		做好心理准备呢。{wait}
+	}
+	TextWait
+	FlagSet flag[10014]
+	QuestTaskSet quest[46] 0x0004
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-3360, 0, 146000) 2000mm/s 0
+	CharWalkToPos self (-3980, 0, 149520) 2000mm/s 0
+	Return
+
+fn[4]:
+	Sleep 600ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-3120, 0, 146420) 2000mm/s 0
+	CharWalkToPos self (-2520, 0, 149280) 2000mm/s 0
+	Return
+
+fn[5]:
+	Sleep 1100ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-3860, 0, 147150) 2000mm/s 0
+	CharWalkToPos self (-4110, 0, 147950) 2000mm/s 0
+	Return
+
+fn[6]:
+	Sleep 1700ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-2750, 0, 147700) 2000mm/s 0
+	Return
+
+fn[7]:
+	EventBegin 0
+	CrossFade 1000ms
+	CharSetPos2 field_party[0] (-2200, 20000, 156800) 0deg
+	CharSetPos2 field_party[1] (-3800, 20000, 156800) 0deg
+	CharSetPos2 field_party[2] (-3800, 20000, 155200) 0deg
+	CharSetPos2 field_party[3] (-2200, 20000, 155200) 0deg
+	CamLookPos (-3000, 0, 156000) 1500ms
+	Sleep 100ms
+	_ObjB0 object[0] 90
+	SystemFlagsSet 0x00100000
+	SoundPlay sound[235] 0 0 100
+	ObjFrame object[0] 0
+	ObjPlay object[0] 500
+	Sleep 2000ms
+	FlagSet flag[9476]
+	NewScene file[0x002101C2] 100 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 0
+	PlaceSetName town[224]
+	system[49] = 224
+	ObjFrame object[0] 300
+	ObjPlay object[0] 0
+	NextFrame
+	CharSetPos2 field_party[0] (-3800, 0, 155200) 180deg
+	CharSetPos2 field_party[1] (-2200, 0, 155200) 180deg
+	CharSetPos2 field_party[2] (-2200, 0, 156800) 180deg
+	CharSetPos2 field_party[3] (-3800, 0, 156800) 180deg
+	CamLookPos (-3000, 0, 156000) 0ms
+	ObjWait object[0]
+	Sleep 100ms
+	CrossFade 1000ms
+	CharSetPos2 field_party[0] (-3030, 0, 152600) 180deg
+	CharSetPos2 field_party[1] (-3030, 0, 152600) 180deg
+	CharSetPos2 field_party[2] (-3030, 0, 152600) 180deg
+	CharSetPos2 field_party[3] (-3030, 0, 152600) 180deg
+	EventEnd 0
+	Return

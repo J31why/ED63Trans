@@ -1,0 +1,1545 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4206.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 "t4206._sn"
+	scp 1 "t4206_1._sn"
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	TextStart self
+	if flag[32]:
+		TextTalk char[29] {
+			#94204v#843F……不过，
+			我的修行还远远不够啊。{wait}
+		} {
+			#94205v还是抽时间进行一次
+			正式的修炼吧……{wait}
+		} {
+			#94206v#840F等到情况稳定之后
+			去和艾南商量一下。{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[29] {
+			#94191v#840F啊，是约修亚。{wait}
+		} {
+			#94192v这两个星期辛苦你了。{wait}
+		} {
+			#94193v你们关于各地的损害报告
+			对人员调度起了很大作用。{wait}
+		} {
+			#94194v谢谢你了。{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78673v#1040F啊，没什么…………{wait}
+		} {
+			#78674v#1035F…………克鲁茨前辈。
+			关于我的游击士资格……{wait}
+		}
+		TextWait
+		Emote name[1] 0mm 2000mm 24 27 250ms 0
+		Sleep 1000ms
+		EmoteStop name[1]
+		Sleep 500ms
+		TextTalk name[1] {
+			#78675v#1043F……可能你已经知道了，
+			我的力量本来是由
+			『结社』给予的。{wait}
+		} {
+			#78676v并且我曾经用那种力量
+			犯了很多重大的罪行。{wait}
+		} {
+			#78677v所以我觉得像自己这样的人
+			不能再称为游击士………{wait}
+		}
+		TextWait
+		TextTalk char[29] {
+			#94195v#843F约修亚，我呢……{wait}
+		} {
+			#94196v我认为力量从来都不是
+			最重要的东西。{wait}
+		} {
+			#94197v所以人们才能够
+			控制并使用它。{wait}
+		} {
+			#94198v#842F……我说的没错吧。{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78678v#1044F………………没、没错……{wait}
+		}
+		TextWait
+		TextTalk char[29] {
+			#94199v#845F……那么，
+			我们两个有什么不一样吗。{wait}
+		} {
+			#94200v认识到自己还远未成熟，
+			为了信念而持续发挥着力量，
+			这样的我们……{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78679v#1054F……是啊…………{wait}
+		} {
+			#78680v虽然没什么自信……{wait}
+		}
+		TextWait
+		TextTalk char[29] {
+			#94201v#841F呵呵，只要努力就好。{wait}
+		} {
+			#94202v#840F而且，就我本人看来……{wait}
+		} {
+			#94203v你是一位十分优秀的游击士。{wait}
+		}
+		TextWait
+		FlagSet flag[32]
+	TextEnd self
+	Return
+
+fn[1]:
+	TextStart self
+	if flag[33]:
+		TextTalk char[30] {
+			#94051v#820F……说起来那边的两个人，
+			真是精力旺盛呢。{wait}
+		} {
+			#94052v总是这个样子吗？{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[30] {
+			#94049v#821F嘿嘿，
+			之前到处奔波帮忙，
+			一直累得要命……{wait}
+		} {
+			#94050v#823F终于可以休息一下了。
+			（嚼嚼………………）{wait}
+		}
+		TextWait
+		FlagSet flag[33]
+	TextEnd self
+	Return
+
+fn[2]:
+	TextStart self
+	TextTalk char[31] {
+		#94065v#835F哎呀，那两个人还真是小孩子。{wait}
+	} {
+		#94066v是不是因为天下太平了，
+		所以开始得意忘形了呢？{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12189]:
+		if flag[9]:
+			TextTalk char[9] {
+				#86351v#811F嗯，一定会很适合的。{wait}
+			} {
+				#86352v之后一定要找个机会试试！{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo char[9] 270deg 0deg/s
+			TextTalk char[9] {
+				#86347v#818F嗯，就这样吧。{wait}
+			} {
+				#86348v让乔丝特戴上红色的耳环，
+				再加上小巧的发带，
+				而艾丝蒂尔就把头发放下来……{wait}
+			} {
+				#86349v这样她们两个人
+				一定会和白色的裙子
+				十分相称的……{wait}
+			}
+			TextWait
+			CharTurnToChar char[9] name[1] 500deg/s
+			Sleep 300ms
+			TextTalk char[9] {
+				#86350v#816F约修亚，你觉得怎么样？{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#78684v#1048F突然问我，我也不知道……{wait}
+			}
+			TextWait
+			FlagSet flag[9]
+	else:
+		TextTalk char[9] {
+			#86344v#814F哎，
+			乔丝特原来是贵族出身啊。{wait}
+		} {
+			#86345v我本来以为帝国的贵族
+			都是些可怕的人……{wait}
+		} {
+			#86346v#1311F嘿嘿，
+			没想到有这么可爱的人呢。{wait}
+		}
+		TextWait
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[26]:
+		TextTalk char[27] {
+			#97373v#1110F『导力停止现象』
+			以及帝国的蒸汽战车部队……{wait}
+		} {
+			#97374v共和国的议会
+			也一定在议论纷纷吧。{wait}
+		} {
+			#97375v要收拾局面，
+			还需要花费
+			很多时间。{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[27] {
+			#97368v#1111F庆祝会吗…………{wait}
+		} {
+			#97369v终于切身体会到了
+			重归和平的感受呢。{wait}
+		} {
+			#97370v#1113F话说回来，
+			在『异变』中的应对措施
+			以及各地的重建指示……{wait}
+		} {
+			#97371v现在我更加佩服
+			艾莉茜雅女王的手腕了。{wait}
+		} {
+			#97372v在共和国肯定
+			无法做到这样的事情。{wait}
+		}
+		TextWait
+		FlagSet flag[26]
+	TextEnd self
+	Return
+
+fn[5]:
+	_Char4A char[22] 0
+	_Char4A char[23] 0
+	CharTurnToChar char[22] name[1] 0deg/s
+	CharTurnToChar char[23] name[1] 0deg/s
+	Sleep 300ms
+	TextTalk char[22] {
+		#97261v#221F哦，我等你很久了。{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78661v#1044F#2P哎……？{wait}
+	}
+	TextWait
+	TextTalk char[23] {
+		#97317v#1101F哦……{wait}
+	} {
+		#97318v那么，
+		这就是刚才所说的？{wait}
+	}
+	TextWait
+	TextTalk char[22] {
+		#97262v#225F是的，他就是约修亚。{wait}
+	} {
+		#97263v#220F我正在向大使讲述
+		你们的活跃呢。{wait}
+	}
+	TextWait
+	TextTalk char[23] {
+		#97319v#1100F很荣幸见到你。{wait}
+	} {
+		#97320v我是驻利贝尔大使
+		达维尔·克莱纳赫。{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78662v#1054F#2P啊，您好……{wait}
+	}
+	TextWait
+	TextTalk char[23] {
+		#97321v#1102F乘上浮游都市的那一段，
+		我光是听着就觉得热血沸腾呢。{wait}
+	} {
+		#97322v明知道那可能是单程机票，
+		却放开恋人的手
+		参加特攻作战……{wait}
+	} {
+		#97323v#1100F哎呀，你们这样的年轻人
+		真的是国家的宝藏啊。{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78663v#1049F#2P谢、谢谢您的夸奖。{wait}
+	} {
+		#78664v（……到底都向他
+		  说了些什么呢…………）{wait}
+	}
+	TextWait
+	CharTurnTo char[22] 180deg 0deg/s
+	CharTurnTo char[23] 0deg 0deg/s
+	_Char4B char[22] 0
+	_Char4B char[23] 0
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[21]:
+		CharTurnTo char[22] 180deg 0deg/s
+		TextTalk char[22] {
+			#97264v#225F然后在这里，
+			奇迹般再会的两人……{wait}
+		}
+		TextWait
+	else:
+		Call fn[1,5]
+		FlagSet flag[21]
+		FlagSet flag[22]
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[22]:
+		TextTalk char[23] {
+			#97324v#1102F年轻人的精神真是值得赞叹……
+			我光是听着就觉得热血沸腾呢。{wait}
+		} {
+			#97325v#1100F哎呀，你们这样的年轻人
+			真的是国家的宝藏啊。{wait}
+		}
+		TextWait
+	else:
+		CharTurnTo self 0deg 0deg/s
+		Call fn[1,5]
+		FlagSet flag[21]
+		FlagSet flag[22]
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[10]:
+		TextTalk char[13] {
+			#87035v#115F由于卡西乌斯准将的争取，
+			我也受到了恩赦……{wait}
+		} {
+			#87036v……该是我为自己
+			做个决断的时候了……{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#78608v#1040F理查德先生……
+			您也来了啊。{wait}
+		}
+		TextWait
+		TextTalk char[13] {
+			#87027v#110F嗯……多亏了准将呢。{wait}
+		} {
+			#87028v我已经得到了
+			陛下正式的恩赦。{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78609v#1040F因为有阻止『结社』
+			袭击王都的功绩嘛。{wait}
+		} {
+			#78610v恭喜您了。{wait}
+		}
+		TextWait
+		TextTalk char[13] {
+			#87029v#115F……不，
+			我还是觉得实在担当不起……{wait}
+		} {
+			#87030v…………不过在和平已经到来的情况下，
+			我也必须直面
+			我曾经犯过的罪才行。{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78611v#1043F理查德先生……{wait}
+		}
+		TextWait
+		TextTalk char[13] {
+			#87031v#111F呵呵，
+			不要一副这么担心的表情。{wait}
+		} {
+			#87032v#115F我绝对不会
+			做出辜负陛下
+			恩情的事情。{wait}
+		} {
+			#87033v但是，也该是我为自己
+			做个决断的时候了……{wait}
+		} {
+			#87034v#110F…………我只是这么想的。{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78612v#1040F…………是。{wait}
+		}
+		TextWait
+		FlagSet flag[10]
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[14]:
+		TextTalk char[15] {
+			#97034v#183F没、没别的事了吧。
+			赶快到那边去吧。{wait}
+		} {
+			#97035v不要打扰阁下。{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#78613v#1044F……是你…………{wait}
+		} {
+			#78614v#1040F在王都遭到袭击的时候，
+			你们的援军真的是帮了大忙。
+			谢谢你们了。{wait}
+		}
+		TextWait
+		TextTalk char[15] {
+			#97032v#183F哼……
+			那是为了保释阁下
+			所做出的交换条件。{wait}
+		} {
+			#97033v你们没有理由
+			来感谢我吧。{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78615v#1048F（真是不诚实啊……）{wait}
+		}
+		TextWait
+		FlagSet flag[14]
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart char[26]
+	if flag[25]:
+		TextTalk char[26] {
+			#95461v#311F啾啾～！{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[26] {
+			#95459v#310F啾啾～！{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78698v#1040F……基库，
+			你也来参加庆祝宴会吗？{wait}
+		}
+		TextWait
+		TextTalk char[26] {
+			#95460v#311F啾啾☆{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78699v#1054F（的确，基库的功劳
+			  就算受到表彰也不奇怪……）{wait}
+		}
+		TextWait
+		FlagSet flag[25]
+	TextEnd char[26]
+	Return
+
+fn[11]:
+	TextStart self
+	TextTalk self {
+		#0215v今晚我尽全力
+		准备了这些料理。{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0216v请不要客气，
+		尽量品尝吧。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[12]:
+	TextStart self
+	TextTalk self {
+		#0213v啊，
+		料理还够吧。{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0214v如果有什么事情
+		请尽管吩咐我。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[13]:
+	TextStart self
+	CharTurnTo self 180deg 0deg/s
+	TextTalk self {
+		#0233v两、两位小姐……{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0234v请不要在这里吵架。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[14]:
+	TextStart self
+	if flag[45]:
+		TextTalk self {
+			#99486v我是从圣海姆门
+			临时调来的厨师。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99487v能够在这样的会场工作，
+			真是作为厨师的骄傲啊。{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#99483v哎呀，真是厉害的宴会。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99484v我是从圣海姆门
+			临时调来的厨师。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99485v没想到能在这样的会场工作，
+			真是作为厨师的骄傲啊。{wait}
+		}
+		TextWait
+		FlagSet flag[45]
+	TextEnd self
+	Return
+
+fn[15]:
+	TextStart self
+	if flag[46]:
+		TextTalk self {
+			#99293v约修亚先生，
+			欢迎随时过来玩。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99294v我还会帮你
+			换衣服的……㈱{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#99290v啊………………！{wait}
+		}
+		TextWait
+		Emote self 0mm 2000mm 10 11 250ms 2
+		SoundPlay sound[15] 0 0 100
+		Sleep 1000ms
+		TextTalk self {
+			#99291v……约修亚先生，
+			欢迎随时过来玩。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99292v我还会帮你
+			换衣服的……㈱{wait}
+		}
+		TextWait
+		Emote name[1] 0mm 2000mm 16 19 250ms 1
+		SoundPlay sound[49] 0 0 100
+		Sleep 1000ms
+		TextTalk name[1] {
+			#78702v#1048F……不用了，
+			我不会再扮女佣了。{wait}
+		}
+		TextWait
+		FlagSet flag[46]
+	TextEnd self
+	Return
+
+fn[16]:
+	TextStart self
+	if flag[47]:
+		TextTalk self {
+			#0220v现在想想，
+			那时的事情真的像做梦一样。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0221v终于有种
+			事情全部结束了的感觉。{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#0217v呼，现在想想
+			那时的事情真的像做梦一样。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0218v当城门崩塌，
+			那群可怕的人冲进来的时候……{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0219v我觉得自己就要晕倒了。{wait}
+		}
+		TextWait
+		FlagSet flag[47]
+	TextEnd self
+	Return
+
+fn[17]:
+	TextStart self
+	if flag[48]:
+		TextTalk self {
+			#0229v真是的，
+			我不知道『结社』是什么来头……{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0230v不过再也不想
+			遇到这种事了。{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#0227v这座王城终于
+			也恢复了和平。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0228v到昨天为止一直忙着收拾打扫，
+			还真是不得了啊。{wait}
+		}
+		TextWait
+		FlagSet flag[48]
+	TextEnd self
+	Return
+
+fn[18]:
+	TextStart self
+	TextTalk self {
+		#0211v唔，
+		接下来去给那边的客人倒酒……{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0212v唔，然后然后……{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[19]:
+	TextStart self
+	if flag[49]:
+		TextTalk self {
+			#0225v啊，这位客人…………{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0226v刚才给您
+			送去了料理吗？{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#0222v呼，今天来了好多客人啊。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0223v啊，这边的料理请随便品尝。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0224v要趁热吃才好吃哦。{wait}
+		}
+		TextWait
+		FlagSet flag[49]
+	TextEnd self
+	Return
+
+fn[20]:
+	TextStart self
+	TextTalk self {
+		#0231v啊，这位客人。
+		要拿饮料吗？{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0232v我们也准备了
+		没有酒精的鸡尾酒。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[21]:
+	TextStart self
+	TextTalk self {
+		#99377v多谢前来参加庆祝宴会，
+		谢谢您。{wait}
+	}
+	TextWait
+	TextTalk self {
+		#99378v请放松一下，
+		好好享受宴会吧。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[22]:
+	TextStart self
+	TextTalk self {
+		#99379v庆祝宴会会场
+		就在空中庭院范围内。{wait}
+	}
+	TextWait
+	TextTalk self {
+		#99380v请好好享受
+		会场热烈的气氛吧。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[23]:
+	TextStart self
+	TextTalk self {
+		#99414v希望在庆祝会上玩得愉快。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[24]:
+	TextStart self
+	TextTalk self {
+		#99720v……十分抱歉。
+		这里面是女王宫。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[25]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundLoad sound[191]
+	CharSetPos name[1] (10620, 14000, 77890) 270deg
+	Call fn[0,10]
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsSet object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	CharFlagsUnset char[21] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[22] 0x0080
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[25] 0x0080
+	CharFlagsUnset char[24] 0x0080
+	CharFlagsSet char[21] 0x0040
+	CharFlagsSet char[5] 0x0040
+	CharFlagsSet char[22] 0x0040
+	CharFlagsSet char[11] 0x0040
+	CharFlagsSet char[25] 0x0040
+	CharFlagsSet char[24] 0x0040
+	_Char4A char[49] 0
+	_Char4A char[50] 0
+	CharSetChipBase char[49] chip[49]
+	CharSetChipBase char[50] chip[49]
+	CharSetChipPattern char[49] 0
+	CharSetChipPattern char[50] 0
+	_Char4A char[51] 0
+	_Char4A char[52] 0
+	CharSetChipBase char[51] chip[49]
+	CharSetChipBase char[52] chip[49]
+	CharSetChipPattern char[51] 0
+	CharSetChipPattern char[52] 0
+	CharSetPos char[21] (570, 14000, 79770) 180deg
+	CharSetPos char[5] (-550, 14000, 80170) 180deg
+	CharSetPos char[22] (1010, 14000, 81490) 180deg
+	CharSetPos char[11] (10, 14000, 83200) 180deg
+	CharSetPos char[25] (-1420, 14000, 83200) 180deg
+	CharSetPos char[24] (1350, 14000, 83200) 180deg
+	_Char4A char[21] 0
+	_Char4A char[5] 0
+	_Char4A char[22] 0
+	_Char4A char[11] 0
+	_Char4A char[25] 0
+	_Char4A char[24] 0
+	CharTurnTo char[0] 0deg 0deg/s
+	CharTurnTo char[3] 0deg 0deg/s
+	CharTurnTo char[4] 0deg 0deg/s
+	CharTurnTo char[6] 0deg 0deg/s
+	CharTurnTo char[8] 0deg 0deg/s
+	CharTurnTo char[9] 0deg 0deg/s
+	CharTurnTo char[10] 0deg 0deg/s
+	CharTurnTo char[30] 0deg 0deg/s
+	CharTurnTo char[31] 0deg 0deg/s
+	CharTurnTo char[34] 0deg 0deg/s
+	CharTurnTo char[35] 0deg 0deg/s
+	CharTurnTo char[12] 0deg 0deg/s
+	CharTurnTo char[16] 90deg 0deg/s
+	CharTurnTo char[17] 90deg 0deg/s
+	CharTurnTo char[18] 90deg 0deg/s
+	CharTurnTo char[19] 90deg 0deg/s
+	CharTurnTo char[20] 90deg 0deg/s
+	CharTurnTo char[32] 90deg 0deg/s
+	CharTurnTo char[33] 90deg 0deg/s
+	CharTurnTo char[7] 315deg 0deg/s
+	CharTurnTo char[36] 315deg 0deg/s
+	_Char4A char[0] 0
+	_Char4A char[1] 0
+	_Char4A char[3] 0
+	_Char4A char[4] 0
+	_Char4A char[5] 0
+	_Char4A char[6] 0
+	_Char4A char[7] 0
+	_Char4A char[8] 0
+	_Char4A char[9] 0
+	_Char4A char[10] 0
+	_Char4A char[11] 0
+	_Char4A char[12] 0
+	_Char4A char[13] 0
+	_Char4A char[14] 0
+	_Char4A char[15] 0
+	_Char4A char[16] 0
+	_Char4A char[17] 0
+	_Char4A char[18] 0
+	_Char4A char[19] 0
+	_Char4A char[20] 0
+	_Char4A char[21] 0
+	_Char4A char[22] 0
+	_Char4A char[23] 0
+	_Char4A char[24] 0
+	_Char4A char[25] 0
+	_Char4A char[26] 0
+	_Char4A char[27] 0
+	_Char4A char[28] 0
+	_Char4A char[29] 0
+	_Char4A char[30] 0
+	_Char4A char[31] 0
+	_Char4A char[32] 0
+	_Char4A char[33] 0
+	_Char4A char[34] 0
+	_Char4A char[35] 0
+	_Char4A char[36] 0
+	_Char4A char[37] 0
+	_Char4A char[38] 0
+	_Char4A char[39] 0
+	_Char4A char[40] 0
+	_Char4A char[41] 0
+	_Char4A char[42] 0
+	_Char4A char[43] 0
+	_Char4A char[44] 0
+	_Char4A char[45] 0
+	_Char4A char[46] 0
+	_Char4A char[47] 0
+	_Char4A char[48] 0
+	_Char4A char[53] 0
+	_Char4A char[49] 0
+	_Char4A char[50] 0
+	_Char4A char[51] 0
+	_Char4A char[52] 0
+	CharFlagsSet char[37] 0x0080
+	CharFlagsSet char[38] 0x0080
+	Sleep 1500ms
+	CamLookPos (-840, 14000, 79350) 0ms
+	CamSetDistance 0 4120 -10000 0ms
+	CamZoom 3210 0ms
+	CamRotate 60000mdeg 0ms
+	CamPers 334 0ms
+	Fork char[55] fork[0]:
+		CamLookPos (-9700, 14000, 74820) 8000ms
+	Fork char[55] fork[1]:
+		CamRotate 45000mdeg 8000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "艾莉茜雅女王"
+	TextMessage null {
+		#97206v{color 0}#55A…………我们的王都
+		虽然遭受了危机……{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sleep 500ms
+	CrossFade 1000ms
+	ForkQuit char[55] fork[255]
+	CamLookPos (500, 12000, 56180) 0ms
+	CamSetDistance 0 5460 -10000 0ms
+	CamZoom 3840 0ms
+	CamRotate 36000mdeg 0ms
+	CamPers 262 0ms
+	Fork char[55] fork[0]:
+		CamLookPos (-500, 12000, 68180) 9000ms
+	Fork char[55] fork[1]:
+		CamRotate 53000mdeg 9000ms
+	FadeWait
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "艾利茜雅女王"
+	TextMessage null {
+		#97207v{color 0}#50A…………但是托各位的福，
+		使『异变』得以终结。{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sleep 500ms
+	EffLoad eff[0] "map\\mp032_00.eff"
+	CrossFade 1000ms
+	ForkQuit char[55] fork[255]
+	CamLookPos (0, 14000, 83260) 0ms
+	CamSetDistance 0 2810 -10000 0ms
+	CamZoom 2540 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 368 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk char[21] {
+		#97208v#094F#5P……为此，
+		今天在这里开办了
+		一个小规模的庆祝会。{wait}
+	} {
+		#97209v#090F好了，科洛蒂娅。{wait}
+	}
+	TextWait
+	TextTalk char[5] {
+		#82213v#1873F#5P是。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork char[5] fork[1]:
+		CharWalkToPos self (-550, 14000, 79170) 1500mm/s 0
+	ForkWait char[5] fork[1]
+	Sleep 500ms
+	TextTalk char[5] {
+		#82214v#1810F#5P……本日的宴会
+		邀请的都是为这次事件
+		贡献力量的人。{wait}
+	} {
+		#82215v#1817F向苦难的人们伸出温暖的援助之手，
+		将人们从不安的每一天中
+		解救出来的各位……{wait}
+	} {
+		#82216v我作为利贝尔的王太女
+		向你们表示由衷的感谢。{wait}
+	} {
+		#82217v#1818F真的非常感谢你们。{wait}
+	} {
+		#82218v今天的宴会
+		虽然规模不大……{wait}
+	}
+	TextWait
+	CharFlagsUnset char[37] 0x0080
+	CharFlagsSet char[37] 0x0040
+	CharSetPos char[37] (9720, 14000, 76650) 270deg
+	CharFlagsUnset char[38] 0x0080
+	CharFlagsSet char[38] 0x0040
+	CharSetPos char[38] (8750, 14000, 77790) 270deg
+	TextTalk char[37] {
+		#93656v#1P……安全上垒！！{wait}
+	}
+	TextWait
+	TextTalk char[38] {
+		#93775v#1P总、总算赶到了……{wait}
+	} {
+		#93776v那、那我就不客气了～……！{wait}
+	}
+	TextWait
+	Fork char[37] fork[1]:
+		CharWalkToPos self (4030, 14000, 76650) 4000mm/s 0
+	ForkWait char[37] fork[1]
+	Sleep 150ms
+	ForkLoop char[37] fork[2]:
+		CharTurnToChar self char[38] 400deg/s
+	Sleep 500ms
+	TextTalk char[37] {
+		#93657v#142F#3P朵洛希，你在干什么！！
+		赶快准备好相机！！{wait}
+	} {
+		#93658v#144F讲话马上
+		就要结束了！！{wait}
+	}
+	TextWait
+	TextTalk char[38] {
+		#93777v#1P呜呜，是吗……{wait}
+	}
+	TextWait
+	Fork char[38] fork[1]:
+		CharWalkToPos self (5000, 14000, 77790) 2500mm/s 0
+	ForkWait char[38] fork[1]
+	ForkQuit char[37] fork[2]
+	Fork char[37] fork[2]:
+		CharTurnTo self 315deg 500deg/s
+	CharTurnTo char[38] 315deg 500deg/s
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase char[38] chip[50]
+	CharSetChipPattern char[38] 0
+	FadeWait
+	ForkFunc char[38] fork[1] fn[0,8]
+	Sleep 2000ms
+	TextTalk char[5] {
+		#82219v#1815F#5P哎…………{wait}
+	} {
+		#82220v请、请各位
+		尽情享受这一刻。{wait}
+	}
+	TextWait
+	TextTalk char[22] {
+		#97257v#225F#5P聚集在这里的每一位
+		都肩负着各种各样的责任，
+		每天的工作都很忙碌。{wait}
+	} {
+		#97258v#220F就请你们在今晚忘掉平日的劳累，
+		充分地放松一下。{wait}
+	} {
+		#97259v我们为大家准备了美味佳肴。
+		请尽情享用！{wait}
+	} {
+		#97260v#221F愿女神赐福于利贝尔！{wait}
+	}
+	TextWait
+	SoundPlay sound[191] 0 0 100
+	BgmStop 2000ms
+	Sleep 2000ms
+	BgmWait
+	ForkQuit char[38] fork[1]
+	FadeIn 100ms 0x00FFFFFF
+	BgmPlay bgm[75] 0
+	Sleep 500ms
+	ForkLoop char[38] fork[2]:
+		CharTurnToChar self char[5] 400deg/s
+	ForkLoop char[37] fork[2]:
+		CharTurnToChar self char[5] 400deg/s
+	Fork char[21] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[5] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[22] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[11] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[25] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[24] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 3000ms
+	CrossFade 1000ms
+	CamLookPos (12000, 14000, 80820) 0ms
+	CamSetDistance 0 4830 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 285 0ms
+	ForkQuit char[21] fork[1]
+	ForkQuit char[5] fork[1]
+	ForkQuit char[22] fork[1]
+	ForkQuit char[11] fork[1]
+	ForkQuit char[25] fork[1]
+	ForkQuit char[24] fork[1]
+	ForkQuit char[38] fork[1]
+	ForkQuit char[38] fork[2]
+	ForkQuit char[37] fork[2]
+	_Char4B char[21] 0
+	_Char4B char[5] 0
+	_Char4B char[22] 0
+	_Char4B char[11] 0
+	_Char4B char[25] 0
+	_Char4B char[24] 0
+	CharSetChipBase char[38] chip[43]
+	CharSetChipPattern char[38] 0
+	_Char4B char[49] 0
+	_Char4B char[50] 0
+	CharSetChipBase char[49] chip[48]
+	CharSetChipBase char[50] chip[48]
+	CharSetChipPattern char[49] 0
+	CharSetChipPattern char[50] 0
+	_Char4B char[51] 0
+	_Char4B char[52] 0
+	CharSetChipBase char[51] chip[48]
+	CharSetChipBase char[52] chip[48]
+	CharSetChipPattern char[51] 0
+	CharSetChipPattern char[52] 0
+	CharFlagsUnset char[21] 0x0040
+	CharFlagsUnset char[5] 0x0040
+	CharFlagsUnset char[22] 0x0040
+	CharFlagsUnset char[11] 0x0040
+	CharFlagsUnset char[25] 0x0040
+	CharFlagsUnset char[24] 0x0040
+	Call fn[0,9]
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsUnset object[5] 0x0004
+	_Char4A char[45] 0
+	_Char4A char[46] 0
+	_Char4A char[47] 0
+	_Char4A char[48] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#77349v#1017F#5P……嗯～
+		科洛丝真的好厉害呢。{wait}
+	} {
+		#77350v穿着那样的礼裙
+		在大家的面前
+		光明正大地讲话。{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78585v#1053F#11P嗯，之前遇到她的时候
+		还说自己没有什么自信的……{wait}
+	} {
+		#78586v#1041F身为王太女，
+		真的做得很不错呢。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#77351v#1008F#5P哇，真好……{wait}
+	} {
+		#77352v#1016F要是我穿上那样的礼裙
+		也很合适的话就好了……{wait}
+	}
+	TextWait
+	CharTurnToChar name[1] char[1] 400deg/s
+	Sleep 300ms
+	TextTalk name[1] {
+		#78587v#1044F#12P………………………………{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	CharTurnToChar char[1] name[1] 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#77353v#1019F#5P……嗯？怎么沉默了？{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78588v#1053F#12P没什么，该怎么说呢……{wait}
+	} {
+		#78589v#1041F……我再次确认了
+		艾丝蒂尔是个女孩子
+		这个事实而已。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#77354v#1013F#5P什、什么嘛……！{wait}
+	} {
+		#77355v#1007F那是因为最近在这里
+		忙于复兴王都的事情，
+		连家都没能回一次。{wait}
+	} {
+		#77356v#1019F……我当然也偶尔
+		会想要穿上美丽的衣服
+		看看嘛！！{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78590v#1049F#12P好～好。{wait}
+	} {
+		#78591v#1054F……不过，在这几周里
+		艾丝蒂尔也成长了许多呢。{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[1] {
+		#77357v#1004F#5P咦……？{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78592v#1053F#12P在利贝尔四处奔走，
+		可不是一件
+		简单的任务……{wait}
+	} {
+		#78593v艾丝蒂尔作为游击士的判断力
+		已经变得很值得信赖了……{wait}
+	} {
+		#78594v#1041F说实话，就算是我来评价，
+		也可以称得上是很可靠的了哦。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#77358v#1008F#5P啊、啊哈哈……{wait}
+	} {
+		#77359v#1016F被约修亚这么一夸，
+		总觉得很不好意思……{wait}
+	} {
+		#77360v#1017F……好在这几天
+		事情总算告一段落了。{wait}
+	} {
+		#77361v王都的复兴也在顺利进行中……{wait}
+	} {
+		#77362v终于，可以平静下来了。{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78595v#1053F#12P…………嗯，是啊……{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo char[1] 225deg 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#77363v#1004F#5P啊…………{wait}
+	}
+	TextWait
+	_59
+	Fork name[1] fork[2]:
+		CharTurnTo name[1] 225deg 300deg/s
+	CharSetPos char[41] (-9350, 12000, 61660) 180deg
+	CharSetPos char[30] (-3880, 12000, 59720) 315deg
+	CharSetPos char[31] (-3900, 12000, 61790) 225deg
+	CharSetPos char[10] (-8100, 12000, 57040) 270deg
+	CharSetPos char[9] (-8100, 12000, 58540) 270deg
+	Fork char[55] fork[0]:
+		CamLookPos (-7020, 12000, 59000) 2500ms
+	Fork char[55] fork[1]:
+		CamRotate 40000mdeg 2500ms
+	Fork char[55] fork[2]:
+		CamZoom 2720 2500ms
+	Fork char[55] fork[3]:
+		CamSetDistance 0 6700 -10000 2500ms
+	ForkWait char[55] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#77364v#1008F#6P啊啊……
+		好丰盛的料理……！{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78596v#1040F#12P好像是格兰赛尔城的厨师们
+		正在帮大家送分好的料理吧。{wait}
+	}
+	TextWait
+	_59
+	CrossFade 800ms
+	CamLookPos (12000, 14000, 80820) 0ms
+	CamSetDistance 0 4830 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 285 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#77365v#1006F#5P嗯，绝对不能错过这样的机会。{wait}
+	} {
+		#77366v上次的女王诞辰庆典
+		都没有好好吃够呢……{wait}
+	} {
+		#77367v#1001F…………这次
+		我一定不能客气了……！{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] name[1] 500deg/s
+	Sleep 400ms
+	TextTalk char[1] {
+		#77368v#1018F#5P约修亚，你在这里等一下！
+		我去看看情况！{wait}
+	}
+	TextWait
+	ForkLoop name[1] fork[1]:
+		CharTurnToChar self char[1] 400deg/s
+	CharTurnTo char[1] 270deg 400deg/s
+	Sleep 300ms
+	ForkFunc char[1] fork[1] fn[0,7]
+	Fork char[55] fork[0]:
+		CamLookPos (7900, 14000, 79710) 2000ms
+	Fork char[55] fork[1]:
+		CamZoom 3100 2000ms
+	ForkWait char[55] fork[0]
+	Sleep 3000ms
+	ForkQuit name[1] fork[1]
+	Emote name[1] 0mm 2000mm 24 27 250ms 0
+	CamLookPos (11610, 14000, 78880) 1500ms
+	ForkQuit char[1] fork[1]
+	CharSetPos char[41] (-8189, 12000, 60260) 180deg
+	CharSetPos char[30] (-5950, 12000, 59520) 225deg
+	CharSetPos char[31] (-6530, 12000, 60440) 225deg
+	CharSetPos char[10] (-8100, 12000, 57040) 0deg
+	CharSetPos char[9] (-5220, 12000, 57140) 270deg
+	CharSetPos char[1] (-8100, 12000, 58540) 180deg
+	CharSetChipPattern char[1] 0
+	Sleep 1000ms
+	EmoteStop name[1]
+	Sleep 500ms
+	TextTalk name[1] {
+		#78597v#1054F#5P……这种方面
+		倒是毫无长进…………{wait}
+	}
+	TextWait
+	CharSetPos char[37] (800, 14000, 77890) 90deg
+	CharSetPos char[38] (800, 14000, 78900) 90deg
+	Fork char[37] fork[1]:
+		CharWalkToPos self (8730, 14000, 77890) 2500mm/s 0
+	Sleep 600ms
+	Fork char[38] fork[1]:
+		CharWalkToPos self (6100, 14000, 78900) 2000mm/s 0
+	Sleep 1000ms
+	Emote name[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	ForkLoop name[1] fork[2]:
+		CharTurnToChar self char[37] 400deg/s
+	ForkWait char[37] fork[1]
+	TextTalk char[37] {
+		#93659v#141F#6P哦，这不是约修亚吗。{wait}
+	} {
+		#93660v艾丝蒂尔那家伙怎么了？{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78598v#1053F#11P……嗯，去取料理了。{wait}
+	} {
+		#78599v#1040F奈尔先生，
+		你们正在进行工作吧。{wait}
+	}
+	TextWait
+	TextTalk char[37] {
+		#93661v#147F#6P是啊，
+		难得聚集了这么多人。{wait}
+	} {
+		#93662v我得趁这个机会
+		好好让大家发表感想啊！{wait}
+	} {
+		#93663v#141F……当然，
+		待会儿还要找你们取材。{wait}
+	} {
+		#93664v可别随便回去啊！{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78600v#1054F#11P呵呵……明白。{wait}
+	}
+	TextWait
+	TextTalk char[37] {
+		#93665v#147F#6P好，接下来是
+		对科洛蒂娅公主进行采访！{wait}
+	}
+	TextWait
+	CharTurnToChar char[37] char[38] 500deg/s
+	Sleep 300ms
+	TextTalk char[37] {
+		#93666v#144F#11P…………朵洛希！{wait}
+	}
+	TextWait
+	TextTalk char[38] {
+		#93778v#154F#6P#40W不、不行了，我要晕倒了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[352] 0 0 100
+	Sleep 1000ms
+	CharShake char[38] 20 0 400 2500ms
+	Sleep 800ms
+	TextTalk char[38] {
+		#93779v#152F#6P#40W给我一点吃的吧……{wait}
+	}
+	TextWait
+	TextTalk char[37] {
+		#93667v#144F#11P喂，别磨磨蹭蹭了！{wait}
+	}
+	TextWait
+	ForkFunc char[37] fork[3] fn[0,18]
+	ForkLoop char[38] fork[2]:
+		CharTurnToChar self char[37] 1000deg/s
+	Sleep 200ms
+	Emote char[38] 0mm 2000mm 40 43 100ms 3
+	Sleep 800ms
+	ForkQuit char[38] fork[2]
+	TextTalk char[38] {
+		#93780v#152F#5P#39A呜～
+		奈尔前辈欺负人……！{0x05}{wait}
+	}
+	TextWait
+	ForkFunc char[38] fork[3] fn[0,19]
+	ForkWait char[38] fork[3]
+	TextTalk name[1] {
+		#78601v#1053F#5P奈尔先生今天可是
+		全神贯注啊……{wait}
+	} {
+		#78602v#1044F哎，艾丝蒂尔呢……{wait}
+	}
+	TextWait
+	ForkWait char[38] fork[3]
+	ForkQuit name[1] fork[2]
+	CharFlagsUnset char[37] 0x0040
+	CharFlagsUnset char[38] 0x0040
+	_Char4B char[37] 0
+	_Char4B char[38] 0
+	CharSetPos char[37] (12210, 12000, 57070) 270deg
+	CharSetPos char[38] (6500, 12000, 60670) 270deg
+	Fork char[55] fork[0]:
+		CamLookPos (-7020, 12000, 59000) 2500ms
+	Fork char[55] fork[1]:
+		CamRotate 40000mdeg 2500ms
+	Fork char[55] fork[2]:
+		CamZoom 2720 2500ms
+	Fork char[55] fork[3]:
+		CamSetDistance 0 6700 -10000 2500ms
+	ForkWait char[55] fork[0]
+	Emote char[10] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[10] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[1] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 1000ms
+	Emote char[10] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[10] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[1] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 2000ms
+	CrossFade 800ms
+	CamLookPos (11640, 14000, 79050) 0ms
+	CamSetDistance 0 4830 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 285 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk name[1] {
+		#78603v#1052F#5P呼，
+		又干什么去了……{wait}
+	} {
+		#78604v#1043F………………………………{wait}
+	}
+	TextWait
+	Emote name[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[65278]
+	Sleep 500ms
+	CharTurnTo name[1] 270deg 300deg/s
+	Sleep 400ms
+	TextTalk name[1] {
+		#78605v#1035F#11P（……也好。）{wait}
+	} {
+		#78606v（聚集到这里来的人
+		　都曾给了我不少关照……）{wait}
+	} {
+		#78607v#1041F（……趁这个机会和他们打个招呼吧。）{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 1000ms
+	CamLookPos (10620, 14000, 77890) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	_Char4B char[0] 0
+	_Char4B char[1] 0
+	_Char4B char[3] 0
+	_Char4B char[4] 0
+	_Char4B char[5] 0
+	_Char4B char[6] 0
+	_Char4B char[7] 0
+	_Char4B char[8] 0
+	_Char4B char[9] 0
+	_Char4B char[10] 0
+	_Char4B char[11] 0
+	_Char4B char[12] 0
+	_Char4B char[13] 0
+	_Char4B char[14] 0
+	_Char4B char[15] 0
+	_Char4B char[16] 0
+	_Char4B char[17] 0
+	_Char4B char[18] 0
+	_Char4B char[19] 0
+	_Char4B char[20] 0
+	_Char4B char[21] 0
+	_Char4B char[22] 0
+	_Char4B char[23] 0
+	_Char4B char[24] 0
+	_Char4B char[25] 0
+	_Char4B char[26] 0
+	_Char4B char[27] 0
+	_Char4B char[28] 0
+	_Char4B char[29] 0
+	_Char4B char[30] 0
+	_Char4B char[31] 0
+	_Char4B char[32] 0
+	_Char4B char[33] 0
+	_Char4B char[34] 0
+	_Char4B char[35] 0
+	_Char4B char[36] 0
+	_Char4B char[37] 0
+	_Char4B char[38] 0
+	_Char4B char[39] 0
+	_Char4B char[40] 0
+	_Char4B char[41] 0
+	_Char4B char[42] 0
+	_Char4B char[43] 0
+	_Char4B char[44] 0
+	_Char4B char[45] 0
+	_Char4B char[46] 0
+	_Char4B char[47] 0
+	_Char4B char[48] 0
+	_Char4B char[53] 0
+	_Char4B char[49] 0
+	_Char4B char[50] 0
+	_Char4B char[51] 0
+	_Char4B char[52] 0
+	_Char4B char[45] 0
+	_Char4B char[47] 0
+	_Char4B char[46] 0
+	_Char4B char[48] 0
+	FlagSet flag[12186]
+	EventEnd 0
+	Return

@@ -1,0 +1,205 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P0313.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+trigger[0]:
+	pos1 (-30, -1000, -7340)
+	pos2 (3700, 1000, -9080)
+	flags 0x0000
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	OpLoad "P0313_2"
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-2290, 150, 8600) 180deg
+	CharSetPos name[14] (-2290, 150, 8600) 180deg
+	CharSetPos name[6] (-2290, 150, 8600) 180deg
+	CharSetPos name[13] (-2290, 150, 8600) 180deg
+	CamLookPos (840, 0, 7550) 0ms
+	CamSetDistance 0 5010 -10000 0ms
+	CamZoom 3830 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[4] 0x0010
+	ObjFrame object[4] 0
+	ObjPlay object[4] 15
+	ObjWait object[4]
+	Fork name[8] fork[1]:
+		CamLookPos (2370, 0, 440) 5000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 7090 -10000 5000ms
+	Fork name[8] fork[3]:
+		CamZoom 3830 5000ms
+	Fork name[14] fork[1]:
+		CamPers 262 5000ms
+	ForkFunc name[13] fork[0] fn[0,3]
+	Sleep 800ms
+	ForkFunc name[8] fork[0] fn[0,4]
+	Sleep 1000ms
+	ForkFunc name[14] fork[0] fn[0,5]
+	Sleep 1000ms
+	ForkFunc name[6] fork[0] fn[0,6]
+	ForkWait name[13] fork[0]
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait name[6] fork[0]
+	ForkWait name[8] fork[1]
+	CrossFade 500ms
+	CamLookPos (840, 0, 4090) 0ms
+	CamSetDistance 0 5020 -10000 0ms
+	CamZoom 3390 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk name[13] {
+		#84585v#178F#5P………………………………{wait}
+	}
+	TextWait
+	Fork name[8] fork[1]:
+		CamLookPos (840, 0, 5090) 1000ms
+	CharTurnTo name[13] 0deg 400deg/s
+	ForkWait name[8] fork[1]
+	Sleep 500ms
+	TextTalk name[13] {
+		#84586v#176F#6P……对不起。
+		花费了多余的时间。{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#82518v#063F#5P尤莉亚小姐……{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88496v#1840F#5P哪里哪里……
+		别放在心上。{wait}
+	} {
+		#88497v站在尤莉亚小姐的立场上，
+		想亲眼确认也是理所当然的。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91801v#1446F#5P……我们想办法来寻找
+		可以打开这局面的线索吧。{wait}
+	} {
+		#91802v#1448F这样的话，
+		应该也能确认部下们的安危。{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#84587v#176F#6P啊……没错。{wait}
+	} {
+		#84588v#170F……谢谢。
+		那就继续前进吧。{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9755]
+	QuestTaskSet quest[42] 0x0004
+	CamLookPos (-150, 0, 4140) 0ms
+	CamSetDistance 0 7500 -10000 0ms
+	CamZoom 4000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos field_party[0] (-150, 0, 4140) 180deg
+	CharSetPos field_party[1] (-150, 0, 4140) 180deg
+	CharSetPos field_party[2] (-150, 0, 4140) 180deg
+	CharSetPos field_party[3] (-150, 0, 4140) 180deg
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CamLookChar field_party[0] 0ms
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[3]:
+	CharWalkToPos self (-2029, 0, 6440) 2000mm/s 0
+	CharWalkToPos self (-290, 0, 2370) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Sleep 500ms
+	CharTurnTo self 90deg 400deg/s
+	Sleep 500ms
+	CharTurnTo self 225deg 400deg/s
+	Sleep 500ms
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[4]:
+	CharWalkToPos self (-2029, 0, 6440) 2000mm/s 0
+	CharWalkToPos self (-1170, 0, 3690) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[5]:
+	CharWalkToPos self (-2029, 0, 6440) 2000mm/s 0
+	CharWalkToPos self (230, 0, 3860) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[6]:
+	CharWalkToPos self (-2029, 0, 6440) 2000mm/s 0
+	ObjFrame object[4] 15
+	ObjPlay object[4] 0
+	ObjFlagsSet object[4] 0x0010
+	CharWalkToPos self (-600, 0, 5250) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[7]:
+	EventBegin 1
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}门紧紧地关着。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	_Char90 field_party[0] 0 0 1500 3000 0
+	Sleep 50ms
+	EventEnd 4
+	SystemFlagsSet 0x02000000
+	Return

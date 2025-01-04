@@ -1,0 +1,256 @@
+calmare fc scena
+scena:
+	name "Zeiss" "T3131.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01020._ch" "npl/ch01020p._cp"
+chip[1] "npl/ch01270._ch" "npl/ch01270p._cp"
+chip[2] "npl/ch01003._ch" "npl/ch01003p._cp"
+chip[3] "npl/ch01050._ch" "npl/ch01050p._cp"
+
+npc char[0]:
+	name "贝恩"
+	pos (-2470, -1000, 4710)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[1]:
+	name "乌尔斯"
+	pos (5480, -1000, 5320)
+	angle 90deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[2]:
+	name "兰达老人"
+	pos (-450, -650, 3980)
+	angle 270deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01B5
+	init fn[65535,65535]
+	talk fn[0,8]
+
+npc char[3]:
+	name "米优"
+	pos (50, -1000, 8500)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,7]
+
+look_point[0]:
+	pos (-530, -1000, 4660)
+	radius 400mm
+	bubble_pos (-2470, 500, 4710)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (660, -1000, 6600)
+	radius 400mm
+	bubble_pos (50, 500, 8500)
+	flags 0x007E
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[8] 0x0080
+		CharFlagsUnset char[9] 0x0080
+		CharFlagsUnset char[10] 0x0080
+		CharFlagsUnset char[11] 0x0080
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (400, null, 5540) (5960, null, 4780) 2000mm/s
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Return
+
+fn[4]:
+	TextStart char[8]
+	if flag[12165]:
+		if flag[0]:
+			CharTurnTo char[8] 90deg 0deg/s
+			TextTalk char[8] {
+				爷爷，
+				别那么生气嘛。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				别看艾莉卡那家伙那个样子，
+				该考虑的东西还是会考虑的。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				哦、哦哦，有什么事吗？{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				前台那边
+				已经交给新人了。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				想点菜的话
+				就去那边吧。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd char[8]
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				……哦，
+				忘记去叫醒露依赛了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				算了，还有乌缇在。
+				…………大概没问题吧。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				新来的人
+				好像是兰达爷爷的孙女呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				料理的本事不错，
+				似乎也很擅长接待客人……{wait}
+			}
+			TextWait
+			TextTalk self {
+				托她的福，
+				老板偷懒的技术也越来越熟练了。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[6]:
+	Call fn[0,7]
+	Return
+
+fn[7]:
+	TextStart char[11]
+	if flag[12165]:
+		if flag[3]:
+			TextTalk char[11] {
+				我只有中午
+				才会到这家店打工哦。{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				因为待在中央工房
+				也都只是做杂事嘛。{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				与其在阴暗的工房当接待，
+				光鲜亮丽的招牌女郎
+				不是更适合我吗～？{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[11] {
+				来了，欢迎光临～！{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				现在本店正在提供
+				中午的限时优惠哦。{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				动心的话就来尝尝吧㈱{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd char[11]
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12165]:
+		if flag[2]:
+			TextTalk self {
+				虽然有丹在，
+				应该不会出什么大事……{wait}
+			}
+			TextWait
+			TextTalk self {
+				不过那两人做共同研究……
+				……唉，真担心啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				拉赛尔那家伙
+				好像又要开始做什么了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				而且听说
+				还和艾莉卡那家伙一起。{wait}
+			}
+			TextWait
+			TextTalk self {
+				唉，
+				要人不担心真是不可能的了。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return

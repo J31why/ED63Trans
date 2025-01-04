@@ -1,0 +1,23 @@
+\x02 = {wait} //结束后续无话
+\x02\x03 = {wait} //结束后续还有话
+\x01 = 换行
+\x07\x00 = {Color 0}
+
+#数字A 对话持续时间 时间到了就自动下一句对话 单位不知
+
+#数字W 对话必须等待的持续时间 时间不到不准下一句对话 单位不知
+
+#数字C 对话颜色 用完必须还原#0c 不然之后全是这个颜色
+
+#数字S 字体大小 1~6   1为小 2为正常大小 
+游戏无法显示72及以上的尺寸汉字
+
+ChrTalk(0x*,("text")) = TextTalk char[0x*-16] {text}
+ChrTalk 0xFE = TextTalk self 
+
+NpcTalk(0x*,"name",("text")) = TextTalkNamed name[*] "name" {text}
+
+scpstr(SCPSTR_CODE_COLOR, 0x0) = {color 0x0}
+
+AnonymousTalk(("text")) = TextMessage null {text}
+
