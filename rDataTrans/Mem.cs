@@ -23,7 +23,9 @@ public static class Mem
     public static extern bool WriteProcessMemory(IntPtr hProcess, uint lpBaseAddress, byte[] lpBuffer, int nSize,
         IntPtr lpNumberOfBytesWritten);
     [DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory")]
-    public static extern bool ReadProcessMemory(IntPtr hProcess, uint lpBaseAddress, ref uint lpBuffer, int nSize, int lpNumberOfBytesRead);
+    public static extern bool ReadProcessMemory(IntPtr hProcess, uint lpBaseAddress, ref uint lpBuffer, int nSize, out int lpNumberOfBytesRead);
+    [DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory")]
+    public static extern bool ReadProcessMemory(IntPtr hProcess, uint lpBaseAddress, byte[] lpBuffer, int nSize, out int lpNumberOfBytesRead);
     [DllImport("kernel32.dll")]
     public static extern void CloseHandle(IntPtr hObject);
 
@@ -84,8 +86,15 @@ public static class Mem
     public static bool ReadUint(uint addr, out uint result)
     {
         uint num = 0;
-        var ret=  ReadProcessMemory(hProcess, addr, ref num, 4, 0);
+        var ret=  ReadProcessMemory(hProcess, addr, ref num, 4, out _);
         result = num;
+        return ret;
+    }
+    public static bool Read(uint addr, out byte[] result,int len)
+    {
+        byte[] bytes = new byte[len];
+        var ret = ReadProcessMemory(hProcess, addr,  bytes, bytes.Length,out _);
+        result = bytes;
         return ret;
     }
     public static bool Write(uint addr, byte[] newData, bool changeProtect)

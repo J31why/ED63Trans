@@ -1,0 +1,1259 @@
+calmare sc scena
+scena:
+	name "Rolent" "T0135.x"
+	town town[7]
+	bgm bgm[84]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00023._ch" "npl/ch00023p._cp"
+chip[1] "npl/ch00033._ch" "npl/ch00033p._cp"
+chip[2] "npl/ch02560._ch" "npl/ch02560p._cp"
+chip[3] "npl/ch01270._ch" "npl/ch01270p._cp"
+chip[4] "apl/ch20049._ch" "apl/ch20049p._cp"
+chip[5] "apl/ch20020._ch" "apl/ch20020p._cp"
+chip[6] "apl/ch20021._ch" "apl/ch20021p._cp"
+chip[7] "npl/ch00020._ch" "npl/ch00020p._cp"
+
+npc char[0]:
+	name "雪拉扎德"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "奥利维尔"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "爱娜"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "福克纳"
+	pos (34500, 0, 75200)
+	angle 90deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "料理"
+	pos (40550, 700, 66950)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 1
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "料理"
+	pos (39700, 700, 67470)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 4
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "酒瓶"
+	pos (39300, 700, 67950)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 28
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[7]:
+	name "酒瓶"
+	pos (39100, 700, 67050)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 30
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[8]:
+	name "玻璃杯"
+	pos (38900, 700, 68000)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 28
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[9]:
+	name "玻璃杯"
+	pos (40550, 700, 68000)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 28
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[10]:
+	name "玻璃杯"
+	pos (38950, 600, 67600)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 5
+	ch chip[6]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[11]:
+	name "玻璃杯"
+	pos (40150, 600, 67950)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 5
+	ch chip[6]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[12]:
+	name "玻璃杯"
+	pos (40100, 600, 66800)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 1
+	ch chip[6]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[13]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 7:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CharFlagsSet char[8] 0x0004
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos char[8] (39580, 200, 68570) 180deg
+	CharFlagsSet char[9] 0x0004
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (39710, 200, 66250) 0deg
+	CharFlagsSet char[10] 0x0004
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[10] (38200, 0, 67800) 121deg
+	CharSetChipBase char[9] chip[4]
+	CharSetChipPattern char[9] 0
+	CharFlagsSet char[9] 0x0002
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharFlagsUnset char[14] 0x0080
+	CharFlagsUnset char[18] 0x0080
+	CharFlagsUnset char[19] 0x0080
+	CharFlagsUnset char[20] 0x0080
+	CamLookPos (37640, 0, 68540) 0ms
+	CamSetDistance 0 5060 -10000 0ms
+	CamZoom 3160 0ms
+	CamRotate 302000mdeg 0ms
+	CamPers 286 0ms
+	BgmStop 0ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#150W七耀历１２０２年　地方都市洛连特#20W――{0x05}{wait}
+	}
+	TextWait
+	Sleep 300ms
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos 72 320 56 3
+	Sleep 100ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "声音"
+	TextMessage null {
+		#94232v{color 0}#70W#1S……雪拉扎德……#40W{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#94233v{color 0}#40W#2S……雪拉扎德！#20W{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Fork char[21] fork[0]:
+		CamZoom 2960 7000ms
+	FadeIn 3000ms 0x00000000
+	Sleep 1500ms
+	TextTalk char[8] {
+		#79176v#026F嗯～………………？{wait}
+	}
+	TextWait
+	_59
+	FadeWait
+	Fork char[8] fork[0]:
+		CharShake self 15 0 500 3000ms
+	Sleep 1000ms
+	CharSetChipPattern char[8] 1
+	Sleep 800ms
+	CharSetChipPattern char[8] 0
+	Sleep 100ms
+	CharSetChipPattern char[8] 2
+	Sleep 800ms
+	CharSetChipPattern char[8] 0
+	Sleep 100ms
+	ForkWait char[21] fork[0]
+	Sleep 500ms
+	TextTalk char[8] {
+		#79177v#029F哎呀？　……这里是哪……？{wait}
+	}
+	TextWait
+	BgmPlay bgm[191] 0
+	Sleep 500ms
+	TextTalk char[10] {
+		#94234v#743F#5P没事吗？
+		你是不是喝多了点？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#79178v#025F啊……………………
+		做了个令人怀念的梦……{wait}
+	} {
+		#79179v那时候的我，
+		还真是年轻呢……{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#94235v#741F#5P呵呵，
+		好像很久没醉得这么舒服了呢。{wait}
+	} {
+		#94236v#740F不过事到如今说这种
+		上年纪似的话也无济于事。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#80173v#038F#100W就、就是嘛
+		写亚乍得君……{wait}
+	}
+	TextWait
+	CharShake char[9] 20 0 500 2000ms
+	Sleep 500ms
+	CharShake char[9] 20 0 500 3000ms
+	Sleep 1000ms
+	CrossFade 500ms
+	CharSetChipBase char[9] chip[1]
+	CharFlagsUnset char[9] 0x0002
+	Sleep 500ms
+	TextTalk char[9] {
+		#80174v#038F#60W我我、我啊……
+		…………我哦……{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#94237v#743F#5P哎呀奥利维尔，
+		你已经起来了？{wait}
+	} {
+		#94238v#741F呵呵，来一杯醒醒神吧。{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[249] 0 0 100
+	CrossFade 1000ms
+	CharSetChipPattern char[20] 5
+	FadeWait
+	Sleep 300ms
+	Fork char[9] fork[0]:
+		CharShake char[9] 15 0 1500 3000ms
+	TextTalk char[9] {
+		#80175v#036F#100W不、#20W不要……不要……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#79180v#026F你在说什么鬼话啊。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharSetChipPattern char[8] 2
+	Sleep 500ms
+	TextTalk char[8] {
+		#79181v#520F福克纳，
+		再给奥利维尔加一瓶～！{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 500ms
+	Fork char[9] fork[0]:
+		CharShake char[9] 15 0 1500 3000ms
+	TextTalk char[9] {
+		#80176v#038F#60W啊、啊呜啊呜…………（失去意识）{wait}
+	}
+	TextWait
+	Sleep 1000ms
+	TextTalk char[8] {
+		#79182v#029F啊，那家伙又溜掉了。{wait}
+	} {
+		#79183v啧……没办法了。
+		我亲自来动手吧……{wait}
+	}
+	TextWait
+	ForkFunc char[9] fork[1] fn[0,5]
+	_59
+	Sleep 300ms
+	CrossFade 800ms
+	CharSetChipBase char[8] chip[7]
+	CharSetChipPattern char[8] 0
+	CharSetPos char[8] (38560, 0, 68740) 270deg
+	SoundPlay sound[26] 0 0 100
+	FadeWait
+	Fork char[21] fork[0]:
+		CamLookPos (35620, 0, 70400) 6000ms
+	ForkFunc char[8] fork[1] fn[0,3]
+	Sleep 500ms
+	TextTalk char[8] {
+		#79184v#520F#12P难道就没有什么
+		更带劲的家伙吗～……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkWait char[8] fork[1]
+	ForkWait char[21] fork[0]
+	TextTalk char[8] {
+		#79185v#521F哦，找到白兰地了！！{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#94239v#741F#1P不行哦，雪拉扎德。{wait}
+	} {
+		#94240v要提神的话，
+		用一点轻度的
+		果酒就可以了。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#79186v#520F那就两个一起来。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#80177v#038F#40W#3P不要……我会死的……{wait}
+	}
+	TextWait
+	Fork char[21] fork[0]:
+		CamLookPos (37640, 0, 68540) 6000ms
+	ForkFunc char[8] fork[1] fn[0,4]
+	Sleep 1000ms
+	TextTalk char[8] {
+		#79187v#026F话说回来，爱娜……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkWait char[8] fork[1]
+	ForkWait char[21] fork[0]
+	Sleep 300ms
+	TextTalk char[8] {
+		#79188v#027F在那之后你喝了多少杯啊。{wait}
+	}
+	TextWait
+	CrossFade 500ms
+	CharFlagsUnset char[15] 0x0080
+	CharFlagsUnset char[16] 0x0080
+	CharFlagsUnset char[17] 0x0080
+	SoundPlay sound[130] 0 0 100
+	FadeWait
+	Sleep 500ms
+	ForkQuit char[9] fork[1]
+	TextTalk char[10] {
+		#94241v#743F#11P在那之后？？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#79189v#521F哎呀，
+		就是我们俩第一次喝酒的时候啦！{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[370] 0 0 100
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 5}雪拉扎德将酒倒在奥利维尔头上。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	SoundPlay sound[249] 0 0 100
+	ForkQuit char[9] fork[255]
+	Fork char[9] fork[0]:
+		CharShake self 25 0 2000 3000ms
+	Fork char[9] fork[2]:
+		CharColor self 0xFF0000FF 2000ms
+	Sleep 2300ms
+	TextTalk char[10] {
+		#94242v#741F#11P雪拉扎德真是的，
+		倒错地方了吧！？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#79190v#029F哎呀呀？{wait}
+	} {
+		#79191v啊，真的……{wait}
+	}
+	TextWait
+	Fork char[9] fork[0]:
+		CharShake self 20 0 500 2000ms
+	Sleep 800ms
+	TextTalk char[9] {
+		#80178v#038F呜……呜…………{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[524] 0 0 100
+	CrossFade 500ms
+	CharSetChipBase char[9] chip[4]
+	CharFlagsSet char[9] 0x0002
+	Sleep 500ms
+	Fork char[21] fork[0]:
+		CamZoom 2760 4000ms
+	Sleep 500ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	ForkQuit char[21] fork[0]
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene "t4100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	Fork char[8] fork[0]:
+		CharWalkToPos self (33560, 0, 68960) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	Fork char[8] fork[0]:
+		CharWalkToPos self (33720, 0, 74320) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	CharTurnTo char[8] 270deg 500deg/s
+	Return
+
+fn[4]:
+	Fork char[8] fork[0]:
+		CharWalkToPos self (33560, 0, 68960) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	Fork char[8] fork[0]:
+		CharWalkToPos self (36120, 0, 67900) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	Fork char[8] fork[0]:
+		CharWalkToPos self (38500, 0, 66280) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	CharTurnTo char[8] 90deg 500deg/s
+	Return
+
+fn[5]:
+	while 1:
+		Sleep 1500ms
+		Fork char[9] fork[0]:
+			CharShake char[9] 15 0 500 3000ms
+		Sleep 1000ms
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsSet char[8] 0x0004
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos char[8] (39580, 200, 68570) 180deg
+	CharFlagsSet char[9] 0x0004
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (39710, 200, 66250) 0deg
+	CharFlagsSet char[10] 0x0004
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[10] (38200, 0, 67800) 121deg
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharFlagsUnset char[14] 0x0080
+	CharFlagsUnset char[18] 0x0080
+	CharFlagsUnset char[19] 0x0080
+	CharFlagsUnset char[20] 0x0080
+	CamLookPos (37640, 0, 68540) 0ms
+	CamSetDistance 0 5070 -10000 0ms
+	CamZoom 2960 0ms
+	CamRotate 302000mdeg 0ms
+	CamPers 286 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	TextTalk char[9] {
+		#030F唔～，不愧是洛连特。{wait}
+	} {
+		用时令蔬菜做的料理
+		简直就是绝品。{wait}
+	} {
+		真是堪比帝都
+		三星餐厅的味道啊。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2P哎呀，你喜欢吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F呵，当然了。{wait}
+	} {
+		令我爱不释口的
+		美酒和美食。{wait}
+	} {
+		还有这样两位仿如
+		地上的女神般的美女
+		陪伴在身侧嘛。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5P呵呵……{wait}
+	} {
+		和听说的一样，
+		真是能说会道呢。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F爱娜也要小心哦。{wait}
+	} {
+		这家伙啊，
+		真是没有一点分寸的。{wait}
+	}
+	TextWait
+	CharSetChipPattern char[8] 2
+	Sleep 200ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (35710, 0, 71540) 1000ms
+	ForkWait field_party[0] fork[0]
+	TextTalk char[8] {
+		#020F#6P啊，福克纳！{wait}
+	} {
+		葡萄酒不够了哦。
+		麻烦再来两三瓶。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5P还要科涅克白兰地。
+		最好是帝国出产的哦。{wait}
+	}
+	TextWait
+	CharTurnTo char[11] 135deg 400deg/s
+	TextTalk char[11] {
+		#5P是、是！{wait}
+	}
+	TextWait
+	Emote char[11] 0mm 2000mm 40 43 100ms 3
+	CharTurnTo char[11] 225deg 400deg/s
+	CharWalkToPos char[11] (33910, 0, 74450) 3000mm/s 0
+	CharWalkToPos char[11] (33160, 0, 74280) 3000mm/s 0
+	Fork field_party[0] fork[0]:
+		CamLookPos (37640, 0, 68540) 1500ms
+	ForkWait field_party[0] fork[0]
+	Sleep 200ms
+	Emote char[9] 0mm 1700mm 20 23 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[9] {
+		#030F我、我说你们两个……{wait}
+	} {
+		是不是发飙过头了？{wait}
+	}
+	TextWait
+	Sleep 200ms
+	CharSetChipPattern char[8] 0
+	Sleep 200ms
+	TextTalk char[8] {
+		#020F#2P是吗？{wait}
+	} {
+		这次一直在说话，
+		算是喝得够慢的啦。{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5P没关系啦。
+		慢慢喝吧。{wait}
+	} {
+		哎呀，不过……{wait}
+	} {
+		奥利维尔先生的
+		杯子空了呢。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[249] 0 0 100
+	CrossFade 1000ms
+	CharSetChipPattern char[20] 5
+	FadeWait
+	Sleep 300ms
+	TextTalk char[9] {
+		#030F哈、哈哈……
+		多谢关照。{wait}
+	}
+	TextWait
+	ForkFunc char[11] fork[0] fn[0,10]
+	ForkWait char[11] fork[0]
+	TextTalk char[11] {
+		#5P久、久等了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CharFlagsUnset char[15] 0x0080
+	CharFlagsUnset char[16] 0x0080
+	CharFlagsUnset char[17] 0x0080
+	FadeWait
+	Sleep 300ms
+	TextTalk char[10] {
+		#740F#2P谢谢。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[11] fork[1] fn[0,9]
+	Sleep 300ms
+	TextTalk char[10] {
+		#740F#5P奥利维尔先生，
+		科涅克你要喝纯的吗？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6P咦……{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5P抱歉。
+		刚才总是让你喝葡萄酒。{wait}
+	} {
+		你是帝国的人嘛，
+		一定喜欢蒸馏酒吧。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2P啊～，原来如此。{wait}
+	} {
+		我就说怎么这么慢呢。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6P咳、咳咳……{wait}
+	} {
+		对、对了雪拉君……{wait}
+	} {
+		你和这位爱娜小姐
+		交情很深吗？{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2P那是当然了。{wait}
+	} {
+		从我还是准游击士的时候
+		我们就认识了嘛。{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6P哦……
+		好像很有趣呢。{wait}
+	} {
+		不介意的话
+		能不能说给我听呢？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5P好啊，
+		第一次见面是在六年前的王都――{wait}
+	} {
+		我接受了保镖的委托
+		前往去协会的时候。{wait}
+	}
+	TextWait
+	ImageShow "c_orb109._ch" 0 0 400ms
+	Sleep 1000ms
+	FadeOut 0ms 0x00000000 255
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F那时候，
+		已经是准游击士的我偶然待在王都的支部。{wait}
+	} {
+		然后接受了委托，
+		结果来了个看起来
+		和事件完全无缘的大小姐。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F唔，
+		爱娜小姐遇到什么麻烦了吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F身为资产家的祖父
+		因病去世了。{wait}
+	} {
+		财产全部留给孙女爱娜……
+		还留下这么随便的遗嘱。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F嗯，接下来就是老段子啦。{wait}
+	} {
+		不知道从哪里涌来的亲戚
+		开始找爱娜的麻烦。{wait}
+	} {
+		好像还有人
+		不择手段想让她放弃继承权。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F呼，这性质可真是恶劣。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F在遗言执行之前的几天
+		真是不安……{wait}
+	} {
+		嗯，
+		因为这样不得已拜托了这个恐怖的姐姐。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F哎呀，你还真敢说呢。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F因为雪拉扎德……{wait}
+	} {
+		你很明显
+		讨厌我嘛。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F难不成……{wait}
+	} {
+		相遇一开始
+		你们俩关系不好？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F我也还年轻，
+		很多时候会觉得尴尬嘛。{wait}
+	} {
+		嗯，
+		不过光凭是资产家的女儿就看不顺眼也是确实的。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F完、完全是偏见嘛。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F什么啊，你真是啰嗦耶。{wait}
+	} {
+		……正说着呢，
+		你杯子怎么又空了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F哦、哦呀，是这样吗？{wait}
+	} {
+		哎，
+		不用管我继续说吧……{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F好啦好啦，别这么说嘛。
+		…………（咕咚咕咚咕咚）{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[249] 0 0 100
+	Sleep 1000ms
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F爱、爱娜小姐！？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F嗯……
+		说到哪里了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F呜……
+		接、接受了委托那里吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F啊，对了对了。{wait}
+	} {
+		嗯，
+		就这样开始了逃亡生活。{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 1000ms
+	ImageShow "c_orb110._ch" 0 0 400ms
+	Sleep 1000ms
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F为了逃避追杀
+		几乎跑遍了王都。{wait}
+	} {
+		不过，
+		这个大小姐出身的委托人竟然一句怨言也没有。{wait}
+	} {
+		大概是从这时开始吧，
+		我们开始相互理解了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F在一起相处了这么久
+		自然也知道对方性情了。{wait}
+	} {
+		而且更重要的是，
+		对我来说你是个很新鲜的人。{wait}
+	} {
+		是以前所生活的世界
+		从来不会有的类型。{wait}
+	} {
+		因此意气相投……
+		遗嘱顺利执行后的当晚，
+		两人还举杯庆祝呢。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F嗯，
+		真正的意气相投就是从那次饮酒会开始呢。{wait}
+	} {
+		养尊处优的
+		有钱人大小姐……{wait}
+	} {
+		我的这种偏见，
+		就是因为爱娜喝酒的样子
+		而完全粉碎掉了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F呜……咿……
+		不、不过那次举杯庆祝……{wait}
+	} {
+		如果速６年前……
+		计算八是八太对头吗？{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F啊ー，真是的……
+		醉鬼给我闭嘴啦。{wait}
+	} {
+		不过，吃惊的还在后头呢。{wait}
+	} {
+		因为爱娜这家伙，
+		居然把好不容易到手的遗产
+		全部捐赠出去了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		#030F真……真的么……{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 1000ms
+	ImageShow "c_orb111._ch" 0 0 400ms
+	Sleep 1000ms
+	TextSetPos 100 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F嗯嗯，
+		分毫不差地捐给女王陛下的福利基金了。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F到头来还一脸淡然地
+		对我说，
+		『要找工作才行了』……{wait}
+	} {
+		就算是我也放心不下啊。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F所以就拜托她
+		介绍协会的工作给我了。{wait}
+	} {
+		呵呵，
+		现在回想起来还真是做过头了点。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F哎呀，
+		既然你这么想就应该更感谢我。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "爱娜"
+	TextMessage null {
+		#740F所以说，
+		欠你的情不是都用工作还了吗。{wait}
+	} {
+		而且还有酒席上嘛。{wait}
+	} {
+		能够不拒绝你的邀请的
+		也只有我和卡西乌斯先生了吧。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "雪拉扎德"
+	TextMessage null {
+		#020F哼哼，算了㈱{wait}
+	} {
+		今后有奥利维尔
+		陪我了嘛。{wait}
+	} {
+		对吧～，奥利维尔～㈱{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "奥利维尔"
+	TextMessage null {
+		……………………………{wait}
+	}
+	TextWait
+	TextClose 0
+	CharSetChipBase char[9] chip[4]
+	CharSetChipPattern char[9] 0
+	CharFlagsSet char[9] 0x0002
+	ImageHide 500ms
+	FadeIn 1000ms 0x00000000
+	Sleep 1000ms
+	FadeWait
+	TextTalk char[8] {
+		#020F#2P哎，咦？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5P唉，可惜……{wait}
+	} {
+		已经醉倒了呢。{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2P哎～，怎么这样。{wait}
+	} {
+		夜晚才刚刚开始呢～。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase char[8] chip[7]
+	CharSetChipPattern char[8] 0
+	CharSetPos char[8] (38570, 0, 68740) 180deg
+	SoundPlay sound[164] 0 0 100
+	FadeWait
+	Fork field_party[0] fork[0]:
+		CamLookPos (37250, 0, 68190) 2000ms
+	CharTurnTo char[8] 270deg 400deg/s
+	CharWalkToPos char[8] (37210, 0, 68990) 3000mm/s 0
+	CharWalkToPos char[8] (37400, 0, 66440) 3000mm/s 0
+	CharWalkToPos char[8] (38730, 0, 66320) 3000mm/s 0
+	ForkWait field_party[0] fork[0]
+	TextTalk char[8] {
+		#020F#5P喂～，奥利维尔～！{wait}
+	} {
+		不准装睡哦～！{wait}
+	}
+	TextWait
+	ForkFunc char[9] fork[0] fn[0,8]
+	Sleep 1000ms
+	TextTalk char[9] {
+		#030F#6P哦、哦呜哦呜哦呜……{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#2P呐，雪拉扎德……
+		不是我说啊。{wait}
+	} {
+		你最好还是
+		对酒友好一点吧。{wait}
+	}
+	TextWait
+	ForkFunc char[11] fork[0] fn[0,7]
+	ForkWait char[11] fork[0]
+	TextTalk char[11] {
+		#5P雪、雪拉小姐！？
+		别使用暴力啊。{wait}
+	}
+	TextWait
+	ForkQuit char[9] fork[0]
+	Sleep 200ms
+	CharTurnTo char[8] 315deg 400deg/s
+	Sleep 200ms
+	TextTalk char[8] {
+		#020F#6P哎呀～，福克纳君㈱{wait}
+	} {
+		嗯呵呵，来得正好? 
+		你代替他来陪我吧。{wait}
+	}
+	TextWait
+	TextTalk char[11] {
+		#5P不、不行！
+		我等下还有工作……{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#6P哎～，不嘛不嘛～。
+		陪我一起喝啦～。{wait}
+	} {
+		……不陪我喝我酒脱啦。{wait}
+	}
+	TextWait
+	TextTalk char[11] {
+		#5P咦！？{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#2P唉，开始了……{wait}
+	}
+	TextWait
+	CharTurnTo char[11] 90deg 400deg/s
+	TextTalk char[11] {
+		#5P爱、爱娜小姐也
+		别光看着快阻止她啊！{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#6P呼～，好热哦～㈱{wait}
+	}
+	TextWait
+	Emote char[11] 0mm 2000mm 40 43 100ms 3
+	CharTurnTo char[11] 135deg 400deg/s
+	Sleep 500ms
+	TextTalk char[11] {
+		#5P啊、啊哇哇哇！？{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6P呜……呜……{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 300ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}就这样――
+		田园的夜晚更深了。{wait}
+	} {
+		这位旅人总算
+		从宴会中生还――{wait}
+	} {
+		但在此后，
+		不经意想起两人的面容时，
+		他仍会暗暗地颤抖。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmStop 2000ms
+	Sleep 2000ms
+	if flag[12032]:
+		NewScene "t0001._sn" 0 0 0
+		Hcf
+	else:
+		NewScene "f1010._sn" 100 0 0
+		Hcf
+	Return
+
+fn[7]:
+	CharTurnTo self 135deg 400deg/s
+	Emote self 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (32890, 0, 69550) 5000mm/s 0
+	CharWalkToPos self (37070, 0, 67350) 5000mm/s 0
+	Return
+
+fn[8]:
+	while 1:
+		CharShake self 0 30 500 3000ms
+		Sleep 1000ms
+		CharShake self 0 30 500 3000ms
+		Sleep 1500ms
+	Return
+
+fn[9]:
+	CharTurnTo self 315deg 400deg/s
+	Emote self 0mm 2000mm 40 43 100ms 3
+	CharWalkToPos self (33430, 0, 69710) 5000mm/s 0
+	CharWalkToPos self (33830, 0, 75030) 5000mm/s 0
+	CharWalkToPos self (34500, 0, 75200) 3000mm/s 0
+	CharTurnTo self 90deg 400deg/s
+	Return
+
+fn[10]:
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (33310, 0, 69380) 2000mm/s 0
+	CharWalkToPos self (38010, 0, 66960) 2000mm/s 0
+	CharTurnTo self 90deg 400deg/s
+	Return

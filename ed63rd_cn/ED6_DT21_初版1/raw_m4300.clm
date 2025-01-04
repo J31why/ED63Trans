@@ -1,0 +1,304 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M4300.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[16] 0x0004
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (45000, 0, -13660) 270deg
+	CharSetPos name[14] (45000, 0, -13660) 270deg
+	CharSetPos party[2] (45000, 0, -13660) 270deg
+	CharSetPos party[3] (45000, 0, -13660) 270deg
+	CamLookPos (40590, 0, -13160) 0ms
+	CamSetDistance 0 7800 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	ForkFunc name[8] fork[0] fn[0,3]
+	ForkFunc name[14] fork[0] fn[0,4]
+	ForkFunc party[2] fork[0] fn[0,5]
+	ForkFunc party[3] fork[0] fn[0,6]
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	Fork name[8] fork[1]:
+		CamLookPos (39070, 0, -13140) 3000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 7800 -10000 3000ms
+	Fork name[8] fork[3]:
+		CamZoom 3200 3000ms
+	Fork name[14] fork[1]:
+		CamRotate 45000mdeg 3000ms
+	Fork name[14] fork[2]:
+		CamPers 262 3000ms
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait name[8] fork[1]
+	TextTalk name[14] {
+		#91942v#1444F#5P这是……{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamLookPos (1080, 0, -19600) 6000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 7500 -10000 6000ms
+	Fork name[8] fork[2]:
+		CamZoom 4310 6000ms
+	Fork name[8] fork[3]:
+		CamRotate 45000mdeg 5000ms
+	Fork name[14] fork[1]:
+		CamPers 490 6000ms
+	ForkWait name[8] fork[3]
+	Fork name[8] fork[3]:
+		CamRotate 0mdeg 6000ms
+	ForkWait name[8] fork[0]
+	Fork name[8] fork[0]:
+		CamLookPos (10, 0, 19140) 6000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 2200 -10000 6000ms
+	Fork name[8] fork[2]:
+		CamZoom 4560 6000ms
+	Fork name[14] fork[1]:
+		CamPers 551 6000ms
+	ForkWait name[8] fork[0]
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (39310, 0, -12660) 0ms
+	CamSetDistance 0 6240 -10000 0ms
+	CamZoom 2750 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 319 0ms
+	FadeWait
+	Sleep 300ms
+	if PartyPosition name[10] != -1 | PartyPosition name[12] != -1:
+		if PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#84047v#216F#5P来、来到了一个
+				很不得了的地方……{wait}
+			}
+			TextWait
+		elif PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85458v#270F#5P奥利维尔那家伙
+				倒是告诉过我这事……{wait}
+			}
+			TextWait
+		TextTalk name[13] {
+			#84738v#178F#5P要想在这里探索的话，
+			应该需要
+			相当周密的准备才行。{wait}
+		} {
+			#84739v#176F唔……
+			就这样继续前进吗。{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1 | PartyPosition name[6] != -1:
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#77534v#1502F#5P要想在这里探索的话，
+				应该需要
+				相当周密的准备才行。{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#82624v#065F#5P要、要调查这里的话，
+				可能会很费力气啊。{wait}
+			}
+			TextWait
+		TextTalk name[13] {
+			#84737v#175F#5P唔……
+			就这样继续前进吗。{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#88751v#1063F首先，
+		先确定一下遗迹的情况吧。{wait}
+	} {
+		#88752v至少可以了解到
+		这附近会有什么样的魔兽出没。{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#84740v#176F#5P……没错。{wait}
+	} {
+		#84741v#170F再往前
+		走一段看看吧。{wait}
+	}
+	TextWait
+	FlagSet flag[10013]
+	QuestTaskSet quest[46] 0x0002
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	CharWalkToPos self (41180, 0, -13970) 2000mm/s 0
+	CharWalkToPos self (37020, 0, -14800) 2000mm/s 0
+	Return
+
+fn[4]:
+	Sleep 600ms
+	CharWalkToPos self (41180, 0, -13970) 2000mm/s 0
+	CharWalkToPos self (37170, 0, -13340) 2000mm/s 0
+	Return
+
+fn[5]:
+	Sleep 1100ms
+	CharWalkToPos self (41180, 0, -13970) 2000mm/s 0
+	CharWalkToPos self (38500, 0, -14970) 2000mm/s 0
+	Return
+
+fn[6]:
+	Sleep 1700ms
+	CharWalkToPos self (41180, 0, -13970) 2000mm/s 0
+	CharWalkToPos self (38520, 0, -12930) 2000mm/s 0
+	Return
+
+fn[7]:
+	EventBegin 0
+	char[0].1 = (field_party[0].1 + field_party[0].1) / 2
+	char[0].2 = (field_party[0].2 + field_party[0].2) / 2
+	char[0].3 = (field_party[0].3 + field_party[0].3) / 2
+	char[1].1 = (field_party[1].1 + field_party[1].1) / 2
+	char[1].2 = (field_party[1].2 + field_party[1].2) / 2
+	char[1].3 = (field_party[1].3 + field_party[1].3) / 2
+	char[2].1 = (field_party[2].1 + field_party[2].1) / 2
+	char[2].2 = (field_party[2].2 + field_party[2].2) / 2
+	char[2].3 = (field_party[2].3 + field_party[2].3) / 2
+	ForkFunc field_party[0] fork[1] fn[0,11]
+	ForkFunc field_party[1] fork[1] fn[0,10]
+	ForkFunc field_party[2] fork[1] fn[0,9]
+	ForkFunc field_party[3] fork[1] fn[0,8]
+	ForkWait field_party[3] fork[1]
+	_30 0
+	Sleep 300ms
+	SoundPlay sound[156] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[247] 0 0 100
+	SoundPlay sound[104] 1 0 100
+	FadeOut 2000ms 0x00000000 255
+	SoundSetVolume sound[104] 90
+	Sleep 400ms
+	SoundSetVolume sound[104] 85
+	Sleep 400ms
+	SoundSetVolume sound[104] 80
+	Sleep 400ms
+	SoundSetVolume sound[104] 75
+	Sleep 400ms
+	SoundSetVolume sound[104] 70
+	Sleep 400ms
+	SoundSetVolume sound[104] 65
+	Sleep 400ms
+	SoundSetVolume sound[104] 60
+	Sleep 400ms
+	SoundStop sound[104]
+	NewScene "u4241._sn" 101 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[8]:
+	CharWalkToChar self char[2] 0mm 6000mm/s 0
+	CharWalkToChar self char[1] 0mm 6000mm/s 0
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharSetChipPattern self 0
+	CharWalkToPos self (45000, 0, -13660) 2000mm/s 0
+	Return
+
+fn[9]:
+	CharWalkToChar self char[1] 0mm 6000mm/s 0
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharSetChipPattern self 0
+	CharWalkToPos self (45000, 0, -13660) 2000mm/s 0
+	Return
+
+fn[10]:
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharSetChipPattern self 0
+	CharWalkToPos self (45000, 0, -13660) 2000mm/s 0
+	Return
+
+fn[11]:
+	CharSetChipPattern self 0
+	CharWalkToPos self (45000, 0, -13660) 2000mm/s 0
+	Return

@@ -1,0 +1,180 @@
+calmare tc scena
+scena:
+	name "Bose" "C1401.x"
+	town town[60]
+	bgm bgm[22]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 13:
+	if system[66] == 13:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 0
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[1] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W『不如也试着当游击士看看？』
+		#500W
+		#40W契机就是这么简单的一句话。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W迪恩、雷斯、洛克——
+		#500W
+		#40W聚集在卢安仓库的不良青年组织
+		『渡鸦帮』的头领三人组。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W在王国全土遭受前所未有危机的非常时期，
+		他们也重新审视了自身的价值……
+		#500W
+		#40W为将来而烦恼不已的结果，
+		就是最终选择了守护地区和平与民众安全的道路——
+		即游击士的道路。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W话虽如此，这三人——
+		倒也不是完全没有歪心。
+		#500W
+		#40W『能够让卡露娜大姐
+		　手把手地指导。』
+		#500W
+		#40W他们是怀着这种期待，
+		才叩响游击士协会卢安支部大门的。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W可是由于支部接待员嘉恩的计策——
+		#500W
+		#40W他们的指导教官被定为『渡鸦帮』的原首领——
+		他们的天敌阿加特·科洛斯纳。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W就这样，在阿加特手下
+		接受直接指导的他们——
+		#500W
+		#40W经过大约三个月地狱般的特训，
+		以必死的决心突破重重难关——
+		#500W
+		#40W——今天，终于要挑战最终考试了。{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	CamLookPos (-6340, 2000, 107480) 0ms
+	CamSetDistance 0 16000 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 135000mdeg 0ms
+	CamPers 450 0ms
+	BgmPlay bgm[22] 0
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	Fork char[0] fork[0]:
+		CamSetDistance 0 8000 -10000 10000ms
+	Fork char[0] fork[1]:
+		CamPers 356 10000ms
+	ForkWait char[0] fork[0]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "c1410._sn" 100 0 0
+	Hcf
+	Return

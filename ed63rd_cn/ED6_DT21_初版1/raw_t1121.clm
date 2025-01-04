@@ -1,0 +1,1367 @@
+calmare tc scena
+scena:
+	name "Bose" "T1121.x"
+	town town[1]
+	bgm bgm[11]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02380._ch" "npl/ch02380p._cp"
+chip[1] "npl2/ch03093._ch" "npl2/ch03093p._cp"
+chip[2] "apl/ch20021._ch" "apl/ch20021p._cp"
+chip[3] "npl/ch02363._ch" "npl/ch02363p._cp"
+
+npc char[0]:
+	name "卢格兰老人"
+	pos (180, 0, 4400)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "信"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 30
+	ch chip[2]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "梅贝尔市长"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "亚妮拉丝"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 18:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 25
+			Event fn[0,6]
+		elif flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 25
+			Event fn[0,7]
+	if system[66] == 19:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,8]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (27740, 200, -2390) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 2480 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 323 0ms
+	CharSetChipBase name[9] chip[1]
+	CharSetChipPattern name[9] 0
+	CharFlagsSet name[9] 0x0004
+	CharSetPos name[9] (26740, 200, -3610) 270deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (25400, 800, -3800) 0deg
+	Sleep 500ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}柏斯支部所属游击士，
+		亚妮拉丝·艾尔菲德――{wait}
+	} {
+		由于在『辉之环』事件中的活跃表现
+		而晋升Ｄ级的她，
+		现在已是年轻游击士的希望之星。{wait}
+	} {
+		然而，突如其来的一封信
+		打破了这样一帆风顺的平静……{wait}
+	} {
+		慵懒的午后――
+		亚妮拉丝在协会独自一人
+		读着那白色的纸片。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	BgmPlay bgm[11] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk name[9] {
+		#86617v#810F#5P嗯……{wait}
+	} {
+		#86618v唔唔唔唔……{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CamLookPos (28150, 0, 630) 2000ms
+	ForkFunc char[0] fork[0] fn[0,3]
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 200ms
+	TextTalk char[0] {
+		#94864v#630F怎么了，亚妮拉丝。
+		发出那么奇怪的声音。{wait}
+	} {
+		#94865v难道又吃太多冰淇淋
+		把肚子吃坏了？{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 40 43 100ms 3
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}◆亚妮拉丝望向卢格兰的方向。（扭头）{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	TextTalk name[9] {
+		#86619v#810F哇哇！？
+		这是秘密啦。{wait}
+	} {
+		#86620v其实，
+		我收到了爷爷的信……{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CamLookPos (27760, 200, -1960) 2000ms
+	Fork name[9] fork[1]:
+		CamZoom 2400 2000ms
+	ForkFunc char[0] fork[0] fn[0,4]
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	TextTalk char[0] {
+		#94866v#630F#5P哦……{wait}
+	} {
+		#94867v我记得，
+		你的祖父是……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86621v#810F嗯，
+		是很有名的剑术老师。{wait}
+	} {
+		#86622v虽然已经老态龙钟了，
+		但要是现在和他比试，
+		我还是会被当成小孩子耍。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94868v#630F#5P能够把现役游击士当孩子耍，
+		真是恐怖的高手啊。{wait}
+	} {
+		#94869v……那，你祖父有什么事？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86623v#810F嗯，这个……
+		这就更令人吃惊了……{wait}
+	} {
+		#86624v上面写着
+		『去见卡西乌斯』……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94870v#630F#5P卡西乌斯……？{wait}
+	} {
+		#94871v就是那个卡西乌斯准将？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86625v#810F是、是的……{wait}
+	} {
+		#86626v爷爷好像曾经是
+		卡西乌斯先生的
+		剑术师父……{wait}
+	} {
+		#86627v１０年前卡西乌斯先生
+		舍弃剑道的时候，
+		也曾经来打过招呼。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94872v#630F#5P说到１０年前，
+		正值『百日战役』……{wait}
+	} {
+		#94873v卡西乌斯先生退役
+		转做游击士时的事吗。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86628v#810F对于卡西乌斯先生舍弃剑道，
+		爷爷似乎相当遗憾……{wait}
+	} {
+		#86629v趁着这次他回归军队，
+		就想要重新
+		确认他的想法。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94874v#630F#5P唔，原来如此啊。{wait}
+	} {
+		#94875v真是在意外的地方
+		有意外的缘分啊。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86630v#810F确、确实是啊……{wait}
+	} {
+		#86631v啊，就是因为这个，
+		卢格兰爷爷。{wait}
+	} {
+		#86632v我有点事
+		想拜托您……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94876v#630F#5P嗯，你想请假吧？{wait}
+	} {
+		#94877v既然有这样的原因，
+		你就随便休息吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86633v#810F哇，是真的吗！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94878v#630F#5P只不过……{wait}
+	} {
+		#94879v要等你把公告板上的通缉魔兽
+		给我全部收拾了之后才行。{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 14 15 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86634v#810F不、不会吧……！？{wait}
+	} {
+		#86635v不是还有
+		５件那么多吗！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94880v#630F#5P三天前因为肚子痛
+		而请病假的家伙还有什么好说的。{wait}
+	} {
+		#94881v而且原因居然是
+		因为想要附赠品
+		而吃太多的冰淇淋……{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86636v#810F哇、哇哇！！？{wait}
+	} {
+		#86637v我、我知道了，
+		这个就别说啦！！{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	BgmStop 1000ms
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene "c3100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	CharSetPos self (25510, -1750, 5500) 0deg
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (28880, 0, 5310) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[4]:
+	CharWalkToPos self (26700, 0, 1270) 2500mm/s 0
+	CharWalkToPos self (26650, 0, -2060) 2500mm/s 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (27220, 0, -2090) 0ms
+	CamSetDistance 0 5790 -10000 0ms
+	CamZoom 2340 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 327 0ms
+	CharSetChipBase name[9] chip[1]
+	CharSetChipPattern name[9] 0
+	CharFlagsSet name[9] 0x0004
+	CharSetPos name[9] (26740, 200, -3610) 270deg
+	CharFlagsUnset char[0] 0x0080
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharFlagsSet char[0] 0x0004
+	CharSetPos char[0] (25330, 0, -2450) 180deg
+	Sleep 100ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}――就这样，爷爷。{wait}
+	} {
+		#86638v很遗憾，
+		卡西乌斯先生还是无意回归剑术。{wait}
+	} {
+		#86639v不过，
+		这次爷爷的信
+		让我也稍微体会到了剑之道的深奥之处。{wait}
+	} {
+		至今为止，
+		都只重视『快』和『强』等方面……{wait}
+	} {
+		#86640v但最重要的应该
+		是自己为何而挥剑
+		的这种心情――『魂』才对吧。{wait}
+	} {
+		#86641v为什么我一直赢不了爷爷，
+		今天我终于明白其中道理了。{wait}
+	} {
+		#86642v虽然是个不成器的弟子，
+		但今后我也会尽一切努力。{wait}
+	} {
+		#86643v即使您去了天国
+		也一定要保佑我哦。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	TextTalk name[9] {
+		#86644v#810F#2P――我寄出了这样的信……{wait}
+	} {
+		#86645v结果爷爷
+		大发雷霆。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#630F#5P呃，最后那两行有点问题吧。{wait}
+	}
+	TextWait
+	Sleep 500ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	Sleep 2000ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_E6_1 0
+	Sleep 1000ms
+	if !QuestFlagsGet quest[10] 0x20:
+		QuestFlagsSet quest[10] 0x20
+		ItemAdd item[1424] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[1424]}{color 0}。{wait}
+		}
+		TextWait
+	if !QuestFlagsGet quest[10] 0x10:
+		QuestFlagsSet quest[10] 0x10
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}５０００米拉{color 0}。{wait}
+		}
+		TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5502._sn" 102 0 0
+	Hcf
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (27740, 200, -2390) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 2680 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 323 0ms
+	CharSetChipBase name[9] chip[1]
+	CharSetChipPattern name[9] 0
+	CharFlagsSet name[9] 0x0004
+	CharSetPos name[9] (26740, 200, -3610) 270deg
+	FadeIn 2000ms 0x00000000
+	CamZoom 2480 2000ms
+	FadeWait
+	Emote name[9] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[9]
+	Sleep 500ms
+	TextTalk name[9] {
+		#86353v#818F#11P嗯嗯……{wait}
+	} {
+		#86354v#817F原来如此，原来如此……{wait}
+	} {
+		#86355v#814F……………………………{wait}
+	} {
+		#86356v#1311F……唉，
+		没想到居然会有这种事。{wait}
+	}
+	TextWait
+	Sleep 500ms
+	CharColor char[0] 0x00FFFFFF 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (25510, -1750, 5500) 0deg
+	TextTalkNamed char[0] "老人的声音" {
+		#94807v#2P喂，亚妮拉丝。{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork name[9] fork[0]:
+		CamLookPos (28150, 0, 630) 2000ms
+	ForkFunc char[0] fork[0] fn[0,3]
+	CharSetChipPattern name[9] 2
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 500ms
+	TextTalk name[9] {
+		#86357v#1310F#12P啊，卢格兰爷爷。{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CamLookPos (27760, 200, -1960) 2000ms
+	Fork name[9] fork[1]:
+		CamZoom 2400 2000ms
+	ForkFunc char[0] fork[0] fn[0,4]
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 300ms
+	TextTalk char[0] {
+		#94808v#633F#5P怎么了。
+		有什么问题吗？{wait}
+	} {
+		#94809v也不看公告板
+		就跑到二楼来躲着……{wait}
+	} {
+		#94810v#632F该不会是，
+		吃太多冰淇淋弄坏肚子了吧？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86358v#819F#12P怎、怎么会……
+		我又不是小孩子了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94811v#633F#5P嗬，你还敢说。{wait}
+	} {
+		#94812v#631F那么上次
+		到底是谁来着？{wait}
+	} {
+		#94813v一大早就吃了三个冰淇淋，
+		然后还要麻烦思潘斯爷爷
+		调了药才治好……{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[9] {
+		#86359v#1317F#12P哇哇！？{wait}
+	} {
+		#86360v那、那是秘密啦。{wait}
+	} {
+		#86361v#817F而且，
+		那只不过是我当准游击士时的事吧！{wait}
+	} {
+		#86362v#816F现在已经反省过，
+		早上绝对只吃
+		一个冰淇淋了！{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94814v#634F#5P呃，这个，
+		一大早吃冰淇淋本身就有点……{wait}
+	} {
+		#94815v#630F……唉，也罢。{wait}
+	} {
+		#94816v那么，
+		你从刚才开始就一直在干什么呢？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86363v#1310F#12P啊，对了。{wait}
+	} {
+		#86364v#811F其实今天早上，
+		我收到了住在远方的
+		爷爷写来的信。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94817v#633F#5P哦……{wait}
+	} {
+		#94818v说到你的祖父……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86365v#819F#12P嗯，是剑术的老师。{wait}
+	} {
+		#86366v#816F说到『八叶一刀流』的
+		云·卡法伊，
+		在行内可是赫赫有名的哦。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94819v#631F#5P唔，是啊。{wait}
+	} {
+		#94820v虽然在听你说之前，
+		我只知道他的名字而已……{wait}
+	} {
+		#94821v#630F不过我记得有一段时期，
+		他也在利贝尔住过吧？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86367v#814F#12P啊，是的，您知道得真详细。{wait}
+	} {
+		#86368v#1316F只是，
+		我也记不大清楚了。{wait}
+	} {
+		#86369v因为那好像
+		是我出生前后的事……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94822v#634F#5P哦……
+		是那么久以前的事了吗。{wait}
+	} {
+		#94823v#630F那么，
+		你祖父现在身体还健朗吗？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86370v#1314F#12P嗯嗯，
+		看样子还生龙活虎的呢。{wait}
+	} {
+		#86371v最后一次见面
+		是在一年前左右……{wait}
+	} {
+		#86372v#819F已经七十岁了，
+		跟我比试的时候
+		还能把我当小孩子耍。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94824v#631F#5P嗬嗬，
+		能够把现役游击士当孩子耍，
+		真是恐怖的高手啊。{wait}
+	} {
+		#94825v#632F唔……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86373v#810F#12P？　怎么了？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94826v#634F#5P哎呀，亚妮拉丝。
+		以前我就一直
+		有这样一个疑问……{wait}
+	} {
+		#94827v#630F你为什么
+		不去祖父门下？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86374v#814F#12P咦……？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94828v#630F#5P就是说，
+		你既然有志走上剑之道……{wait}
+	} {
+		#94829v在祖父身边磨练技艺
+		不是最好的捷径吗。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86375v#1317F#12P唔，这个……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94830v#633F#5P啊啊，没什么……
+		我多管闲事了。{wait}
+	} {
+		#94831v#634F抱歉啊。
+		你就当是老人说胡话，
+		听过就算了吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86376v#819F#12P不不，没这回事……！{wait}
+	} {
+		#86377v#816F您刚才说的
+		完全没有多管闲事。{wait}
+	} {
+		#86378v#813F卢格兰爷爷的话
+		确实有一定的道理。{wait}
+	} {
+		#86379v只是有些事情
+		比较难说清楚……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94832v#633F#5P哦……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86380v#1316F#12P我想知道更多更多
+		关于剑术的知识……
+		想要追求剑的真谛。{wait}
+	} {
+		#86381v为此，
+		在爷爷门下修行
+		确实可以说是捷径。{wait}
+	} {
+		#86382v#813F但是和我对待剑术一样，
+		我也想在游击士方面有所作为……
+		不，也许是更为甚之。{wait}
+	} {
+		#86383v#812F嗯～，所以……
+		不是想作为剑术家来学习剑术，
+		而是想作为游击士来学习剑术……{wait}
+	} {
+		#86384v#1316F嗯～……
+		果然还是说不清楚啊。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94833v#631F#5P不……虽然只是模模糊糊的，
+		但是大概明白你想说的事了。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86385v#1314F#12P嗯……
+		而且，
+		爷爷也跟我说了。{wait}
+	} {
+		#86386v#817F身形和技法……
+		这些技术上的东西
+		已经全部教给我了。{wait}
+	} {
+		#86387v能不能运用自如
+		以后就看我自己了。{wait}
+	} {
+		#86388v#816F从这个意义上来说，
+		我想也没有必要
+		继续在爷爷门下学习剑术了。{wait}
+	} {
+		#86389v#819F嘿嘿……话虽如此，
+		其实我一直都很担心
+		自己到底是不是在进步呢。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94834v#633F#5P嗯，原来如此啊……{wait}
+	} {
+		#94835v…………………………………{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86390v#1317F#12P哎，那个……
+		卢格兰爷爷？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94836v#634F#5P不，没什么……{wait}
+	} {
+		#94837v#630F难得你这么
+		认真地说这些话，
+		真是让我觉得吃惊呢。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86391v#1316F#12P什、什么啊～……{wait}
+	} {
+		#86392v#812F让我说这么多的
+		不是卢格兰爷爷你吗。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94838v#631F#5P呵呵呵，
+		哪里，你说得很好哦。{wait}
+	} {
+		#94839v#630F对了对了，
+		那关键的信里
+		到底写了些什么呢？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86393v#814F#12P啊，对了……{wait}
+	} {
+		#86394v#819F嗯，这个，
+		就更令人大吃一惊了……{wait}
+	} {
+		#86395v#1314F上面写着
+		『去见卡西乌斯』呢。{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94840v#633F#5P卡西乌斯……？{wait}
+	} {
+		#94841v就是指那个卡西乌斯？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86396v#1316F#12P嗯，看来没错。{wait}
+	} {
+		#86397v#816F似乎以前爷爷
+		曾经被邀请担任
+		王国军训练的特别讲师……{wait}
+	} {
+		#86398v在那个时候好像
+		指导过卡西乌斯先生。{wait}
+	} {
+		#86399v#817F从那以来，
+		两人之间似乎
+		一直保持着师徒关系……{wait}
+	} {
+		#86400v#1314F１０年前，
+		卡西乌斯先生放弃剑术的时候
+		似乎还特地到爷爷那里拜访过。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94842v#633F#5P１０年前……{wait}
+	} {
+		#94843v#634F正是卡西乌斯从军队退役
+		成为游击士时的时候嘛。{wait}
+	} {
+		#94844v#632F哦，然后呢……？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86401v#819F#12P嗯，然后……
+		爷爷最近听说
+		卡西乌斯先生回归了军队……{wait}
+	} {
+		#86402v『或许有趁此机会
+		  重拾剑术的觉悟』――
+		爷爷似乎是这么考虑的。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94845v#634F#5P嗯……{wait}
+	} {
+		#94846v#630F所以，
+		就拜托你直接
+		确认其真伪了啊。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86403v#816F#12P嗯嗯，就是这个意思。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94847v#630F#5P原来如此……{wait}
+	} {
+		#94848v#631F……不过，
+		真是在意外的地方有意外的缘分啊。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86404v#819F#12P哈哈……确实啊。{wait}
+	} {
+		#86405v#816F对了，卢格兰爷爷。
+		就是因为这个。{wait}
+	} {
+		#86406v所以，
+		我想拜托您一件事……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94849v#631F#5P嗯，你想请假吧？{wait}
+	} {
+		#94850v既然有这样的原因就没问题啊。{wait}
+	} {
+		#94851v而且，我也可以帮你
+		安排和卡西乌斯的见面。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86407v#1310F#12P哇，是真的吗！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94852v#634F#5P嗯，
+		尽情把心中的疑问弄个明白吧。{wait}
+	} {
+		#94853v#630F只不过……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86408v#814F#12P只不过……？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94854v#631F#5P要等你把现在公告板上的通缉魔兽
+		给我全部收拾了之后才行。{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86409v#1317F#12P不、不会吧……！？{wait}
+	} {
+		#86410v我记得
+		还有五件任务的啊！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94855v#631F#5P这有什么，消灭附近的魔兽
+		对现在的你来说还不是小菜一碟。{wait}
+	} {
+		#94856v#630F而且卢安那边
+		借走的库拉茨
+		也还没回来。{wait}
+	} {
+		#94857v该做的事
+		你要给我好好做才行啊。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86411v#1316F#12P呜呜呜……是～。{wait}
+	}
+	TextWait
+	Fork name[9] fork[1]:
+		CamZoom 2700 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}三天之后——{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	FlagSet flag[9477]
+	NewScene "c3100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (1240, 0, 4560) 0ms
+	CamSetDistance 0 5550 -10000 0ms
+	CamZoom 2520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 327 0ms
+	CharSetPos name[9] (0, 0, 2340) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (180, 0, 4400) 180deg
+	Fork name[9] fork[1]:
+		CamZoom 2320 2000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#94858v#631F#5P……是吗。
+		真是不错的经历啊。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86526v#819F#12P是……{wait}
+	} {
+		#86527v#1314F说不定爷爷
+		正是知道会有这样的事
+		才会写那封信给我的吧。{wait}
+	} {
+		#86528v因为我上次给他
+		写信的时候写了一些
+		打退堂鼓的话……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94859v#634F#5P原来如此……
+		不愧是卡西乌斯的师父啊。{wait}
+	} {
+		#94860v#630F对了，虽然你刚回来，
+		不过还是得请你去解决
+		休假时积攒起来的委托。{wait}
+	} {
+		#94861v在你离开的这段时间，
+		还有市长亲自提出的委托呢。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86529v#1317F#12P呃……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94862v#631F#5P呵呵……
+		这不是正好吗。{wait}
+	} {
+		#94863v让自己摆脱武器束缚的
+		训练机会这么快就来了。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86530v#819F#12P哈哈……
+		确实是这样呢。{wait}
+	}
+	TextWait
+	Fork name[9] fork[1]:
+		CamZoom 2220 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#86531v{color 12}#40W――就这样，爷爷。{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86532v{color 12}#40W我想您应该一开始就知道了，
+		卡西乌斯先生还是
+		无意回归剑之道。{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86533v{color 12}#40W不过，这次爷爷的信
+		让我也重新认识了自己的剑术。{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86534v{color 12}#40W至今为止我只重视
+		『速度』和『力量』那些方面……{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86535v{color 12}#40W但是比起这些，
+		最重要的应该是『自己为何而挥剑』
+		的那种『理念』――也就是『灵魂』才对吧。{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86536v{color 12}#40W为什么一直赢不了爷爷，
+		我终于明白其中道理了。{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86537v{color 12}#40W虽然我是个不成器的弟子，
+		但今后也会尽一切努力。
+		　　　　　　　　　　　　　亚妮拉丝敬上。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	TextWait
+	Sc_C4Unset 536870912
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 5 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『剑之道』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_E6_1 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	Sleep 1000ms
+	if !QuestFlagsGet quest[10] 0x20:
+		if flag[12198]:
+			QuestFlagsSet quest[10] 0x20
+			ItemAdd item[1424] 1
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[1424]}{color 0}。{wait}
+			}
+			TextWait
+	if !QuestFlagsGet quest[10] 0x10:
+		QuestFlagsSet quest[10] 0x10
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}５０００米拉{color 0}。{wait}
+		}
+		TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5502._sn" 102 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (27170, 0, -2020) 0ms
+	CamSetDistance 0 5100 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 323 0ms
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[2] (26740, 200, -3610) 270deg
+	CharSetPos char[3] (24060, 200, -3580) 90deg
+	FadeIn 2000ms 0x00000000
+	CamZoom 2500 2000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[3] {
+		#86538v#1317F#6P呃，那个～梅贝尔市长……{wait}
+	} {
+		#86539v#819F能不能再……
+		仔细说一下委托内容？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94635v#615F#11P咳、咳咳……{wait}
+	} {
+		#94636v#618F就是说，那个……
+		他、他们两个是什么关系……{wait}
+	} {
+		#94637v#612F以及对方是怎样的人，
+		都要麻烦你调查一下。{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86540v#1316F#6P嗯～也就是说……{wait}
+	} {
+		#86541v调查两人交往的真伪
+		和对方的品性……{wait}
+	} {
+		#86542v#812F就是这两方面对吧。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94638v#615F#11P嗯、嗯嗯，就是这样。{wait}
+	} {
+		#94639v#612F有、有什么问题吗？{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86543v#1316F#6P……………………………{wait}
+	} {
+		#86544v#813F那个……梅贝尔市长……{wait}
+	} {
+		#86545v#1314F我们游击士
+		的确也可以接受
+		调查品性之类的委托……{wait}
+	} {
+		#86546v不过那纯粹只是
+		和犯罪有关的情况。{wait}
+	} {
+		#86547v否则的话，
+		就会和侵犯隐私权
+		挂上钩啦。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94640v#613F#11P啊……{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86548v#817F#6P莉拉小姐所交往的男性
+		可能会图谋不轨……{wait}
+	} {
+		#86549v#812F是否有这样的征兆呢？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94641v#618F#11P不、不是……{wait}
+	} {
+		#94642v看起来倒是个
+		善良又诚实的男人……{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86550v#1316F#6P嗯、嗯……{wait}
+	} {
+		#86551v#1314F确实，
+		也不能光靠外表来判断
+		一个人的人品……{wait}
+	} {
+		#86552v不过现在就要游击士
+		出动实在有点……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94643v#615F#11P是、是吗……
+		确实如你所说呢……{wait}
+	} {
+		#94644v#610F……我明白了。
+		我会另想办法的。{wait}
+	} {
+		#94645v#617F亚妮拉丝小姐，很抱歉。
+		刚才的话就当没说过……{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86553v#1317F#6P唔，嗯……{wait}
+	} {
+		#86554v#819F……那个。
+		市长应该是想支持
+		莉拉小姐的恋爱吧？{wait}
+	} {
+		#86555v既然如此，为什么还这么担心呢？{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94646v#615F#11P………………………………{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	TextTalk char[2] {
+		#94647v#618F#11P你应该也知道她的事……
+		莉拉在『百日战役』的时候
+		失去了双亲。{wait}
+	} {
+		#94648v当时她心灵的伤痛……
+		或许现在也没有消失。{wait}
+	}
+	TextWait
+	Emote char[3] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[3] {
+		#86556v#1317F#6P啊……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94649v#615F#11P……就我所知，
+		这种事对莉拉而言
+		也是第一次经历。{wait}
+	} {
+		#94650v所以就更加……
+		我一定不能
+		让她受到伤害。{wait}
+	} {
+		#94651v#618F对方的家世和财产……
+		这些东西都无所谓。{wait}
+	} {
+		#94652v他是否真的
+		能给莉拉幸福……{wait}
+	} {
+		#94653v#610F我只是……
+		想确定这个而已。{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86557v#813F#6P市长……{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94654v#617F#11P……所以，
+		我似乎有些失去冷静了。{wait}
+	} {
+		#94655v#611F不过既然是莉拉，
+		总有一天会把对方的事
+		告诉我的吧。{wait}
+	} {
+		#94656v到时候
+		我再直接去问本人吧。{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86558v#817F#6P不……
+		用不着那样了。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94657v#613F#11P哎……{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86559v#816F#6P市长的心情
+		我完～全了解了！{wait}
+	} {
+		#86560v#815F在下亚妮拉丝·艾尔菲德！
+		请让我接受之前的委托！{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 800ms
+	Emote char[2] 0mm 1700mm 40 43 100ms 3
+	Sleep 800ms
+	TextTalk char[2] {
+		#94658v#618F#11P但、但是……{wait}
+	} {
+		#94659v#612F真的可以吗？
+		游击士不是有规定……{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86561v#816F#6P没问题！
+		规定的解释在某种程度上，
+		是因每个游击士而异的啦！{wait}
+	} {
+		#86562v#1316F被规定所束缚
+		而忽视了人心的话，
+		那就是本末倒置了……{wait}
+	} {
+		#86563v#1310F市长的父母心，
+		要是随便归于侵犯隐私的层次
+		就太草率了！{wait}
+	} {
+		#86564v#811F请您放一百个心，
+		交给我就行了！{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94660v#611F#11P亚妮拉丝小姐……{wait}
+	} {
+		#94661v#617F……谢谢你。
+		听你这么说
+		我真是放心多了。{wait}
+	} {
+		#94662v#610F对方的隐私
+		不必过于追究……{wait}
+	} {
+		#94663v请以此为前提
+		展开调查可以吗？{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86565v#816F#6P嗯嗯，交给我吧！{wait}
+	} {
+		#86566v#819F嘿嘿，莉拉小姐的恋爱……
+		要是能进展顺利就好了呢！{wait}
+	}
+	TextWait
+	Fork char[3] fork[1]:
+		CamZoom 2800 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	BgmWait
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W――就这样，
+		亚妮拉丝接受了梅贝尔市长的委托，
+		马上开始调查两人的情况。{wait}
+	} {
+		为了不让他们本人发现，
+		她小心谨慎地
+		开始收集旁人的证言……{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	FlagSet flag[9476]
+	NewScene "t1131._sn" 0 0 0
+	Hcf
+	Return

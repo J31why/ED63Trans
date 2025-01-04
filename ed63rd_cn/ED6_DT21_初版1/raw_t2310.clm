@@ -1,0 +1,1148 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2310.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[1] "npl/ch01460._ch" "npl/ch01460p._cp"
+chip[2] "npl/ch02590._ch" "npl/ch02590p._cp"
+chip[3] "npl/ch02640._ch" "npl/ch02640p._cp"
+chip[4] "npl/ch01000._ch" "npl/ch01000p._cp"
+chip[5] "npl/ch01050._ch" "npl/ch01050p._cp"
+chip[6] "npl/ch01150._ch" "npl/ch01150p._cp"
+chip[7] "npl/ch02570._ch" "npl/ch02570p._cp"
+chip[8] "npl/ch01200._ch" "npl/ch01200p._cp"
+chip[9] "npl/ch01010._ch" "npl/ch01010p._cp"
+
+npc char[0]:
+	name "扎古"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "索雷诺"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[2]:
+	name "克拉姆"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "达尼艾尔"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "塞尔吉村长"
+	pos (-28110, 0, 7510)
+	angle 180deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[5]:
+	name "阿梅莉娅"
+	pos (-29710, 0, 42820)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,6]
+
+npc char[6]:
+	name "萨蒂"
+	pos (-28520, 0, 41210)
+	angle 270deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,8]
+
+npc char[7]:
+	name "特蕾莎院长"
+	pos (-31800, 0, 39140)
+	angle 0deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,9]
+
+npc char[8]:
+	name "费瑟尔"
+	pos (-31960, 0, 42210)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,7]
+
+npc char[9]:
+	name "珂蕾妲婆婆"
+	pos (-29220, 0, 38160)
+	angle 90deg
+	x 0
+	cp chip[9]
+	frame 0
+	ch chip[9]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,10]
+
+npc char[10]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 9:
+		CharFlagsUnset char[0] 0x0080
+		CharSetPos char[0] (-27000, 0, 39020) 270deg
+		CharFlagsUnset char[1] 0x0080
+		CharSetPos char[1] (-30800, 0, 44300) 180deg
+		if flag[12066]:
+			CharSetPos char[4] (-31740, 0, 40230) 180deg
+			CharFlagsUnset char[7] 0x0080
+			CharFlagsUnset char[9] 0x0080
+			CharFlagsUnset char[6] 0x0080
+			CharSetPos char[5] (-29710, 0, 42820) 0deg
+		elif flag[12099]:
+		elif flag[12065]:
+			CharSetPos char[5] (-1740, 0, 7940) 0deg
+		elif flag[12064]:
+		elif flag[12055]:
+	if system[66] == 9:
+		if system[0] == 102:
+			if !flag[12065]:
+				Event fn[0,11]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[0] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart char[0]
+	if flag[12066]:
+		if flag[1]:
+			TextTalk char[0] {
+				我果然适合
+				做这种工作啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				义卖会的收入
+				都会作为孤儿院的运营经费。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				我果然适合
+				做这种工作啊。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12099]:
+		if flag[1]:
+			TextTalk char[0] {
+				……算了。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				反正平时经常
+				来帮忙的那位小哥
+				这次也会来的。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				说起来，
+				虽然向游击士协会提出了
+				请求协助义卖会的委托……{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				却没看到他们的人啊。
+				……还没来吗？{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12065]:
+		if flag[1]:
+			TextTalk char[0] {
+				这些商品总共２０米拉。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				既然是孤儿院的孩子
+				就算１０米拉好啦！{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				欢迎！
+				请买些东西吧！{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				……啊，这不是孤儿院的孩子吗。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				没关系，
+				有什么想要的
+				就尽管说啊。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				会特别给你们算便宜些哦！{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd char[0]
+	Return
+
+fn[4]:
+	TextStart char[1]
+	if flag[12066]:
+		if flag[0]:
+			TextTalk char[1] {
+				来来，随便看吧。{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				在所谓的义卖会上，
+				与其说是购物不如说是体会气氛啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[1] {
+				最先举办义卖会的人，
+				好像是杰尼丝学院的学生呢。{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				现在已经完全
+				变成村里的特色活动了。{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				怎么说呢，
+				就像节日一样开心呢。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12099]:
+		if flag[0]:
+			TextTalk char[1] {
+				顺带一提，义卖会的实行委员
+				虽然只有我和扎古两人……{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				不过也能算得上是个委员会吧？{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[1] {
+				今年的义卖会已经是第三届了。
+				最近似乎已经有常客了呢。{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				我作为从一开始就参加的人
+				真是再开心不过了。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12065]:
+		if flag[0]:
+			TextTalk char[1] {
+				抱歉哦，
+				那好像是个古老的传说。{wait}
+			} {
+				我也不知道
+				详细的情况呢。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[1] {
+				呀，这不是刚才的孩子吗。
+				又是来打听事情的？{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				很遗憾，
+				我也不知道详细情况。{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				因为是从老爸那里听来的嘛。{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd char[1]
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12066]:
+		CharTurnTo self 180deg 0deg/s
+		if flag[2]:
+			TextTalk self {
+				老师，不用那么担心。{wait}
+			}
+			TextWait
+			TextTalk self {
+				对于孩子们来说，
+				老师的笑容就是最好的礼物哦。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				……真是个相当好的孩子哦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				小小年纪就那么懂事，
+				完全不用人操心。{wait}
+			}
+			TextWait
+			TextTalk self {
+				孩子们都会成长的啊，老师。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12099]:
+		if flag[2]:
+			TextTalk self {
+				村里的年轻人也都很起劲。{wait}
+			}
+			TextWait
+			TextTalk self {
+				呵呵，真是令人高兴啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				今天早上的梅威海道
+				似乎没什么魔兽出现……{wait}
+			}
+			TextWait
+			TextTalk self {
+				是不是因为要开义卖会，
+				所以有人去开路了呢。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12065]:
+		if flag[2]:
+			TextTalk self {
+				今年到底会有些
+				什么好东西呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				呵呵，真是令人期待啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				我也差不多
+				该去逛一逛了吧。{wait}
+			}
+			TextWait
+			TextTalk self {
+				呵呵，今年到底
+				会有些什么好东西呢。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12064]:
+		if flag[2]:
+			TextTalk self {
+				风车小屋在村外的高台上。{wait}
+			}
+			TextWait
+			TextTalk self {
+				不介意的话
+				你们也去玩玩吧。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				哦？是孤儿院的孩子们吗？{wait}
+			}
+			TextWait
+			TextTalk self {
+				呵呵，村里就像过节一样对吧？
+				风车小屋的义卖会开始了哦。{wait}
+			}
+			TextWait
+			TextTalk self {
+				不介意的话
+				你们也去玩玩吧。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12066]:
+		if flag[3]:
+			TextTalk self {
+				好了，接下来买什么呢⊙{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				嘿嘿，我买到锅子了呢！{wait}
+			}
+			TextWait
+			TextTalk self {
+				真不愧是义卖会呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				想要的东西
+				一下就找到了。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12065]:
+		if flag[3]:
+			TextTalk self {
+				……之前的锅子
+				已经烧焦了呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				唉，
+				义卖会上有没有锅子卖呢？{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				玛诺利亚村的义卖会，
+				扎古从一开始就参加了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				那孩子小时候经常迷路，
+				总是让人担心得到处找，
+				不过现在真是可靠多了呢。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12064]:
+		if flag[3]:
+			CharTurnTo self 90deg 0deg/s
+			TextTalk self {
+				记得这边有我的旧衣服……{wait}
+			}
+			TextWait
+			TextTalk self {
+				咦～？　没有了呢……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				唔～有没有什么
+				可以拿去义卖会卖掉的东西呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				扎古的旧衣服，
+				谁也不会买吧？{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[12066]:
+		TextTalk self {
+			……真希望也能开设
+			面向孩子的垂钓教室。{wait}
+		}
+		TextWait
+	elif flag[12099]:
+		if flag[6]:
+			TextTalk self {
+				据本人推测，
+				到这周末都会持续晴天的天气。{wait}
+			}
+			TextWait
+			TextTalk self {
+				一流的垂钓人对天气也是很敏感的。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				今天的天气
+				似乎也很不错。{wait}
+			}
+			TextWait
+			TextTalk self {
+				一会儿就去灯塔的山麓那边
+				看看能钓上什么鱼。{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12065]:
+		if flag[6]:
+			TextTalk self {
+				玛诺利亚村……
+				真是个不错的村子啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				作为垂钓场所
+				也是无可挑剔。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				我每年都会
+				来这个村子……{wait}
+			}
+			TextWait
+			TextTalk self {
+				真是个不错的村子啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				等我老了之后，
+				真想在这样宁静的村子里
+				安度晚年啊。{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12064]:
+		if flag[6]:
+			TextTalk self {
+				……这附近似乎也有
+				优秀的钓鱼爱好者呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				真希望他也能
+				加入我们钓公师团。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				以前我在这个义卖会上
+				找到过很好的钓竿。{wait}
+			}
+			TextWait
+			TextTalk self {
+				虽然是手制的但很好用，
+				是我非常喜欢的钓竿。{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12066]:
+		if flag[4]:
+			TextTalk self {
+				我也有拿出东西来卖哦。
+				请一定去看看。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				您好，欢迎光临～{wait}
+			}
+			TextWait
+			TextTalk self {
+				这里全部都是
+				村里的居民拿出来的商品。{wait}
+			}
+			TextWait
+			TextTalk self {
+				嘿嘿，我也有拿东西来卖。
+				请一定去看看。{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12065]:
+	elif flag[12099]:
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12066]:
+		if flag[12090]:
+			CharTurnTo char[7] 0deg 0deg/s
+			if flag[5]:
+				TextTalk char[7] {
+					#94938v#754F果然还是不想成为
+					我的负担吧……{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[7] {
+					#94936v#754F是的，
+					虽然懂事是很好……{wait}
+				} {
+					#94937v#757F但因此却总是被别人依赖，
+					从来不会向别人撒娇……{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#95202v#1713F（……………………）{wait}
+				}
+				TextWait
+				FlagSet flag[5]
+		else:
+			TextTalk char[7] {
+				#94932v#753F哎呀，玛丽？
+				你没跟波利在一起吗？{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#95195v#1713F嗯、嗯……{wait}
+			} {
+				#95196v波利和克拉姆他们
+				在一块儿玩呢。{wait}
+			}
+			TextWait
+			TextTalk char[7] {
+				#94933v#750F是吗……{wait}
+			} {
+				#94934v#754F玛丽，
+				要是有什么事要马上告诉老师哦？{wait}
+			} {
+				#94935v不要一个人放在心里。
+				……知道吗？{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#95197v#1714F是、是！{wait}
+			} {
+				#95198v#1712F……………………{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#95199v#1713F（不、不行………………）{wait}
+			} {
+				#95200v（礼物的事情还是秘密，
+				  而且波利会不见
+				  也是我的错……）{wait}
+			} {
+				#95201v#1713F（我还是自己
+				  再去找一下吧……）{wait}
+			}
+			TextWait
+			FlagSet flag[12090]
+	elif flag[12065]:
+	elif flag[12099]:
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12066]:
+		if flag[7]:
+			TextTalk self {
+				果然有人想要呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				呼，真是松了一口气。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				哎呀呀，
+				我的锅已经卖掉了啊。{wait}
+			}
+			TextWait
+			TextTalk self {
+				呼，
+				果然有人想要呢。{wait}
+			}
+			TextWait
+			FlagSet flag[7]
+	elif flag[12065]:
+	elif flag[12099]:
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[11]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	_Char4A char[1] 255
+	_Char4A char[0] 255
+	CharFlagsSet name[77] 0x0040
+	CharFlagsSet name[78] 0x0040
+	CharFlagsSet char[8] 0x0008
+	CharFlagsSet char[5] 0x0008
+	CharSetPos name[77] (-30500, -500, 34700) 0deg
+	CharSetPos name[78] (-29780, -500, 34700) 0deg
+	CharColor name[77] 0x00FFFFFF 0ms
+	CharColor name[78] 0x00FFFFFF 0ms
+	CamLookPos (-29140, 0, 47160) 0ms
+	CamSetDistance 0 4800 -10000 0ms
+	CamZoom 3120 0ms
+	CamRotate 55000mdeg 0ms
+	CamPers 280 0ms
+	FadeIn 2000ms 0x00000000
+	Fork char[10] fork[0]:
+		CamLookPos (-29140, 0, 39160) 6000ms
+	Fork char[10] fork[1]:
+		CamZoom 2720 6000ms
+	Fork char[10] fork[2]:
+		CamRotate 45000mdeg 6000ms
+	Sleep 5000ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-30600, 0, 36660) 1500mm/s 0
+	Fork name[77] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Sleep 300ms
+	Fork name[78] fork[1]:
+		CharWalkToPos self (-29880, 0, 36160) 1500mm/s 0
+	Fork name[78] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	FadeWait
+	ForkWait char[10] fork[1]
+	ForkWait name[77] fork[1]
+	ForkWait name[78] fork[1]
+	SoundPlay sound[7] 0 0 100
+	ForkFunc name[77] fork[3] fn[0,12]
+	CharTurnTo name[78] 45deg 400deg/s
+	Sleep 500ms
+	CharTurnTo name[78] 0deg 400deg/s
+	Sleep 500ms
+	CharTurnTo name[78] 45deg 400deg/s
+	Sleep 400ms
+	TextTalk name[78] {
+		#95425v#1733F哦……
+		好厉害——！{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95142v#1714F#12P哇，有好多商品哦。{wait}
+	} {
+		#95143v#1719F嗯，有没有什么好东西呢……{wait}
+	} {
+		#95144v适合老师的漂亮的东西……{wait}
+	}
+	TextWait
+	Fork char[10] fork[0]:
+		CamLookPos (-28370, 0, 39810) 3000ms
+	ForkFunc name[77] fork[2] fn[0,13]
+	ForkFunc name[78] fork[2] fn[0,14]
+	ForkWait name[78] fork[2]
+	ForkWait char[10] fork[0]
+	CharSetPos char[2] (-30080, -500, 34500) 0deg
+	CharSetPos char[3] (-30080, -500, 34500) 0deg
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsSet char[2] 0x0040
+	CharFlagsSet char[3] 0x0040
+	CharColor char[2] 0x00FFFFFF 0ms
+	CharColor char[3] 0x00FFFFFF 0ms
+	SoundPlay sound[6] 0 0 100
+	ForkFunc char[2] fork[3] fn[0,15]
+	ForkFunc char[3] fork[3] fn[0,16]
+	Emote name[78] 0mm 1600mm 38 39 250ms 1
+	Sleep 1000ms
+	EmoteStop name[78]
+	CharTurnTo name[78] 180deg 400deg/s
+	Sleep 200ms
+	CharTurnTo char[0] 225deg 400deg/s
+	ForkWait char[3] fork[3]
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 100ms
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 500ms
+	Emote char[2] 0mm 1600mm 38 39 200ms 5
+	Sleep 500ms
+	Emote char[0] 0mm 2000mm 38 39 250ms 2
+	Sleep 1000ms
+	EmoteStop char[2]
+	EmoteStop char[0]
+	Sleep 500ms
+	CharTurnTo char[2] 0deg 400deg/s
+	Sleep 500ms
+	CharTurnTo char[3] 0deg 400deg/s
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 100ms
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 500ms
+	Emote char[2] 0mm 1600mm 38 39 200ms 5
+	Sleep 300ms
+	Emote name[78] 0mm 1600mm 38 39 200ms 2
+	Sleep 1000ms
+	EmoteStop char[2]
+	EmoteStop name[78]
+	Sleep 1000ms
+	ForkFunc char[2] fork[3] fn[0,17]
+	ForkFunc char[3] fork[3] fn[0,18]
+	ForkWait char[3] fork[3]
+	SoundPlay sound[7] 0 0 100
+	Sleep 500ms
+	CharTurnTo char[0] 270deg 400deg/s
+	Sleep 200ms
+	CharTurnTo name[78] 90deg 400deg/s
+	Fork char[10] fork[0]:
+		CamLookPos (-29390, 0, 44230) 5000ms
+	Fork char[10] fork[1]:
+		CamZoom 2730 5000ms
+	Fork char[10] fork[2]:
+		CamRotate 39000mdeg 5000ms
+	ForkWait char[10] fork[0]
+	CharFlagsSet char[2] 0x0080
+	CharFlagsSet char[3] 0x0080
+	ForkQuit name[77] fork[2]
+	EmoteStop name[77]
+	CharTurnTo name[77] 45deg 400deg/s
+	Sleep 500ms
+	TextTalk name[77] {
+		#95145v#1900F#12P（义卖会给人的感觉
+		  像是在卖魔法道具似的……）{wait}
+	} {
+		#95146v#1900F（嗯……
+		  好像没有幸福之石……）{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99082v#5P呀，在找什么东西呢？{wait}
+	}
+	TextWait
+	Emote name[77] 0mm 1700mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo name[77] 0deg 400deg/s
+	TextTalk name[77] {
+		#95147v#1714F#12P嗯、嗯……{wait}
+	} {
+		#95148v#1900F（还、还是
+		  稍微打听一下吧？？）{wait}
+	} {
+		#95149v#1718F请、请问……
+		您觉得世界上有幸福之石吗？{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99083v#5P…………咦。{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95150v#1710F#12P那是能让
+		拥有它的人
+		得到幸福的石头……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99084v#5P这、这个…………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99085v#5P哈哈，
+		我可不太了解……{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95151v#1713F#12P也、也是……{wait}
+	} {
+		#95152v#1716F谢谢您，打扰了。{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 180deg 400deg/s
+	Sleep 300ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-30470, 0, 41190) 1500mm/s 0
+	Fork char[10] fork[0]:
+		CamLookPos (-29590, 0, 43800) 1500ms
+	Emote char[1] 0mm 2000mm 40 43 100ms 3
+	Sleep 300ms
+	TextTalk char[1] {
+		#99086v#5P啊，对了……{wait}
+	}
+	TextWait
+	ForkWait name[77] fork[1]
+	ForkWait char[10] fork[0]
+	TextTalk char[1] {
+		#99087v#5P这、这么说来，
+		我倒是听说过古罗尼连峰发生的怪事。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99088v#5P是很神秘的事情，
+		…………你想知道吗？{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 600deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#95153v#1718F#12P……想、想！{wait}
+	}
+	TextWait
+	Fork char[10] fork[0]:
+		CamLookPos (-29600, 0, 44770) 1500ms
+	CharWalkToPos name[77] (-30860, 0, 42500) 1500mm/s 0
+	ForkWait char[10] fork[0]
+	Sleep 300ms
+	TextTalk char[1] {
+		#99089v#5P是老爸告诉我的，
+		那还真是个古老的故事。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99090v#5P正好就是现在这个季节吧……
+		每年的某个时间，
+		古罗尼的山中就会突然发出金色的光芒。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99091v#5P碰巧在这个时期去山里的人，
+		好像都有过不可思议的经历。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99092v#5P而在那之后，
+		似乎都变得非常幸福……{wait}
+	}
+	TextWait
+	Sleep 400ms
+	FadeOut 2000ms 0x00000000 255
+	Fork char[10] fork[1]:
+		CamZoom 2560 3500ms
+	FadeWait
+	Sleep 2200ms
+	FlagSet flag[9476]
+	NewScene "t2300._sn" 104 0 0
+	Hcf
+	Return
+
+fn[12]:
+	Sleep 500ms
+	CharTurnTo name[77] 45deg 400deg/s
+	Sleep 800ms
+	CharTurnTo name[77] 0deg 400deg/s
+	Return
+
+fn[13]:
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-29380, 0, 39200) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	CharTurnTo name[77] 90deg 400deg/s
+	Sleep 2000ms
+	CharTurnTo name[77] 45deg 400deg/s
+	Sleep 2000ms
+	CharTurnTo name[77] 0deg 400deg/s
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-30280, 0, 42660) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	CharTurnTo name[77] 0deg 400deg/s
+	Sleep 2000ms
+	Emote name[77] 0mm 1600mm 24 27 200ms 0
+	while 1:
+		CharTurnTo name[77] 45deg 400deg/s
+		Sleep 2500ms
+		CharTurnTo name[77] 0deg 400deg/s
+		Sleep 3500ms
+	Return
+
+fn[14]:
+	Sleep 500ms
+	CharTurnTo name[78] 0deg 400deg/s
+	Sleep 400ms
+	CharTurnTo name[78] 45deg 400deg/s
+	Sleep 400ms
+	Fork name[78] fork[1]:
+		CharWalkToPos self (-29180, 0, 38160) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	CharTurnTo name[78] 90deg 400deg/s
+	Sleep 2500ms
+	CharTurnTo name[78] 135deg 400deg/s
+	Sleep 2000ms
+	CharTurnTo name[78] 0deg 400deg/s
+	Fork name[78] fork[1]:
+		CharWalkToPos self (-29140, 0, 39680) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	CharTurnTo name[78] 90deg 400deg/s
+	Sleep 3000ms
+	Return
+
+fn[15]:
+	Fork char[2] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 4000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-29140, 0, 37600) 4000mm/s 0
+	ForkWait char[2] fork[1]
+	Sleep 6000ms
+	Return
+
+fn[16]:
+	Sleep 500ms
+	Fork char[3] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 3000mm/s 0
+	ForkWait char[3] fork[1]
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-28840, 0, 36640) 3000mm/s 0
+	ForkWait char[3] fork[1]
+	CharTurnTo char[3] 45deg 400deg/s
+	Sleep 500ms
+	Return
+
+fn[17]:
+	CharTurnTo char[2] 220deg 500deg/s
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 4000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-30080, -500, 34500) 4000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait char[2] fork[1]
+	Return
+
+fn[18]:
+	Sleep 500ms
+	CharTurnTo char[3] 220deg 500deg/s
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 3000mm/s 0
+	ForkWait char[3] fork[1]
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-30080, -500, 34500) 3000mm/s 0
+	Sleep 100ms
+	Fork char[3] fork[2]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait char[3] fork[1]
+	Return

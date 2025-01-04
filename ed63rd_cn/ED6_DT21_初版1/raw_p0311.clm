@@ -1,0 +1,259 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P0311.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (-2400, 0, 53230)
+	radius 1000mm
+	bubble_pos (-2250, 1000, 53930)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (3600, 0, -38500)
+	radius 1000mm
+	bubble_pos (3600, 1000, -38500)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,5]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,4]
+	Return
+
+fn[1]:
+	OpLoad "P0311_2"
+	if !flag[9751]:
+		ObjFlagsSet object[2] 0x0004
+		ObjFlagsUnset object[7] 0x0010
+	if !flag[9872]:
+		ObjFrame object[12] 0
+	else:
+		ObjFrame object[12] 60
+	if !flag[9873]:
+		ObjFrame object[13] 0
+	else:
+		ObjFrame object[13] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[9872]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[12] 60
+		Sleep 500ms
+		if ItemAdd item[619] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[619]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[9872]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[619]}{color 0}。
+				不过现有的数量太多，{item item[619]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[12] 60
+			ObjPlay object[12] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 226 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[9873]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[13] 30
+		ObjWait object[13]
+		ObjFrame object[13] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		if ItemHas item[525] 0 != 0:
+			if RecipeLearn 1:
+			else:
+			TextMessage null {
+				{color 0}得到了{color 2}啪啪啦海鲜饭{color 0}的食谱。{wait}
+			}
+			TextWait
+			SoundPlay sound[17] 0 0 100
+			TextMessage null {
+				{0x6}{color 2}啪啪啦海鲜饭{color 0}的制作方法已经记下了。{wait}
+			}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[9873]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 227 0
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (2870, 0, 3830) 0ms
+	CamSetDistance 0 5500 -10000 0ms
+	CamZoom 2970 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	CrossFade 1000ms
+	ObjFlagsUnset object[2] 0x0004
+	SoundPlay sound[156] 0 0 100
+	FadeWait
+	ObjFlagsUnset object[7] 0x0010
+	ObjFrame object[7] 0
+	ObjPlay object[7] 15
+	ObjWait object[7]
+	Sleep 500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ObjFlagsSet object[7] 0x0010
+	FlagSet flag[9751]
+	FlagSet flag[9476]
+	NewScene "p0312._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[13] (-290, 150, -35430) 180deg
+	CharSetPos name[8] (-290, 150, -35430) 180deg
+	CharSetPos name[14] (-290, 150, -35430) 180deg
+	CharSetPos name[6] (-290, 150, -35430) 180deg
+	CamLookPos (1250, 0, -37400) 0ms
+	CamSetDistance 0 6280 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 259 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[6] 0x0010
+	ObjFrame object[6] 0
+	ObjPlay object[6] 15
+	ObjWait object[6]
+	Fork name[8] fork[1]:
+		CamLookPos (1310, 0, -42970) 4000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 6060 -10000 4000ms
+	Fork name[8] fork[3]:
+		CamZoom 2880 4000ms
+	Fork name[14] fork[1]:
+		CamPers 279 4000ms
+	ForkFunc name[13] fork[0] fn[0,6]
+	Sleep 800ms
+	ForkFunc name[8] fork[0] fn[0,7]
+	Sleep 1000ms
+	ForkFunc name[14] fork[0] fn[0,8]
+	Sleep 1000ms
+	ForkFunc name[6] fork[0] fn[0,9]
+	ForkWait name[13] fork[0]
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait name[6] fork[0]
+	ForkWait name[8] fork[1]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9477]
+	NewScene "p0313._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[6]:
+	CharWalkToPos self (-370, 0, -42410) 2000mm/s 0
+	CharTurnTo self 225deg 400deg/s
+	Sleep 1000ms
+	CharTurnTo self 135deg 400deg/s
+	Sleep 1000ms
+	CharTurnTo self 180deg 400deg/s
+	Sleep 1000ms
+	Return
+
+fn[7]:
+	CharWalkToPos self (-140, 0, -37900) 2000mm/s 0
+	CharWalkToPos self (-600, 0, -40160) 2000mm/s 0
+	CharTurnTo self 135deg 400deg/s
+	Return
+
+fn[8]:
+	CharWalkToPos self (-140, 0, -37900) 2000mm/s 0
+	CharWalkToPos self (1400, 0, -39340) 2000mm/s 0
+	CharTurnTo self 90deg 400deg/s
+	Return
+
+fn[9]:
+	CharWalkToPos self (-90, 0, -38470) 2000mm/s 0
+	ObjFrame object[6] 15
+	ObjPlay object[6] 0
+	ObjWait object[6]
+	ObjFlagsSet object[6] 0x0010
+	CharTurnTo self 225deg 400deg/s
+	Return

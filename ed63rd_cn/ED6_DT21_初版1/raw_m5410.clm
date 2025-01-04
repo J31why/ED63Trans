@@ -1,0 +1,98 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M5410.x"
+	town town[1]
+	bgm bgm[234]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (-81710, 0, -17950)
+	radius 1000mm
+	bubble_pos (-81000, 0, -18020)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	ObjFrame object[1] 100
+	ObjFlagsUnset object[1] 0x0002
+	Sc_BE 1 1 2 0 1000 0 2 -127750 -1000 -57600 -122480 2000 -60300
+	ObjFlagsUnset object[0] 0x0020
+	ObjFlagsUnset object[0] 0x0008
+	ObjFrame object[0] 0
+	ObjFlagsSet object[0] 0x0002
+	ObjFlagsUnset object[2] 0x0020
+	ObjFlagsUnset object[2] 0x0008
+	ObjFrame object[2] 0
+	ObjFlagsSet object[2] 0x0002
+	if !flag[11258]:
+		ObjFrame object[19] 0
+	else:
+		ObjFrame object[19] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11258]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[19] 60
+		Sleep 500ms
+		if ItemAdd item[380] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[380]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11258]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[380]}{color 0}。
+				不过现有的数量太多，{item item[380]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[19] 60
+			ObjPlay object[19] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 104 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

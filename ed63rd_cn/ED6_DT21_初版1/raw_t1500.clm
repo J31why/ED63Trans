@@ -1,0 +1,597 @@
+calmare tc scena
+scena:
+	name "Bose" "T1500.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01020._ch" "npl/ch01020p._cp"
+
+npc char[0]:
+	name "罗伊德"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	OpLoad "T1500_n"
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	if QuestFlagsGet quest[28] 0x20:
+		Call fn[0,6]
+	Call fn[0,3]
+	Call fn[0,4]
+	Return
+
+fn[3]:
+	BgmPlay bgm[20] 0
+	Sc_C4Unset 2048
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (2190, -2000, 42760) 180deg
+	CharSetPos char[0] (2280, -2000, 41180) 0deg
+	CamLookPos (2190, -1800, 41900) 0ms
+	CamSetDistance 0 8970 -10000 0ms
+	CamZoom 3030 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	MapColor 0x005898CE 0ms
+	Sc_C4Set 2048
+	system[40] = 65535
+	Sc_C4Set 536870912
+	Sleep 2000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}热爱『垂钓』的活泼女孩，艾丝蒂尔·布莱特――{wait}
+		　
+		以及将本部设在王都、
+		无比喜爱『垂钓』的组织，『钓公师团』――{wait}
+		　
+		『物以类聚』――{wait}
+		这就是两者间的奇妙因缘所产生的故事。{wait}
+	}
+	TextWait
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}#15A～第１章　始于川蝉亭～{0x05}{wait}
+	}
+	TextWait
+	BgmStop 3000ms
+	BgmWait
+	TextClose 0
+	Sleep 1000ms
+	BgmPlay bgm[15] 0
+	_75 object[255] 3 5
+	_75 object[255] 4 5
+	ObjFlagsUnset object[2] 0x0008
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	FadeOut 1000ms 0x00000000 80
+	Sleep 2000ms
+	TextMessage null {
+		{color 0}瓦雷利亚湖沿岸的休憩之所『川蝉亭』――{wait}
+		正游击士艾丝蒂尔在休假期间到访了此地。{wait}
+		　
+		难得的休闲时光――{wait}
+		艾丝蒂尔借来了旅店的钓具，
+		走出栈桥，尽情享受垂钓的乐趣。{wait}
+		那天的鱼神奇地接连上钩，
+		她的篮子里不一会儿就满了。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}同一时刻，来此旅店进行一日游的
+		『钓公师团』成员罗伊德则叹气不已。{wait}
+		　
+		一来到这里，他便将小船驶进湖区，
+		在船上享受垂钓――{wait}
+		但是很不走运，连一条鱼也没钓上来。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}意气消沉回到旅店的罗伊德――{wait}
+		眼帘中映入了艾丝蒂尔正为大丰收而雀跃不已的身影。{wait}
+		　
+		这立刻挑起了他的好胜心――{wait}
+		使得他坐立不安，
+		随即向艾丝蒂尔提出了一种『比试』。{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[460] 1 0 100
+	FadeIn 1000ms 0x00000000
+	Sc_C4Unset 2048
+	Sleep 500ms
+	MapColor 0x00FFFFFF 2500ms
+	_75 object[255] 3 1
+	_75 object[255] 4 1
+	ObjFlagsSet object[2] 0x0008
+	Sleep 4000ms
+	TextTalk char[0] {
+		#99037v……就这样，
+		现在我要向你挑战
+		爆钓五回合决胜赛。{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77397v#1004F爆、爆钓五回合决胜赛～！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99038v是的，『爆钓比赛』――{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99039v钓鱼之人赌上骄傲与名誉，
+		也就是所谓的『决斗』。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99040v而钓公师团的成员
+		一旦说出这话，
+		就决不能退缩。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99041v来吧，现在就以自己
+		最好的钓具为赌注决一胜负吧！{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77398v#1019F……真、真是莫名其妙呢。{wait}
+	} {
+		#77399v#1015F而且要以钓具为赌注的话，
+		我现在手上拿的
+		可全部是从旅馆借来的啊。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99042v那样的话，
+		你什么都不赌也行。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99043v这是我的坚持――
+		这场比试，你无论如何都得接受。{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77400v#1016F啊哈哈……
+		看来没有选择余地呢。{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	Sleep 300ms
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	BgmStop 1000ms
+	Sc_C4Set 16
+	SoundStop sound[460]
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	Sleep 1000ms
+	Return
+
+fn[4]:
+	FadeOut 0ms 0x00000000 255
+	var[0] = 0
+	BgmPlay bgm[192] 0
+	ImageShow "c_vis505._ch" 0 0 500ms
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"【　开始　】" // 0
+			"【　说明　】" // 1
+			"【　结束　】" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		TextClose 0
+		TextSetPos 72 320 56 3
+		switch var[0]:
+			case 0:
+				ImageHide 500ms
+				Sleep 1000ms
+				Call fn[0,5]
+				BgmPlay bgm[192] 0
+				ImageShow "c_vis505._ch" 0 0 500ms
+				var[0] = 0
+				break
+			case 1:
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+					　
+					　艾丝蒂尔与罗伊德将进行一对一的垂钓对决。
+					  游戏是５次对战的回合制，由玩家和
+					  对战对手交替行动来进行。
+					　
+					  轮到自己的回合时，首先选择要使用的钓竿和鱼饵。
+					　（※能够使用的鱼饵因钓竿而异。）
+					　
+					  选择鱼饵后，即开始钓鱼游戏。
+					　鱼上钩时，将显示[ ！]标志，
+					  请迅速按下决定按钮，把鱼钓上来。
+					　
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――《   规则说明   》―――――――――
+					　
+					  能钓到的鱼根据鱼饵的种类而变化，
+					  而且钓到的鱼也可能用作鱼饵。
+					　
+					  钓到的鱼各自有设定分数，
+					  最后获得分数多的一方获胜。
+					　
+					  此外，大鱼可能会逃走，
+					  请不要放弃多试几次。
+					　
+					　
+					　
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9477]
+				if flag[9999]:
+					NewScene "u4169._sn" 105 0 0
+					Hcf
+				else:
+					NewScene "u4121._sn" 110 0 0
+					Hcf
+				break
+	Return
+
+fn[5]:
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	CamLookPos (-2710, -2000, 30940) 0ms
+	CamSetDistance 0 8970 -10000 0ms
+	CamZoom 3030 0ms
+	CamRotate 135000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-2960, -2000, 32500) 180deg
+	CharSetPos char[0] (-10780, -2000, 32560) 180deg
+	NextFrame
+	ItemAdd item[591] 1
+	ItemAdd item[592] 1
+	ItemAdd item[595] 1
+	ItemAdd item[980] 3
+	ItemAdd item[981] 3
+	ItemAdd item[983] 3
+	SoundPlay sound[460] 1 0 100
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	if Minigame 27 0 -2960 -2000 32500 180 -2980 -3000 29380:
+		var[0] = 0
+	else:
+		var[0] = 1
+	EventBegin 0
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (2190, -2000, 42760) 180deg
+	CharSetPos char[0] (2280, -2000, 41180) 0deg
+	CamLookPos (2190, -1800, 41900) 0ms
+	CamSetDistance 0 8970 -10000 0ms
+	CamZoom 3030 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	Sleep 3000ms
+	switch var[0]:
+		case 1:
+			FadeIn 1000ms 0x00000000
+			BgmResume
+			Sleep 1000ms
+			TextTalk name[0] {
+				#77401v#1003F输、输掉了……{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99044v呼，总算保住了面子。{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99045v这下今晚总算能睡个好觉了。{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#77402v#1009F唔～虽然不知道为什么，
+				但总觉得超级不甘心啊。{wait}
+			}
+			TextWait
+			FadeOut 1000ms 0x00000000 255
+			BgmStop 2000ms
+			FadeWait
+			SoundStop sound[460]
+			Sleep 1000ms
+			TextSetPos -1 80 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{0x18}{color 5}再度挑战小游戏吗？{wait}
+			}
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"【 再挑战 】" // 0
+				"【回到门前】" // 1
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			TextSetPos 72 320 56 3
+			Sleep 1000ms
+			switch var[0]:
+				case 1:
+					Sc_D6 1
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					if flag[9999]:
+						NewScene "u4169._sn" 105 0 0
+						Hcf
+					else:
+						NewScene "u4121._sn" 110 0 0
+						Hcf
+					break
+				case 0:
+					Sc_D6 1
+					Sc_D6 0
+					var[0] = 0
+					Return
+		case 0:
+			break
+	FadeIn 1000ms 0x00000000
+	BgmResume
+	Sc_C4Set 536870912
+	Sleep 1000ms
+	TextTalk name[0] {
+		#77403v#1018F太好了，赢啦！{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99046v唔，输了吗……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99047v不过，这是场精彩的比赛。
+		即使输了也毫无怨言。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99048v来，收下这个吧。{wait}
+	}
+	TextWait
+	CharWalkToPos char[0] (2260, -2000, 41740) 2000mm/s 0
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	FadeWait
+	SoundPlay sound[17] 0 0 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}罗伊德交出了银色的钓钩。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	CharWalkToPos2 char[0] (2280, -2000, 41180) 2000mm/s 0
+	Sleep 500ms
+	TextTalk name[0] {
+		#77404v#1004F……这、这个是
+		银耀石做的钓钩？{wait}
+	} {
+		#77405v这么贵重的东西
+		我可不能收啊。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99049v是我向你挑战……
+		并且失败了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99050v难道说，
+		你还要让我背负更大的耻辱吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99051v来吧，别客气，
+		收下就是。{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77406v#1008F嗯、嗯～……
+		既然你都这么说了。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeOut 2000ms 0x00000000 255
+	SoundStop sound[460]
+	BgmStop 3000ms
+	BgmWait
+	Sleep 3000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}就这样，
+		艾丝蒂尔接受了罗伊德的银色钓钩。{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}但她对前方等待着的
+		奇异的命运一无所知……{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[28] 0x20:
+		Sleep 3000ms
+		QuestFlagsSet quest[28] 0x10
+		QuestFlagsSet quest[28] 0x20
+		QuestFlagsSet quest[29] 0x02
+		ItemAdd item[934] 20
+		ItemAdd item[938] 20
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{color 2}鱼贝系列{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}５０００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	Sleep 2000ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 5}继续进行第二章吗？{wait}
+	}
+	Sleep 1000ms
+	system[40] = 24
+	Menu menu[0] -1 200 0
+		"【 进入第二章 】" // 0
+		"【  回到门前  】" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 1000ms
+	switch var[0]:
+		case 0:
+			FlagSet flag[9476]
+			NewScene "c4203._sn" 100 0 0
+			Hcf
+			break
+		case 1:
+			FlagSet flag[9477]
+			if flag[9999]:
+				NewScene "u4169._sn" 105 0 0
+				Hcf
+			else:
+				NewScene "u4121._sn" 110 0 0
+				Hcf
+			break
+	Return
+
+fn[6]:
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		TextSetPos -1 60 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}爆钓传说艾丝蒂尔{wait}
+		}
+		ED6MenuNew menu[0] 65535 160 0
+		if QuestFlagsGet quest[28] 0x20:
+			ED6MenuAdd menu[0] "【  回到门前  】"
+			ED6MenuAdd menu[0] "【 从最初开始 】"
+			ED6MenuAdd menu[0] "【从第二章开始】"
+		if QuestFlagsGet quest[29] 0x20:
+			ED6MenuAdd menu[0] "【从最终章开始】"
+		ED6MenuShow menu[0]
+		MenuWait var[0]
+		TextClose 0
+		MenuClose menu[255]
+		system[40] = 65535
+		Sleep 1000ms
+		switch var[0]:
+			case 0:
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9477]
+				if flag[9999]:
+					NewScene "u4169._sn" 105 0 0
+					Hcf
+				else:
+					NewScene "u4121._sn" 110 0 0
+					Hcf
+				break
+			case 1:
+				BgmStop 1000ms
+				BgmWait
+				var[0] = 255
+				break
+			case 2:
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9476]
+				NewScene "c4203._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9476]
+				NewScene "r2201._sn" 100 0 0
+				Hcf
+				break
+	Return

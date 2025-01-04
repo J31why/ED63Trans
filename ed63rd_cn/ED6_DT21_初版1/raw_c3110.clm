@@ -1,0 +1,1134 @@
+calmare tc scena
+scena:
+	name "Zeiss" "C3110.x"
+	town town[1]
+	bgm bgm[34]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03670._ch" "npl2/ch03670p._cp"
+chip[1] "npl2/ch03673._ch" "npl2/ch03673p._cp"
+chip[2] "npl/ch01600._ch" "npl/ch01600p._cp"
+chip[3] "npl/ch01640._ch" "npl/ch01640p._cp"
+
+npc char[0]:
+	name "卡西乌斯"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "王国军军官"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "卫兵"
+	pos (22110, 0, 157150)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[3]:
+	name "卫兵"
+	pos (-24850, 0, 38600)
+	angle 270deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[4]:
+	name "卫兵"
+	pos (23150, 0, 127870)
+	angle 270deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[5]:
+	name "卫兵"
+	pos (-2240, 0, 1150)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,6]
+
+npc char[6]:
+	name "卫兵"
+	pos (-10400, 0, -3510)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,7]
+
+trigger[0]:
+	pos1 (-30350, -2500, 38060)
+	pos2 (-28450, -250, 41960)
+	flags 0x0000
+	func fn[0,16]
+	unk1 0
+
+look_point[0]:
+	pos (21040, 0, 158020)
+	radius 1000mm
+	bubble_pos (21040, 800, 158020)
+	flags 0x007C
+	func fn[0,15]
+	unk1 0
+
+fn[0]:
+	if system[66] == 18:
+		if flag[9478]:
+			system[1] = 101
+			FlagUnset flag[9478]
+			SystemFlagsSet 0x10000000
+			Event fn[0,17]
+	Return
+
+fn[1]:
+	if system[66] == 18:
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	TextTalk char[2] {
+		准将在训练场等待。{wait}
+	}
+	TextWait
+	TextTalk self {
+		整理好装备之后，
+		请到屋外去。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	TextTalk char[3] {
+		◆卫兵的对话信息。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	TextTalk char[4] {
+		◆卫兵的对话信息。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	TextTalk char[5] {
+		◆卫兵的对话信息。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	TextTalk char[6] {
+		◆卫兵的对话信息。{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[9] (21070, 0, 136950) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20650, 0, 138370) 0deg
+	CharSetPos char[0] (21360, 0, 159470) 180deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (22110, 0, 157150) 180deg
+	_Char4A char[2] 255
+	CamLookPos (22020, 0, 137120) 0ms
+	CamSetDistance 0 5120 -10000 0ms
+	CamZoom 2890 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 291 0ms
+	Fork name[9] fork[2]:
+		CamLookPos (23210, 0, 157170) 4000ms
+	Fork name[9] fork[3]:
+		CamPers 297 4000ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21050, 0, 154380) 2000mm/s 0
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21610, 0, 153380) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[9] fork[2]
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	TextTalk char[2] {
+		#5P这前面是司令室。{wait}
+	} {
+		我可以代为传话，
+		请告诉我有什么事。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6P是守备队副队长贝尔克
+		和游击士亚妮拉丝小姐。{wait}
+	} {
+		请求面见准将。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F#4P请、请多关照！{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5P是，请稍等。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (20980, 0, 157780) 2000mm/s 0
+	Sleep 300ms
+	SoundPlay sound[113] 0 0 100
+	Sleep 500ms
+	TextTalk char[2] {
+		#4P贝尔克副队长和游击士
+		已经到了。{wait}
+	}
+	TextWait
+	TextTalkNamed char[0] "男性的声音" {
+		#2P没问题，让他们进来。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#4P是！{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 90deg 400deg/s
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (22110, 0, 157150) 2000mm/s 0
+	CharTurnTo char[2] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#5P请进。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6P辛苦了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[9] fork[3]:
+		CamLookPos (22290, 0, 158760) 2500ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (20980, 0, 157780) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 156450) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Sleep 300ms
+	ObjFrame object[0] 0
+	ObjPlay object[0] 9
+	ObjWait object[0]
+	Sleep 300ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Fork char[1] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	Fork name[9] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	_Char4B char[2] 255
+	Call fn[0,9]
+	Return
+
+fn[9]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharColor name[9] 0x00FFFFFF 0ms
+	CharSetPos name[9] (20740, 0, 250590) 0deg
+	CharColor char[1] 0x00FFFFFF 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20740, 0, 250590) 0deg
+	CharColor char[1] 0xFFFFFFFF 0ms
+	CharFlagsSet char[0] 0x0004
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (20940, 0, 260040) 180deg
+	CamLookPos (21250, 0, 251550) 0ms
+	CamSetDistance 0 5040 -10000 0ms
+	CamZoom 2830 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 297 0ms
+	Fork name[9] fork[2]:
+		CamLookPos (22440, 0, 258519) 3000ms
+	Fork name[9] fork[3]:
+		CamPers 305 3000ms
+	ForkFunc char[1] fork[0] fn[0,13]
+	ForkFunc name[9] fork[0] fn[0,14]
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	ForkWait name[9] fork[2]
+	ForkWait name[9] fork[3]
+	TextTalk char[1] {
+		我把亚妮拉丝小姐带来了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F嗯，辛苦了。{wait}
+	} {
+		你可以回自己的岗位了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		是，告辞了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[1] fork[0] fn[0,12]
+	ForkWait char[1] fork[0]
+	TextTalk char[0] {
+		#1120F哎呀，你来得正好。{wait}
+	} {
+		前阵子艾丝蒂尔
+		承蒙你的照顾了。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F哪里，是我麻烦她才对。{wait}
+	} {
+		那个，不好意思。
+		让您特地腾出时间来见我。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F哪里，不必客气。{wait}
+	} {
+		对了，
+		老爷子别来无恙吧。{wait}
+	} {
+		今天你好像是
+		受他的指示才来的吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F是、是的，没错……{wait}
+	} {
+		您果然
+		认识爷爷？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F是啊，他是剑道的高人嘛。{wait}
+	} {
+		不过自从十年前我退伍之后
+		就没再见过他了……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F原来如此……{wait}
+	} {
+		其实，我来这里
+		也是和当时的事有关。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F哦……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F卡西乌斯先生舍弃了剑，
+		爷爷至今仍觉得很惋惜。{wait}
+	} {
+		因此，听说您复归了军队，
+		就立刻派我来送信了。{wait}
+	} {
+		想问问您
+		是否有意回归剑之道……{wait}
+	} {
+		……他让我来直接确认
+		卡西乌斯先生的心意。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F嗯……是这样吗。{wait}
+	} {
+		他还记得
+		我这等未成熟的剑法，
+		实在是无上的光荣……{wait}
+	} {
+		……但是，我并没有
+		再度拿起剑的意思。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F为、为什么？{wait}
+	} {
+		是因为棒术
+		比剑术更优秀吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F不，武术是不分优劣的。{wait}
+	} {
+		只不过棒术更符合
+		我现在的目标。{wait}
+	} {
+		不是斩杀敌人，
+		而是让敌人无法近身的
+		象征守护的武术。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F怎、怎么是这样……{wait}
+	} {
+		我也有
+		想要守护的东西啊！{wait}
+	} {
+		这……
+		不能用剑来守护吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F很遗憾，这个问题
+		我没有直接的答案。{wait}
+	} {
+		不过，对了……{wait}
+	} {
+		……正好。
+		就让她来回答吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F咦……？{wait}
+	}
+	TextWait
+	Fork name[9] fork[2]:
+		CamLookPos (22330, 0, 254190) 2500ms
+	ForkFunc char[0] fork[0] fn[0,10]
+	ForkLoop name[9] fork[0]:
+		CharTurnToChar self char[0] 400deg/s
+	Sleep 2500ms
+	TextTalk name[9] {
+		#810F#5P怎、怎么回事？{wait}
+	}
+	TextWait
+	ForkWait name[9] fork[2]
+	ForkQuit name[9] fork[0]
+	CharTurnTo name[9] 180deg 400deg/s
+	ForkWait char[0] fork[0]
+	CharTurnTo char[0] 0deg 400deg/s
+	TextTalk char[0] {
+		#1120F我去准备一下。{wait}
+	} {
+		亚妮拉丝……
+		你也整理一下装备，
+		然后到外面的训练场来吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F#5P整、整理装备……是吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120F啊啊，
+		因为可能会有点危险。{wait}
+	} {
+		那么，等你过来。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F#5P是、是的！{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[0] fork[0] fn[0,11]
+	ForkWait char[0] fork[0]
+	CamLookPos (22800, 0, 255550) 1000ms
+	TextTalk name[9] {
+		#810F#5P呼、呼……{wait}
+	} {
+		虽、虽然还不是太明白，
+		看来只好照做了。{wait}
+	} {
+		总之，
+		先检查一下装备……{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CharSetPos name[9] (20820, 0, 156030) 180deg
+	CamLookPos (20820, 0, 156030) 0ms
+	CamSetDistance 0 6000 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	LookPointFlagsUnset look_point[0] 0x0001
+	ObjFrame object[0] 0
+	ObjPlay object[0] 0
+	ObjFlagsUnset object[0] 0x0008
+	ObjFlagsUnset object[0] 0x0010
+	ObjFlagsUnset object[0] 0x0020
+	Sleep 1000ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[10]:
+	CharWalkToPos self (20220, 0, 258820) 2000mm/s 0
+	CharWalkToPos self (20220, 0, 254700) 2000mm/s 0
+	Return
+
+fn[11]:
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (20520, 0, 252500) 2000mm/s 0
+	Sleep 200ms
+	SoundPlay sound[106] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	CharWalkToPos self (20520, 0, 250500) 2000mm/s 0
+	CharFlagsSet self 0x0080
+	Return
+
+fn[12]:
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (20380, 0, 254240) 2000mm/s 0
+	CharWalkToPos self (20800, 0, 252130) 2000mm/s 0
+	SoundPlay sound[106] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharWalkToPos self (20800, 0, 250000) 2000mm/s 0
+	CharFlagsSet self 0x0080
+	SoundPlay sound[230] 0 0 100
+	Return
+
+fn[13]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (20650, 0, 255390) 2000mm/s 0
+	Return
+
+fn[14]:
+	Sleep 600ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (21490, 0, 254430) 2000mm/s 0
+	Sleep 700ms
+	ForkWait self fork[2]
+	Return
+
+fn[15]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}门上了锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[16]:
+	if system[66] == 255:
+		Return
+	EventBegin 1
+	_Char4A char[3] 255
+	TextTalk char[3] {
+		前面禁止入内。{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		请回吧。{wait}
+	}
+	TextWait
+	_Char90 field_party[0] 1500 0 0 3000 0
+	_Char4B char[3] 255
+	Sleep 50ms
+	EventEnd 4
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[9] (21070, 0, 136950) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20650, 0, 138370) 0deg
+	CharSetPos char[0] (21360, 0, 159470) 180deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (22110, 0, 157150) 180deg
+	CamLookPos (22020, 0, 137120) 0ms
+	CamSetDistance 0 7520 -10000 0ms
+	CamZoom 2890 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 337 0ms
+	Fork name[9] fork[2]:
+		CamLookPos (23210, 0, 157170) 7000ms
+	Fork name[9] fork[3]:
+		CamPers 297 7000ms
+	Fork char[2] fork[3]:
+		CamSetDistance 0 5120 -10000 7000ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21050, 0, 154380) 2000mm/s 0
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21610, 0, 153380) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 4000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	SoundPlay sound[106] 0 0 100
+	Sleep 1500ms
+	SoundPlay sound[230] 0 0 100
+	Sleep 1000ms
+	Call fn[0,18]
+	ForkWait name[9] fork[2]
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	TextTalk char[2] {
+		#5P这前面是司令室。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5P我可以代为传话，
+		请告诉我有什么事。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6P我奉准将之命，
+		将游击士亚妮拉丝小姐带来了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6P请求面见准将。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#812F#4P请、请多关照！{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5P是，请稍候。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (20980, 0, 157780) 2000mm/s 0
+	Sleep 300ms
+	SoundPlay sound[113] 0 0 100
+	Sleep 500ms
+	TextTalk char[2] {
+		#4P准将大人，
+		游击士已经到了。{wait}
+	}
+	TextWait
+	TextTalkNamed char[0] "男性的声音" {
+		#2P没问题，让他们进来。{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#4P是，明白！{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 90deg 400deg/s
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (22110, 0, 157150) 2000mm/s 0
+	CharTurnTo char[2] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#5P请进。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6P辛苦了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[9] fork[3]:
+		CamLookPos (22290, 0, 158760) 2500ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (20980, 0, 157780) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 156450) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Sleep 300ms
+	ObjFrame object[0] 0
+	ObjPlay object[0] 9
+	ObjWait object[0]
+	Sleep 300ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Fork char[1] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	Fork name[9] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	_Char4B char[2] 255
+	Call fn[0,18]
+	Return
+
+fn[18]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sleep 1000ms
+	CharColor name[9] 0x00FFFFFF 0ms
+	CharSetPos name[9] (20740, 0, 250590) 0deg
+	CharColor char[1] 0x00FFFFFF 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20740, 0, 250590) 0deg
+	CharColor char[1] 0xFFFFFFFF 0ms
+	CharFlagsSet char[0] 0x0004
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (20940, 0, 260040) 180deg
+	char[0].45 = 1030
+	char[0].46 = 1050
+	char[0].47 = 1030
+	char[0].7 = 1030
+	char[0].41 = 1030
+	CamLookPos (21250, 0, 251550) 0ms
+	CamSetDistance 0 5040 -10000 0ms
+	CamZoom 2830 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 297 0ms
+	Fork char[0] fork[2]:
+		CamLookPos (22360, 0, 258519) 3000ms
+	Fork char[0] fork[3]:
+		CamPers 305 3000ms
+	ForkFunc char[1] fork[0] fn[0,13]
+	ForkFunc name[9] fork[0] fn[0,14]
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	ForkWait name[9] fork[2]
+	ForkWait name[9] fork[3]
+	Sleep 500ms
+	TextTalk char[1] {
+		#99356v#6P我把亚妮拉丝小姐带来了。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87611v#1125F#5P嗯，辛苦了。{wait}
+	} {
+		#87612v#1120F你可以回自己的岗位了。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99357v#6P是，告辞了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[1] fork[0] fn[0,12]
+	Sleep 3000ms
+	Fork name[9] fork[2]:
+		CamLookPos (22360, 0, 259980) 1500ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 257220) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#87613v#1123F#5P呼，亚妮拉丝。
+		抱歉迟到了。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86430v#816F#12P#12P哪里，没关系。{wait}
+	} {
+		#86431v#1316F倒是我才应该道歉。
+		百忙之中还麻烦您
+		特地抽出时间来见我。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87614v#1121F#5P哈哈，这也是为了
+		游击士时代的可爱后辈嘛。
+		你不必介意。{wait}
+	} {
+		#87615v#1120F不过，还真是好久不见了呢。
+		亚妮拉丝。{wait}
+	} {
+		#87616v嗯……看起来
+		水平又有进步了嘛。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86432v#819F#12P嘿嘿，还好啦……{wait}
+	} {
+		#86433v#816F我可不能输给
+		在远处努力着的
+		艾丝蒂尔嘛。{wait}
+	} {
+		#86434v姑且也算是
+		被她承认的对手呢。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87617v#1125F#5P呵呵，是啊。{wait}
+	} {
+		#87618v#1120F那我就期待你们
+		今后的活跃表现了哦。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86435v#811F#12P是！{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87619v#1120F#5P对了……云老师
+		似乎还是那么健朗。{wait}
+	} {
+		#87620v今天你好像是
+		受他的指示才来的吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86436v#1316F#12P是、是的，
+		关于这件事……{wait}
+	} {
+		#86437v#818F卡西乌斯先生，
+		您果然认识
+		我爷爷吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87621v#1125F#5P啊啊，他是我剑道的恩师。{wait}
+	} {
+		#87622v#1120F已经是二十多年前的事了吧……
+		第一次见面
+		还是在士官学校学剑的时候。{wait}
+	} {
+		#87623v#1121F呵呵，在这个雷斯顿要塞里
+		可是被他教训得很惨呢，
+		到现在还历历在目。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86438v#819F#12P原、原来如此……{wait}
+	} {
+		#86439v#814F但、但是，
+		为什么您不告诉我
+		认识爷爷的事呢？{wait}
+	} {
+		#86440v您知道我是
+		爷爷的孙女吧？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87624v#1125F#5P……啊啊，是的。{wait}
+	} {
+		#87625v#1120F只是，见到你时
+		我已放弃剑术多时了。{wait}
+	} {
+		#87626v要自称是师兄
+		也有点心虚。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86441v#813F#12P啊……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87627v#1125F#5P和云老师也已有十年不见了……{wait}
+	} {
+		#87628v#1120F虽然偶有联络，
+		不知他老人家还好吗？{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86442v#819F#12P啊，是的……
+		他倒是老样子，
+		总是生龙活虎的……{wait}
+	} {
+		#86443v#812F嗯，对了。{wait}
+	} {
+		#86444v其实，
+		我今天来这里也是和
+		十年前的事有关。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87629v#1124F#5P哦……{wait}
+	}
+	TextWait
+	BgmStop 1500ms
+	BgmWait
+	BgmPlay bgm[173] 0
+	Sleep 500ms
+	TextTalk name[9] {
+		#86445v#1316F#12P卡西乌斯先生舍弃了剑，
+		爷爷至今仍觉得很惋惜。{wait}
+	} {
+		#86446v因此，听说您复归了军队，
+		就立刻给我写了信。{wait}
+	} {
+		#86447v#813F想问问您
+		是否有重新拿起剑的觉悟……{wait}
+	} {
+		#86448v#812F……他让我来直接确认
+		卡西乌斯先生的心意。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87630v#1128F#5P嗯……是这样吗。{wait}
+	}
+	TextWait
+	Sleep 500ms
+	Emote char[0] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#87631v#1125F#5P他还记得
+		我这等未成熟的剑法，
+		实在是光荣之至……{wait}
+	} {
+		#87632v#1122F……但是，我并没有
+		再度拿起剑的意思。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86449v#1317F#12P…………………………{wait}
+	} {
+		#86450v#813F这、这是……
+		为什么呢？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87633v#1123F#5P嗯，这个啊。
+		怎么说才好呢……{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86451v#1316F#12P我……
+		一直有一个疑问。{wait}
+	} {
+		#86452v被称为『剑圣』的
+		卡西乌斯先生，
+		为什么会放弃剑……{wait}
+	} {
+		#86453v#813F虽然我并不是想
+		否定卡西乌斯先生
+		所用的棒术……{wait}
+	} {
+		#86454v#812F但是，我还是
+		无论如何也无法接受……！{wait}
+	} {
+		#86455v为什么回到了军队
+		却还是不想拿起剑呢？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87634v#1122F#5P嗯………{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86456v#1316F#12P难、难道是……{wait}
+	} {
+		#86457v#813F……因为您觉得棒术
+		比剑术更优秀吗？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87635v#1125F#5P不，
+		绝不是因为这个。{wait}
+	} {
+		#87636v只是棒术比剑
+		更适合我现在的立场──
+		如此而已。{wait}
+	} {
+		#87637v#1120F不是斩杀敌人，
+		而是让敌人无法近身的
+		象征守护的武术。{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86458v#1317F#12P怎、怎么是这样……
+		剑也不仅仅是用来
+		斩人的武器啊！{wait}
+	} {
+		#86459v#813F而且，我也有
+		想要守护的东西啊……！{wait}
+	} {
+		#86460v#30W作为剑士，作为游击士……
+		……更重要的是作为我自己………{wait}
+	} {
+		#86461v#815F#20W难道说……难道说……
+		您认为爷爷教的剑法
+		无法守护吗！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87638v#1122F#5P………………………………{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86462v#1316F#12P对、对不起。
+		我说了些莽撞的话……{wait}
+	} {
+		#86463v#813F#30W但是……我……
+		无论如何也无法接受……{wait}
+	} {
+		#86464v至今为止从来没有
+		因为挥剑而感到迷茫……{wait}
+	} {
+		#86465v但是通过那件事，
+		却重新感受到了自己的软弱……{wait}
+	} {
+		#86466v#1316F这样下去我……
+		觉得自己无论怎样努力
+		大概也无法独当一面……{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87639v#1125F#5P……原来如此啊。{wait}
+	} {
+		#87640v嗯……
+		这也是女神的旨意吧。{wait}
+	} {
+		#87641v#1120F话说回来……
+		老师还是那么坏心眼。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86467v#814F#12P咦……？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87642v#1125F#5P……亚妮拉丝。
+		很遗憾，现在的我
+		无法回答你的问题。{wait}
+	} {
+		#87643v#1122F因此……
+		我就让代替者来回答吧。{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	CamZoom 3130 3000ms
+	FadeWait
+	SystemFlagsSet 0x02000000
+	NewScene "c3101._sn" 100 0 0
+	Hcf
+	Fork name[9] fork[2]:
+		CamLookPos (22360, 0, 257980) 2500ms
+	ForkFunc char[0] fork[0] fn[0,10]
+	ForkLoop name[9] fork[0]:
+		CharTurnToChar self char[0] 400deg/s
+	Sleep 2500ms
+	TextTalk name[9] {
+		#812F#5P要、要去哪里？{wait}
+	}
+	TextWait
+	ForkWait name[9] fork[2]
+	ForkQuit name[9] fork[0]
+	CharTurnTo name[9] 180deg 400deg/s
+	ForkWait char[0] fork[0]
+	CharTurnTo char[0] 0deg 400deg/s
+	TextTalk char[0] {
+		#1120F你很快就知道了。{wait}
+	} {
+		跟我来吧。{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#813F#5P是、是……{wait}
+	}
+	TextWait
+	ForkFunc char[0] fork[0] fn[0,11]
+	Sleep 600ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 252500) 2000mm/s 0
+	ForkWait name[9] fork[0]
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 250500) 2000mm/s 0
+	Fork name[9] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	NewScene "c3101._sn" 100 0 0
+	Hcf
+	Return

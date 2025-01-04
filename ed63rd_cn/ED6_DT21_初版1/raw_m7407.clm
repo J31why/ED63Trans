@@ -1,0 +1,588 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7407.x"
+	town town[1]
+	bgm bgm[225]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (6940, 0, 42960)
+	radius 1000mm
+	bubble_pos (6940, 1000, 42960)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+look_point[1]:
+	pos (0, 0, 82100)
+	radius 2000mm
+	bubble_pos (0, 1500, 82100)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	ObjFlagsUnset object[0] 0x0010
+	Return
+
+fn[2]:
+	EventBegin 0
+	if !flag[11305]:
+		FlagSet flag[11305]
+		CrossFade 1000ms
+		CamLookPos (340, 6750, 76730) 0ms
+		CamSetDistance 0 3130 -10000 0ms
+		CamZoom 3200 0ms
+		CamRotate 0mdeg 0ms
+		CamPers 404 0ms
+		CharSetPos party[12] (-750, 0, 78490) 0deg
+		CharSetPos party[13] (750, 0, 78380) 0deg
+		CharSetPos party[14] (-1250, 0, 76780) 0deg
+		CharSetPos party[15] (1250, 0, 76810) 0deg
+		CharSetChipBase field_party[0] chip[65535]
+		CharSetChipBase field_party[1] chip[65535]
+		CharSetChipBase field_party[2] chip[65535]
+		CharSetChipBase field_party[3] chip[65535]
+		CharSetChipPattern field_party[0] 0
+		CharSetChipPattern field_party[1] 0
+		CharSetChipPattern field_party[2] 0
+		CharSetChipPattern field_party[3] 0
+		Fork party[12] fork[0]:
+			CamZoom 4000 5000ms
+		FadeWait
+		ForkWait party[12] fork[0]
+		CrossFade 500ms
+		CamLookPos (1110, 0, 79950) 0ms
+		CamSetDistance 0 5840 -10000 0ms
+		CamZoom 2610 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 357 0ms
+		CharSetPos party[12] (-1120, 0, 78970) 0deg
+		CharSetPos party[13] (410, 0, 78980) 0deg
+		CharSetPos party[14] (-1330, 0, 77010) 0deg
+		CharSetPos party[15] (210, 0, 77060) 0deg
+		FadeWait
+		Sleep 500ms
+		if PartyPosition name[0] != -1:
+			TextTalk name[0] {
+				#76928v#1020F#12P这、这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#78297v#1502F#12P这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#83070v#065F#12P这、这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#84425v#216F#12P怎么了，这扇门……{wait}
+			}
+			TextWait
+		elif PartyPosition name[9] != -1:
+			TextTalk name[9] {
+				#86315v#1317F#12P这、这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[4] != -1:
+			TextTalk name[4] {
+				#81528v#1162F#12P……这扇门是………{wait}
+			}
+			TextWait
+		elif PartyPosition name[2] != -1:
+			TextTalk name[2] {
+				#79152v#1522F#12P这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[5] != -1:
+			TextTalk name[5] {
+				#80710v#057F#12P……这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[7] != -1:
+			TextTalk name[7] {
+				#83831v#072F#12P唔，这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[13] != -1:
+			TextTalk name[13] {
+				#85141v#172F#12P这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[3] != -1:
+			TextTalk name[3] {
+				#80142v#1542F#12P哦？这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85757v#270F#12P这扇门是……{wait}
+			}
+			TextWait
+		elif PartyPosition name[11] != -1:
+			TextTalk name[11] {
+				#87010v#112F#12P这扇门是……{wait}
+			}
+			TextWait
+		if PartyPosition name[15] != -1:
+			TextTalk name[15] {
+				#91201v#1306F#12P嘻嘻……
+				似乎不是普通的门呢。{wait}
+			}
+			TextWait
+		elif PartyPosition name[11] != -1:
+			TextTalk name[11] {
+				#87011v#112F#12P这种气势……
+				似乎不是普通的门啊。{wait}
+			}
+			TextWait
+		elif PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85758v#276F#12P这种气势……
+				不是普通的门啊。{wait}
+			}
+			TextWait
+		elif PartyPosition name[3] != -1:
+			TextTalk name[3] {
+				#80143v#1540F#12P唔……
+				似乎不是普通的门呢。{wait}
+			}
+			TextWait
+		elif PartyPosition name[13] != -1:
+			TextTalk name[13] {
+				#85142v#178F#12P这种气势……
+				不是普通的门啊。{wait}
+			}
+			TextWait
+		elif PartyPosition name[7] != -1:
+			TextTalk name[7] {
+				#83832v#070F#12P哦……
+				这可不是普通的门啊。{wait}
+			}
+			TextWait
+		elif PartyPosition name[5] != -1:
+			TextTalk name[5] {
+				#80711v#051F#12P哦……　
+				相当气派的门嘛。{wait}
+			}
+			TextWait
+		elif PartyPosition name[2] != -1:
+			TextTalk name[2] {
+				#79153v#1527F#12P哦……
+				相当气派的门呢。{wait}
+			}
+			TextWait
+		elif PartyPosition name[4] != -1:
+			TextTalk name[4] {
+				#81529v#1162F#12P这种气势……
+				不是普通的门呢。{wait}
+			}
+			TextWait
+		elif PartyPosition name[9] != -1:
+			TextTalk name[9] {
+				#86316v#819F#12P感、感觉……
+				好像不是普通的门呢。{wait}
+			}
+			TextWait
+		elif PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#84426v#216F#12P感、感觉……
+				好像不是普通的门呢。{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#83071v#065F#12P这、这个……
+				不是普通的门吧？{wait}
+			}
+			TextWait
+		elif PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#78298v#1502F#12P这种气势……
+				似乎不是普通的门呢。{wait}
+			}
+			TextWait
+	else:
+		CrossFade 500ms
+		CamLookPos (1110, 0, 79950) 0ms
+		CamSetDistance 0 5840 -10000 0ms
+		CamZoom 2610 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 357 0ms
+		CharSetPos party[12] (-1120, 0, 78970) 0deg
+		CharSetPos party[13] (410, 0, 78980) 0deg
+		CharSetPos party[14] (-1330, 0, 77010) 0deg
+		CharSetPos party[15] (210, 0, 77060) 0deg
+		CharSetChipBase field_party[0] chip[65535]
+		CharSetChipBase field_party[1] chip[65535]
+		CharSetChipBase field_party[2] chip[65535]
+		CharSetChipBase field_party[3] chip[65535]
+		CharSetChipPattern field_party[0] 0
+		CharSetChipPattern field_party[1] 0
+		CharSetChipPattern field_party[2] 0
+		CharSetChipPattern field_party[3] 0
+		FadeWait
+		Sleep 300ms
+	TextTalk name[8] {
+		#90205v#1063F#6P看来这里……
+		就是『幻影城』的终点了啊。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92818v#1936F#12P……嗯。
+		我感觉到了姐姐的存在。{wait}
+	}
+	TextWait
+	CharTurnTo party[13] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk name[14] {
+		#92819v#1933F#11P凯文……怎么办？{wait}
+	}
+	TextWait
+	FlagSet flag[11302]
+	FadeOut 300ms 0x00000000 100
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 150 1
+			"打开门" // 0
+			"离开这里" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		FadeIn 300ms 0x00000000
+		FadeWait
+		switch var[0]:
+			case 0:
+				Call fn[0,3]
+				var[0] = 255
+				break
+			default:
+				CrossFade 1000ms
+				var[0] = 255
+				break
+	EventEnd 0
+	Return
+
+fn[3]:
+	BgmStop 2000ms
+	Fork party[12] fork[0]:
+		CamLookPos (1390, 0, 79820) 1500ms
+	Fork party[12] fork[1]:
+		CamSetDistance 0 5400 -10000 1500ms
+	Fork party[12] fork[2]:
+		CamZoom 2500 1500ms
+	CharTurnTo party[12] 180deg 400deg/s
+	ForkWait party[12] fork[0]
+	Sleep 500ms
+	if PartyPosition name[4] != -1 | PartyPosition name[13] != -1 | PartyPosition name[12] != -1 | PartyPosition name[2] != -1 | PartyPosition name[5] != -1 | PartyPosition name[11] != -1 | PartyPosition name[7] != -1 | PartyPosition name[3] != -1:
+		TextTalk name[8] {
+			#90206v#1840F#5P你们两个……
+			能陪我们来到这里，
+			真的非常感谢。{wait}
+		} {
+			#90207v话虽如此，希望你们
+			能再助我一臂之力。{wait}
+		} {
+			#90208v#1065F对手是『影之王』……
+			能自由操纵这个世界之理的、
+			至高无上的存在。{wait}
+		} {
+			#90209v#1063F恐怕需要赌上全部
+			去挑战才行吧。{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#90210v#1840F#5P你们两个……
+			能陪我们来到这里，
+			真的非常感谢。{wait}
+		} {
+			#90211v话虽如此，希望你们
+			能再助我一臂之力。{wait}
+		} {
+			#90212v#1065F对手是『影之王』……
+			能自由操纵这个世界之理的、
+			至高无上的存在。{wait}
+		} {
+			#90213v#1063F恐怕需要赌上全部
+			去挑战才行吧。{wait}
+		}
+		TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76929v#1006F#12P嗯……当然了！{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#78299v#1500F#12P明白了……！{wait}
+		}
+		TextWait
+	if PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#87012v#119F#12P早就做好心理准备了……！{wait}
+		}
+		TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85143v#170F#12P明白……！{wait}
+		}
+		TextWait
+	if PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80712v#051F#12P嘿……交给我吧！{wait}
+		}
+		TextWait
+	if PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83833v#070F#12P啊啊……
+			正如我所愿！{wait}
+		}
+		TextWait
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85759v#275F#12P交给我们吧……！{wait}
+		}
+		TextWait
+	if PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#83072v#067F#12P哇哇……
+			我、我会努力的！{wait}
+		}
+		TextWait
+	if PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#86317v#816F#12P嗯！
+			加油吧！{wait}
+		}
+		TextWait
+	if PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81530v#1168F#12P我会尽一切努力……！{wait}
+		}
+		TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84427v#210F#12P哼哼！
+			那就上吧！{wait}
+		}
+		TextWait
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79154v#1536F#12P呵呵……
+			事到如今可没法抽身了呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80144v#1541F#12P呼，
+			终于要拉开最终章的帷幕了呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91202v#263F#12P嘻嘻……好啊。{wait}
+		} {
+			#91203v#1306F玲也想和『影之王』
+			认真比试一下嘛。{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#90214v#1075F#5P……太感谢了。{wait}
+	}
+	TextWait
+	CharTurnTo party[12] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#90215v#1078F#6P好……
+		那就上吧。{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92820v#1938F#11P嗯……！{wait}
+	}
+	TextWait
+	Fork party[12] fork[1]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 100ms
+	CharTurnTo party[13] 0deg 400deg/s
+	BgmPlay bgm[212] 0
+	Sleep 500ms
+	SoundPlay sound[133] 1 0 60
+	ForkLoop party[12] fork[3]:
+		Shake 5 5 3000 300ms
+	Sleep 300ms
+	SoundPlay sound[133] 1 0 80
+	ForkLoop party[12] fork[3]:
+		Shake 10 10 3000 300ms
+	Sleep 300ms
+	SoundPlay sound[133] 1 0 100
+	ForkLoop party[12] fork[3]:
+		Shake 20 20 3000 300ms
+	ObjFrame object[0] 0
+	ObjPlay object[0] 600
+	Sleep 500ms
+	CrossFade 1000ms
+	CamLookPos (0, -1000, 81330) 0ms
+	CamSetDistance 0 4420 -10000 0ms
+	CamZoom 3600 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 311 0ms
+	CharSetPos party[12] (-850, 0, 78490) 0deg
+	CharSetPos party[13] (680, 0, 78380) 0deg
+	CharSetPos party[14] (-1250, 0, 76780) 0deg
+	CharSetPos party[15] (1190, 0, 76810) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	Fork party[12] fork[1]:
+		CamLookPos (0, 4800, 81080) 7500ms
+	Fork party[13] fork[1]:
+		CamSetDistance 0 3200 -10000 7500ms
+	Fork party[14] fork[1]:
+		CamZoom 3820 7500ms
+	Fork party[15] fork[1]:
+		CamPers 431 7500ms
+	ForkWait party[12] fork[1]
+	ForkQuit party[12] fork[3]
+	SoundStop sound[210]
+	SoundStop sound[133]
+	Fork party[12] fork[3]:
+		Shake 40 40 3000 300ms
+	SoundPlay sound[136] 0 0 100
+	Sleep 2000ms
+	Fork party[12] fork[3]:
+		CamLookPos (0, 3800, 81080) 10000ms
+	Fork party[13] fork[3]:
+		CamSetDistance 0 2500 -10000 10000ms
+	Fork party[14] fork[3]:
+		CamZoom 3000 10000ms
+	ForkFunc party[12] fork[0] fn[0,4]
+	Sleep 100ms
+	ForkFunc party[13] fork[0] fn[0,5]
+	Sleep 100ms
+	ForkFunc party[14] fork[0] fn[0,6]
+	Sleep 100ms
+	ForkFunc party[15] fork[0] fn[0,7]
+	Sleep 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit party[12] fork[0]
+	ForkQuit party[13] fork[0]
+	ForkQuit party[14] fork[0]
+	ForkQuit party[15] fork[0]
+	ForkQuit party[12] fork[3]
+	ForkQuit party[13] fork[3]
+	ForkQuit party[14] fork[3]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "m7408._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[4]:
+	CharFlagsSet self 0x0004
+	CharWalkToPos self (-850, 0, 85950) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharWalkToPos self (-850, 0, 87990) 2000mm/s 0
+	Return
+
+fn[5]:
+	Sleep 200ms
+	CharFlagsSet self 0x0004
+	CharWalkToPos self (700, 0, 85950) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharWalkToPos self (700, 0, 87990) 2000mm/s 0
+	Return
+
+fn[6]:
+	Sleep 330ms
+	CharFlagsSet self 0x0004
+	CharWalkToPos self (-1100, 0, 85950) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharWalkToPos self (-1100, 0, 87990) 2000mm/s 0
+	Return
+
+fn[7]:
+	Sleep 360ms
+	CharFlagsSet self 0x0004
+	CharWalkToPos self (1100, 0, 85950) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharWalkToPos self (1100, 0, 87990) 2000mm/s 0
+	Return
+
+fn[8]:
+	TextStart null
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}有一股不可思议的力量涌出。{wait}
+	}
+	TextWait
+	TextClose 0
+	system[40] = 24
+	var[0] = 0
+	Menu menu[1] -1 150 1
+		"在这里休息" // 0
+		"离开" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	FadeIn 300ms 0x00000000
+	FadeWait
+	switch var[0]:
+		case 0:
+			EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+			system[40] = 65535
+			Sleep 300ms
+			BgmStop 1000ms
+			SoundPlay sound[12] 0 0 100
+			FadeOut 1000ms 0x00000000 255
+			FadeWait
+			SoundPlay sound[13] 0 0 100
+			Minigame 21 0 0 0 0 0 0 0 0
+			_30 1
+			Sleep 3500ms
+			EffStop eff_instance[130] 0
+			BgmPlay bgm[225] 0
+			system[40] = 24
+			FadeIn 1000ms 0x00000000
+			FadeWait
+		case 1:
+	TextEnd null
+	Return

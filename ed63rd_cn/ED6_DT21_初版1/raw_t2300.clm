@@ -1,0 +1,1315 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2300.x"
+	town town[86]
+	bgm bgm[15]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01070._ch" "npl/ch01070p._cp"
+chip[1] "npl/ch01260._ch" "npl/ch01260p._cp"
+chip[2] "npl/ch01150._ch" "npl/ch01150p._cp"
+
+npc char[0]:
+	name "玛诺利亚间道方向"
+	pos (-2940, 7990, 68620)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "梅威海道方向"
+	pos (75410, -40, 20810)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "卢西亚"
+	pos (37840, -50, 17810)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,2]
+
+npc char[4]:
+	name "库拉茨"
+	pos (38170, -20, 18890)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[5]:
+	name "萨蒂"
+	pos (45300, 0, 23500)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+trigger[0]:
+	pos1 (27540, 0, 18980)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,9]
+	unk1 0
+
+trigger[1]:
+	pos1 (53410, 0, 22710)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,10]
+	unk1 0
+
+trigger[2]:
+	pos1 (6000, 4000, 20210)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,11]
+	unk1 0
+
+look_point[0]:
+	pos (37770, -10, 19530)
+	radius 1000mm
+	bubble_pos (37770, 1800, 19530)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+fn[0]:
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsSet object[8] 0x0004
+	ObjFlagsSet object[2] 0x0010
+	if system[66] == 9:
+		if flag[12066]:
+			CharFlagsSet char[5] 0x0080
+			CharSetPos char[3] (4510, 6000, -1100) 90deg
+			CharSetPos char[4] (4510, 6000, -100) 90deg
+		elif flag[12065]:
+		elif flag[12064]:
+		elif flag[12055]:
+	if system[66] == 9:
+		if !flag[12065]:
+			if flag[9476]:
+				FlagUnset flag[9476]
+				Event fn[0,5]
+	Return
+
+fn[1]:
+	MapSet 4000 (-108000, null, -126000) "mt2300._ch"
+	SoundPlay sound[453] 1 0 100
+	Return
+
+fn[2]:
+	TextStart self
+	if flag[12066]:
+		if flag[12093]:
+			if flag[12092]:
+				if flag[0]:
+					_Char4A char[4] 255
+					TextTalk self {
+						#99460v悬崖边上、悬崖边上……{wait}
+					}
+					TextWait
+					TextTalk self {
+						#99461v波利的谜题，
+						真是好难哦～！{wait}
+					}
+					TextWait
+					if flag[12094]:
+						TextTalk char[4] {
+							#94025v#823F……快干活啦。{wait}
+						}
+						TextWait
+					else:
+						TextTalkNamed char[4] "男人" {
+							#94025v#823F……快干活啦。{wait}
+						}
+						TextWait
+					_Char4B char[4] 255
+				else:
+					TextTalk self {
+						#99458v悬崖边上、悬崖边上……{wait}
+					}
+					TextWait
+					TextTalk self {
+						#99459v明明是幸福之石，
+						为什么会在悬崖边上呢～？{wait}
+					}
+					TextWait
+					FlagSet flag[0]
+			elif flag[0]:
+				TextTalk self {
+					#99450v要是像格兰赛尔的百货店那样，
+					能有很多人来的地方就好了呢。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99451v卢西亚会热烈欢迎大家的⊙{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					#99448v没有客人来啊～。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99449v要是像格兰赛尔的百货店一样，
+					会有很多人来就好了呢。{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			if flag[12092]:
+				TextTalk self {
+					#99446v咦～，是玛丽。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99447v波利呢？
+					你们没在一起吗～？{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#95203v#1713F嗯、嗯……{wait}
+				} {
+					#95204v#1712F波利在和
+					克拉姆他们一起玩。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99456v是吗～真可惜……
+					真想要点提示啊～。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99457v我说，玛丽～，
+					幸福之石是什么呢～？{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#95208v#1714F呃，嗯…………{wait}
+				} {
+					#95209v#1713F（……是什么来着。）{wait}
+				} {
+					#95210v（……不知道了……）{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					#99452v咦～，是玛丽。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99453v波利呢？
+					你们没在一起吗～？{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#95205v#1713F嗯、嗯……{wait}
+				} {
+					#95206v#1712F波利在和
+					克拉姆他们一起玩。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99454v是吗～真可惜……{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99455v你们要再来参观
+					义卖会哦～。{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#95207v#1710F嗯、嗯。
+					我会转达他们的。{wait}
+				}
+				TextWait
+			FlagSet flag[12093]
+	elif flag[12065]:
+		if flag[12092]:
+			if flag[0]:
+				CharTurnTo self 0deg 0deg/s
+				TextTalk self {
+					#99441v悬崖边上、悬崖边上……{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99442v……………………真是个难题！{wait}
+				}
+				TextWait
+			else:
+				CharTurnTo self 0deg 0deg/s
+				TextTalk self {
+					#99439v悬崖边上、悬崖边上……{wait}
+				}
+				TextWait
+				Emote self 0mm 1600mm 24 27 200ms 2
+				Sleep 1600ms
+				EmoteStop self
+				CharTurnToChar self name[78] 400deg/s
+				Sleep 500ms
+				TextTalk self {
+					#99440v波利～，
+					给点提示吧！{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			TextTalk name[77] {
+				#95173v#1710F那个，卢西亚，
+				你知道幸福之石吗？{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99432v咦……？{wait}
+			}
+			TextWait
+			Sleep 200ms
+			Emote self 0mm 1600mm 38 39 250ms 2
+			Sleep 1200ms
+			EmoteStop self
+			TextTalk self {
+				#99433v哇啊……！！{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#95174v#1714F（哇，好灿烂的笑容……）{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99434v……幸福之石？{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99435v什么什么，
+				快告诉卢西亚～！{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#95175v#1719F不行不行，
+				这是秘密啦！{wait}
+			} {
+				#95176v#1711F不过只说一点点
+				应该也没关系吧……？{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99436v哎呀，告诉我、告诉我啦～{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#95436v#1731F就是说呢～
+				被魔兽袭击了呢～
+				安全绳索断了呢～……{wait}
+			} {
+				#95437v#1732F…………就在悬崖边上～。{wait}
+			}
+			TextWait
+			Emote self 0mm 1600mm 24 27 200ms 0
+			Sleep 1500ms
+			SoundPlay sound[49] 0 0 100
+			Emote name[77] 0mm 1600mm 16 19 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			CharTurnToChar name[77] name[78] 500deg/s
+			Sleep 500ms
+			TextTalk name[77] {
+				#95177v#1714F（嗯…………
+				　这不是欧尼尔叔叔的话吗？）{wait}
+			} {
+				#95178v#1712F（波利这么一说
+				  听起来像是别的事情似的……）{wait}
+			}
+			TextWait
+			Sleep 500ms
+			EmoteStop self
+			Sleep 500ms
+			TextTalk self {
+				#99437v…………悬崖边上？{wait}
+			}
+			TextWait
+			SystemFlagsSet 0x00000020
+			TextTalk self {
+				#99438v#4S卢·西·亚·大·震·惊！！{wait}
+			}
+			Shake 0 300 3000 500ms
+			TextWait
+			SystemFlagsUnset 0x00000020
+			Sleep 200ms
+			FlagSet flag[12092]
+			FlagUnset flag[1]
+	elif flag[12064]:
+		if flag[12091]:
+			if flag[0]:
+				CharTurnTo self 0deg 0deg/s
+				_Char4A char[4] 255
+				TextTalk self {
+					#99428v啊，再右边点！{wait}
+				}
+				TextWait
+				CharTurnTo char[4] 45deg 400deg/s
+				Sleep 200ms
+				if flag[12094]:
+					TextTalk char[4] {
+						#94007v#822F咦？　这、这里吗？{wait}
+					}
+					TextWait
+				else:
+					TextTalkNamed char[4] "男人" {
+						#94007v#822F咦？　这、这里吗？{wait}
+					}
+					TextWait
+				TextTalk self {
+					#99429v啊～，这次太靠右了～！{wait}
+				}
+				TextWait
+				if flag[12094]:
+					TextTalk char[4] {
+						#94008v#822F嗯嗯…………{wait}
+					}
+					TextWait
+				else:
+					TextTalkNamed char[4] "男人" {
+						#94008v#822F嗯嗯…………{wait}
+					}
+					TextWait
+				CharTurnTo char[4] 0deg 400deg/s
+				Sleep 400ms
+				TextTalk self {
+					#99430v啊，太靠左边了。{wait}
+				}
+				TextWait
+				Sleep 400ms
+				if flag[12094]:
+					TextTalk char[4] {
+						#94009v#823F……这么复杂的指示……{wait}
+					}
+					TextWait
+				else:
+					TextTalkNamed char[4] "男人" {
+						#94009v#823F……这么复杂的指示……{wait}
+					}
+					TextWait
+				_Char4B char[4] 255
+			else:
+				TextTalk self {
+					#99426v卢西亚不懂，
+					还是拜托游击士大哥哥吧。{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99427v……大哥哥的名字，
+					叫什么来着～？{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			TextTalk self {
+				#99422v啊，你们来了啊～！{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#95424v#1732F因为好像很有趣嘛～。{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99423v嗯，一定很有趣的★
+				卢西亚给你们打包票！{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#95134v#1710F我说，卢西亚。
+				义卖会在哪里开啊？{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99424v那个啊，是在风车小屋开的呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99425v你们俩都要来
+				尽情买东西哦！{wait}
+			}
+			TextWait
+			FlagSet flag[12091]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12066]:
+		if flag[12094]:
+			if flag[12096]:
+				if flag[1]:
+					TextTalk char[4] {
+						#94033v#820F有什么麻烦的话，
+						随时都可以跟我说哦。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[4] {
+						#94031v#820F别看我这样，我也是游击士呢。{wait}
+					} {
+						#94032v有什么麻烦的话，
+						别客气只管说哦。{wait}
+					}
+					TextWait
+					FlagSet flag[1]
+			else:
+				TextTalk char[4] {
+					#94029v#821F欢迎，欢迎！
+					……这不是刚才的孩子吗。{wait}
+				} {
+					#94030v#820F怎么了？
+					发生什么事了吗？{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#95213v#1713F嗯、嗯，
+					没什么……{wait}
+				} {
+					#95214v#1712F（波利瞎晃悠
+					  是常有的事啦。）{wait}
+				} {
+					#95215v（反正很快就会找到的！）{wait}
+				}
+				TextWait
+				FlagSet flag[12096]
+		else:
+			CharTurnTo char[4] 90deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "男人" {
+				#94026v嗯……怎么了？{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#95211v#1714F啊…………想起来了。{wait}
+			} {
+				#95212v嗯………………
+				……是叫……
+				………布莱克先生……？{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "男人" {
+				#94027v你的记忆还真混乱啊……{wait}
+			}
+			TextWait
+			TextTalk char[4] {
+				#94028v#823F……是库拉茨。
+				各位，要记住我的名字哦。{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+	elif flag[12065]:
+		if flag[12094]:
+			if flag[12095]:
+				if flag[12092]:
+					CharTurnTo char[4] 0deg 0deg/s
+					if flag[1]:
+						TextTalk char[3] {
+							#99445v可是，是在悬崖边上！{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#94016v#823F（完全莫名其妙……）{wait}
+						}
+						TextWait
+					else:
+						TextTalk char[3] {
+							#99443v那个，
+							叫做幸福之石的，
+							就是玛丽和波利提到过的东西吧？{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#94013v#825F啊～
+							那个就别管啦……{wait}
+						} {
+							#94014v这个传单，
+							就贴在这里可以吗？{wait}
+						}
+						TextWait
+						TextTalk char[3] {
+							#99444v那个啊，一定是亮晶晶的，
+							这种感觉吧～㈱{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#94015v#825F（…………女孩子啊，
+							　还真喜欢这方面的事呢～。）{wait}
+						}
+						TextWait
+						FlagSet flag[1]
+				else:
+					CharTurnTo char[4] 0deg 0deg/s
+					if flag[1]:
+						TextTalk char[4] {
+							#94012v#820F虽然对工作热心是很好……
+							但真是不想让这种类型的人当上司呢。{wait}
+						}
+						TextWait
+					else:
+						TextTalk char[4] {
+							#94010v#820F我想放在这边
+							应该差不多了吧。{wait}
+						}
+						TextWait
+						TextTalk char[3] {
+							#99431v不行！
+							这叫做半途而废！{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#94011v#825F……唉，真是让人伤脑筋的主人啊……{wait}
+						}
+						TextWait
+						FlagSet flag[1]
+			elif ItemHas item[320] 0 >= 1:
+				TextTalk char[4] {
+					#94017v#821F啊…………{wait}
+				}
+				TextWait
+				SoundPlay sound[38] 0 0 100
+				Emote name[77] 0mm 1600mm 0 1 200ms 3
+				Sleep 1000ms
+				EmoteStop name[77]
+				FadeOut 300ms 0x00000000 100
+				TextSetName ""
+				TextMessage null {
+					{color 5}库拉茨好像在看
+					玛丽拿着的土人偶。{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				FadeIn 300ms 0x00000000
+				TextTalk char[4] {
+					#94018v#823F不、不，
+					没什么……{wait}
+				} {
+					#94019v（那个道具，
+					  是我拿来卖的……）{wait}
+				} {
+					#94020v#825F（其实是很贵重的东西……
+					  ……不过算了。）{wait}
+				} {
+					#94021v#821F要好好珍藏哦！{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#95179v#1714F是、是的…………？？{wait}
+				}
+				TextWait
+				FlagSet flag[12095]
+			elif ItemHas item[313] 0 >= 1:
+				TextTalk char[4] {
+					#94017v#821F啊…………{wait}
+				}
+				TextWait
+				Emote name[77] 0mm 1600mm 0 1 200ms 3
+				Emote name[78] 0mm 1600mm 0 1 200ms 3
+				Sleep 1000ms
+				EmoteStop name[77]
+				EmoteStop name[78]
+				FadeOut 300ms 0x00000000 100
+				TextSetName ""
+				TextMessage null {
+					{color 5}库拉茨好像在看
+					波利戴的柔软编织帽。{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				FadeIn 300ms 0x00000000
+				TextTalk char[4] {
+					#94018v#823F不、不，
+					没什么……{wait}
+				} {
+					#94024v#825F（那顶帽子，
+					  是我拿来卖的……）{wait}
+				}
+				TextWait
+				FlagSet flag[12095]
+			elif flag[12092]:
+				CharTurnTo char[4] 0deg 0deg/s
+				_Char4A char[3] 255
+				if flag[1]:
+					TextTalk char[3] {
+						#99445v可是，是在悬崖边上！{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#94016v#823F（完全莫名其妙……）{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[3] {
+						#99443v那个，
+						叫做幸福之石的，
+						就是玛丽和波利提到过的东西吧？{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#94013v#825F啊～
+						那个就别管啦……{wait}
+					} {
+						#94014v这个传单，
+						就贴在这里可以吗？{wait}
+					}
+					TextWait
+					TextTalk char[3] {
+						#99444v那个啊，一定是亮晶晶的，
+						这种感觉吧～㈱{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#94015v#823F（…………女孩子啊，
+						　还真喜欢这方面的事呢～。）{wait}
+					}
+					TextWait
+					_Char4B char[3] 255
+					FlagSet flag[1]
+			else:
+				CharTurnTo char[4] 0deg 0deg/s
+				if flag[1]:
+					TextTalk char[4] {
+						#94012v#825F虽然对工作热心很好……
+						但真是不想让这种类型的人当上司呢。{wait}
+					}
+					TextWait
+				else:
+					_Char4A char[3] 255
+					TextTalk char[4] {
+						#94010v#820F我想放在这边
+						应该差不多了吧。{wait}
+					}
+					TextWait
+					TextTalk char[3] {
+						#99431v不行！
+						这叫做半途而废！{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#94011v#825F……唉，真是让人伤脑筋的主人啊……{wait}
+					}
+					TextWait
+					_Char4B char[3] 255
+					FlagSet flag[1]
+		elif flag[12095]:
+			CharTurnTo char[4] 0deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "男人" {
+				#94026v嗯……怎么了？{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#95132v#1714F啊……想起来了！！{wait}
+			} {
+				#95133v#1711F是布莱克先生！{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalk char[4] {
+				#94028v#823F……是库拉茨。
+				各位，要记住我的名字哦。{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+		elif ItemHas item[320] 0 >= 1:
+			TextTalkNamed char[4] "男人" {
+				#94017v啊…………{wait}
+			}
+			TextWait
+			SoundPlay sound[38] 0 0 100
+			Emote name[77] 0mm 1600mm 0 1 200ms 3
+			Sleep 1000ms
+			EmoteStop name[77]
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}男人好像在看
+				玛丽拿着的土人偶。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			TextTalkNamed char[4] "男人" {
+				#94018v不、不，
+				没什么……{wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "男人" {
+				#94019v（那个道具，
+				  是我拿来卖的……）{wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "男人" {
+				#94020v（其实是很贵重的东西……
+				  ……不过算了。）{wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "男人" {
+				#94021v要好好珍藏哦！{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#95179v#1714F是、是的…………？？{wait}
+			}
+			TextWait
+			FlagSet flag[12095]
+		elif ItemHas item[313] 0 >= 1:
+			TextTalkNamed char[4] "男人" {
+				#94022v啊…………{wait}
+			}
+			TextWait
+			SoundPlay sound[38] 0 0 100
+			Emote name[77] 0mm 1600mm 0 1 200ms 3
+			Emote name[78] 0mm 1600mm 0 1 200ms 3
+			Sleep 1000ms
+			EmoteStop name[77]
+			EmoteStop name[78]
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}库拉茨好像在看
+				波利戴的柔软编织帽。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			TextTalkNamed char[4] "男人" {
+				#94023v不、不，
+				没什么……{wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "男人" {
+				#94024v（那顶帽子，
+				  是我拿来卖的……）{wait}
+			}
+			TextWait
+			FlagSet flag[12095]
+		else:
+			CharTurnTo char[4] 0deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "男人" {
+				#94026v嗯……怎么了？{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#95132v#1711F啊……想起来了！！{wait}
+			} {
+				#95133v是布莱克先生！{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalk char[4] {
+				#94028v#823F……是库拉茨。
+				各位，要记住我的名字哦。{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+	elif flag[12064]:
+		if flag[12094]:
+			if flag[12091]:
+				CharTurnTo char[4] 0deg 0deg/s
+				if flag[1]:
+					TextTalk char[4] {
+						#94001v#820F贴在这里就可以了吧……{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[4] {
+						#93999v#822F……唔～
+						贴得太高的话很难看到吧。{wait}
+					} {
+						#94000v#821F这里有不少老人和孩子，
+						还是贴低一点吧。{wait}
+					}
+					TextWait
+					FlagSet flag[1]
+			else:
+				CharTurnTo char[4] 0deg 0deg/s
+				if flag[1]:
+					TextTalk char[4] {
+						#94002v#823F虽然我是柏斯支部所属的，
+						最近却一直在
+						卢安工作啊～……{wait}
+					} {
+						#94003v唉，
+						都快一个月没回去了……{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[4] {
+						#94004v#823F嘉恩那家伙，
+						硬把工作都塞给我……{wait}
+					} {
+						#94005v帮忙义卖会这种事，
+						根本就不适合我嘛。{wait}
+					} {
+						#94006v#824F这应该是卡露娜的工作吧？
+						那个家伙，给我记住！{wait}
+					}
+					TextWait
+					FlagSet flag[1]
+		else:
+			CharTurnTo char[4] 0deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "男人" {
+				#93997v嗯……怎么了？{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#95132v#1714F啊……想起来了！！{wait}
+			} {
+				#95133v#1711F是布莱克先生！{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalk char[4] {
+				#93998v#823F……是库拉茨。
+				各位，要记住我的名字哦。{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12066]:
+	elif flag[12099]:
+		if flag[2]:
+			TextTalk self {
+				……一定是这个村子的人吧。{wait}
+			}
+			TextWait
+			TextTalk self {
+				因为他正那么开心地
+				在给义卖会帮忙嘛。{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				……和卢西亚在一起的
+				那个男人是谁啊？{wait}
+			}
+			TextWait
+			TextTalk self {
+				感觉好像以前见过似的，
+				是玛诺利亚村的人吗？{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12065]:
+		if flag[2]:
+			TextTalk self {
+				如果是花的话，
+				应该会有人买的。{wait}
+			} {
+				因为一看到漂亮的花
+				就会感到放松对吧？{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				……差不多到中午了呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				嗯，得把店收起来
+				去参加义卖会了！{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12064]:
+		if flag[2]:
+			TextTalk self {
+				怎么还没到中午呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				感觉心里老不踏实啊～{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				今天义卖会就要开始了。{wait}
+			}
+			TextWait
+			TextTalk self {
+				我也打算从下午开始
+				去那里帮忙呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				呵呵，
+				我也拿一些盆栽去卖吧。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-1560, 6000, -3200) 0ms
+	CamSetDistance 0 6100 -10000 0ms
+	CamZoom 3340 0ms
+	CamRotate 328000mdeg 0ms
+	CamPers 340 0ms
+	CharFlagsSet name[77] 0x0040
+	CharFlagsSet name[78] 0x0040
+	CharSetPos name[77] (3300, 6500, -2840) 90deg
+	CharSetPos name[78] (3300, 6500, -2840) 90deg
+	Fork char[2] fork[0]:
+		CamLookPos (5100, 6000, 960) 6000ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 6360 -10000 6000ms
+	Fork char[2] fork[2]:
+		CamZoom 2440 6000ms
+	Fork char[2] fork[3]:
+		CamRotate 318000mdeg 6000ms
+	Fork name[78] fork[1]:
+		CamPers 262 6000ms
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	SoundPlay sound[450] 0 0 100
+	FadeWait
+	ObjPlay object[2] 29
+	ObjWait object[2]
+	Sleep 200ms
+	ForkFunc name[77] fork[2] fn[0,6]
+	ForkFunc name[78] fork[2] fn[0,7]
+	Sleep 2500ms
+	ObjFlagsUnset object[2] 0x0800
+	ObjFrame object[2] 29
+	SoundPlay sound[7] 0 0 100
+	ObjPlay object[2] 0
+	ForkWait char[2] fork[0]
+	SoundStop sound[450]
+	ForkWait name[77] fork[2]
+	ForkWait name[78] fork[2]
+	TextTalk name[77] {
+		#95154v#1719F呼……{wait}
+	}
+	TextWait
+	Emote name[77] 0mm 1600mm 40 43 100ms 2
+	CharTurnTo name[77] 180deg 500deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#95155v#1718F怎、怎么办啊波利！
+		听到了不得了的话……！{wait}
+	} {
+		#95156v高山果然还是有
+		不可思议的力量的……{wait}
+	} {
+		#95157v#1903F这、这是真事啊！？{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#95426v#1730F我说，玛丽……{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 500deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#95158v#1719F（说、说不定古罗尼山峰
+		  真的有幸福之石……）{wait}
+	} {
+		#95159v#1711F（那、那样的话
+		  就说得通了对吧……？）{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#95427v#1733F……玛丽，
+		你都不听我说话……{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95160v#1719F……………………{wait}
+	} {
+		#95161v就、就过去
+		看一下吧……{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 180deg 400deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#95162v#1718F我说，波利……{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#95428v#1731F……玛丽，刚才啊～
+		克拉姆和达尼艾尔
+		来过了哦～？{wait}
+	}
+	TextWait
+	SoundPlay sound[39] 0 0 100
+	Emote name[77] 0mm 1600mm 2 7 200ms 1
+	Sleep 1000ms
+	EmoteStop name[77]
+	Sleep 200ms
+	TextTalk name[77] {
+		#95163v#1714F#3S……咦！？#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk name[78] {
+		#95429v#1730F说要去古罗尼山道～
+		还买了很多东西～……{wait}
+	} {
+		#95430v说什么准备完全了呢～。{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95164v#1714F那是真的吗！？
+		我完全没注意到……{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#95431v#1731F玛丽最近
+		总是在发呆呢～。{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95165v#1715F克、克拉姆真是的！{wait}
+	} {
+		#95166v老师不是一直说
+		不能跑到比玛诺利亚村更远的地方嘛！{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#95432v#1733F玛丽不是也打算
+		去古罗尼山道吗～。{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95167v#1900F（吓一跳）……{wait}
+	} {
+		#95168v#1903F因、因为要寻找
+		老师的生日礼物…………
+		就去一下没关系啦！{wait}
+	} {
+		#95169v而、而且还要把那两人
+		带回来才行啊。
+		这个只是顺便……对吧？{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#95433v#1731F……………………{wait}
+	} {
+		#95434v#1730F对老师要保密吗～？{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#95170v#1710F对，一定要保密哦。
+		因为是她的生日嘛！{wait}
+	}
+	TextWait
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5580, 6000, 260) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	TextTalk name[77] {
+		#95171v#1718F#11P……好，走吧！
+		波利，别走散哦！{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 400deg/s
+	Sleep 600ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5580, 6000, 8260) 1500mm/s 0
+	Fork name[78] fork[1]:
+		CharWalkToPos self (5700, 6000, 7580) 1500mm/s 0
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[77] fork[1]
+	ForkQuit name[78] fork[2]
+	CharSetPos name[77] (4120, 4000, 15700) 0deg
+	CharSetPos name[78] (4120, 4000, 15700) 0deg
+	CharFlagsUnset name[77] 0x0040
+	ObjFlagsSet object[2] 0x0800
+	ObjFrame object[2] 0
+	FlagSet flag[12065]
+	EventEnd 0
+	FadeIn 1000ms 0x00000000
+	Return
+
+fn[6]:
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5700, 6000, -2600) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5700, 6000, 1180) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	Return
+
+fn[7]:
+	Sleep 1200ms
+	Fork name[78] fork[1]:
+		CharWalkToPos self (5700, 6000, -2600) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	Fork name[78] fork[1]:
+		CharWalkToPos self (5700, 6000, -420) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	Return
+
+fn[8]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}　　　●第３回玛诺利亚村义卖会正在进行！●
+
+		今年玛诺利亚村义卖会的季节又到来了。
+		从本日开始的３天，将在风车小屋举行。
+		家中不需要的物品，或者还能使用的旧东西，
+		请务必拿出来作为商品出售。
+		说不定会意外淘到好东西。
+		各位，请积极参与！
+
+		{}　　　　　　　　　　玛诺利亚村义卖会实行委员会{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[9]:
+	PlaceSetName town[88]
+	Return
+
+fn[10]:
+	PlaceSetName town[87]
+	Return
+
+fn[11]:
+	PlaceSetName town[89]
+	Return

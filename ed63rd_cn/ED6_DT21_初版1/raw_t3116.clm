@@ -1,0 +1,537 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3116.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01190._ch" "npl/ch01190p._cp"
+chip[1] "npl/ch02020._ch" "npl/ch02020p._cp"
+chip[2] "npl/ch00060._ch" "npl/ch00060p._cp"
+chip[3] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+
+npc char[0]:
+	name "拉赛尔博士"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "艾莉卡"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "加鲁诺"
+	pos (-2000, 0, 3410)
+	angle 270deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,2]
+
+npc char[3]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[2] 0x0080
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	TextStart self
+	if flag[12165]:
+		if flag[0]:
+			CharTurnTo self 270deg 0deg/s
+			TextTalk self {
+				唔唔唔，
+				这里到底是削减还是不削减呢……{wait}
+			}
+			TextWait
+			TextTalk self {
+				但是不再控制一点制造成本
+				会被帝国制造的领先……{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				咦，你找艾莉卡博士？{wait}
+			}
+			TextWait
+			TextTalk self {
+				不，今天没看到呢。{wait}
+			}
+			TextWait
+			TextTalk self {
+				这里经常
+				会被器材堆满…………{wait}
+			}
+			TextWait
+			TextTalk self {
+				难道又有新发明什么的
+				要完成了吗？{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (1280, 0, 12800) 0ms
+	CamSetDistance 0 5000 -10000 0ms
+	CamZoom 2860 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[0] (-30, 0, 12840) 180deg
+	CharSetPos char[1] (-360, 0, 10320) 0deg
+	CharFlagsSet name[6] 0x0004
+	CharSetPos name[6] (-2800, 0, 3260) 0deg
+	SoundPlay sound[224] 1 0 100
+	ObjFlagsSet object[1] 0x0020
+	ObjFlagsSet object[2] 0x0020
+	ObjPlay object[1] 3
+	ObjPlay object[2] 3
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#96605v#101F#5P这个工作机是新型的，
+		可以以原来的十分之一精度
+		进行加工。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97961v#1457F#12P啧，
+		居然有这种东西……{wait}
+	} {
+		#97962v#1456F看来有必要
+		重新检讨基础设计啊！{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[109] 0 0 100
+	Sleep 500ms
+	TextTalk name[6] {
+		#83253v#560F#1P啊，妈妈！{wait}
+	} {
+		#83254v你在这里啊。{wait}
+	}
+	TextWait
+	_59
+	CharFlagsUnset name[6] 0x0004
+	CharSetPos name[6] (-360, 0, 3120) 0deg
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-360, 0, 8790) 4500mm/s 0
+	Sleep 100ms
+	SoundPlay sound[109] 0 0 100
+	ForkWait name[6] fork[1]
+	Sleep 300ms
+	TextTalk char[1] {
+		#97963v#1450F#5P哎呀，提妲。{wait}
+	} {
+		#97964v你那边顺利吗？{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83255v#061F#12P嗯。
+		回国文件那边没问题。{wait}
+	} {
+		#83256v工房长叔叔
+		说会马上准备好的。{wait}
+	} {
+		#83257v#560F对了，妈妈……{wait}
+	} {
+		#83258v我也想参加
+		导力装甲的开发。{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[1] 180deg 500deg/s
+	ObjFlagsUnset object[1] 0x0020
+	ObjFlagsUnset object[2] 0x0020
+	SoundStop sound[224]
+	SoundPlay sound[154] 0 0 100
+	Sleep 800ms
+	TextTalk char[1] {
+		#97965v#1454F#5P提妲……？{wait}
+	}
+	TextWait
+	ForkFunc char[0] fork[3] fn[0,4]
+	TextTalk name[6] {
+		#83259v#063F#12P嗯，那个……
+		虽然我没写在信里……{wait}
+	} {
+		#83260v其实我
+		曾经和玲在一起
+		待过一段时间……{wait}
+	} {
+		#83261v#062F玲虽然
+		加入了『结社』，
+		但她还是我的朋友。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#98165v#1452F#5P玲………………{wait}
+		#98166v#1457F我就觉得
+		好像在哪儿听过…………{wait}
+	} {
+		#97966v#1453F是帕蒂尔·玛蒂尔的操纵者吧。{wait}
+	}
+	TextWait
+	ForkWait char[0] fork[3]
+	TextTalk char[0] {
+		#96606v#100F#5P啊，艾莉卡。
+		让我来补充吧……{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] char[0] 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#97967v#1830F#11P补充？{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (-1660, -120, 12880) 1500ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 4320 -10000 1500ms
+	Fork char[3] fork[2]:
+		CamRotate 36000mdeg 1500ms
+	ForkLoop name[6] fork[2]:
+		CharTurnToChar self char[1] 500deg/s
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 10360) 5000mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 11760) 5000mm/s 0
+	ForkWait char[1] fork[1]
+	Shake 0 100 3000 100ms
+	SoundPlay sound[143] 0 0 100
+	char[0].40 = 1 | 8 | 4
+	CharFlagsSet char[0] 0x0004
+	Fork char[0] fork[2]:
+		CharShake self 15 0 0 3000ms
+	Fork char[0] fork[1]:
+		CharJump self 0 300 0 300 1000mm/s
+	ForkWait char[0] fork[1]
+	Sleep 500ms
+	ForkQuit name[6] fork[2]
+	Emote name[6] 0mm 1700mm 40 43 100ms 3
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-3240, 0, 9600) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-3240, 0, 9900) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	Sleep 300ms
+	TextTalk name[6] {
+		#83262v#065F妈、妈妈！？
+		那个…………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97968v#1457F#6P这到底是怎么回事呢。
+		阿尔巴特·拉赛尔……{wait}
+	} {
+		#97969v提妲居然和
+		『结社』的成员在一起……？{wait}
+	} {
+		#97970v#1459F这种事，
+		资料上没有写啊！！{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#96607v#104F#5P啊～那是～……{wait}
+	} {
+		#96608v实在很难写出来嘛，
+		这种事……{wait}
+	}
+	TextWait
+	CharFlagsSet char[0] 0x0020
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 12560) 1000mm/s 0
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (-3200, 300, 13080) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	Sleep 300ms
+	CharFlagsUnset char[0] 0x0020
+	TextTalk char[1] {
+		#97971v#1459F#6P不是这个意思。{wait}
+	} {
+		#97972v你居然让提妲
+		置身于如此危险境地……{wait}
+	} {
+		#97973v#1830F#3S你这混帐，
+		到底是怎么对待你可爱的孙女的啊！！#2S{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83263v#062F妈、妈妈！
+		让我也参与开发吧！{wait}
+	} {
+		#83264v虽然我力量微薄，
+		但是还是想和
+		玲好好谈谈。{wait}
+	} {
+		#83265v用这个导力装甲
+		就可以对抗
+		帕蒂尔·玛蒂尔吧？{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[6] {
+		#83266v#068F我、我也
+		想要艾丝蒂尔姐姐
+		那样的力量……！{wait}
+	}
+	Shake 0 300 3000 100ms
+	TextWait
+	BgmStop 3000ms
+	ForkQuit char[0] fork[2]
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#97974v#1453F#5P…………提妲？{wait}
+	}
+	TextWait
+	CharFlagsUnset char[0] 0x0004
+	Fork char[0] fork[1]:
+		_Char96 self (-3300, 0, 13180) 10 4000
+	ForkWait char[0] fork[1]
+	char[0].40 = 1 | 8
+	SoundPlay sound[142] 0 0 50
+	SoundPlay sound[209] 0 0 100
+	Sleep 300ms
+	CharTurnToChar char[1] name[6] 500deg/s
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 12060) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	TextTalk char[1] {
+		#97975v#1452F#5P难不成你…………{wait}
+	} {
+		#97976v想用导力装甲，
+		和帕蒂尔·玛蒂尔作战？{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83267v#564F#12P咦…………？{wait}
+	} {
+		#83268v不、不是那个意思，
+		我是…………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97977v#1457F#5P…………提妲。{wait}
+	} {
+		#97978v你明白制造导力装甲
+		是怎么一回事吗？{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83269v#064F#12P咦…………嗯、嗯。{wait}
+	} {
+		#83270v#560F虽然只是瞄了一眼，
+		不过应该是双足步行型……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97979v#1453F#5P不是说这个。{wait}
+	} {
+		#97980v导力装甲是兵器。
+		就算怎么美化也不会改变。{wait}
+	} {
+		#97981v#1452F说白了，
+		就是伤人的道具。{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83271v#063F#12P但、但是…………{wait}
+	} {
+		#83272v妈妈也不是为了这个
+		才制造的吧……？{wait}
+	} {
+		#83273v警备飞艇也是
+		为了保卫利贝尔而存在的……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97982v#1457F#5P『为了什么』并不重要。{wait}
+	} {
+		#97983v实际使用兵器的
+		也不是我们。{wait}
+	} {
+		#97984v#1453F自己制造的机械，
+		会为许多人带来悲伤。{wait}
+	} {
+		#97985v#1452F提妲，
+		你想过这种事吗？{wait}
+	} {
+		#97986v即使如此也还是想要得到力量吗？{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83274v#065F#12P呜…………{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97987v#1453F#5P我们所做的事情，
+		就包含了这种可能性。{wait}
+	} {
+		#97988v#1457F我也非常喜欢提妲。{wait}
+	} {
+		#97989v我明白你
+		对朋友的重视。{wait}
+	} {
+		#97990v但是，
+		并不能因此
+		就认同提妲的参与。{wait}
+	} {
+		#97991v#1452F你明白吧，提妲。{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83275v#065F#12P#40W…………………………{wait}
+	} {
+		#83276v#562F但、但是…………
+		……我也…………{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[6] {
+		#83277v#069F#12P#3S……不是抱着
+		随随便便的心情，才说的……！{wait}
+	}
+	Shake 0 300 3000 150ms
+	TextWait
+	CharTurnTo name[6] 90deg 600deg/s
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-1300, 0, 9600) 5000mm/s 0
+	ForkWait name[6] fork[1]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-1300, 0, 1000) 5000mm/s 0
+	ForkWait name[6] fork[1]
+	SoundPlay sound[109] 0 0 100
+	Emote char[0] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	SoundPlay sound[109] 0 0 100
+	Sleep 1000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#96609v#104F#5P艾莉卡啊，
+		这次的事情
+		提妲应该也想了很多。{wait}
+	} {
+		#96610v#102F不能稍微
+		尊重一下她的想法吗。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97992v#1457F#6P但也不能因为这个
+		就让她参与兵器的开发啊。{wait}
+	} {
+		#97993v……研究成果离开自己的手之后
+		无论被如何使用，
+		研究者都是无法干涉的。{wait}
+	} {
+		#97994v#1453F我们对于这种事，
+		也只能事先有所觉悟。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#96611v#104F#5P…………是啊。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97995v#1452F#6P虽然也明白那孩子的心情，
+		但是绝不能让她
+		接触导力装甲计划。{wait}
+	} {
+		#97996v#1457F那个孩子，
+		不必为这种事而烦恼……{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamZoom 2960 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9476]
+	NewScene "t3112._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-30, 0, 14080) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-2200, 0, 14080) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-3200, 0, 13080) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-3200, 0, 12280) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self char[1] 500deg/s
+	Return

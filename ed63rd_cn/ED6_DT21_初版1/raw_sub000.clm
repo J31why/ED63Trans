@@ -1,0 +1,738 @@
+calmare sc scena
+scena:
+	name "a" "a.x"
+	town town[0]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	var[101] = random % 8
+	switch var[101]:
+		case 0:
+			CharAnimation self 0 7 1450ms
+			break
+		case 1:
+			CharAnimation self 0 7 1550ms
+			break
+		case 2:
+			CharAnimation self 0 7 1600ms
+			break
+		case 3:
+			CharAnimation self 0 7 1400ms
+			break
+		case 4:
+			CharAnimation self 0 7 1650ms
+			break
+		case 5:
+			CharAnimation self 0 7 1350ms
+			break
+		case 6:
+			CharAnimation self 0 7 1500ms
+			break
+		default:
+			CharAnimation self 0 7 1500ms
+			break
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	Return
+
+fn[4]:
+	Return
+
+fn[5]:
+	Return
+
+fn[6]:
+	Return
+
+fn[7]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}打开『门』吗？{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"【是】" // 0
+		"【否】" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[8]:
+	PartySetAttr name[8] 0 90
+	PartySetAttr name[8] 254 0
+	PartyEquip name[8] item[1361] 255
+	PartyEquip name[8] item[1550] 255
+	PartyEquip name[8] item[100] 255
+	PartyAddCraft name[8] magic[0]
+	PartySetPortrait name[8] 6 14 1 0 0
+	PartySetSlot name[8] 127 2
+	PartyEquip name[8] item[678] 0
+	PartyEquip name[8] item[662] 1
+	PartyEquip name[8] item[660] 2
+	PartyEquip name[8] item[668] 3
+	PartyEquip name[8] item[666] 4
+	PartyEquip name[8] item[657] 5
+	PartyEquip name[8] item[711] 6
+	Return
+
+fn[9]:
+	PartySetAttr name[14] 0 90
+	PartySetAttr name[14] 254 0
+	PartyEquip name[14] item[1451] 255
+	PartyEquip name[14] item[1550] 255
+	PartyEquip name[14] item[100] 255
+	PartyAddCraft name[14] magic[0]
+	PartySetSlot name[14] 128 2
+	PartySetSlot name[14] 129 2
+	PartySetSlot name[14] 130 2
+	PartySetSlot name[14] 131 1
+	PartySetSlot name[14] 132 1
+	PartySetSlot name[14] 133 2
+	PartySetSlot name[14] 134 2
+	PartyEquip name[14] item[722] 0
+	PartyEquip name[14] item[608] 1
+	PartyEquip name[14] item[602] 2
+	PartyEquip name[14] item[614] 3
+	PartyEquip name[14] item[617] 4
+	PartyEquip name[14] item[628] 5
+	PartyEquip name[14] item[623] 6
+	Return
+
+fn[10]:
+	PartySetAttr name[0] 0 113
+	PartySetAttr name[0] 254 0
+	PartyEquip name[0] item[1001] 255
+	PartyEquip name[0] item[1555] 255
+	PartyEquip name[0] item[106] 255
+	PartyAddCraft name[0] magic[0]
+	PartySetPortrait name[0] 6 232 0 0 0
+	PartySetSlot name[0] 128 2
+	PartySetSlot name[0] 129 2
+	PartySetSlot name[0] 130 2
+	PartySetSlot name[0] 131 2
+	PartySetSlot name[0] 132 2
+	PartySetSlot name[0] 133 2
+	PartySetSlot name[0] 134 2
+	PartyEquip name[0] item[726] 0
+	PartyEquip name[0] item[664] 6
+	PartyEquip name[0] item[623] 1
+	PartyEquip name[0] item[714] 2
+	PartyEquip name[0] item[670] 3
+	PartyEquip name[0] item[660] 4
+	PartyEquip name[0] item[614] 5
+	Return
+
+fn[11]:
+	PartySetAttr name[1] 0 102
+	PartySetAttr name[1] 254 0
+	PartyEquip name[1] item[1046] 255
+	PartyEquip name[1] item[1552] 255
+	PartyEquip name[1] item[103] 255
+	PartyAddCraft name[1] magic[0]
+	PartySetPortrait name[1] 6 237 0 0 0
+	PartySetSlot name[1] 128 2
+	PartySetSlot name[1] 129 2
+	PartySetSlot name[1] 130 2
+	PartySetSlot name[1] 131 2
+	PartySetSlot name[1] 132 1
+	PartySetSlot name[1] 133 2
+	PartySetSlot name[1] 134 1
+	PartyEquip name[1] item[628] 0
+	PartyEquip name[1] item[622] 1
+	PartyEquip name[1] item[712] 2
+	PartyEquip name[1] item[710] 3
+	PartyEquip name[1] item[604] 4
+	PartyEquip name[1] item[613] 5
+	PartyEquip name[1] item[607] 6
+	Return
+
+fn[12]:
+	PartySetAttr name[2] 0 110
+	PartySetAttr name[2] 254 0
+	PartyEquip name[2] item[1091] 255
+	PartyEquip name[2] item[1555] 255
+	PartyEquip name[2] item[106] 255
+	PartyAddCraft name[2] magic[0]
+	PartySetPortrait name[2] 6 241 0 0 0
+	PartySetSlot name[2] 128 2
+	PartySetSlot name[2] 129 1
+	PartySetSlot name[2] 130 1
+	PartySetSlot name[2] 131 2
+	PartySetSlot name[2] 132 2
+	PartySetSlot name[2] 133 2
+	PartySetSlot name[2] 134 2
+	PartyEquip name[2] item[674] 0
+	PartyEquip name[2] item[614] 1
+	PartyEquip name[2] item[605] 2
+	PartyEquip name[2] item[629] 3
+	PartyEquip name[2] item[640] 4
+	PartyEquip name[2] item[608] 5
+	Return
+
+fn[13]:
+	PartySetAttr name[3] 0 107
+	PartySetAttr name[3] 254 0
+	PartyEquip name[3] item[1138] 255
+	PartyEquip name[3] item[1554] 255
+	PartyEquip name[3] item[104] 255
+	PartyAddCraft name[3] magic[0]
+	PartySetPortrait name[3] 6 246 0 0 0
+	PartySetSlot name[3] 128 2
+	PartySetSlot name[3] 129 2
+	PartySetSlot name[3] 130 2
+	PartySetSlot name[3] 131 2
+	PartySetSlot name[3] 132 2
+	PartySetSlot name[3] 133 2
+	PartySetSlot name[3] 134 2
+	PartyEquip name[3] item[605] 0
+	PartyEquip name[3] item[620] 1
+	PartyEquip name[3] item[610] 2
+	PartyEquip name[3] item[607] 3
+	PartyEquip name[3] item[622] 4
+	PartyEquip name[3] item[625] 5
+	Return
+
+fn[14]:
+	PartySetAttr name[4] 0 104
+	PartySetAttr name[4] 254 0
+	PartyEquip name[4] item[1181] 255
+	PartyEquip name[4] item[1552] 255
+	PartyEquip name[4] item[103] 255
+	PartyAddCraft name[4] magic[0]
+	PartySetPortrait name[4] 6 250 0 0 0
+	PartySetSlot name[4] 128 2
+	PartySetSlot name[4] 129 1
+	PartySetSlot name[4] 130 1
+	PartySetSlot name[4] 131 2
+	PartySetSlot name[4] 132 2
+	PartySetSlot name[4] 133 2
+	PartySetSlot name[4] 134 2
+	PartyEquip name[4] item[601] 0
+	PartyEquip name[4] item[613] 1
+	PartyEquip name[4] item[604] 2
+	PartyEquip name[4] item[724] 3
+	PartyEquip name[4] item[713] 4
+	PartyEquip name[4] item[616] 5
+	PartyEquip name[4] item[710] 6
+	Return
+
+fn[15]:
+	PartySetAttr name[5] 0 112
+	PartySetAttr name[5] 254 0
+	PartyEquip name[5] item[1230] 255
+	PartyEquip name[5] item[1555] 255
+	PartyEquip name[5] item[106] 255
+	PartyAddCraft name[5] magic[0]
+	PartySetPortrait name[5] 6 1 1 0 0
+	PartySetSlot name[5] 128 2
+	PartySetSlot name[5] 129 2
+	PartySetSlot name[5] 130 1
+	PartySetSlot name[5] 131 2
+	PartySetSlot name[5] 132 1
+	PartySetSlot name[5] 133 2
+	PartySetSlot name[5] 134 1
+	PartyEquip name[5] item[664] 0
+	PartyEquip name[5] item[626] 1
+	PartyEquip name[5] item[617] 2
+	PartyEquip name[5] item[602] 3
+	PartyEquip name[5] item[643] 5
+	PartyEquip name[5] item[610] 6
+	Return
+
+fn[16]:
+	PartySetAttr name[6] 0 92
+	PartySetAttr name[6] 254 0
+	PartyEquip name[6] item[1271] 255
+	PartyEquip name[6] item[1551] 255
+	PartyEquip name[6] item[101] 255
+	PartyAddCraft name[6] magic[0]
+	PartySetPortrait name[6] 6 5 1 0 0
+	PartySetSlot name[6] 128 2
+	PartySetSlot name[6] 129 2
+	PartySetSlot name[6] 130 1
+	PartySetSlot name[6] 131 1
+	PartySetSlot name[6] 132 2
+	PartySetSlot name[6] 133 1
+	PartySetSlot name[6] 134 2
+	PartyEquip name[6] item[712] 0
+	PartyEquip name[6] item[606] 2
+	PartyEquip name[6] item[721] 3
+	PartyEquip name[6] item[600] 4
+	Return
+
+fn[17]:
+	PartySetAttr name[7] 0 107
+	PartySetAttr name[7] 254 0
+	PartyEquip name[7] item[1316] 255
+	PartyEquip name[7] item[1554] 255
+	PartyEquip name[7] item[104] 255
+	PartyAddCraft name[7] magic[0]
+	PartySetPortrait name[7] 6 11 1 0 0
+	PartySetSlot name[7] 128 2
+	PartySetSlot name[7] 129 2
+	PartySetSlot name[7] 130 1
+	PartySetSlot name[7] 131 2
+	PartySetSlot name[7] 132 2
+	PartySetSlot name[7] 133 2
+	PartySetSlot name[7] 134 1
+	PartyEquip name[7] item[611] 0
+	PartyEquip name[7] item[602] 1
+	PartyEquip name[7] item[713] 2
+	PartyEquip name[7] item[641] 5
+	PartyEquip name[7] item[626] 6
+	Return
+
+fn[18]:
+	PartySetAttr name[9] 0 108
+	PartySetAttr name[9] 254 0
+	PartyEquip name[9] item[1406] 255
+	PartyEquip name[9] item[1555] 255
+	PartyEquip name[9] item[106] 255
+	PartyAddCraft name[9] magic[0]
+	PartySetPortrait name[9] 6 16 1 0 0
+	PartySetSlot name[9] 128 2
+	PartySetSlot name[9] 129 2
+	PartySetSlot name[9] 130 1
+	PartySetSlot name[9] 131 2
+	PartySetSlot name[9] 132 2
+	PartySetSlot name[9] 133 1
+	PartySetSlot name[9] 134 2
+	PartyEquip name[9] item[707] 0
+	PartyEquip name[9] item[713] 1
+	PartyEquip name[9] item[611] 2
+	PartyEquip name[9] item[626] 3
+	PartyEquip name[9] item[623] 4
+	PartyEquip name[9] item[602] 5
+	Return
+
+fn[19]:
+	PartySetAttr name[10] 0 100
+	PartySetAttr name[10] 254 0
+	PartyEquip name[10] item[1136] 255
+	PartyEquip name[10] item[1552] 255
+	PartyEquip name[10] item[103] 255
+	PartyAddCraft name[10] magic[0]
+	PartySetSlot name[10] 128 2
+	PartySetSlot name[10] 129 1
+	PartySetSlot name[10] 130 2
+	PartySetSlot name[10] 131 2
+	PartySetSlot name[10] 132 2
+	PartySetSlot name[10] 133 1
+	PartySetSlot name[10] 134 1
+	PartyEquip name[10] item[610] 0
+	PartyEquip name[10] item[713] 1
+	PartyEquip name[10] item[637] 2
+	PartyEquip name[10] item[607] 3
+	Return
+
+fn[20]:
+	PartySetAttr name[11] 0 117
+	PartySetAttr name[11] 254 0
+	PartyEquip name[11] item[1407] 255
+	PartyEquip name[11] item[1557] 255
+	PartyEquip name[11] item[107] 255
+	PartyAddCraft name[11] magic[0]
+	PartySetPortrait name[11] 6 20 1 0 0
+	PartySetSlot name[11] 128 2
+	PartySetSlot name[11] 129 2
+	PartySetSlot name[11] 130 2
+	PartySetSlot name[11] 131 2
+	PartySetSlot name[11] 132 2
+	PartySetSlot name[11] 133 2
+	PartySetSlot name[11] 134 2
+	PartyEquip name[11] item[664] 0
+	PartyEquip name[11] item[678] 1
+	PartyEquip name[11] item[715] 2
+	PartyEquip name[11] item[672] 4
+	PartyEquip name[11] item[668] 5
+	PartyEquip name[11] item[674] 6
+	Return
+
+fn[21]:
+	PartySetAttr name[12] 0 99
+	PartySetAttr name[12] 254 0
+	PartyEquip name[12] item[1226] 255
+	PartyEquip name[12] item[1552] 255
+	PartyEquip name[12] item[103] 255
+	PartyAddCraft name[12] magic[0]
+	PartySetPortrait name[12] 6 22 1 0 0
+	PartySetSlot name[12] 128 2
+	PartySetSlot name[12] 129 2
+	PartySetSlot name[12] 130 1
+	PartySetSlot name[12] 131 1
+	PartySetSlot name[12] 132 1
+	PartySetSlot name[12] 133 2
+	PartySetSlot name[12] 134 1
+	PartyEquip name[12] item[601] 0
+	PartyEquip name[12] item[628] 1
+	PartyEquip name[12] item[607] 2
+	PartyEquip name[12] item[618] 4
+	PartyEquip name[12] item[624] 5
+	Return
+
+fn[22]:
+	PartySetAttr name[13] 0 94
+	PartySetAttr name[13] 254 0
+	PartyEquip name[13] item[1181] 255
+	PartyEquip name[13] item[1551] 255
+	PartyEquip name[13] item[101] 255
+	PartyAddCraft name[13] magic[0]
+	PartySetPortrait name[13] 6 24 1 0 0
+	PartySetSlot name[13] 128 2
+	PartySetSlot name[13] 129 2
+	PartySetSlot name[13] 130 1
+	PartySetSlot name[13] 131 2
+	PartySetSlot name[13] 132 1
+	PartySetSlot name[13] 133 1
+	PartySetSlot name[13] 134 1
+	PartyEquip name[13] item[712] 0
+	PartyEquip name[13] item[627] 1
+	PartyEquip name[13] item[618] 2
+	PartyEquip name[13] item[630] 3
+	PartyEquip name[13] item[624] 4
+	PartyEquip name[13] item[606] 5
+	PartyEquip name[13] item[615] 6
+	Return
+
+fn[23]:
+	PartySetAttr name[15] 0 119
+	PartySetAttr name[15] 254 0
+	PartyEquip name[15] item[1496] 255
+	PartyEquip name[15] item[1557] 255
+	PartyEquip name[15] item[107] 255
+	PartyAddCraft name[15] magic[0]
+	PartySetPortrait name[15] 6 28 1 0 0
+	PartySetSlot name[15] 128 3
+	PartySetSlot name[15] 129 3
+	PartySetSlot name[15] 130 3
+	PartySetSlot name[15] 131 3
+	PartySetSlot name[15] 132 3
+	PartySetSlot name[15] 133 3
+	PartySetSlot name[15] 134 3
+	PartyEquip name[15] item[669] 0
+	PartyEquip name[15] item[671] 3
+	PartyEquip name[15] item[664] 4
+	PartyEquip name[15] item[660] 5
+	PartyEquip name[15] item[740] 6
+	PartyEquip name[15] item[728] 1
+	PartyEquip name[15] item[725] 2
+	Return
+
+fn[24]:
+	if PartyPosition name[0] != -1 && !flag[11504]:
+		FlagSet flag[11504]
+		ItemAdd item[1008] 1
+		TextMessage null {
+			{color 0}得到了{item item[1008]}{color 0}。{wait}
+		}
+	elif PartyPosition name[1] != -1 && !flag[11505]:
+		FlagSet flag[11505]
+		ItemAdd item[1056] 1
+		TextMessage null {
+			{color 0}得到了{item item[1056]}{color 0}。{wait}
+		}
+	elif PartyPosition name[2] != -1 && !flag[11506]:
+		FlagSet flag[11506]
+		ItemAdd item[1098] 1
+		TextMessage null {
+			{color 0}得到了{item item[1098]}{color 0}。{wait}
+		}
+	elif PartyPosition name[3] != -1 && !flag[11507]:
+		FlagSet flag[11507]
+		ItemAdd item[1146] 1
+		TextMessage null {
+			{color 0}得到了{item item[1146]}{color 0}。{wait}
+		}
+	elif PartyPosition name[4] != -1 && !flag[11508]:
+		FlagSet flag[11508]
+		ItemAdd item[1192] 1
+		TextMessage null {
+			{color 0}得到了{item item[1192]}{color 0}。{wait}
+		}
+	elif PartyPosition name[5] != -1 && !flag[11509]:
+		FlagSet flag[11509]
+		ItemAdd item[1236] 1
+		TextMessage null {
+			{color 0}得到了{item item[1236]}{color 0}。{wait}
+		}
+	elif PartyPosition name[6] != -1 && !flag[11510]:
+		FlagSet flag[11510]
+		ItemAdd item[1282] 1
+		TextMessage null {
+			{color 0}得到了{item item[1282]}{color 0}。{wait}
+		}
+	elif PartyPosition name[7] != -1 && !flag[11511]:
+		FlagSet flag[11511]
+		ItemAdd item[1324] 1
+		TextMessage null {
+			{color 0}得到了{item item[1324]}{color 0}。{wait}
+		}
+	elif PartyPosition name[8] != -1 && !flag[11512]:
+		FlagSet flag[11512]
+		ItemAdd item[1372] 1
+		TextMessage null {
+			{color 0}得到了{item item[1372]}{color 0}。{wait}
+		}
+	elif PartyPosition name[9] != -1 && !flag[11513]:
+		FlagSet flag[11513]
+		ItemAdd item[1413] 1
+		TextMessage null {
+			{color 0}得到了{item item[1413]}{color 0}。{wait}
+		}
+	elif PartyPosition name[10] != -1 && !flag[11514]:
+		FlagSet flag[11514]
+		ItemAdd item[1146] 1
+		TextMessage null {
+			{color 0}得到了{item item[1146]}{color 0}。{wait}
+		}
+	elif PartyPosition name[11] != -1 && !flag[11515]:
+		FlagSet flag[11515]
+		ItemAdd item[1413] 1
+		TextMessage null {
+			{color 0}得到了{item item[1413]}{color 0}。{wait}
+		}
+	elif PartyPosition name[12] != -1 && !flag[11516]:
+		FlagSet flag[11516]
+		ItemAdd item[1236] 1
+		TextMessage null {
+			{color 0}得到了{item item[1236]}{color 0}。{wait}
+		}
+	elif PartyPosition name[13] != -1 && !flag[11517]:
+		FlagSet flag[11517]
+		ItemAdd item[1192] 1
+		TextMessage null {
+			{color 0}得到了{item item[1192]}{color 0}。{wait}
+		}
+	elif PartyPosition name[14] != -1 && !flag[11518]:
+		FlagSet flag[11518]
+		ItemAdd item[1462] 1
+		TextMessage null {
+			{color 0}得到了{item item[1462]}{color 0}。{wait}
+		}
+	elif PartyPosition name[15] != -1 && !flag[11519]:
+		FlagSet flag[11519]
+		ItemAdd item[1501] 1
+		TextMessage null {
+			{color 0}得到了{item item[1501]}{color 0}。{wait}
+		}
+	Return
+
+fn[25]:
+	PartySetPortrait name[0] 1 0 0 0 0
+	PartySetPortrait name[1] 1 26 0 0 0
+	PartySetPortrait name[2] 1 25 0 0 0
+	PartySetPortrait name[4] 1 29 0 0 0
+	PartySetPortrait name[3] 1 27 0 0 0
+	PartySetPortrait name[10] 1 10 0 0 0
+	PartySetPortrait name[11] 1 11 0 0 0
+	PartySetPortraitFinish
+	Return
+
+fn[26]:
+	if PartyPosition name[1] != -1 && !flag[10417]:
+		FlagSet flag[10417]
+		ItemAdd item[1049] 1
+		TextMessage null {
+			{color 0}得到了{item item[1049]}{color 0}。{wait}
+		}
+	elif PartyPosition name[4] != -1 && !flag[10420]:
+		FlagSet flag[10420]
+		ItemAdd item[350] 1
+		TextMessage null {
+			{color 0}得到了{item item[350]}{color 0}。{wait}
+		}
+	elif PartyPosition name[6] != -1 && !flag[10422]:
+		FlagSet flag[10422]
+		ItemAdd item[392] 1
+		TextMessage null {
+			{color 0}得到了{item item[392]}{color 0}。{wait}
+		}
+	elif PartyPosition name[10] != -1 && !flag[10426]:
+		FlagSet flag[10426]
+		ItemAdd item[1139] 1
+		TextMessage null {
+			{color 0}得到了{item item[1139]}{color 0}。{wait}
+		}
+	elif PartyPosition name[12] != -1 && !flag[10428]:
+		FlagSet flag[10428]
+		ItemAdd item[1230] 1
+		TextMessage null {
+			{color 0}得到了{item item[1230]}{color 0}。{wait}
+		}
+	elif PartyPosition name[13] != -1 && !flag[10429]:
+		FlagSet flag[10429]
+		ItemAdd item[363] 1
+		TextMessage null {
+			{color 0}得到了{item item[363]}{color 0}。{wait}
+		}
+	else:
+		ItemAdd item[516] 1
+		TextMessage null {
+			{color 0}得到了{item item[516]}{color 0}。{wait}
+		}
+	Return
+
+fn[27]:
+	FadeOut 0ms 0x00000000 255
+	EffLoad eff[0] "map\\mp252_04.eff"
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	EffPlay eff[0] eff_instance[0] field_party[0] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[1] field_party[1] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[2] field_party[2] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[3] field_party[3] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Sleep 2000ms
+	Fork field_party[0] fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	ForkWait field_party[0] fork[1]
+	ForkWait field_party[1] fork[1]
+	ForkWait field_party[2] fork[1]
+	ForkWait field_party[3] fork[1]
+	_83 eff_instance[0] 2
+	_83 eff_instance[1] 2
+	_83 eff_instance[2] 2
+	_83 eff_instance[3] 2
+	Sleep 2000ms
+	Return
+
+fn[28]:
+	if PartyPosition name[0] != -1 && !flag[11344]:
+		FlagSet flag[11344]
+		ItemAdd item[1635] 1
+		TextMessage null {
+			{color 0}得到了{item item[1635]}{color 0}。{wait}
+		}
+	elif PartyPosition name[1] != -1 && !flag[11345]:
+		FlagSet flag[11345]
+		ItemAdd item[1614] 1
+		TextMessage null {
+			{color 0}得到了{item item[1614]}{color 0}。{wait}
+		}
+	elif PartyPosition name[2] != -1 && !flag[11346]:
+		FlagSet flag[11346]
+		ItemAdd item[194] 1
+		TextMessage null {
+			{color 0}得到了{item item[194]}{color 0}。{wait}
+		}
+	elif PartyPosition name[3] != -1 && !flag[11347]:
+		FlagSet flag[11347]
+		ItemAdd item[174] 1
+		TextMessage null {
+			{color 0}得到了{item item[174]}{color 0}。{wait}
+		}
+	elif PartyPosition name[4] != -1 && !flag[11348]:
+		FlagSet flag[11348]
+		ItemAdd item[194] 1
+		TextMessage null {
+			{color 0}得到了{item item[194]}{color 0}。{wait}
+		}
+	elif PartyPosition name[5] != -1 && !flag[11349]:
+		FlagSet flag[11349]
+		ItemAdd item[1635] 1
+		TextMessage null {
+			{color 0}得到了{item item[1635]}{color 0}。{wait}
+		}
+	elif PartyPosition name[6] != -1 && !flag[11350]:
+		FlagSet flag[11350]
+		ItemAdd item[1635] 1
+		TextMessage null {
+			{color 0}得到了{item item[1635]}{color 0}。{wait}
+		}
+	elif PartyPosition name[7] != -1 && !flag[11351]:
+		FlagSet flag[11351]
+		ItemAdd item[1614] 1
+		TextMessage null {
+			{color 0}得到了{item item[1614]}{color 0}。{wait}
+		}
+	elif PartyPosition name[8] != -1 && !flag[11352]:
+		FlagSet flag[11352]
+		ItemAdd item[174] 1
+		TextMessage null {
+			{color 0}得到了{item item[174]}{color 0}。{wait}
+		}
+	elif PartyPosition name[9] != -1 && !flag[11353]:
+		FlagSet flag[11353]
+		ItemAdd item[194] 1
+		TextMessage null {
+			{color 0}得到了{item item[194]}{color 0}。{wait}
+		}
+	elif PartyPosition name[10] != -1 && !flag[11354]:
+		FlagSet flag[11354]
+		ItemAdd item[1635] 1
+		TextMessage null {
+			{color 0}得到了{item item[1635]}{color 0}。{wait}
+		}
+	elif PartyPosition name[11] != -1 && !flag[11355]:
+		FlagSet flag[11355]
+		ItemAdd item[174] 1
+		TextMessage null {
+			{color 0}得到了{item item[174]}{color 0}。{wait}
+		}
+	elif PartyPosition name[12] != -1 && !flag[11356]:
+		FlagSet flag[11356]
+		ItemAdd item[1614] 1
+		TextMessage null {
+			{color 0}得到了{item item[1614]}{color 0}。{wait}
+		}
+	elif PartyPosition name[13] != -1 && !flag[11357]:
+		FlagSet flag[11357]
+		ItemAdd item[194] 1
+		TextMessage null {
+			{color 0}得到了{item item[194]}{color 0}。{wait}
+		}
+	elif PartyPosition name[14] != -1 && !flag[11358]:
+		FlagSet flag[11358]
+		ItemAdd item[194] 1
+		TextMessage null {
+			{color 0}得到了{item item[194]}{color 0}。{wait}
+		}
+	elif PartyPosition name[15] != -1 && !flag[11359]:
+		FlagSet flag[11359]
+		ItemAdd item[1635] 1
+		TextMessage null {
+			{color 0}得到了{item item[1635]}{color 0}。{wait}
+		}
+	Return

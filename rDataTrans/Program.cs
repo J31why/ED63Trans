@@ -182,11 +182,13 @@ internal class Program
 #endif
                     if (font.Key >= 72)
                     {
-                        var addr = Mem.Alloc((uint)data.Length);
-                        Mem.Write((uint)addr, data, true);
-                        Mem.Write(font.Value, BitConverter.GetBytes(addr), true);
+                        var addr = Mem.Alloc((uint)data.Length+0x20);
+                        //Mem.Read(num - 0x20, out var fontMemData, 0x20);
+                        //Mem.Write((uint)addr, fontMemData, true);
+                        Mem.Write((uint)addr + 0x20, data, true);
+                        Mem.Write(font.Value, BitConverter.GetBytes(addr + 0x20), true);
 #if CONSOLE
-                        Console.WriteLine($"font{font.Key} new addr: {addr}");
+                        Console.WriteLine($"font{font.Key} new addr: {addr + 0x20}");
 #endif
                     }
                     else

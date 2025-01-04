@@ -1,0 +1,248 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4151.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02420._ch" "npl/ch02420p._cp"
+
+npc char[0]:
+	name "基尔巴特"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0184
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		system[1] = 173
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (70000, 1720, 14920) 180deg
+	CharSetPos name[14] (70000, 1720, 14920) 180deg
+	CharColor name[8] 0x00FFFFFF 0ms
+	CharColor name[14] 0x00FFFFFF 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (78160, 1250, 13000) 225deg
+	CamLookPos (70110, 3350, 17060) 0ms
+	CamSetDistance 0 6220 -10000 0ms
+	CamZoom 2540 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 390 0ms
+	Fork name[14] fork[2]:
+		CamLookPos (70110, 3350, 13660) 5000ms
+	Fork name[14] fork[3]:
+		CamSetDistance 0 5000 -10000 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[0] 0x0010
+	ObjFlagsUnset object[0] 0x0020
+	ObjFrame object[0] 0
+	ObjPlay object[0] 59
+	ObjWait object[0]
+	ForkFunc name[8] fork[0] fn[0,4]
+	Sleep 800ms
+	ForkFunc name[14] fork[0] fn[0,3]
+	Sleep 500ms
+	ObjFrame object[0] 59
+	ObjPlay object[0] 0
+	Sleep 3000ms
+	ForkQuit name[14] fork[2]
+	CrossFade 1000ms
+	CamLookPos (70700, 250, 5590) 0ms
+	CamSetDistance 0 5500 -10000 0ms
+	CamZoom 2300 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 344 0ms
+	FadeWait
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait name[14] fork[3]
+	TextTalk name[8] {
+		#88085v#1068F#6P竟然一个不留
+		全部都买下来了……{wait}
+	} {
+		#88086v那个售货员小姐
+		可是被你吓得不轻吧？{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91493v#1442F#2P这也是女神的引导。{wait}
+	} {
+		#91494v食物如果没人买就会被丢掉，
+		这样只是将其有效利用罢了。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88087v#1840F#6P真没办法……{wait}
+	} {
+		#88088v骑士团的俸禄，
+		全部被你花在吃上面了吧？{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91495v#1447F#2P……不劳你担心。{wait}
+	} {
+		#91496v我敢说没有比我对限时优惠
+		更有热情的女性了。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88089v#1840F#6P呼……好吧好吧。{wait}
+	} {
+		#88090v#1068F不过嘛，
+		虽然我的穿着已经够怪异了……{wait}
+	} {
+		#88091v但穿着修女服
+		去百货店大扫荡也太……{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91497v#1801F#2P凯文，你真啰嗦。{wait}
+	} {
+		#91498v#1447F……时间差不多了，
+		我们这就去飞艇坪吧。{wait}
+	} {
+		#91499v我的肚子开始叫苦连天了。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88092v#1840F#6P好好──{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#88093v#1063F#6P………………………………{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91500v#1444F#2P怎么了……{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (79250, 1250, 14670) 0ms
+	CamSetDistance 0 6500 -10000 0ms
+	CamZoom 2300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 344 0ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (78160, 1250, 15220) 2000mm/s 0
+	FadeWait
+	Sleep 1500ms
+	Fork char[0] fork[2]:
+		CamSetDistance 0 5500 -10000 3000ms
+	CamLookPos (70700, 250, 5590) 3000ms
+	Sleep 300ms
+	TextTalk name[14] {
+		#91501v#1801F#2P………………………………{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88094v#1840F#6P（……现在好像并不是
+		  悠闲地吃面包的时候。）{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91502v#1446F#2P（……不可饶恕……）{wait}
+	} {
+		#91503v#1801F（虽然不知道是谁，
+		  至少也得把他打个半死才行……）{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#88095v#1068F#6P（……我明白你的感受，
+		  不过请你保持冷静。）{wait}
+	} {
+		#88096v#1060F（话说回来，这可真是
+		  超级拙劣的跟踪方式啊……）{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91504v#1443F#2P（感觉不过是个新手罢了……）{wait}
+	} {
+		#91505v（但似乎也受过一点训练。）{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88097v#1065F#6P（哎呀……）{wait}
+	} {
+		#88098v#1063F（没办法了。
+		  只有放弃乘坐最后一趟飞艇了。）{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91506v#1443F#2P（你准备将他引到某个地方吗……？）{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88099v#1075F#6P（嗯……）{wait}
+	} {
+		#88100v#1060F（我想到一个与目前的情况
+		  相配的绝佳场所。）{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsUnset 0x02000000
+	FlagSet flag[9476]
+	NewScene "t4404._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (70240, 1250, 12630) 2000mm/s 0
+	CharWalkToPos self (70650, 250, 4610) 2000mm/s 0
+	Sleep 100ms
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (69800, 1250, 12630) 2000mm/s 0
+	CharWalkToPos self (68840, 250, 4500) 2000mm/s 0
+	Sleep 100ms
+	CharTurnTo self 90deg 400deg/s
+	Return

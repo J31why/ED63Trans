@@ -1,0 +1,261 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4151.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14450._ch" "mons2/ch14450p._cp"
+chip[1] "mons2/ch14451._ch" "mons2/ch14451p._cp"
+chip[2] "mons2/ch14730._ch" "mons2/ch14730p._cp"
+chip[3] "mons2/ch14730._ch" "mons2/ch14730p._cp"
+chip[4] "mons2/ch14790._ch" "mons2/ch14790p._cp"
+chip[5] "mons2/ch14791._ch" "mons2/ch14791p._cp"
+
+monster char[0]:
+	name ""
+	pos (57070, 0, -1480)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (83090, 0, 1450)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[215]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (89470, 0, 23560)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[216]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (92930, 250, 50040)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (69810, 250, 45060)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[215]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (79570, 250, 59610)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[216]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (120980, -3500, 71290)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (53090, 250, 35050)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[215]
+	flag flag[0]
+	unk3 0
+
+monster char[8]:
+	name ""
+	pos (50840, 0, 64300)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[216]
+	flag flag[0]
+	unk3 0
+
+monster char[9]:
+	name ""
+	pos (39310, 1250, 46730)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (124880, -3500, 70940)
+	radius 800mm
+	bubble_pos (124880, -2500, 70940)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (71060, 140, -9870)
+	radius 800mm
+	bubble_pos (71060, 1140, -9870)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (38820, 1250, 36920)
+	radius 800mm
+	bubble_pos (38820, 2250, 36920)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	MapSet 4000 (-46000, null, -90000) "mt4101._ch"
+	if !flag[9999]:
+		EntranceSetDisabled entrance[10] 0
+		ObjFlagsUnset object[5] 0x0010
+		ObjFlagsUnset object[6] 0x0010
+		ObjFlagsUnset object[7] 0x0010
+		ObjFlagsUnset object[8] 0x0010
+	else:
+		ObjFlagsSet object[40] 0x0004
+		ObjFlagsSet object[41] 0x0004
+	ObjFlagsUnset object[9] 0x0008
+	ObjFlagsUnset object[9] 0x0010
+	ObjFrame object[9] 60
+	char[0].36 = 239
+	char[3].36 = 239
+	char[6].36 = 239
+	char[9].36 = 239
+	Return
+
+fn[2]:
+	EventBegin 0
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (108850, 10000, 32970) 0ms
+	CamSetDistance 0 4720 -10000 0ms
+	CamZoom 3260 0ms
+	CamRotate 90000mdeg 0ms
+	CamPers 335 0ms
+	Fork name[8] fork[0]:
+		CamLookPos (108850, 3000, 32970) 4000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 2460 -10000 4000ms
+	Fork name[8] fork[2]:
+		CamZoom 3260 4000ms
+	Fork name[8] fork[3]:
+		CamRotate 90000mdeg 4000ms
+	Fork name[14] fork[1]:
+		CamPers 350 4000ms
+	FadeIn 2000ms 0x00000000
+	ForkWait name[8] fork[0]
+	CrossFade 1000ms
+	Fork name[8] fork[2]:
+		CamZoom 3000 2000ms
+	SoundPlay sound[279] 0 0 100
+	ObjFlagsSet object[40] 0x0004
+	ObjFlagsSet object[41] 0x0004
+	FadeWait
+	Sleep 1500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9481]
+	NewScene "u7000._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}门上了锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[4]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}导力式时钟２号机
+		　七耀历１１６３年·由蔡斯技术工房制造{wait}
+	}
+	TextWait
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

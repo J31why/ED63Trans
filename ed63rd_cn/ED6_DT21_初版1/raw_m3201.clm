@@ -1,0 +1,1092 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M3201.x"
+	town town[1]
+	bgm bgm[232]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03120._ch" "npl2/ch03120p._cp"
+chip[1] "npl2/ch04120._ch" "npl2/ch04120p._cp"
+chip[2] "apl/ch20027._ch" "apl/ch20027p._cp"
+chip[3] "npl2/ch04124._ch" "npl2/ch04124p._cp"
+chip[4] "npl2/ch04125._ch" "npl2/ch04125p._cp"
+chip[5] "npl2/ch04126._ch" "npl2/ch04126p._cp"
+chip[6] "npl/ch00340._ch" "npl/ch00340p._cp"
+chip[7] "npl/ch00342._ch" "npl/ch00342p._cp"
+chip[8] "npl/ch00440._ch" "npl/ch00440p._cp"
+chip[9] "npl/ch00441._ch" "npl/ch00441p._cp"
+chip[10] "npl/ch00500._ch" "npl/ch00500p._cp"
+chip[11] "npl/ch00508._ch" "npl/ch00508p._cp"
+chip[12] "npl/ch00320._ch" "npl/ch00320p._cp"
+chip[13] "npl/ch00321._ch" "npl/ch00321p._cp"
+
+npc char[0]:
+	name "凯诺娜"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "机枪特务兵"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "机枪特务兵"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "钩爪特务兵"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "钩爪特务兵"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "重装甲特务兵"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[10]
+	frame 0
+	ch chip[10]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[6]:
+	name ""
+	pos (-15320, 0, 870)
+	angle 180deg
+	chip chip[12]
+	flags 0x0141
+	unk2 -1
+	battle battle[652]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (43940, 0, 35180)
+	angle 180deg
+	chip chip[12]
+	flags 0x0141
+	unk2 -1
+	battle battle[653]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-42100, 0, 15050)
+	radius 1000mm
+	bubble_pos (-42100, 800, 15050)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	if system[0] == 108:
+		if flag[11036] && !flag[11037]:
+			system[1] = 0
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	if !flag[11036]:
+		ObjFlagsUnset object[1] 0x0010
+	else:
+		LookPointFlagsSet look_point[0] 0x0001
+	Return
+
+fn[2]:
+	TextStart null
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}门上了锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	FadeWait
+	if flag[11136]:
+		FadeOut 300ms 0x00000000 100
+		system[40] = 24
+		var[0] = 0
+		while var[0] != 255:
+			Menu menu[1] -1 -1 1
+				"使用Ｂ－０１钥匙" // 0
+				"不使用" // 1
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[1]
+			FadeIn 300ms 0x00000000
+			FadeWait
+			switch var[0]:
+				case 0:
+					SoundPlay sound[115] 0 0 100
+					Sleep 500ms
+					FlagSet flag[11036]
+					ObjFlagsSet object[1] 0x0010
+					LookPointFlagsSet look_point[0] 0x0001
+					var[0] = 255
+					break
+				default:
+					var[0] = 255
+					break
+	TextEnd null
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Call fn[0,10]
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	EffLoad eff[0] "map\\mp250_00.eff"
+	EffLoad eff[1] "map\\mp250_01.eff"
+	EffLoad eff[2] "monster\\msc1000.eff"
+	Tc_E0 party[0] 78 2
+	Tc_E0 party[0] 79 3
+	Tc_E0 party[1] 80 2
+	Tc_E0 party[1] 81 3
+	Tc_E0 party[2] 82 2
+	Tc_E0 party[2] 83 3
+	Tc_E0 party[3] 84 2
+	Tc_E0 party[3] 85 3
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (830, 0, 48770) 180deg
+	CharSetChipPattern char[0] 0
+	CharSetPos name[8] (450, 0, 38370) 0deg
+	if CharInSlot 0 party[1] == 11:
+		CharSetPos party[1] (1770, 0, 38220) 0deg
+		CharSetPos party[2] (0, 0, 36840) 0deg
+		CharSetPos party[3] (1800, 0, 36800) 0deg
+	elif CharInSlot 0 party[2] == 11:
+		CharSetPos party[2] (1770, 0, 38220) 0deg
+		CharSetPos party[1] (0, 0, 36840) 0deg
+		CharSetPos party[3] (1800, 0, 36800) 0deg
+	elif CharInSlot 0 party[3] == 11:
+		CharSetPos party[3] (1770, 0, 38220) 0deg
+		CharSetPos party[1] (0, 0, 36840) 0deg
+		CharSetPos party[2] (1800, 0, 36800) 0deg
+	CamLookPos (1970, 0, 38740) 0ms
+	CamSetDistance 0 6350 -10000 0ms
+	CamZoom 2750 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 260 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalkNamed char[0] "女人的声音" {
+		#96998v#4P阁下……
+		我正在等着您呢。{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (2210, 0, 50140) 0ms
+	CamSetDistance 0 4660 -10000 0ms
+	CamZoom 2790 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 264 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk name[8] {
+		#89577v#1064F#1P啊……{wait}
+	}
+	TextWait
+	TextTalk name[11] {
+		#86860v#115F#1P是你吗……凯诺娜。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork party[0] fork[1]:
+		CamLookPos (2390, 0, 46240) 2000ms
+	Fork party[1] fork[1]:
+		CamSetDistance 0 5010 -10000 2000ms
+	Fork party[2] fork[1]:
+		CamZoom 2310 2000ms
+	Fork party[3] fork[1]:
+		CamPers 367 2000ms
+	Sleep 1000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (210, 0, 42650) 5000mm/s 0
+	Sleep 100ms
+	if CharInSlot 0 party[1] == 11:
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (1600, 0, 42600) 5000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (-230, 0, 40930) 5000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (1570, 0, 41010) 5000mm/s 0
+	elif CharInSlot 0 party[2] == 11:
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (1600, 0, 42600) 5000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-230, 0, 40930) 5000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (1570, 0, 41010) 5000mm/s 0
+	elif CharInSlot 0 party[3] == 11:
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (1600, 0, 42600) 5000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-230, 0, 40930) 5000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (1570, 0, 41010) 5000mm/s 0
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[1]
+	Sleep 500ms
+	TextTalk char[0] {
+		#96999v#1321F#5P啊啊……
+		这真是命运弄人啊。{wait}
+	} {
+		#97000v竟然偏偏让我担当
+		与阁下敌对的角色……{wait}
+	} {
+		#97001v#1185F可是，请相信我！
+		与您开战
+		绝对不是我的愿望！{wait}
+	}
+	TextWait
+	TextTalk name[11] {
+		#86861v#119F#12P啊啊，我很明白。{wait}
+	} {
+		#86862v#111F但是……
+		请你不要再叫我『阁下』了。{wait}
+	} {
+		#86863v原本也不是对军官
+		必须使用的敬称……{wait}
+	} {
+		#86864v而且我也已经很习惯
+		你称呼我『所长』啦。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97002v#1323F#5P可是，阁下……{wait}
+	} {
+		#97003v#1189F那么，至少在这里
+		请您允许我用『阁下』称呼您！{wait}
+	} {
+		#97004v在这里出现的我
+		是被对过去的留恋束缚住的象征……{wait}
+	} {
+		#97005v#1185F请阁下您把我一刀两断，
+		这样就可以让我获得重生！{wait}
+	}
+	TextWait
+	TextTalk name[11] {
+		#86865v#113F#12P凯诺娜……{wait}
+	} {
+		#86866v#115F我明白了，你高兴就好。{wait}
+	}
+	TextWait
+	if PartyPosition name[13] != -1:
+		Sleep 500ms
+		TextTalk char[0] {
+			#97006v#1182F#5P……话说回来。
+			真是可恨啊，尤莉亚。{wait}
+		} {
+			#97007v为什么没有选中我，
+			而偏偏是你待在那边呢？{wait}
+		}
+		TextWait
+		TextTalk name[13] {
+			#84997v#176F#12P唉……
+			你的心情我十分了解……{wait}
+		} {
+			#84998v#178F先不提这次的灾祸，
+			我能亲自保卫殿下
+			就要对女神千恩万谢了。{wait}
+		}
+		TextWait
+		if PartyPosition name[4] != -1:
+			TextTalk name[4] {
+				#81400v#1382F#12P尤莉亚小姐……{wait}
+			}
+			TextWait
+		TextTalk char[0] {
+			#97008v#1180F#5P哼，算了。{wait}
+		} {
+			#97009v#1183F反正站在你的对立面
+			对我来说一点也
+			感觉不到罪恶感。{wait}
+		} {
+			#97010v#1181F我会把你狠揍一番的，
+			你可不要手下留情哦！{wait}
+		}
+		TextWait
+		TextTalk name[13] {
+			#84999v#179F#4P呵……
+			那是我要说的话啊。{wait}
+		}
+		TextWait
+	if PartyPosition name[0] != -1:
+		Sleep 500ms
+		TextTalk char[0] {
+			#97011v#1180F#5P艾丝蒂尔·布莱特……
+			跟你也有说不清的纠葛呢。{wait}
+		} {
+			#97012v据说你好像正在利贝尔之外修行，
+			怎么觉得还是没有什么变化啊？{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76706v#1016F#12P啊哈哈……
+			嗯，算是吧……{wait}
+		} {
+			#76707v#1015F那个……
+			你好像和理查德上校一起
+			开了一家调查公司？{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#97013v#1183F#5P是啊……
+			从某种意义上来说，
+			也会和游击士协会进行竞争呢。{wait}
+		} {
+			#97014v#1181F这次就当作是事先打个照面，
+			让我好好招呼你一下吧。{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#76708v#1016F#4P请、请手下留情啊……{wait}
+		}
+		TextWait
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#77996v#1514F#12P哈哈……{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#82919v#067F#12P啊、啊哈哈……{wait}
+			}
+			TextWait
+		if PartyPosition name[5] != -1:
+			TextTalk name[5] {
+				#80572v#051F#12P哼……
+				正合我意。{wait}
+			}
+			TextWait
+		elif PartyPosition name[2] != -1:
+			TextTalk name[2] {
+				#79008v#1527F#12P呵呵……
+				这不是正好吗。{wait}
+			}
+			TextWait
+	if PartyPosition name[15] != -1:
+		Sleep 500ms
+		TextTalk char[0] {
+			#97015v#1322F#5P可、可是再怎么说……{wait}
+		} {
+			#97016v#1182F为什么
+			你也会出现在这里呢？{wait}
+		}
+		TextWait
+		TextTalk name[15] {
+			#91016v#261F#12P呵呵。
+			大姐姐，好久不见呢。{wait}
+		} {
+			#91017v#265F我们上次见面还是在准备茶会时
+			把『福音』作为礼物送给你的时候吧？{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#97017v#1189F#5P厚、厚颜无耻……{wait}
+		} {
+			#97018v#1187F我对你也是一肚子火，
+			就让我好好教训教训你吧！{wait}
+		} {
+			#97019v你可要准备好了！{wait}
+		}
+		TextWait
+		TextTalk name[15] {
+			#91018v#1306F#12P嘻嘻……
+			那我就稍微期待一下了⊙{wait}
+		}
+		TextWait
+	if PartyPosition name[13] != -1 | PartyPosition name[15] != -1 | PartyPosition name[0] != -1:
+		TextTalk name[8] {
+			#89578v#1066F#6P唔……
+			虽然很有活力，
+			不过还是那么盛气凌人呢。{wait}
+		}
+		TextWait
+		if PartyPosition name[7] != -1:
+			TextTalk name[7] {
+				#83706v#071F#12P哈哈……
+				我认为这点很好啊。{wait}
+			}
+			TextWait
+		TextTalk char[0] {
+			#97020v#1182F#5P你、你住嘴！{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#89579v#1066F#6P唔……
+			总觉得是个比想象中
+			还要有活力的大姐啊。{wait}
+		}
+		TextWait
+		if PartyPosition name[7] != -1:
+			TextTalk name[7] {
+				#83707v#071F#12P哈哈……
+				正如我所料呢。{wait}
+			}
+			TextWait
+		TextTalk char[0] {
+			#97021v#1185F#5P『比想象中』那个词
+			就不必说了吧！{wait}
+		}
+		TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase char[0] chip[1]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 300ms
+	CharSetChipBase char[0] chip[4]
+	ForkLoop char[0] fork[3]:
+		CharAnimation self 0 3 1500ms
+	EffPlay eff[2] eff_instance[0] char[0] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	SoundPlay sound[563] 0 0 100
+	EffPlay eff[0] eff_instance[1] null 0 (-2009, 100, 47910) 0 0 0 500 500 500 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[2] null 0 (3190, 100, 48160) 0 0 0 500 500 500 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[3] null 0 (-3530, 100, 43250) 0 0 0 500 500 500 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[4] null 0 (4900, 100, 43000) 0 0 0 500 500 500 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[5] null 0 (810, 100, 46670) 0 0 0 500 500 500 null (0, 0, 0) 0ms
+	Sleep 300ms
+	if CharInSlot 0 party[0] == 7:
+		Emote party[0] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[0] == 6:
+		Emote party[0] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[0] == 15:
+		Emote party[0] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[0] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork party[0] fork[0]:
+		CamLookPos (1930, 0, 46370) 3000ms
+	Fork party[1] fork[0]:
+		CamSetDistance 0 5540 -10000 3000ms
+	Fork party[2] fork[0]:
+		CamZoom 2920 3000ms
+	Fork party[3] fork[0]:
+		CamPers 303 3000ms
+	Fork party[0] fork[2]:
+		CamRotate 33000mdeg 3000ms
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharSetPos char[1] (-2009, -3000, 47910) 180deg
+	CharSetPos char[2] (3190, -3000, 48160) 180deg
+	CharSetPos char[3] (-3530, -3000, 43250) 90deg
+	CharSetPos char[4] (4900, -3000, 43000) 270deg
+	CharSetPos char[5] (810, -3000, 46670) 180deg
+	SoundPlay sound[133] 1 0 100
+	ForkLoop name[8] fork[3]:
+		Shake 20 20 3000 300ms
+	ForkFunc char[1] fork[0] fn[0,5]
+	ForkFunc char[2] fork[0] fn[0,6]
+	ForkFunc char[3] fork[0] fn[0,7]
+	ForkFunc char[4] fork[0] fn[0,8]
+	ForkFunc char[5] fork[0] fn[0,9]
+	Sleep 300ms
+	if CharInSlot 0 party[1] == 11:
+		Fork party[0] fork[1]:
+			CharTurnTo self 0deg 600deg/s
+		Sleep 50ms
+		Fork party[1] fork[1]:
+			CharTurnTo self 0deg 600deg/s
+		Sleep 50ms
+		Fork party[2] fork[1]:
+			CharTurnTo self 315deg 600deg/s
+		Sleep 50ms
+		Fork party[3] fork[1]:
+			CharTurnTo self 45deg 600deg/s
+	elif CharInSlot 0 party[2] == 11:
+		Fork party[0] fork[1]:
+			CharTurnTo self 0deg 600deg/s
+		Sleep 50ms
+		Fork party[2] fork[1]:
+			CharTurnTo self 0deg 600deg/s
+		Sleep 50ms
+		Fork party[1] fork[1]:
+			CharTurnTo self 315deg 600deg/s
+		Sleep 50ms
+		Fork party[3] fork[1]:
+			CharTurnTo self 45deg 600deg/s
+	elif CharInSlot 0 party[3] == 11:
+		Fork party[0] fork[1]:
+			CharTurnTo self 0deg 600deg/s
+		Sleep 50ms
+		Fork party[3] fork[1]:
+			CharTurnTo self 0deg 600deg/s
+		Sleep 50ms
+		Fork party[1] fork[1]:
+			CharTurnTo self 315deg 600deg/s
+		Sleep 50ms
+		Fork party[3] fork[1]:
+			CharTurnTo self 45deg 600deg/s
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase name[8] chip[14]
+	CharSetChipPattern name[8] 0
+	Sleep 50ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[1] chip[16]
+	CharSetChipPattern party[1] 0
+	Sleep 80ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase party[2] chip[18]
+	CharSetChipPattern party[2] 0
+	Sleep 50ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[3] chip[20]
+	CharSetChipPattern party[3] 0
+	FadeWait
+	Sleep 300ms
+	ForkWait char[1] fork[0]
+	ForkWait char[2] fork[0]
+	ForkWait char[3] fork[0]
+	ForkWait char[4] fork[0]
+	ForkWait char[5] fork[0]
+	ForkQuit name[8] fork[3]
+	ForkQuit char[0] fork[3]
+	SoundStop sound[133]
+	BgmPlay bgm[196] 0
+	CrossFade 1000ms
+	EffStop eff_instance[0] 0
+	EffLoad eff[1] "map\\mp250_00.eff"
+	EffStop eff_instance[1] 0
+	EffStop eff_instance[2] 0
+	EffStop eff_instance[3] 0
+	EffStop eff_instance[4] 0
+	EffStop eff_instance[5] 0
+	FadeWait
+	ForkWait party[0] fork[0]
+	CrossFade 250ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase char[0] chip[5]
+	CharSetChipPattern char[0] 1
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97022v#1186F#5P那么阁下……
+		请让我全力向您挑战吧。{wait}
+	} {
+		#97023v准备好了吗！？{wait}
+	}
+	TextWait
+	TextTalk name[11] {
+		#86867v#112F#12P好啊……
+		放马过来吧！{wait}
+	}
+	TextWait
+	system[28] = 1
+	Fork party[0] fork[1]:
+		CamLookPos (1600, 0, 44760) 280ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 5830 -10000 280ms
+	Fork party[0] fork[3]:
+		CamZoom 2200 280ms
+	Fork party[1] fork[3]:
+		CamPers 323 280ms
+	Sleep 100ms
+	CharSetChipBase char[1] chip[9]
+	Fork char[1] fork[0]:
+		CharWalkToPos2 self (-540, 0, 43440) 8500mm/s 0
+	CharSetChipBase char[2] chip[9]
+	Fork char[2] fork[0]:
+		CharWalkToPos2 self (1350, 0, 43890) 8500mm/s 0
+	Sc_7D_0 char[3] 50 500
+	CharFlagsSet char[3] 0x0020
+	CharSetChipBase char[3] chip[7]
+	CharSetChipPattern char[3] 6
+	Fork char[3] fork[0]:
+		CharWalkToPos2 self (-830, 0, 42110) 7000mm/s 0
+	Sc_7D_0 char[4] 50 500
+	CharFlagsSet char[4] 0x0020
+	CharSetChipBase char[4] chip[7]
+	CharSetChipPattern char[4] 6
+	Fork char[4] fork[0]:
+		CharWalkToPos2 self (2000, 0, 42210) 7000mm/s 0
+	CharSetChipBase char[5] chip[11]
+	CharSetChipPattern char[5] 0
+	Fork char[5] fork[2]:
+		CharAnimation self 0 3 2500ms
+	SoundPlay sound[163] 0 0 100
+	Fork char[5] fork[0]:
+		_Char96 self (1090, 0, 42500) 1000 7000
+	ForkWait party[0] fork[1]
+	ForkWait party[0] fork[2]
+	ForkWait party[0] fork[3]
+	ForkWait party[1] fork[3]
+	ED6Battle battle[680] null 0 0 null
+	Return
+
+fn[5]:
+	EffPlay eff[1] eff_instance[255] null 0 (-2009, 100, 47910) 0 0 0 400 400 400 null (0, 0, 0) 0ms
+	_Char91 self 0 3000 0 1200 0
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[6]:
+	EffPlay eff[1] eff_instance[255] null 0 (3190, 100, 48160) 0 0 0 400 400 400 null (0, 0, 0) 0ms
+	_Char91 self 0 3000 0 1200 0
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[7]:
+	EffPlay eff[1] eff_instance[255] null 0 (-3530, 100, 43250) 0 0 0 400 400 400 null (0, 0, 0) 0ms
+	_Char91 self 0 3000 0 1200 0
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[8]:
+	EffPlay eff[1] eff_instance[255] null 0 (4900, 100, 43000) 0 0 0 400 400 400 null (0, 0, 0) 0ms
+	_Char91 self 0 3000 0 1200 0
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[9]:
+	EffPlay eff[1] eff_instance[255] null 0 (810, 100, 46670) 0 0 0 400 400 400 null (0, 0, 0) 0ms
+	_Char91 self 0 3000 0 1200 0
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[10]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ForkQuit char[1] fork[0]
+	ForkQuit char[2] fork[0]
+	ForkQuit char[3] fork[0]
+	ForkQuit char[4] fork[0]
+	ForkQuit char[5] fork[0]
+	system[28] = 0
+	CharFlagsSet char[1] 0x0080
+	CharFlagsSet char[2] 0x0080
+	CharFlagsSet char[3] 0x0080
+	CharFlagsSet char[4] 0x0080
+	CharFlagsSet char[5] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0800
+	CharSetPos char[0] (740, 0, 47860) 180deg
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 3
+	ForkFunc char[0] fork[3] fn[0,11]
+	EffLoad eff[0] "map\\mp259_02.eff"
+	EffLoad eff[1] "map\\mp256_00.eff"
+	EffLoad eff[2] "map\\mp257_00.eff"
+	SoundPlay sound[326] 1 0 60
+	EffPlay eff[0] eff_instance[0] char[0] 0 (50, 600, 100) 0 0 0 2200 2400 1000 null (0, 0, 0) 0ms
+	CharSetPos name[8] (-500, 0, 43300) 0deg
+	if CharInSlot 0 party[1] == 11:
+		CharSetPos party[1] (780, 0, 44800) 0deg
+		CharSetPos party[2] (1600, 0, 43500) 0deg
+		CharSetPos party[3] (320, 0, 42300) 0deg
+	elif CharInSlot 0 party[2] == 11:
+		CharSetPos party[2] (780, 0, 44800) 0deg
+		CharSetPos party[1] (1600, 0, 43500) 1deg
+		CharSetPos party[3] (320, 0, 42300) 0deg
+	elif CharInSlot 0 party[3] == 11:
+		CharSetPos party[3] (780, 0, 44800) 0deg
+		CharSetPos party[1] (1600, 0, 43500) 1deg
+		CharSetPos party[2] (320, 0, 42300) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookPos (1810, 0, 46710) 0ms
+	CamSetDistance 0 5700 -10000 0ms
+	CamZoom 2680 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 292 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97024v#1183F#5P呵呵……
+		不愧是理查德阁下。{wait}
+	} {
+		#97025v#1180F……除此之外的人
+		也很强嘛。{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89580v#1066F#6P哈哈，谢啦。{wait}
+	}
+	TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85000v#171F#12P呼……
+			彼此彼此。{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80573v#051F#12P哼……
+			你也不赖啊。{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79009v#1536F#12P呵呵……
+			你也不错呢。{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#77997v#1513F#12P你也是……
+			招数应对的不错呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76709v#1017F#12P啊哈哈……
+			是场不错的较量呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91019v#261F#12P嘻嘻……
+			我这次玩得很高兴呢。{wait}
+		}
+		TextWait
+	if PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83708v#071F#12P哈哈……
+			辛苦了辛苦了。{wait}
+		}
+		TextWait
+	TextTalk char[0] {
+		#97026v#1322F#5P哼、哼……{wait}
+	} {
+		#97027v#1182F在前面等候的是
+		利贝尔的武神们……{wait}
+	} {
+		#97028v你们可给我注意好了，
+		别拖阁下的后腿。{wait}
+	}
+	TextWait
+	if PartyPosition name[14] != -1:
+		TextTalk name[14] {
+			#92443v#1447F#12P……明白了。{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#89581v#1075F#6P知道了。{wait}
+		}
+		TextWait
+	TextTalk name[11] {
+		#86868v#115F#12P凯诺娜……{wait}
+	} {
+		#86869v看来我还有
+		未完成的任务。{wait}
+	} {
+		#86870v#116F前方的试炼
+		也是其中的一部分。{wait}
+	} {
+		#86871v#111F……多亏了你，
+		我终于坚定了决心。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97029v#1323F#5P阁、阁下……{wait}
+	} {
+		#97030v#1183F既然您这么说，
+		我就不再多嘴了……{wait}
+	} {
+		#97031v#1320F请一定要通过试炼，
+		平安地回来……{wait}
+	}
+	TextWait
+	TextTalk name[11] {
+		#86872v#119F#12P啊，那是当然。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[312] 0 0 100
+	EffPlay eff[1] eff_instance[1] char[0] 0 (-100, -600, 0) 0 0 0 1750 1750 1750 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	SoundStop sound[326]
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	ForkQuit char[0] fork[3]
+	Fork char[0] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Sleep 800ms
+	CrossFade 1000ms
+	EffStop eff_instance[0] 0
+	EffStop eff_instance[1] 0
+	FadeWait
+	EffPlay eff[2] eff_instance[0] null 0 (740, 300, 47860) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1500ms
+	CharFlagsSet char[0] 0x0080
+	TextTalk name[11] {
+		#86873v#116F#12P……………………………{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork party[0] fork[0]:
+		CamLookPos (2000, 0, 47710) 1500ms
+	CharWalkToPos2 name[11] (770, 0, 47000) 2000mm/s 0
+	Sleep 500ms
+	CrossFade 250ms
+	SoundPlay sound[143] 0 0 100
+	CharSetChipBase name[11] chip[2]
+	CharSetChipPattern name[11] 0
+	FadeWait
+	Sleep 500ms
+	EffStop eff_instance[0] 2
+	Sleep 500ms
+	SoundPlay sound[17] 0 0 100
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}得到了{item item[820]}{color 0}。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	ItemAdd item[820] 1
+	TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	SoundPlay sound[143] 0 0 100
+	CharSetChipBase name[11] chip[65535]
+	CharSetChipPattern name[11] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#89582v#1075F#12P好了……
+		终于要到核心部分了呢。{wait}
+	} {
+		#89583v#1060F是这个要塞的司令部吗。{wait}
+	}
+	TextWait
+	CharTurnTo name[11] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[11] {
+		#86874v#115F#5P是啊……
+		就是院子正面的建筑物。{wait}
+	} {
+		#86875v#110F我们已经有了钥匙，
+		马上去开门吧。{wait}
+	}
+	TextWait
+	FlagSet flag[11037]
+	QuestTaskSet quest[57] 0x0040
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CamLookPos (760, 0, 43590) 0ms
+	CamSetDistance 0 6000 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	CharSetPos field_party[0] (760, 0, 43590) 180deg
+	CharSetPos field_party[1] (760, 0, 43590) 180deg
+	CharSetPos field_party[2] (760, 0, 43590) 180deg
+	CharSetPos field_party[3] (760, 0, 43590) 180deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookChar field_party[0] 0ms
+	Sleep 500ms
+	BgmPlay bgm[232] 0
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[11]:
+	var[1] = random % 14
+	if var[1] == 0:
+		Sleep 100ms
+	elif var[1] == 1:
+		Sleep 200ms
+	elif var[1] == 2:
+		Sleep 300ms
+	elif var[1] == 3:
+		Sleep 400ms
+	elif var[1] == 4:
+		Sleep 500ms
+	elif var[1] == 5:
+		Sleep 600ms
+	elif var[1] == 6:
+		Sleep 700ms
+	while 1:
+		CharColor self 0x78FFFFFF 1500ms
+		CharColor self 0xFFFFFFFF 1500ms
+	Return

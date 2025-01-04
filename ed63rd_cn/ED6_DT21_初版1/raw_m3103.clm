@@ -1,0 +1,113 @@
+calmare fc scena
+scena:
+	name "Gaiden3" "M3103.x"
+	town town[1]
+	bgm bgm[232]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons/ch10060._ch" "mons/ch10060p._cp"
+chip[1] "mons/ch10061._ch" "mons/ch10061p._cp"
+chip[2] "mons/ch11210._ch" "mons/ch11210p._cp"
+chip[3] "mons/ch11211._ch" "mons/ch11211p._cp"
+chip[4] "mons/ch11030._ch" "mons/ch11030p._cp"
+chip[5] "mons/ch11031._ch" "mons/ch11031p._cp"
+chip[6] "mons/ch11020._ch" "mons/ch11020p._cp"
+chip[7] "mons/ch11021._ch" "mons/ch11021p._cp"
+
+monster char[0]:
+	name ""
+	pos (6190, 0, 21540)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[657]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (23830, 0, 8039)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[650]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (22280, 0, 28450)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[656]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-10110, 0, 42760)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[651]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (-10870, 0, 16730)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[650]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (70, 0, 45460)
+	radius 800mm
+	bubble_pos (70, 1200, 45460)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-113000, null, -113000) file[0x002300A8]
+	Return
+
+fn[2]:
+	TextStart null
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}被毛玻璃遮住，无法窥视里面的情况。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	Return

@@ -1,0 +1,776 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7426.x"
+	town town[1]
+	bgm bgm[225]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+chip[1] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+chip[2] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[3] "mons2/ch14881._ch" "mons2/ch14881p._cp"
+chip[4] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[5] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[6] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[7] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[8] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[9] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+
+npc char[0]:
+	name "命运终结天使"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "神箭天使"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[2]:
+	name ""
+	pos (-90260, 0, -73990)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-93990, 0, -77780)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (-97810, 0, -73980)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (-94000, 0, -70240)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (-19620, 6000, 113250)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[801]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (15450, 6000, 124860)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[802]
+	flag flag[0]
+	unk3 0
+
+trigger[0]:
+	pos1 (-8240, 5000, 249100)
+	pos2 (160, 11000, 253210)
+	flags 0x0000
+	func fn[0,9]
+	unk1 0
+
+look_point[0]:
+	pos (-94060, 0, -74020)
+	radius 1000mm
+	bubble_pos (-94060, 1000, -74020)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-23590, 6000, 112970)
+	radius 1000mm
+	bubble_pos (-23590, 7000, 112970)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (-19950, 6000, 116710)
+	radius 1000mm
+	bubble_pos (-19950, 7000, 116710)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (-19950, 6000, 109240)
+	radius 1000mm
+	bubble_pos (-19950, 7000, 109240)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+look_point[4]:
+	pos (19860, 6000, 125000)
+	radius 1000mm
+	bubble_pos (19860, 7000, 125000)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+look_point[5]:
+	pos (15980, 6000, 128820)
+	radius 1000mm
+	bubble_pos (15980, 7000, 128820)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+look_point[6]:
+	pos (16010, 6000, 121230)
+	radius 1000mm
+	bubble_pos (16010, 7000, 121230)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+fn[0]:
+	if !flag[11315] && flag[11316]:
+		CharFlagsUnset char[0] 0x0080
+		CharSetPos char[0] (-4140, 6500, 260810) 180deg
+		ForkLoop char[0] fork[3]:
+			CharAnimation self 0 7 1500ms
+		CharFlagsUnset char[1] 0x0080
+		CharSetPos char[1] (-2570, 8500, 260230) 180deg
+		ForkLoop char[1] fork[3]:
+			CharAnimation self 0 7 1500ms
+	Return
+
+fn[1]:
+	char[2].36 = 215
+	char[3].36 = 215
+	char[4].36 = 215
+	char[5].36 = 215
+	char[6].36 = 223
+	char[7].36 = 223
+	char[6].40 = 8
+	char[7].40 = 8
+	char[0].40 = 8
+	char[1].40 = 8
+	if !flag[11469]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[11470]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[11471]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	if !flag[11472]:
+		ObjFrame object[3] 0
+	else:
+		ObjFrame object[3] 60
+	if !flag[11473]:
+		ObjFrame object[4] 0
+	else:
+		ObjFrame object[4] 60
+	if !flag[11474]:
+		ObjFrame object[5] 0
+	else:
+		ObjFrame object[5] 60
+	if !flag[11475]:
+		ObjFrame object[6] 0
+	else:
+		ObjFrame object[6] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11469]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[383] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[383]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11469]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[383]}{color 0}。
+				不过现有的数量太多，{item item[383]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11470]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[513] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[513]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11470]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[513]}{color 0}。
+				不过现有的数量太多，{item item[513]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[11471]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[507] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[507]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11471]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[507]}{color 0}。
+				不过现有的数量太多，{item item[507]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[11472]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[3] 60
+		Sleep 500ms
+		if ItemAdd item[518] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[518]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11472]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[518]}{color 0}。
+				不过现有的数量太多，{item item[518]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[3] 60
+			ObjPlay object[3] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[6]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11473]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[4] 30
+		ObjWait object[4]
+		ObjFrame object[4] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,28]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11473]
+	else:
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return
+
+fn[7]:
+	SystemFlagsSet 0x08000000
+	if !flag[11474]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[5] 60
+		Sleep 500ms
+		if ItemAdd item[506] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[506]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11474]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[506]}{color 0}。
+				不过现有的数量太多，{item item[506]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[5] 60
+			ObjPlay object[5] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[8]:
+	SystemFlagsSet 0x08000000
+	if !flag[11475]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[6] 60
+		Sleep 500ms
+		if ItemAdd item[516] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[516]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11475]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[516]}{color 0}。
+				不过现有的数量太多，{item item[516]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[6] 60
+			ObjPlay object[6] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[9]:
+	if flag[11315]:
+		Return
+	if flag[11316]:
+		EventBegin 0
+		CrossFade 500ms
+		Tc_E0 field_party[0] 74 2
+		Tc_E0 field_party[1] 75 2
+		Tc_E0 field_party[2] 76 2
+		Tc_E0 field_party[3] 77 2
+		CharSetPos field_party[0] (-4780, 6000, 249400) 0deg
+		CharSetPos field_party[1] (-3370, 6000, 249200) 0deg
+		CharSetPos field_party[2] (-5020, 6000, 247450) 0deg
+		CharSetPos field_party[3] (-3250, 6000, 247430) 0deg
+		CamLookPos (-2700, 6000, 254320) 0ms
+		CamSetDistance 0 6360 -10000 0ms
+		CamZoom 2210 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 462 0ms
+		FadeWait
+		CrossFade 250ms
+		SoundPlay sound[213] 0 0 100
+		CharSetChipBase field_party[0] chip[10]
+		CharSetChipPattern field_party[0] 0
+		Sleep 50ms
+		SoundPlay sound[213] 0 0 100
+		CharSetChipBase field_party[1] chip[11]
+		CharSetChipPattern field_party[1] 0
+		Sleep 80ms
+		SoundPlay sound[216] 0 0 100
+		CharSetChipBase field_party[2] chip[12]
+		CharSetChipPattern field_party[2] 0
+		Sleep 50ms
+		SoundPlay sound[213] 0 0 100
+		CharSetChipBase field_party[3] chip[13]
+		CharSetChipPattern field_party[3] 0
+		FadeWait
+		Sleep 300ms
+		Sleep 500ms
+	else:
+		EventBegin 0
+		Tc_E0 field_party[0] 74 2
+		Tc_E0 field_party[1] 75 2
+		Tc_E0 field_party[2] 76 2
+		Tc_E0 field_party[3] 77 2
+		CharFlagsUnset char[0] 0x0080
+		CharSetPos char[0] (-4140, 8500, 260810) 180deg
+		ForkLoop char[0] fork[3]:
+			CharAnimation self 0 7 1500ms
+		CharColor char[0] 0x00FFFFFF 0ms
+		CharFlagsUnset char[1] 0x0080
+		CharSetPos char[1] (-2570, 11500, 260230) 180deg
+		ForkLoop char[1] fork[3]:
+			CharAnimation self 0 7 1500ms
+		CharColor char[1] 0x00FFFFFF 0ms
+		Emote field_party[0] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+		Sleep 1000ms
+		Fork field_party[0] fork[0]:
+			CamLookPos (-1490, 6000, 262240) 2000ms
+		Fork field_party[0] fork[1]:
+			CamSetDistance 0 5750 -10000 2000ms
+		Fork field_party[0] fork[2]:
+			CamZoom 2340 2000ms
+		Fork field_party[0] fork[3]:
+			CamPers 454 2000ms
+		Fork field_party[0] fork[1]:
+			CharTurnTo self 0deg 400deg/s
+		Sleep 100ms
+		Fork field_party[1] fork[1]:
+			CharTurnTo self 0deg 400deg/s
+		Sleep 100ms
+		Fork field_party[2] fork[1]:
+			CharTurnTo self 0deg 400deg/s
+		Sleep 100ms
+		CharTurnTo field_party[3] 0deg 400deg/s
+		ForkWait field_party[0] fork[0]
+		CharSetPos field_party[0] (-4780, 6000, 249400) 0deg
+		CharSetPos field_party[1] (-3370, 6000, 249200) 0deg
+		CharSetPos field_party[2] (-5020, 6000, 247450) 0deg
+		CharSetPos field_party[3] (-3250, 6000, 247430) 0deg
+		ForkFunc char[0] fork[0] fn[0,10]
+		ForkFunc char[1] fork[0] fn[0,11]
+		ForkWait char[0] fork[0]
+		ForkWait char[1] fork[0]
+		Sleep 1000ms
+		Fork field_party[0] fork[0]:
+			CamLookPos (-2700, 6000, 254320) 1500ms
+		Fork field_party[0] fork[1]:
+			CamSetDistance 0 6360 -10000 1500ms
+		Fork field_party[0] fork[2]:
+			CamZoom 2210 1500ms
+		Fork field_party[0] fork[3]:
+			CamPers 465 1500ms
+		ForkWait field_party[0] fork[0]
+		CrossFade 250ms
+		SoundPlay sound[213] 0 0 100
+		CharSetChipBase field_party[0] chip[10]
+		CharSetChipPattern field_party[0] 0
+		Sleep 50ms
+		SoundPlay sound[213] 0 0 100
+		CharSetChipBase field_party[1] chip[11]
+		CharSetChipPattern field_party[1] 0
+		Sleep 80ms
+		SoundPlay sound[216] 0 0 100
+		CharSetChipBase field_party[2] chip[12]
+		CharSetChipPattern field_party[2] 0
+		Sleep 50ms
+		SoundPlay sound[213] 0 0 100
+		CharSetChipBase field_party[3] chip[13]
+		CharSetChipPattern field_party[3] 0
+		FadeWait
+		Sleep 300ms
+		Sleep 500ms
+	system[28] = 1
+	Fork field_party[0] fork[3]:
+		CamLookPos (-2800, 6000, 251750) 400ms
+	Fork field_party[1] fork[3]:
+		CamSetDistance 0 6330 -10000 400ms
+	Fork field_party[2] fork[3]:
+		CamZoom 1920 400ms
+	Fork field_party[3] fork[3]:
+		CamPers 370 400ms
+	CharSetChipBase char[1] chip[3]
+	Fork char[1] fork[0]:
+		CharWalkToPos2 self (-3880, 7000, 249200) 20000mm/s 0
+	ForkLoop char[1] fork[3]:
+		CharAnimation self 0 7 2500ms
+	Sleep 50ms
+	CharSetChipBase char[0] chip[1]
+	Fork char[0] fork[0]:
+		CharWalkToPos2 self (-3880, 6500, 249200) 16000mm/s 0
+	ForkLoop char[0] fork[3]:
+		CharAnimation self 0 7 2500ms
+	ForkWait field_party[0] fork[3]
+	ED6Battle battle[819] null 0 0 null
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	switch system[3]:
+		case 0:
+			system[28] = 0
+			ForkQuit char[1] fork[0]
+			ForkQuit char[0] fork[0]
+			CharFlagsSet char[0] 0x0080
+			CharFlagsSet char[1] 0x0080
+			CamLookPos (-4240, 6000, 254970) 0ms
+			CamSetDistance 0 6650 -10000 0ms
+			CamZoom 3200 0ms
+			CamRotate 45000mdeg 0ms
+			CamPers 380 0ms
+			CharSetPos field_party[0] (-4240, 6000, 254970) 0deg
+			CharSetPos field_party[1] (-4240, 6000, 254970) 0deg
+			CharSetPos field_party[2] (-4240, 6000, 254970) 0deg
+			CharSetPos field_party[3] (-4240, 6000, 254970) 0deg
+			CharSetChipBase field_party[0] chip[65535]
+			CharSetChipBase field_party[1] chip[65535]
+			CharSetChipBase field_party[2] chip[65535]
+			CharSetChipBase field_party[3] chip[65535]
+			CharSetChipPattern field_party[0] 0
+			CharSetChipPattern field_party[1] 0
+			CharSetChipPattern field_party[2] 0
+			CharSetChipPattern field_party[3] 0
+			CamLookChar field_party[0] 0ms
+			FlagSet flag[11315]
+			break
+		case 2:
+			system[28] = 0
+			CharFlagsSet char[0] 0x0080
+			CharFlagsSet char[1] 0x0080
+			ForkQuit char[1] fork[0]
+			ForkQuit char[0] fork[0]
+			CharFlagsUnset char[0] 0x0080
+			CharSetPos char[0] (-4140, 6500, 260810) 180deg
+			ForkLoop char[0] fork[3]:
+				CharAnimation self 0 7 1500ms
+			CharFlagsUnset char[1] 0x0080
+			CharSetPos char[1] (-2570, 8500, 260230) 180deg
+			ForkLoop char[1] fork[3]:
+				CharAnimation self 0 7 1500ms
+			CamLookPos (-4280, 6000, 247440) 0ms
+			CamSetDistance 0 6650 -10000 0ms
+			CamZoom 3200 0ms
+			CamRotate 45000mdeg 0ms
+			CamPers 380 0ms
+			CharSetPos field_party[0] (-4280, 6000, 247440) 0deg
+			CharSetPos field_party[1] (-4280, 6000, 247440) 0deg
+			CharSetPos field_party[2] (-4280, 6000, 247440) 0deg
+			CharSetPos field_party[3] (-4280, 6000, 247440) 0deg
+			CharSetChipBase field_party[0] chip[65535]
+			CharSetChipBase field_party[1] chip[65535]
+			CharSetChipBase field_party[2] chip[65535]
+			CharSetChipBase field_party[3] chip[65535]
+			CharSetChipPattern field_party[0] 0
+			CharSetChipPattern field_party[1] 0
+			CharSetChipPattern field_party[2] 0
+			CharSetChipPattern field_party[3] 0
+			CamLookChar field_party[0] 0ms
+			FlagSet flag[11316]
+			break
+		case 1:
+			ReturnToTitle 0
+			break
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[10]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork self fork[2]:
+		CharWalkToPos2 self (-4140, 6500, 260810) 2000mm/s 0
+	SoundPlay sound[153] 0 0 100
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	Return
+
+fn[11]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork self fork[2]:
+		CharWalkToPos2 self (-2570, 8500, 260230) 2000mm/s 0
+	SoundPlay sound[153] 0 0 100
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	Return

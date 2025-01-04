@@ -1,0 +1,1351 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U7003.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	if flag[11296]:
+		if !flag[6]:
+			if PartyPosition name[14] != -1:
+				TextStart self
+				TextTalk char[16] {
+					#91160v#265F埃尔赛尤
+					是那艘漂亮的白色飞船吧？{wait}
+				} {
+					#91161v#261F嘻嘻，
+					玲以前也很想乘坐看看呢。{wait}
+				} {
+					#91162v从甲板上眺望的话
+					肯定非常舒服吧？{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				Emote self 0mm 2000mm 38 38 250ms 1
+				Sleep 500ms
+				CharTurnToChar self char[1] 400deg/s
+				Sleep 300ms
+				TextTalk char[16] {
+					#91163v#264F哎呀，姐姐……{wait}
+				} {
+					#91164v#260F偷吃可是不好的哦？{wait}
+				}
+				TextWait
+				_Char4A char[1] 255
+				Emote char[1] 0mm 2000mm 40 43 100ms 3
+				Sleep 200ms
+				CharTurnToChar char[1] char[16] 600deg/s
+				Sleep 200ms
+				TextTalk char[1] {
+					#92796v#1933F刚、刚刚
+					我才没有偷吃。{wait}
+				} {
+					#92797v#1940F……只是试试味道而已。{wait}
+				}
+				TextWait
+				CharTurnTo char[1] 0deg 0deg/s
+				_Char4B char[1] 255
+			FlagSet flag[6]
+		else:
+			TextStart self
+			TextTalk char[16] {
+				#91165v#265F玲啊，
+				好想赶快乘坐埃尔赛尤号啊。{wait}
+			} {
+				#91166v#261F嘻嘻，
+				赶快做好准备出发吧。{wait}
+			}
+			TextWait
+			if PartyPosition name[8] != -1:
+				TextTalk name[8] {
+					#90169v#1066F是要去露营吗……{wait}
+				}
+				TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11029]:
+		if !flag[9832]:
+			EventBegin 0
+			_Char4A char[16] 255
+			_Char4A char[1] 255
+			_Char4A char[14] 255
+			CharSetPos char[1] (93410, -14000, -52280) 90deg
+			if PartyPosition name[14] != -1:
+				CrossFade 500ms
+				CamLookPos (97110, -14000, -51710) 0ms
+				CamSetDistance 0 5080 -10000 0ms
+				CamZoom 1920 0ms
+				CamRotate 48000mdeg 0ms
+				CamPers 476 0ms
+				CharSetPos party[0] (95350, -14000, -52580) 90deg
+				if CharInSlot 0 party[1] == 14:
+					CharSetPos party[1] (94630, -14000, -54700) 45deg
+					CharSetPos party[2] (94280, -14000, -51660) 90deg
+					CharSetPos party[3] (93340, -14000, -53740) 90deg
+				elif CharInSlot 0 party[2] == 14:
+					CharSetPos party[2] (94630, -14000, -54700) 45deg
+					CharSetPos party[1] (94280, -14000, -51660) 90deg
+					CharSetPos party[3] (93340, -14000, -53740) 90deg
+				elif CharInSlot 0 party[3] == 14:
+					CharSetPos party[3] (94630, -14000, -54700) 45deg
+					CharSetPos party[1] (94280, -14000, -51660) 90deg
+					CharSetPos party[2] (93340, -14000, -53740) 90deg
+				CharTurnToChar char[16] name[8] 0deg/s
+				FadeWait
+				Sleep 500ms
+				TextTalk name[8] {
+					#89515v#1079F#6P哎呀，玲。
+					在这种地方做什么呢……？{wait}
+				} {
+					#89516v#1066F啊，难道，
+					是在推测下一个『守护者』的身份？{wait}
+				} {
+					#89517v#1068F唔，
+					要是能推算出他的技能和特性
+					就真是帮大忙了……{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90954v#263F#11P嘻嘻，是啊。{wait}
+				} {
+					#90955v#269F『影之王』的人选
+					也真是有趣……{wait}
+				} {
+					#90956v#265F在下一个童话王国中
+					到底会有谁登场呢。{wait}
+				} {
+					#90957v#261F真期待⊙ {wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89518v#1061F#6P期、期待…………{wait}
+				} {
+					#89519v#1066F不是在推测吗？{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90958v#264F#11P哎呀，要是这样做了的话
+					多无聊啊。{wait}
+				} {
+					#90959v#1305F本来童话就是要怀着
+					期待的心情才有意思嘛。{wait}
+				}
+				TextWait
+				Emote name[14] 0mm 2000mm 24 27 250ms 1
+				Sleep 2000ms
+				TextTalk name[14] {
+					#92387v#1446F#12P……从刚才起
+					我就想说了。{wait}
+				} {
+					#92388v#1805F你是不是有点太不谨慎了？{wait}
+				}
+				TextWait
+				Emote char[16] 0mm 1700mm 0 1 250ms 2
+				SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				Fork field_party[0] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				Fork field_party[1] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				Fork field_party[2] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				Fork field_party[3] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				CharTurnToChar char[16] name[14] 400deg/s
+				Sleep 200ms
+				TextTalk char[16] {
+					#90960v#264F#11P不谨慎…………？{wait}
+				}
+				TextWait
+			elif flag[17]:
+				CrossFade 500ms
+				CamLookPos (88090, -14000, -51890) 0ms
+				CamSetDistance 0 6720 -10000 0ms
+				CamZoom 2070 0ms
+				CamRotate 47000mdeg 0ms
+				CamPers 512 0ms
+				CharSetPos party[0] (84050, -14000, -53200) 90deg
+				CharSetPos party[1] (84000, -14000, -51820) 90deg
+				CharSetPos party[2] (82700, -14000, -53630) 90deg
+				CharSetPos party[3] (82660, -14000, -51800) 90deg
+				FadeWait
+				Sleep 500ms
+				TextTalk char[1] {
+					#92387v#1446F#6P……从刚才起
+					我就想说了。{wait}
+				} {
+					#92388v#1805F你是不是有点太不谨慎了？{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90960v#264F#12P不谨慎…………？{wait}
+				}
+				TextWait
+				if CharInSlot 0 party[0] == 7:
+					Emote party[0] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 6:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 15:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[0] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[1] == 7:
+					Emote party[1] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 6:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 15:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[1] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[2] == 7:
+					Emote party[2] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 6:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 15:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[2] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[3] == 7:
+					Emote party[3] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 6:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 15:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[3] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+			elif flag[18]:
+				CrossFade 500ms
+				CamLookPos (93730, -14000, -51100) 0ms
+				CamSetDistance 0 5330 -10000 0ms
+				CamZoom 2670 0ms
+				CamRotate 51000mdeg 0ms
+				CamPers 394 0ms
+				CharSetPos party[0] (87290, -14000, -53260) 270deg
+				CharSetPos party[1] (87420, -14000, -51850) 270deg
+				CharSetPos party[2] (88980, -14000, -53460) 270deg
+				CharSetPos party[3] (89350, -14000, -52010) 270deg
+				FadeWait
+				Sleep 500ms
+				TextTalk char[1] {
+					#92387v#1446F#6P……从刚才起
+					我就想说了。{wait}
+				} {
+					#92388v#1805F你是不是有点太不谨慎了？{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90960v#264F#11P不谨慎…………？{wait}
+				}
+				TextWait
+				if CharInSlot 0 party[0] == 7:
+					Emote party[0] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 6:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 15:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[0] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[1] == 7:
+					Emote party[1] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 6:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 15:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[1] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[2] == 7:
+					Emote party[2] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 6:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 15:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[2] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[3] == 7:
+					Emote party[3] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 6:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 15:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[3] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				Fork party[0] fork[1]:
+					CharTurnTo self 90deg 400deg/s
+				Sleep 50ms
+				Fork party[1] fork[1]:
+					CharTurnTo self 90deg 400deg/s
+				Sleep 50ms
+				Fork party[2] fork[1]:
+					CharTurnTo self 90deg 400deg/s
+				Sleep 50ms
+				CharTurnTo party[3] 90deg 400deg/s
+				Sleep 300ms
+			else:
+				CrossFade 500ms
+				CamLookPos (97110, -14000, -51710) 0ms
+				CamSetDistance 0 5080 -10000 0ms
+				CamZoom 1920 0ms
+				CamRotate 48000mdeg 0ms
+				CamPers 476 0ms
+				CharSetPos party[0] (95350, -14000, -52580) 90deg
+				CharSetPos party[1] (94480, -14000, -51660) 90deg
+				CharSetPos party[2] (94630, -14000, -54700) 45deg
+				CharSetPos party[3] (93370, -14000, -53970) 90deg
+				CharSetPos char[1] (93000, -14000, -52320) 90deg
+				CharTurnToChar char[16] name[8] 0deg/s
+				FadeWait
+				Sleep 500ms
+				TextTalk name[8] {
+					#89515v#1079F#6P哎呀，玲。
+					在这种地方做什么呢……？{wait}
+				} {
+					#89516v#1066F啊，难道，
+					是在推测下一个『守护者』的身份？{wait}
+				} {
+					#89517v#1068F唔，
+					要是能推算出他的技能和特性
+					就真是帮大忙了……{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#91261v#263F#11P嘻嘻，是啊。{wait}
+				} {
+					#90955v#269F『影之王』的人选
+					也真是有趣……{wait}
+				} {
+					#90956v#265F在下一个童话王国中
+					到底会有谁登场呢。{wait}
+				} {
+					#90957v#261F真期待⊙ {wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89518v#1061F#6P期、期待…………{wait}
+				} {
+					#89519v#1066F不是在推测吗？{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#91262v#264F#11P哎呀，要是这样做了的话
+					多无聊啊。{wait}
+				} {
+					#90959v#1305F本来童话就是要怀着
+					期待的心情才有意思嘛。{wait}
+				}
+				TextWait
+				Fork party[0] fork[3]:
+					CamLookPos (96000, -14000, -51710) 1500ms
+				Emote char[1] 0mm 2000mm 24 27 250ms 1
+				Sleep 2000ms
+				ForkWait party[0] fork[3]
+				TextTalk char[1] {
+					#92387v#1446F#6P……从刚才起
+					我就想说了。{wait}
+				} {
+					#92388v#1805F你是不是有点太不谨慎了？{wait}
+				}
+				TextWait
+				Emote char[16] 0mm 1700mm 0 1 250ms 2
+				SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				Fork field_party[0] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				Fork field_party[1] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				Fork field_party[2] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				Fork field_party[3] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				CharTurnToChar char[16] char[1] 400deg/s
+				Sleep 400ms
+				TextTalk char[16] {
+					#90960v#264F#11P不谨慎…………？{wait}
+				}
+				TextWait
+				Sleep 300ms
+			FadeOut 1000ms 0x00000000 255
+			FadeWait
+			CharTurnTo char[16] 270deg 0deg/s
+			if PartyPosition name[14] != -1:
+				CharFlagsSet name[14] 0x0008
+				CharFlagsUnset char[1] 0x0080
+			CharSetPos char[1] (94850, -14000, -52390) 90deg
+			CharSetPos party[0] (93550, -14000, -53440) 90deg
+			if CharInSlot 0 party[1] == 14:
+				CharSetPos party[1] (94850, -14000, -52390) 90deg
+				if CharInSlot 0 party[2] == 0:
+					CharSetPos party[2] (92780, -14000, -51830) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+				elif CharInSlot 0 party[3] == 0:
+					CharSetPos party[3] (92780, -14000, -51830) 90deg
+					CharSetPos party[2] (92390, -14000, -54300) 90deg
+				else:
+					CharSetPos party[2] (91700, -14000, -52850) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+			elif CharInSlot 0 party[2] == 14:
+				CharSetPos party[2] (94630, -14000, -54700) 90deg
+				if CharInSlot 0 party[1] == 0:
+					CharSetPos party[1] (92780, -14000, -51830) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+				elif CharInSlot 0 party[3] == 0:
+					CharSetPos party[3] (92780, -14000, -51830) 90deg
+					CharSetPos party[1] (92390, -14000, -54300) 90deg
+				else:
+					CharSetPos party[1] (91700, -14000, -52850) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+			elif CharInSlot 0 party[3] == 14:
+				CharSetPos party[3] (94630, -14000, -54700) 90deg
+				if CharInSlot 0 party[1] == 0:
+					CharSetPos party[1] (92780, -14000, -51830) 90deg
+					CharSetPos party[2] (92390, -14000, -54300) 90deg
+				elif CharInSlot 0 party[2] == 0:
+					CharSetPos party[2] (92780, -14000, -51830) 90deg
+					CharSetPos party[1] (92390, -14000, -54300) 90deg
+				else:
+					CharSetPos party[1] (91700, -14000, -52850) 90deg
+					CharSetPos party[2] (92390, -14000, -54300) 90deg
+			elif CharInSlot 0 party[1] == 0:
+				CharSetPos party[1] (92780, -14000, -51830) 90deg
+				CharSetPos party[2] (92390, -14000, -54300) 90deg
+				CharSetPos party[3] (91700, -14000, -52850) 90deg
+			elif CharInSlot 0 party[2] == 0:
+				CharSetPos party[2] (92780, -14000, -51830) 90deg
+				CharSetPos party[1] (92390, -14000, -54300) 90deg
+				CharSetPos party[3] (91700, -14000, -52850) 90deg
+			elif CharInSlot 0 party[3] == 0:
+				CharSetPos party[3] (92780, -14000, -51830) 90deg
+				CharSetPos party[1] (92390, -14000, -54300) 90deg
+				CharSetPos party[2] (91700, -14000, -52850) 90deg
+			else:
+				CharSetPos party[1] (92780, -14000, -51830) 90deg
+				CharSetPos party[2] (92390, -14000, -54300) 90deg
+				CharSetPos party[3] (91700, -14000, -52850) 90deg
+			if PartyPosition name[0] != -1:
+				CharFlagsSet name[0] 0x0008
+				CharFlagsUnset char[14] 0x0080
+				CharSetPos char[14] (92780, -14000, -51830) 90deg
+				ForkQuit char[14] fork[255]
+			else:
+				CharSetPos char[14] (80540, -13100, -52040) 90deg
+			CamLookPos (94920, -14000, -51020) 0ms
+			CamSetDistance 0 6000 -10000 0ms
+			CamZoom 2160 0ms
+			CamRotate 315000mdeg 0ms
+			CamPers 406 0ms
+			Sleep 500ms
+			FadeIn 1000ms 0x00000000
+			FadeWait
+			Sleep 500ms
+			TextTalk char[1] {
+				#92389v#1446F#5P从之前的情况来看，
+				『影之王』明显是我们的敌人。{wait}
+			} {
+				#92390v虽然只是虚拟人格，
+				但『影之王』还利用了那么多人。{wait}
+			} {
+				#92391v#1443F面对这样的事态，
+				你还能够用开玩笑的语气说话，
+				是不是有点弄错形势了呢？{wait}
+			}
+			TextWait
+			Emote name[8] 0mm 2000mm 40 43 100ms 3
+			Sleep 500ms
+			TextTalk name[8] {
+				#89520v#1079F#5P莉、莉丝…………{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90961v#262F#12P……………………………………{wait}
+			} {
+				#90962v#268F这位姐姐，你为什么要生气呢？{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92392v#1446F#5P……我并没有
+				生什么气。{wait}
+			} {
+				#92393v#1445F只不过是想说
+				『王』是我们的敌人。{wait}
+			} {
+				#92394v#1443F肯定那家伙做法的言论
+				我是无法认同的。{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90963v#263F#12P呼………………{wait}
+			} {
+				#90964v#260F说起来，
+				『影之王』也一直在挑衅呢……{wait}
+			} {
+				#90965v#261F嘻嘻，这是不是
+				让姐姐变得如此焦躁不安的原因呢。{wait}
+			}
+			TextWait
+			Emote char[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk char[1] {
+				#92395v#1441F#5P………………………………{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90966v#263F#12P……对了，『影之王』似乎对
+				『异端制裁者』很感兴趣呢。{wait}
+			} {
+				#90967v但好像姐姐你
+				对这些事情并不是很清楚……{wait}
+			} {
+				#90968v#1306F嘻嘻……
+				是不是因为这个才发怒的？{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89521v#1067F#5P………………………………{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92396v#1443F#5P………………………………{wait}
+			} {
+				#92397v#1446F我只是想请你不要忘了。
+				这可不是闹着玩的。{wait}
+			} {
+				#92398v#1805F就算你是天才，
+				以为自己什么都懂
+				那也只不过是自鸣得意而已。{wait}
+			}
+			TextWait
+			ForkQuit char[14] fork[255]
+			if PartyPosition name[0] == -1:
+				TextTalkNamed char[14] "声音" {
+					#77436v#4P……好了好了，
+					你们俩都给我打住。{wait}
+				}
+				TextWait
+				Fork party[0] fork[3]:
+					CamLookPos (90000, -14000, -51430) 1500ms
+				ForkFunc char[14] fork[0] fn[3,3]
+				if PartyPosition name[14] != 0:
+					Emote field_party[0] 0mm 2000mm 38 38 250ms 1
+				Emote char[16] 0mm 2000mm 38 38 250ms 1
+				Sleep 50ms
+				if PartyPosition name[14] != 2:
+					Emote field_party[2] 0mm 2000mm 38 38 250ms 1
+				if PartyPosition name[14] != 3:
+					Emote field_party[3] 0mm 2000mm 38 38 250ms 1
+				Sleep 50ms
+				if PartyPosition name[14] != 1:
+					Emote field_party[1] 0mm 2000mm 38 38 250ms 1
+				Emote char[1] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				ForkLoop field_party[0] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[1] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[2] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[3] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop char[1] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop char[16] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkWait party[0] fork[3]
+				Sleep 1000ms
+				Fork party[0] fork[3]:
+					CamLookPos (95010, -14000, -50480) 3000ms
+				Fork party[1] fork[3]:
+					CamSetDistance 0 5350 -10000 3000ms
+				Fork party[2] fork[3]:
+					CamZoom 2160 3000ms
+				Fork party[3] fork[3]:
+					CamRotate 327000mdeg 3000ms
+				ForkWait char[14] fork[0]
+				ForkWait party[0] fork[3]
+				ForkQuit char[16] fork[0]
+				ForkQuit char[1] fork[0]
+				ForkQuit field_party[0] fork[0]
+				ForkQuit field_party[1] fork[0]
+				ForkQuit field_party[2] fork[0]
+				ForkQuit field_party[3] fork[0]
+				Sleep 200ms
+			else:
+				Fork party[0] fork[3]:
+					CamLookPos (94660, -14000, -50260) 2000ms
+				Fork party[1] fork[3]:
+					CamSetDistance 0 5350 -10000 2000ms
+				Fork party[2] fork[3]:
+					CamZoom 2160 2000ms
+				Fork party[3] fork[3]:
+					CamRotate 327000mdeg 2000ms
+				CharFlagsSet char[14] 0x0040
+				Fork char[14] fork[0]:
+					CharWalkToPos self (93970, -14000, -51040) 3000mm/s 0
+				ForkWait char[14] fork[0]
+				Fork char[14] fork[0]:
+					CharWalkToPos self (95570, -14000, -50890) 3000mm/s 0
+				ForkLoop field_party[0] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[1] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[2] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[3] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkWait char[14] fork[0]
+				ForkQuit field_party[0] fork[0]
+				ForkQuit field_party[1] fork[0]
+				ForkQuit field_party[2] fork[0]
+				ForkQuit field_party[3] fork[0]
+				CharTurnTo char[14] 180deg 800deg/s
+				CharFlagsUnset char[14] 0x0040
+				ForkWait party[0] fork[3]
+				TextTalk char[14] {
+					#76659v#1007F#5P……好了好了，
+					你们俩都给我打住。{wait}
+				}
+				TextWait
+				Fork char[16] fork[1]:
+					CharTurnToChar self char[14] 400deg/s
+				Sleep 100ms
+				CharTurnToChar char[1] char[14] 400deg/s
+			TextTalk char[14] {
+				#76660v#1009F#11P你们两个……
+				该适可而止了。{wait}
+			}
+			TextWait
+			CharTurnTo char[14] 135deg 400deg/s
+			Sleep 300ms
+			TextTalk char[14] {
+				#76661v#1019F#5P玲，
+				莉丝小姐她也有自己的隐情，
+				别再用这种口气和她说话了。{wait}
+			}
+			TextWait
+			CharTurnTo char[14] 180deg 400deg/s
+			Sleep 300ms
+			TextTalk char[14] {
+				#76662v#1007F#11P莉丝小姐也是。{wait}
+			} {
+				#76663v#1002F总说天才什么的，
+				玲只不过是个
+				普通的女孩子啊。{wait}
+			}
+			TextWait
+			Sleep 300ms
+			Emote char[16] 0mm 2000mm 24 27 250ms 1
+			Sleep 1300ms
+			TextTalk char[16] {
+				#90969v#264F#12P…………哎……………{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92399v#1443F#6P………………………………{wait}
+			} {
+				#92400v#1446F我不明白
+				你想说什么……{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76664v#1003F#11P那个，莉丝小姐。{wait}
+			} {
+				#76665v#1002F玲的确很聪明，
+				又拥有了不起的力量。{wait}
+			} {
+				#76666v但是我认为这和她
+				是不是一个普通的女孩子
+				没有关系。{wait}
+			} {
+				#76667v#1007F又任性又得意，
+				总爱学大人装成熟，
+				把什么都看得很有趣……{wait}
+			} {
+				#76668v#1006F但是却很会照顾人，
+				也会为别人担心。{wait}
+			} {
+				#76669v#1016F看，不就是和主日学校的
+				普通女孩子一样吗？{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92401v#1802F#6P……………………………………{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90970v#1307F#12P………艾丝蒂尔……………{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76670v#1025F#11P所以……
+				请不要武断地认为
+				玲是特别的。{wait}
+			} {
+				#76671v#1007F如果你觉得为了这些事情
+				值得去教训一个普通孩子，
+				那倒也无所谓……{wait}
+			} {
+				#76672v#1003F但我听了莉丝小姐的说法以后，
+				只觉得你有些过于片面了…… {wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92402v#1445F#6P…………………………………{wait}
+			} {
+				#92403v#1446F是啊……
+				也许正如你说的，
+				我的确对她有些偏见。{wait}
+			}
+			TextWait
+			CharTurnToChar char[1] char[16] 400deg/s
+			Sleep 300ms
+			TextTalk char[1] {
+				#92404v#1446F#5P……对不起，玲。{wait}
+			}
+			TextWait
+			CharTurnToChar char[16] char[1] 400deg/s
+			Sleep 300ms
+			TextTalk char[16] {
+				#90971v#269F#12P哎呀……
+				姐姐，你还真直率。{wait}
+			} {
+				#90972v#263F……不过看来
+				你还是有一堆话要和玲说对吧。{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92405v#1447F#5P当然。{wait}
+			} {
+				#92406v#1448F教育不明事理的孩子
+				是年长者的义务。{wait}
+			}
+			TextWait
+			CharTurnToChar char[14] char[16] 400deg/s
+			Sleep 300ms
+			TextTalk char[14] {
+				#76673v#1006F#5P啊，那我也同意。{wait}
+			} {
+				#76674v只要玲还在这里，
+				那我们就算是她的监护人。{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90973v#266F#12P哼……
+				随你们怎么想。{wait}
+			}
+			TextWait
+			CharTurnToChar char[16] char[14] 400deg/s
+			Sleep 300ms
+			TextTalk char[16] {
+				#90974v#262F#12P……对了，艾丝蒂尔。{wait}
+			} {
+				#90975v你刚才说
+				玲就像主日学校里的
+				普通孩子对吧。{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76675v#1011F#5P啊……怎么了？{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90976v#266F#12P虽然怎么想
+				是艾丝蒂尔自己的事情……{wait}
+			} {
+				#90977v不过我还是要纠正一点。{wait}
+			} {
+				#90978v#269F……玲可不是被教育的对象，
+				而是教育别人的身份哦。{wait}
+			} {
+				#90979v因为，
+				我已经有三个博士学位啦。{wait}
+			}
+			TextWait
+			Emote char[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 50ms
+			Emote char[14] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 50ms
+			Emote name[8] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1500ms
+			TextTalk char[14] {
+				#76676v#1004F#5P#3S…………哎。#2S{wait}
+			}
+			Shake 0 200 3000 100ms
+			TextWait
+			TextTalk char[1] {
+				#92407v#1444F#5P………什么………………{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90980v#263F#12P化学、数学和情报理论……
+				而且我还会定期发表论文哦。{wait}
+			} {
+				#90981v#1305F只不过因为害怕引起轰动
+				而都是让代理人去发表的。{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76677v#1016F#5P哈、哈哈……
+				是吗……{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92408v#1446F#5P（这样吗……
+				  看来要教育她还真是挺难的。）{wait}
+			}
+			TextWait
+			_59
+			FadeOut 2000ms 0x00000000 255
+			FadeWait
+			_30 1
+			CharSetPos char[14] (55220, 1800, -49210) 0deg
+			if PartyPosition name[0] != -1:
+				CharFlagsUnset char[14] 0x0080
+				CharFlagsUnset name[0] 0x0008
+				CharFlagsSet char[14] 0x0080
+			else:
+				_85 char[14]
+			if PartyPosition name[14] != -1:
+				CharFlagsUnset name[14] 0x0008
+			CharFlagsSet char[1] 0x0080
+			CharSetPos char[16] (97450, -14000, -47720) 37deg
+			_Char4B char[16] 255
+			_Char4B char[14] 255
+			_Char4B char[1] 255
+			ForkFunc char[16] fork[0] fn[6,2]
+			ForkFunc char[14] fork[0] fn[6,2]
+			ForkFunc char[1] fork[0] fn[6,2]
+			CamLookPos (95860, -14000, -52680) 0ms
+			CamSetDistance 0 7900 -10000 0ms
+			CamZoom 2530 0ms
+			CamRotate 315000mdeg 0ms
+			CamPers 450 0ms
+			CharSetPos field_party[0] (95860, -14000, -52680) 90deg
+			CharSetPos field_party[1] (95860, -14000, -52680) 90deg
+			CharSetPos field_party[2] (95860, -14000, -52680) 90deg
+			CharSetPos field_party[3] (95860, -14000, -52680) 90deg
+			CharSetChipBase field_party[0] chip[65535]
+			CharSetChipBase field_party[1] chip[65535]
+			CharSetChipBase field_party[2] chip[65535]
+			CharSetChipBase field_party[3] chip[65535]
+			CharSetChipPattern field_party[0] 0
+			CharSetChipPattern field_party[1] 0
+			CharSetChipPattern field_party[2] 0
+			CharSetChipPattern field_party[3] 0
+			CamLookChar field_party[0] 0ms
+			Sleep 500ms
+			SystemFlagsSet 0x00000080
+			FadeIn 1000ms 0x00000000
+			EventEnd 0
+			SystemFlagsUnset 0x00000080
+			FlagSet flag[9832]
+		else:
+			TextStart self
+			TextTalk char[16] {
+				#90982v#266F呼……
+				可不要小看玲哦。{wait}
+			} {
+				#90983v#262F如果没有玲帮忙的话，
+				不管过多长时间
+				你们也可能无法逃出这里哦？{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#76678v#1007F啊，我知道啦。{wait}
+				} {
+					#76679v#1006F那就拜托你了，玲。{wait}
+				}
+				TextWait
+			TextEnd self
+	elif flag[11016]:
+		var[2] = self.8
+		CharFlagsSet self 0x0010
+		TextStart self
+		if PartyPosition name[6] != -1:
+			name[6].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[6] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[6].5
+			name[6].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+		else:
+			char[2].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self char[2] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = char[2].5
+			char[2].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+		if !flag[0]:
+			TextTalk char[16] {
+				#90929v#263F竟然还再现了
+				那位细眼的爷爷……{wait}
+			} {
+				#90930v#269F呵呵，
+				『影之王』还真是懂得游戏的乐趣啊。{wait}
+			} {
+				#90931v……真想早点跟他决一胜负呢。{wait}
+			} {
+				#90932v#261F干脆偷偷地
+				抢先一步行动吧。{wait}
+			}
+			TextWait
+			if PartyPosition name[6] != -1:
+				TextTalk name[6] {
+					#82887v#562F真、真是的……{wait}
+				} {
+					#82888v外面很危险的，
+					千万不要单独出去哦？{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[2] {
+					#82887v#562F真、真是的……{wait}
+				} {
+					#82888v外面很危险的，
+					千万不要单独出去哦？{wait}
+				}
+				TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92375v#1440F……………………………………{wait}
+				}
+				TextWait
+			FlagSet flag[0]
+		else:
+			TextTalk char[16] {
+				#90933v#266F玲啊，
+				觉得看家最无聊了。{wait}
+			} {
+				#90934v#265F干脆偷偷地
+				抢先一步行动吧……{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92376v#1440F……………………………………{wait}
+				}
+				TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+		self.8 = var[2]
+	elif flag[11008]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[6]:
+			TextTalk char[16] {
+				#90908v#260F要说布娃娃的话，
+				玲也有很多呢。{wait}
+			} {
+				#90909v房间里到处都堆满了，
+				就像被埋起来一样。{wait}
+			} {
+				#90910v#261F嘻嘻，真想让
+				提妲和姐姐看看呢。{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+		else:
+			TextTalk char[16] {
+				#90911v#260F嘻嘻，
+				玲的房间已经被
+				布娃娃埋起来了。{wait}
+			} {
+				#90912v#261F嘻嘻，真想让
+				提妲和姐姐看看呢。{wait}
+			}
+			TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[10759]:
+		if !flag[9826]:
+			if PartyPosition name[6] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				name[6].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[6] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[6].5
+				name[6].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk name[6] {
+					#82844v#560F啊，玲！{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90859v#264F哎，
+					提妲和艾丝蒂尔都要出去吗？{wait}
+				} {
+					#90860v#266F玲一个人好无聊啊。{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82845v#065F对、对不起……{wait}
+				} {
+					#82846v#066F那个，
+					要不下次我们一起去购物吧。{wait}
+				} {
+					#82847v#067F嘿嘿，
+					之前在百货店里
+					买到了好漂亮的胸针……{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90861v#260F嘻嘻，是有这么一回事。{wait}
+				} {
+					#90862v#267F对了……#1400W 
+					#20W我之前在一家很小的店里
+					看到了同一种胸针。{wait}
+				} {
+					#90863v#261F不过中间的宝石是红色的。{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82848v#064F啊，真不错……{wait}
+				} {
+					#82849v王都的百货店
+					已经都卖完了……{wait}
+				} {
+					#82850v#562F唉，
+					我也想要红色的啊……{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90866v#265F那么，
+					下次我就带你去
+					那家很远的店转转吧？{wait}
+				} {
+					#90867v#269F在共和国的东方人街里
+					转一天都不会觉得烦。{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82851v#064F是、是这样啊……{wait}
+				} {
+					#82852v#061F嘿嘿，
+					如果能再找到可爱的小玩意就好了～{wait}
+				} {
+					#82853v#560F听我说，
+					之前我买的那个挂饰……{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76529v#1016F（……唔，
+					  好像聊得很热闹嘛。）{wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[16] {
+					#90864v#261F……在那家店里看到
+					和上次买的同一种胸针。{wait}
+				} {
+					#90865v#265F不过中间的宝石是红色的。{wait}
+				}
+				TextWait
+				TextTalk char[2] {
+					#82832v#064F啊，真不错……{wait}
+				} {
+					#82833v王都的百货店
+					已经都卖完了……{wait}
+				} {
+					#82834v#562F唉，
+					我也想要红色的啊……{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90855v#265F那么，
+					下次我就带你去
+					那家很远的店转转吧？{wait}
+				} {
+					#90856v#269F在共和国的东方人街里
+					转一天都不会觉得烦。{wait}
+				}
+				TextWait
+				TextTalk char[2] {
+					#82835v#064F是、是这样啊……{wait}
+				} {
+					#82836v#061F嘿嘿，
+					如果能再找到可爱的小玩意就好了～{wait}
+				} {
+					#82837v#560F听我说，
+					之前我买的那个挂饰……{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76528v#1016F（……唔，
+					  好像聊得很热闹嘛。）{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[9826]
+		elif !flag[6]:
+			if PartyPosition name[6] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				name[6].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[6] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[6].5
+				name[6].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[16] {
+					#90868v#261F嘻嘻……
+					玲之前可是在帝国的商店里
+					看到了这么大的布偶熊。{wait}
+				} {
+					#90869v#265F就像成年人那般大。{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82854v#065F哇……{wait}
+				} {
+					#82855v#067F我、我也想见识一下呢……{wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[16] {
+					#90870v#260F对了，
+					帝国也有很多大型商店呢。{wait}
+				} {
+					#90871v#261F嘻嘻，玲之前可是在帝国的商店里
+					看到了这么大的布偶熊。{wait}
+				} {
+					#90872v就像成年人那般大。{wait}
+				}
+				TextWait
+				TextTalk char[2] {
+					#82840v#065F哇……{wait}
+				} {
+					#82841v#067F我、我也想见识一下呢……{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[6]
+		elif PartyPosition name[6] != -1:
+			CharFlagsSet self 0x0010
+			TextStart self
+			name[6].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[6] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[6].5
+			name[6].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[16] {
+				#90870v#260F对了，
+				帝国也有很多大型商店呢。{wait}
+			} {
+				#90871v#261F嘻嘻，玲之前可是在帝国的商店里
+				看到了这么大的布偶熊。{wait}
+			} {
+				#90872v就像成年人那般大。{wait}
+			}
+			TextWait
+			CharSetChipPattern self 0
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[16] {
+				#90868v#261F嘻嘻……
+				玲之前可是在帝国的商店里
+				看到了这么大的布偶熊。{wait}
+			} {
+				#90869v#265F就像成年人那般大。{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	Return
+
+fn[3]:
+	CharFlagsSet self 0x0040
+	CharWalkToPos self (90170, -14000, -51960) 3000mm/s 0
+	CharWalkToPos self (92620, -14000, -50470) 3000mm/s 0
+	CharWalkToPos self (95570, -14000, -50890) 3000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	CharFlagsSet self 0x0040
+	Return
+
+fn[4]:
+	CharFlagsSet char[8] 0x0010
+	TextStart char[8]
+	if !flag[15]:
+		TextTalk char[8] {
+			#95449v#311F……啾☆{wait}
+		}
+		TextWait
+		Emote char[8] 0mm 1200mm 8 9 250ms 2
+		SoundPlay sound[15] 0 0 100
+		Sleep 1000ms
+		EmoteStop char[8]
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}基库啄起了
+			科洛丝手里的食物。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[15]
+	else:
+		Emote char[8] 0mm 1200mm 8 9 250ms 2
+		SoundPlay sound[15] 0 0 100
+		Sleep 1000ms
+		EmoteStop char[8]
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}基库啄起了
+			科洛丝手里的食物。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	CharFlagsUnset char[8] 0x0010
+	TextEnd char[8]
+	Return

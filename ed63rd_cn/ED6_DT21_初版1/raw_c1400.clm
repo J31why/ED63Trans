@@ -1,0 +1,462 @@
+calmare tc scena
+scena:
+	name "Bose" "C1400.x"
+	town town[60]
+	bgm bgm[22]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01680._ch" "npl/ch01680p._cp"
+chip[1] "apl/ch20053._ch" "apl/ch20053p._cp"
+
+npc char[0]:
+	name "维姆拉"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "阿加特"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (-59360, 2000, 181540)
+	pos2 (-67440, 8000, 177040)
+	flags 0x0000
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 13:
+		if flag[12176]:
+			CharFlagsUnset char[0] 0x0080
+			CharSetPos char[0] (-60800, 3970, 187600) 270deg
+	if system[66] == 13:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	ObjFlagsUnset object[1] 0x0004
+	ObjFlagsSet object[3] 0x0004
+	TriggerFlagsSet trigger[0] 0x0080
+	if system[66] == 13:
+		TriggerFlagsUnset trigger[0] 0x0080
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	TextTalk self {
+		#99550v怎么了，想说点什么吗？{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	system[40] = 24
+	Menu menu[0] 10 100 1
+		"休息" // 0
+		"吃饭" // 1
+		"离开" // 2
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	FadeIn 300ms 0x00000000
+	if var[0] == 0:
+		BgmStop 3000ms
+		FadeOut 1000ms 0x00000000 255
+		Sleep 700ms
+		SoundPlay sound[13] 0 0 100
+		FadeWait
+		PartySetAttr name[16] 254 0
+		PartySetAttr name[17] 254 0
+		PartySetAttr name[18] 254 0
+		Sleep 1000ms
+		Sleep 3500ms
+		BgmResume
+		FadeIn 1000ms 0x00000000
+		FadeWait
+		TextTalk self {
+			#99551v是不是
+			觉得舒服一些了？{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99552v那就赶快
+			鼓起干劲出发吧。{wait}
+		}
+		TextWait
+	elif var[0] == 1:
+		FadeOut 1000ms 0x00000000 255
+		FadeWait
+		TextSetPos -1 -1 -1 -1
+		SoundPlay sound[11] 0 0 100
+		TextMessage null {
+			{0x6}{color 2}地狱极乐锅{color 0}品尝过了。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		if PartyPosition name[18] != -1:
+			var[2] = 0
+			var[2] = random % 3
+			switch var[2]:
+				case 0:
+					if PartyPosition name[16] != -1:
+						PartySetAttr name[16] 2 1
+						PartySetAttr name[16] 5 0
+					if PartyPosition name[17] != -1:
+						PartySetAttr name[17] 5 100
+					if PartyPosition name[18] != -1:
+						PartySetAttr name[18] 5 100
+					break
+				case 1:
+					if PartyPosition name[16] != -1:
+						PartySetAttr name[16] 5 100
+					if PartyPosition name[17] != -1:
+						PartySetAttr name[17] 2 1
+						PartySetAttr name[17] 5 0
+					if PartyPosition name[18] != -1:
+						PartySetAttr name[18] 5 100
+					break
+				case 2:
+					if PartyPosition name[16] != -1:
+						PartySetAttr name[16] 5 100
+					if PartyPosition name[17] != -1:
+						PartySetAttr name[17] 5 100
+					if PartyPosition name[18] != -1:
+						PartySetAttr name[18] 2 1
+						PartySetAttr name[18] 5 0
+					break
+		else:
+			var[2] = 0
+			var[2] = random % 2
+			switch var[2]:
+				case 0:
+					if PartyPosition name[16] != -1:
+						PartySetAttr name[16] 2 1
+						PartySetAttr name[16] 5 0
+					if PartyPosition name[17] != -1:
+						PartySetAttr name[17] 5 100
+					break
+				case 1:
+					if PartyPosition name[16] != -1:
+						PartySetAttr name[16] 5 100
+					if PartyPosition name[17] != -1:
+						PartySetAttr name[17] 2 1
+						PartySetAttr name[17] 5 0
+					break
+		FadeIn 1000ms 0x00000000
+		FadeWait
+		TextTalk self {
+			#99553v怎么样，满足了吗？{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99554v那就赶快
+			鼓起干劲出发吧。{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#99555v这样啊，不接受帮助吗。{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99556v那你们就
+			好好努力干吧。{wait}
+		}
+		TextWait
+	TextEnd self
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-62140, 3940, 188700) 0ms
+	CamSetDistance 0 5040 -10000 0ms
+	CamZoom 3380 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-63680, 3950, 188120) 180deg
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-62400, 3950, 188260) 180deg
+	_Char4A char[0] 255
+	CharSetPos name[18] (-64780, 4070, 185560) 0deg
+	CharSetPos name[16] (-63880, 4070, 185560) 0deg
+	CharSetPos name[17] (-62980, 4070, 185560) 0deg
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#81017v#051F#5P这里就是你们一直期盼的
+		最终考试的会场了。{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#95488v#1743F#12P这、这样的地方居然有洞窟……{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95728v#1750F#12P嘿，我们是要进到这里面去吗。{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95619v#1765F#6P哼，又是骗小孩子的伎俩。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#81018v#053F#5P……考试的内容
+		就是刚才所说的。{wait}
+	} {
+		#81019v#051F我就先走一步，在里面等着你们啦。
+		你们给我打起精神，赶快跟上来。{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 0deg 500deg/s
+	Sleep 200ms
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-63680, 4010, 191360) 2000mm/s 0
+	ForkWait char[1] fork[1]
+	CharFlagsSet char[1] 0x0080
+	TextTalk char[0] {
+		#99547v#5P我来担当
+		你们的后援。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99548v#5P我会为你们安排
+		简单的食宿，
+		如果遇到什么危险就回到这里来吧。{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95620v#1761F#6P『如果遇到什么危险』吗……{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95729v#1751F#12P不过，应该没啥大不了的吧？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99549v#5P……………………………{wait}
+	}
+	TextWait
+	_59
+	CharTurnTo char[0] 90deg 500deg/s
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-60800, 3970, 187600) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	CharTurnTo char[0] 270deg 500deg/s
+	Sleep 300ms
+	TextTalk name[16] {
+		#95489v#1741F#12P好了……{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#95730v#1750F#12P那就……{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#95621v#1761F#6P开始干吧。{wait}
+	}
+	TextWait
+	FlagSet flag[12176]
+	Tc_C2 1 4
+	PartySetAttr name[16] 16 45
+	PartySetAttr name[16] 254 0
+	PartySetAttr name[16] 5 0
+	PartyAddCraft name[16] magic[65535]
+	PartyAddArt name[16] magic[65535]
+	PartyAddCraft name[16] magic[0]
+	PartySetPortrait name[16] 6 0 0 0 0
+	PartyEquip name[16] item[0] 255
+	PartyEquip name[16] item[1541] 255
+	PartyEquip name[16] item[1600] 255
+	PartyEquip name[16] item[128] 255
+	PartySetAttr name[17] 16 45
+	PartySetAttr name[17] 254 0
+	PartySetAttr name[17] 5 0
+	PartyAddCraft name[17] magic[65535]
+	PartyAddArt name[17] magic[65535]
+	PartyAddCraft name[17] magic[0]
+	PartySetPortrait name[17] 6 0 0 0 0
+	PartyEquip name[17] item[0] 255
+	PartyEquip name[17] item[1541] 255
+	PartyEquip name[17] item[1600] 255
+	PartyEquip name[17] item[128] 255
+	PartySetAttr name[18] 16 45
+	PartySetAttr name[18] 254 0
+	PartySetAttr name[18] 5 0
+	PartyAddCraft name[18] magic[65535]
+	PartyAddArt name[18] magic[65535]
+	PartyAddCraft name[18] magic[0]
+	PartySetPortrait name[18] 6 0 0 0 0
+	PartyEquip name[18] item[0] 255
+	PartyEquip name[18] item[1541] 255
+	PartyEquip name[18] item[1600] 255
+	PartyEquip name[18] item[128] 255
+	ItemAdd item[470] 3
+	ItemAdd item[471] 2
+	ItemAdd item[472] 2
+	ItemAdd item[473] 4
+	ItemAdd item[474] 2
+	ItemAdd item[318] 1
+	ItemAdd item[496] 1
+	if system[74] == 2:
+		ItemAdd item[352] 1
+	elif system[74] == 3:
+		ItemAdd item[352] 1
+	EventEnd 0
+	_Char4B char[0] 255
+	Return
+
+fn[5]:
+	EventBegin 2
+	if flag[0]:
+		if system[10] == 16:
+			TextTalk name[16] {
+				#95491v#1740F呼，赶快回去吧。{wait}
+			}
+			TextWait
+		elif system[10] == 17:
+			TextTalk name[17] {
+				#95732v#1750F好了，回去吧。{wait}
+			}
+			TextWait
+		elif system[10] == 18:
+			TextTalk name[18] {
+				#95623v#1763F哼，赶快回去了。{wait}
+			}
+			TextWait
+	elif PartyPosition name[18] != -1:
+		_Char4A char[0] 255
+		CharTurnToChar char[0] field_party[0] 0deg/s
+		if system[100] >= 0 && system[100] <= 90:
+			TextTalk char[0] {
+				#99557v#6P怎么，放弃了？{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99558v#6P嗯，也好。
+				知难而退也很重要嘛。{wait}
+			}
+			TextWait
+		elif system[100] >= 270 && system[100] <= 360:
+			TextTalk char[0] {
+				#99557v#6P怎么，放弃了？{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99558v#6P嗯，也好。
+				知难而退也很重要嘛。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				#99557v怎么，放弃了？{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99558v嗯，也好。
+				知难而退也很重要嘛。{wait}
+			}
+			TextWait
+		TextTalk name[16] {
+			#95490v#1741F嘁，谁要……{wait}
+		}
+		TextWait
+		TextTalk name[18] {
+			#95622v#1763F怎么可能放弃嘛。{wait}
+		}
+		TextWait
+		TextTalk name[17] {
+			#95731v#1756F好了，回去吧。{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+		CharTurnTo char[0] 270deg 0deg/s
+		_Char4B char[0] 255
+	else:
+		_Char4A char[0] 255
+		CharTurnToChar char[0] field_party[0] 0deg/s
+		if system[100] >= 0 && system[100] <= 90:
+			TextTalk char[0] {
+				#99559v#6P哦，你们两个……{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99560v#6P想丢下同伴
+				就这样逃走吗？{wait}
+			}
+			TextWait
+		elif system[100] >= 270 && system[100] <= 360:
+			TextTalk char[0] {
+				#99559v#6P哦，你们两个……{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99560v#6P想丢下同伴
+				就这样逃走吗？{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				#99559v哦，你们两个……{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99560v想丢下同伴
+				就这样逃走吗？{wait}
+			}
+			TextWait
+		TextTalk name[16] {
+			#95492v#1744F哎，很不巧……{wait}
+		}
+		TextWait
+		TextTalk name[17] {
+			#95733v#1750F我们可没那么薄情呢。{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+		CharTurnTo char[0] 270deg 0deg/s
+		_Char4B char[0] 255
+	_Char90 field_party[0] 0 0 1500 2000 0
+	Sleep 50ms
+	EventEnd 4
+	Return

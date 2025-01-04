@@ -1,0 +1,46 @@
+0055E073    FF35 FCD19B00   push dword ptr ds:[0x9BD1FC]
+0055E079    FF15 B0325E00   call dword ptr ds:[<&USER32.WINNLSEnable>; user32.WINNLSEnableIME
+0055E07F    E8 FC62FFFF     call ed6_win3.00554380
+0055E084    E8 5757FFFF     call ed6_win3.005537E0
+0055E089    E8 F24FF4FF     call ed6_win3.004A3080
+0055E08E    E8 5DF6FFFF     call ed6_win3.0055D6F0
+0055E093    84C0            test al,al
+0055E095    0F84 F2110000   je ed6_win3.0055F28D
+0055E09B    6A 20           push 0x20
+0055E09D    FF15 24335E00   call dword ptr ds:[<&d3d9.Direct3DCreate>; d3d9.Direct3DCreate9
+0055E0A3    A3 D8199900     mov dword ptr ds:[0x9919D8],eax          ; 0x9919D8
+0055E0A8    85C0            test eax,eax
+0055E0AA    75 56           jnz short ed6_win3.0055E102
+0055E0AC    8B35 3C325E00   mov esi,dword ptr ds:[<&USER32.ShowCurso>; user32.ShowCursor
+0055E0B2    6A 01           push 0x1
+0055E0B4    FFD6            call esi                                 ; ntdll.77506A68
+
+0055EBC7    E8 F442F4FF     call ed6_win3.004A2EC0
+
+004A2F0C    E8 035F1100     call ed6_win3.005B8E14
+
+0055226F    E8 BC0B0000     call ed6_win3.00552E30
+
+
+
+void __stdcall sub_552E30(char a1, int a2, int a3, __int16 a4)
+
+0047EEAB   /75 09           jnz short ed6_win3.0047EEB6
+0047EEAD   |81E3 2FFFFFFF   and ebx,-0xD1
+0047EEB3   |83CB 20         or ebx,0x20
+0047EEB6   \A1 D8199900     mov eax,dword ptr ds:[0x9919D8]
+0047EEBB    8D97 A4BC0100   lea edx,dword ptr ds:[edi+0x1BCA4]
+0047EEC1    68 FC199900     push ed6_win3.009919FC
+0047EEC6    52              push edx                                 ; ed6_win3.00693874
+0047EEC7    83CB 04         or ebx,0x4
+0047EECA    8B08            mov ecx,dword ptr ds:[eax]               ; d3d9.554228FC
+0047EECC    53              push ebx
+0047EECD    FFB7 FCBC0100   push dword ptr ds:[edi+0x1BCFC]
+0047EED3    FF75 00         push dword ptr ss:[ebp]
+0047EED6    FF77 04         push dword ptr ds:[edi+0x4]
+0047EED9    50              push eax
+0047EEDA    FF51 40         call dword ptr ds:[ecx+0x40]             ; d3d9.5548F050
+0047EEDD    894424 14       mov dword ptr ss:[esp+0x14],eax
+0047EEE1    85C0            test eax,eax
+0047EEE3    79 39           jns short ed6_win3.0047EF1E
+

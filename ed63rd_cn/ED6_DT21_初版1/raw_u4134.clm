@@ -1,0 +1,357 @@
+calmare tc scena
+scena:
+	name "gaiden2" "U4134.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (2900, 1000, 20280)
+	radius 1000mm
+	bubble_pos (2750, 2000, 21270)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (72040, 4000, 4910)
+	radius 1000mm
+	bubble_pos (71980, 5000, 5610)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (-77000, 0, 7000)
+	radius 1000mm
+	bubble_pos (-77000, 1000, 7000)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (-131880, 0, 6130)
+	radius 1000mm
+	bubble_pos (-132000, 3000, 7000)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+look_point[4]:
+	pos (-74960, 0, 65920)
+	radius 800mm
+	bubble_pos (-74960, 1000, 65920)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+fn[0]:
+	if flag[9478]:
+		FlagUnset flag[9478]
+		SystemFlagsSet 0x10000000
+		Event fn[0,8]
+		global[5] = 5
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[19] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	if !flag[10123]:
+		ObjFrame object[17] 0
+	else:
+		ObjFrame object[17] 60
+	if !flag[10124]:
+		ObjFrame object[18] 0
+	else:
+		ObjFrame object[18] 60
+	if !flag[10125]:
+		ObjFrame object[19] 0
+	else:
+		ObjFrame object[19] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10123]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[17] 60
+		Sleep 500ms
+		if ItemAdd item[509] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[509]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10123]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[509]}{color 0}。
+				不过现有的数量太多，{item item[509]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[17] 60
+			ObjPlay object[17] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 271 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[10124]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[18] 60
+		Sleep 500ms
+		if ItemAdd item[502] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[502]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10124]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[502]}{color 0}。
+				不过现有的数量太多，{item item[502]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[18] 60
+			ObjPlay object[18] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 272 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[10125]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[19] 60
+		Sleep 500ms
+		if ItemAdd item[1274] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 0}得到了{item item[1274]}{color 0}。{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10125]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				宝箱里装有{item item[1274]}{color 0}。
+				不过现有的数量太多，{item item[1274]}{color 0}不能再拿更多了。{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[19] 60
+			ObjPlay object[19] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}宝箱中什么都没有。{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 273 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}打开『门』吗？{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"【是】" // 0
+		"【否】" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[6]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (-132630, 0, 4570) 0deg
+	CharSetPos field_party[1] (-130870, 0, 4490) 0deg
+	CharSetPos field_party[2] (-132550, 0, 2760) 0deg
+	CharSetPos field_party[3] (-130530, 0, 2570) 0deg
+	CamLookPos (-131590, 0, 5430) 0ms
+	CamSetDistance 0 3910 -10000 0ms
+	CamZoom 4220 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	if !QuestFlagsGet quest[19] 0x02:
+		QuestFlagsSet quest[19] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99893v{color 5}#40W　　　无『武勋』者，
+		 毫无穿越此『门』之价值……
+		#500W
+		#40W若欲获得认可，请历经百战……
+		　当汝等获得１００场胜利之时，
+		　则『门』将开启……{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if system[24] >= 100:
+		Call fn[0,5]
+		if var[0] == 0:
+			Call fn[0,7]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[7]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[21] 0
+	ObjPlay object[21] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[21]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3400 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 30 0 0
+	NewScene "p9001._sn" 100 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (-132630, 0, 4570) 0deg
+	CharSetPos field_party[1] (-130870, 0, 4490) 0deg
+	CharSetPos field_party[2] (-132550, 0, 2760) 0deg
+	CharSetPos field_party[3] (-130530, 0, 2570) 0deg
+	CamLookPos (-131590, 0, 5430) 0ms
+	CamSetDistance 0 3910 -10000 0ms
+	CamZoom 4220 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return
+
+fn[9]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}门上了锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

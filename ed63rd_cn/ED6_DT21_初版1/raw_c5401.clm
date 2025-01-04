@@ -1,0 +1,820 @@
+calmare tc scena
+scena:
+	name "Other" "C5401.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 "t7000._sn"
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03550._ch" "npl2/ch03550p._cp"
+chip[1] "npl2/ch03600._ch" "npl2/ch03600p._cp"
+chip[2] "apl2/ch20765._ch" "apl2/ch20765p._cp"
+chip[3] "apl2/ch20485._ch" "apl2/ch20485p._cp"
+
+npc char[0]:
+	name "怀斯曼教授"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "小丑肯帕雷拉"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "怀斯曼之杖"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 255:
+		switch system[0]:
+			case 101:
+				Event fn[0,8]
+				break
+			case 102:
+				Event fn[0,9]
+				break
+	if system[66] == 4:
+		system[1] = 110
+		Event fn[0,7]
+	if system[66] == 29:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 0
+			Event fn[0,5]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 212
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 0
+	if system[66] == 255:
+		_1B look_point[1] fn[0,10]
+		_1B look_point[2] fn[0,11]
+	else:
+		ObjFlagsSet object[7] 0x0004
+		ObjFlagsSet object[8] 0x0004
+		EntranceSetDisabled entrance[1] 0
+		EntranceSetDisabled entrance[2] 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	SoundPlay sound[133] 40 0 100
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-1140, 1500, 85570) 0deg
+	CamLookPos (-300, 0, 53260) 0ms
+	CamSetDistance 0 9770 -10000 0ms
+	CamZoom 3660 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 410 0ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (-510, 1500, 87040) 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait field_party[0] fork[0]
+	CrossFade 500ms
+	ObjFlagsSet object[4] 0x0004
+	_79 object[9] 2
+	_7B
+	CamLookPos (20, 1500, 86880) 0ms
+	CamSetDistance 0 4690 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk char[1] {
+		#850F#5P呵呵，这声音真令人心情舒畅啊。{wait}
+	} {
+		所有的一切都在
+		崩坏毁灭的声音……{wait}
+	} {
+		……枕着古代都市的瓦砾
+		陷入永远的长眠。{wait}
+	} {
+		教授也一定
+		会满意吧？{wait}
+	} {
+		哈哈，没问题。
+		之后的事就交给我吧。{wait}
+	} {
+		所以，教授……{wait}
+	} {
+		……你不用再从那
+		炼狱出来了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[2]
+	CharSetChipPattern char[1] 0
+	CharFlagsSet char[1] 0x0002
+	FadeWait
+	Sleep 300ms
+	CharSetChipPattern char[1] 1
+	Sleep 300ms
+	SoundPlay sound[188] 0 0 100
+	CharSetChipPattern char[1] 2
+	Sleep 300ms
+	ForkFunc char[2] fork[0] fn[0,3]
+	ForkWait char[2] fork[0]
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[1]
+	CharSetChipPattern char[1] 0
+	CharFlagsUnset char[1] 0x0002
+	FadeWait
+	Sleep 300ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}◆追加肯帕雷拉喜欢打响指。{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	TextTalk char[1] {
+		#850F#5PＮｏ．０――
+		『小丑肯帕雷拉』。{wait}
+	} {
+		代替『蛇之使徒』第三支柱――
+		怀斯曼
+		申请进入『星辰之间』。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc field_party[3] fork[0] fn[0,6]
+	BgmStop 2000ms
+	CrossFade 2000ms
+	CamLookPos (20, 1500, 156880) 0ms
+	CamSetDistance 0 4690 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[1] (-1140, 1500, 155570) 0deg
+	CharSetPos char[2] (-1140, 1500, 156570) 0deg
+	FadeWait
+	FlagSet flag[9478]
+	system[67] = 3000
+	NewScene "c5416._sn" 100 1 0
+	Hcf
+	Return
+
+fn[3]:
+	CharFlagsSet self 0x0800
+	CharSetChipBase self chip[3]
+	CharSetChipPattern self 5
+	CharColor self 0x00FFFFFF 0ms
+	CharSetPos self (-1140, 1500, 86570) 0deg
+	CharFlagsSet self 0x0004
+	CharFlagsUnset self 0x0080
+	CharFlagsSet self 0x0002
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	SoundPlay sound[153] 0 0 100
+	ForkWait self fork[1]
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsSet object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	ObjFlagsSet object[6] 0x0004
+	CamLookPos (0, 0, 60700) 0ms
+	CamSetDistance 0 8920 -10000 0ms
+	CamZoom 4560 0ms
+	CamRotate 55000mdeg 0ms
+	CamPers 328 0ms
+	EffLoad eff[0] "map\\\\mp294_00.eff"
+	EffLoad eff[1] "map\\\\mp294_01.eff"
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-1000, 0, 65360) 0deg
+	Fork char[3] fork[0]:
+		CamLookPos (1000, 0, 84400) 7000ms
+	Fork char[3] fork[1]:
+		CamRotate 45000mdeg 7000ms
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1000, 1500, 85760) 2000mm/s 0
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	CrossFade 1000ms
+	CamLookPos (-60, 1500, 86800) 0ms
+	CamSetDistance 0 5300 -10000 0ms
+	CamZoom 3450 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	ForkWait char[1] fork[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#90424v#850F呵呵，外面的杂音
+		到这里面就听不到了。{wait}
+	} {
+		#90425v#853F不过，如果不是这样，
+		也就没法完成任务了呢。{wait}
+	}
+	TextWait
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[2]
+	CharSetChipPattern char[1] 0
+	FadeWait
+	Sleep 300ms
+	CharSetChipPattern char[1] 1
+	Sleep 200ms
+	CharSetChipPattern char[1] 2
+	Sleep 400ms
+	SoundPlay sound[188] 0 0 100
+	CharSetChipPattern char[1] 3
+	Sleep 50ms
+	BgmStop 0ms
+	Sleep 450ms
+	system[28] = 1
+	Fork char[3] fork[0]:
+		CamLookPos (-1000, 2300, 88200) 1500ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 4440 -10000 1500ms
+	Fork char[3] fork[2]:
+		CamRotate 0mdeg 1500ms
+	Fork char[3] fork[3]:
+		CamPers 605 1500ms
+	ForkWait char[3] fork[0]
+	Sleep 300ms
+	system[28] = 0
+	CrossFade 200ms
+	SoundPlay sound[157] 0 0 100
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsUnset object[5] 0x0004
+	FadeWait
+	Sleep 400ms
+	CrossFade 200ms
+	SoundPlay sound[157] 0 0 100
+	ObjFlagsUnset object[6] 0x0004
+	FadeWait
+	Sleep 1000ms
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[1]
+	CharSetChipPattern char[1] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#90426v#853F#6P──接入。{wait}
+	} {
+		#90427v#854F执行者Ｎｏ．０。
+		『小丑』肯帕雷拉。{wait}
+	} {
+		#90428v代替『蛇之使徒』第三支柱
+		盖鲁格·怀斯曼，
+		申请进入『星辰之间』。{wait}
+	}
+	TextWait
+	BgmPlay bgm[224] 0
+	Sleep 500ms
+	_59
+	CrossFade 1000ms
+	EffPlay eff[0] eff_instance[1] null 0 (-6820, 5000, 75500) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[2] null 0 (4820, 5000, 75500) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[3] null 0 (-13120, 5000, 85000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[4] null 0 (11120, 5000, 85000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[1] eff_instance[5] null 0 (-1000, 8500, 91000) 0 0 0 1500 1500 1500 null (0, 0, 0) 0ms
+	Sleep 3000ms
+	Minigame 20 4000 0 0 0 0 0 0 0
+	FadeWait
+	FlagSet flag[9476]
+	NewScene "c5416._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00FFFFFF 255
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsSet object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	ObjFlagsSet object[6] 0x0004
+	CamLookPos (-60, 1500, 86800) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 3550 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Sleep 500ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-1000, 1500, 85760) 0deg
+	ImageHide 1500ms
+	Fork char[3] fork[2]:
+		CamZoom 3350 3000ms
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#90441v#853F#6P『幻焰计划』……
+		终于要开始了吗。{wait}
+	} {
+		#90442v已经做好充分准备……
+		规模和完成度都是
+		『福音计划』所无法比拟的。{wait}
+	} {
+		#90443v#854F呵呵……
+		这下变得好玩了。{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote char[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#90444v#855F#6P……对了。{wait}
+	} {
+		#90445v虽然我也不太好
+		说别人什么──{wait}
+	}
+	TextWait
+	Sleep 300ms
+	system[28] = 1
+	Fork char[3] fork[0]:
+		CamLookPos (-360, 1500, 86500) 1200ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 7000 -10000 1200ms
+	Fork char[3] fork[2]:
+		CamZoom 3550 1200ms
+	CharTurnTo char[1] 225deg 300deg/s
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	system[28] = 0
+	TextTalk char[1] {
+		#90446v#854F#5P──我不知道你是谁，
+		不过能不能不要再偷窥了？{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	ScAchievement 9 14 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Episode『幻焰计划』　～Fin～{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	SystemFlagsUnset 0x02000000
+	SystemFlagsUnset 0x00100000
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[18] 0x20:
+		Sleep 500ms
+		QuestFlagsSet quest[18] 0x10
+		QuestFlagsSet quest[18] 0x20
+		ItemAdd item[399] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 0}得到了{item item[399]}{color 0}。{wait}
+		}
+		TextWait
+		MiraAdd 30000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 0}得到了{color 2}３００００米拉{color 0}。{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5401._sn" 100 0 0
+	Hcf
+	Return
+
+fn[6]:
+	SoundSetVolume sound[133] 90
+	Sleep 100ms
+	SoundSetVolume sound[133] 80
+	Sleep 100ms
+	SoundSetVolume sound[133] 70
+	Sleep 100ms
+	SoundSetVolume sound[133] 60
+	Sleep 100ms
+	SoundSetVolume sound[133] 50
+	Sleep 100ms
+	SoundSetVolume sound[133] 40
+	Sleep 100ms
+	SoundSetVolume sound[133] 30
+	Sleep 100ms
+	SoundSetVolume sound[133] 20
+	Sleep 100ms
+	SoundSetVolume sound[133] 10
+	Sleep 100ms
+	SoundSetVolume sound[133] 0
+	SoundStop sound[133]
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[35] (-1000, 0, 43070) 0deg
+	CharSetPos char[0] (-1170, 1500, 85080) 0deg
+	CharSetPos char[1] (70, 1500, 84280) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CamLookPos (-1000, 0, 50840) 0ms
+	CamSetDistance 0 7100 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 429 0ms
+	Fork char[0] fork[0]:
+		CamLookPos (-1000, 1500, 87960) 5000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 6100 -10000 5000ms
+	Fork char[0] fork[2]:
+		CamZoom 3820 5000ms
+	Fork char[0] fork[3]:
+		CamPers 500 5000ms
+	Fork name[35] fork[0]:
+		CharWalkToPos2 self (-1000, 0, 78020) 3000mm/s 0
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkWait char[0] fork[0]
+	Sleep 1000ms
+	Fork char[0] fork[0]:
+		CamLookPos (-1000, 1500, 83010) 5000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 3250 -10000 5000ms
+	Fork char[0] fork[2]:
+		CamZoom 2380 5000ms
+	ForkWait char[0] fork[0]
+	ForkWait name[35] fork[0]
+	CrossFade 500ms
+	ObjFlagsSet object[4] 0x0004
+	_79 object[9] 2
+	_7B
+	CamLookPos (830, 420, 83300) 0ms
+	CamSetDistance 0 4650 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 386 0ms
+	FadeWait
+	Sleep 500ms
+	CharTurnTo char[0] 180deg 400deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 180deg 400deg/s
+	Sleep 500ms
+	TextTalk char[1] {
+		#850F#2P呀，莱维。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150F完全休息好了么？{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120F啊啊……{wait}
+	} {
+		好了，说说现在的状况吧？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150F呵呵呵……完全超越了希望值。{wait}
+	} {
+		『环』引发的现象，
+		使王国陷入了一片混乱之中。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2P结合时机
+		还投降了大量的人形兵器。{wait}
+	} {
+		暂时，王国军的家伙们
+		应该无法采取任何有组织的行动。{wait}
+	} {
+		当然，那个麻烦的
+		卡西乌斯·布莱特也一样……{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120F很顺利啊。{wait}
+	} {
+		……约修亚的动向如何？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150F他所乘坐的巡洋舰
+		刚在瓦雷利亚湖着水。{wait}
+	} {
+		估计会有所行动，
+		不过目前还不需要考虑。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2P呵呵，到时候就迟了。{wait}
+	} {
+		因为那个『铁血宰相』
+		似乎对这次异变
+		也有极大兴趣呢。{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120F呼……
+		干嘛说得事不关己似的。{wait}
+	} {
+		那位大人会知道这个计划，
+		不都是你做的手脚吗。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2P啊哈哈，这可
+		不能说出来啊。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150F不过，演员越多
+		舞台越热闹嘛。{wait}
+	} {
+		……对了，莱维。{wait}
+	} {
+		其实我来这里，
+		发现了一个很大的问题。{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120F哦……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2P浮游都市的防卫系统……{wait}
+	} {
+		那东西居然
+		现在还好好的运作着。{wait}
+	} {
+		要着陆的话
+		必须使其失效才行啊。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150F巨大的『古罗力亚斯』
+		会遭到系统的集中炮火攻击。{wait}
+	} {
+		但是，为你开发的
+		『梦幻曲·德尔基昂』
+		有可能穿过火线进行攻击。{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120F原来如此……{wait}
+	} {
+		因此才叫我来吗。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2P有办法吗？{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120F『盟主』赐予的这把剑……{wait}
+	} {
+		……世上没有它切不开的东西。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2P呵呵，是啊。{wait}
+	} {
+		这也是以『外』之理
+		制造的东西吧。{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150F『德尔基昂』
+		已经在甲板待机了。{wait}
+	} {
+		去吧，驾着那黑色的野兽
+		推开传说之门扉吧！{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo name[35] 180deg 400deg/s
+	CrossFade 500ms
+	ObjFlagsUnset object[4] 0x0004
+	_79 object[9] 1
+	_7B
+	CamLookPos (-970, -1500, 81290) 0ms
+	CamSetDistance 0 3720 -10000 0ms
+	CamZoom 2500 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 542 0ms
+	Fork name[35] fork[0]:
+		CharWalkToPos2 self (-940, 0, 63550) 2000mm/s 0
+	FadeWait
+	Sleep 500ms
+	Fork char[0] fork[0]:
+		CamLookPos (-1000, 11000, 85270) 7000ms
+	ForkWait char[0] fork[0]
+	ForkQuit name[35] fork[0]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9477]
+	NewScene "c5408._sn" 0 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 1
+	system[40] = 65535
+	CamLookPos (-980, 0, 56040) 0ms
+	CharSetPos field_party[3] (-920, 0, 55420) 0deg
+	CharSetPos field_party[2] (-1670, 0, 56080) 0deg
+	CharSetPos field_party[1] (-310, 0, 56080) 0deg
+	CharSetPos field_party[0] (-980, 0, 56670) 0deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,13]
+	CrossFade 500ms
+	CamLookPos (-960, 0, 58290) 0ms
+	CharSetPos field_party[0] (-960, 0, 58290) 0deg
+	CharSetPos field_party[1] (-960, 0, 58290) 0deg
+	CharSetPos field_party[2] (-960, 0, 58290) 0deg
+	CharSetPos field_party[3] (-960, 0, 58290) 0deg
+	EventEnd 0
+	Return
+
+fn[9]:
+	EventBegin 1
+	system[40] = 65535
+	CamLookPos (-960, 0, 78190) 0ms
+	CharSetPos field_party[3] (-960, 0, 78810) 180deg
+	CharSetPos field_party[2] (-350, 0, 78190) 180deg
+	CharSetPos field_party[1] (-1580, 0, 78190) 180deg
+	CharSetPos field_party[0] (-960, 0, 77580) 180deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,13]
+	CrossFade 500ms
+	CamLookPos (-960, 0, 75810) 0ms
+	CharSetPos field_party[0] (-960, 0, 75810) 180deg
+	CharSetPos field_party[1] (-960, 0, 75810) 180deg
+	CharSetPos field_party[2] (-960, 0, 75810) 180deg
+	CharSetPos field_party[3] (-960, 0, 75810) 180deg
+	EventEnd 0
+	Return
+
+fn[10]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CamLookPos (-980, 0, 56040) 0ms
+	CharSetPos field_party[0] (-920, 0, 55420) 180deg
+	CharSetPos field_party[1] (-1670, 0, 56080) 180deg
+	CharSetPos field_party[2] (-310, 0, 56080) 180deg
+	CharSetPos field_party[3] (-980, 0, 56670) 180deg
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,14]
+	NewScene "c5313._sn" 103 0 0
+	Hcf
+	Return
+
+fn[11]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CamLookPos (-1000, 0, 79150) 0ms
+	CamSetDistance 0 5320 -10000 0ms
+	CamZoom 3120 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 402 0ms
+	CharSetPos field_party[3] (-960, 0, 78810) 180deg
+	CharSetPos field_party[2] (-350, 0, 78190) 180deg
+	CharSetPos field_party[1] (-1580, 0, 78190) 180deg
+	CharSetPos field_party[0] (-960, 0, 77580) 180deg
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,14]
+	NewScene "c4103._sn" 102 0 0
+	Hcf
+	Return
+
+fn[12]:
+	EffLoad eff[0] "map\\mp049_21.eff"
+	EffPlay eff[0] eff_instance[255] field_party[0] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[255] field_party[1] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[255] field_party[2] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[255] field_party[3] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Return
+
+fn[13]:
+	Fork field_party[0] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Sleep 2500ms
+	if system[10] != 255:
+		CharColor field_party[0] 0xFFFFFFFF 0ms
+	if system[11] != 255:
+		CharColor field_party[1] 0xFFFFFFFF 0ms
+	if system[12] != 255:
+		CharColor field_party[2] 0xFFFFFFFF 0ms
+	if system[13] != 255:
+		CharColor field_party[3] 0xFFFFFFFF 0ms
+	Return
+
+fn[14]:
+	Fork field_party[0] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Sleep 2000ms
+	Return

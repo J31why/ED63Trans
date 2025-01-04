@@ -1,0 +1,97 @@
+calmare fc scena
+scena:
+	name "Ruan" "T2320.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01010._ch" "npl/ch01010p._cp"
+
+npc char[0]:
+	name "珂蕾妲婆婆"
+	pos (3470, 0, 8480)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0111
+	init fn[6,2]
+	talk fn[0,3]
+
+fn[0]:
+	if flag[12066]:
+		CharFlagsSet char[8] 0x0080
+	elif flag[12065]:
+	elif flag[12064]:
+	elif flag[12055]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	TextStart char[8]
+	if flag[12066]:
+	elif flag[12065]:
+		if flag[0]:
+			TextTalk char[8] {
+				啊啊，真伤脑筋呢。
+				该卖掉什么东西呢……{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				就算把土锅什么的拿去卖，
+				应该也没人会买吧。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				花瓶什么的，
+				萨蒂应该也会卖的……{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12064]:
+		if flag[0]:
+			TextTalk char[8] {
+				啊啊，真伤脑筋呢。
+				该卖掉什么东西呢……{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				今天是义卖会呢。
+				我该卖什么东西呢。{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				又不好卖店里剩下的东西，
+				就没有什么拿的出手的吗……{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12055]:
+	TextEnd char[8]
+	Return

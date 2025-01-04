@@ -1,0 +1,163 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4152.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14450._ch" "mons2/ch14450p._cp"
+chip[1] "mons2/ch14451._ch" "mons2/ch14451p._cp"
+chip[2] "mons2/ch14730._ch" "mons2/ch14730p._cp"
+chip[3] "mons2/ch14730._ch" "mons2/ch14730p._cp"
+chip[4] "mons2/ch14790._ch" "mons2/ch14790p._cp"
+chip[5] "mons2/ch14791._ch" "mons2/ch14791p._cp"
+
+monster char[0]:
+	name ""
+	pos (-42290, 0, -4190)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-38330, 40, -37890)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[215]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-74650, -3500, -24560)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[216]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-79070, 0, -3000)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-76990, -3500, -30450)
+	radius 800mm
+	bubble_pos (-76990, -2500, -30450)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	MapSet 4000 (-185000, null, -131000) "mt4102._ch"
+	if !flag[9999]:
+		EntranceSetDisabled entrance[1] 0
+	else:
+		ObjFlagsSet object[38] 0x0004
+	char[0].36 = 239
+	char[3].36 = 239
+	Return
+
+fn[2]:
+	EventBegin 1
+	system[40] = 65535
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (-68150, 1250, 4980) 0ms
+	CamSetDistance 0 11130 -10000 0ms
+	CamZoom 4690 0ms
+	CamRotate 57000mdeg 0ms
+	CamPers 421 0ms
+	FadeWait
+	system[67] = 500
+	Sleep 1000ms
+	CrossFade 1000ms
+	CamLookPos (-39910, 0, -570) 0ms
+	CamSetDistance 0 10460 -10000 0ms
+	CamZoom 3040 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 376 0ms
+	Fork name[8] fork[0]:
+		CamLookPos (-40060, -3000, 34710) 6000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 7150 -10000 6000ms
+	Fork name[8] fork[2]:
+		CamZoom 3020 6000ms
+	Fork name[8] fork[3]:
+		CamRotate 0mdeg 6000ms
+	Fork name[14] fork[1]:
+		CamPers 376 6000ms
+	ForkWait name[8] fork[1]
+	Sleep 500ms
+	CrossFade 1000ms
+	Fork name[8] fork[2]:
+		CamZoom 2800 2000ms
+	SoundPlay sound[279] 0 0 100
+	ObjFlagsSet object[38] 0x0004
+	FadeWait
+	Sleep 1000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ImageHide 1500ms
+	FlagSet flag[9476]
+	NewScene "u4151._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}门上了锁。{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

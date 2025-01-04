@@ -1,0 +1,4233 @@
+calmare fc scena
+scena:
+	name "Gaiden2" "U7003.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	if flag[11296]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[9829]:
+			if PartyPosition name[8] != -1:
+				TextTalk char[9] {
+					#92780v#1936F…………………………{wait}
+				} {
+					#92781v……５年前的那一天，
+					救了我的人果然是
+					凯文和姐姐。{wait}
+				} {
+					#92782v#1938F不管结果如何……
+					凯文和姐姐都是我最重要的人。{wait}
+				}
+				TextWait
+				CharTurnToChar self name[8] 400deg/s
+				Sleep 300ms
+				TextTalk char[9] {
+					#92783v#1932F所以，
+					『影之王』一定要由我们来打倒。{wait}
+				} {
+					#92784v……这也是为了姐姐。{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#90166v#1075F嗯，说的没错。{wait}
+				} {
+					#90167v…………………………{wait}
+				} {
+					#90168v#1079F不过……
+					莉丝，你在干什么？{wait}
+				}
+				TextWait
+				Emote self 0mm 2000mm 40 43 100ms 3
+				Sleep 300ms
+				TextTalk char[9] {
+					#92785v#1940F……保、保证足够的粮食
+					也是身在前线最重要的使命……{wait}
+				} {
+					#92786v…………你要是敢笑的话我就揍你。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					#92789v#1936F…………………………{wait}
+				} {
+					#92790v……５年前的那一天，
+					救了我的人果然是
+					凯文和姐姐。{wait}
+				} {
+					#92791v#1938F不管结果如何……
+					凯文和姐姐都是我最重要的人。{wait}
+				}
+				TextWait
+				CharTurnToChar self field_party[0] 400deg/s
+				Sleep 300ms
+				TextTalk char[9] {
+					#92792v#1932F所以，
+					『影之王』一定要由我们来打倒。{wait}
+				} {
+					#92793v#1932F……这也是为了姐姐。{wait}
+				}
+				TextWait
+			FlagSet flag[9829]
+		elif PartyPosition name[8] != -1:
+			CharTurnToChar self name[8] 0deg/s
+			TextTalk char[9] {
+				#92787v#1936F『影之王』
+				一定要由我们来打倒。{wait}
+			} {
+				#92788v#1932F……这也是为了姐姐。{wait}
+			}
+			TextWait
+		else:
+			CharTurnToChar self field_party[0] 0deg/s
+			TextTalk char[9] {
+				#92794v#1936F『影之王』
+				一定要由我们来打倒。{wait}
+			} {
+				#92795v#1932F……这也是为了姐姐。{wait}
+			}
+			TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11264]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		name[8].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self name[8] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = name[8].5
+		name[8].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[11]:
+			TextTalk char[9] {
+				#92522v#1446F……凯文，
+				进入紫苑之家必须要有我同行……{wait}
+			} {
+				#92523v#1801F难道………你是故意把我扔下的？{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89736v#1077F不，
+				……不是的！{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				#92524v#1801F（盯着看）………………{wait}
+			}
+			TextWait
+			FlagSet flag[11]
+		else:
+			TextTalk char[9] {
+				#92525v#1446F……凯文，
+				进入紫苑之家必须要有我同行……{wait}
+			} {
+				#92526v#1801F………你不是故意的吧？{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11052]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[11]:
+			TextTalk name[8] {
+				#89698v#1065F…………莉丝。{wait}
+			}
+			TextWait
+			Emote self 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			name[8].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[8] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[8].5
+			name[8].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			Sleep 200ms
+			TextTalk char[9] {
+				#92499v#1802F哎…………？{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89699v#1060F不好意思，
+				你跟我们走一趟好吗？{wait}
+			} {
+				#89700v#1075F一会儿我再解释……#2000W 
+				#20W不，你来了就知道了。{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				#92500v#1440F………………………………{wait}
+			} {
+				#92501v#1446F……我知道了。{wait}
+			}
+			TextWait
+			FlagSet flag[11]
+		else:
+			name[8].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[8] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[8].5
+			name[8].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[9] {
+				#92502v#1445F………………………………{wait}
+			} {
+				#92503v#1443F……我已经做好准备了。
+				一起走吧。{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11051]:
+		if !flag[9828]:
+			if PartyPosition name[6] != -1:
+				if PartyPosition name[9] != -1:
+					CharFlagsSet self 0x0010
+					TextStart self
+					TextTalk char[9] {
+						#92497v#1445F（『剑帝』莱恩哈特………）{wait}
+					} {
+						#92498v#1446F（……他好像知道
+						  姐姐的事情……）{wait}
+					}
+					TextWait
+					CharFlagsUnset self 0x0010
+					TextEnd self
+				else:
+					CharFlagsSet self 0x0010
+					TextStart self
+					TextTalk char[9] {
+						#92504v#1446F…………………………{wait}
+					} {
+						#92505v#1445F是这样吗…………{wait}
+					}
+					TextWait
+					CharFlagsUnset self 0x0010
+					TextEnd self
+			else:
+				Call fn[5,8]
+		else:
+			var[2] = self.8
+			if !flag[11]:
+				if flag[16]:
+					CharFlagsSet self 0x0010
+					TextStart self
+					TextTalk char[9] {
+						#92508v#1447F#32W……精灵落下的水滴
+						在森林中被称为朝雾。{wait}
+					} {
+						#92509v在那泉水湖畔，
+						集齐了七只铃铛……#20W{wait}
+					}
+					TextWait
+					CharFlagsUnset self 0x0010
+					TextEnd self
+				else:
+					field_party[0].5 = self.4
+					self.5 = self.4
+					TextStart self
+					CharFlagsUnset self 0x0010
+					CharTurnToChar self field_party[0] 0deg/s
+					self.4 = (self.4 + 360) % 360
+					self.4 = self.4 + 360 - self.5
+					self.5 = self.4 / 180
+					if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+					elif self.5 < 1:
+						self.8 = 2
+					elif self.5 > 2:
+						self.8 = 1
+					else:
+						self.8 = self.5
+					self.4 = field_party[0].5
+					field_party[0].5 = 0
+					self.5 = 0
+					CharFlagsSet self 0x0010
+					TextTalk char[9] {
+						#92506v#1448F……我来读一下
+						圣典中的故事吧。{wait}
+					} {
+						#92507v#1442F怎么说我也是个修女。{wait}
+					}
+					TextWait
+					CharSetChipPattern self 0
+					TextEnd self
+				FlagSet flag[11]
+			elif flag[16]:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[9] {
+					#92512v#1447F#32W……愿那两个清贫的人
+					得到安息的永眠。{wait}
+				} {
+					#92513v#1442F愿所有的生命
+					得到勇气和祝福。#20W{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				field_party[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self field_party[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = field_party[0].5
+				field_party[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[9] {
+					#92510v#1448F……我来读一下
+					圣典中的故事吧。{wait}
+				} {
+					#92511v#1442F怎么说我也是个修女。{wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				TextEnd self
+			self.8 = var[2]
+	elif flag[11040]:
+	elif flag[11029]:
+		if !flag[9827] && PartyPosition name[15] == -1:
+			Call fn[3,2]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if !flag[11]:
+				TextTalk char[9] {
+					#92409v#1445F………………………………{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89522v#1079F……莉丝，你怎么了？{wait}
+				}
+				TextWait
+				TextTalk char[9] {
+					#92410v#1446F………没什么。{wait}
+				}
+				TextWait
+				Emote name[8] 0mm 2000mm 0 1 250ms 2
+				SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				FlagSet flag[11]
+			else:
+				TextTalk char[9] {
+					#92411v#1445F………………………………{wait}
+				} {
+					#92412v（为什么凯文和姐姐都……）{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11016]:
+		EmoteStop self
+		if !flag[11]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[9] {
+				#92368v#1447F#40W………………………………#20W{wait}
+			} {
+				#92369v#1442F哦………………{wait}
+			}
+			TextWait
+			Emote self 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			CharSetChipBase self chip[2]
+			CharSetChipPattern self 0
+			Emote self 0mm 2000mm 40 43 100ms 3
+			CharTurnToChar self field_party[0] 800deg/s
+			Sleep 200ms
+			TextTalk char[9] {
+				#92370v#1802F有………有什么事！？{wait}
+			}
+			TextWait
+			TextEnd self
+			CharFlagsUnset self 0x0010
+			ForkFunc self fork[0] fn[0,13]
+			FlagSet flag[11]
+		else:
+			TextStart self
+			TextTalk char[9] {
+				#92371v#1800F咳咳……{wait}
+			} {
+				#92372v圣典可以给所有的人
+				带来平安和宁静……{wait}
+			} {
+				#92373v#1805F如果可以的话，
+				我来为大家阅读一段吧。{wait}
+			}
+			TextWait
+			TextEnd self
+			ForkFunc self fork[0] fn[0,13]
+	Return
+
+fn[3]:
+	if flag[11296]:
+		if !flag[7]:
+			TextStart self
+			TextTalk char[22] {
+				#76885v#1008F那个，
+				到达目的地还要很久吧？{wait}
+			} {
+				#76886v#1017F半路上肯定会饿的，
+				还是要准备必要的食品才好。{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92777v#1932F…………真是我知心的朋友。{wait}
+				}
+				TextWait
+				if PartyPosition name[8] != -1:
+					TextTalk name[8] {
+						#90154v#1066F哈哈哈…………{wait}
+					}
+					TextWait
+			FlagSet flag[7]
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[22] {
+				#76887v#1015F那个，赛雷斯托大人
+				好像不需要吃饭……{wait}
+			} {
+				#76888v嗯～１６人份吗……
+				还真多啊。{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92778v#1932F……请带上１８人份的。{wait}
+				} {
+					#92779v#1938F我一个人要３人份。{wait}
+				}
+				TextWait
+				CharTurnToChar char[22] name[14] 0deg/s
+				CharSetChipPattern self 0
+				TextTalk char[22] {
+					#76889v#1004F啊，是吗……{wait}
+				} {
+					#76890v#1006F……嗯，知道了！{wait}
+				}
+				TextWait
+				if PartyPosition name[8] != -1:
+					TextTalk name[8] {
+						#90155v#1068F（这两个人……
+						  都把基尔巴特那小子
+						  给忘得一干二净……）{wait}
+					}
+					TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11029]:
+		if !flag[7]:
+			if !flag[9832]:
+				TextStart self
+				TextTalk char[22] {
+					#76681v#1008F啊，
+					我肚子有点饿了……{wait}
+				} {
+					#76682v#1019F只、只要一运动
+					肚子就会饿！{wait}
+				}
+				TextWait
+				if PartyPosition name[14] != -1:
+					TextTalk name[14] {
+						#92418v#1447F……没错。{wait}
+					} {
+						#92419v#1448F那个是真理。
+						谁也无法否认的事实。{wait}
+					}
+					TextWait
+					TextTalk name[8] {
+						#89523v#1068F（这两个人还真是臭味相投……）{wait}
+					}
+					TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[22] {
+					#76685v#1007F真是的，那两个人啊……{wait}
+				} {
+					#76686v就没有办法让他们
+					相处得融洽一点吗……{wait}
+				}
+				TextWait
+				if PartyPosition name[15] == -1 && PartyPosition name[14] == -1:
+					TextTalk name[8] {
+						#89524v#1061F（哈哈，如果是艾丝蒂尔的话，
+						  倒是没什么问题……）{wait}
+					}
+					TextWait
+				elif PartyPosition name[14] != -1:
+					TextTalk name[14] {
+						#92420v#1440F………………………………{wait}
+					}
+					TextWait
+				elif PartyPosition name[15] != -1:
+					TextTalk name[15] {
+						#90984v#1300F………………………………{wait}
+					}
+					TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[7]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if !flag[9832]:
+				TextTalk char[22] {
+					#76683v#1015F唔，喉咙干了……{wait}
+				} {
+					#76684v#1006F好，就吃冰淇淋吧。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[22] {
+					#76687v#1007F那两个人……{wait}
+				} {
+					#76688v好像还是不能和好呢……{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	Return
+
+fn[4]:
+	if flag[11296]:
+		TextStart self
+		if !flag[9831] && PartyPosition name[8] != -1:
+			CharTurnToChar char[14] name[8] 0deg/s
+			TextTalk char[14] {
+				#78255v#1500F凯文先生……
+				这段时间说长也不算很长吧。{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90156v#1075F哈哈……也许吧。{wait}
+			} {
+				#90157v#1840F……约修亚。
+				我想对你说一句真心话。{wait}
+			} {
+				#90158v我啊……
+				现在非常羡慕你呢。{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#78256v#1504F哎……{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90159v#1844F在某种意义上……
+				我和你走的是同样的道路不是吗？{wait}
+			} {
+				#90160v但是只有你能够
+				回到充满阳光的地方……{wait}
+			} {
+				#90161v#1846F半年前，
+				我只是为你的转变感觉到高兴……{wait}
+			} {
+				#90162v……而事到如今，
+				我却产生了强烈的羡慕之情。{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#78257v#1514F凯文先生……{wait}
+			} {
+				#78258v#1513F……大概这会成为你
+				『永不放弃』的动力吧。{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90163v#1068F啊啊……
+				看来的确是这样啊。{wait}
+			} {
+				#90164v#1066F哈哈……
+				总觉得很没有面子呢。{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#78259v#1509F这样不也很好吗。
+				没有面子又怎么样呢。{wait}
+			} {
+				#78260v#1501F……凯文先生。
+				我们一定要从这个世界逃出去。{wait}
+			} {
+				#78261v要相信大家……
+				还有，相信自己。{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90165v#1840F啊啊……当然！{wait}
+			}
+			TextWait
+			FlagSet flag[9831]
+		elif !flag[1]:
+			TextTalk char[14] {
+				#78262v#1505F『影之王』
+				把我们都称呼为棋子。{wait}
+			} {
+				#78263v#1502F……大概他设下了
+				只要我们所有人不齐心协力
+				就无法逃出这里的安排。{wait}
+			} {
+				#78264v『影之王』似乎
+				对规则十分偏执。{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+		else:
+			TextTalk char[14] {
+				#78265v#1502F如果我们在这里的
+				所有人不齐心协力，
+				肯定就无法逃出这里……{wait}
+			} {
+				#78266v#1503F这也许就是他
+				预先设定好的规则。{wait}
+			} {
+				#78267v『王』本身似乎就是
+				由规则所定下的存在。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		if !flag[9830]:
+			if PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk name[15] {
+					#90841v#264F……约修亚？{wait}
+				} {
+					#90842v#260F你在这种地方干什么呢？{wait}
+				}
+				TextWait
+				Emote self 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[14] name[15] 400deg/s
+				Sleep 300ms
+				TextTalk char[14] {
+					#77879v#1513F啊啊，这个……{wait}
+				} {
+					#77880v#1500F我想试着推测一下
+					接下来会有怎样的进展……{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90843v#266F……呼，
+					那种事不前进怎么知道。{wait}
+				} {
+					#90844v#262F唉，
+					难得我说过
+					要给你们帮忙的……{wait}
+				}
+				TextWait
+				TextTalk char[14] {
+					#77881v#1509F哈哈，是啊。{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				var[2] = char[14].4
+				var[3] = char[15].4
+				EventBegin 0
+				_Char4A char[14] 0
+				_Char4A char[15] 0
+				CharTurnToChar char[14] name[0] 0deg/s
+				CharTurnToChar field_party[0] char[14] 0deg/s
+				CharTurnToChar field_party[1] char[14] 0deg/s
+				CharTurnToChar field_party[2] char[14] 0deg/s
+				CharTurnToChar field_party[3] char[14] 0deg/s
+				var[4] = field_party[0].1
+				var[5] = field_party[0].2
+				var[6] = field_party[0].3
+				var[7] = field_party[0].4
+				if PartyPosition name[4] != -1:
+					CharTurnToChar name[4] name[0] 0deg/s
+					TextTalk name[0] {
+						#76505v#1000F……约修亚？{wait}
+					} {
+						#76506v在这里做什么呢……{wait}
+					}
+					TextWait
+					TextTalk char[14] {
+						#77883v#1505F嗯，关于玲的事……{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58170, 1000, -57430) 147deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (60320, 1000, -59930) 129deg
+					CharSetPos name[4] (58640, 1000, -59150) 133deg
+					CharTurnToChar name[0] name[4] 0deg/s
+					CharTurnToChar char[14] name[4] 0deg/s
+					CharTurnToChar name[4] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk name[4] {
+						#81272v#1382F那个，艾丝蒂尔，
+						你们离开利贝尔出去旅行，
+						是为了去找玲吧。{wait}
+					}
+					TextWait
+				else:
+					CharTurnToChar char[15] name[0] 0deg/s
+					TextTalk name[0] {
+						#76507v#1000F……约修亚和科洛丝？{wait}
+					} {
+						#76508v在这里做什么呢……{wait}
+					}
+					TextWait
+					TextTalk char[14] {
+						#77882v#1505F嗯，关于玲的事……{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58040, 1000, -58350) 129deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (59430, 1000, -60340) 129deg
+					CharTurnToChar name[0] char[15] 0deg/s
+					CharTurnToChar char[14] char[15] 0deg/s
+					CharTurnToChar char[15] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk char[15] {
+						#81272v#1382F那个，艾丝蒂尔，
+						你们离开利贝尔出去旅行，
+						是为了去找玲吧。{wait}
+					}
+					TextWait
+				TextTalk name[0] {
+					#76509v#1003F嗯，因为当时
+					在中枢塔没能好好说明白……{wait}
+				} {
+					#76510v#1007F还有一些
+					要告诉玲的话……{wait}
+				}
+				TextWait
+				CharTurnTo name[0] 129deg 400deg/s
+				CharTurnTo char[15] 129deg 400deg/s
+				CharTurnTo char[14] 129deg 400deg/s
+				Emote name[0] 0mm 2000mm 24 27 250ms 0
+				Sleep 2000ms
+				EmoteStop name[0]
+				Sleep 300ms
+				TextTalk name[0] {
+					#76511v#1016F呵呵，
+					不过现在的她看起来好多了呢。{wait}
+				} {
+					#76512v#1017F……嗯，
+					就这样继续在一旁守护着她吧。{wait}
+				}
+				TextWait
+				TextTalk char[14] {
+					#77884v#1501F…………是啊。{wait}
+				} {
+					#77885v#1513F着急是没有用的。
+					作出最后决定的
+					只能是玲自己……{wait}
+				} {
+					#77886v……她被吸进
+					这个世界里面……{wait}
+				} {
+					#77887v#1500F在这里与大家见面，
+					对玲来说也许会
+					产生不错的影响。{wait}
+				}
+				TextWait
+				if PartyPosition name[4] != -1:
+					TextTalk name[4] {
+						#81273v#1168F……嗯，是啊。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[15] {
+						#81280v#1168F……嗯，是啊。{wait}
+					}
+					TextWait
+				Sleep 500ms
+				CrossFade 500ms
+				CharFlagsUnset field_party[0] 0x0008
+				CharFlagsUnset field_party[1] 0x0008
+				CharFlagsUnset field_party[2] 0x0008
+				CharFlagsUnset field_party[3] 0x0008
+				field_party[0].1 = var[4]
+				field_party[0].2 = var[5]
+				field_party[0].3 = var[6]
+				field_party[0].4 = var[7]
+				_Char4B char[14] 0
+				_Char4B char[15] 0
+				char[14].4 = var[2]
+				char[15].4 = var[3]
+				FlagSet flag[9830]
+				EventEnd 6
+		else:
+			TextStart self
+			if !flag[1]:
+				FlagSet flag[1]
+				if PartyPosition name[15] != -1:
+					TextTalk char[14] {
+						#77891v#1505F如果和玲所说的一样，
+						这个世界是由『影之王』
+						构建起来的……{wait}
+					} {
+						#77892v那么这前方的星层
+						也一定是遵照着
+						『影之王』的目的而产生。{wait}
+					} {
+						#77893v#1503F『王』所设置的游戏……
+						……真是没什么好感。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[14] {
+						#77888v#1501F关于玲的事情，
+						就这样继续在一旁
+						默默守护着她吧。{wait}
+					} {
+						#77889v作出最后决定的
+						只能是玲自己……{wait}
+					} {
+						#77890v#1513F在这里与大家见面，
+						对玲来说也许会
+						产生不错的影响。{wait}
+					}
+					TextWait
+			elif PartyPosition name[15] != -1:
+				TextTalk char[14] {
+					#77893v#1505F『王』所设置的游戏……#2580W 
+					#20W#1503F……真是没什么好感。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[14] {
+					#77888v#1501F关于玲的事情，
+					就这样继续在一旁
+					默默守护着她吧。{wait}
+				} {
+					#77889v作出最后决定的
+					只能是她自己……{wait}
+				}
+				TextWait
+			TextEnd self
+	Return
+
+fn[5]:
+	if flag[11016]:
+		if !flag[14]:
+			TextStart self
+			var[2] = char[12].4
+			if PartyPosition name[13] != -1:
+				CharTurnToChar self name[13] 0deg/s
+				TextTalk char[17] {
+					#79978v#1541F……尤莉亚小姐。{wait}
+				} {
+					#79979v我回国的时候，
+					真是受你多方照顾了。{wait}
+				} {
+					#79980v#1547F怎么样，
+					待会儿一起去喝一杯吧。{wait}
+				}
+				TextWait
+				TextTalk name[13] {
+					#84970v#172F啊………………{wait}
+				}
+				TextWait
+				_Char4A char[12] 255
+				if PartyPosition name[13] != -1:
+					if PartyPosition name[12] != -1:
+						CharTurnToChar name[12] name[13] 400deg/s
+					else:
+						CharTurnToChar char[12] name[13] 400deg/s
+				elif PartyPosition name[12] != -1:
+					CharTurnToChar name[12] char[11] 400deg/s
+				else:
+					CharTurnToChar char[12] char[11] 400deg/s
+				if PartyPosition name[12] != -1:
+					TextTalk name[12] {
+						#85623v#272F……上尉，
+						请不要把这家伙的话当真。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[12] {
+						#85623v#272F……上尉，
+						请不要把这家伙的话当真。{wait}
+					}
+					TextWait
+				_Char4B char[12] 255
+				char[12].4 = var[2]
+			else:
+				TextTalk char[17] {
+					#79981v#1545F哼，其实我想趁这个机会
+					和尤莉亚小姐多亲近一些呢。{wait}
+				} {
+					#79982v#1542F趁别人没发现……
+					不对，应该瞅准时机……{wait}
+				}
+				TextWait
+				if PartyPosition name[12] != -1:
+					if PartyPosition name[1] != -1:
+						TextTalk name[1] {
+							#77963v#1505F我劝你最好
+							还是放弃吧。{wait}
+						}
+						TextWait
+					elif PartyPosition name[0] != -1:
+						TextTalk name[0] {
+							#76631v#1007F唉……还是不要这样了。{wait}
+						}
+						TextWait
+					elif PartyPosition name[4] != -1:
+						TextTalk name[4] {
+							#81371v#1165F啊、啊哈哈……{wait}
+						} {
+							#81372v我劝你最好
+							还是放弃吧……{wait}
+						}
+						TextWait
+					TextTalk name[12] {
+						#85624v#274F……我不是已经那么警告过你
+						不要惹出问题来吗。{wait}
+					} {
+						#85625v乖乖地留在这里看家吧。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[17] {
+						#79985v#1541F真是不走运，
+						让穆拉那家伙看到了。{wait}
+					}
+					TextWait
+			FlagSet flag[14]
+			TextEnd self
+		elif PartyPosition name[12] != -1:
+			TextStart self
+			if PartyPosition name[13] != -1:
+				CharTurnToChar char[17] name[13] 0deg/s
+				TextTalk char[17] {
+					#80362v#1547F哦呵呵，尤莉亚小姐。
+					待会儿一起去喝一杯吧。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[17] {
+					#79983v#1542F呼，还真是滴水不漏啊。{wait}
+				} {
+					#79984v到底从哪边开始下手呢……{wait}
+				}
+				TextWait
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			_Char4A char[12] 255
+			TextTalk char[17] {
+				#79986v#1541F穆拉君真讨厌……{wait}
+			}
+			TextWait
+			Emote char[12] 0mm 2000mm 12 13 250ms 2
+			SoundPlay sound[49] 0 0 100
+			Sleep 1000ms
+			_Char4B char[12] 255
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11008]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[14]:
+			TextTalk char[17] {
+				#79960v#1540F哎呀，凯文神父……{wait}
+			} {
+				#79961v#1545F呵呵，
+				你似乎也隐瞒着很多事情呢。{wait}
+			} {
+				#79962v虽然我不会要求你都说出来，
+				但既然把我们也卷了进来，
+				至少要告诉我们来龙去脉吧？{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89382v#1843F嗯，我一定会坦白的。{wait}
+			} {
+				#89383v#1060F不好意思，
+				请你们再等一段时间。{wait}
+			}
+			TextWait
+			FlagSet flag[14]
+		else:
+			TextTalk char[17] {
+				#79963v#1545F呼……从你的职业来说，
+				不可能把全部事情都告诉我们……{wait}
+			} {
+				#79964v#1540F但既然把我们也卷了进来，
+				至少要告诉我们来龙去脉吧？{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10501]:
+		if PartyPosition name[12] != -1:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			if !flag[14]:
+				TextTalk char[17] {
+					#79845v#1545F呵呵，
+					这次豪华的聚会
+					看来还要继续下去。{wait}
+				} {
+					#79846v#1540F偶尔在这种地方
+					安静地修养一下也不错。{wait}
+				}
+				TextWait
+				TextTalk name[12] {
+					#85535v#272F…………你也至少干点活吧。{wait}
+				}
+				TextWait
+				FlagSet flag[14]
+			else:
+				TextStart self
+				TextTalk char[17] {
+					#79847v#1545F各位，你们就
+					随便使唤穆拉这家伙吧。{wait}
+				} {
+					#79848v为了我，
+					他一定会努力工作的。{wait}
+				}
+				TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+		elif !flag[14]:
+			CharFlagsSet char[17] 0x0010
+			TextStart char[17]
+			_Char4A char[17] 255
+			_Char4A char[12] 255
+			TextTalk char[17] {
+				#79842v#1542F……不，这次的事件
+				应该和宰相阁下没有关系。{wait}
+			} {
+				#79843v那个人要是动手的话，
+				一定不会采用这种
+				麻烦的方式的。{wait}
+			} {
+				#79844v#1551F至于与『蛇』的关系就不好断言了……{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				#85533v#272F的确，不像是他的作风呢。{wait}
+			} {
+				#85534v#276F如果要弄出这种花样，
+				趁我们在帝都时应该有的是机会……{wait}
+			}
+			TextWait
+			FlagSet flag[14]
+			CharFlagsUnset char[17] 0x0010
+			_Char4B char[17] 255
+			_Char4B char[12] 255
+			TextEnd char[17]
+		else:
+			TextStart self
+			TextTalk char[17] {
+				#79849v#1540F哎呀，各位，
+				探索方面有什么进展呢？{wait}
+			} {
+				#79850v#1541F如果知道了什么的话，
+				请一定要来告诉我哦。{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[10496]:
+		if !flag[9824]:
+			_Char4A char[15] 255
+			if PartyPosition name[12] == -1:
+				_Char4A char[12] 255
+			if PartyPosition name[13] == -1 && PartyPosition name[7] != -1:
+				_Char4A char[11] 255
+			CharFlagsSet char[17] 0x0010
+			TextStart char[17]
+			if PartyPosition name[4] != -1:
+				name[4].5 = char[17].4
+				char[17].5 = char[17].4
+				TextStart char[17]
+				CharFlagsUnset char[17] 0x0010
+				CharTurnToChar char[17] name[4] 0deg/s
+				char[17].4 = (char[17].4 + 360) % 360
+				char[17].4 = char[17].4 + 360 - char[17].5
+				char[17].5 = char[17].4 / 180
+				if char[17].4 <= 45 | char[17].4 >= 315 && char[17].4 <= 405 | char[17].4 >= 675:
+				elif char[17].5 < 1:
+					char[17].8 = 2
+				elif char[17].5 > 2:
+					char[17].8 = 1
+				else:
+					char[17].8 = char[17].5
+				char[17].4 = name[4].5
+				name[4].5 = 0
+				char[17].5 = 0
+				CharFlagsSet char[17] 0x0010
+				TextTalk name[4] {
+					#81161v#1382F奥利维特皇子，
+					自上次之后您好像没有什么变化呢。{wait}
+				} {
+					#81162v不过我倒是听说您在
+					帝国的社交界非常活跃……{wait}
+				}
+				TextWait
+			else:
+				CharSetChipPattern char[17] 0
+				TextTalk char[15] {
+					#81161v#1382F奥利维特皇子，
+					自上次之后您好像没有什么变化呢。{wait}
+				} {
+					#81162v不过我倒是听说您在
+					帝国的社交界非常活跃……{wait}
+				}
+				TextWait
+			TextTalk char[17] {
+				#79813v#1545F呵呵，
+				现在只是隐藏实力掩人耳目罢了。{wait}
+			} {
+				#79814v#1542F不过当一个优雅的贵公子
+				还真是累人。{wait}
+			} {
+				#79815v#1544F等时机一到，
+				我就会华丽地披露我的真实身份……{wait}
+			}
+			TextWait
+			Sleep 500ms
+			TextTalk char[17] {
+				#79816v#1541F#3S──对！
+				作为『爱的福音使者』的真实身份！{wait}
+			}
+			Shake 0 200 3000 100ms
+			TextWait
+			Emote char[17] 300mm 1600mm 54 57 250ms 0
+			SoundPlay sound[137] 0 0 100
+			Sleep 2000ms
+			Emote field_party[0] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Emote field_party[1] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Emote field_party[2] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Emote field_party[3] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			if PartyPosition name[4] == -1:
+				Emote char[15] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+			if PartyPosition name[12] == -1:
+				Emote char[12] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+			if PartyPosition name[13] == -1 && PartyPosition name[7] != -1:
+				Emote char[11] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+			Sleep 1000ms
+			if PartyPosition name[12] != -1:
+				TextTalk name[12] {
+					#85512v#274F白痴……{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[12] {
+					#85512v#274F白痴……{wait}
+				}
+				TextWait
+			TextTalk name[8] {
+				#89075v#1068F原来你是『爱的福音使者』啊……{wait}
+			}
+			TextWait
+			if PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#77650v#1508F听起来比那个『福音』
+					还要危险呢……{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[14] {
+					#77650v#1508F听起来比那个『福音』
+					还要危险呢……{wait}
+				}
+				TextWait
+			if PartyPosition name[4] != -1:
+				TextTalk name[4] {
+					#81163v#1165F呵呵……
+					看到您没变我就放心了。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[15] {
+					#81163v#1165F呵呵……
+					看到您没变我就放心了。{wait}
+				}
+				TextWait
+			EmoteStop char[17]
+			_Char4B char[15] 255
+			if PartyPosition name[12] == -1:
+				_Char4B char[12] 255
+			if PartyPosition name[13] == -1 && PartyPosition name[7] != -1:
+				_Char4B char[11] 255
+			CharSetChipPattern char[17] 0
+			CharFlagsUnset char[17] 0x0010
+			TextEnd char[17]
+			FlagSet flag[9824]
+		else:
+			field_party[0].5 = char[17].4
+			char[17].5 = char[17].4
+			TextStart char[17]
+			CharFlagsUnset char[17] 0x0010
+			CharTurnToChar char[17] field_party[0] 0deg/s
+			char[17].4 = (char[17].4 + 360) % 360
+			char[17].4 = char[17].4 + 360 - char[17].5
+			char[17].5 = char[17].4 / 180
+			if char[17].4 <= 45 | char[17].4 >= 315 && char[17].4 <= 405 | char[17].4 >= 675:
+			elif char[17].5 < 1:
+				char[17].8 = 2
+			elif char[17].5 > 2:
+				char[17].8 = 1
+			else:
+				char[17].8 = char[17].5
+			char[17].4 = field_party[0].5
+			field_party[0].5 = 0
+			char[17].5 = 0
+			CharFlagsSet char[17] 0x0010
+			if !flag[14]:
+				TextTalk char[17] {
+					#79817v#1545F…………说起来，
+					那个女性幽灵还真是不错啊。{wait}
+				} {
+					#79818v孤身一人留在这『影之国』的
+					美丽亡灵……{wait}
+				} {
+					#79819v#1547F哦呵呵，
+					还真是让人雀跃不已呢。{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#77651v#1508F………………………………{wait}
+				}
+				TextWait
+				FlagSet flag[14]
+			else:
+				TextTalk char[17] {
+					#79820v#1540F说起来，
+					那个女性幽灵还真是不错啊。{wait}
+				} {
+					#79821v这样富有幻想风格的『庭院』
+					说不定也是她的兴趣呢。{wait}
+				} {
+					#79822v#1541F呵呵，不觉得很美妙吗？{wait}
+				}
+				TextWait
+			CharSetChipPattern char[17] 0
+			TextEnd char[17]
+	Return
+
+fn[6]:
+	if flag[11051]:
+		if PartyPosition name[1] != -1 && !flag[9798] && !flag[9833]:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[15] {
+				#81454v#1383F约修亚…………{wait}
+			} {
+				#81455v#1382F……你和那个人道过别了吧。{wait}
+			}
+			TextWait
+			Emote name[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk name[1] {
+				#78194v#1513F……嗯，托大家的福。{wait}
+			} {
+				#78195v#1514F话说回来……
+				科洛丝，你的感觉也太敏锐了吧？{wait}
+			}
+			TextWait
+			TextTalk char[15] {
+				#81456v#1165F啊哈哈………{wait}
+			} {
+				#81457v#1168F因为，
+				你现在的表情看起来很释然呢。{wait}
+			}
+			TextWait
+			FlagSet flag[9833]
+			CharSetChipPattern self 0
+			TextEnd self
+		elif !flag[12]:
+			if PartyPosition name[10] != -1:
+				field_party[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self field_party[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = field_party[0].5
+				field_party[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[15] {
+					#81449v#1164F啊，那个……{wait}
+				} {
+					#81450v#1382F我不知不觉就热衷于
+					读这书架上面的书了……{wait}
+				} {
+					#81451v#1165F呵呵，
+					现在要稍微休息一下。{wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[15] {
+					#81447v#1165F啊、啊哈哈……
+					不好意思，乔丝特。{wait}
+				} {
+					#81448v我经常会像这样
+					埋头于一件事而顾不得其它……{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[12]
+		else:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[15] {
+				#81452v#1168F说起来，
+				这里真是让人感到平静的地方。{wait}
+			} {
+				#81453v#1168F刚来到这里的时候，
+				倒是让我吃惊不小……{wait}
+			}
+			TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+	elif flag[10759]:
+		if !flag[9830]:
+			if PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				Emote self 0mm 2000mm 2 7 80ms 1
+				SoundPlay sound[39] 0 0 100
+				Sleep 1000ms
+				CharTurnToChar char[15] name[15] 400deg/s
+				TextTalk char[15] {
+					#81286v#1164F啊，玲……？{wait}
+				} {
+					#81287v#1165F啊哈哈，那个……{wait}
+				} {
+					#81288v出去探索的时候
+					要小心啊。{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				var[2] = char[14].4
+				var[3] = char[15].4
+				EventBegin 0
+				_Char4A char[14] 0
+				_Char4A char[15] 0
+				CharTurnToChar char[14] name[0] 0deg/s
+				CharTurnToChar char[15] name[0] 0deg/s
+				CharTurnToChar field_party[0] char[15] 0deg/s
+				CharTurnToChar field_party[1] char[15] 0deg/s
+				CharTurnToChar field_party[2] char[15] 0deg/s
+				CharTurnToChar field_party[3] char[15] 0deg/s
+				var[4] = field_party[0].1
+				var[5] = field_party[0].2
+				var[6] = field_party[0].3
+				var[7] = field_party[0].4
+				if PartyPosition name[1] != -1:
+					TextTalk name[0] {
+						#76513v#1000F……科洛丝？{wait}
+					} {
+						#76514v在这里
+						做什么呢……{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81274v#1164F啊，那个……{wait}
+					} {
+						#81275v#1382F我有点担心
+						玲的情况……{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58040, 1000, -58350) 129deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (59430, 1000, -60340) 129deg
+					if PartyPosition name[4] != -1:
+						CharSetPos name[4] (59050, 1000, -59340) 129deg
+					if PartyPosition name[1] != -1:
+						CharSetPos name[1] (59020, 1000, -59390) 81deg
+					CharFlagsUnset name[0] 0x0008
+					CharFlagsUnset name[14] 0x0008
+					CharTurnToChar name[1] char[15] 0deg/s
+					CharTurnToChar name[0] char[15] 0deg/s
+					CharTurnToChar char[15] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk char[15] {
+						#81276v#1382F你们离开利贝尔之后，
+						是为了去找玲吧。{wait}
+					}
+					TextWait
+					TextTalk name[1] {
+						#77894v#1503F嗯，在中枢塔上
+						没能和她好好谈谈，所以……{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76515v#1011F所以，就想找到她，
+						告诉她一直以来想说的话……{wait}
+					}
+					TextWait
+					CharTurnTo name[0] 129deg 400deg/s
+					CharTurnTo char[15] 129deg 400deg/s
+					CharTurnTo name[1] 129deg 400deg/s
+					Emote name[0] 0mm 2000mm 24 27 250ms 0
+					Sleep 2000ms
+					EmoteStop name[0]
+					Sleep 300ms
+					TextTalk name[0] {
+						#76520v#1016F呵呵，
+						不过现在的她看起来好多了呢。{wait}
+					} {
+						#76521v#1017F……嗯，
+						就这样继续在一旁守护着她吧。{wait}
+					}
+					TextWait
+					TextTalk name[1] {
+						#77895v#1501F…………是啊。{wait}
+					} {
+						#77896v#1513F着急是没有用的。
+						作出最后决定的
+						只能是玲自己……{wait}
+					} {
+						#77897v……她被吸进
+						这个世界里面……{wait}
+					} {
+						#77898v#1500F在这里与大家见面，
+						对玲来说也许会
+						产生不错的影响。{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81280v#1168F……嗯，是啊。{wait}
+					}
+					TextWait
+				else:
+					TextTalk name[0] {
+						#76516v#1000F……约修亚和科洛丝？{wait}
+					} {
+						#76517v在这里
+						做什么呢……{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81277v#1164F啊，艾丝蒂尔。{wait}
+					} {
+						#81278v#1382F有点在意玲的情况……{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58260, 1000, -58840) 129deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (59430, 1000, -60340) 129deg
+					if PartyPosition name[4] != -1:
+						CharSetPos name[4] (59050, 1000, -59340) 129deg
+					if PartyPosition name[1] != -1:
+						CharFlagsSet name[1] 0x0008
+						CharFlagsUnset char[14] 0x0080
+					CharFlagsUnset name[0] 0x0008
+					CharFlagsUnset name[14] 0x0008
+					CharTurnToChar char[14] char[15] 0deg/s
+					CharTurnToChar name[0] char[15] 0deg/s
+					CharTurnToChar char[15] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk char[15] {
+						#81279v#1382F艾丝蒂尔，
+						你们离开利贝尔出去旅行，
+						是为了去找玲吧。{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76518v#1003F嗯，因为当时
+						在中枢塔没能好好说明白……{wait}
+					} {
+						#76519v#1007F还有一些
+						要告诉玲的话……{wait}
+					}
+					TextWait
+					CharTurnTo name[0] 129deg 400deg/s
+					CharTurnTo char[15] 129deg 400deg/s
+					CharTurnTo char[14] 129deg 400deg/s
+					Emote name[0] 0mm 2000mm 24 27 250ms 0
+					Sleep 2000ms
+					EmoteStop name[0]
+					Sleep 300ms
+					TextTalk name[0] {
+						#76520v#1016F呵呵，
+						不过现在的她看起来好多了呢。{wait}
+					} {
+						#76521v#1017F……嗯，
+						就这样继续在一旁守护着她吧。{wait}
+					}
+					TextWait
+					TextTalk char[14] {
+						#77895v#1501F…………是啊。{wait}
+					} {
+						#77896v#1513F着急是没有用的。
+						作出最后决定的
+						只能是玲自己……{wait}
+					} {
+						#77897v……她被吸进
+						这个世界里面……{wait}
+					} {
+						#77898v#1500F在这里与大家见面，
+						对玲来说也许会
+						产生不错的影响。{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81280v#1168F……嗯，是啊。{wait}
+					}
+					TextWait
+				Sleep 500ms
+				CrossFade 500ms
+				CharFlagsUnset field_party[0] 0x0008
+				CharFlagsUnset field_party[1] 0x0008
+				CharFlagsUnset field_party[2] 0x0008
+				CharFlagsUnset field_party[3] 0x0008
+				field_party[0].1 = var[4]
+				field_party[0].2 = var[5]
+				field_party[0].3 = var[6]
+				field_party[0].4 = var[7]
+				_Char4B char[14] 0
+				_Char4B char[15] 0
+				char[14].4 = var[2]
+				char[15].4 = var[3]
+				FlagSet flag[9830]
+				EventEnd 6
+		else:
+			TextStart self
+			if !flag[12]:
+				if PartyPosition name[15] != -1:
+					TextTalk char[15] {
+						#81289v#1162F这世界能够反映人的想法……{wait}
+					} {
+						#81290v那么，把我们集合在这里
+						也许也是某个人的意志在起作用。{wait}
+					} {
+						#81291v#1169F如果是这样的话……
+						是『影之王』，还是那个女性的幽灵呢……{wait}
+					} {
+						#81292v#1167F或许……是我们自身也说不定。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[15] {
+						#81281v#1167F虽然我觉得正面
+						向玲传达心意很不容易……{wait}
+					} {
+						#81282v#1168F不过，艾丝蒂尔和约修亚
+						你们一定没问题的。{wait}
+					} {
+						#81283v因为你们之间拥有如此强大的羁绊，
+						所以一定能……{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76522v#1008F啊哈哈……{wait}
+					} {
+						#76523v#1006F谢谢你，科洛丝。{wait}
+					}
+					TextWait
+				FlagSet flag[12]
+			elif PartyPosition name[15] != -1:
+				TextTalk char[15] {
+					#81293v#1167F虽然解决了一些谜题，
+					但新的问题又随之而来。{wait}
+				} {
+					#81294v#1162F……原来如此。
+					的确是计划周全的游戏啊。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[15] {
+					#81284v#1383F我也想尽力
+					帮你们为玲
+					做一些事情。{wait}
+				} {
+					#81285v#1382F如果有用的上我的地方，
+					请随时来找我。{wait}
+				}
+				TextWait
+			TextEnd self
+	elif flag[10756]:
+		TextStart self
+		if !flag[12]:
+			TextTalk char[15] {
+				#81263v#1160F自从理查德先生
+				从军队退役之后，
+				我还没有机会和他见面……{wait}
+			} {
+				#81264v#1161F不过倒是听说过好几次
+				他开的公司的名字。{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#76451v#1004F哎，是这样啊……{wait}
+			} {
+				#76452v#1015F好像生意很红火的样子……？{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81265v#1160F我经常听人提起
+				理查德先生的公司。{wait}
+			} {
+				#81266v#1383F『Ｒ＆Ａ Research』公司……
+				我记得杂志上也刊登过
+				小型的广告。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10510]:
+		TextStart self
+		if !flag[12]:
+			TextTalk char[15] {
+				#81207v#1167F应该还有人
+				被封印石困在里面。{wait}
+			} {
+				#81208v#1167F不知道是在异界化的
+				卢·洛克尔训练场，
+				还是接下来的『第五星层』……{wait}
+			} {
+				#81209v#1162F……现在只能继续前进了。{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81210v#1162F我很担心
+				被封印之人的安全。
+				但现在也只能继续前进了。{wait}
+			} {
+				#81211v#1167F虽然莉丝小姐的事情
+				也很让人在意……{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89208v#1840F（唔…………
+				  好像被看穿了……）{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#77757v#1514F（不愧是科洛丝，感觉真敏锐……）{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10506]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[12]:
+			TextTalk char[15] {
+				#81199v#1164F啊，
+				正好基库说它有点饿了……{wait}
+			} {
+				#81200v#1165F呵呵，没关系的。
+				马上就好。{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81201v#1160F话说回来，
+				能够方便取得水和食物真是太好了。{wait}
+			} {
+				#81202v这也许都是
+				那位女性幽灵……
+				『庭院之主』的功劳呢。{wait}
+			}
+			TextWait
+		CharSetChipPattern self 1
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[10501]:
+		TextStart self
+		if !flag[12]:
+			TextTalk char[15] {
+				#81184v#1167F没想到亚妮拉丝小姐
+				也被卷了进来……{wait}
+			} {
+				#81185v………………………………{wait}
+			} {
+				#81186v#1162F……约修亚，
+				我们必须尽快进行探索。{wait}
+			} {
+				#81187v我也会尽力
+				援助大家的。{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81188v#1162F……约修亚，
+				我们必须尽快进行探索。{wait}
+			} {
+				#81189v我也会尽力
+				援助大家的。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10496]:
+		if !flag[9824] && PartyPosition name[3] == -1:
+			Call fn[5,5]
+		else:
+			TextStart self
+			if !flag[12]:
+				TextTalk char[15] {
+					#81164v#1383F这个庭院似乎
+					和那位女性幽灵有关。{wait}
+				} {
+					#81165v#1160F说起来，这里与其它异空间不同，
+					有种被保护起来的感觉呢。{wait}
+				}
+				TextWait
+				FlagSet flag[12]
+			else:
+				TextTalk char[15] {
+					#81166v#1160F这个庭院
+					也许本来就是和那位
+					女性幽灵有关的地方。{wait}
+				} {
+					#81167v#1168F呵呵，
+					这么一想，
+					就有种被保护起来的感觉呢。{wait}
+				}
+				TextWait
+			TextEnd self
+	Return
+
+fn[7]:
+	if flag[11296]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[5]:
+			if PartyPosition name[6] == -1 && PartyPosition name[0] != -1:
+				name[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[0].5
+				name[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk name[0] {
+					#76893v#1015F咦，阿加特……
+					你没跟提妲在一起吗？{wait}
+				}
+				TextWait
+				if PartyPosition name[15] != -1:
+					TextTalk char[21] {
+						#80678v#551F哎呀，
+						我又不是那家伙的监护人。{wait}
+					} {
+						#80679v#053F……那家伙已经不是小孩了。{wait}
+					} {
+						#80680v她知道自己
+						该做些什么。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[21] {
+						#80676v#551F哎呀，
+						我又不是那家伙的监护人。{wait}
+					} {
+						#80677v#051F而且她正和朋友在一起，
+						不是也挺好吗。{wait}
+					}
+					TextWait
+				TextTalk name[0] {
+					#76894v#1028F……呼…………{wait}
+				}
+				TextWait
+				TextTalk char[21] {
+					#80681v#555F……怎么，想发什么牢骚吗。{wait}
+				}
+				TextWait
+				if PartyPosition name[3] != -1:
+					TextTalk name[3] {
+						#80120v#1541F别害羞，别害羞㈱{wait}
+					}
+					TextWait
+					Emote self 0mm 2000mm 12 13 250ms 2
+					SoundPlay sound[49] 0 0 100
+					Sleep 1000ms
+			elif PartyPosition name[6] == -1 && PartyPosition name[14] != -1:
+				name[14].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[14] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[14].5
+				name[14].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk name[14] {
+					#92798v#1936F…………那个。{wait}
+				} {
+					#92799v#1938F要找提妲的话，
+					她就在那边……{wait}
+				}
+				TextWait
+				TextTalk char[21] {
+					#80685v#052F嗯，啊啊……{wait}
+				} {
+					#80686v#051F那又怎么样啊。{wait}
+				}
+				TextWait
+				TextTalk name[14] {
+					#92800v#1938F没什么，
+					你们之前总是在一起。{wait}
+				} {
+					#92801v#1937F我还以为你们走散了。{wait}
+				}
+				TextWait
+				TextTalk char[21] {
+					#80687v#055F……我又没有迷路……！{wait}
+				}
+				TextWait
+				if PartyPosition name[15] != -1:
+					TextTalk name[15] {
+						#91167v#261F嘻嘻…………{wait}
+					}
+					TextWait
+			else:
+				field_party[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self field_party[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = field_party[0].5
+				field_party[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[21] {
+					#80672v#053F……终于要结束了。{wait}
+				} {
+					#80673v#051F趁现在好好锻炼一下吧。{wait}
+				}
+				TextWait
+			FlagSet flag[5]
+		elif PartyPosition name[6] == -1 && PartyPosition name[0] != -1:
+			name[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[0].5
+			name[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[21] {
+				#80682v#053F那家伙已经不是小孩了。{wait}
+			} {
+				#80683v#051F必要的时候我会跟着她的。
+				……不用担心。{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#76895v#1028F哎呀～………☆{wait}
+			}
+			TextWait
+			TextTalk char[21] {
+				#80684v#055F……到底要怎么样 ！！{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] == -1 && PartyPosition name[14] != -1:
+			name[14].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[14] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[14].5
+			name[14].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[21] {
+				#80688v#551F……我可不是说
+				要一直在一起。{wait}
+			} {
+				#80689v#051F那家伙
+				已经不是小孩子了。{wait}
+			}
+			TextWait
+			TextTalk name[14] {
+				#92802v#1930F………………………………{wait}
+			}
+			TextWait
+			TextTalk char[21] {
+				#80690v#055F……你、你那一脸
+				不可思议的表情是什么意思！？{wait}
+			}
+			TextWait
+		else:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[21] {
+				#80674v#050F从现在开始，
+				已经没有什么时间
+				让我们停滞不前了。{wait}
+			} {
+				#80675v#051F你们也趁现在
+				好好锻炼一下吧。{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	Return
+
+fn[8]:
+	if flag[11296]:
+		TextStart self
+		if !flag[0]:
+			TextTalk char[10] {
+				#83039v#060F靠埃尔赛尤号的速度，
+				超越『星层』
+				应该不会用很长时间的。{wait}
+			} {
+				#83040v#067F上个月妈妈刚改造过，
+				速度已经有很大提升了……{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#76891v#1001F啊哈哈，是这样啊。{wait}
+				} {
+					#76892v#1006F唔，提妲的妈妈吗。
+					我也想见见呢。{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#83041v#067F嘿嘿…………{wait}
+				} {
+					#83042v#560F嗯，爸爸妈妈都说
+					要和姐姐你们见一面呢。{wait}
+				} {
+					#83043v#061F等你们回利贝尔之后
+					我一定会把你们介绍给他们的！{wait}
+				}
+				TextWait
+			elif PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#78268v#1504F提妲的母亲
+					是叫做艾莉卡吧。{wait}
+				} {
+					#78269v#1500F父亲的名字……
+					是丹对吗？{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#83044v#067F嘿嘿………没错。{wait}
+				} {
+					#83045v#560F他们两人都说
+					想见哥哥你们一面呢……{wait}
+				} {
+					#83046v#061F等你们回利贝尔之后
+					我一定会介绍给他们的！{wait}
+				}
+				TextWait
+			elif PartyPosition name[5] != -1:
+				TextTalk name[5] {
+					#80670v#552F（说起来，
+					  这次会受到什么样的招待呢……）{wait}
+				} {
+					#80671v#551F（我去的时候就突然
+					  受到了螺丝扳手的袭击……）{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#83047v#565F哎………………？{wait}
+				}
+				TextWait
+			FlagSet flag[0]
+		else:
+			TextTalk char[10] {
+				#83048v#062F好、好的…………{wait}
+			} {
+				#83049v为了早日回到爸爸妈妈身边，
+				我也要加油……！{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11051]:
+		if !flag[9828] && PartyPosition name[14] == -1 && !flag[11052]:
+			CharFlagsSet char[10] 0x0010
+			CharFlagsSet char[9] 0x0010
+			TextStart char[10]
+			_Char4A char[19] 255
+			if PartyPosition name[9] == -1:
+				TextTalk char[19] {
+					#86227v#1314F……是这样啊。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					#92487v#1445F是这样啊……{wait}
+				}
+				TextWait
+			TextTalk char[10] {
+				#82976v#060F……嗯。{wait}
+			} {
+				#82977v#563F我也不清楚
+				详细的情况，
+				不过莱维哥哥果然……{wait}
+			} {
+				#82978v我觉得他肯定
+				一直很担心
+				约修亚哥哥的情况。{wait}
+			} {
+				#82979v所以才会专门来和
+				约修亚哥哥道别……{wait}
+			} {
+				#82980v约修亚哥哥
+				能有和他道别的机会……{wait}
+			} {
+				#82981v#066F……真的是太好了……{wait}
+			}
+			TextWait
+			if PartyPosition name[9] == -1:
+				TextTalk char[19] {
+					#86228v#816F嗯。是啊。{wait}
+				}
+				TextWait
+			TextTalk char[9] {
+				#92488v#1448F…………嗯。{wait}
+			}
+			TextWait
+			Sleep 300ms
+			if PartyPosition name[15] != -1:
+				name[15].5 = char[9].4
+				char[9].5 = char[9].4
+				TextStart char[9]
+				CharFlagsUnset char[9] 0x0010
+				CharTurnToChar char[9] name[15] 0deg/s
+				char[9].4 = (char[9].4 + 360) % 360
+				char[9].4 = char[9].4 + 360 - char[9].5
+				char[9].5 = char[9].4 / 180
+				if char[9].4 <= 45 | char[9].4 >= 315 && char[9].4 <= 405 | char[9].4 >= 675:
+				elif char[9].5 < 1:
+					char[9].8 = 2
+				elif char[9].5 > 2:
+					char[9].8 = 1
+				else:
+					char[9].8 = char[9].5
+				char[9].4 = name[15].5
+				name[15].5 = 0
+				char[9].5 = 0
+				CharFlagsSet char[9] 0x0010
+				Sleep 200ms
+				if flag[9796]:
+					TextTalk char[9] {
+						#92489v#1962F……玲能和他见最后一面，
+						也是件好事。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[9] {
+						#92490v#1802F对了，玲……{wait}
+					} {
+						#92491v#1445F你也和他道了别，
+						也算是件好事……{wait}
+					}
+					TextWait
+				TextTalk name[15] {
+					#91110v#269F呵呵……
+					这话由教会的姐姐说出来
+					还真是有点奇怪呢。{wait}
+				} {
+					#91111v#263F……不过…………{wait}
+				} {
+					#91112v……难得你在这里，
+					能为莱维讲一些
+					圣典中的故事吗？{wait}
+				}
+				TextWait
+				TextTalk char[9] {
+					#92492v#1448F……嗯，我很荣幸。{wait}
+				}
+				TextWait
+				CharSetChipPattern char[9] 0
+			elif flag[9796]:
+				TextTalk char[9] {
+					#92493v#1447F……玲………
+					你能和他道别真是太好了。{wait}
+				} {
+					#92494v#1806F和别人分离，
+					是件十分痛苦的事情。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					#92495v#1806F……如果………
+					能让玲也和他见最后一面就好了。{wait}
+				} {
+					#92496v#1445F虽然这也许是件很痛苦的事，
+					……不过毕竟是家人………{wait}
+				}
+				TextWait
+			FlagSet flag[9828]
+			CharFlagsUnset char[10] 0x0010
+			CharFlagsUnset char[9] 0x0010
+			_Char4B char[19] 255
+			TextEnd char[10]
+		else:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			if !flag[0]:
+				TextTalk char[10] {
+					#82982v#060F我也不清楚
+					详细的情况……{wait}
+				} {
+					#82983v#563F不过我觉得莱维哥哥
+					一定一直很挂念
+					约修亚哥哥的情况。{wait}
+				} {
+					#82984v#066F而且，还有玲……{wait}
+				}
+				TextWait
+				if PartyPosition name[15] != -1:
+					TextTalk name[15] {
+						#91113v#263F……呵呵，也许吧。{wait}
+					}
+					TextWait
+				FlagSet flag[0]
+			else:
+				TextTalk char[10] {
+					#82985v#060F以前在拉文努村的时候，
+					我和莱维哥哥
+					见过一次面。{wait}
+				} {
+					#82986v#564F那个时候，
+					他的眼神十分寂寞……{wait}
+				} {
+					#82987v#067F嘿嘿，现在已经完全不同了呢。{wait}
+				}
+				TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+			if PartyPosition name[14] == -1:
+				CharSetChipPattern self 2
+	elif flag[11016]:
+		if !flag[0]:
+			var[2] = char[10].8
+			var[3] = char[24].8
+			CharFlagsSet self 0x0010
+			TextStart self
+			field_party[0].5 = char[10].4
+			char[10].5 = char[10].4
+			TextStart char[10]
+			CharFlagsUnset char[10] 0x0010
+			CharTurnToChar char[10] field_party[0] 0deg/s
+			char[10].4 = (char[10].4 + 360) % 360
+			char[10].4 = char[10].4 + 360 - char[10].5
+			char[10].5 = char[10].4 / 180
+			if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+			elif char[10].5 < 1:
+				char[10].8 = 2
+			elif char[10].5 > 2:
+				char[10].8 = 1
+			else:
+				char[10].8 = char[10].5
+			char[10].4 = field_party[0].5
+			field_party[0].5 = 0
+			char[10].5 = 0
+			CharFlagsSet char[10] 0x0010
+			TextTalk char[10] {
+				#82881v#064F菲利普先生
+				好像是公爵大人的管家吧。{wait}
+			} {
+				#82882v#063F为、为什么
+				『影之王』先生要把
+				毫无关系的人卷进来呢……{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				TextTalk name[15] {
+					#90926v#263F呵呵，我觉得这也不错。{wait}
+				} {
+					#90927v#260F……我啊，
+					对『影之王』很感兴趣呢。{wait}
+				} {
+					#90928v#261F真想早点跟他一决胜负。{wait}
+				}
+				TextWait
+			else:
+				char[10].5 = char[24].4
+				char[24].5 = char[24].4
+				TextStart char[24]
+				CharFlagsUnset char[24] 0x0010
+				CharTurnToChar char[24] char[10] 0deg/s
+				char[24].4 = (char[24].4 + 360) % 360
+				char[24].4 = char[24].4 + 360 - char[24].5
+				char[24].5 = char[24].4 / 180
+				if char[24].4 <= 45 | char[24].4 >= 315 && char[24].4 <= 405 | char[24].4 >= 675:
+				elif char[24].5 < 1:
+					char[24].8 = 2
+				elif char[24].5 > 2:
+					char[24].8 = 1
+				else:
+					char[24].8 = char[24].5
+				char[24].4 = char[10].5
+				char[10].5 = 0
+				char[24].5 = 0
+				CharFlagsSet char[24] 0x0010
+				TextTalk char[24] {
+					#90926v#263F呵呵，我觉得这也不错。{wait}
+				} {
+					#90927v#260F……我啊，
+					对『影之王』很感兴趣呢。{wait}
+				} {
+					#90928v#261F真想早点跟他一决胜负。{wait}
+				}
+				TextWait
+			TextTalk name[8] {
+				#89444v#1066F哈哈，
+				你可不要单独行动哦……{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				name[15].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] name[15] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = name[15].5
+				name[15].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			else:
+				char[24].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] char[24] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = char[24].5
+				char[24].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			TextTalk char[10] {
+				#82883v#562F是、是啊，玲……{wait}
+			} {
+				#82884v外面很危险的，
+				不能一个人随便跑出去哦！{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92374v#1440F……………………………………{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[0]
+			TextEnd self
+			char[10].8 = var[2]
+			char[24].8 = var[3]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if PartyPosition name[15] != -1:
+				name[15].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] name[15] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = name[15].5
+				name[15].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			else:
+				char[24].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] char[24] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = char[24].5
+				char[24].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			TextTalk char[10] {
+				#82885v#562F真、真的很危险……{wait}
+			} {
+				#82886v玲，
+				你可不要单独行动哦。{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				CharSetChipPattern self 0
+			else:
+				CharSetChipPattern self 1
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11008]:
+		if PartyPosition name[15] != -1:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[10] {
+				#82868v#064F啊，玲。
+				#061F嘿嘿，一会儿再聊吧。{wait}
+			} {
+				#82869v刚才还没说完呢……{wait}
+			}
+			TextWait
+			TextTalk name[15] {
+				#90905v#261F嘻嘻，好啊。{wait}
+			}
+			TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+			if PartyPosition name[9] == -1:
+				CharSetChipPattern self 1
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[10] {
+				#82870v#061F那么，
+				给那孩子起个名字吧……{wait}
+			}
+			TextWait
+			TextTalk char[24] {
+				#90906v#261F嘻嘻，
+				玲以前也养过一只猫。{wait}
+			} {
+				#90907v#265F博士把它叫做
+				装甲猎豹……{wait}
+			}
+			TextWait
+			Emote self 0mm 1700mm 40 43 100ms 3
+			Sleep 1000ms
+			TextTalk char[10] {
+				#82871v#065F这、这个不行吧！{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[10759]:
+		if !flag[9826]:
+			if PartyPosition name[15] != -1:
+				TextStart self
+				CharTurnToChar self name[15] 0deg/s
+				TextTalk char[10] {
+					#82828v#064F啊，玲！{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90849v#264F提妲，
+					你在这里做什么呢？{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#82829v#060F嗯……{wait}
+				} {
+					#82830v#061F之前，
+					我们不是一起去购过物吗？{wait}
+				} {
+					#82831v我想起那次
+					买了一只很漂亮的
+					胸针的事情……{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90850v#260F嘻嘻，是有这么一回事。{wait}
+				} {
+					#90851v#267F对了……#1480W 
+					#20W我之前在一家很小的店里
+					看到了同一种胸针。{wait}
+				} {
+					#90852v#261F不过中间的宝石是红色的。{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[24] {
+					#90853v#261F……在那家店里看到
+					和上次买的同一种胸针。{wait}
+				} {
+					#90854v#265F不过中间的宝石是红色的。{wait}
+				}
+				TextWait
+			TextTalk char[10] {
+				#82832v#064F啊，真不错……{wait}
+			} {
+				#82833v王都的百货店
+				已经都卖完了……{wait}
+			} {
+				#82834v#562F唉，
+				我也想要红色的啊……{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				TextTalk name[15] {
+					#90855v#265F那么，
+					下次我就带你去
+					那家很远的店转转吧？{wait}
+				} {
+					#90856v#269F在共和国的东方人街里
+					转一天都不会觉得烦。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[24] {
+					#90855v#265F那么，
+					下次我就带你去
+					那家很远的店转转吧？{wait}
+				} {
+					#90856v#269F在共和国的东方人街里
+					转一天都不会觉得烦。{wait}
+				}
+				TextWait
+			TextTalk char[10] {
+				#82835v#064F是、是这样啊……{wait}
+			} {
+				#82836v#061F嘿嘿，
+				如果能再找到可爱的小玩意就好了～{wait}
+			} {
+				#82837v#560F听我说，
+				之前我买的那个挂饰……{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#76528v#1016F（……唔，
+				  好像聊得很热闹嘛。）{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9826]
+			TextEnd self
+		elif !flag[0]:
+			if PartyPosition name[15] != -1:
+				TextStart self
+				CharTurnToChar char[10] name[15] 0deg/s
+				TextTalk char[10] {
+					#82838v#061F玲，
+					下次我们再一起去购物吧。{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90857v#260F……我倒无所谓。{wait}
+				} {
+					#90858v#263F不过在那之前，
+					我们必须要想办法
+					从这个世界逃出去不是吗？{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#82839v#064F啊，没错……{wait}
+				}
+				TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[10] {
+					#82840v#065F哇……{wait}
+				} {
+					#82841v#067F我、我也想见识一下呢……{wait}
+				}
+				TextWait
+				TextEnd self
+				CharFlagsUnset self 0x0010
+			FlagSet flag[0]
+		else:
+			TextStart self
+			TextTalk char[10] {
+				#82842v#560F玲，
+				你去过的店还真不少啊……{wait}
+			} {
+				#82843v#067F我、我也想去见识一下呢……{wait}
+			}
+			TextWait
+			TextEnd self
+	Return
+
+fn[9]:
+	if flag[11052]:
+		TextStart self
+		TextTalk char[19] {
+			#86229v#814F哎……
+			发生什么事了吗？{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#89701v#1075F不，没什么要紧的。{wait}
+		}
+		TextWait
+		TextEnd self
+	elif flag[11051]:
+		if flag[9828] | PartyPosition name[14] != -1 && PartyPosition name[6] != -1:
+			TextStart self
+			if !flag[9] && PartyPosition name[1] != -1:
+				CharTurnToChar self name[1] 0deg/s
+				TextTalk char[19] {
+					#86230v#1316F那个，
+					我并不知道详细的情况……{wait}
+				} {
+					#86231v#816F不过，我可以这样断言。{wait}
+				} {
+					#86232v#811F……现在的约修亚，
+					表情相当释然呢。{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#78200v#1504F亚妮拉丝小姐……{wait}
+				} {
+					#78201v#1513F……谢谢你。{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					CharTurnToChar self name[0] 400deg/s
+					Sleep 300ms
+					TextTalk char[19] {
+						#86247v#816F对了……
+						艾丝蒂尔也是！{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76827v#1017F啊、啊哈哈……是吗？{wait}
+					}
+					TextWait
+				FlagSet flag[9]
+			elif PartyPosition name[1] != -1:
+				CharTurnToChar self name[1] 0deg/s
+				TextTalk char[19] {
+					#86248v#816F约修亚，
+					你好像越过了一道巨大的障碍呢。{wait}
+				} {
+					#86249v#811F嗯，现在的表情很不错！{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[19] {
+					#86242v#817F那个，
+					我并不知道详细的情况……{wait}
+				} {
+					#86243v#1314F可以断定的是……
+					约修亚他好像
+					越过了一道巨大的障碍呢。{wait}
+				}
+				TextWait
+			TextEnd self
+		elif PartyPosition name[14] == -1 && PartyPosition name[6] == -1:
+			Call fn[5,8]
+		elif PartyPosition name[14] == -1:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[19] {
+				#86236v#1314F唔，
+				我对相关的事情不是很了解……{wait}
+			} {
+				#86237v#813F莱维先生……
+				是约修亚的哥哥吧。{wait}
+			} {
+				#86238v#817F不过，在浮游都市的那次事件中……{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		else:
+			TextStart self
+			TextTalk char[19] {
+				#86239v#817F莱维先生……{wait}
+			} {
+				#86240v好像是
+				约修亚的哥哥吧。{wait}
+			} {
+				#86241v#813F唔，
+				我没有到浮游都市去，
+				所以不清楚详细情况……{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[11040]:
+		if !flag[9]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[19] {
+				#86201v#814F啊，咦……！？{wait}
+			} {
+				#86202v#1317F大家都到哪里去了！？{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9]
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if PartyPosition name[6] != -1 && PartyPosition name[15] != -1:
+				Emote char[19] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[19] name[6] 500deg/s
+				TextTalk char[19] {
+					#86205v#1310F啊，
+					你们两个竟然躲在这里！{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82945v#067F哎，嘿嘿……{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#91044v#263F我们马上
+					就要出发了。{wait}
+				} {
+					#91045v#260F姐姐，
+					一会儿再聊吧。{wait}
+				}
+				TextWait
+				if PartyPosition name[14] != -1:
+					TextTalk char[19] {
+						#86206v#818F嗯嗯～…………{wait}
+					} {
+						#86207v#1311F那，
+						一会儿莉丝也要来……㈱{wait}
+					}
+					TextWait
+					TextTalk name[14] {
+						#92458v#1802F啊，唉…………{wait}
+					}
+					TextWait
+			elif PartyPosition name[6] != -1:
+				Emote char[19] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[19] name[6] 500deg/s
+				TextTalk char[19] {
+					#86208v#1310F啊，找到提妲了！{wait}
+				} {
+					#86209v#811F好，
+					让姐姐来抱抱你……！{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82946v#067F哎，嘿嘿……{wait}
+				} {
+					#82947v#560F那个，亚妮拉丝姐姐。
+					待、待会儿再聊吧。{wait}
+				}
+				TextWait
+			elif PartyPosition name[15] != -1:
+				Emote char[19] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[19] name[15] 500deg/s
+				TextTalk char[19] {
+					#86210v#1310F啊，找到玲了！{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#91046v#263F嘻嘻……
+					我们马上
+					就要出发了。{wait}
+				} {
+					#91047v#260F姐姐，
+					一会儿再聊吧。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[19] {
+					#86203v#1316F提妲和玲
+					都不在啊……{wait}
+				} {
+					#86204v#818F嗯，
+					也许睡得迷迷糊糊的，
+					就能梦到了吧……{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11029]:
+		CharFlagsSet char[25] 0x0010
+		TextStart char[25]
+		if !flag[9]:
+			FlagSet flag[9]
+			TextTalk char[25] {
+				#86171v#1311F#60W唔，嗯……#20W{wait}
+			} {
+				#86172v#819F#60W啊哈哈，等等我～……#20W{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#76689v#1016F亚、亚妮拉丝……？{wait}
+				}
+				TextWait
+			if PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#77985v#1514F好像睡着了……{wait}
+				}
+				TextWait
+			elif PartyPosition name[2] != -1:
+				TextTalk name[2] {
+					#78995v#1526F真是的，
+					这孩子竟然在这种地方睡觉……{wait}
+				}
+				TextWait
+			else:
+				TextTalk name[8] {
+					#89525v#1068F她到底在
+					追什么呢……{wait}
+				}
+				TextWait
+		else:
+			CharShake char[25] 20 0 200 3000ms
+			Sleep 300ms
+			CharShake char[25] 20 0 500 4000ms
+			Sleep 200ms
+			TextTalk char[25] {
+				#86173v#1311F#60W好，抓到啦……{wait}
+			} {
+				#86174v这样我就可以去玩偶王国了……⊙{wait}
+			}
+			TextWait
+		CharFlagsUnset char[25] 0x0010
+		TextEnd char[25]
+	elif flag[11016]:
+		if flag[11017]:
+			TextStart self
+			if !flag[11019]:
+				TextTalk char[19] {
+					#86102v#814F啊，大家。
+					有什么事吗？{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89455v#1078F啊，是这么回事……{wait}
+				}
+				TextWait
+				FadeOut 300ms 0x00000000 100
+				TextSetName ""
+				TextSetPos 72 320 56 3
+				TextMessage null {
+					{color 5}凯文把琥耀石石碑上
+					记述的语句向亚妮拉丝作了说明。
+					　{wait}
+				}
+				TextWait
+				TextClose 0
+				FadeIn 300ms 0x00000000
+				FadeWait
+				Sleep 500ms
+				TextTalk char[19] {
+					#86103v#814F『剑道之少女』……是说我吗！？{wait}
+				} {
+					#86104v#818F唔，那个……
+					我倒是觉得自己
+					并没有那么了不起啦……{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89456v#1066F没关系，不试试看怎么知道呢。{wait}
+				} {
+					#89457v能陪我们去看看吗？{wait}
+				}
+				TextWait
+				TextTalk char[19] {
+					#86105v#814F嗯，当然了。
+					这点小事倒不要紧……{wait}
+				} {
+					#86106v#810F只要做好准备，
+					我随时都可以加入队伍哦。{wait}
+				}
+				TextWait
+				FlagSet flag[11019]
+			else:
+				TextTalk char[19] {
+					#86107v#818F虽然不明白到底怎么回事，
+					不过似乎是在召唤我……{wait}
+				} {
+					#86108v#810F我已经做好准备了，
+					随时都可以加入队伍哦。{wait}
+				}
+				TextWait
+			TextEnd self
+		else:
+			TextStart self
+			if !flag[9]:
+				if flag[9791]:
+					TextTalk char[19] {
+						#86085v#1317F没、没想到
+						竟然有这样强的人……{wait}
+					} {
+						#86086v#1316F唔唔，那招到底是什么啊……{wait}
+					} {
+						#86087v#815F真的是剑技吗！？{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[19] {
+						#86088v#814F菲利普先生，
+						好像是那个公爵的管家吧。{wait}
+					} {
+						#86089v#818F唔……
+						之前也和他见过几面……{wait}
+					} {
+						#86090v没想到是这样强的人啊……{wait}
+					}
+					TextWait
+				FlagSet flag[9]
+			else:
+				TextTalk char[19] {
+					#86091v#1316F唉，
+					我的修行还远远不够……{wait}
+				} {
+					#86092v#812F这样的话……
+					就再和理查德先生
+					切磋一下吧。{wait}
+				}
+				TextWait
+				if PartyPosition name[11] != -1:
+					CharTurnToChar char[19] name[11] 400deg/s
+					Sleep 500ms
+					TextTalk char[19] {
+						#86093v#815F理查德先生，
+						请你多多指教！{wait}
+					}
+					TextWait
+					TextTalk name[11] {
+						#86785v#111F哈哈……我考虑一下。{wait}
+					}
+					TextWait
+			TextEnd self
+	elif flag[11008]:
+		if !flag[9]:
+			if PartyPosition name[15] != -1 && PartyPosition name[6] != -1:
+				TextStart self
+				TextTalk char[19] {
+					#86060v#817F『影之国』──{wait}
+				} {
+					#86061v可以实现人们的愿望，
+					并根据独立的法则不断进行
+					自我组织和创建的高位空间……{wait}
+				} {
+					#86062v……………………………………………
+					……………………………………………
+					……………………………………………{wait}
+				}
+				TextWait
+				CharShake char[19] 20 0 800 3000ms
+				Sleep 1000ms
+				TextTalk char[19] {
+					#86063v#819F………呜………………{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					TextTalk name[0] {
+						#76596v#1004F啊，崩溃了！！{wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#77931v#1512F……亚妮拉丝小姐，
+						请不要勉强自己。{wait}
+					}
+					TextWait
+				elif PartyPosition name[2] != -1:
+					TextTalk name[2] {
+						#78959v#1525F……亚妮拉丝，
+						不懂的话就不要勉强了。{wait}
+					}
+					TextWait
+				else:
+					TextTalk name[6] {
+						#82867v#065F啊，亚妮拉丝姐姐……！{wait}
+					}
+					TextWait
+					TextTalk name[8] {
+						#89384v#1068F哎呀，头晕了……{wait}
+					}
+					TextWait
+			elif PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				CharTurnToChar self name[15] 0deg/s
+				TextTalk char[19] {
+					#86067v#816F呵呵，
+					玲也很喜欢布娃娃吧。{wait}
+				} {
+					#86068v#811F好，
+					一会儿来和姐姐聊聊吧。{wait}
+				} {
+					#86069v我要亲自确认一下
+					你的热爱程度！{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[19] {
+					#86072v#814F哎，
+					玲竟然有兰德摩尔的
+					限定版布娃娃吗！？{wait}
+				} {
+					#86073v#1317F我、我也好想要啊……{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					TextTalk name[0] {
+						#76597v#1016F（亚、亚妮拉丝……）{wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#77932v#1512F（我说啊，亚妮拉丝小姐……）{wait}
+					}
+					TextWait
+				elif PartyPosition name[2] != -1:
+					TextTalk name[2] {
+						#78960v#1525F（这孩子真是的……）{wait}
+					}
+					TextWait
+				TextTalk name[8] {
+					#89385v#1068F（从某种意义上来说，
+					  是最没有紧张感的人了……）{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9]
+			TextEnd self
+		else:
+			if PartyPosition name[15] != -1 && PartyPosition name[6] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[19] {
+					#86064v#817F到底要怎么做
+					才能够变出布娃娃啊…………{wait}
+				} {
+					#86065v嗯～…………{wait}
+				} {
+					#86066v#1312F唔…………！！{wait}
+				}
+				TextWait
+			elif PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				CharTurnToChar self name[15] 0deg/s
+				TextTalk char[19] {
+					#86070v#816F玲，
+					一会儿来和姐姐聊聊吧。{wait}
+				} {
+					#86071v#811F我要亲自确认一下
+					你的热爱程度！{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[19] {
+					#86074v#812F我、我也
+					看中了那个呢……{wait}
+				} {
+					#86075v#1316F呜呜，那一天突然接到了任务，
+					所以没来得及去买……{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	Return
+
+fn[10]:
+	if flag[11051]:
+		if !flag[4]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if PartyPosition name[4] != -1:
+				TextTalk char[13] {
+					#84345v#416F……唔，是这样吗。{wait}
+				} {
+					#84346v#210F还是偶尔把它拆开
+					清洗一下吧。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[13] {
+					#84341v#213F哎呀，不要勉强了。{wait}
+				} {
+					#84342v#212F总之，
+					休息一下喝点水吧……{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[4]
+			TextEnd self
+		else:
+			if PartyPosition name[1] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				CharTurnToChar self name[1] 0deg/s
+				TextTalk char[13] {
+					#84348v#213F啊，约修亚……{wait}
+				} {
+					#84349v#215F那、那个…………{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#78196v#1513F嗯，没关系的。{wait}
+				} {
+					#78197v#1501F谢谢你的担心。{wait}
+				}
+				TextWait
+				TextTalk char[13] {
+					#84350v#414F啊，嗯…………{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+			else:
+				TextStart self
+				if PartyPosition name[4] != -1:
+					TextTalk char[13] {
+						#84347v#210F导力枪内部结构十分精细，
+						偶尔也要拆开清洗一下。{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[13] {
+						#84343v#416F公主殿下，请别累着自己了。{wait}
+					} {
+						#84344v#212F有这么多伙伴在，
+						没必要一个人去调查……{wait}
+					}
+					TextWait
+			TextEnd self
+	Return
+
+fn[11]:
+	if flag[11051]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#85040v#175F这只是我自己的看法……{wait}
+			} {
+				#85041v#170F洛伦斯少尉
+				是不是也对上校
+				有过敬佩的感觉呢。{wait}
+			} {
+				#85042v#179F虽然这种想法没什么根据……{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#85043v#176F我觉得洛伦斯少尉
+				并不只是单纯地
+				在利用情报部。{wait}
+			} {
+				#85044v#170F虽然这种想法没什么根据……
+				不过他实际上
+				应该是个很诚实的人吧。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11040]:
+	elif flag[11029]:
+		TextStart self
+		if !flag[2]:
+			if flag[9794]:
+				TextTalk char[11] {
+					#84981v#179F雾香小姐――
+					我以前也想过
+					要和她见一面……{wait}
+				} {
+					#84982v#178F没想到她是那么强的人……{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[11] {
+					#84979v#178F说到雾香小姐，
+					我听说她一个人
+					登上了那座里塔……{wait}
+				} {
+					#84980v#179F呼，如果她还在利贝尔，
+					一定要见上一面才行。{wait}
+				}
+				TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84983v#175F说起来，到达雾香小姐那里
+				仅仅是试炼的一半吗……{wait}
+			} {
+				#84984v#176F我们最好还是
+				重新评估一下
+				当前的战斗力。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11016]:
+		TextStart self
+		if !flag[2]:
+			if PartyPosition name[3] != -1:
+				CharTurnToChar self name[3] 0deg/s
+				TextTalk name[3] {
+					#79975v#1541F……尤莉亚小姐。{wait}
+				} {
+					#79976v我回国的时候，
+					真是受你多方照顾了。{wait}
+				} {
+					#79977v#1547F怎么样，
+					待会儿一起去喝一杯吧。{wait}
+				}
+				TextWait
+				TextTalk char[11] {
+					#84964v#172F哈啊………………{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[11] {
+					#84965v#175F……其实刚才，
+					奥利维特皇子
+					邀请我去喝一杯……{wait}
+				} {
+					#84966v#176F唔唔………
+					到底要不要接受呢……{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					TextTalk name[0] {
+						#76629v#1007F那个皇子真是的……{wait}
+					} {
+						#76630v#1009F尤莉亚小姐，
+						你最好别理他！{wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#77962v#1512F不管怎么说，
+						还是拒绝了吧。{wait}
+					}
+					TextWait
+				elif PartyPosition name[4] != -1:
+					TextTalk name[4] {
+						#81370v#1165F啊哈哈……
+						唔，嗯……{wait}
+					}
+					TextWait
+			if PartyPosition name[12] != -1:
+				TextTalk name[12] {
+					#85622v#272F……上尉，
+					请一定不要接受。{wait}
+				}
+				TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84967v#176F咳、咳……{wait}
+			} {
+				#84968v#178F没想到连菲利普大人
+				都被再现了出来……{wait}
+			} {
+				#84969v#175F如果可能的话，
+				我还想向现实中的他讨教呢。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11008]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84941v#179F那位女性幽灵
+				竟然是利贝尔王家始祖
+				赛雷斯托大人……{wait}
+			} {
+				#84942v#171F呵呵，这样我就放心了。{wait}
+			} {
+				#84943v#170F借助她的力量，
+				我们就一定能与
+				『影之王』对抗了。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84944v#170F虽然现在还不到
+				感到乐观的时候……{wait}
+			} {
+				#84945v但如果能借助她的力量，
+				我们就一定能与
+				『影之王』对抗了。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[2]:
+			TextTalk char[11] {
+				#84923v#176F能够实现人的意念的世界……{wait}
+			} {
+				#84924v#175F唔，
+				我还觉得有些半信半疑……{wait}
+			} {
+				#84925v不过如果现在的情况
+				是『影之王』所期望的……{wait}
+			} {
+				#84926v#170F那我们决不能
+				任他这样妄为下去。{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84927v#176F嗯，
+				我还觉得有些半信半疑……{wait}
+			} {
+				#84928v『影之王』……{wait}
+			} {
+				#84929v#170F他所期望的事情，
+				我们决不能任其
+				就这样发生。{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10756]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84913v#170F理查德大人退役的时候，
+				摩尔根将军和卡西乌斯准将
+				都极力挽留他。{wait}
+			} {
+				#84914v虽然理查德大人
+				曾经不幸误入歧途，
+				但他的确是位非常优秀的军人。{wait}
+			} {
+				#84915v#179F我还听说卡西乌斯准将
+				准备采取一些措施
+				把他请回军队。{wait}
+			}
+			TextWait
+			if PartyPosition name[4] != -1:
+				TextTalk name[4] {
+					#81262v#1165F呵呵，真像卡西乌斯先生的作风。{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76450v#1007F果然很爱使唤人啊……{wait}
+				}
+				TextWait
+			elif PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#77853v#1508F……好像又要
+					把工作推给别人了。{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76450v#1007F真是爱使唤人啊……{wait}
+				}
+				TextWait
+			else:
+				TextTalk name[0] {
+					#76449v#1019F哇，那个不良中年……{wait}
+				} {
+					#76450v#1007F真是爱使唤人啊……{wait}
+				}
+				TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84916v#178F没想到理查德大人
+				也被卷入了异世界……{wait}
+			} {
+				#84917v#176F唔……
+				看来将『协力者』牵连进来
+				是所谓『规则』的一部分吧。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10752]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84898v#176F……我之前已经知道
+				凯文先生的身份
+				其实是星杯骑士……{wait}
+			} {
+				#84899v#175F但他竟然是守护骑士第五位……{wait}
+			} {
+				#84900v真是没想到是这么厉害的人物……{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84901v#176F守护骑士……{wait}
+			} {
+				#84902v#175F没想到凯文先生
+				是这么厉害的人物……{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10510]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84882v#178F这样一来，
+				『庭院之主』所说的
+				三个修炼场都已经通过了。{wait}
+			} {
+				#84883v接下来应该
+				去『第五星层』了吧。{wait}
+			} {
+				#84884v#176F那里到底是什么样的地方呢……{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84885v#178F接下来应该是『第五星层』吧……{wait}
+			} {
+				#84886v到底是什么样的地方呢……{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10506]:
+		if !flag[2]:
+			if PartyPosition name[4] != -1:
+				TextStart self
+				TextTalk char[11] {
+					#84873v#176F呼，
+					明天有军队司令部的内部会议……{wait}
+				} {
+					#84874v不能缺席啊……{wait}
+				}
+				TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[11] {
+					#84872v#178F殿下，
+					请您也稍微
+					休息一下吧……？{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[2]
+		elif PartyPosition name[4] != -1:
+			TextStart self
+			TextTalk char[11] {
+				#84875v#172F不，
+				也许是今天……？{wait}
+			} {
+				#84876v#175F唔，
+				现在已经没有时间的概念了……{wait}
+			} {
+				#84877v说不定至今为止
+				已经经过了很多天……{wait}
+			}
+			TextWait
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[11] {
+				#84872v#178F殿下，
+				请您也稍微
+				休息一下吧……？{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[10501]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84859v#178F从之前的情况来看，
+				『影之王』对我们大家的情况
+				似乎做了很详细的调查。{wait}
+			} {
+				#84860v#175F不过，竟然还再现了
+				利贝尔之外的地点……{wait}
+			} {
+				#84861v『影之王』……
+				他到底是什么人…………{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84862v#178F『影之王』对我们大家的情况
+				似乎做了很详细的调查。{wait}
+			} {
+				#84863v#176F而且还能够操纵『恶魔』……{wait}
+			} {
+				#84864v#175F『影之王』……
+				他到底是什么人…………{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10496]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84838v#176F炼狱的镜子和战车……
+				和圣典中描绘的一模一样。{wait}
+			} {
+				#84839v#175F敌人能够伪造整个王都。
+				这种程度的事情就跟把戏一样吧……{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84840v#178F我听过大司教的讲义，
+				也知道一些
+				关于圣典的内容……{wait}
+			} {
+				#84841v#175F没想到会出现
+				那样的东西……{wait}
+			}
+			TextWait
+		TextEnd self
+	Return
+
+fn[12]:
+	if flag[11051]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85688v#270F……看来已经
+				找到了前进的方向。{wait}
+			} {
+				#85689v#270F就算是为了逝去的人们，
+				我们也必须前进。{wait}
+			} {
+				#85690v#278F『第七星层』……
+				去拜访一下
+				这世界的根源吧。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		elif PartyPosition name[3] != -1:
+			CharTurnToChar self name[3] 0deg/s
+			TextTalk char[12] {
+				#85691v#277F……看来已经
+				找到了前进的方向。{wait}
+			} {
+				#85692v#276F奥利维尔，要小心行事。{wait}
+			}
+			TextWait
+			TextTalk name[3] {
+				#80059v#1541F呵，遵命大哥。{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				#85693v#274F……谁是大哥啊。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[12] {
+				#85694v#277F……看来已经
+				找到了前进的方向。{wait}
+			} {
+				#85695v#278F差不多该把
+				奥利维尔那家伙拽过来了。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11040]:
+		if flag[9786]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[12] {
+				#85669v#276F那就是将自己的路贯彻到底的人物吗……{wait}
+			} {
+				#85670v#278F呼……
+				我还差得很远。{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		else:
+			TextStart self
+			TextTalk char[12] {
+				#85671v#272F传说中的『剑圣』之技……{wait}
+			} {
+				#85672v#277F嗯……
+				我也想亲眼见识一下呢。{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[11029]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85640v#276F『影之王』那小子……
+				看来手段还真不简单。{wait}
+			} {
+				#85641v#272F话说回来，
+				已经见过两名『守护者』……{wait}
+			} {
+				#85642v呼，还会有谁出场呢……{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85643v#270F『影之王』的手段
+				看来还真不简单。{wait}
+			} {
+				#85644v#276F对了，
+				那个『黑骑士』也自称守护者……{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11016]:
+		if !flag[3]:
+			if PartyPosition name[3] != -1:
+				TextStart self
+				CharTurnToChar self name[3] 0deg/s
+				TextTalk char[12] {
+					#85626v#272F……奥利维尔，别引起麻烦。{wait}
+				} {
+					#85627v虽然这里是异空间，
+					但你的奇怪行动也会造成国际问题的。{wait}
+				}
+				TextWait
+				TextTalk name[3] {
+					#79987v#1541F哈哈哈，你还真是爱操心。{wait}
+				}
+				TextWait
+				TextTalk char[12] {
+					#85628v#274F……给我老实听着。{wait}
+				}
+				TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[12] {
+					#85629v#274F…………这个赖皮蛋{wait}
+				} {
+					#85630v就交给我来教训一下吧。{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[3]
+		else:
+			TextStart self
+			if PartyPosition name[3] != -1:
+				CharTurnToChar self name[3] 0deg/s
+				TextTalk char[12] {
+					#85626v#272F……奥利维尔，别引起麻烦。{wait}
+				} {
+					#85627v虽然这里是异空间，
+					但你的奇怪行动也会造成国际问题的。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[12] {
+					#85631v#272F……请不要理睬
+					这个家伙。{wait}
+				} {
+					#85632v#270F我会好好
+					看着他的。{wait}
+				}
+				TextWait
+			TextEnd self
+	elif flag[11008]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85607v#276F那个『方石』，
+				原来是这么一个来头啊……{wait}
+			} {
+				#85608v这样一来，
+				就可以说明我们
+				怎么会被吸进『影之国』了。{wait}
+			} {
+				#85609v#270F但是做出这件事的
+				似乎是『影之王』。{wait}
+			} {
+				#85610v#272F哼，
+				真想早点把他揪出来……{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85611v#272F『雷克鲁斯方石』……
+				这样就可以说明我们
+				怎么会被吸进『影之国』了。{wait}
+			} {
+				#85612v#276F……但是做出这件事的
+				似乎是『影之王』。{wait}
+			} {
+				#85613v哼，
+				真想早点把他揪出来……{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85595v#272F……事态似乎比
+				想像中还要严重。{wait}
+			} {
+				#85596v#276F如果这个世界
+				以及那些奇怪的『规则』
+				是『影之王』制造出来的……{wait}
+			} {
+				#85597v那么说不定我们
+				永远也无法逃出这个空间。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85598v#272F……唯一的希望是那位女性幽灵。{wait}
+			} {
+				#85599v#276F『影之王』的力量
+				似乎还达不到这座庭院。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10756]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85588v#277F原王国军情报部上校
+				亚兰·理查德……{wait}
+			} {
+				#85589v我听说他的剑法是师从『剑圣』，
+				并且在智力战、谍报战上
+				也有相当的水准。{wait}
+			} {
+				#85590v#278F呼……不能轻易与之为敌啊。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85591v#277F原王国军情报部上校
+				亚兰·理查德……{wait}
+			} {
+				#85592v有他加入的话，
+				真是再强不过的战斗力了。{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10752]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[3]:
+			TextTalk char[12] {
+				#85574v#272F星杯骑士团吗……{wait}
+			} {
+				#85575v奥利维尔曾经凭一时热心
+				调查过相关的资料，
+				但详细情况还是不太清楚。{wait}
+			} {
+				#85576v#276F不过见识过那种力量后，
+				我也理解他为什么要调查了。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85577v#276F能够一瞬间
+				打倒那种『恶魔』的能力……{wait}
+			} {
+				#85578v叫做『异能』更为恰当吧……{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10510]:
+		TextStart self
+		if !flag[3]:
+			if PartyPosition name[3] == -1:
+				TextTalk char[12] {
+					#85558v#276F……说起来，
+					奥利维尔那家伙到哪里去了呢。{wait}
+				} {
+					#85559v#272F真是的，
+					一不注意就……{wait}
+				} {
+					#85560v在异空间里面
+					也不知道老实一点吗。{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[12] {
+					#276F在协会设施里的封印石角色就是游击士……吗 。{wait}
+				} {
+					原来如此，还真是遵守规则啊。{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#78793v#1503F…………………………………{wait}
+				}
+				TextWait
+			FlagSet flag[3]
+		elif PartyPosition name[3] == -1:
+			TextTalk char[12] {
+				#85561v#272F哼……
+				暂时休息一下吧。{wait}
+			} {
+				#85562v不拿着『方石』
+				就走出庭院
+				是很危险的。{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[12] {
+				#270F那些带着面具的……
+				还真是遵守规则啊。{wait}
+			} {
+				#276F……如果能从这一点上
+				找到他们的弱点就好了……{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10506]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[3]:
+			TextTalk char[12] {
+				#85548v#276F拥有武装的魔兽和『兽人』……
+				这也是『影之王』的爱好吗。{wait}
+			} {
+				#85549v#272F…………真无聊啊。{wait}
+			} {
+				#85550v赶快继续前进吧。{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85551v#272F不知道『影之王』
+				到底在打什么算盘……{wait}
+			} {
+				#85552v不过我可没有一直
+				和他玩下去的闲工夫。{wait}
+			} {
+				#85553v#270F赶快继续前进吧。{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10501]:
+		if PartyPosition name[3] != -1:
+			CharFlagsSet self 0x0010
+			TextStart self
+			name[3].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[3] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[3].5
+			name[3].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			if !flag[3]:
+				TextTalk char[12] {
+					#85536v#272F……奥利维尔，一会儿来找我。{wait}
+				}
+				TextWait
+				TextTalk name[3] {
+					#79851v#1540F呵呵，怎么了穆拉君。{wait}
+				} {
+					#79852v#1541F难不成，
+					是要向我告白吗？{wait}
+				}
+				TextWait
+				TextTalk char[12] {
+					#85537v#270F别说废话了。
+					是要确认你周围的情况。{wait}
+				} {
+					#85538v#276F包括被吸进
+					异空间之前的事情。{wait}
+				}
+				TextWait
+				FlagSet flag[3]
+			else:
+				TextTalk char[12] {
+					#85539v#272F……奥利维尔，
+					可别得意忘形。{wait}
+				}
+				TextWait
+			CharSetChipPattern self 0
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		elif !flag[14]:
+			Call fn[5,5]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[12] {
+				#85540v#276F我们被困在这里，
+				外面的世界还不知道变成什么样呢……{wait}
+			} {
+				#85541v#272F……一定得赶快
+				找到逃出去的办法。{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[10496]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85513v#270F……从大家所说的情况来看，
+				每个人都是在同一时刻被吸进来的。{wait}
+			} {
+				#85514v#272F我还一直在担心
+				如果只有我先被吸进来，
+				那个赖皮蛋会在外面如何肆意妄为呢……{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#77652v#1505F……我很理解这种心情。{wait}
+			}
+			TextWait
+			if PartyPosition name[3] != -1:
+				TextTalk name[3] {
+					#79823v#1542F……真没礼貌。{wait}
+				} {
+					#79824v#1541F顶多也就是好好享受一下
+					整个晚上的甜美宴会而已。{wait}
+				}
+				TextWait
+				TextTalk char[12] {
+					#85515v#274F………………………………{wait}
+				}
+				TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85516v#272F看来我们大家是在
+				同一时刻被吸进来的。{wait}
+			} {
+				#85517v虽然这么说有些对不起被吸进来的人，
+				但我觉得真是不幸中的万幸。{wait}
+			}
+			TextWait
+		TextEnd self
+	Return

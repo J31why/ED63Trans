@@ -1,0 +1,418 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2131.x"
+	town town[1]
+	bgm bgm[12]
+	item fn[0,65535]
+	scp 0 "t2131._sn"
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20777._ch" "apl2/ch20777p._cp"
+chip[1] "npl/ch01560._ch" "npl/ch01560p._cp"
+chip[2] "npl/ch01270._ch" "npl/ch01270p._cp"
+
+npc char[0]:
+	name "雷克特"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "修比拉老板"
+	pos (26000, 0, 27230)
+	angle 135deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "普莱米奥"
+	pos (-5500, 300, 33800)
+	angle 90deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "目标用照相机"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (28730, 0, 37220)
+	radius 800mm
+	bubble_pos (28730, 1800, 37220)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 8:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			Event fn[0,4]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[3] 0x0008
+	ObjFlagsSet object[3] 0x0020
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-720, 250, 31660) 0ms
+	CamSetDistance 0 4059 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 322000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0004
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[0] (27080, 500, 36860) 0deg
+	CharSetPos name[4] (0, -500, 24500) 180deg
+	CharColor name[4] 0x00FFFFFF 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Fork name[4] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (0, 250, 30800) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 300ms
+	CharTurnTo name[4] 90deg 600deg/s
+	Sleep 500ms
+	CharTurnTo name[4] 280deg 600deg/s
+	Sleep 1000ms
+	Fork char[3] fork[0]:
+		CamLookPos (4120, 750, 31660) 1500ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (6900, 250, 30800) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (6900, 2000, 37000) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (4500, 3500, 37000) 5000mm/s 0
+	Sleep 600ms
+	CrossFade 1000ms
+	CamLookPos (32759, -2000, 37520) 0ms
+	CamSetDistance 0 8080 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	ForkQuit name[4] fork[255]
+	CharColor name[4] 0x00FFFFFF 0ms
+	CharSetPos name[4] (35500, -3250, 34500) 0deg
+	Sleep 1000ms
+	Fork name[4] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (35500, -2000, 37200) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (31720, 0, 37200) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Emote name[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[3] fork[0]:
+		CamLookPos (26740, 0, 37440) 2000ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 5480 -10000 2000ms
+	Fork char[3] fork[2]:
+		CamZoom 3000 2000ms
+	Emote char[0] 150mm 1850mm 8 9 200ms 0
+	ForkWait char[3] fork[0]
+	Sleep 1000ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (30600, 0, 36300) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (28500, 0, 36300) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	CharTurnTo name[4] 315deg 400deg/s
+	Sleep 300ms
+	TextTalk name[4] {
+		#81862v#047F#12P雷克特学长……{wait}
+	} {
+		#81863v#046F你在这种地方干什么！！{wait}
+	} {
+		#81864v学院的学生不是禁止来这里的吗！？{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97513v#1772F哦哦，我知道啊。{wait}
+	} {
+		#97514v#1778F因为我是学生会长嘛！{wait}
+	}
+	TextWait
+	EmoteStop char[0]
+	Sleep 300ms
+	SoundPlay sound[260] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[260] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[260] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[261] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[15] 0 0 100
+	Emote char[0] 150mm 1850mm 10 11 200ms 2
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97515v#1771F哦！　来了来了！！{wait}
+	}
+	TextWait
+	SoundPlay sound[264] 0 0 100
+	Sleep 1000ms
+	Emote char[0] 150mm 1850mm 8 9 200ms 0
+	Sleep 1000ms
+	TextTalk name[4] {
+		#81865v#047F#12P……………………………{wait}
+	} {
+		#81866v#043F（……真的是学生会长吗。）{wait}
+	} {
+		#81867v（下次得跟
+		  校长确认一下…………）{wait}
+	}
+	TextWait
+	ForkFunc char[0] fork[3] fn[0,3]
+	Sleep 2000ms
+	Emote name[4] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	CharTurnTo name[4] 270deg 500deg/s
+	Sleep 300ms
+	TextTalk name[4] {
+		#81868v#044F（这个钟声是…………）{wait}
+	} {
+		#81869v#047F（桥放下来了吧。）{wait}
+	}
+	TextWait
+	CharTurnTo name[4] 315deg 500deg/s
+	Sleep 500ms
+	TextTalk name[4] {
+		#81870v#042F#12P……学长，
+		我先去办点事儿。{wait}
+	} {
+		#81871v你要乖乖待在这里！{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97516v#1773F哦哦，哦哦……{wait}
+	} {
+		#97517v#1776F……哦哦？　哦～……{wait}
+	} {
+		#97518v还差一点点啊……{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81872v#042F#12P……什么啊！{wait}
+	} {
+		#81873v#047F哼，真是的……！{wait}
+	}
+	TextWait
+	CharTurnTo name[4] 90deg 500deg/s
+	Fork name[4] fork[1]:
+		CharWalkToPos self (30600, 0, 36300) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (31720, 0, 37200) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (35500, -2000, 37200) 2000mm/s 0
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	NewScene "t2200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (28260, 0, 38200) 0ms
+	CamSetDistance 0 6520 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (26300, 250, 37100) 45deg
+	CharColor name[4] 0x00FFFFFF 0ms
+	CharSetPos name[4] (35500, -3250, 34500) 0deg
+	FadeIn 1000ms 0x00000000
+	Fork name[4] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (35500, -2000, 37200) 4500mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (31720, 0, 37200) 4500mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 300ms
+	Emote name[4] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[4] {
+		#81887v#042F#12P（学长……果然……！！）{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (26260, 0, 38200) 1800ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 5520 -10000 1800ms
+	Fork char[3] fork[2]:
+		CamZoom 2900 1800ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (30800, 0, 36600) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (28600, 0, 36600) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 300ms
+	TextTalk name[4] {
+		#81888v#045F#12P那个，不好意思。{wait}
+	} {
+		#81889v关于刚才那个
+		坐在这里的学生……{wait}
+	} {
+		#81890v您知道
+		他上哪儿去了吗？{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 90deg 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#99093v#5P嗯嗯，是说雷克特大人吧。{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81891v#044F#12P（……雷克特大人？？）{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99094v#5P刚才有个
+		女孩子把他接走了……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99095v#5P对了对了，
+		还打了他一拳呢。{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[4] {
+		#81892v#045F#12P（…………是露西学姐……）{wait}
+	} {
+		#81893v#043F那个，学院的学生……{wait}
+	} {
+		#81894v……不，学生会长
+		给你们添麻烦了……{wait}
+	} {
+		#81895v#047F实在是
+		对不起……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99096v#5P哪里哪里，
+		本店一直承蒙雷克特大人照顾。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99097v#5P啊啊，对了。
+		关于之前中断的游戏……{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99098v#5P和平时一样，
+		筹码会储存下来的。{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99099v#5P请把这句话
+		转告给雷克特大人。{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81896v#542F#12P啊，唉……{wait}
+	}
+	TextWait
+	Fork char[3] fork[2]:
+		CamZoom 3000 4000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t2100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}愿赌博精神常驻心中。
+		赌场拉旺塔尔{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
