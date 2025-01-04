@@ -22,7 +22,7 @@ internal class Program
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         ReplaceListFileName = @"F:\源码\C#\ED63Trans\ED63Trans\replace.txt";
-        
+        TransMnsnote();
         
         // TransMagic();
         // TransItTxt();
@@ -314,91 +314,14 @@ internal class Program
         Console.WriteLine(new string('-', 100) + datName + " 结束");
     }
     
-    [Obsolete]
-    public static void TransMonster()
+    public static void TransMnsnote()
     {
-        
-        var text = "";
-        var content = "";
-        if (!Directory.Exists("Monster"))
-        {
-            Directory.CreateDirectory("Monster");
-        }
-
-        var xseedMsFile = Directory.GetFiles(xseedDT30Dir, "ms*._dt");
-        var yltMsCount = Directory.GetFiles(yltDT30Dir, "ms*._dt").Length;
-        Console.WriteLine(new string('-', 100) + "Monster._dt 开始");
-        Console.WriteLine($"XSEED \tMonster item Count: {xseedMsFile.Length}");
-        Console.WriteLine($"娱乐通 \ttMonster item Count: {yltMsCount}");
-        if (xseedMsFile.Length != yltMsCount) Console.WriteLine("数量不匹配");
-
-        foreach (var xseedFile in xseedMsFile)
-        {
-            var datName = Path.GetFileName(xseedFile);
-            var yltFile = Path.Combine(yltDT30Dir, datName);
-            if (!File.Exists(yltFile))
-            {
-                Console.WriteLine($"娱乐通文件不存在: {datName}");
-                return;
-            }
-            var xseedMsItem = MonsterDat.GetTexts(xseedFile, SjisEncoding);
-            var yltMsItem = MonsterDat.GetTexts(yltFile, GbkEncoding);
-
-            content += $"{datName}|{xseedMsItem.TextsOffset[0]}|{xseedMsItem.Id}";
-
-            for (int i = 0; i < xseedMsItem.Texts.Count; i++)
-            {
-                if (yltMsItem.Texts.Count > i)
-                {
-                    text += yltMsItem.Texts[i];
-                    content += $"|{xseedMsItem.Texts[i]}|{yltMsItem.Texts[i]}";
-                }
-                else
-                {
-                    content += $"|{xseedMsItem.Texts[i]}|";
-                }
-            }
-
-            content += "\n";
-
-            if (xseedMsItem.Id is 1276 or 1053 or 87 or 704 or 694 or 1381 or 1120 or 1122 or 1124 or 1126
-                or 1128 or 721 or 722 or 660 or 651 or 652 or 653 or 654 or 655 or 656 or 645 or 45 or 46)
-                continue;
-
-            File.Copy(xseedFile, "Monster\\" + datName, true);
-
-            using var fs = new FileStream("Monster\\" + datName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
-            for (int i = 0; i < xseedMsItem.Texts.Count; i++)
-            {
-                fs.Seek(xseedMsItem.TextsOffset[i], SeekOrigin.Begin);
-                var replacedText = xseedMsItem.Texts[i];
-                if (yltMsItem.Texts.Count > i)
-                {
-                    replacedText = yltMsItem.Texts[i];
-                }
-
-                if (xseedMsItem.Texts[i] ==
-                    "A winged, cat-like \\nmonster. Beware of its\\nattack after it stores\\nup energy.")
-                {
-                    replacedText = "有翅膀的猫型魔兽。\u3000\u3000\\n要注意其蓄力后\u3000\u3000\u3000\u3000\\n释放的攻击力道很大。";
-                }
-
-                var textBytes = SjisEncoding.GetBytes(replacedText);
-                if (textBytes.Length > 0)
-                    fs.Write(textBytes);
-                fs.WriteByte(0);
-            }
-            fs.SetLength(fs.Position);
-            fs.Flush();
-        }
-        var charsTxt = "monster_chars.txt";
-        File.WriteAllText(charsTxt, text);
-        Console.WriteLine(charsTxt + " 已生成");
-        var contentTxt = "monster.txt";
-        File.WriteAllText(contentTxt, content);
-        Console.WriteLine(contentTxt + " 已生成");
-        Console.WriteLine(new string('-', 100) + "monster 结束");
+        Console.WriteLine(new string('-', 100)  + "mnsnote2 开始");
+        var datName = "E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT3C\\mnsnote2._dt";
+        var translatedMsDir = "E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30";
+        MnsnoteDat.Generate(datName, translatedMsDir);
+        Console.WriteLine("mnsnote2 已生成");
+        Console.WriteLine(new string('-', 100)  + "mnsnote2 结束");
     }
 
     public static void TransQuest()

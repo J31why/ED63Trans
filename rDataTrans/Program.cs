@@ -90,13 +90,13 @@ internal class Program
 #if CONSOLE
         Console.WriteLine($"allocated base address：{allocAddr:X}\n");
 #endif
-        //foreach (var item in stringList)
-        //{
-        //    if (item.Key.Contains("Septian Church")|| item.Key.Contains("Various Shops"))
-        //    {
+        foreach (var item in stringList)
+        {
+            if (item.Key.Contains("Opening") || item.Key.Contains("Various Shops"))
+            {
 
-        //    }
-        //}
+            }
+        }
 
         foreach (var item in replaceDic)
         {
@@ -182,13 +182,13 @@ internal class Program
 #endif
                     if (font.Key >= 72)
                     {
-                        var addr = Mem.Alloc((uint)data.Length+0x20);
+                        var addr = (uint)(Mem.Alloc((uint)data.Length + 0x20) +0x20);
                         //Mem.Read(num - 0x20, out var fontMemData, 0x20);
                         //Mem.Write((uint)addr, fontMemData, true);
-                        Mem.Write((uint)addr + 0x20, data, true);
-                        Mem.Write(font.Value, BitConverter.GetBytes(addr + 0x20), true);
+                        Mem.Write(addr, data, true);
+                        Mem.Write(font.Value, BitConverter.GetBytes(addr), true);
 #if CONSOLE
-                        Console.WriteLine($"font{font.Key} new addr: {addr + 0x20}");
+                        Console.WriteLine($"font{font.Key} new addr: {addr:X}");
 #endif
                     }
                     else
