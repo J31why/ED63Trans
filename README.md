@@ -1,5 +1,7 @@
 # ED63Trans  
   
+贴吧地址： https://tieba.baidu.com/p/9387522169  
+  
 首先感谢Github上的ZhenjianYang、Kyuuhachi、Sewer56几位大佬的开源项目，才能让我制作出本次3RD的汉化补丁。  
   
 汉化补丁文本以娱乐通版本文本为基础进行汉化，新文本和一些不好提取的文本是我手动翻译的。数据脚本使用Kyuuhachi的LB-ARK插件来进行Mod式汉化，字体文件则是通过内存注入，主程序的文本是修改程序运行时代码来达到汉化目的，所以可能会被杀毒软件报错，还请注意。 
@@ -56,10 +58,6 @@ A：汉化程序被杀毒软件杀了。
 #### 补丁使用方法：  
 直接解压，替换游戏原文件即可。  
 如果你使用了语音补丁，请删除游戏\ voice\ scena内的所有文件，但不要删除scena文件夹。　  
-　　  
-#### 补丁下载地址：  
-链接：pan点baidu点com/s/12ZLnRqU-CujPVtqzWA12LA?pwd=6666   
-提取码：6666  
 　  
 ## 感谢：  
 脚本转换、MOD外挂: [Aureole Suite](https://github.com/Aureole-Suite)  
