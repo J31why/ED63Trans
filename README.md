@@ -8,7 +8,7 @@
   
 本汉化补丁由Jelly制作，转载请注明作者和出处。  
 　
-以下是汉化补丁的汉化情况：  
+####以下是汉化补丁的汉化情况：  
 •	剧情：		100%  
 •	道具/装备：	100%  
 •	魔法：		100%  
@@ -42,7 +42,7 @@ Q：可以换字体么？
 A：不推荐，如果你懂编程可以用本项目生成字库。  
 
 Q：装了语音包没语音？  
-A：语音包插件不兼容高版本游戏，进入下方链接下载新版本插件：[SoraVoice][https://github.com/ZhenjianYang/SoraVoice/releases/tag/20230823]  
+A：语音包插件不兼容高版本游戏，进入下方链接下载新版本插件：[SoraVoice](https://github.com/ZhenjianYang/SoraVoice/releases/tag/20230823)  
   
 Q：打完补丁为什么是乱码？  
 A：汉化程序被杀毒软件杀了。  
@@ -53,18 +53,18 @@ A：汉化程序被杀毒软件杀了。
 2.	如果换地图时崩溃闪退，那么删除data\ED6_DT30\ t_town._dt文件，这是地名文件，进入游戏记录一下地图名。  
 3.	对话时出现崩溃/字符错误/乱码/英文等问题，把前后文本记录一下。  
 　　  
-补丁使用方法：  
+####补丁使用方法：  
 直接解压，替换游戏原文件即可。  
 如果你使用了语音补丁，请删除游戏\ voice\ scena内的所有文件，但不要删除scena文件夹。　  
 　　  
-补丁下载地址：  
+####补丁下载地址：  
 链接：pan点baidu点com/s/12ZLnRqU-CujPVtqzWA12LA?pwd=6666   
 提取码：6666  
 　  
-感谢：  
-脚本转换、MOD外挂: [Aureole Suite][https://github.com/Aureole-Suite]  
-脚本转换: [EDDecompiler][https://github.com/ZhenjianYang/EDDecompiler]  
-字库解析: [SoraTranslation-Tools][https://github.com/ZhenjianYang/SoraTranslation-Tools]  
-图片转换: [KisekiCHConverter][https://github.com/Sewer56/Kiseki-Texture-Tool]  
-字体：[霞鹜文楷][https://github.com/lxgw/LxgwWenKai]  
+##感谢：  
+脚本转换、MOD外挂: [Aureole Suite](https://github.com/Aureole-Suite)  
+脚本转换: [EDDecompiler](https://github.com/ZhenjianYang/EDDecompiler)  
+字库解析: [SoraTranslation-Tools](https://github.com/ZhenjianYang/SoraTranslation-Tools)  
+图片转换: [KisekiCHConverter](https://github.com/Sewer56/Kiseki-Texture-Tool)  
+字体：[霞鹜文楷](https://github.com/lxgw/LxgwWenKai)  
   
