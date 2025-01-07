@@ -90,6 +90,22 @@ public static class MagicDat
                         yltItem.Desc = "预留";
                     }
 
+                    switch (xseedItem.Id)
+                    {
+                        case 350:
+                            yltItem.Desc = "物理战技：单体·攻击、50%气绝\\n释放可使人失神的剑气，将远处的敌人强行拉到近前。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                        case 362:
+                            yltItem.Desc = "辅助战技：全体·STR+20%、SPD+10%\\n提高己方队友的士气。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                        case 260:
+                            yltItem.Name = "炮射冲击Ｆ";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                    }
+
                     var replacedText = ReplaceClmChars(yltItem.Name);
                     nameBytes = SjisEncoding.GetBytes(replacedText);
 

@@ -261,22 +261,22 @@ public class SoraFont
                 _ => ch
             };
 
-            //if (code >= 0x889f)
-            //{
-            //    var margin = new SKRect();
-            //    margin.Left += (pixelSize - bounds.Width) / 2;
-            //    margin.Top += (pixelSize - bounds.Height) / 2;
-            //    x = -bounds.Left + margin.Left;
-            //    y = -bounds.Top + margin.Top;
-            //}
-            //else
-            //{
-            //    x = 0 + CharXOffset;
-            //    y = -metrics.Ascent - CharYOffset;
-            //}
+            if (code >= 0x889f)
+            {
+                var margin = new SKRect();
+                margin.Left += (pixelSize - bounds.Width) / 2;
+                margin.Top += (pixelSize - bounds.Height) / 2;
+                x = -bounds.Left + margin.Left;
+                y = -bounds.Top + margin.Top;
+            }
+            else
+            {
+                x = 0 + CharXOffset;
+                y = -metrics.Ascent - CharYOffset;
+            }
 
-            x = 0 + CharXOffset;
-            y = -metrics.Ascent - CharYOffset;
+            // x = 0 + CharXOffset;
+            // y = -metrics.Ascent - CharYOffset;
 
             if (bounds.Width > pixelSize || bounds.Height > pixelSize)
                 callback($"out of pixel bounds : {code}, {ch}");

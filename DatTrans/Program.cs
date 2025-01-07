@@ -22,7 +22,7 @@ internal class Program
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         ReplaceListFileName = @"F:\源码\C#\ED63Trans\ED63Trans\replace.txt";
-        TransMnsnote();
+        //TransMnsnote();
         
         // TransMagic();
         // TransItTxt();

@@ -49,6 +49,26 @@ public static class CookDat
                 {
                     if (yltItem.Name is "--" or " " or "-") Console.WriteLine("空ID:" + yltItem.Id);
 
+                    switch (xseedItem.Id)
+                    {   
+                        case 2:
+                            yltItem.Desc = "【大盘】全员 HP15000 CP40\\n如同燃烧中的绯红之火一般，\\n味道酸涩可口的极品汤水。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                        case 7:
+                            yltItem.Desc = "【大盘】全员 HP全回复 CP80\\n让所有美食家都为之吼叫赞叹，\\n至高无上的究极火锅料理。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                        case 75:
+                            yltItem.Desc = "【携带】HP24000\\n完全存活着的神秘料理。\\n具有解除『战斗不能』的功能。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                        case 43:
+                            yltItem.Desc = "【携带】HP16000 DEF+20%\\n连骨头也可吃下去的铁板料理，\\n富含充足的钙质。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                   
+                    }
                     var replacedText = ReplaceClmChars(yltItem.Name);
                     nameBytes = SjisEncoding.GetBytes(replacedText);
 
@@ -56,7 +76,8 @@ public static class CookDat
                     descBytes = SjisEncoding.GetBytes(replacedText);
                 }
             }
-
+            
+            
             xseedItem.Entry = (ushort)fs.Position;
             //id
             fs.WriteUshort(xseedItem.Id);
