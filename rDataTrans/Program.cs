@@ -76,6 +76,7 @@ internal class Program
         var length = rdata.rSize + rdata.rAddr;
         var stringList = reader.ParseString();
         reader.MatchTextAddrAsm();
+        reader.MatchCmp48hAddrAsm();
         reader.MatchFontAddrAsm();
 #if CONSOLE
         foreach (var font in reader.FontAddrs)
@@ -90,13 +91,13 @@ internal class Program
 #if CONSOLE
         Console.WriteLine($"allocated base address：{allocAddr:X}\n");
 #endif
-        foreach (var item in stringList)
-        {
-            if (item.Key.Contains("Opening") || item.Key.Contains("Various Shops"))
-            {
+        //foreach (var item in stringList)
+        //{
+        //    if (item.Key.Contains("Opening") || item.Key.Contains("Various Shops"))
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         foreach (var item in replaceDic)
         {
@@ -107,29 +108,44 @@ internal class Program
             {
                 var text = ReplaceFactory.ReplaceSjisChar(item.Value.Text);
                 var ascii = ReplaceFactory.SjisEncoding.GetBytes(text);
-                ascii = [.. ascii, .. new byte[8]];
-                var str_vaddr = reader.Clac_vAddr(rstr.offset);
-                var matches = reader.AsmMatches.FindAll(x => x.TextAddr == str_vaddr);
-
-                if (matches.Count == 0)
+                var str_vaddr = reader.Calc_vAddr(rstr.offset);
+                if (!item.Value.Overwrite)
                 {
-                    WriteError($"error: va:{str_vaddr:X},foa:{rstr.offset:X},{rstr.str.Replace("\n", "\\n")} \t", false);
-                    error = true;
-                    continue;
-                }
+                    ascii = [.. ascii, .. new byte[8]];
+                    var matches = reader.AsmMatches.FindAll(x => x.TextAddr == str_vaddr);
 
-                foreach (AsmMatch m in matches)
-                {
-                    var asm_pointer = reader.Clac_vAddr(m.Offset);
-                    var new_va = (uint)(allocAddr + pos);
+                    if (matches.Count == 0)
+                    {
+                        WriteError($"error: va:{str_vaddr:X},foa:{rstr.offset:X},{rstr.str.Replace("\n", "\\n")} \t", false);
+                        error = true;
+                        continue;
+                    }
+
+                    foreach (AsmMatch m in matches)
+                    {
+                        var asm_pointer = reader.Calc_vAddr(m.Offset);
+                        var new_va = (uint)(allocAddr + pos);
 #if CONSOLE
-                    Console.Write($"replace: foa:{rstr.offset:X},va:{str_vaddr:X},new va: {new_va:X},asm pointer:{asm_pointer:X},text:{rstr.str.Replace("\n", "\\n")} \t");
+                        Console.Write($"replace: foa:{rstr.offset:X},va:{str_vaddr:X},new va: {new_va:X},asm pointer:{asm_pointer:X},text:{rstr.str.Replace("\n", "\\n")} \t");
 #endif
-                    if (!Redirect(asm_pointer, new_va, ascii))
+                        if (!Redirect(asm_pointer, new_va, ascii))
+                        {
+                            error = true;
+                        }
+                        pos += (int)(Math.Ceiling(ascii.Length / 4d) * 4);
+                    }
+                }
+                else
+                {
+                    if(item.Key.Length< ascii.Length)
                     {
                         error = true;
+                        continue;
                     }
-                    pos += (int)(Math.Ceiling(ascii.Length / 4d) * 4);
+#if CONSOLE
+                    Console.Write($"replace: foa:{rstr.offset:X},va:{str_vaddr:X},text:{rstr.str.Replace("\n", "\\n")} \t");
+#endif
+                    OverWrite(str_vaddr, [.. ascii, 0], rstr, false);
                 }
             }
             else
@@ -140,7 +156,7 @@ internal class Program
         }
         Mem.SetWindowTitle();
 
-        WriteFont(reader.FontAddrs);
+        WriteFont(reader.FontAddrs,reader.Cmp48hAddr);
 #if CONSOLE
         Console.WriteLine("\ndone.");
         if (error)
@@ -150,11 +166,13 @@ internal class Program
     #endif
 #endif
     }
-    public static void WriteFont(Dictionary<uint, uint> fonts)
+    
+    public static void WriteFont(Dictionary<uint, uint> fonts,uint cmp48hAddr)
     {
 #if CONSOLE
         Console.WriteLine("\nbegin write font.");
 #endif
+        var _4k = false;
         var success = false;
         var fontLoaded = false;
         while (success = Mem.ReadUint(fonts[8], out var num))
@@ -171,32 +189,36 @@ internal class Program
             Thread.Sleep(1000);
             foreach (var font in fonts)
             {
-                if (font.Key == 8)
+                if (font.Key is 8 )
                     continue;
-                if (Mem.ReadUint(font.Value, out var num) && num > 0)
-                {
+                if (!Mem.ReadUint(font.Value, out var num) || num <= 0) 
+                    continue;
 #if DEBUG
-                    var data = File.ReadAllBytes($"E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\rdata\\font{font.Key}._da");
+                var data = File.ReadAllBytes($"E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\rdata\\font{font.Key}._da");
 #else
                     var data = File.ReadAllBytes($"rdata\\font{font.Key}._da");
 #endif
-                    if (font.Key >= 72)
+               
+                if (font.Key >=72 )
+                {
+                    if (font.Key > 100)
                     {
-                        var addr = (uint)(Mem.Alloc((uint)data.Length + 0x20) +0x20);
-                        //Mem.Read(num - 0x20, out var fontMemData, 0x20);
-                        //Mem.Write((uint)addr, fontMemData, true);
-                        Mem.Write(addr, data, true);
-                        Mem.Write(font.Value, BitConverter.GetBytes(addr), true);
+                        _4k = true;
+                    }
+                    var addr = (uint)(Mem.Alloc((uint)data.Length + 0x20) +0x20);
+                    //Mem.Read(num - 0x20, out var fontMemData, 0x20);
+                    //Mem.Write((uint)addr, fontMemData, true);
+                    Mem.Write(addr, data, true);
+                    Mem.Write(font.Value, BitConverter.GetBytes(addr), true);
 #if CONSOLE
-                        Console.WriteLine($"font{font.Key} new addr: {addr:X}");
+                    Console.WriteLine($"font{font.Key} old addr: {num:X}, new addr: {addr:X}");
 #endif
-                    }
-                    else
-                    {
-                        Mem.Write(num, data, true);
-                    }
+                }
+                else 
+                {
+                    Mem.Write(num, data, true);
 #if CONSOLE
-                    Console.WriteLine($"font{font.Key} 已写入.");
+                    Console.WriteLine($"font{font.Key} addr: {num:X} 已写入.");
 #endif
                 }
             }
@@ -204,6 +226,14 @@ internal class Program
 #if CONSOLE
         Console.WriteLine("\nend write font.");
 #endif
+        if (_4k)
+        {
+            JmpCmp48h(cmp48hAddr);
+        }
+    }
+    public static void JmpCmp48h(uint cmp48hAddr)
+    {
+        Mem.Write(cmp48hAddr, [0xeb],true);
     }
 
     public static bool Redirect(uint pointer, uint addr, byte[] newData)

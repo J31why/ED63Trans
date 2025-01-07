@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection.PortableExecutable;
+using System.Text;
 using System.Text.RegularExpressions;
 using static rDataTrans.Mem;
 
@@ -27,6 +28,7 @@ internal class ED6Reader : MemoryStream
     public Section[] Sections = [];
     public int PeEnd = 0;
     public Dictionary<uint, uint> FontAddrs = [];
+    public uint Cmp48hAddr;
     public static readonly string[] Pattern =
         [
         "c7 04 24 ?? ?? ?? 00",
@@ -118,6 +120,24 @@ internal class ED6Reader : MemoryStream
         offset = 0;
         return false;
     }
+    internal void MatchCmp48hAddrAsm() 
+    {
+        string[] FontPattern =
+        [
+        "83 3C BD F8 4F 5F 00 48 7C",//192
+        ];
+        short[][] FontPatternArray = new short[FontPattern.Length][];
+        ConvertPattern(FontPattern, ref FontPatternArray);
+        var pos = PeEnd;
+        base.Seek(pos, SeekOrigin.Begin);
+        if (!MatchAddr(FontPatternArray[0], out int offset))
+        {
+            return;
+        }
+        offset--;
+        Cmp48hAddr = Calc_vAddr(offset);
+    }
+
     internal void MatchFontAddrAsm()
     {
         string[] FontPattern =
@@ -126,8 +146,6 @@ internal class ED6Reader : MemoryStream
         ];
         short[][] FontPatternArray = new short[FontPattern.Length][];
         ConvertPattern(FontPattern, ref FontPatternArray);
-        var pos = PeEnd;
-        base.Seek(pos, SeekOrigin.Begin);
         if (!MatchAddr(FontPatternArray[0], out int offset))
         {
             return;
@@ -156,8 +174,8 @@ internal class ED6Reader : MemoryStream
         FontAddrs[16] = FontAddrs[20] - 4;  //
         FontAddrs[12] = FontAddrs[16] - 4;
         FontAddrs[8] = FontAddrs[12] - 4;
-
     }
+
     internal void MatchTextAddrAsm()
     {
         AsmMatches.Clear();
@@ -256,7 +274,7 @@ internal class ED6Reader : MemoryStream
         return dic;
     }
 
-    public uint Clac_vAddr(long foa)
+    public uint Calc_vAddr(long foa)
     {
         foreach (Section sec in Sections)
         {

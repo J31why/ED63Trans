@@ -8,12 +8,14 @@ namespace rDataTrans;
 public class ReplaceItem
 {
     public string Text { get; set; } = "";
+    public bool Overwrite { get; set; } = false;
     public ReplaceItem()
     {
     }
-    public ReplaceItem(string text)
+    public ReplaceItem(string text, bool ow)
     {
         Text = text;
+        Overwrite = ow;
     }
 }
 
