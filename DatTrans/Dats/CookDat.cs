@@ -59,15 +59,18 @@ public static class CookDat
                             yltItem.Desc = "【大盘】全员 HP全回复 CP80\\n让所有美食家都为之吼叫赞叹，\\n至高无上的究极火锅料理。";
                             Console.WriteLine($"ID: {xseedItem.Id} 已处理");
                             break;
-                        case 75:
-                            yltItem.Desc = "【携带】HP24000\\n完全存活着的神秘料理。\\n具有解除『战斗不能』的功能。";
-                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
-                            break;
                         case 43:
                             yltItem.Desc = "【携带】HP16000 DEF+20%\\n连骨头也可吃下去的铁板料理，\\n富含充足的钙质。";
                             Console.WriteLine($"ID: {xseedItem.Id} 已处理");
                             break;
-                   
+                        case 44:
+                            yltItem.Desc = "【携带】HP18000 DEF+20%\\n榨取爪子、豆酱、肉汁精华的\\n豪华型螃蟹料理。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                        case 75:
+                            yltItem.Desc = "【携带】HP24000\\n完全存活着的神秘料理。\\n具有解除『战斗不能』的功能。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
                     }
                     var replacedText = ReplaceClmChars(yltItem.Name);
                     nameBytes = SjisEncoding.GetBytes(replacedText);

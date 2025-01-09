@@ -35,7 +35,7 @@ internal class Program
         // TransMemo();
         // TransShop();
         // TransChain();
-        // TransQuiz();
+        TransQuiz();
         // TransFish();
         // TransPoker();
         //查询语音版修改文件

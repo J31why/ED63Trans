@@ -61,7 +61,7 @@ public static class QuestDat
                                 text = "太阳\u2464";
                                 break;
                             case 2:
-                                text = "轨迹之PONG／终极";
+                                text = "轨迹之PONG／狂热";
                                 break;
                             case 3:
                                 text = "黑色方舟\u3000前部第１层";
@@ -73,7 +73,7 @@ public static class QuestDat
                                 text = "全部５级结晶回路";
                                 break;
                             case 6:
-                                text = "关于『空之轨迹』的一切？\u0001问答小游戏，终极篇。";
+                                text = "关于『空之轨迹』的一切？\u0001问答小游戏，狂热篇。";
                                 break;
                             case 7:
                                 text = "刻耀珠（结晶回路）";

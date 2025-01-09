@@ -114,8 +114,16 @@ public static class ItTxtDat
                             Console.WriteLine($"ID: {xseedItem.Id} 已处理");
                             break;
                         // parameter error
+                        case 424:
+                            yltItem.Desc = "【HP16000回复 DEF+20%】\\n\u3000连骨头也可吃下去的铁板料理，富含充足的钙质。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
                         case 425:
                             yltItem.Desc = "【HP18000回复 DEF+20%】\\n\u3000榨取爪子、豆酱、肉汁精华的豪华型螃蟹料理。";
+                            Console.WriteLine($"ID: {xseedItem.Id} 已处理");
+                            break;
+                        case 456:
+                            yltItem.Desc = "【HP24000回复 『战斗不能』解除】\\n\u3000如同活着的生物一般，不可思议的料理。";
                             Console.WriteLine($"ID: {xseedItem.Id} 已处理");
                             break;
                         case 1365:

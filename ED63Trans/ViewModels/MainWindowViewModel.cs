@@ -150,8 +150,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
 
         // ConvertSn_2(
-        //     "C:\\Users\\Jelly\\Desktop\\ED6_DT21\\raw_e1110.clm",
-        //     "C:\\Users\\Jelly\\Desktop\\ED6_DT21\\e1110.clm");
+        //     "C:\\Users\\Jelly\\Desktop\\ED6SCRIPT\\ED6_DT21_初版1\\raw_e1000.clm",
+        //     "C:\\Users\\Jelly\\Desktop\\ED6SCRIPT\\ED6_DT21_初版1\\e1000.clm");
 
         //foreach (var sn in Directory.EnumerateFiles("C:\\Users\\Jelly\\Desktop\\scena"))
         //{

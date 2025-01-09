@@ -120,11 +120,12 @@ internal class ED6Reader : MemoryStream
         offset = 0;
         return false;
     }
+
     internal void MatchCmp48hAddrAsm() 
     {
         string[] FontPattern =
         [
-        "83 3C BD F8 4F 5F 00 48 7C",//192
+        "83 3C BD ?? ?? ?? 00 48 7C",
         ];
         short[][] FontPatternArray = new short[FontPattern.Length][];
         ConvertPattern(FontPattern, ref FontPatternArray);

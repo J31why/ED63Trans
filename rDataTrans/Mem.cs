@@ -45,6 +45,7 @@ public static class Mem
 
     private static IntPtr hProcess;
     public static Process? Process;
+    public static bool IsDx9;
 
     public static bool OpenED6()
     {
@@ -53,6 +54,7 @@ public static class Mem
         if (processes.Length > 0)
         {
             Process = processes.First();
+            IsDx9 = true;
             return Open(Process);
         }
         processes = Process.GetProcessesByName("ed6_win3");
