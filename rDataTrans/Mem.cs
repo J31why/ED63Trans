@@ -65,7 +65,13 @@ public static class Mem
         }
         return false;
     }
-
+    public static bool OpenPID(int pid)
+    {
+        Process = Process.GetProcessById(pid);
+        if (Process == null)
+            return false;
+        return Open(Process);
+    }
     public static void SetWindowTitle()
     {
         if (Process == null) return;

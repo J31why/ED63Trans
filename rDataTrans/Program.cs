@@ -29,6 +29,12 @@ internal class Program
 
     public static void Main(string[] args)
     {
+#if CONSOLE
+        foreach (var arg in args)
+        {
+            Console.WriteLine(arg);
+        }       
+#endif
         var replaceDic = ReplaceFactory.GetDictionary();
 
         if (replaceDic == null)
@@ -37,13 +43,14 @@ internal class Program
             return;
         }
 
-        if (!Mem.OpenED6())
+        if (args.Length == 0 || !int.TryParse(args[0], out var pid) || !Mem.OpenPID(pid))
         {
             WriteError("open game failed.");
 #if !DEBUG
             return;
 #endif
         }
+
 
         //var file1 = "F:\\源码\\C#\\ED63Trans\\ED63Trans\\bin\\Debug\\net9.0\\fonts_霞鹜\\font96._da";
         //var bytes = File.ReadAllBytes(file1);
@@ -161,9 +168,9 @@ internal class Program
         Console.WriteLine("\ndone.");
         if (error)
             Console.ReadKey();
-    #if DEBUG
+#if DEBUG
         Console.ReadKey();
-    #endif
+#endif
 #endif
     }
     

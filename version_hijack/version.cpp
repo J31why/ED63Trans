@@ -190,14 +190,15 @@ BOOL APIENTRY DllMain( HMODULE hModule,
             DisableThreadLibraryCalls(hModule);
             if ( !NsLoad() )
                 return FALSE;
-            
             const LPCUWSTR programPath = L"rdata\\rdata.exe";
             STARTUPINFO si = { sizeof(STARTUPINFO) };
             PROCESS_INFORMATION pi;
-
+            DWORD pid = GetCurrentProcessId();
+            wchar_t commandLine[200];
+            swprintf(commandLine, sizeof(commandLine) / sizeof(wchar_t), L"\"%s\" \"%u\"", programPath, pid);
             CreateProcess(
-                programPath,
-                NULL,         
+                NULL,
+                commandLine,
                 NULL,         
                 NULL,        
                 FALSE,        
