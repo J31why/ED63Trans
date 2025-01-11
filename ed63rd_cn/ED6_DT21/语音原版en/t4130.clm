@@ -1,0 +1,641 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4130.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02060._ch" "npl/ch02060p._cp"
+chip[1] "npl/ch01023._ch" "npl/ch01023p._cp"
+chip[2] "npl/ch01100._ch" "npl/ch01100p._cp"
+chip[3] "npl/ch01150._ch" "npl/ch01150p._cp"
+chip[4] "npl/ch01143._ch" "npl/ch01143p._cp"
+chip[5] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[6] "npl/ch02070._ch" "npl/ch02070p._cp"
+chip[7] "npl/ch01540._ch" "npl/ch01540p._cp"
+
+npc char[0]:
+	name "Editor-in-Chief"
+	pos (-54100, 200, 61000)
+	angle 270deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[0,9]
+
+npc char[1]:
+	name "Noticia"
+	pos (-56570, 0, 64660)
+	angle 1deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,10]
+
+npc char[2]:
+	name "Faults"
+	pos (-59030, 100, 59540)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[0,11]
+
+npc char[3]:
+	name "Sariah"
+	pos (-56630, 0, 5500)
+	angle 174deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,13]
+
+npc char[4]:
+	name "Baral"
+	pos (61020, 0, 2490)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[5]:
+	name "Connor"
+	pos (65800, 100, -3410)
+	angle 90deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[0,5]
+
+npc char[6]:
+	name "Cready"
+	pos (4560, 0, 2500)
+	angle 186deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,7]
+
+npc char[7]:
+	name "Spencer"
+	pos (4500, 100, -3850)
+	angle 90deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[0,8]
+
+look_point[0]:
+	pos (60700, 0, 550)
+	radius 400mm
+	bubble_pos (61020, 1500, 2490)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (4530, 0, 590)
+	radius 400mm
+	bubble_pos (4560, 1500, 2500)
+	flags 0x007E
+	func fn[0,6]
+	unk1 0
+
+look_point[2]:
+	pos (-56840, 0, 3500)
+	radius 400mm
+	bubble_pos (-56630, 1500, 5500)
+	flags 0x007E
+	func fn[0,12]
+	unk1 0
+
+look_point[3]:
+	pos (57530, 0, 400)
+	radius 800mm
+	bubble_pos (57290, 900, 340)
+	flags 0x007C
+	func fn[0,14]
+	unk1 0
+
+look_point[4]:
+	pos (2480, -250, -3810)
+	radius 800mm
+	bubble_pos (2480, 1100, -3810)
+	flags 0x007C
+	func fn[0,15]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	OpLoad "t4130_n"
+	EffStop eff_instance[130] 0
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Return
+
+fn[4]:
+	TextStart char[12]
+	if flag[12112]:
+		if flag[2]:
+			TextTalk char[12] {
+				On a completely unrelated note, I heard a strange
+				loud noise yesterday evening, and I'm still not sure
+				what it was...{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				I wonder what it could have been.{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				I can't say I feel quite as safe in this area these
+				days as I once did, and that's not helping...{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[12] {
+				Hello there. Interested in having breakfast here?{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				We're best known for our curry and our coffee!{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				I wholeheartedly recommend them both.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd char[12]
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12112]:
+		if flag[3]:
+			TextTalk self {
+				He had connections throughout so many different
+				industries, too, connecting them all together...{wait}
+			}
+			TextWait
+			TextTalk self {
+				His death will be a big blow to industry here in
+				Liberl... I just hope it doesn't have too much of
+				a major impact.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I was beside myself when I'd read about
+				Saul Holden's passing in the Liberl News
+				yesterday.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I knew he was well known for being rich,
+				but I don't remember ever reading his age
+				anywhere.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I hadn't realized he was that old...{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[6]:
+	Call fn[0,7]
+	Return
+
+fn[7]:
+	TextStart char[14]
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[0]:
+			TextTalk char[14] {
+				Hello there.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				Why not stay and have lunch here?{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[14] {
+				Hello there! Welcome to the Sunnybell Inn.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				Why not try our new menu item, bouillabaisse?{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				I'm sure you won't be disappointed!{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[0]:
+			TextTalk char[14] {
+				I feel like there are a lot more tourists coming
+				to Grancel lately.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				That's no bad thing, either. It makes the city 
+				that much livelier!{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[14] {
+				We seem to be getting a lot of customers from 
+				other countries here lately.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				Heehee. I suppose they must all be coming here
+				on vacation.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				I certainly don't mind. It's always nice when this
+				place is lively.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd char[14]
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[1]:
+			TextTalk self {
+				I saw a really suspicious group of men wearing
+				black suits in front of Grancel Castle earlier.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I wonder what they were doing there? I can't say,
+				but I get the feeling they were up to no good.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I saw a really suspicious group in front of
+				Grancel Castle earlier.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I've got no idea who they were, either...
+				They were all wearing black suits is about
+				as much as I could tell you.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[1]:
+			TextTalk self {
+				It feels like a lot of people have already forgotten
+				the Hundred Days War, even though it was only a
+				few short years ago...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Still...maybe trying to forget painful memories
+				is the best thing to do?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				It feels like people are already beginning to
+				forget the war that we all endured...{wait}
+			}
+			TextWait
+			TextTalk self {
+				It was only mere years ago that we had droves
+				of evacuees flooding into the city, trying to get
+				away from the fighting elsewhere...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but it feels like everyone's already forgotten
+				all of that.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12112]:
+		if flag[4]:
+			TextTalk self {
+				We'll continue the editorial meeting after Nial
+				gets back.{wait}
+			}
+			TextWait
+			TextTalk self {
+				He'll probably wander back some time in the
+				afternoon, I think.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I'm off to go and meet with someone in a minute.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Not just anyone, either! A famous reporter who
+				once received the Fulitzer Prize.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's been a long time since we last met, too.
+				I can't wait to see the guy.{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12112]:
+		if flag[5]:
+			TextTalk self {
+				To write a good article, you need to do more than
+				gather a dumpload of information and analyze it.{wait}
+			}
+			TextWait
+			TextTalk self {
+				You need to always try to provide a fresh take on
+				what you're working with.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				That Nial! He really doesn't seem to understand...{wait}
+			}
+			TextWait
+			TextTalk self {
+				There's no way we could have printed an article
+				like that as it stands.{wait}
+			}
+			TextWait
+			TextTalk self {
+				He's just so goodnatured that he seems to have
+				a habit of getting far too wrapped up in a single
+				opinion or piece of information.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'm sure he'll come to understand eventually,
+				but for now...{wait}
+			}
+			TextWait
+			FlagSet flag[5]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[11]:
+	TextStart self
+	if flag[12112]:
+		if flag[6]:
+			TextTalk self {
+				I-I just handle the culture section of the paper,
+				so I've never really had that many run-ins with
+				them...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Poor Nial seems to end up in an argument with
+				them every time he brings a story, though.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Yesterday's editorial meeting was...a disaster,
+				to put it lightly.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I can understand how frustrated Nial must
+				feel, though--he finds some incredible stories,
+				but they never end up getting printed.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Both Noticia and the editor-in-chief are really
+				strict with him, too.{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[12]:
+	Call fn[0,13]
+	Return
+
+fn[13]:
+	TextStart char[11]
+	if flag[12112]:
+		if flag[7]:
+			TextTalk char[11] {
+				Nial still isn't back, I see...{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				I'm guessing he spent the whole night drinking.
+				AGAIN.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[11] {
+				Welcome to the Liberl News Service!{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				This is reception, while the second floor is the
+				home of our editorial department.{wait}
+			}
+			TextWait
+			FlagSet flag[7]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd char[11]
+	Return
+
+fn[14]:
+	FadeOut 300ms 0x00000000 100
+	if system[66] == 7:
+		TextSetName ""
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 5}The Baral Coffee House's specialty!
+			[Chef's Curry] - 1000 mira{wait}
+		}
+		TextWait
+		TextMessage null {
+			{color 5}Try our hot curry, cooked to perfection
+			with our secret spices!{wait}
+		}
+		TextWait
+		TextClose 0
+	else:
+		TextSetName ""
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 5}The Baral Coffee House's specialty!
+			[Curry of Dreams] - 900 mira{wait}
+		}
+		TextWait
+		TextMessage null {
+			{color 5}Try our hot curry, cooked to perfection
+			with our secret spices!{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[15]:
+	FadeOut 300ms 0x00000000 100
+	if system[66] == 7:
+		TextSetName ""
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 5}- Menu -
+			Mixed Cocktail    750 mira
+			Refreshing Pie    450 mira{wait}
+		}
+		TextWait
+		TextMessage null {
+			{color 5}- Newly Available -
+			Bouillabaisse    1000 mira{wait}
+		}
+		TextWait
+	else:
+		TextSetName ""
+		TextSetPos -1 -1 -1 -1
+		TextMessage null {
+			{color 5}- Menu -
+			Mocking Pie           400 mira
+			Tomatrio Sandwich    1400 mira{wait}
+		}
+		TextWait
+		TextMessage null {
+			{color 5}- Chef's Recommendations -
+			Seafood Hotpot     1200 mira{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

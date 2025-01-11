@@ -1,0 +1,816 @@
+calmare tc scena
+scena:
+	name "Other" "C5401.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 "t7000._sn"
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03550._ch" "npl2/ch03550p._cp"
+chip[1] "npl2/ch03600._ch" "npl2/ch03600p._cp"
+chip[2] "apl2/ch20765._ch" "apl2/ch20765p._cp"
+chip[3] "apl2/ch20485._ch" "apl2/ch20485p._cp"
+
+npc char[0]:
+	name "Weissmann"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Campanella"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Weissmann's Staff"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 255:
+		switch system[0]:
+			case 101:
+				Event fn[0,8]
+				break
+			case 102:
+				Event fn[0,9]
+				break
+	if system[66] == 4:
+		system[1] = 110
+		Event fn[0,7]
+	if system[66] == 29:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 0
+			Event fn[0,5]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 212
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 0
+	if system[66] == 255:
+		_1B look_point[1] fn[0,10]
+		_1B look_point[2] fn[0,11]
+	else:
+		ObjFlagsSet object[7] 0x0004
+		ObjFlagsSet object[8] 0x0004
+		EntranceSetDisabled entrance[1] 0
+		EntranceSetDisabled entrance[2] 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	SoundPlay sound[133] 40 0 100
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-1140, 1500, 85570) 0deg
+	CamLookPos (-300, 0, 53260) 0ms
+	CamSetDistance 0 9770 -10000 0ms
+	CamZoom 3660 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 410 0ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (-510, 1500, 87040) 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait field_party[0] fork[0]
+	CrossFade 500ms
+	ObjFlagsSet object[4] 0x0004
+	_79 object[9] 2
+	_7B
+	CamLookPos (20, 1500, 86880) 0ms
+	CamSetDistance 0 4690 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk char[1] {
+		#850F#5PHeehee. What a lovely sound.{wait}
+	} {
+		The sound of everything crumbling to the ground...{wait}
+	} {
+		Still, at least now the professor has the rubble
+		of an ancient city to serve as his pillow in his
+		eternal slumber.{wait}
+	} {
+		I'm sure he must be very happy about that.{wait}
+	} {
+		Haha. Don't you worry, Professor. You just leave
+		everything to me now...{wait}
+	} {
+		And with that...{wait}
+	} {
+		...you won't ever need to crawl your way out of 
+		Gehenna and return to this world ever again.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[2]
+	CharSetChipPattern char[1] 0
+	CharFlagsSet char[1] 0x0002
+	FadeWait
+	Sleep 300ms
+	CharSetChipPattern char[1] 1
+	Sleep 300ms
+	SoundPlay sound[188] 0 0 100
+	CharSetChipPattern char[1] 2
+	Sleep 300ms
+	ForkFunc char[2] fork[0] fn[0,3]
+	ForkWait char[2] fork[0]
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[1]
+	CharSetChipPattern char[1] 0
+	CharFlagsUnset char[1] 0x0002
+	FadeWait
+	Sleep 300ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}◆Campanella clicks his fingers{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	TextTalk char[1] {
+		#850F#5PEnforcer No. 0, Campanella the Fool...{wait}
+	} {
+		Entering the Celestial Globe in place of the
+		Third Anguis, Georg Weissmann!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc field_party[3] fork[0] fn[0,6]
+	BgmStop 2000ms
+	CrossFade 2000ms
+	CamLookPos (20, 1500, 156880) 0ms
+	CamSetDistance 0 4690 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[1] (-1140, 1500, 155570) 0deg
+	CharSetPos char[2] (-1140, 1500, 156570) 0deg
+	FadeWait
+	FlagSet flag[9478]
+	system[67] = 3000
+	NewScene "c5416._sn" 100 1 0
+	Hcf
+	Return
+
+fn[3]:
+	CharFlagsSet self 0x0800
+	CharSetChipBase self chip[3]
+	CharSetChipPattern self 5
+	CharColor self 0x00FFFFFF 0ms
+	CharSetPos self (-1140, 1500, 86570) 0deg
+	CharFlagsSet self 0x0004
+	CharFlagsUnset self 0x0080
+	CharFlagsSet self 0x0002
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	SoundPlay sound[153] 0 0 100
+	ForkWait self fork[1]
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsSet object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	ObjFlagsSet object[6] 0x0004
+	CamLookPos (0, 0, 60700) 0ms
+	CamSetDistance 0 8920 -10000 0ms
+	CamZoom 4560 0ms
+	CamRotate 55000mdeg 0ms
+	CamPers 328 0ms
+	EffLoad eff[0] "map\\\\mp294_00.eff"
+	EffLoad eff[1] "map\\\\mp294_01.eff"
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-1000, 0, 65360) 0deg
+	Fork char[3] fork[0]:
+		CamLookPos (1000, 0, 84400) 7000ms
+	Fork char[3] fork[1]:
+		CamRotate 45000mdeg 7000ms
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1000, 1500, 85760) 2000mm/s 0
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	CrossFade 1000ms
+	CamLookPos (-60, 1500, 86800) 0ms
+	CamSetDistance 0 5300 -10000 0ms
+	CamZoom 3450 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	ForkWait char[1] fork[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#90424v#850FEven all the noise going on outside can't reach
+		this far inside the ship by the looks of it.{wait}
+	} {
+		#90425v#853FJust as well. I couldn't fulfill my role otherwise.{wait}
+	}
+	TextWait
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[2]
+	CharSetChipPattern char[1] 0
+	FadeWait
+	Sleep 300ms
+	CharSetChipPattern char[1] 1
+	Sleep 200ms
+	CharSetChipPattern char[1] 2
+	Sleep 400ms
+	SoundPlay sound[188] 0 0 100
+	CharSetChipPattern char[1] 3
+	Sleep 50ms
+	BgmStop 0ms
+	Sleep 450ms
+	system[28] = 1
+	Fork char[3] fork[0]:
+		CamLookPos (-1000, 2300, 88200) 1500ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 4440 -10000 1500ms
+	Fork char[3] fork[2]:
+		CamRotate 0mdeg 1500ms
+	Fork char[3] fork[3]:
+		CamPers 605 1500ms
+	ForkWait char[3] fork[0]
+	Sleep 300ms
+	system[28] = 0
+	CrossFade 200ms
+	SoundPlay sound[157] 0 0 100
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsUnset object[5] 0x0004
+	FadeWait
+	Sleep 400ms
+	CrossFade 200ms
+	SoundPlay sound[157] 0 0 100
+	ObjFlagsUnset object[6] 0x0004
+	FadeWait
+	Sleep 1000ms
+	CrossFade 250ms
+	CharSetChipBase char[1] chip[1]
+	CharSetChipPattern char[1] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#90426v#853F#6PRequesting access.{wait}
+	} {
+		#90427v#854FI, Enforcer No. 0, Campanella the Fool...{wait}
+	} {
+		#90428v...hereby request access to the Celestial Globe
+		in place of the Third Anguis, Georg Weissmann.{wait}
+	}
+	TextWait
+	BgmPlay bgm[224] 0
+	Sleep 500ms
+	_59
+	CrossFade 1000ms
+	EffPlay eff[0] eff_instance[1] null 0 (-6820, 5000, 75500) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[2] null 0 (4820, 5000, 75500) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[3] null 0 (-13120, 5000, 85000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[4] null 0 (11120, 5000, 85000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[1] eff_instance[5] null 0 (-1000, 8500, 91000) 0 0 0 1500 1500 1500 null (0, 0, 0) 0ms
+	Sleep 3000ms
+	Minigame 20 4000 0 0 0 0 0 0 0
+	FadeWait
+	FlagSet flag[9476]
+	NewScene "c5416._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00FFFFFF 255
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsSet object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	ObjFlagsSet object[6] 0x0004
+	CamLookPos (-60, 1500, 86800) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 3550 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Sleep 500ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-1000, 1500, 85760) 0deg
+	ImageHide 1500ms
+	Fork char[3] fork[2]:
+		CamZoom 3350 3000ms
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#90441v#853F#6PSo it's time for the Phantasmal Blaze Plan to
+		begin, huh?{wait}
+	} {
+		#90442vThe stage is set, at the very least. It's going
+		to utterly dwarf the Gospel Plan in terms of
+		both quality and scale...{wait}
+	} {
+		#90443v#854FHeehee... Things are finally about to get
+		interesting.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote char[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#90444v#855F#6P...By the way.{wait}
+	} {
+		#90445vI might be the last person you want to hear
+		this from, but...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	system[28] = 1
+	Fork char[3] fork[0]:
+		CamLookPos (-360, 1500, 86500) 1200ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 7000 -10000 1200ms
+	Fork char[3] fork[2]:
+		CamZoom 3550 1200ms
+	CharTurnTo char[1] 225deg 300deg/s
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	system[28] = 0
+	TextTalk char[1] {
+		#90446v#854F#5P...would you mind stopping the whole peeping
+		in thing, mysterious stranger?{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	ScAchievement 9 14 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Phantasmal Blaze] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	SystemFlagsUnset 0x02000000
+	SystemFlagsUnset 0x00100000
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[18] 0x20:
+		Sleep 500ms
+		QuestFlagsSet quest[18] 0x10
+		QuestFlagsSet quest[18] 0x20
+		ItemAdd item[399] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[399]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 30000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}30,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5401._sn" 100 0 0
+	Hcf
+	Return
+
+fn[6]:
+	SoundSetVolume sound[133] 90
+	Sleep 100ms
+	SoundSetVolume sound[133] 80
+	Sleep 100ms
+	SoundSetVolume sound[133] 70
+	Sleep 100ms
+	SoundSetVolume sound[133] 60
+	Sleep 100ms
+	SoundSetVolume sound[133] 50
+	Sleep 100ms
+	SoundSetVolume sound[133] 40
+	Sleep 100ms
+	SoundSetVolume sound[133] 30
+	Sleep 100ms
+	SoundSetVolume sound[133] 20
+	Sleep 100ms
+	SoundSetVolume sound[133] 10
+	Sleep 100ms
+	SoundSetVolume sound[133] 0
+	SoundStop sound[133]
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[35] (-1000, 0, 43070) 0deg
+	CharSetPos char[0] (-1170, 1500, 85080) 0deg
+	CharSetPos char[1] (70, 1500, 84280) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CamLookPos (-1000, 0, 50840) 0ms
+	CamSetDistance 0 7100 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 429 0ms
+	Fork char[0] fork[0]:
+		CamLookPos (-1000, 1500, 87960) 5000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 6100 -10000 5000ms
+	Fork char[0] fork[2]:
+		CamZoom 3820 5000ms
+	Fork char[0] fork[3]:
+		CamPers 500 5000ms
+	Fork name[35] fork[0]:
+		CharWalkToPos2 self (-1000, 0, 78020) 3000mm/s 0
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkWait char[0] fork[0]
+	Sleep 1000ms
+	Fork char[0] fork[0]:
+		CamLookPos (-1000, 1500, 83010) 5000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 3250 -10000 5000ms
+	Fork char[0] fork[2]:
+		CamZoom 2380 5000ms
+	ForkWait char[0] fork[0]
+	ForkWait name[35] fork[0]
+	CrossFade 500ms
+	ObjFlagsSet object[4] 0x0004
+	_79 object[9] 2
+	_7B
+	CamLookPos (830, 420, 83300) 0ms
+	CamSetDistance 0 4650 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 386 0ms
+	FadeWait
+	Sleep 500ms
+	CharTurnTo char[0] 180deg 400deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 180deg 400deg/s
+	Sleep 500ms
+	TextTalk char[1] {
+		#850F#2PHey, Loewe.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150FDid you get plenty of rest?{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120FYeah...{wait}
+	} {
+		So, what's the situation?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150FHeheh... Things are going even better than
+		we expected.{wait}
+	} {
+		The kingdom is in a complete state of panic
+		because of the Aureole.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2PTo make matters worse for them, we sent down
+		quite a lot of archaisms, too.{wait}
+	} {
+		All in all, the Royal Army won't be able to act in
+		an organized fashion to deal with things any time
+		soon.{wait}
+	} {
+		That goes for that irritating Cassius Bright, too.{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120FSo all in all, everything is going well.{wait}
+	} {
+		...What about Joshua?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150FThe ship he was on has landed in Valleria Lake.{wait}
+	} {
+		I don't doubt he'll begin to act again at some
+		point, but for now, I don't think there's any
+		need to factor him into our calculations.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2PHaha. By the time he's ready to act again, it'll
+		be too late for him to do anything, anyway.{wait}
+	} {
+		After all, now even the famous Blood and Iron
+		Chancellor seems to have taken an interest in
+		what's happening.{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120FHeh. You say that as if you had nothing to
+		do with it.{wait}
+	} {
+		It's only because of you that he even knows
+		about the plan.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2PAhaha. Well, you know.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150FStill, the more actors on the stage, the livelier
+		it is.{wait}
+	} {
+		...Incidentally, Loewe...{wait}
+	} {
+		We do have one small problem that needs to
+		be dealt with.{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120FDo we, now?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2PIt's the floating city's defensive system,
+		you see.{wait}
+	} {
+		Amazingly enough, it's still operational.{wait}
+	} {
+		We're going to need to disable it before we
+		can land, too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150FA giant ship like the Glorious is just going to
+		be a huge, slow target for all of its firepower
+		if we try getting any closer.{wait}
+	} {
+		Still, if you use the Reverie Dragion that was
+		developed for you, you should be able to get
+		close to it and attack.{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120FI see...{wait}
+	} {
+		So that's why you called me, is it?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2PDo you think you can handle it?{wait}
+	}
+	TextWait
+	TextTalk name[35] {
+		#120FI have the sword granted to me by the Grandmaster,
+		that can cut anything in this world...{wait}
+	} {
+		Of course I can.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#850F#2PHaha. So you do.{wait}
+	} {
+		That was made with the Divergent Laws, too,
+		wasn't it?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1150FThe Dragion is standing by for you on the deck.{wait}
+	} {
+		Go forth, and use it to open the door that leads
+		to a legend!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo name[35] 180deg 400deg/s
+	CrossFade 500ms
+	ObjFlagsUnset object[4] 0x0004
+	_79 object[9] 1
+	_7B
+	CamLookPos (-970, -1500, 81290) 0ms
+	CamSetDistance 0 3720 -10000 0ms
+	CamZoom 2500 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 542 0ms
+	Fork name[35] fork[0]:
+		CharWalkToPos2 self (-940, 0, 63550) 2000mm/s 0
+	FadeWait
+	Sleep 500ms
+	Fork char[0] fork[0]:
+		CamLookPos (-1000, 11000, 85270) 7000ms
+	ForkWait char[0] fork[0]
+	ForkQuit name[35] fork[0]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9477]
+	NewScene "c5408._sn" 0 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 1
+	system[40] = 65535
+	CamLookPos (-980, 0, 56040) 0ms
+	CharSetPos field_party[3] (-920, 0, 55420) 0deg
+	CharSetPos field_party[2] (-1670, 0, 56080) 0deg
+	CharSetPos field_party[1] (-310, 0, 56080) 0deg
+	CharSetPos field_party[0] (-980, 0, 56670) 0deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,13]
+	CrossFade 500ms
+	CamLookPos (-960, 0, 58290) 0ms
+	CharSetPos field_party[0] (-960, 0, 58290) 0deg
+	CharSetPos field_party[1] (-960, 0, 58290) 0deg
+	CharSetPos field_party[2] (-960, 0, 58290) 0deg
+	CharSetPos field_party[3] (-960, 0, 58290) 0deg
+	EventEnd 0
+	Return
+
+fn[9]:
+	EventBegin 1
+	system[40] = 65535
+	CamLookPos (-960, 0, 78190) 0ms
+	CharSetPos field_party[3] (-960, 0, 78810) 180deg
+	CharSetPos field_party[2] (-350, 0, 78190) 180deg
+	CharSetPos field_party[1] (-1580, 0, 78190) 180deg
+	CharSetPos field_party[0] (-960, 0, 77580) 180deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,13]
+	CrossFade 500ms
+	CamLookPos (-960, 0, 75810) 0ms
+	CharSetPos field_party[0] (-960, 0, 75810) 180deg
+	CharSetPos field_party[1] (-960, 0, 75810) 180deg
+	CharSetPos field_party[2] (-960, 0, 75810) 180deg
+	CharSetPos field_party[3] (-960, 0, 75810) 180deg
+	EventEnd 0
+	Return
+
+fn[10]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CamLookPos (-980, 0, 56040) 0ms
+	CharSetPos field_party[0] (-920, 0, 55420) 180deg
+	CharSetPos field_party[1] (-1670, 0, 56080) 180deg
+	CharSetPos field_party[2] (-310, 0, 56080) 180deg
+	CharSetPos field_party[3] (-980, 0, 56670) 180deg
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,14]
+	NewScene "c5313._sn" 103 0 0
+	Hcf
+	Return
+
+fn[11]:
+	EventBegin 1
+	system[40] = 65535
+	CrossFade 500ms
+	CamLookPos (-1000, 0, 79150) 0ms
+	CamSetDistance 0 5320 -10000 0ms
+	CamZoom 3120 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 402 0ms
+	CharSetPos field_party[3] (-960, 0, 78810) 180deg
+	CharSetPos field_party[2] (-350, 0, 78190) 180deg
+	CharSetPos field_party[1] (-1580, 0, 78190) 180deg
+	CharSetPos field_party[0] (-960, 0, 77580) 180deg
+	FadeWait
+	Call fn[0,12]
+	Call fn[0,14]
+	NewScene "c4103._sn" 102 0 0
+	Hcf
+	Return
+
+fn[12]:
+	EffLoad eff[0] "map\\mp049_21.eff"
+	EffPlay eff[0] eff_instance[255] field_party[0] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[255] field_party[1] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[255] field_party[2] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[255] field_party[3] 0 (0, 500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Return
+
+fn[13]:
+	Fork field_party[0] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Sleep 2500ms
+	if system[10] != 255:
+		CharColor field_party[0] 0xFFFFFFFF 0ms
+	if system[11] != 255:
+		CharColor field_party[1] 0xFFFFFFFF 0ms
+	if system[12] != 255:
+		CharColor field_party[2] 0xFFFFFFFF 0ms
+	if system[13] != 255:
+		CharColor field_party[3] 0xFFFFFFFF 0ms
+	Return
+
+fn[14]:
+	Fork field_party[0] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Sleep 2000ms
+	Return

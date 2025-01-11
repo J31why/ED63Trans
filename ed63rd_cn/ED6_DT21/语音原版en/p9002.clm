@@ -1,0 +1,492 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P9002.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/chdummy._ch" "npl2/chdummyp._cp"
+
+npc char[0]:
+	name "Guardian Beast"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Event Camera"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 1:
+		if QuestFlagsGet quest[36] 0x08:
+			system[1] = 0
+		Event fn[0,14]
+	elif system[66] == 10:
+		if QuestFlagsGet quest[25] 0x08:
+			system[1] = 0
+		Event fn[0,17]
+	elif system[66] == 11:
+		if QuestFlagsGet quest[31] 0x08:
+			system[1] = 0
+		Event fn[0,18]
+	elif system[66] == 12:
+		if QuestFlagsGet quest[28] 0x08:
+			system[1] = 0
+		Event fn[0,19]
+	elif system[66] == 15:
+		if QuestFlagsGet quest[24] 0x08:
+			system[1] = 0
+		Event fn[0,20]
+	elif system[66] == 16:
+		if QuestFlagsGet quest[33] 0x08:
+			system[1] = 0
+		Event fn[0,21]
+	else:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Sleep 4000ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (600, 0, -6500) 2000mm/s 0
+	CharSetChipPattern self 0
+	Return
+
+fn[3]:
+	Sleep 4000ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (-200, 0, -6500) 2000mm/s 0
+	CharSetChipPattern self 0
+	Return
+
+fn[4]:
+	Sleep 4000ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (-1000, 0, -6500) 2000mm/s 0
+	CharSetChipPattern self 0
+	Return
+
+fn[5]:
+	Sleep 4000ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (600, 0, -8000) 2000mm/s 0
+	CharSetChipPattern self 0
+	Return
+
+fn[6]:
+	Sleep 4000ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (-1000, 0, -8000) 2000mm/s 0
+	CharSetChipPattern self 0
+	Return
+
+fn[7]:
+	CharSetPos field_party[0] (600, 0, -16500) 0deg
+	CharSetPos field_party[1] (-1000, 0, -16500) 0deg
+	CharSetPos field_party[2] (600, 0, -18500) 0deg
+	CharSetPos field_party[3] (-1000, 0, -18500) 0deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (440, 9760, 12190) 0ms
+	CamSetDistance 0 2440 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 397 0ms
+	Return
+
+fn[8]:
+	CrossFade 1000ms
+	ForkQuit char[1] fork[0]
+	CamLookPos (2140, 5910, 10240) 0ms
+	CamSetDistance 0 3590 -10000 0ms
+	CamZoom 3900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 478 0ms
+	Fork char[1] fork[0]:
+		CamLookPos (5340, 3360, 4440) 6000ms
+	Fork char[1] fork[1]:
+		CamSetDistance 0 1910 -10000 6000ms
+	Fork char[1] fork[2]:
+		CamZoom 4100 6000ms
+	Fork char[1] fork[3]:
+		CamPers 571 6000ms
+	Sc_C8 512 70 "C_PLAC43._CH" 0 1000
+	ForkWait char[1] fork[0]
+	Sleep 2000ms
+	CrossFade 500ms
+	CamLookPos (890, 110, -4660) 0ms
+	CamSetDistance 0 5970 -10000 0ms
+	CamZoom 2210 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 384 0ms
+	FadeWait
+	Sleep 300ms
+	Return
+
+fn[9]:
+	Fork field_party[0] fork[2]:
+		Sc_D0 -270000mdeg 8000ms
+	Fork field_party[0] fork[3]:
+		CamZoom 2000 8000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	ForkQuit field_party[0] fork[2]
+	ForkQuit field_party[0] fork[3]
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	Return
+
+fn[10]:
+	CharSetPos field_party[0] (1260, 0, -5630) 0deg
+	CharSetPos field_party[1] (-2060, 0, -6120) 0deg
+	CharSetPos field_party[2] (450, 0, -9110) 0deg
+	CharSetPos field_party[3] (-1470, 0, -9140) 0deg
+	Return
+
+fn[11]:
+	Sleep 150ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 128 -1 -1
+	TextMessage null {
+		#99914v{color 5}#2S#40WI shall grant to you a memory fragment
+		and my blessing...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	Return
+
+fn[12]:
+	Sleep 150ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 80 -1 -1
+	TextMessage null {
+		#99874v{color 5}#2S#40WYou have overcome the trial...
+		#500W 
+		#40WThus I shall grant to you a memory fragment
+		and my blessing...{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	Return
+
+fn[13]:
+	Sleep 150ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 100 -1 -1
+	TextMessage null {
+		#99873v{color 5}#40WOvercome the trial before you...
+		#500W 
+		#40WThen I shall grant to you a memory fragment
+		and my blessing...{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	Return
+
+fn[14]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	TcEpisodeStart 1 0 0
+	PartyClear
+	PartyAdd name[10] party[0] 255
+	Call fn[0,7]
+	CharSetPos name[10] (0, 0, -16000) 0deg
+	if !QuestFlagsGet quest[36] 0x08:
+		Fork char[1] fork[0]:
+			CamZoom 3100 4000ms
+		FadeIn 2000ms 0x00000000
+		FadeWait
+		Sleep 1000ms
+		ForkFunc name[10] fork[0] fn[0,3]
+		Call fn[0,8]
+		ForkWait name[10] fork[0]
+		Sleep 500ms
+		Call fn[0,11]
+		Call fn[0,9]
+	Sc_D6 0
+	TcEpisodeStart 1 1024 2
+	PartyClear
+	PartyAdd name[10] party[0] 255
+	QuestFlagsSet quest[36] 0x08
+	FlagSet flag[9476]
+	NewScene "e0810._sn" 100 0 0
+	Hcf
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	TcEpisodeStart 10 0 0
+	Call fn[0,7]
+	Fork char[1] fork[0]:
+		CamZoom 3100 4000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	ForkFunc field_party[0] fork[0] fn[0,2]
+	ForkFunc field_party[1] fork[0] fn[0,4]
+	ForkFunc field_party[2] fork[0] fn[0,5]
+	ForkFunc field_party[3] fork[0] fn[0,6]
+	Call fn[0,8]
+	ForkWait field_party[0] fork[0]
+	ForkWait field_party[1] fork[0]
+	ForkWait field_party[2] fork[0]
+	ForkWait field_party[3] fork[0]
+	Sleep 2000ms
+	CrossFade 1000ms
+	EffLoad eff[0] "map\\mp200_00.eff"
+	EffPlay eff[0] eff_instance[0] null 0 (0, 200, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[546] 0 0 100
+	FadeWait
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (0, 0, 0) 180deg
+	CharColor char[0] 0x00FFFFFF 0ms
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	ForkLoop char[0] fork[3]:
+		CharAnimation self 0 7 1500ms
+	CamLookPos (0, 0, -3000) 1500ms
+	EffLoad eff[1] "map\\mp200_02.eff"
+	EffPlay eff[1] eff_instance[255] null 0 (0, 200, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Fork char[0] fork[0]:
+		CharColor self 0xFFFFFFFF 800ms
+	Sleep 500ms
+	EffStop eff_instance[0] 2
+	ForkWait char[0] fork[0]
+	CrossFade 250ms
+	system[28] = 1
+	SystemFlagsUnset 0x00000010
+	Sleep 300ms
+	Call fn[0,13]
+	Fork field_party[0] fork[0]:
+		CamLookPos (0, 0, 0) 200ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2280 200ms
+	ForkWait field_party[0] fork[0]
+	ED6Battle battle[901] null 0 0 null
+	Call fn[0,16]
+	Return
+
+fn[16]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	system[28] = 0
+	CharFlagsSet char[0] 0x0080
+	ForkQuit char[0] fork[3]
+	Call fn[0,10]
+	CamLookPos (100, 0, -7160) 0ms
+	CamSetDistance 0 5850 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 310 0ms
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	Sleep 500ms
+	Call fn[0,12]
+	Call fn[0,9]
+	QuestFlagsSet quest[25] 0x08
+	NewScene "e1000._sn" 100 0 0
+	Hcf
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	TcEpisodeStart 10 0 0
+	Call fn[0,7]
+	if !QuestFlagsGet quest[25] 0x08:
+		Fork char[1] fork[0]:
+			CamZoom 3100 4000ms
+		FadeIn 2000ms 0x00000000
+		FadeWait
+		Sleep 1000ms
+		ForkFunc field_party[0] fork[0] fn[0,2]
+		ForkFunc field_party[1] fork[0] fn[0,4]
+		ForkFunc field_party[2] fork[0] fn[0,5]
+		ForkFunc field_party[3] fork[0] fn[0,6]
+		Call fn[0,8]
+		ForkWait field_party[0] fork[0]
+		ForkWait field_party[1] fork[0]
+		ForkWait field_party[2] fork[0]
+		ForkWait field_party[3] fork[0]
+		Sleep 500ms
+		Call fn[0,11]
+		Call fn[0,9]
+	QuestFlagsSet quest[25] 0x08
+	NewScene "e1000._sn" 100 0 0
+	Hcf
+	Return
+
+fn[18]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	TcEpisodeStart 11 0 0
+	Call fn[0,7]
+	if !QuestFlagsGet quest[31] 0x08:
+		Fork char[1] fork[0]:
+			CamZoom 3100 4000ms
+		FadeIn 2000ms 0x00000000
+		FadeWait
+		Sleep 1000ms
+		ForkFunc field_party[0] fork[0] fn[0,2]
+		ForkFunc field_party[1] fork[0] fn[0,4]
+		ForkFunc field_party[2] fork[0] fn[0,5]
+		ForkFunc field_party[3] fork[0] fn[0,6]
+		Call fn[0,8]
+		ForkWait field_party[0] fork[0]
+		ForkWait field_party[1] fork[0]
+		ForkWait field_party[2] fork[0]
+		ForkWait field_party[3] fork[0]
+		Sleep 500ms
+		Call fn[0,11]
+		Call fn[0,9]
+	QuestFlagsSet quest[31] 0x08
+	NewScene "e1000._sn" 100 0 0
+	Hcf
+	Return
+
+fn[19]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	TcEpisodeStart 12 0 0
+	PartyClear
+	PartyAdd name[0] party[0] 255
+	Call fn[0,7]
+	CharSetPos name[0] (0, 0, -16000) 0deg
+	if !QuestFlagsGet quest[28] 0x08:
+		Fork char[1] fork[0]:
+			CamZoom 3100 4000ms
+		FadeIn 2000ms 0x00000000
+		FadeWait
+		Sleep 1000ms
+		ForkFunc name[0] fork[0] fn[0,3]
+		Call fn[0,8]
+		ForkWait name[0] fork[0]
+		Sleep 500ms
+		Call fn[0,11]
+		Call fn[0,9]
+	Sc_D6 0
+	TcEpisodeStart 12 1 2
+	PartyClear
+	PartyAdd name[0] party[0] 255
+	QuestFlagsSet quest[28] 0x08
+	FlagSet flag[9476]
+	NewScene "t1500._sn" 100 0 0
+	Hcf
+	Return
+
+fn[20]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	TcEpisodeStart 15 0 0
+	Call fn[0,7]
+	if !QuestFlagsGet quest[24] 0x08:
+		Fork char[1] fork[0]:
+			CamZoom 3100 4000ms
+		FadeIn 2000ms 0x00000000
+		FadeWait
+		Sleep 1000ms
+		ForkFunc field_party[0] fork[0] fn[0,2]
+		ForkFunc field_party[1] fork[0] fn[0,4]
+		ForkFunc field_party[2] fork[0] fn[0,5]
+		ForkFunc field_party[3] fork[0] fn[0,6]
+		Call fn[0,8]
+		ForkWait field_party[0] fork[0]
+		Sleep 500ms
+		Call fn[0,11]
+		Call fn[0,9]
+	QuestFlagsSet quest[24] 0x08
+	NewScene "e1000._sn" 100 0 0
+	Hcf
+	Return
+
+fn[21]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	TcEpisodeStart 16 0 0
+	Call fn[0,7]
+	if !QuestFlagsGet quest[33] 0x08:
+		Fork char[1] fork[0]:
+			CamZoom 3100 4000ms
+		FadeIn 2000ms 0x00000000
+		FadeWait
+		Sleep 1000ms
+		ForkFunc field_party[0] fork[0] fn[0,2]
+		ForkFunc field_party[1] fork[0] fn[0,4]
+		ForkFunc field_party[2] fork[0] fn[0,5]
+		ForkFunc field_party[3] fork[0] fn[0,6]
+		Call fn[0,8]
+		ForkWait field_party[0] fork[0]
+		ForkWait field_party[1] fork[0]
+		ForkWait field_party[2] fork[0]
+		ForkWait field_party[3] fork[0]
+		Sleep 500ms
+		Call fn[0,11]
+		Call fn[0,9]
+	QuestFlagsSet quest[33] 0x08
+	FlagSet flag[9476]
+	NewScene "e1001._sn" 100 0 0
+	Hcf
+	Return

@@ -1,0 +1,243 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M5506.x"
+	town town[1]
+	bgm bgm[231]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14740._ch" "mons2/ch14740p._cp"
+chip[1] "mons2/ch14741._ch" "mons2/ch14741p._cp"
+chip[2] "mons2/ch14540._ch" "mons2/ch14540p._cp"
+chip[3] "mons2/ch14541._ch" "mons2/ch14541p._cp"
+chip[4] "mons2/ch15110._ch" "mons2/ch15110p._cp"
+chip[5] "mons2/ch15111._ch" "mons2/ch15111p._cp"
+
+monster char[0]:
+	name ""
+	pos (37660, 0, 37770)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[407]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (50140, 0, 5540)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[408]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (15580, 0, -2310)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[406]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (46400, 0, 38540)
+	radius 1000mm
+	bubble_pos (46400, 1000, 38540)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (42470, 0, -15200)
+	radius 1000mm
+	bubble_pos (42470, 1000, -15200)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (46200, 0, 36480)
+	radius 1000mm
+	bubble_pos (46200, 1000, 36480)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-106000, null, -132000) "mm5506._ch"
+	if !flag[10664]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[10665]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[10666]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10664]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[507] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[507]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10664]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[507]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[507]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}You know, I'm worth a hell lot more sepith than that lousy trinket you just
+			took!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 125 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[10665]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[1187] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1187]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10665]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1187]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[1187]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}You found a plank of wood, but it seems to be nailed down.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 126 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10666]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 30
+		ObjWait object[2]
+		ObjFrame object[2] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		ItemAdd item[489] 1
+		TextMessage null {
+			{color 5}Received {item item[489]}{color 5}.{wait}
+		}
+		if ItemHas item[525] 0 != 0:
+			if RecipeLearn 67:
+			else:
+				TextWait
+				TextMessage null {
+					Found a scrap of paper with a recipe written on it.{wait}
+				}
+				TextWait
+				SoundPlay sound[17] 0 0 100
+				TextMessage null {
+					{color 5}Learned the recipe for {item item[489]}{color 5}.{wait}
+				}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10666]
+	else:
+		TextMessage null {
+			{color 5}The aromatic hickory lining of this chest permeated the Sludgy Cookies
+			with a mouth-watering flavor.{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 127 0
+	Return

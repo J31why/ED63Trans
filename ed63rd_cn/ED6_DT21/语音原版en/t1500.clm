@@ -1,0 +1,602 @@
+calmare tc scena
+scena:
+	name "Bose" "T1500.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01020._ch" "npl/ch01020p._cp"
+
+npc char[0]:
+	name "Lloyd"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	OpLoad "T1500_n"
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	if QuestFlagsGet quest[28] 0x20:
+		Call fn[0,6]
+	Call fn[0,3]
+	Call fn[0,4]
+	Return
+
+fn[3]:
+	BgmPlay bgm[20] 0
+	Sc_C4Unset 2048
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (2190, -2000, 42760) 180deg
+	CharSetPos char[0] (2280, -2000, 41180) 0deg
+	CamLookPos (2190, -1800, 41900) 0ms
+	CamSetDistance 0 8970 -10000 0ms
+	CamZoom 3030 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	MapColor 0x005898CE 0ms
+	Sc_C4Set 2048
+	system[40] = 65535
+	Sc_C4Set 536870912
+	Sleep 2000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}Once upon a time, there was a girl called Estelle
+		Bright who absolutely loved fishing.{wait}
+		Meanwhile, in Grancel, there existed a group of
+		dedicated men and women who prided themselves
+		on the sport. They were called the Fisherman's Guild.{wait}
+		What else could it possibly called but 'fate' were
+		the two paths to cross?{wait}
+		This is their peculiar story.{wait}
+	}
+	TextWait
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}#15A～Chapter 1 - Our Story Begins at the Lakeside～{0x05}{wait}
+	}
+	TextWait
+	BgmStop 3000ms
+	BgmWait
+	TextClose 0
+	Sleep 1000ms
+	BgmPlay bgm[15] 0
+	_75 object[255] 3 5
+	_75 object[255] 4 5
+	ObjFlagsUnset object[2] 0x0008
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	FadeOut 1000ms 0x00000000 80
+	Sleep 2000ms
+	TextMessage null {
+		{color 0}At the side of Valleria Lake lies a quiet little
+		place by the name of the Kingfisher Inn. {wait}
+		Seeking a break from her work, Estelle decided
+		to visit for some well-deserved relaxation.{wait}
+		At first, she had gotten exactly that.{wait}
+		The fishing lover she was, she decided to borrow
+		some gear from the inn and make her way out
+		onto the pier to enjoy some quality time there.{wait}
+		She saw one successful catch after another, and
+		before long, her bucket was teeming with fish.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}But then there was Lloyd, a member of that one and
+		only Fisherman's Guild, who happened to be at that
+		very same inn and on that very same day. He was
+		having the opposite of young Estelle's lucky streak.{wait}
+		The moment he had arrived, he had set off in a boat
+		to begin fishing...{wait}
+		but try as he did, he hadn't managed to catch so
+		much as a single fish.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}Now feeling thoroughly defeated, Lloyd motioned
+		back towards the inn.{wait}
+		Upon his boat approaching the pier, however,
+		he caught sight of none other than a very pleased
+		Estelle rejoicing the size of her most recent catch. {wait}
+		This sight was all it took to give rise to Lloyd's
+		competitive nature.{wait}
+		Now thoroughly fired up, he approached her and
+		challenged her to a special kind of duel...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[460] 1 0 100
+	FadeIn 1000ms 0x00000000
+	Sc_C4Unset 2048
+	Sleep 500ms
+	MapColor 0x00FFFFFF 2500ms
+	_75 object[255] 3 1
+	_75 object[255] 4 1
+	ObjFlagsSet object[2] 0x0008
+	Sleep 4000ms
+	TextTalk char[0] {
+		#99037v...And that's why I want to challenge you
+		to a five-round anglers' duel.{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77397v#1004FA-A what, now?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99038vA five-round anglers' duel!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99039vIt's a special kinda competition we fishermen
+		take part in where they stake their pride and
+		honor on the outcome.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99040vOnce a member of the Fisherman's Guild
+		mentions those words, there can be no
+		turning back. The duel must take place!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99041vSo let us do battle, with our finest fishing
+		tackle on the line!{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77398v#1019FI feel like I'm getting dragged into something
+		completely nutso...{wait}
+	} {
+		#77399v#1015FI hate to break it to you, but I don't have any
+		stellar fishing tackle to bet on this. All my stuff
+		was borrowed from the inn.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99042vThen you don't need to bet anything at all!
+		That's fine.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99043vThis duel is more for my own good than yours,
+		and I intend to see it through no matter what.{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77400v#1016FAhaha... Doesn't sound like I've got much choice
+		but to go along with this, huh?{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	Sleep 300ms
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	BgmStop 1000ms
+	Sc_C4Set 16
+	SoundStop sound[460]
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	Sleep 1000ms
+	Return
+
+fn[4]:
+	FadeOut 0ms 0x00000000 255
+	var[0] = 0
+	BgmPlay bgm[192] 0
+	ImageShow "c_vis505._ch" 0 0 500ms
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"Start" // 0
+			"Rules" // 1
+			"Quit" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		TextClose 0
+		TextSetPos 72 320 56 3
+		switch var[0]:
+			case 0:
+				ImageHide 500ms
+				Sleep 1000ms
+				Call fn[0,5]
+				BgmPlay bgm[192] 0
+				ImageShow "c_vis505._ch" 0 0 500ms
+				var[0] = 0
+				break
+			case 1:
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――――――――――――――――――――
+
+					Estelle and Lloyd will face off in a five-round duel of the century. Both
+					will take turns at fishing, and whoever has the most points at the end of
+					the five rounds will be declared the winner.
+
+					When it is Estelle's turn, you will be prompted to choose a rod and a bait
+					to use. Certain baits can only be used with certain rods.
+
+					After choosing, the game begins. When the ! mark appears, quickly press
+					confirm to catch the fish.
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――――――――――――――――――――
+
+					Certain fish can only be caught with certain baits, and in addition, some
+					fish can be used as bait to catch other fish.
+
+					Different varieties of fish are worth different amounts of points, making
+					trying to catch more valuable ones the key to success.
+
+					More valuable ones are also more likely to escape, but don't let that deter
+					you.
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9477]
+				if flag[9999]:
+					NewScene "u4169._sn" 105 0 0
+					Hcf
+				else:
+					NewScene "u4121._sn" 110 0 0
+					Hcf
+				break
+	Return
+
+fn[5]:
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	CamLookPos (-2710, -2000, 30940) 0ms
+	CamSetDistance 0 8970 -10000 0ms
+	CamZoom 3030 0ms
+	CamRotate 135000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-2960, -2000, 32500) 180deg
+	CharSetPos char[0] (-10780, -2000, 32560) 180deg
+	NextFrame
+	ItemAdd item[591] 1
+	ItemAdd item[592] 1
+	ItemAdd item[595] 1
+	ItemAdd item[980] 3
+	ItemAdd item[981] 3
+	ItemAdd item[983] 3
+	SoundPlay sound[460] 1 0 100
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	if Minigame 27 0 -2960 -2000 32500 180 -2980 -3000 29380:
+		var[0] = 0
+	else:
+		var[0] = 1
+	EventBegin 0
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (2190, -2000, 42760) 180deg
+	CharSetPos char[0] (2280, -2000, 41180) 0deg
+	CamLookPos (2190, -1800, 41900) 0ms
+	CamSetDistance 0 8970 -10000 0ms
+	CamZoom 3030 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	Sleep 3000ms
+	switch var[0]:
+		case 1:
+			FadeIn 1000ms 0x00000000
+			BgmResume
+			Sleep 1000ms
+			TextTalk name[0] {
+				#77401v#1003FI-I lost...{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99044vWhew... I'm glad I got to retain my honor.{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				#99045vI'll be able to sleep like a baby tonight!{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#77402v#1009FI might not've lost anything, but I still feel
+				like crap for losing...{wait}
+			}
+			TextWait
+			FadeOut 1000ms 0x00000000 255
+			BgmStop 2000ms
+			FadeWait
+			SoundStop sound[460]
+			Sleep 1000ms
+			TextSetPos -1 80 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{0x18}{color 5}Try again?{wait}
+			}
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"Try Again" // 0
+				"Leave Door" // 1
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			TextSetPos 72 320 56 3
+			Sleep 1000ms
+			switch var[0]:
+				case 1:
+					Sc_D6 1
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					if flag[9999]:
+						NewScene "u4169._sn" 105 0 0
+						Hcf
+					else:
+						NewScene "u4121._sn" 110 0 0
+						Hcf
+					break
+				case 0:
+					Sc_D6 1
+					Sc_D6 0
+					var[0] = 0
+					Return
+		case 0:
+			break
+	FadeIn 1000ms 0x00000000
+	BgmResume
+	Sc_C4Set 536870912
+	Sleep 1000ms
+	TextTalk name[0] {
+		#77403v#1018FWoohoo! I won!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99046vSo I lost...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99047vWhat a battle! You fought admirably, Estelle.
+		There's no shame in losing against someone
+		as talented as you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99048vHere! I want you to have this.{wait}
+	}
+	TextWait
+	CharWalkToPos char[0] (2260, -2000, 41740) 2000mm/s 0
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	FadeWait
+	SoundPlay sound[17] 0 0 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}Lloyd handed Estelle a silver-colored lure.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	CharWalkToPos2 char[0] (2280, -2000, 41180) 2000mm/s 0
+	Sleep 500ms
+	TextTalk name[0] {
+		#77404v#1004FA-A lure made out of argem?{wait}
+	} {
+		#77405vI couldn't possibly take this... It looks so
+		expensive!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99049vNo can do. Those're the rules. I challenged you
+		to a duel while putting this on the line, and I was
+		defeated.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99050vIf you refuse to accept it, that will bring me even
+		greater shame than I already face! {wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99051vSo please! Accept it.{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#77406v#1008FW-Well, if you really insist...{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeOut 2000ms 0x00000000 255
+	SoundStop sound[460]
+	BgmStop 3000ms
+	BgmWait
+	Sleep 3000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Thus Estelle accepted the silver lure from Lloyd.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}And though feeling bliss thanks to her victory,
+		she was also blissfully unaware of what fate had
+		in store for her...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[28] 0x20:
+		Sleep 3000ms
+		QuestFlagsSet quest[28] 0x10
+		QuestFlagsSet quest[28] 0x20
+		QuestFlagsSet quest[29] 0x02
+		ItemAdd item[934] 20
+		ItemAdd item[938] 20
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {color 2}Fishing set{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}5,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	Sleep 2000ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 5}Continue to Chapter 2?{wait}
+	}
+	Sleep 1000ms
+	system[40] = 24
+	Menu menu[0] -1 200 0
+		"Continue" // 0
+		"Leave Door" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 1000ms
+	switch var[0]:
+		case 0:
+			FlagSet flag[9476]
+			NewScene "c4203._sn" 100 0 0
+			Hcf
+			break
+		case 1:
+			FlagSet flag[9477]
+			if flag[9999]:
+				NewScene "u4169._sn" 105 0 0
+				Hcf
+			else:
+				NewScene "u4121._sn" 110 0 0
+				Hcf
+			break
+	Return
+
+fn[6]:
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		TextSetPos -1 60 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{0x18}{color 5}Legendary Angler Estelle{wait}
+		}
+		ED6MenuNew menu[0] 65535 160 0
+		if QuestFlagsGet quest[28] 0x20:
+			ED6MenuAdd menu[0] "Leave the Door"
+			ED6MenuAdd menu[0] "Start from Beginning"
+			ED6MenuAdd menu[0] "Start from Chapter 2"
+		if QuestFlagsGet quest[29] 0x20:
+			ED6MenuAdd menu[0] "Start from Final Chapter"
+		ED6MenuShow menu[0]
+		MenuWait var[0]
+		TextClose 0
+		MenuClose menu[255]
+		system[40] = 65535
+		Sleep 1000ms
+		switch var[0]:
+			case 0:
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9477]
+				if flag[9999]:
+					NewScene "u4169._sn" 105 0 0
+					Hcf
+				else:
+					NewScene "u4121._sn" 110 0 0
+					Hcf
+				break
+			case 1:
+				BgmStop 1000ms
+				BgmWait
+				var[0] = 255
+				break
+			case 2:
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9476]
+				NewScene "c4203._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9476]
+				NewScene "r2201._sn" 100 0 0
+				Hcf
+				break
+	Return

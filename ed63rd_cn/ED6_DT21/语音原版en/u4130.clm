@@ -1,0 +1,332 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4130.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (5830, 4000, 5250)
+	radius 1000mm
+	bubble_pos (6530, 5000, 5220)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (59930, 0, -550)
+	radius 1000mm
+	bubble_pos (60000, 1000, 150)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (61900, 0, -550)
+	radius 1000mm
+	bubble_pos (62000, 1000, 150)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (-59340, 0, 121250)
+	radius 1000mm
+	bubble_pos (-59340, 1000, 121250)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+look_point[4]:
+	pos (57530, 0, 400)
+	radius 800mm
+	bubble_pos (57290, 900, 340)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+look_point[5]:
+	pos (2480, -250, -3810)
+	radius 800mm
+	bubble_pos (2480, 1100, -3810)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if flag[10017]:
+		OpLoad "U4130_y"
+	else:
+		OpLoad "U4130_n"
+	if !flag[10120]:
+		ObjFrame object[6] 0
+	else:
+		ObjFrame object[6] 60
+	if !flag[10121]:
+		ObjFrame object[7] 0
+	else:
+		ObjFrame object[7] 60
+	if !flag[10122]:
+		ObjFrame object[8] 0
+	else:
+		ObjFrame object[8] 60
+	if !flag[10133]:
+		ObjFrame object[9] 0
+	else:
+		ObjFrame object[9] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10120]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[6] 60
+		Sleep 500ms
+		if ItemAdd item[428] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[428]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10120]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[428]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[428]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[6] 60
+			ObjPlay object[6] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}[9/36] The story truly begins neither with Genevieve nor with Jubilee,
+			but with the shop in the letter. Located in Bose, cramped between two
+			of the most popular shops on the block, was a tiny, tiny building. {color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 256 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[10121]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[7] 60
+		Sleep 500ms
+		if ItemAdd item[412] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[412]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10121]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[412]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[412]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[7] 60
+			ObjPlay object[7] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}(7/12) Each time Hideko reflected on these events, feelings of remorse
+			would wash over her. If only I'd had the courage to refuse that door-to-
+			door bargain all those years ago...{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 257 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[10122]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[8] 60
+		Sleep 500ms
+		if ItemAdd item[409] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[409]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10122]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[409]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[409]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[8] 60
+			ObjPlay object[8] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}The chest is empty.
+			Look, YOU try coming up with hundreds of these across three games.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 258 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[10133]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[9] 60
+		Sleep 500ms
+		if ItemAdd item[357] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[357]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10133]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[357]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[357]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[9] 60
+			ObjPlay object[9] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Did you know? Early concepts had Joshua as the protagonist while Estelle
+			had Joshua's current role. Over time, however, the team believed it made
+			more sense if the roles were switched.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 259 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[6]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}The Baral Coffee House's specialty!
+		[Curry of Dreams] - 900 mira{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}Try our hot curry, cooked to perfection
+		with our secret spices!{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[7]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}- Menu -
+		Mocking Pie           400 mira
+		Tomatrio Sandwich    1,400 mira{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}- Chef's Recommendations -
+		Seafood Hotpot     1,200 mira{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

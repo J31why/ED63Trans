@@ -1,0 +1,310 @@
+calmare fc scena
+scena:
+	name "Ruan" "T2330.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+	scp 0 file[0x0021010D]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01270._ch" "npl/ch01270p._cp"
+chip[1] "npl/ch01030._ch" "npl/ch01030p._cp"
+
+npc char[0]:
+	name "Rex"
+	pos (-25500, 0, 43210)
+	angle 270deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "Carla"
+	pos (-37500, 0, 44500)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,5]
+
+look_point[0]:
+	pos (-37020, 0, 42970)
+	radius 400mm
+	bubble_pos (-37500, 1500, 44500)
+	flags 0x007E
+	func fn[0,4]
+	unk1 0
+
+look_point[1]:
+	pos (-26870, 0, 42820)
+	radius 400mm
+	bubble_pos (-25500, 1500, 43210)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	TextStart char[8]
+	if flag[12066]:
+		if flag[0]:
+			TextTalk char[8] {
+				There's no harm in playing around and
+				having a good time. Just make sure you
+				don't get hurt.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				Hmm? What happened to Polly?{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Is she playing with Clem and Daniel now?{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Well, that's all right. Though, I hope they
+				all take it easy and don't get hurt.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12065]:
+		if flag[0]:
+			TextTalk char[8] {
+				I'll have to go and check the bazaar out
+				myself a bit later on.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				All of the interesting items might have sold
+				by now, though.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				Well! You two look cheery all of a sudden.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Did you find something interesting over at
+				the bazaar?{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1711FThat's a secret!{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1732FA BIIIG secret!{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Ahaha. Maybe I should pop over there myself
+				and see what I find, then.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12064]:
+		if flag[12097]:
+			if flag[0]:
+				TextTalk char[8] {
+					Lucia's supposed to be helping out over at the
+					bazaar, too. Why not pop by for a while?{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[8] {
+					I take it you've heard about the bazaar in town
+					already? It started today, if you haven't.{wait}
+				}
+				TextWait
+				TextTalk char[8] {
+					The town's all in a bustle because of it.
+					A bazaar like this feels right for a rural
+					town like this, huh?{wait}
+				}
+				TextWait
+				TextTalk char[8] {
+					I think Lucia's out helping with it, too.
+					If you're interested, you should stop by
+					and check it out.{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			TextTalk char[8] {
+				Hello there, you two.{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1718FHello, sir!{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Thanks so much for always playing with our Lucia.{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1732FYou're welcome!{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Haha. Always nice to see such cheery faces
+				around here.{wait}
+			}
+			TextWait
+			FlagSet flag[12097]
+	elif flag[12055]:
+	TextEnd char[8]
+	Return
+
+fn[4]:
+	Call fn[0,5]
+	Return
+
+fn[5]:
+	TextStart char[9]
+	if flag[12066]:
+		if flag[12098]:
+			if flag[1]:
+				TextTalk char[9] {
+					Try and go home before it gets dark, all right?{wait}
+				} {
+					Otherwise Matron Theresa will be very worried 
+					about you all.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					Just remember that Matron Theresa will worry
+					about you all if you stay out too late.{wait}
+				}
+				TextWait
+				TextTalk char[9] {
+					Try and go home before it gets dark, all right?{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1713F...I will.{wait}
+				}
+				TextWait
+				FlagSet flag[1]
+		else:
+			TextTalk char[9] {
+				Hmm? I thought you were with Polly earlier?{wait}
+			} {
+				What happened to her?{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1713FShe's... Umm... She's playing with Clem and
+				Daniel at the moment.{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				Oh, really? That's all right, then.{wait}
+			} {
+				You all be careful. And remember to stay
+				away from tall cliffs!{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1712FI-I will!{wait}
+			}
+			TextWait
+			FlagSet flag[12098]
+	elif flag[12065]:
+		if flag[1]:
+			TextTalk char[9] {
+				Come play with Lucia again soon, okay?{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				I'm sure nothing would make her happier.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[9] {
+				Oh? What's going on here?{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				You look like you're having fun.{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1711FNothing! Nothing at all!{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1732FNothing at all!{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				Heehee. Really, now? {wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12064]:
+		if flag[1]:
+			TextTalk char[9] {
+				Lucia's always loved big events like these.{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				And people wonder who she took after.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[9] {
+				Oh, if it isn't Mary and Polly! Welcome!{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				If you're looking for Lucia, she's out helping
+				with the bazaar.{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				She loves these kinds of things, you see,
+				so she couldn't resist trying to get involved
+				somehow.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12055]:
+	TextEnd char[9]
+	Return

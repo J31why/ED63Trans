@@ -1,0 +1,1325 @@
+calmare tc scena
+scena:
+	name "Bose" "T1121.x"
+	town town[1]
+	bgm bgm[11]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02380._ch" "npl/ch02380p._cp"
+chip[1] "npl2/ch03093._ch" "npl2/ch03093p._cp"
+chip[2] "apl/ch20021._ch" "apl/ch20021p._cp"
+chip[3] "npl/ch02363._ch" "npl/ch02363p._cp"
+
+npc char[0]:
+	name "Lugran"
+	pos (180, 0, 4400)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Letter"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 30
+	ch chip[2]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Mayor Maybelle"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Anelace"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 18:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 25
+			Event fn[0,6]
+		elif flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 25
+			Event fn[0,7]
+	if system[66] == 19:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,8]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (27740, 200, -2390) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 2480 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 323 0ms
+	CharSetChipBase name[9] chip[1]
+	CharSetChipPattern name[9] 0
+	CharFlagsSet name[9] 0x0004
+	CharSetPos name[9] (26740, 200, -3610) 270deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (25400, 800, -3800) 0deg
+	Sleep 500ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}Anelace Elfead was a bracer affiliated with the
+		Bose branch of the Bracer Guild.{wait}
+	} {
+		For her achievements during the Liber Ark crisis,
+		she was promoted to D rank, and was now seen as 
+		one of the guild's most promising youngsters.{wait}
+	} {
+		But the peaceful days that followed were shattered
+		by the sudden arrival of a letter...{wait}
+	} {
+		A letter she now sat staring at inside the somber
+		afternoon guild.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	BgmPlay bgm[11] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk name[9] {
+		#86617v#810F#5PHmm...{wait}
+	} {
+		#86618vHmm...{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CamLookPos (28150, 0, 630) 2000ms
+	ForkFunc char[0] fork[0] fn[0,3]
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 200ms
+	TextTalk char[0] {
+		#94864v#630FWhat's up with you, Anelace?{wait}
+	} {
+		#94865vYou haven't made yourself sick by eating too much
+		ice cream again, have you?{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 40 43 100ms 3
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}◆Anelace looks over at Lugran.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	TextTalk name[9] {
+		#86619v#810FY-You were supposed to forget about that!{wait}
+	} {
+		#86620vAnyway, I got a letter from my granddad, you
+		see...{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CamLookPos (27760, 200, -1960) 2000ms
+	Fork name[9] fork[1]:
+		CamZoom 2400 2000ms
+	ForkFunc char[0] fork[0] fn[0,4]
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	TextTalk char[0] {
+		#94866v#630F#5POh, really?{wait}
+	} {
+		#94867vWasn't your grandfather...{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86621v#810FYep, he's a really famous swordsmanship 
+		instructor.{wait}
+	} {
+		#86622vEven now, every time we get the chance to fight, 
+		I feel like I'm just being treated like a child. 
+		He's an old man now, too!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94868v#630F#5PHaha. He really must be skilled to be treating 
+		an active bracer that way.{wait}
+	} {
+		#94869v...Anyway, what exactly does he want with you?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86623v#810FW-Well, as surprising as it is...{wait}
+	} {
+		#86624vHe actually wants me to go and speak to Cassius.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94870v#630F#5PCassius?{wait}
+	} {
+		#94871vAs in Brigadier General Bright?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86625v#810FY-Yeah...{wait}
+	} {
+		#86626vApparently Granddad is like a master to Cassius...{wait}
+	} {
+		#86627vApparently he even came to see him when he stopped
+		fighting with a sword ten years ago, too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94872v#630F#5PTen years ago? So around the time of the Hundred
+		Days War, then.{wait}
+	} {
+		#94873vBack when Cassius left the army and became a
+		bracer.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86628v#810FGranddad seems to have been really disappointed
+		that Cassius abandoned the path of the sword,
+		too.{wait}
+	} {
+		#86629vSo now that he's returned to the army, Granddad
+		wants to know whether his feelings have changed.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94874v#630F#5PHmm... I see...{wait}
+	} {
+		#94875vIt really is surprising how people can end up
+		knowing one another.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86630v#810FY-Yeah, it is...{wait}
+	} {
+		#86631vAnyway, that said... Umm...{wait}
+	} {
+		#86632vI kind of have a favor to ask...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94876v#630F#5PYou want time off, I assume?{wait}
+	} {
+		#94877vWell, I certainly don't mind. You've got good
+		cause to have it.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86633v#810FR-Really?!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94878v#630F#5PBut in return...{wait}
+	} {
+		#94879vI want you to take care of every single one of the
+		monster extermination requests on the board.{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 14 15 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86634v#810FE-Every single one?!{wait}
+	} {
+		#86635vAren't there like five of them in all at the
+		moment?!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94880v#630F#5PI don't want to hear any complaints from someone
+		who had to take a day off three days ago because
+		they ate too much ice cream.{wait}
+	} {
+		#94881vEspecially considering they were only eating that
+		many because they wanted the bonus goods that came
+		with the things...{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86636v#810FA-Aaaaah!{wait}
+	} {
+		#86637vO-Okay, okay, I'll do it! I'll do it! Just stop!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	BgmStop 1000ms
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene "c3100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	CharSetPos self (25510, -1750, 5500) 0deg
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (28880, 0, 5310) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[4]:
+	CharWalkToPos self (26700, 0, 1270) 2500mm/s 0
+	CharWalkToPos self (26650, 0, -2060) 2500mm/s 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (27220, 0, -2090) 0ms
+	CamSetDistance 0 5790 -10000 0ms
+	CamZoom 2340 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 327 0ms
+	CharSetChipBase name[9] chip[1]
+	CharSetChipPattern name[9] 0
+	CharFlagsSet name[9] 0x0004
+	CharSetPos name[9] (26740, 200, -3610) 270deg
+	CharFlagsUnset char[0] 0x0080
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharFlagsSet char[0] 0x0004
+	CharSetPos char[0] (25330, 0, -2450) 180deg
+	Sleep 100ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}...Anyway, Granddad.{wait}
+	} {
+		#86638vI'm afraid it doesn't look like Cassius has any
+		interest at all in taking up a sword again.{wait}
+	} {
+		#86639vStill, going to speak to him wasn't all for 
+		naught. I feel like I've learned more about
+		swordsmanship myself by doing so.{wait}
+	} {
+		Up until now, I thought it was all about getting
+		stronger, or faster, or things like that...{wait}
+	} {
+		#86640vBut now I've finally realized that what's far more
+		important than either of those things is why you
+		take up your sword -- your soul and your feelings.{wait}
+	} {
+		#86641vI feel like now I finally understand why I was
+		never able to defeat you, no matter how many 
+		times we fought.{wait}
+	} {
+		#86642vOf course, I hardly expect this revelation will
+		allow me to suddenly be able to win against you,
+		but hopefully you'll watch over me until I can.{wait}
+	} {
+		#86643vHopefully when you end up going to heaven, you'll
+		watch over me from there, too.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	TextTalk name[9] {
+		#86644v#810F#2P...That was what the letter I sent said, but he
+		wasn't too impressed with it.{wait}
+	} {
+		#86645vHe got really angry... I wonder why?{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#630F#5PI'll give you a clue... It's the last two lines...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	Sleep 2000ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_E6_1 0
+	Sleep 1000ms
+	if !QuestFlagsGet quest[10] 0x20:
+		QuestFlagsSet quest[10] 0x20
+		ItemAdd item[1424] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Obtained {item item[1424]}{color 5}.{wait}
+		}
+		TextWait
+	if !QuestFlagsGet quest[10] 0x10:
+		QuestFlagsSet quest[10] 0x10
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Obtained {color 2}5,000 mira{color 5}.{wait}
+		}
+		TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5502._sn" 102 0 0
+	Hcf
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (27740, 200, -2390) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 2680 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 323 0ms
+	CharSetChipBase name[9] chip[1]
+	CharSetChipPattern name[9] 0
+	CharFlagsSet name[9] 0x0004
+	CharSetPos name[9] (26740, 200, -3610) 270deg
+	FadeIn 2000ms 0x00000000
+	CamZoom 2480 2000ms
+	FadeWait
+	Emote name[9] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[9]
+	Sleep 500ms
+	TextTalk name[9] {
+		#86353v#818F#11PHmm...{wait}
+	} {
+		#86354v#817FInteresting...{wait}
+	} {
+		#86355v#814F...{wait}
+	} {
+		#86356v#1311FWow, that's a surprise...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	CharColor char[0] 0x00FFFFFF 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (25510, -1750, 5500) 0deg
+	TextTalkNamed char[0] "Old Man's Voice" {
+		#94807v#2PAnelace!{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork name[9] fork[0]:
+		CamLookPos (28150, 0, 630) 2000ms
+	ForkFunc char[0] fork[0] fn[0,3]
+	CharSetChipPattern name[9] 2
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 500ms
+	TextTalk name[9] {
+		#86357v#1310F#12POh, Lugran!{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CamLookPos (27760, 200, -1960) 2000ms
+	Fork name[9] fork[1]:
+		CamZoom 2400 2000ms
+	ForkFunc char[0] fork[0] fn[0,4]
+	ForkWait char[0] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 300ms
+	TextTalk char[0] {
+		#94808v#633F#5PIs something the matter?{wait}
+	} {
+		#94809vIt's not like you to walk right up to the second
+		floor without even looking at the board and sit
+		quietly like this.{wait}
+	} {
+		#94810v#632FYou're not feeling sick from eating too much
+		ice cream or something, are you?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86358v#819F#12PD-Don't be silly... I'm not a kid anymore,
+		you know.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94811v#633F#5PCould've fooled me!{wait}
+	} {
+		#94812v#631FI swear that you were the one who ate three
+		full scoops first thing one morning and later had
+		to go get some stomach medicine from Spence...{wait}
+	} {
+		#94813vMaybe my memory's playing tricks on me?{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[9] {
+		#86359v#1317F#12PHaha! Aha...ha...{wait}
+	} {
+		#86360vL-Let's all pretend that never happened,
+		okay?{wait}
+	} {
+		#86361v#817FBesides, that was back when I was a junior
+		bracer! That was forever ago!{wait}
+	} {
+		#86362v#816FI learned my lesson after that, I swear!
+		Now I never have more than one scoop
+		each morning!{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94814v#634F#5PYou're not supposed to have ice cream in
+		the morning at all, you know...{wait}
+	} {
+		#94815v#630F...Well, no matter.{wait}
+	} {
+		#94816vSo, what've you been doing up here all this 
+		time, anyway?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86363v#1310F#12POh, right...{wait}
+	} {
+		#86364v#811FWell, you see, I got a letter from my pappy
+		who lives a long way away this morning.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94817v#633F#5PReally, now?{wait}
+	} {
+		#94818vHe's a swordsman if I recall, isn't he?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86365v#819F#12PYup. He's an instructor.{wait}
+	} {
+		#86366v#816FHe's real famous among sword practitioners,
+		actually! Yun Ka-fai of the Eight Leaves One
+		Blade school.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94819v#631F#5PAh, yeah. That's the one.{wait}
+	} {
+		#94820vI was familiar with the name even before
+		meeting you, but I was quite surprised to
+		find out you were his granddaughter.{wait}
+	} {
+		#94821v#630FDidn't he used to live here in Liberl?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86367v#814F#12PI'm surprised you know about that!{wait}
+	} {
+		#86368v#1316FI can't say I have any memories
+		of when he was here, though.{wait}
+	} {
+		#86369vIt was around when I was born,
+		so how could I?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94822v#634F#5PThat long ago? I see...{wait}
+	} {
+		#94823v#630FSo, how's he doing? Well?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86370v#1314F#12PJudging by his letter, yeah. He's doing fine.{wait}
+	} {
+		#86371vI haven't had the chance to meet him in person
+		for about a year now...{wait}
+	} {
+		#86372v#819FLast time we had the chance to spar, I felt like
+		he was totally babying me. Even though he's,
+		like, seventy!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94824v#631F#5PHaha. He really must be skilled to be treating 
+		an active bracer that way.{wait}
+	} {
+		#94825v#632FHmm...{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86373v#810F#12PHuh? What's with the sudden serious face?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94826v#634F#5POh, it's nothing all that major, but I've been
+		wondering something for a while.{wait}
+	} {
+		#94827v#630FWhy do you stay here when you could join him?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86374v#814F#12PErr... Sorry. I'm lost.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94828v#630F#5PWell, it's just that you're aiming to improve your
+		swordsmanship, aren't you?{wait}
+	} {
+		#94829vIt feels like if you have a grandfather like that,
+		the fastest way to do that would be to go with
+		him and polish your skills at his side.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86375v#1317F#12PThat's... Well...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94830v#633F#5PI suppose it's not my place to be telling you
+		what may or may not be best for you.{wait}
+	} {
+		#94831v#634FSorry, Anelace. You needn't pay any attention
+		to an old man like me.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86376v#819F#12PNo, that's not true at all!{wait}
+	} {
+		#86377v#816FI really appreciate your advice, so please don't
+		think it's not your place to give it.{wait}
+	} {
+		#86378v#813FI can definitely see where you're coming from
+		on this.{wait}
+	} {
+		#86379vI do have my reasons for being here and all.
+		They're just a little difficult to explain...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94832v#633F#5POh?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86380v#1316F#12PI DO want to learn more about swordsmanship
+		and swords in general...{wait}
+	} {
+		#86381v...so in that sense, you're right that continuing
+		to train under Pappy would be both the best and
+		fastest course of action.{wait}
+	} {
+		#86382v#813FBut that's not all I want to do with my life.
+		I want at least as much, if not more, to know
+		more about what it means to be a bracer.{wait}
+	} {
+		#86383v#812FI guess it's a case of wanting to learn more
+		about swordsmanship as a bracer rather than
+		as a swordsman, if that makes sense.{wait}
+	} {
+		#86384v#1316FAm I even doing a good job of explaining this...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94833v#631F#5PNo, no. I think I see where you're coming from now,
+		actually.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86385v#1314F#12PBesides...{wait}
+	} {
+		#86386v#817F...Pappy once told me that he'd taught me all 
+		of the technical side of swordsmanship--forms,
+		crafts, and that kinda stuff--already.{wait}
+	} {
+		#86387vWhether I can master them or not is all down to
+		me now.{wait}
+	} {
+		#86388v#816FSo in that sense, I feel like there's no specific
+		need for me to train under him nowadays.{wait}
+	} {
+		#86389v#819FHeehee... Of course, whether I'm really advancing
+		in my swordsmanship now is another issue entirely.
+		I wish I could say for sure I was, but...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94834v#633F#5PHmm... I see...{wait}
+	} {
+		#94835v...{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86390v#1317F#12PU-Umm... What's with the silent treatment all
+		of a sudden?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94836v#634F#5PO-Oh, it's nothing.{wait}
+	} {
+		#94837v#630FYou're just not really one for these kinds of
+		serious discussions, so I was impressed to see
+		you were even capable of them.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86391v#1316F#12PH-Hey! I am SO capable!{wait}
+	} {
+		#86392v#812FBesides, you were the one who kind of pushed
+		me into talking about all this stuff first!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94838v#631F#5PHahaha! I'm glad I did, too.{wait}
+	} {
+		#94839v#630FAnyway, getting back to the point. What did
+		the letter even say, anyway?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86393v#814F#12POh, right...{wait}
+	} {
+		#86394v#819FW-Well, as surprising as it is...{wait}
+	} {
+		#86395v#1314F...it says that I should go and see Cassius Bright.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#94840v#633F#5PCassius...?{wait}
+	} {
+		#94841vThe one and only?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86396v#1316F#12PYep! That's right.{wait}
+	} {
+		#86397v#816FSupposedly, Pappy was invited by the Royal Army
+		to be a guest instructor at some point a long time
+		ago.{wait}
+	} {
+		#86398vThat's when he trained Cassius, too.{wait}
+	} {
+		#86399v#817FSo ever since, they've had this kinda student-
+		master relationship with one another...{wait}
+	} {
+		#86400v#1314FCassius even went out of his way to go and see
+		him ten years ago when he decided to stop using
+		a sword, too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94842v#633F#5PTen years ago?{wait}
+	} {
+		#94843v#634FThat would put that around when he left the
+		army and became a bracer, then.{wait}
+	} {
+		#94844v#632FWhat exactly prompted him to tell you to go
+		visit Cassius now, though?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86401v#819F#12PWell, I guess he only just recently found out
+		that Cassius has returned to the army.{wait}
+	} {
+		#86402vSo now he's wondering whether he might take
+		this opportunity to take up the sword again.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94845v#634F#5PHmm...{wait}
+	} {
+		#94846v#630FAhh, I got'cha. He wants you to go and ask
+		for him?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86403v#816F#12PAnd let him know what he says, yeah.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94847v#630F#5PI see...{wait}
+	} {
+		#94848v#631FPeople really do end up connected in the
+		strangest places and the funniest ways.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86404v#819F#12PAhaha... Tell me about it.{wait}
+	} {
+		#86405v#816FAnyway, that being said...{wait}
+	} {
+		#86406v...I...kind of have a favor to ask...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94849v#631F#5PYou want time off, I assume?{wait}
+	} {
+		#94850vWell, who am I to say no? You've got good cause
+		to have it.{wait}
+	} {
+		#94851vI can even get in touch with the army and set up
+		a meeting with Cassius if you want.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86407v#1310F#12PReally?!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94852v#634F#5PReally. Go along and get that truth your 
+		grandfather wants for him.{wait}
+	} {
+		#94853v#630FBut in return...{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86408v#814F#12PIn return...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94854v#631F#5PI want you to take care of every single one of the
+		monster extermination requests on the board first.{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86409v#1317F#12PE-EVERY single one?!{wait}
+	} {
+		#86410vAren't there, like, five of them right now?!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94855v#631F#5PSure, but the monsters in this area will be
+		no trouble at all for you as you are now.{wait}
+	} {
+		#94856v#630FThey'd be less of a problem if Grant were
+		around, but I had to lend him to the guild
+		over in Ruan, and he's still not back.{wait}
+	} {
+		#94857vYou're gonna have to pick up the slack here
+		in his place, especially if you want time off.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86411v#1316F#12P*sigh* Okaaay...{wait}
+	}
+	TextWait
+	Fork name[9] fork[1]:
+		CamZoom 2700 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Three days later...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	FlagSet flag[9477]
+	NewScene "c3100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (1240, 0, 4560) 0ms
+	CamSetDistance 0 5550 -10000 0ms
+	CamZoom 2520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 327 0ms
+	CharSetPos name[9] (0, 0, 2340) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (180, 0, 4400) 180deg
+	Fork name[9] fork[1]:
+		CamZoom 2320 2000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#94858v#631F#5P...Really? It sounds like that was quite the
+		fruitful experience.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86526v#819F#12PIt sure was.{wait}
+	} {
+		#86527v#1314FI'm guessing this was Pappy's plan all along.
+		He knew exactly what would happen if I went to
+		ask Cassius what I did, and that's why he asked.{wait}
+	} {
+		#86528vI must've sounded a little unsure of myself in the
+		last letter I wrote him...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94859v#634F#5PI see... Like master, like pupil.{wait}
+	} {
+		#94860v#630FIncidentally, while I hate to spring this on you
+		before you've even had a chance to settle back in,
+		a lot of work built up while you were away.{wait}
+	} {
+		#94861vThere's even a request from the mayor, too,
+		so I really need you to get right on it all.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86529v#1317F#12PAck...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#94862v#631F#5PHaha... If anything, you should be grateful!{wait}
+	} {
+		#94863vAll this work'll give you a chance to refine
+		your skills with that new mindset of yours,
+		won't it?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86530v#819F#12PAhaha... That's one way of looking at it, sure.{wait}
+	}
+	TextWait
+	Fork name[9] fork[1]:
+		CamZoom 2220 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#86531v{color 12}#40WSo, Pappy...{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86532v{color 12}#40WWhile I bet you knew all along, it looks like Cassius
+		has no intentions of taking up the way of the sword
+		ever again.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86533v{color 12}#40WBut thanks to seeing him, I ended up being given a
+		chance to reexamine my own swordsmanship.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86534v{color 12}#40WUp until now, I thought it was all about getting 
+		stronger. Or faster. Things like that.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86535v{color 12}#40WBut now, I've finally realized that what's far more
+		important than either of those things is why you 
+		take up your sword in the first place. Your feelings.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86536v{color 12}#40WI feel like now I finally understand why I was never
+		able to defeat you, no matter how many times we
+		fought.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		#86537v{color 12}#40WI might not be the best student in the world, but I'll
+		keep giving my training all I've got.
+		{}                                   Love, Anelace{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	TextWait
+	Sc_C4Unset 536870912
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 5 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Swordsmanship] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_E6_1 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	Sleep 1000ms
+	if !QuestFlagsGet quest[10] 0x20:
+		if flag[12198]:
+			QuestFlagsSet quest[10] 0x20
+			ItemAdd item[1424] 1
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Received {item item[1424]}{color 5}.{wait}
+			}
+			TextWait
+	if !QuestFlagsGet quest[10] 0x10:
+		QuestFlagsSet quest[10] 0x10
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}5,000 mira{color 5}.{wait}
+		}
+		TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5502._sn" 102 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (27170, 0, -2020) 0ms
+	CamSetDistance 0 5100 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 323 0ms
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[2] (26740, 200, -3610) 270deg
+	CharSetPos char[3] (24060, 200, -3580) 90deg
+	FadeIn 2000ms 0x00000000
+	CamZoom 2500 2000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[3] {
+		#86538v#1317F#6PU-Umm... Mayor Maybelle?{wait}
+	} {
+		#86539v#819FCan I ask you to go over what you want me to do
+		one more time? Just so I'm not misunderstanding.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94635v#615F#11P*cough* W-Well...{wait}
+	} {
+		#94636v#618FAs I said, I would like to investigate...erm...
+		exactly what relationship those two have...{wait}
+	} {
+		#94637v#612F...as well as what kind of person the gentleman
+		in question is.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86540v#1316F#6PSo, to put it in simpler terms...{wait}
+	} {
+		#86541v...you want me to check out whether they're
+		dating and do a background check on the man,
+		right?{wait}
+	} {
+		#86542v#812FIs that right?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94638v#615F#11PY-Yes... Yes, it is.{wait}
+	} {
+		#94639v#612FI-Is there something wrong?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86543v#1316F#6P...{wait}
+	} {
+		#86544v#813FWell, kinda...{wait}
+	} {
+		#86545v#1314FI mean, we bracers do at times do background
+		checks on people...{wait}
+	} {
+		#86546v...but that's when we suspect or know for sure
+		they're involved in a crime.{wait}
+	} {
+		#86547vIf they're not, doing so would be an invasion of
+		their privacy, and that doesn't exactly fly with
+		us.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94640v#613F#11POh...{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86548v#817F#6PObviously, if you have reason to believe the
+		man Lila appears to be dating is involved in
+		illegal activity, I'd be happy to help...{wait}
+	} {
+		#86549v#812FIs that the case, though?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94641v#618F#11PN-No...{wait}
+	} {
+		#94642vOn the contrary, actually. He appears to be
+		a good, honest man.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86550v#1316F#6PI-I see...{wait}
+	} {
+		#86551v#1314FThere's obviously going to be the chance that's
+		just a facade and he's not the kind of person he
+		appears to be...{wait}
+	} {
+		#86552v...but as it stands, I don't see any grounds for
+		the guild to make their move.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94643v#615F#11PThat is unfortunate...but I can certainly see
+		where you're coming from.{wait}
+	} {
+		#94644v#610FI'm sorry for troubling you with this. I don't know
+		what came over me.{wait}
+	} {
+		#94645v#617FPlease, forget this conversation ever happened.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86553v#1317F#6PU-Umm...{wait}
+	} {
+		#86554v#819F...Forgive me for asking this, but you're all in
+		favor of them dating, right? You're not trying 
+		to break them up or something?{wait}
+	} {
+		#86555vSo why are you so concerned with finding all
+		this out?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94646v#615F#11P...{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	TextTalk char[2] {
+		#94647v#618F#11PAs I think you're aware, Lila lost her mother
+		and father during the Hundred Days War.{wait}
+	} {
+		#94648vAs far as I can tell, the scars that left on her
+		heart still haven't truly healed, either.{wait}
+	}
+	TextWait
+	Emote char[3] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[3] {
+		#86556v#1317F#6P...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94649v#615F#11PAnd I believe this is her first foray into romantic
+		relationships, too...{wait}
+	} {
+		#94650vI'm just so worried about her getting hurt as a
+		result of this.{wait}
+	} {
+		#94651v#618FI'm not the slightest concerned about how noble
+		the man's family is or how much money they have.
+		Nothing superficial like that.{wait}
+	} {
+		#94652vAll I want to know is whether he genuinely cares
+		for her well-being and will make her happy.{wait}
+	} {
+		#94653v#610FThat's all that matters to me.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86557v#813F#6PI see where you're coming from...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94654v#617F#11PStill, at the end of the day, that doesn't give
+		me the excuse to invade the man's privacy or
+		meddle in their affairs.{wait}
+	} {
+		#94655v#611FI'm sure Lila will eventually tell me about what's
+		going on when she feels the time is right.{wait}
+	} {
+		#94656vI can ask her all of my questions then.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86558v#817F#6P...Nah. This is good stuff.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94657v#613F#11PWhat do you mean?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86559v#816F#6PI COMPLETELY understand where you're coming
+		from here!{wait}
+	} {
+		#86560v#815FI'd be MORE than happy to accept your request!{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 800ms
+	Emote char[2] 0mm 1700mm 40 43 100ms 3
+	Sleep 800ms
+	TextTalk char[2] {
+		#94658v#618F#11PWait. I thought...erm...{wait}
+	} {
+		#94659v#612FAre you sure? Wouldn't doing so violate the
+		bracer code?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86561v#816F#6POh, no worries! The bracer code's totally open
+		to individual interpretation, so it leaves a lot to
+		each bracer's personal judgment.{wait}
+	} {
+		#86562v#1316FI feel trying to follow the code to the letter and
+		ignoring the feelings of those we're trying to
+		serve misses the point of being a bracer, too.{wait}
+	} {
+		#86563v#1310FSo I don't think it's unfair to dismiss your well-
+		meaning intentions as trying to invade someone's
+		privacy, either!{wait}
+	} {
+		#86564v#811FYou leave all of this to me! I'll get you aaall kinds
+		of answers!{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94660v#611F#11PThank you so much...{wait}
+	} {
+		#94661v#617FI appreciate you agreeing to do this for me. Really.{wait}
+	} {
+		#94662v#610FJust know that I completely understand where you
+		were coming from earlier, so I do want to ask that
+		you invade his privacy no more than necessary.{wait}
+	} {
+		#94663vIs that fair?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#86565v#816F#6PPerfect-o!{wait}
+	} {
+		#86566v#819FHeehee. I hope this turns out to be something
+		that'll really make her happy.{wait}
+	}
+	TextWait
+	Fork char[3] fork[1]:
+		CamZoom 2800 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	BgmWait
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WAnd that was the day Anelace agreed to accept the
+		mayor's request, immediately--and enthusiastically--
+		beginning her investigation.{wait}
+	} {
+		Naturally, she was very cautious not to make both Lila
+		and her presumed partner suspicious in the process.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	FlagSet flag[9476]
+	NewScene "t1131._sn" 0 0 0
+	Hcf
+	Return

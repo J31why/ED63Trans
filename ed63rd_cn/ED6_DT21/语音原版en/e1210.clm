@@ -1,0 +1,1116 @@
+calmare tc scena
+scena:
+	name "event" "E1210.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20610._ch" "apl2/ch20610p._cp"
+chip[1] "apl2/ch20744._ch" "apl2/ch20744p._cp"
+
+npc char[0]:
+	name "Squire Marcia"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Squire Cesar"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Commander Selnate"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Squire"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Squire"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Squire"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		Event fn[0,4]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	if flag[9602] && system[4] == 8:
+		system[1] = 0
+	SoundPlay sound[122] 1 0 70
+	if flag[9602] && system[4] == 8:
+		SoundStop sound[451]
+		system[1] = 0
+		SoundStop sound[122]
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-160, 200, 6650) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-3150, 200, 6970) 315deg
+	CharSetPos name[8] (-210, 1500, -4500) 0deg
+	CharColor name[8] 0x00FFFFFF 0ms
+	CamLookPos (4150, 0, 6650) 0ms
+	CamSetDistance 0 4870 -10000 0ms
+	CamZoom 3140 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 305 0ms
+	ForkLoop name[8] fork[3]:
+		Shake 1 1 2000 100ms
+	_76 255 7 1 -6 -3 0 0 0
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	SoundPlay sound[109] 0 0 100
+	Sleep 500ms
+	ForkFunc name[8] fork[0] fn[0,3]
+	Sleep 500ms
+	Fork char[0] fork[0]:
+		CamLookPos (-30, 1500, 5630) 3500ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 6180 -10000 3500ms
+	Fork char[0] fork[2]:
+		CamZoom 2600 3500ms
+	Fork char[0] fork[3]:
+		CamPers 325 3500ms
+	ForkWait name[8] fork[0]
+	ForkWait char[0] fork[0]
+	CharSetChipPattern char[1] 1
+	Sleep 100ms
+	CharSetChipPattern char[0] 1
+	Sleep 150ms
+	TextTalk char[1] {
+		#99790v#5P#100PCongratulations on completing your operation,
+		sir.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99805v#5P#100PMy thoughts exactly.{wait}
+	} {
+		#99806vThat seemed to be a rather easy one for you
+		in the end, too.{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87850v#1075FCompared to what they're usually like, it was.{wait}
+	} {
+		#87851v#1066FIf I'd had a bit more time, I could've enjoyed some
+		private time with a real gem of a woman, too...but
+		I'll have to settle for crying myself to sleep tonight.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99791v#5P#100PNot this again...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99807v#5P#100PUnless you want another earful from the
+		commander, you might want to start taking
+		your work more seriously.{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87852v#1060FI know, I know. Lighten up a little, yeah?{wait}
+	} {
+		#87853vI swear, I'll never get how you hardheaded
+		types ended up assigned to a slacker like me.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99792v#5P#100P*sigh* This may come as a shock, but you ARE
+		a Dominion, you know. We can't very well have
+		you acting alone without any form of backup.{wait}
+	} {
+		#99793vAs long as you're here and this ship is under
+		your command, then slacker or not, we're here,
+		too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99808v#5P#100PEven then, you've got a lot less squires in your
+		service than you should have.{wait}
+	} {
+		#99809vMaybe you should take this chance to gather
+		up a few more?{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87854v#1068FI think I'm gonna have to pass.{wait}
+	} {
+		#87855v#1066FThat'll just make it even harder
+		for me to work on my own.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99810v#5P#100P*sigh* I thought you'd say that...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99794v#5P#100PWe'd prefer it if you would actually trust us
+		to help you a little more, sir...{wait}
+	} {
+		#99795vI mean, all we could do in that Salt Pale
+		operation was transport the thing.{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87856v#1065FYou say that as if transporting it isn't
+		a huge responsibility in itself.{wait}
+	} {
+		#87857v#1072F(After all, the last thing we wanted was
+		him catching wind of it and becoming
+		wary of us.){wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99796v#5P#100P...Is something wrong?{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87858v#1075FOh, not a thing.{wait}
+	} {
+		#87859v#1060FAnyway, as per the original plan, we need
+		to get ourselves back to Arteria a.s.a.p.{wait}
+	} {
+		#87860vWe should be able to reach there by noon 
+		tomorrow...or today now, I guess.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99811v#5PGot it.{wait}
+	}
+	TextWait
+	EffLoad eff[0] "map\\mp001_00.eff"
+	EffPlay eff[0] eff_instance[0] null 0 (-4400, 1150, 6600) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[171] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[171] 0 0 100
+	Sleep 500ms
+	EffStop eff_instance[0] 0
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote char[1] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	CharSetChipPattern char[1] 0
+	Sleep 50ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	CharSetChipPattern char[0] 0
+	Sleep 1000ms
+	TextTalkNamed name[8] "Father Kevin" {
+		#87861v#1063FWhere's it from?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99797v#5PArteria, apparently.{wait}
+	} {
+		#99798vIt's a call from Commander Selnate.{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87862v#1064FOh, you are KIDDING me...{wait}
+	} {
+		#87863v#1068F(Getting a call from her right after a mission
+		is always a bad, bad sign...){wait}
+	} {
+		#87864v#1060FLet's get this over with. Put her through.{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 1
+	Sleep 150ms
+	TextTalk char[1] {
+		#99799v#5P#100PAll right.{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 0
+	Sleep 150ms
+	SoundPlay sound[156] 0 0 100
+	Sleep 500ms
+	Fork char[1] fork[0]:
+		CamLookPos (1250, 2000, 3510) 3000ms
+	Fork char[1] fork[1]:
+		CamSetDistance 0 5340 -10000 3000ms
+	Fork char[1] fork[2]:
+		CamZoom 3140 3000ms
+	Fork char[1] fork[3]:
+		CamRotate 45000mdeg 3000ms
+	Fork char[0] fork[1]:
+		CamPers 262 3000ms
+	_ObjB0 object[0] 10
+	ObjFrame object[0] 0
+	ObjPlay object[0] 30
+	Sleep 300ms
+	SoundPlay sound[295] 0 0 100
+	Fork name[8] fork[0]:
+		CharTurnTo self 90deg 400deg/s
+	ObjWait object[0]
+	ForkWait char[1] fork[0]
+	Sleep 500ms
+	SoundPlay sound[157] 0 0 100
+	Sleep 200ms
+	CrossFade 500ms
+	_74 0 6 1
+	FadeWait
+	Sleep 500ms
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98543v{color 5}Evening, Kevin. It sounds like you did well.{wait}
+	} {
+		#98544vFill me in on the details.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "Father Kevin" {
+		#87865v#1060F#6P#100PIt basically went without issue.{wait}
+	} {
+		#87866vThe artifact was the Fool's Locket.{wait}
+	} {
+		#87867vThere were signs of society involvement,
+		but it looks like they've cut any ties with
+		him a long time ago.{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98545v{color 5}I see... As I thought, then.{wait}
+	} {
+		#98546vGood work all around. I'd say you deserve a
+		well-earned rest...but unfortunately, I can't
+		grant you one right now.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "Father Kevin" {
+		#87868v#1068F#6P#100P(Aaaaaand here we go...){wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98547v{color 5}Hmm? Is something the matter?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "Father Kevin" {
+		#87869v#1061F#6P#100POh, I'm just dandy. Please continue.{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98548v{color 5}Well, then. As much as I hate to spring this on
+		you immediately after finishing one mission...{wait}
+	} {
+		#98549v...I've got something I'd like you to do for me.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "Father Kevin" {
+		#87870v#1065F#6P#100PHmm...{wait}
+	} {
+		#87871v#1063FRegarding a heretic, I assume?{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98550v{color 5}Not this time. All I want you to do is pick
+		something up.{wait}
+	} {
+		#98551vThe object in question is currently being
+		held underneath Grancel Cathedral.{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalkNamed name[8] "Father Kevin" {
+		#87872v#1063F#6P#100PGrancel?!{wait}
+	} {
+		#87873vDo you think this object may be somehow
+		related to the Aureole?{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98552v{color 5}It's a distinct possibility.{wait}
+	} {
+		#98553vCan I count on you to handle this?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalkNamed name[8] "Father Kevin" {
+		#87874v#1065F#6P#100P...All right.{wait}
+	} {
+		#87875v#1060FThat said, we've already got one artifact on this
+		ship that needs transporting back, so I'll let the
+		crew here take that to Arteria.{wait}
+	} {
+		#87876vI'll handle going to Liberl on my own.{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98554v{color 5}That's fine with me.{wait}
+	} {
+		#98555vOh, incidentally...you won't actually be alone.
+		I've dispatched a rookie squire to aid you.{wait}
+	} {
+		#98556vThey'll be serving you from now on, so do play
+		nice, won't you?{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Emote name[8] 0mm 2000mm 40 43 100ms 3
+	Sleep 300ms
+	TextTalkNamed name[8] "Father Kevin" {
+		#87877v#1064F#6P#100PW-Wait a minute! Wait just ONE minute!{wait}
+	} {
+		#87878vYou can't just spring a rookie on me outta 
+		nowhere like this!{wait}
+	}
+	TextWait
+	TextSetPos 290 170 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98557v{color 5}Heh. Meetings ordained by the Goddess always
+		come suddenly and unannounced.{wait}
+	} {
+		#98558vDon't worry, though. They won't be a burden. 
+		The abilities they demonstrated during training
+		were truly something special.{wait}
+	} {
+		#98559vWell, I will be praying for your success.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	SoundPlay sound[157] 0 0 100
+	Sleep 200ms
+	CrossFade 500ms
+	_74 0 6 0
+	FadeWait
+	Sleep 500ms
+	TextTalkNamed name[8] "Father Kevin" {
+		#87879v#1064F#6P#100P...*gawp*...{wait}
+	}
+	TextWait
+	Fork char[0] fork[0]:
+		CamLookPos (-30, 1500, 5630) 2000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 6180 -10000 2000ms
+	Fork char[0] fork[2]:
+		CamZoom 2600 2000ms
+	Fork char[0] fork[3]:
+		CamRotate 45000mdeg 2000ms
+	Fork char[1] fork[3]:
+		CamPers 325 2000ms
+	ForkWait char[0] fork[0]
+	CharSetChipPattern char[1] 1
+	Sleep 100ms
+	CharSetChipPattern char[0] 1
+	Sleep 150ms
+	TextTalk char[1] {
+		#99800v#5P#100PHaha... Well...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99812v#5P#100PC-Congratulations on the new recruit?
+		We were only just saying you could do
+		with more squires serving you.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 0deg 400deg/s
+	TextTalkNamed name[8] "Father Kevin" {
+		#87880v#1068FAnd I was SO not down! I can't believe this...{wait}
+	} {
+		#87881v#1067F*sigh* She never changes, I swear.{wait}
+	} {
+		#87882vOh, if all the people reading that book had
+		any idea what a hellion she is in real life...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99813v#5P#100POh, Carnelia?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99801v#5P#100PI've always wondered whether publishing it
+		was really such a good idea, to be honest.{wait}
+	} {
+		#99802vIt's a complete advertisement saying we
+		exist to the world.{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87883v#1060FIf anything, I'd say a book that wild just serves
+		to make people LESS likely to believe we really
+		exist.{wait}
+	} {
+		#87884vAnd then the heroine died in it, which obviously
+		is a big, fat lie.{wait}
+	} {
+		#87885v#1068FIf they'd actually met her, they'd know she's the
+		kind of woman who could probably take a bullet
+		to the head and ask for a cigarette first thing.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99803v#5P#100PHaha...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99814v#5P#100PI...think we should probably refrain from
+		commenting here.{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87886v#1060FAnyway...you guys heard her.{wait}
+	} {
+		#87887vI'm gonna leave taking care of everything else
+		relating to our mission to you guys.{wait}
+	} {
+		#87888vJust follow the money trail--there might still
+		be hidden accounts we don't know about.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99804v#5P#100PUnderstood, sir.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99815v#5P#100PWhat will you be doing from here?{wait}
+	} {
+		#99816vWe'll need to return to Arteria, obviously,
+		but we can drop you off somewhere.{wait}
+	}
+	TextWait
+	TextTalkNamed name[8] "Father Kevin" {
+		#87889v#1075FYou can put me down in any old state we pass
+		on the way there.{wait}
+	} {
+		#87890v#1060FPreferably near a town that has international
+		flights going out of it, I guess.{wait}
+	}
+	TextWait
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	TextTalk char[0] {
+		#99817v#5P#100PGot it.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharSetChipPattern char[0] 0
+	Sleep 150ms
+	TextTalk char[0] {
+		#99818v#5P#100POh, it looks like the sun's started coming up.{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 2
+	Sleep 100ms
+	Sleep 500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "e0811._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-140, 1500, -930) 2000mm/s 0
+	SoundPlay sound[109] 0 0 100
+	CharWalkToPos2 self (-800, 2000, 1450) 2000mm/s 0
+	CharWalkToPos2 self (-850, 2000, 2790) 2000mm/s 0
+	ForkWait self fork[1]
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (-160, 200, 6650) 0deg
+	CharFlagsUnset char[4] 0x0080
+	CharSetPos char[4] (-3150, 200, 6970) 315deg
+	CharFlagsUnset char[5] 0x0080
+	CharSetPos char[5] (2920, 200, 6830) 45deg
+	CharFlagsSet char[2] 0x0004
+	CharFlagsSet char[2] 0x0002
+	CharFlagsSet char[2] 0x0001
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-100, 2200, 2400) 0deg
+	CharSetChipBase char[2] chip[1]
+	CharSetChipPattern char[2] 0
+	ForkFunc char[2] fork[0] fn[0,5]
+	ObjFlagsUnset object[2] 0x0004
+	ObjFrame object[0] 30
+	ObjFlagsUnset object[0] 0x0008
+	_74 0 6 3
+	ForkLoop char[3] fork[3]:
+		Shake 1 1 2000 100ms
+	_76 2 0 1 -3 -2 0 0 0
+	_76 2 1 1 -6 -3 0 0 0
+	_76 2 2 1 -8 -4 0 0 0
+	CamLookPos (4300, 0, 6750) 0ms
+	CamSetDistance 0 4870 -10000 0ms
+	CamZoom 3320 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 325 0ms
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98627v{color 0}I think I have a rough idea of the situation now.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 500ms
+	BgmPlay bgm[118] 0
+	FadeIn 2000ms 0x00000000
+	CamZoom 3090 2000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[2] {
+		#98628v#1824F#6PWe've been able to confirm the safety of the six
+		you mentioned.{wait}
+	} {
+		#98629vPrince Olivert Reise Arnor, Mueller Vander...{wait}
+	} {
+		#98630v...Zin Vathek, Josette Capua...{wait}
+	} {
+		#98631v...Estelle and Joshua Bright...{wait}
+	} {
+		#98632v#1820FAll of them have safely returned to our world.{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90357v{color 5}Really? That's a relief...{wait}
+	} {
+		#90358vI was able to confirm the safety of the ones who
+		ended up in Liberl myself--it was just those six
+		I was concerned about.{wait}
+	} {
+		#90359vWell, and the two from Ouroboros... But I'm not
+		sure either of us have any chance of checking up
+		on those two.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98633v#1825F#6PHaha. Unfortunately not.{wait}
+	} {
+		#98634v#1822FStill, this certainly wasn't what I was expecting to
+		happen when I gave you that mission.{wait}
+	} {
+		#98635vThe Aureole left us a nasty little present, didn't it?{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90360v{color 5}That's one way of putting it...{wait}
+	} {
+		#90361v...Either way, I'll give you my full report as soon
+		as I'm back.{wait}
+	} {
+		#90362vWrapping things up on my end seems like it'll
+		take a little while longer, but hopefully not too
+		long.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98636v#1825F#6PI'm looking forward to it.{wait}
+	}
+	TextWait
+	ForkQuit char[2] fork[0]
+	char[2].8 = 0
+	Sleep 100ms
+	char[2].8 = 4
+	Sleep 100ms
+	char[2].8 = 5
+	Sleep 100ms
+	char[2].8 = 6
+	Sleep 300ms
+	Sleep 300ms
+	TextTalk char[2] {
+		#98637v#1826F#6P...You know, you've changed since I last
+		spoke to you. I'm quite surprised.{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90363v{color 5}Huh?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98638v#1825F#6PThe Kevin I know wouldn't care to know whether
+		those he'd been involved with were safe or not.{wait}
+	} {
+		#98639vOr rather, he'd try and suppress those concerns.{wait}
+	} {
+		#98640v#1820FI can only imagine a lot must have happened in
+		this 'Phantasma.'{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90364v{color 5}Haha... That's putting it lightly.{wait}
+	} {
+		#90365vI'll fill you in on all of it once I get back,
+		like I said.{wait}
+	} {
+		#90366v...I've got something I want to tell you on
+		a personal level, too.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98641v#1823F#6POh? Color me curious.{wait}
+	} {
+		#98642v#1825FRegardless, I'm glad you two returned safely.{wait}
+	} {
+		#98643v#1821FPerhaps we should all go and get some drinks
+		together after you return.{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90367v{color 5}Haha. I'd be happy to.{wait}
+	} {
+		#90368v...Oh, yeah... I've actually got something
+		I want to ask.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98644v#1820F#6PHmm?{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90369v{color 5}Umm... Well...{wait}
+	} {
+		#90370v...is it possible for a Dominion to change
+		their title after choosing one?{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote char[2] 150mm 1500mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[2] fork[1]:
+		CharAnimation self 6 9 1800ms
+	Sleep 500ms
+	TextTalk char[2] {
+		#98645v#1823F#6PWhat's this, now?{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90371v{color 5}I just... I've found something other than hunting
+		heretics I want to do, you see.{wait}
+	} {
+		#90372vI still intend to fulfill my duties as a Dominion to
+		the fullest, don't worry about that. Just...{wait}
+	}
+	TextWait
+	TextClose 0
+	Emote char[2] -50mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	char[2].8 = 10
+	Sleep 80ms
+	char[2].8 = 11
+	Sleep 80ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	char[2].8 = 13
+	Sleep 60ms
+	char[2].8 = 14
+	Sleep 60ms
+	char[2].8 = 12
+	Sleep 60ms
+	TextTalk char[2] {
+		#98646v#1825F#6P#40W...Haha...Hahaha....{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CamLookPos (4300, 0, 6900) 0ms
+	CharFlagsUnset char[2] 0x0800
+	CharFlagsUnset char[2] 0x0001
+	CharSetPos char[2] (-250, 2000, 2600) 45deg
+	CharSetChipPattern char[2] 16
+	FadeWait
+	ForkFunc char[2] fork[0] fn[0,6]
+	ForkQuit char[3] fork[3]
+	TextTalk char[2] {
+		#98647v#1827F#6P#4SHahahahahahaha!{wait}
+	}
+	Shake 50 50 3000 500ms
+	TextWait
+	ForkLoop char[3] fork[3]:
+		Shake 1 1 2000 100ms
+	Emote char[3] 0mm 1700mm 40 43 100ms 3
+	Emote char[4] 0mm 1700mm 40 43 100ms 3
+	Emote char[5] 0mm 1700mm 40 43 100ms 3
+	Sleep 1000ms
+	CharSetChipPattern char[4] 1
+	Sleep 100ms
+	CharSetChipPattern char[3] 1
+	Sleep 150ms
+	TextTalk char[4] {
+		#99960v#2PC-Commander...?{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90373v{color 5}Erm... Sooo, that's a 'no,' probably.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	char[2].8 = 21
+	Sleep 100ms
+	char[2].8 = 22
+	Sleep 200ms
+	Sleep 300ms
+	TextTalk char[2] {
+		#98648v#1825F#6PHaha... A Dominion wanting to change their title,
+		eh?{wait}
+	} {
+		#98649vIn the thousand years the Gralsritter has existed,
+		that's not something that has happened often.{wait}
+	} {
+		#98650v#1821F...But it's not entirely unprecedented, either.{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90374v{color 5}Then...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk char[2] {
+		#98651v#1826F#6PHaha. Go ahead and think up something fitting
+		for yourself before we next meet.{wait}
+	} {
+		#98652vIf you fail to, I'll give you a new one myself as
+		punishment. And trust me--you won't like it.{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90375v{color 5}If I'd known you were going to say that,
+		I would've thought of something before
+		asking!{wait}
+	} {
+		#90376vWell, I guess I'd better get to work on
+		thinking up something cool.{wait}
+	} {
+		#90377vWhat do you think of 'Blue Shooting Star'?
+		Or maybe  'Black Arrow'?{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	char[2].8 = 22
+	Sleep 120ms
+	char[2].8 = 23
+	Sleep 120ms
+	char[2].8 = 24
+	Sleep 120ms
+	char[2].8 = 25
+	Sleep 120ms
+	Sleep 300ms
+	Emote char[3] 0mm 1700mm 24 27 250ms 0
+	Emote char[4] 0mm 1700mm 24 27 250ms 0
+	Emote char[5] -150mm 1700mm 24 27 250ms 0
+	Emote char[2] -360mm 2200mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[2]
+	EmoteStop char[3]
+	EmoteStop char[4]
+	EmoteStop char[5]
+	Sleep 500ms
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90378v{color 5}Wh-What's with the awkward silence?{wait}
+	}
+	TextWait
+	TextClose 0
+	char[2].8 = 24
+	Sleep 120ms
+	char[2].8 = 23
+	Sleep 120ms
+	char[2].8 = 22
+	Sleep 120ms
+	Sleep 300ms
+	TextTalk char[2] {
+		#98653v#1824F#6P...Father Kevin.{wait}
+	} {
+		#98654v#1821FAs your former instructor, allow to me to give
+		you one piece of heartfelt advice.{wait}
+	}
+	TextWait
+	TextSetPos -1 85 -1 -1
+	TextSetName "Kevin's Voice"
+	TextMessage null {
+		#90379v{color 5}...Sure?{wait}
+	}
+	TextWait
+	TextClose 0
+	Fork party[0] fork[2]:
+		CamZoom 3000 2000ms
+	Fork party[0] fork[2]:
+		CamZoom 2900 2000ms
+	FadeOut 2000ms 0x00000000 255
+	SoundSetVolume sound[122] 60
+	Sleep 200ms
+	SoundSetVolume sound[122] 50
+	Sleep 200ms
+	SoundSetVolume sound[122] 40
+	Sleep 200ms
+	SoundSetVolume sound[122] 30
+	Sleep 200ms
+	SoundSetVolume sound[122] 20
+	Sleep 200ms
+	SoundSetVolume sound[122] 10
+	Sleep 200ms
+	SoundStop sound[122]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9477]
+	NewScene "e0810._sn" 100 0 0
+	Hcf
+	ForkWait party[0] fork[2]
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Commander Selnate"
+	TextMessage null {
+		#98655v{color 0}Unless you want to live the rest of your life in
+		abject shame...{wait}
+	} {
+		#98656v...for the love of Aidios, get Ries to help you
+		choose.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	BgmStop 5000ms
+	BgmWait
+	Sleep 3000ms
+	BgmPlay bgm[1] 0
+	VisShow vis[0] 0 0 640 1024 0 0 1024 1024 0 0 640 1024 0x00FFFFFF 0 "C_VIS477._CH"
+	VisShow vis[1] 0 0 640 480 150 120 768 512 0 0 640 480 0x00FFFFFF 1 "C_VIS478._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 7 0 -320000 7000 0
+	VisWait vis[0] 0
+	Sleep 2000ms
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 3000ms
+	TextClose 2
+	VisSet vis[0] 3 0x00FFFFFF 2500ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 3000ms 0 0
+	Sleep 4000ms
+	FlagSet flag[11303]
+	FlagSet flag[9602]
+	Sc_C4Set 16
+	system[40] = 24
+	system[49] = 349
+	FlagSet flag[9474]
+	ScAchievement 8 0 0
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Save Clear Data?{0x18}{wait}
+	}
+	Menu menu[0] -1 180 0
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	MenuClose menu[0]
+	if var[0] == 0:
+		TcTeamUse 3
+		Save
+		EventBegin 4
+	system[40] = 65535
+	Sc_C4Unset 16
+	FlagUnset flag[9602]
+	FadeOut 0ms 0x00000000 255
+	TextClose 0
+	BgmStop 3000ms
+	BgmWait
+	Sleep 3000ms
+	ReturnToTitle 1
+	Return
+
+fn[5]:
+	while 1:
+		char[2].8 = 0
+		Sleep 300ms
+		char[2].8 = 1
+		Sleep 300ms
+		char[2].8 = 2
+		Sleep 300ms
+		char[2].8 = 1
+		Sleep 300ms
+	Return
+
+fn[6]:
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	char[2].8 = 18
+	Sleep 60ms
+	char[2].8 = 19
+	Sleep 60ms
+	char[2].8 = 17
+	Sleep 60ms
+	Return

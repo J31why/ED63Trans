@@ -1,0 +1,886 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M4110.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14360._ch" "mons2/ch14360p._cp"
+chip[1] "mons2/ch14360._ch" "mons2/ch14360p._cp"
+chip[2] "mons2/ch14690._ch" "mons2/ch14690p._cp"
+chip[3] "mons2/ch14691._ch" "mons2/ch14691p._cp"
+chip[4] "mons2/ch14460._ch" "mons2/ch14460p._cp"
+chip[5] "mons2/ch14461._ch" "mons2/ch14461p._cp"
+chip[6] "mons2/ch14620._ch" "mons2/ch14620p._cp"
+chip[7] "mons2/ch14621._ch" "mons2/ch14621p._cp"
+chip[8] "mons2/ch14630._ch" "mons2/ch14630p._cp"
+chip[9] "mons2/ch14631._ch" "mons2/ch14631p._cp"
+chip[10] "mons2/ch14010._ch" "mons2/ch14010p._cp"
+chip[11] "mons2/ch14011._ch" "mons2/ch14011p._cp"
+
+monster char[0]:
+	name ""
+	pos (-2320, 0, -5480)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[600]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (10670, -20, 23680)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[605]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-22750, 0, 29730)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[601]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-8610, 0, -37690)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[604]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-44400, 500, 7650)
+	radius 1500mm
+	bubble_pos (-44400, 4000, 7650)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+look_point[1]:
+	pos (7980, 0, 17210)
+	radius 1000mm
+	bubble_pos (7980, 1000, 17210)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+fn[0]:
+	if system[66] == 255:
+		switch system[0]:
+			case 103:
+				Event fn[0,7]
+				break
+	switch system[0]:
+		case 100:
+			SystemFlagsSet 0x10000000
+			break
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		_B6 0
+		system[1] = 173
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	MapSet 4000 (-138000, null, -128000) "mc4100._ch"
+	if !flag[11040]:
+		ObjFlagsSet object[1] 0x0004
+		EffStop eff_instance[136] 0
+	if !flag[11040]:
+		_79 object[0] 2
+		_7B
+	char[0].36 = 225
+	if !flag[11164]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (-45540, 2600, 6230) 0ms
+	CamSetDistance 0 6280 -10000 0ms
+	CamZoom 2500 0ms
+	CamRotate 225000mdeg 0ms
+	CamPers 376 0ms
+	Fork party[0] fork[0]:
+		CamLookPos (-45540, 600, 6230) 5000ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 4660 -10000 5000ms
+	Fork party[0] fork[2]:
+		CamZoom 2230 5000ms
+	Fork party[0] fork[3]:
+		CamPers 376 5000ms
+	FadeIn 1500ms 0x00000000
+	FadeWait
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	Fork party[0] fork[2]:
+		CamZoom 2000 3000ms
+	SoundPlay sound[215] 0 0 100
+	CrossFade 1000ms
+	ObjFlagsUnset object[1] 0x0004
+	EffPlay eff[136] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	_7A object[0] 2
+	_7B
+	FadeWait
+	Sleep 1500ms
+	FadeOut 1500ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9476]
+	NewScene "m3204._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	CrossFade 500ms
+	CamLookPos (-45100, 250, 6960) 0ms
+	CamSetDistance 0 4800 -10000 0ms
+	CamZoom 2690 0ms
+	CamRotate 225000mdeg 0ms
+	CamPers 348 0ms
+	if PartyPosition name[1] != -1:
+		CharSetPos name[1] (-42310, 0, 9750) 225deg
+		if CharInSlot 0 party[1] == 1:
+			CharSetPos name[8] (-40950, 0, 9840) 225deg
+			CharSetPos party[2] (-42200, 0, 11190) 225deg
+			CharSetPos party[3] (-40780, 0, 11320) 225deg
+		elif CharInSlot 0 party[2] == 1:
+			CharSetPos name[8] (-40950, 0, 9840) 225deg
+			CharSetPos party[1] (-42200, 0, 11190) 225deg
+			CharSetPos party[3] (-40780, 0, 11320) 225deg
+		elif CharInSlot 0 party[3] == 1:
+			CharSetPos name[8] (-40950, 0, 9840) 225deg
+			CharSetPos party[1] (-42200, 0, 11190) 225deg
+			CharSetPos party[2] (-40780, 0, 11320) 225deg
+	else:
+		CharSetPos name[8] (-42310, 0, 9750) 225deg
+		CharSetPos party[1] (-40950, 0, 9840) 225deg
+		CharSetPos party[2] (-42200, 0, 11190) 225deg
+		CharSetPos party[3] (-40780, 0, 11320) 225deg
+	FadeWait
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}The face of the monument is glowing, and words are visible upon its surface.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99881v{color 2}#40WIn my lord's place, I, the Schwarzritter,
+		do decree:
+		#500W 
+		#40W Here lies the Black Ark.
+		#500W 
+		#40W       Place your hand on this monument,
+		the orphan of a lost village among your number.{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	if PartyPosition name[1] != -1:
+		FlagSet flag[11042]
+		TextTalk name[1] {
+			#78042v#1504F#6P#3S!!!{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#89618v#1069F#6PWha...?!{wait}
+	}
+	TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#76761v#1020F#6PTh-That's...!{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84306v#216F#6PTh-That's...!{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81429v#1164F#6PTh-That's...!{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#79050v#1523F#6PTh-That's...!{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#80604v#055F#6PW-Wait a sec! Isn't that...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83737v#072F#6PTh-That's...!{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#80031v#1542F#6PBut that's...{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85673v#273F#6P...What?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#82948v#065F#6PTh-That's...!{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#91048v#262F#6PBut that's...{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#86925v#112F#6PTh-That's...!{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#85026v#172F#6PTh-That's...!{wait}
+		}
+		TextWait
+	if PartyPosition name[14] != -1 | PartyPosition name[9] != -1:
+		if PartyPosition name[14] != -1 && PartyPosition name[9] != -1:
+			TextTalk name[14] {
+				#92459v#1444F#6PHuh...?{wait}
+			}
+			TextWait
+			TextTalk name[9] {
+				#86211v#814F#6PWhat's wrong?{wait}
+			}
+			TextWait
+		elif PartyPosition name[14] != -1:
+			TextTalk name[14] {
+				#92460v#1444F#6PHuh...?{wait}
+			} {
+				#92461vIs something wrong?{wait}
+			}
+			TextWait
+		elif PartyPosition name[9] != -1:
+			TextTalk name[9] {
+				#86212v#814F#6PHuh...?{wait}
+			} {
+				#86213vIs something wrong?{wait}
+			}
+			TextWait
+		TextTalk name[8] {
+			#89619v#1067F#5PW-Well, it's just...{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1:
+		Sleep 500ms
+		TextTalk name[1] {
+			#78043v#1503F#5P...{wait}
+		} {
+			#78044v#1513FThe Schwarzritter's waiting for us in here.{wait}
+		} {
+			#78045v#1514FAnd for some reason, he really wants me
+			to come and see him.{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#89620v#1065F#6PYep. That about sums it up.{wait}
+		} {
+			#89621v#1063FSo...the choice is yours, Joshua.{wait}
+		}
+		TextWait
+		CharTurnTo name[1] 45deg 400deg/s
+		Sleep 300ms
+		TextTalk name[1] {
+			#78046v#1505F#5PNaturally, I'll be accepting his invitation.{wait}
+		} {
+			#78047v#1500FAs soon as you're all ready, let me know.
+			Then I'll touch the monument.{wait}
+		}
+		TextWait
+		if PartyPosition name[0] != -1:
+			TextTalk name[0] {
+				#76762v#1026F#6PJoshua...{wait}
+			}
+			TextWait
+		if PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#84307v#215F#6PU-Umm...{wait}
+			}
+			TextWait
+		if PartyPosition name[4] != -1:
+			TextTalk name[4] {
+				#81430v#1163F#6PJoshua...{wait}
+			}
+			TextWait
+		if PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#82949v#063F#6PJ-Joshua...{wait}
+			}
+			TextWait
+		if PartyPosition name[15] != -1:
+			TextTalk name[15] {
+				#91049v#1307F#6P...You're sure?{wait}
+			}
+			TextWait
+		if PartyPosition name[0] != -1 | PartyPosition name[10] != -1 | PartyPosition name[4] != -1 | PartyPosition name[6] != -1 | PartyPosition name[15] != -1:
+			TextTalk name[1] {
+				#78048v#1513F#5PI am. No matter what happens, I'll be fine.{wait}
+			} {
+				#78049v#1500FAll we can do now is keep moving forward,
+				and that's what I intend to do.{wait}
+			}
+			TextWait
+	else:
+		Sleep 500ms
+		TextTalk name[8] {
+			#89622v#1065F#5P(The orphan of a lost village? Well, this is the
+			most obvious one so far.){wait}
+		}
+		TextWait
+		CharTurnTo name[8] 45deg 400deg/s
+		Sleep 300ms
+		TextTalk name[8] {
+			#89623v#1063F#5PWe should head back to the garden and speak
+			to Joshua. {wait}
+		} {
+			#89624vWe can decide what to do then.{wait}
+		}
+		TextWait
+		if PartyPosition name[0] != -1:
+			TextTalk name[0] {
+				#76763v#1007F#6P...Yeah...{wait}
+			}
+			TextWait
+		elif PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#84308v#413F#6PY-Yeah...{wait}
+			}
+			TextWait
+		elif PartyPosition name[4] != -1:
+			TextTalk name[4] {
+				#81431v#1169F#6P...Right...{wait}
+			}
+			TextWait
+		elif PartyPosition name[2] != -1:
+			TextTalk name[2] {
+				#79051v#1532F#6P...Yeah...{wait}
+			}
+			TextWait
+		elif PartyPosition name[5] != -1:
+			TextTalk name[5] {
+				#80605v#552F#6P...Yeah...{wait}
+			}
+			TextWait
+		elif PartyPosition name[7] != -1:
+			TextTalk name[7] {
+				#83738v#074F#6P...Yeah...{wait}
+			}
+			TextWait
+		elif PartyPosition name[3] != -1:
+			TextTalk name[3] {
+				#80032v#1542F#6PIndeed...{wait}
+			}
+			TextWait
+		elif PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#85674v#272F#6P...Indeed.{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#82950v#561F#6PR-Right...{wait}
+			}
+			TextWait
+		elif PartyPosition name[15] != -1:
+			TextTalk name[15] {
+				#91050v#268F#6P...All right.{wait}
+			}
+			TextWait
+		elif PartyPosition name[11] != -1:
+			TextTalk name[11] {
+				#86926v#115F#6PIndeed...{wait}
+			}
+			TextWait
+		elif PartyPosition name[13] != -1:
+			TextTalk name[13] {
+				#85027v#176F#6PIndeed...{wait}
+			}
+			TextWait
+		if PartyPosition name[14] != -1 && PartyPosition name[9] != -1:
+			TextTalk name[9] {
+				#86214v#1317F#6P(I-I feel like I'm missing something...){wait}
+			}
+			TextWait
+			TextTalk name[14] {
+				#92462v#1445F#6P(As do I...){wait}
+			}
+			TextWait
+		elif PartyPosition name[14] != -1:
+			TextTalk name[14] {
+				#92463v#1445F#6P(I feel as though I'm missing something.){wait}
+			}
+			TextWait
+		elif PartyPosition name[9] != -1:
+			TextTalk name[9] {
+				#86215v#1317F#6P(I-I feel like I'm missing something...){wait}
+			}
+			TextWait
+	FlagSet flag[11041]
+	QuestTaskSet quest[58] 0x0002
+	QuestTaskSet quest[58] 0x0004
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[4]:
+	EventBegin 0
+	CrossFade 500ms
+	CamLookPos (-45100, 250, 6960) 0ms
+	CamSetDistance 0 5420 -10000 0ms
+	CamZoom 2470 0ms
+	CamRotate 225000mdeg 0ms
+	CamPers 348 0ms
+	CharSetPos name[8] (-42320, 0, 9790) 225deg
+	if CharInSlot 0 party[1] == 1:
+		CharSetPos party[1] (-43440, 480, 8590) 225deg
+		CharSetPos party[2] (-41000, 0, 10170) 225deg
+		CharSetPos party[3] (-41900, 0, 11120) 225deg
+	elif CharInSlot 0 party[2] == 1:
+		CharSetPos party[2] (-43440, 480, 8590) 225deg
+		CharSetPos party[1] (-41000, 0, 10170) 225deg
+		CharSetPos party[3] (-41900, 0, 11120) 225deg
+	elif CharInSlot 0 party[3] == 1:
+		CharSetPos party[3] (-43440, 480, 8590) 225deg
+		CharSetPos party[1] (-41000, 0, 10170) 225deg
+		CharSetPos party[2] (-41900, 0, 11120) 225deg
+	FadeWait
+	Sleep 300ms
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99882v{color 2}#40WIn my lord's place, I, the Schwarzritter,
+		do decree:
+		#500W 
+		#40W Here lies the Black Ark.
+		#500W 
+		#40W       Place your hand on this monument,
+		the orphan of a lost village among your number.{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	if !flag[11043]:
+		FadeIn 300ms 0x00000000
+		FadeWait
+		Sleep 300ms
+		TextTalk name[1] {
+			#78065v#1502F#6P...{wait}
+		}
+		TextWait
+		FadeOut 300ms 0x00000000 100
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 -1 1
+			"Touch the monument" // 0
+			"Step away" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		FadeIn 300ms 0x00000000
+		FadeWait
+		switch var[0]:
+			case 0:
+				CrossFade 1000ms
+				SoundPlay sound[215] 0 0 100
+				EffPlay eff[136] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+				FadeWait
+				Sleep 1000ms
+				EffLoad eff[0] "map\\mp200_01.eff"
+				if !flag[11043]:
+					Fork party[0] fork[3]:
+						CamLookPos (-45100, 10000, 6960) 6000ms
+				if CharInSlot 0 party[1] == 1:
+					EffPlay eff[0] eff_instance[255] party[1] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[1] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] name[8] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork name[8] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] party[2] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[2] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] party[3] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[3] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+				elif CharInSlot 0 party[2] == 1:
+					EffPlay eff[0] eff_instance[255] party[2] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[2] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] name[8] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork name[8] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] party[1] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[1] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] party[3] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[3] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+				elif CharInSlot 0 party[3] == 1:
+					EffPlay eff[0] eff_instance[255] party[3] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[3] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] name[8] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork name[8] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] party[1] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[1] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+					Sleep 300ms
+					EffPlay eff[0] eff_instance[255] party[2] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+					SoundPlay sound[153] 0 0 100
+					SoundPlay sound[184] 0 0 100
+					Fork party[2] fork[1]:
+						CharColor self 0x00FFFFFF 800ms
+				if !flag[11043]:
+					Sleep 1500ms
+				else:
+					Sleep 500ms
+				FadeOut 1000ms 0x00000000 255
+				FadeWait
+				NewScene "m5408._sn" 103 0 0
+				Hcf
+				var[0] = 255
+				break
+			default:
+				Sleep 500ms
+				var[0] = 255
+				break
+	EventEnd 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	CrossFade 500ms
+	CamLookPos (-43550, 0, 6920) 0ms
+	CamSetDistance 0 6510 -10000 0ms
+	CamZoom 2500 0ms
+	CamRotate 179000mdeg 0ms
+	CamPers 339 0ms
+	CharSetPos field_party[0] (-43470, 490, 8880) 225deg
+	CharSetPos field_party[1] (-42470, 0, 10010) 225deg
+	CharSetPos field_party[2] (-41040, 0, 10440) 225deg
+	CharSetPos field_party[3] (-42120, 0, 11800) 225deg
+	FadeWait
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 -1 1
+			"Touch the monument" // 0
+			"Step away" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		FadeIn 300ms 0x00000000
+		FadeWait
+		switch var[0]:
+			case 0:
+				CrossFade 1000ms
+				SoundPlay sound[215] 0 0 100
+				EffPlay eff[136] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+				FadeWait
+				Sleep 1000ms
+				EffLoad eff[0] "map\\mp200_01.eff"
+				EffPlay eff[0] eff_instance[255] field_party[0] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+				SoundPlay sound[153] 0 0 100
+				SoundPlay sound[184] 0 0 100
+				Fork field_party[0] fork[1]:
+					CharColor self 0x00FFFFFF 800ms
+				Sleep 300ms
+				EffPlay eff[0] eff_instance[255] field_party[1] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+				SoundPlay sound[153] 0 0 100
+				SoundPlay sound[184] 0 0 100
+				Fork field_party[1] fork[1]:
+					CharColor self 0x00FFFFFF 800ms
+				Sleep 300ms
+				EffPlay eff[0] eff_instance[255] field_party[2] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+				SoundPlay sound[153] 0 0 100
+				SoundPlay sound[184] 0 0 100
+				Fork field_party[2] fork[1]:
+					CharColor self 0x00FFFFFF 800ms
+				Sleep 300ms
+				EffPlay eff[0] eff_instance[255] field_party[3] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+				SoundPlay sound[153] 0 0 100
+				SoundPlay sound[184] 0 0 100
+				Fork field_party[3] fork[1]:
+					CharColor self 0x00FFFFFF 800ms
+				Sleep 500ms
+				FadeOut 1000ms 0x00000000 255
+				FadeWait
+				NewScene "m5408._sn" 103 0 0
+				Hcf
+				var[0] = 255
+				break
+			default:
+				Sleep 500ms
+				var[0] = 255
+				break
+	EventEnd 0
+	Return
+
+fn[6]:
+	if flag[11051]:
+		Call fn[0,5]
+		Return
+	if flag[11042]:
+		if PartyPosition name[1] != -1:
+			Call fn[0,4]
+			Return
+		TextStart null
+		Sleep 300ms
+		FadeOut 300ms 0x00000000 100
+		Sc_C4Set 2048
+		TextSetName ""
+		TextSetPos -1 60 -1 -1
+		TextMessage null {
+			#99881v{color 2}#40WIn my lord's place, I, the Schwarzritter,
+			do decree:
+			#500W 
+			#40W Here lies the Black Ark.
+			#500W 
+			#40W       Place your hand on this monument,
+			the orphan of a lost village among your number.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		Sc_C4Unset 2048
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextEnd null
+	elif flag[11041] && !flag[11042]:
+		TextStart null
+		Sleep 300ms
+		FadeOut 300ms 0x00000000 100
+		Sc_C4Set 2048
+		TextSetName ""
+		TextSetPos -1 60 -1 -1
+		TextMessage null {
+			#99881v{color 2}#40WIn my lord's place, I, the Schwarzritter,
+			do decree:
+			#500W 
+			#40W Here lies the Black Ark.
+			#500W 
+			#40W       Place your hand on this monument,
+			the orphan of a lost village among your number.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		Sc_C4Unset 2048
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextEnd null
+	else:
+		if flag[11040]:
+			Call fn[0,3]
+			Return
+		TextStart null
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextSetPos 72 320 56 3
+		TextMessage null {
+			{color 5}Nothing is written on the nohval monument.{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextEnd null
+	Return
+
+fn[7]:
+	Tc_DE 0 35193091
+	system[40] = 65535
+	CharSetPos field_party[0] (-42220, 0, 10120) 45deg
+	CharSetPos field_party[1] (-42220, 0, 10120) 45deg
+	CharSetPos field_party[2] (-42220, 0, 10120) 45deg
+	CharSetPos field_party[3] (-42220, 0, 10120) 45deg
+	CamLookChar field_party[0] 0ms
+	CamRotate 180000mdeg 0ms
+	EffLoad eff[0] "map\\mp200_02.eff"
+	EffPlay eff[0] eff_instance[255] party[0] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,8]
+	EventEnd 0
+	system[49] = 211
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[8]:
+	if system[10] != 255:
+		CharColor field_party[0] 0x00FFFFFF 0ms
+		Fork field_party[0] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[11] != 255:
+		CharColor field_party[1] 0x00FFFFFF 0ms
+		Fork field_party[1] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[12] != 255:
+		CharColor field_party[2] 0x00FFFFFF 0ms
+		Fork field_party[2] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[13] != 255:
+		CharColor field_party[3] 0x00FFFFFF 0ms
+		Fork field_party[3] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	Sleep 800ms
+	ForkQuit field_party[0] fork[1]
+	ForkQuit field_party[1] fork[1]
+	ForkQuit field_party[2] fork[1]
+	ForkQuit field_party[3] fork[1]
+	if system[10] != 255:
+		CharColor field_party[0] 0xFFFFFFFF 0ms
+	if system[11] != 255:
+		CharColor field_party[1] 0xFFFFFFFF 0ms
+	if system[12] != 255:
+		CharColor field_party[2] 0xFFFFFFFF 0ms
+	if system[13] != 255:
+		CharColor field_party[3] 0xFFFFFFFF 0ms
+	Return
+
+fn[9]:
+	SystemFlagsSet 0x08000000
+	if !flag[11164]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[663] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[663]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11164]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[663]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[663]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Don't you have better things to do?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 58 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

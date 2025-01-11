@@ -1,0 +1,531 @@
+calmare sc scena
+scena:
+	name "Ruan" "R2202.x"
+	town town[101]
+	bgm bgm[29]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02590._ch" "npl/ch02590p._cp"
+chip[1] "npl/ch00045._ch" "npl/ch00045p._cp"
+
+npc char[0]:
+	name "Clem"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Ruan"
+	pos (146110, -2000, -272220)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Vista Forest Road"
+	pos (195320, -2000, -200020)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Manoria Village"
+	pos (117860, -1990, -86810)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (145130, -2029, -194770)
+	radius 1500mm
+	bubble_pos (145130, -500, -194770)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+look_point[1]:
+	pos (143160, -1960, -203990)
+	radius 1500mm
+	bubble_pos (143160, -550, -203990)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if system[66] == 8:
+		SystemFlagsSet 0x10000000
+		Event fn[0,3]
+	Return
+
+fn[1]:
+	SoundPlay sound[456] 1 0 100
+	system[42] = -6400
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (137420, -2000, -210960) 0ms
+	CamSetDistance 0 5820 -10000 0ms
+	CamZoom 3140 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	SoundLoad sound[125]
+	EffLoad eff[0] "map\\mp257_00.eff"
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos char[8] (138720, -2020, -186800) 180deg
+	CharSetPos name[4] (137420, -2000, -210960) 0deg
+	_Char6A name[4]
+	FadeIn 2000ms 0x00000000
+	Fork char[9] fork[0]:
+		CamRotate 60000mdeg 7500ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (137420, -2000, -202060) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (142000, -2000, -199180) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Emote name[4] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo name[4] 330deg 400deg/s
+	Sleep 300ms
+	_Char6A null
+	TextTalk name[4] {
+		#81900v#044F#11PHmm...?{wait}
+	}
+	TextWait
+	Fork char[9] fork[0]:
+		CamLookPos (139260, -1500, -187080) 3000ms
+	Fork char[9] fork[1]:
+		CamZoom 2900 3000ms
+	Fork char[9] fork[2]:
+		CamRotate 45000mdeg 3000ms
+	Fork char[9] fork[3]:
+		CamSetDistance 0 5020 -10000 3000ms
+	ForkFunc char[8] fork[3] fn[0,4]
+	ForkWait char[9] fork[0]
+	Sleep 4000ms
+	CharSetPos name[4] (139620, -2000, -196300) 0deg
+	Fork name[4] fork[1]:
+		CharWalkToPos2 self (138620, -2000, -188440) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 500ms
+	TextTalk name[4] {
+		#81901v#040F#12PIs something wrong?{wait}
+	} {
+		#81902v#044FOh, are you lost?{wait}
+	}
+	TextWait
+	ForkWait char[8] fork[3]
+	CharTurnTo char[8] 180deg 500deg/s
+	TextTalkNamed char[8] "Young Boy" {
+		#94939v#776F#5PN-No! I'm not lost!{wait}
+	} {
+		#94940v#773FI'm just trying to find something!{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81903v#044F#12PLike what?{wait}
+	}
+	TextWait
+	TextTalkNamed char[8] "Young Boy" {
+		#94941v#776F#5P...!{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81904v#542F#12PUmm...{wait}
+	} {
+		#81905v#041FI can help you look if you'd like.{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 40 43 100ms 3
+	CharTurnTo char[8] 270deg 500deg/s
+	Sleep 300ms
+	TextTalkNamed char[8] "Young Boy" {
+		#94942v#775F#11PY-You don't have to do that...but if you
+		reeeally wanna...{wait}
+	} {
+		#94943v#773FIt's a red stone. It's really, really pretty.{wait}
+	} {
+		#94944vI'm sure I dropped it somewhere around
+		here, but I can't find it.{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81906v#040F#12PA red stone, right?{wait}
+	}
+	TextWait
+	TextTalkNamed char[8] "Young Boy" {
+		#94945v#773F#11PY-Yeah...{wait}
+	} {
+		#94946vI don't get why I haven't found it already...{wait}
+	}
+	TextWait
+	ForkFunc char[8] fork[3] fn[0,5]
+	Sleep 1000ms
+	CharTurnTo name[4] 190deg 400deg/s
+	Sleep 500ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (137640, -2040, -189500) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 500ms
+	CharTurnTo name[4] 315deg 500deg/s
+	Sleep 800ms
+	CharTurnTo name[4] 180deg 500deg/s
+	Sleep 800ms
+	CharTurnTo name[4] 90deg 500deg/s
+	Fork name[4] fork[1]:
+		CharWalkToPos self (140280, -2040, -189400) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	EffPlay eff[0] eff_instance[0] null 0 (140850, -1500, -189430) 0 0 0 800 800 800 null (0, 0, 0) 0ms
+	Sleep 500ms
+	Emote name[4] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1500ms
+	SoundPlay sound[143] 0 0 100
+	EffStop eff_instance[0] 2
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}Kloe found a pretty red stone.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	Fork name[4] fork[1]:
+		CharWalkToPos2 self (139280, -2040, -189400) 1500mm/s 0
+	ForkWait name[4] fork[1]
+	ForkLoop name[4] fork[2]:
+		CharTurnToChar self char[8] 400deg/s
+	Sleep 400ms
+	TextTalk name[4] {
+		#81907v#542F#12PExcuse me...{wait}
+	} {
+		#81908vThis wouldn't happen to be what
+		you're looking for, would it?{wait}
+	}
+	TextWait
+	ForkQuit char[8] fork[3]
+	Emote char[8] 0mm 1700mm 38 38 250ms 1
+	Sleep 500ms
+	CharTurnToChar char[8] name[4] 400deg/s
+	Fork char[9] fork[0]:
+		CamLookPos (140080, -2000, -187900) 800ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (139040, -2020, -188260) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	CharTurnTo char[8] 180deg 500deg/s
+	Sleep 500ms
+	ForkQuit name[4] fork[2]
+	TextTalkNamed char[8] "Young Boy" {
+		#94947v#772F#5PTh-That's it...!{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}Kloe handed the boy the stone.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	FadeWait
+	TextTalk name[4] {
+		#81909v#048F#12PPhew! I'm glad we were able to find it.{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalkNamed char[8] "Young Boy" {
+		#94948v#774F#5PY-Yeah...{wait}
+	} {
+		#94949v#773F...I-I'm... I'm Clem. And...umm...th...nks...{wait}
+	}
+	TextWait
+	CharTurnTo char[8] 0deg 500deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#94950v#772F#11P#3SA-Anyway, bye!#2S{wait}
+	}
+	TextWait
+	Fork name[4] fork[0]:
+		CamLookPos (139990, -2000, -186060) 1500ms
+	Fork char[8] fork[1]:
+		CharWalkToPos2 self (138940, -2000, -187440) 5000mm/s 0
+	ForkWait char[8] fork[1]
+	SoundPlay sound[414] 0 0 100
+	CrossFade 250ms
+	CharFlagsUnset char[8] 0x0100
+	CharFlagsUnset char[8] 0x0001
+	CharFlagsSet char[8] 0x0800
+	CharFlagsSet char[8] 0x0004
+	Sc_D1 char[8] 20000 45000 0 0ms
+	Fork char[8] fork[1]:
+		_Char96 self (139320, -2020, -186240) 500 2500
+	Sc_D1 char[8] 20000 45000 80000 0ms
+	ForkWait char[8] fork[1]
+	SoundPlay sound[125] 0 0 100
+	Shake 0 200 3000 300ms
+	Sleep 1000ms
+	ForkWait name[4] fork[0]
+	Fork name[4] fork[1]:
+		CharWalkToPos2 self (139100, -2020, -187820) 4500mm/s 0
+	ForkWait name[4] fork[1]
+	TextTalk name[4] {
+		#81910v#043F#12PA-Are you all right?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#94951v#773F#5PI-I'm okay...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[143] 0 0 100
+	CrossFade 500ms
+	CharFlagsSet char[8] 0x0100
+	CharFlagsSet char[8] 0x0001
+	CharFlagsUnset char[8] 0x0800
+	CharFlagsUnset char[8] 0x0004
+	CharSetPos char[8] (138940, -2020, -185900) 0deg
+	FadeWait
+	Sleep 300ms
+	TextTalk name[4] {
+		#81911v#048F#12PI'll escort you back home.{wait}
+	}
+	TextWait
+	CharTurnTo char[8] 180deg 500deg/s
+	Sleep 300ms
+	Emote char[8] 0mm 1700mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk char[8] {
+		#94952v#776F#5PI can get home on my own! I'm not some
+		dumb kid, you know!{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[4]
+	Sleep 500ms
+	TextTalk name[4] {
+		#81912v#542F#12PI know, but you see, I'm a little lost myself.{wait}
+	} {
+		#81913vI was hoping that I might be able to ask
+		your family for directions.{wait}
+	} {
+		#81914v#041FSo while you might not need my help,
+		would you be willing to let me go with
+		you?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#94953v#772F#5PHuh?{wait}
+	} {
+		#94954v#773FO-Oh, then I guess I could. Sure.{wait}
+	} {
+		#94955v#770F...This way!{wait}
+	}
+	TextWait
+	CharTurnTo char[8] 0deg 600deg/s
+	Fork char[9] fork[0]:
+		CamLookPos (140080, -2000, -182900) 800ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (138040, -2020, -182820) 5000mm/s 0
+	ForkWait char[8] fork[1]
+	CharTurnTo char[8] 180deg 600deg/s
+	CharJump char[8] 0 0 0 500 4000mm/s
+	CharJump char[8] 0 0 0 500 4000mm/s
+	TextTalk char[8] {
+		#94956v#771F#5PCome on! Hurry up!{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81915v#048F#12PHeehee. I'm coming, I'm coming.{wait}
+	} {
+		#81916v#044F(His house is this way, though?){wait}
+	} {
+		#81917v(I guess he must be from Manoria...){wait}
+	}
+	TextWait
+	Fork name[4] fork[1]:
+		CharWalkToPos2 self (137040, -2000, -180100) 1500mm/s 0
+	Sleep 1000ms
+	CharTurnTo char[8] 0deg 600deg/s
+	Fork char[8] fork[1]:
+		CharWalkToPos2 self (136900, -2020, -179720) 5000mm/s 0
+	ForkWait char[8] fork[1]
+	CharTurnTo char[8] 180deg 600deg/s
+	Emote char[8] 0mm 1700mm 38 39 250ms 2
+	CharJump char[8] 0 0 0 500 4000mm/s
+	CharJump char[8] 0 0 0 500 4000mm/s
+	Sleep 500ms
+	CharTurnTo char[8] 0deg 600deg/s
+	Fork char[8] fork[1]:
+		CharWalkToPos2 self (135040, -2020, -171720) 5000mm/s 0
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	Sleep 1000ms
+	NewScene "t2400._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	CharTurnTo char[8] 280deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[8] 90deg 500deg/s
+	Sleep 500ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (139760, -2000, -186800) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Sleep 500ms
+	CharTurnTo char[8] 120deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[8] 0deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[8] 270deg 500deg/s
+	Fork char[8] fork[1]:
+		CharWalkToPos self (137560, -2000, -186800) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Sleep 500ms
+	CharTurnTo char[8] 225deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[8] 315deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[8] 90deg 500deg/s
+	Sleep 800ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (138720, -2020, -186800) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Sleep 500ms
+	CharTurnTo char[8] 0deg 500deg/s
+	Return
+
+fn[5]:
+	while 1:
+		Call fn[0,4]
+	Return
+
+fn[6]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}East: Jenis Royal Academy - 252 selge{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[7]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}South: City of Ruan
+		North: Manoria Village - 312 selge{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[8]:
+	EventBegin 1
+	TextTalk name[0] {
+		#1001FThis looks like a good spot to fish.{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[1]:
+		CamLookPos (109750, -6680, -243120) 1500ms
+	Fork field_party[1] fork[1]:
+		CamZoom 3200 1500ms
+	Fork field_party[1] fork[2]:
+		CamRotate 45000mdeg 1500ms
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 5}Fish?{color 0}{wait}
+	}
+	system[40] = 24
+	Menu menu[0] 10 32 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	ForkWait field_party[0] fork[1]
+	if var[0] == 0:
+		Minigame 14 23 110290 -6670 -241280 180 109590 -5800 -245650
+		FadeWait
+		EventEnd 1
+	elif var[0] != 0:
+		EventEnd 1
+	Return

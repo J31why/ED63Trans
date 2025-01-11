@@ -1,0 +1,448 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3115.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02620._ch" "npl/ch02620p._cp"
+chip[1] "npl/ch02623._ch" "npl/ch02623p._cp"
+chip[2] "npl/ch01230._ch" "npl/ch01230p._cp"
+chip[3] "npl/ch01050._ch" "npl/ch01050p._cp"
+chip[4] "npl/ch02440._ch" "npl/ch02440p._cp"
+chip[5] "npl/ch01680._ch" "npl/ch01680p._cp"
+chip[6] "npl/ch01100._ch" "npl/ch01100p._cp"
+chip[7] "npl/ch02020._ch" "npl/ch02020p._cp"
+chip[8] "npl/ch01430._ch" "npl/ch01430p._cp"
+chip[9] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+chip[10] "npl/ch01250._ch" "npl/ch01250p._cp"
+
+npc char[0]:
+	name "Professor Russell"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Erika"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[9]
+	frame 0
+	ch chip[9]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Prometheus"
+	pos (2350, 0, 2800)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,2]
+
+npc char[3]:
+	name "Constance"
+	pos (-107400, 0, -90)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[4]:
+	name "Hugo"
+	pos (-103500, 0, 108340)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[5]:
+	name "Igor"
+	pos (-102790, 0, 98030)
+	angle 270deg
+	x 0
+	cp chip[10]
+	frame 0
+	ch chip[10]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,5]
+
+npc char[6]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[2] 0x0080
+		CharFlagsUnset char[3] 0x0080
+		CharFlagsUnset char[4] 0x0080
+		CharFlagsUnset char[5] 0x0080
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,6]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 0
+	Return
+
+fn[2]:
+	TextStart self
+	if flag[12165]:
+		if flag[0]:
+			TextTalk self {
+				I think I picked a bit of a bad time to come.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I was hoping to have these documents signed
+				before the factory ship departs, but fat chance
+				of that happening now.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				The factory chief seems to be out...but I have
+				no idea where he could have gone.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I need him to sign these documents, too...{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				I've got a lazy one who's always skipping work
+				at the moment...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but young people do all the manual labor here,
+				that's just how it is. Decided by me, of course.{wait}
+			}
+			TextWait
+			TextTalk self {
+				No matter how dirty this room gets, I am determined
+				to do absolutely nothing to resolve the problem! Not
+				my job.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				MY job involves training new people.{wait}
+			}
+			TextWait
+			TextTalk self {
+				How do I do this? Get them to clean up this
+				room for me.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Which means I don't have to lift a finger.
+				Smart, right?{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12165]:
+		if flag[2]:
+			TextTalk self {
+				On an unrelated note...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...this place feels awfully...quiet, somehow.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Maybe I'm just feeling uneasy over nothing.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Whew... It's so good to finally be done with
+				all the repair work on the Arseille.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It feels like forever since I was last back here.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Although thinking about it, there's still
+				the adjustments to be made to the engines,
+				so our work may not be quite done yet.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12165]:
+		if flag[3]:
+			CharTurnTo self 270deg 0deg/s
+			TextTalk self {
+				Wh-What are these?!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I know these plans aren't Russell's work...{wait}
+			}
+			TextWait
+			TextTalk self {
+				They're way too clean for that.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I wonder how Freddy's doing right now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I haven't heard from him since he went back
+				to Rolent. {wait}
+			}
+			TextWait
+			TextTalk self {
+				He was a hell of a kid for one so young. 
+				He's gonna shake things up as a real
+				skilled artisan one day, if you ask me.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd self
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-101240, 0, 100160) 0ms
+	CamSetDistance 0 4640 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsSet char[0] 0x0040
+	CharFlagsSet char[1] 0x0040
+	CharSetPos char[0] (-102660, 0, 97700) 270deg
+	CharSetPos char[1] (-103650, 0, 99100) 180deg
+	CharSetPos name[6] (-98510, 0, 101000) 270deg
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#96602v#100FWhat are these wires here for, Erika?{wait}
+	} {
+		#96603vThey look completely unnecessary to me...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97949v#1456FThey're to deal with noise.{wait}
+	} {
+		#97950vThis design requires a very high degree of
+		precision, so it was a necessary addition.{wait}
+	}
+	TextWait
+	ObjFlagsUnset object[2] 0x0010
+	ObjPlay object[2] 30
+	ObjWait object[2]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-100650, 0, 101000) 2000mm/s 0
+	ForkWait name[6] fork[1]
+	CharTurnTo name[6] 225deg 400deg/s
+	ObjPlay object[2] 0
+	ObjWait object[2]
+	Sleep 300ms
+	TextTalk name[6] {
+		#83220v#060F#5PMom?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97951v#1456FSo the orbal pressure changes get absorbed
+		into here...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#96604v#100FHmm... I see...{wait}
+	}
+	TextWait
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-103600, 0, 101000) 2500mm/s 0
+	ForkWait name[6] fork[1]
+	CharTurnTo name[6] 180deg 500deg/s
+	Sleep 300ms
+	TextTalk name[6] {
+		#83221v#0560F#3S#1PMom!#2S{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	Emote char[1] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 900ms
+	Fork char[1] fork[2]:
+		CharTurnToChar self name[6] 500deg/s
+	Sleep 100ms
+	Fork char[0] fork[2]:
+		CharTurnToChar self name[6] 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#97952v#1454F#6POh, Tita. What are you doing there?{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83222v#560F#5PW-Well...{wait}
+	} {
+		#83223v...I was wondering if, you know, there was
+		anything I could do to help.{wait}
+	} {
+		#83224vI want to do something for Renne, too...{wait}
+	} {
+		#83225v#561FI'm just not sure what I can actually do.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97953v#1454F#6PHmm? What you can do?{wait}
+	} {
+		#97954v#1450FWell, if you want to help me out, there IS
+		one thing you could do for me.{wait}
+	} {
+		#97955vIt's an annoying job, but if you're up for it...{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83226v#064F#5PAn annoying job?{wait}
+	} {
+		#83227v#061FO-Okay... I'll do anything I can to help...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97956v#1451F#6PIt's nothing that important, really, but I appreciate
+		it all the same.{wait}
+	} {
+		#97957vI need you to go talk to Murdock and get him
+		to sort out the paperwork for our return to
+		Liberl.{wait}
+	} {
+		#97958v#1450FThe way we returned home was kinda, uh, 
+		borderline illegal. So no official paperwork's
+		been filed or anything.{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83228v#064F#5PU-Umm...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97959v#1458F#6PI'm cool with it, but Dan's brought it up a few
+		times, so it'd be good if someone could get it
+		taken care of.{wait}
+	} {
+		#97960v#1456FSo, thanks!{wait}
+	}
+	TextWait
+	Fork char[1] fork[2]:
+		CharTurnTo self 180deg 500deg/s
+	Sleep 300ms
+	Fork char[0] fork[2]:
+		CharTurnTo self 270deg 500deg/s
+	Sleep 300ms
+	TextTalk name[6] {
+		#83229v#560F#1PO-Okay...{wait}
+	} {
+		#83230v...{wait}
+	} {
+		#83231v#561F(This wasn't what I had in mind when I said
+		I wanted to help...){wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 1200ms
+	EmoteStop name[6]
+	TextTalk name[6] {
+		#83232v#060F#1P(Oh, well. I guess I am still helping her by
+		doing this.){wait}
+	} {
+		#83233v(I'll just have to get it sorted out quickly so
+		I can get back and help with the real work!){wait}
+	}
+	TextWait
+	CharTurnTo name[6] 90deg 500deg/s
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-100650, 0, 101000) 2000mm/s 0
+	ForkWait name[6] fork[1]
+	ObjPlay object[2] 30
+	ObjWait object[2]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-98510, 0, 101000) 2000mm/s 0
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t3100._sn" 100 0 0
+	Hcf
+	Return

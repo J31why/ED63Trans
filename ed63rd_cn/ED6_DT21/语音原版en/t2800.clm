@@ -1,0 +1,883 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2800.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02670._ch" "npl/ch02670p._cp"
+chip[1] "npl/ch00043._ch" "npl/ch00043p._cp"
+chip[2] "apl2/ch20777._ch" "apl2/ch20777p._cp"
+
+npc char[0]:
+	name "Lechter"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Academy - Back Road"
+	pos (84080, 0, 28010)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Vista Forest Road"
+	pos (-3490, 0, 46180)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (43800, 0, 49800)
+	pos2 (50300, 4000, 47600)
+	flags 0x0000
+	func fn[0,5]
+	unk1 0
+
+trigger[1]:
+	pos1 (43800, 0, 44200)
+	pos2 (50300, 4000, 42200)
+	flags 0x0000
+	func fn[0,5]
+	unk1 0
+
+trigger[2]:
+	pos1 (43800, 0, 47600)
+	pos2 (46500, 4000, 44200)
+	flags 0x0000
+	func fn[0,5]
+	unk1 0
+
+trigger[3]:
+	pos1 (41180, 0, 74060)
+	pos2 (1000, 3000, 0)
+	flags 0x0041
+	func fn[0,10]
+	unk1 0
+
+trigger[4]:
+	pos1 (53030, 0, 67260)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,10]
+	unk1 0
+
+trigger[5]:
+	pos1 (53150, 0, 59630)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,11]
+	unk1 0
+
+trigger[6]:
+	pos1 (48380, 0, 45960)
+	pos2 (1000, 3000, 0)
+	flags 0x0041
+	func fn[0,11]
+	unk1 0
+
+trigger[7]:
+	pos1 (52870, 0, 32110)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,11]
+	unk1 0
+
+trigger[8]:
+	pos1 (53030, 0, 24850)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,12]
+	unk1 0
+
+trigger[9]:
+	pos1 (47120, 0, 19010)
+	pos2 (1000, 3000, 0)
+	flags 0x0041
+	func fn[0,12]
+	unk1 0
+
+trigger[10]:
+	pos1 (22030, 0, 25660)
+	pos2 (1000, 3000, 0)
+	flags 0x0041
+	func fn[0,13]
+	unk1 0
+
+trigger[11]:
+	pos1 (22010, 0, 67170)
+	pos2 (1000, 3000, 0)
+	flags 0x0041
+	func fn[0,14]
+	unk1 0
+
+look_point[0]:
+	pos (13480, 1000, 46000)
+	radius 1000mm
+	bubble_pos (13480, 1000, 46000)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+look_point[1]:
+	pos (22000, 500, 68220)
+	radius 500mm
+	bubble_pos (22000, 1100, 68220)
+	flags 0x007C
+	func fn[0,15]
+	unk1 0
+
+look_point[2]:
+	pos (22000, 500, 24820)
+	radius 1000mm
+	bubble_pos (22000, 1100, 24820)
+	flags 0x007C
+	func fn[0,16]
+	unk1 0
+
+look_point[3]:
+	pos (59440, 9000, 17860)
+	radius 1000mm
+	bubble_pos (59440, 9500, 17860)
+	flags 0x007C
+	func fn[0,17]
+	unk1 0
+
+fn[0]:
+	if system[66] == 8:
+		if flag[9478]:
+			FlagUnset flag[9478]
+			SystemFlagsSet 0x10000000
+			Event fn[0,6]
+		elif flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			Event fn[0,4]
+		elif flag[9476]:
+			system[1] = 84
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	MapSet 4000 (-88000, null, -82000) "mt2500._ch"
+	if system[0] == 130:
+		Fog 0xFF000000 38000 85000 0
+	TriggerFlagsSet trigger[0] 0x0080
+	TriggerFlagsSet trigger[1] 0x0080
+	TriggerFlagsSet trigger[2] 0x0080
+	LookPointFlagsSet look_point[0] 0x0001
+	LookPointFlagsSet look_point[1] 0x0001
+	LookPointFlagsSet look_point[2] 0x0001
+	LookPointFlagsSet look_point[3] 0x0001
+	if system[66] == 8:
+		if flag[12142]:
+			ObjFlagsUnset object[9] 0x0010
+			ObjFlagsUnset object[3] 0x0010
+			ObjFlagsUnset object[4] 0x0010
+			TriggerFlagsUnset trigger[0] 0x0080
+			TriggerFlagsUnset trigger[1] 0x0080
+			TriggerFlagsUnset trigger[2] 0x0080
+			LookPointFlagsUnset look_point[0] 0x0001
+			LookPointFlagsUnset look_point[1] 0x0001
+			LookPointFlagsUnset look_point[2] 0x0001
+			LookPointFlagsUnset look_point[3] 0x0001
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundPlay sound[463] 0 0 100
+	ObjFlagsUnset object[9] 0x0010
+	ObjFrame object[9] 60
+	Fog 0xFF966464 38000 85000 0
+	CamLookPos (48000, 0, 45460) 0ms
+	CamSetDistance 0 9460 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 130000mdeg 0ms
+	CamPers 440 0ms
+	CharSetPos name[4] (-10000, 0, 45880) 90deg
+	Fork char[1] fork[0]:
+		CamLookPos (5440, 0, 45500) 12000ms
+	Fork char[1] fork[1]:
+		CamSetDistance 0 7020 -10000 12000ms
+	Fork char[1] fork[2]:
+		CamRotate 225000mdeg 12000ms
+	Fork char[1] fork[3]:
+		CamPers 354 12000ms
+	FadeIn 2000ms 0x00000000
+	Sleep 9000ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (5820, 0, 45880) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 500ms
+	TextTalk name[4] {
+		#81967v#045F#11PHeehee. I know I didn't intend to stay out
+		that long...{wait}
+	} {
+		#81968v#542FIt's so easy to lose track of time when I'm at
+		the orphanage.{wait}
+	} {
+		#81969vI'd better hurry back to the dorm.{wait}
+	}
+	TextWait
+	Fork name[4] fork[1]:
+		CharWalkToPos self (21820, 0, 45880) 5000mm/s 0
+	Sleep 2000ms
+	Fork char[1] fork[0]:
+		CamZoom 2700 4000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	NewScene "t2812._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ObjFlagsUnset object[9] 0x0010
+	ObjFlagsUnset object[10] 0x0010
+	ObjFlagsUnset object[3] 0x0010
+	ObjFlagsUnset object[4] 0x0010
+	TriggerFlagsUnset trigger[0] 0x0080
+	TriggerFlagsUnset trigger[1] 0x0080
+	TriggerFlagsUnset trigger[2] 0x0080
+	LookPointFlagsUnset look_point[0] 0x0001
+	LookPointFlagsUnset look_point[1] 0x0001
+	LookPointFlagsUnset look_point[2] 0x0001
+	LookPointFlagsUnset look_point[3] 0x0001
+	CharSetPos name[4] (22000, 250, 67020) 180deg
+	CamLookPos (22640, 0, 67720) 0ms
+	CamSetDistance 0 8700 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Emote name[4] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[4]
+	Sleep 500ms
+	TextTalk name[4] {
+		#81993v#049F#40WShe's... She's got me all wrong...{wait}
+	} {
+		#81994v#049FI'm not some kind of model student or 'good girl'
+		like she thinks I am...{wait}
+	} {
+		#81995vThat's not why I'm always going to the orphanage!{wait}
+	}
+	TextWait
+	FlagSet flag[12142]
+	EventEnd 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	Sc_C4Set 536870912
+	CrossFade 1500ms
+	CamLookPos (47000, 0, 44700) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3100 0ms
+	CamRotate 135000mdeg 0ms
+	CamPers 286 0ms
+	CharSetPos name[4] (45700, 250, 46000) 90deg
+	ObjFrame object[0] 0
+	FadeWait
+	Sleep 300ms
+	Emote name[4] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[4]
+	Sleep 500ms
+	CharTurnTo name[4] 270deg 400deg/s
+	Sleep 500ms
+	TextTalk name[4] {
+		#82011v#049F#5P#40W...*sigh*...{wait}
+	}
+	TextWait
+	Fork char[1] fork[0]:
+		CamLookPos (44910, -300, 44260) 2000ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (43900, 0, 45460) 1000mm/s 0
+	ForkWait name[4] fork[1]
+	ForkWait char[1] fork[0]
+	Sleep 500ms
+	SoundPlay sound[143] 0 0 100
+	CrossFade 500ms
+	CharSetPos name[4] (43700, -300, 45460) 270deg
+	CharFlagsSet name[4] 0x0004
+	CharSetChipBase name[4] chip[1]
+	Sleep 1000ms
+	TextTalk name[4] {
+		#82012v#047F#5P#40W...{wait}
+	} {
+		#82013v...*sigh*...{wait}
+	} {
+		#82014v#049F(...What's wrong with me? 
+		#5W  #40WMy heart just won't stop pounding...){wait}
+	} {
+		#82015v(Why am I acting like this...?){wait}
+	}
+	TextWait
+	Emote name[4] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	PartyClear
+	PartyAdd name[58] party[0] 255
+	NewScene "t2812._sn" 100 0 0
+	Hcf
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CamLookPos (44910, -300, 44260) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3100 0ms
+	CamRotate 135000mdeg 0ms
+	CamPers 286 0ms
+	CamLookPos (36010, -300, 44770) 0ms
+	CamSetDistance 0 3570 -10000 0ms
+	CamZoom 980 0ms
+	CamRotate 225000mdeg 0ms
+	CamPers 806 0ms
+	CharSetPos name[4] (43700, -300, 45460) 270deg
+	CharFlagsSet name[4] 0x0004
+	CharSetChipBase name[4] chip[1]
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (45630, 0, 50000) 180deg
+	Emote name[4] 0mm 1700mm 24 27 250ms 0
+	FadeIn 2000ms 0x00000000
+	Fork name[4] fork[1]:
+		CamLookPos (41260, -300, 44200) 4000ms
+	Fork name[4] fork[2]:
+		CamSetDistance 0 4930 -10000 4000ms
+	FadeWait
+	Sleep 1000ms
+	ForkWait name[4] fork[1]
+	EmoteStop name[4]
+	Sleep 500ms
+	TextTalk name[4] {
+		#82016v#049F#5P...*sigh*...{wait}
+	}
+	TextWait
+	_59
+	Fork name[4] fork[1]:
+		CamZoom 1090 2000ms
+	ForkFunc char[0] fork[3] fn[0,8]
+	ForkWait char[0] fork[3]
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97519v#1774F#6P...'I feel like I can't understand myself at all
+		these days.'{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#82017v#047F#5PPlease don't stand behind me like that.{wait}
+	} {
+		#82018v#042FIt's creepy.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97520v#1771F#6PHahaha. Someone's in a bad mood.{wait}
+	}
+	TextWait
+	Fork char[0] fork[1]:
+		CharWalkToPos self (43900, 0, 47100) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	CharTurnTo char[0] 270deg 0deg/s
+	Sleep 300ms
+	SoundPlay sound[143] 0 0 100
+	CrossFade 500ms
+	CharSetPos char[0] (43700, -300, 47100) 270deg
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	CrossFade 1000ms
+	CamLookPos (44120, -300, 45540) 0ms
+	CamSetDistance 0 5230 -10000 0ms
+	CamZoom 1250 0ms
+	CamRotate 134000mdeg 0ms
+	CamPers 572 0ms
+	CamLookPos (44200, -300, 45280) 0ms
+	CamSetDistance 0 5230 -10000 0ms
+	CamZoom 1250 0ms
+	CamRotate 134000mdeg 0ms
+	CamPers 572 0ms
+	FadeWait
+	Sleep 800ms
+	TextTalk char[0] {
+		#97521v#1776F#6P(She's not looking too good.){wait}
+	}
+	TextWait
+	Emote name[4] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[4]
+	Sleep 500ms
+	TextTalk name[4] {
+		#82019v#049F#5P...I always wished I could have a 'normal'
+		life like everyone else.{wait}
+	} {
+		#82020vAn ordinary family, ordinary friends...{wait}
+	} {
+		#82021vBut wishing for those things just doesn't
+		get you them, and no matter how hard
+		I try, nothing seems to work out.{wait}
+	} {
+		#82022vI just can't seem to make any progress...{wait}
+	} {
+		#82023v...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97522v#1775F#6P...I get'cha.{wait}
+	} {
+		#97523v#1779FYou were so frustrated, you ended up lashing
+		out against a friend who's kinda on the dense
+		side.{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 1700mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	CrossFade 300ms
+	CharSetChipPattern name[4] 2
+	Sleep 500ms
+	TextTalk name[4] {
+		#82024v#042F#5PThat's not what happened at all. I'm not you.{wait}
+	} {
+		#82025vI might be annoyed at her, but Jill is still very
+		important to me.{wait}
+	} {
+		#82026v#049FBut...{wait}
+	} {
+		#82027v#046F#3SBut I'm not wrong, either!#2S{wait}
+	}
+	TextWait
+	_59
+	CrossFade 300ms
+	CharSetChipPattern name[4] 0
+	Sleep 500ms
+	Fork char[1] fork[1]:
+		CamZoom 1200 30000ms
+	Sleep 500ms
+	TextTalk name[4] {
+		#82028v#049F#5P#40WI'm not going there because I pity the children
+		or because I'm a good girl...{wait}
+	} {
+		#82029vThe children there are wonderful. They don't
+		need pity!{wait}
+	} {
+		#82030v#047FI'm going there because I enjoy being there,
+		and because it's important to me!{wait}
+	} {
+		#82031vI don't need to be made out to be some kind
+		of saint for going somewhere I like!{wait}
+	} {
+		#82032v#049FBecause I'm not. That's not who I am!{wait}
+	} {
+		#82033vI just... I just wanted to be family!{wait}
+	}
+	TextWait
+	_59
+	Fork name[4] fork[0]:
+		CharShake self 10 0 1000 2000ms
+	Sleep 1000ms
+	TextTalk name[4] {
+		#82034v#049F#5P#40W(Why does nothing work out how I want it to...?){wait}
+	} {
+		#82035v(No matter how much I want friends and family,
+		I just can't get them.){wait}
+	} {
+		#82036v(Are they destined to forever be out of my reach?){wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97524v#1775F#6PYou're spillin' all the beans tonight, huh?{wait}
+	}
+	TextWait
+	_59
+	CrossFade 100ms
+	CharSetChipPattern name[4] 2
+	Sleep 300ms
+	TextTalk name[4] {
+		#82037v#047F#5P...What about you?{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[4] {
+		#82038v#046F#5P#3SIs there anything in the world
+		that you take seriously?!#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 500ms
+	TextTalk name[4] {
+		#82039v#046F#5P#3SJust one thing where you refuse
+		to compromise?!#2S{wait}
+	}
+	Shake 0 300 3000 100ms
+	TextWait
+	Sleep 300ms
+	TextTalk char[0] {
+		#97525v#1773F#6PYou know, you can be preeetty scary when
+		you start shouting.{wait}
+	}
+	TextWait
+	_59
+	CrossFade 300ms
+	CharSetChipPattern name[4] 0
+	Sleep 500ms
+	TextTalk name[4] {
+		#82040v#049F#5P#40W...Forget it.
+		*sigh*...{wait}
+	} {
+		#82041v#047FShouting at you isn't going to solve anything.{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 1700mm 24 27 250ms 0
+	Sleep 3500ms
+	TextTalk char[0] {
+		#97526v#1775F#6PSo?{wait}
+	} {
+		#97527v#1777FYou still don't know why you're mad, right?{wait}
+	}
+	EmoteStop name[4]
+	TextWait
+	Emote name[4] 0mm 1700mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	CrossFade 100ms
+	CharSetChipPattern name[4] 2
+	Sleep 300ms
+	TextTalk name[4] {
+		#82042v#042F#5PYou're not even listening to me, are you?{wait}
+	} {
+		#82043vI just told you why! It's because, well...
+		It's because I'm not going there out of
+		pity.{wait}
+	} {
+		#82044v#046FThat's not why I'm going there at all!{wait}
+	} {
+		#82045vIt's because it's genuinely important to me,
+		and because...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97528v#1776F#6P*sigh* Now we're just going around in circles.{wait}
+	} {
+		#97529vSorry, but this is boring as sin.{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[164] 0 0 100
+	CrossFade 250ms
+	CharSetPos char[0] (43900, 0, 47100) 270deg
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 300ms
+	Emote name[4] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[4] {
+		#82046v#043F#5PWh-Where are you going? At least listen to me!{wait}
+	} {
+		#82047v#042FI'm trying to have a serious discussion with you!
+		You can't walk away in the middle of it!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97530v#1775F#6PListen. All I'm gonna say is, get yourself a clear
+		answer to my question.{wait}
+	} {
+		#97531v#1777FThese things are like a knotted-up rope--if you
+		don't untangle the heart of the problem, you'll 
+		just get more and more wrapped up in yourself.{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#82048v#043F#5P#40W...What does that even mean?{wait}
+	}
+	TextWait
+	_59
+	CharTurnTo char[0] 120deg 500deg/s
+	Fork char[1] fork[0]:
+		CamLookPos (45580, -300, 42590) 4000ms
+	ForkFunc char[0] fork[3] fn[0,7]
+	CharSetChipPattern name[4] 0
+	TextTalk char[0] {
+		#97532v#1771F#15A#5PThat's for you to find out! ♪{wait}
+	}
+	Sleep 2000ms
+	CharSetChipPattern name[4] 1
+	TextTalk name[4] {
+		#82049v#043F#3S#6P#15ALechter!#2S{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	ForkWait char[0] fork[3]
+	Fork char[0] fork[0]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait char[1] fork[0]
+	Fork char[1] fork[0]:
+		CamLookPos (44590, -300, 44500) 2000ms
+	ForkWait char[1] fork[0]
+	CrossFade 300ms
+	CharSetChipPattern name[4] 0
+	Sleep 500ms
+	TextTalk name[4] {
+		#82050v#043F#5P#40W...{wait}
+	} {
+		#82051v#047F#20WOh, who am I even kidding?{wait}
+	} {
+		#82052vHe's probably just trying to bully me.{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[4]
+	Sleep 500ms
+	TextTalk name[4] {
+		#82053v#049F#5P(...No, he's not.){wait}
+	} {
+		#82054v(He seems like he never takes anything seriously,
+		but in reality, he does.){wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 100
+	Sc_C4Set 2048
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#97533v{0x18}{color 5}#40WYou still don't know why you're mad, right?{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		#97534v{0x18}{color 5}#40WThese things are like a knotted-up rope--if you
+		don't untangle the heart of the problem, you'll 
+		just get more and more wrapped up in yourself.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sleep 100ms
+	Sc_C4Unset 2048
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[4] {
+		#82055v#043F#5P#40W...He's right...{wait}
+	} {
+		#82056vWhy am I so angry about this...?{wait}
+	} {
+		#82057v#047FWhat's got me so worked up?{wait}
+	} {
+		#82058v...Why?{wait}
+	}
+	TextWait
+	Fork char[1] fork[0]:
+		CamZoom 1100 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[1] fork[0]
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#82059v{0x18}{color 12}#40WDeep down, I knew all along what I was doing.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#82060v{0x18}{color 12}#40WAll that time, I'd been pretending not to notice the
+		truth, but I had known since the very beginning.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#82061v{0x18}{color 12}#40WAnd to avoid facing that fact, I kept desperately 
+		clinging on to everything I could, telling myself I was
+		right over and over again... Trying to convince myself
+		it was true.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#82062v{0x18}{color 12}#40WMaybe it was because I was afraid that if I accepted
+		it, I was going to lose everything.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#82063v{0x18}{color 12}#40WThat was why my heart was so restless.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sleep 100ms
+	Sc_C4Unset 2048
+	BgmStop 4000ms
+	BgmWait
+	Sleep 2000ms
+	NewScene "t2400._sn" 100 0 0
+	Hcf
+	Return
+
+fn[7]:
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (45480, 0, 45400) 2000mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (45460, 0, 30740) 2000mm/s 0
+	ForkWait char[0] fork[1]
+	Return
+
+fn[8]:
+	Fork char[0] fork[1]:
+		CharWalkToPos self (44760, 0, 45800) 2000mm/s 0
+	ForkWait char[0] fork[1]
+	CharTurnToChar char[0] name[4] 400deg/s
+	Return
+
+fn[9]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	TextTalk name[4] {
+		#81996v#049F...{wait}
+	}
+	TextWait
+	TextEnd null
+	Return
+
+fn[10]:
+	PlaceSetName town[95]
+	Return
+
+fn[11]:
+	PlaceSetName town[92]
+	Return
+
+fn[12]:
+	PlaceSetName town[93]
+	Return
+
+fn[13]:
+	PlaceSetName town[108]
+	Return
+
+fn[14]:
+	PlaceSetName town[109]
+	Return
+
+fn[15]:
+	if flag[0]:
+		TextTalk name[4] {
+			#82002v#047F...{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[4] {
+			#82000v#042F...{wait}
+		} {
+			#82001v#047FI don't want to talk to her right now.{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+	TextEnd null
+	Return
+
+fn[16]:
+	if flag[1]:
+		TextTalk name[4] {
+			#82004v#047F...{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[4] {
+			#82003v#049FI don't want to talk to anyone right now.{wait}
+		}
+		TextWait
+		FlagSet flag[1]
+	TextEnd null
+	Return
+
+fn[17]:
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	NewScene "t2811._sn" 112 0 0
+	Hcf
+	TextEnd null
+	Return

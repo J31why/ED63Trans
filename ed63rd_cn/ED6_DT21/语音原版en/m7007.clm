@@ -1,0 +1,614 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7007.x"
+	town town[1]
+	bgm bgm[220]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "Arseille"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C4
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		system[1] = 153
+		Event fn[0,3]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 153
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	if flag[9754]:
+		ObjFlagsSet object[9] 0x0004
+	if !flag[9604]:
+		EffStop eff_instance[143] 0
+		EffStop eff_instance[144] 0
+		EffStop eff_instance[146] 0
+	EffStop eff_instance[147] 0
+	if QuestFlagsGet quest[36] 0x02:
+		EffStop eff_instance[148] 0
+	else:
+		EffStop eff_instance[149] 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-11520, -21000, 16780) 0ms
+	CamSetDistance 0 10010 -10000 0ms
+	CamZoom 6280 0ms
+	CamRotate 314000mdeg 0ms
+	CamPers 477 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (-18620, -21500, -27800) 0ms
+	CamSetDistance 0 10320 -10000 0ms
+	CamZoom 5250 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 429 0ms
+	EffStop eff_instance[147] 0
+	EffStop eff_instance[148] 0
+	EffStop eff_instance[149] 0
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	SoundPlay sound[215] 0 0 100
+	CrossFade 2000ms
+	Tc_E5_0 8 name[0] 0 4
+	Tc_E5_0 8 name[1] 0 4
+	Tc_E5_0 8 name[2] 0 4
+	Tc_E5_0 8 name[3] 0 4
+	Tc_E5_0 8 name[4] 0 4
+	Tc_E5_0 8 name[5] 0 4
+	Tc_E5_0 8 name[6] 0 4
+	Tc_E5_0 8 name[7] 0 4
+	Tc_E5_0 8 name[8] 0 4
+	Tc_E5_0 8 name[9] 0 4
+	Tc_E5_0 8 name[10] 0 4
+	Tc_E5_0 8 name[11] 0 4
+	Tc_E5_0 8 name[12] 0 4
+	Tc_E5_0 8 name[13] 0 4
+	Tc_E5_0 8 name[14] 0 4
+	Tc_E5_0 8 name[15] 0 4
+	Tc_E5_0 8 name[16] 0 4
+	Tc_E5_0 8 name[17] 0 4
+	Tc_E5_0 8 name[18] 0 4
+	Tc_E5_0 8 name[19] 0 4
+	Tc_E5_0 8 name[20] 0 4
+	Tc_E5_0 8 name[21] 0 4
+	Tc_E5_0 8 name[22] 0 4
+	Tc_E5_0 8 name[23] 0 4
+	Tc_E5_0 8 name[24] 0 4
+	Tc_E5_0 8 name[25] 0 4
+	Tc_E5_0 8 name[26] 0 4
+	Tc_E5_0 8 name[27] 0 4
+	Tc_E5_0 8 name[28] 0 4
+	Tc_E5_0 8 name[29] 0 4
+	Tc_E5_0 8 name[30] 0 4
+	Tc_E5_0 8 name[31] 0 4
+	Tc_E5_0 8 name[32] 0 4
+	Tc_E5_0 8 name[33] 0 4
+	Tc_E5_0 8 name[34] 0 4
+	Tc_E5_0 8 name[35] 0 4
+	Tc_E5_0 8 name[36] 0 4
+	Tc_E5_0 8 name[37] 0 4
+	Tc_E5_0 8 name[38] 0 4
+	Tc_E5_0 8 name[39] 0 4
+	Tc_E5_0 8 name[40] 0 4
+	Tc_E5_0 8 name[41] 0 4
+	Tc_E5_0 8 name[42] 0 4
+	Tc_E5_0 8 name[43] 0 4
+	Tc_E5_0 8 name[44] 0 4
+	Tc_E5_0 8 name[45] 0 4
+	Tc_E5_0 8 name[46] 0 4
+	Tc_E5_0 8 name[47] 0 4
+	Tc_E5_0 8 name[48] 0 4
+	Tc_E5_0 8 name[49] 0 4
+	Tc_E5_0 8 name[50] 0 4
+	Tc_E5_0 8 name[51] 0 4
+	Tc_E5_0 8 name[52] 0 4
+	Tc_E5_0 8 name[53] 0 4
+	Tc_E5_0 8 name[54] 0 4
+	Tc_E5_0 8 name[55] 0 4
+	Tc_E5_0 8 name[56] 0 4
+	Tc_E5_0 8 name[57] 0 4
+	Tc_E5_0 8 name[58] 0 4
+	Tc_E5_0 8 name[59] 0 4
+	Tc_E5_0 8 name[60] 0 4
+	Tc_E5_0 8 name[61] 0 4
+	Tc_E5_0 8 name[62] 0 4
+	Tc_E5_0 8 name[63] 0 4
+	Tc_E5_0 8 name[64] 0 4
+	Tc_E5_0 8 name[65] 0 4
+	Tc_E5_0 8 name[66] 0 4
+	Tc_E5_0 8 name[67] 0 4
+	Tc_E5_0 8 name[68] 0 4
+	Tc_E5_0 8 name[69] 0 4
+	Tc_E5_0 8 name[70] 0 4
+	Tc_E5_0 8 name[71] 0 4
+	Tc_E5_0 8 name[72] 0 4
+	Tc_E5_0 8 name[73] 0 4
+	Tc_E5_0 8 name[74] 0 4
+	Tc_E5_0 8 name[75] 0 4
+	Tc_E5_0 8 name[76] 0 4
+	Tc_E5_0 8 name[77] 0 4
+	Tc_E5_0 8 name[78] 0 4
+	Tc_E5_0 8 name[79] 0 4
+	Tc_E5_0 8 name[80] 0 4
+	Tc_E5_0 8 name[81] 0 4
+	Tc_E5_0 8 name[82] 0 4
+	Tc_E5_0 8 name[83] 0 4
+	Tc_E5_0 8 name[84] 0 4
+	Tc_E5_0 8 name[85] 0 4
+	Tc_E5_0 8 name[86] 0 4
+	Tc_E5_0 8 name[87] 0 4
+	Tc_E5_0 8 name[88] 0 4
+	Tc_E5_0 8 name[89] 0 4
+	Tc_E5_0 8 name[90] 0 4
+	Tc_E5_0 8 name[91] 0 4
+	Tc_E5_0 8 name[92] 0 4
+	Tc_E5_0 8 name[93] 0 4
+	Tc_E5_2 8 name[0] 700
+	Tc_E5_2 8 name[1] 700
+	Tc_E5_2 8 name[2] 700
+	Tc_E5_2 8 name[3] 700
+	Tc_E5_2 8 name[4] 700
+	Tc_E5_2 8 name[5] 700
+	Tc_E5_2 8 name[6] 700
+	Tc_E5_2 8 name[7] 700
+	Tc_E5_2 8 name[8] 700
+	Tc_E5_2 8 name[9] 700
+	Tc_E5_2 8 name[10] 700
+	Tc_E5_2 8 name[11] 700
+	Tc_E5_2 8 name[12] 700
+	Tc_E5_2 8 name[13] 700
+	Tc_E5_2 8 name[14] 700
+	Tc_E5_2 8 name[15] 700
+	Tc_E5_2 8 name[16] 700
+	Tc_E5_2 8 name[17] 700
+	Tc_E5_2 8 name[18] 700
+	Tc_E5_2 8 name[19] 700
+	Tc_E5_2 8 name[20] 700
+	Tc_E5_2 8 name[21] 700
+	Tc_E5_2 8 name[22] 700
+	Tc_E5_2 8 name[23] 700
+	Tc_E5_2 8 name[24] 700
+	Tc_E5_2 8 name[25] 700
+	Tc_E5_2 8 name[26] 700
+	Tc_E5_2 8 name[27] 700
+	Tc_E5_2 8 name[28] 700
+	Tc_E5_2 8 name[29] 700
+	Tc_E5_2 8 name[30] 700
+	Tc_E5_2 8 name[31] 700
+	Tc_E5_2 8 name[32] 700
+	Tc_E5_2 8 name[33] 700
+	Tc_E5_2 8 name[34] 700
+	Tc_E5_2 8 name[35] 700
+	Tc_E5_2 8 name[36] 700
+	Tc_E5_2 8 name[37] 700
+	Tc_E5_2 8 name[38] 700
+	Tc_E5_2 8 name[39] 700
+	Tc_E5_2 8 name[40] 700
+	Tc_E5_2 8 name[41] 700
+	Tc_E5_2 8 name[42] 700
+	Tc_E5_2 8 name[43] 700
+	Tc_E5_2 8 name[44] 700
+	Tc_E5_2 8 name[45] 700
+	Tc_E5_2 8 name[46] 700
+	Tc_E5_2 8 name[47] 700
+	Tc_E5_2 8 name[48] 700
+	Tc_E5_2 8 name[49] 700
+	Tc_E5_2 8 name[50] 700
+	Tc_E5_2 8 name[51] 700
+	Tc_E5_2 8 name[52] 700
+	Tc_E5_2 8 name[53] 700
+	Tc_E5_2 8 name[54] 700
+	Tc_E5_2 8 name[55] 700
+	Tc_E5_2 8 name[56] 700
+	Tc_E5_2 8 name[57] 700
+	Tc_E5_2 8 name[58] 700
+	Tc_E5_2 8 name[59] 700
+	Tc_E5_2 8 name[60] 700
+	Tc_E5_2 8 name[61] 700
+	Tc_E5_2 8 name[62] 700
+	Tc_E5_2 8 name[63] 700
+	Tc_E5_2 8 name[64] 700
+	Tc_E5_2 8 name[65] 700
+	Tc_E5_2 8 name[66] 700
+	Tc_E5_2 8 name[67] 700
+	Tc_E5_2 8 name[68] 700
+	Tc_E5_2 8 name[69] 700
+	Tc_E5_2 8 name[70] 700
+	Tc_E5_2 8 name[71] 700
+	Tc_E5_2 8 name[72] 700
+	Tc_E5_2 8 name[73] 700
+	Tc_E5_2 8 name[74] 700
+	Tc_E5_2 8 name[75] 700
+	Tc_E5_2 8 name[76] 700
+	Tc_E5_2 8 name[77] 700
+	Tc_E5_2 8 name[78] 700
+	Tc_E5_2 8 name[79] 700
+	Tc_E5_2 8 name[80] 700
+	Tc_E5_2 8 name[81] 700
+	Tc_E5_2 8 name[82] 700
+	Tc_E5_2 8 name[83] 700
+	Tc_E5_2 8 name[84] 700
+	Tc_E5_2 8 name[85] 700
+	Tc_E5_2 8 name[86] 700
+	Tc_E5_2 8 name[87] 700
+	Tc_E5_2 8 name[88] 700
+	Tc_E5_2 8 name[89] 700
+	Tc_E5_2 8 name[90] 700
+	Tc_E5_2 8 name[91] 700
+	Tc_E5_2 8 name[92] 700
+	Tc_E5_2 8 name[93] 700
+	FadeWait
+	Sleep 1000ms
+	Fork party[0] fork[0]:
+		CamLookPos (-19420, -21050, -28140) 8000ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 5720 -10000 8000ms
+	Fork party[0] fork[2]:
+		CamZoom 6840 10000ms
+	Fork party[0] fork[3]:
+		CamRotate 335000mdeg 8000ms
+	Fork party[1] fork[1]:
+		CamPers 484 10000ms
+	SoundPlay sound[119] 1 0 100
+	SoundPlay sound[293] 1 0 60
+	_ObjB0 object[8] 30
+	ObjFrame object[8] 1
+	ObjPlay object[8] 140
+	ObjWait object[8]
+	ObjFlagsSet object[8] 0x0020
+	ObjFrame object[8] 140
+	ObjPlay object[8] 150
+	SoundPlay sound[293] 1 0 80
+	Sleep 3000ms
+	ForkWait party[0] fork[0]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit party[0] fork[2]
+	ForkQuit party[1] fork[1]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9479]
+	NewScene "p0310._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	EffLoad eff[0] "scraft\\sc000_33.eff"
+	EffLoad eff[1] "map\\mp205_00.eff"
+	EffLoad eff[2] "map\\mp201_01.eff"
+	CamLookPos (-11520, -21000, 16780) 0ms
+	CamSetDistance 0 10010 -10000 0ms
+	CamZoom 6280 0ms
+	CamRotate 314000mdeg 0ms
+	CamPers 477 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (-19470, -22500, -27530) 0ms
+	CamSetDistance 0 3500 -10000 0ms
+	CamZoom 5110 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 530 0ms
+	CharAttachObj char[0] object[8]
+	CharSetPos char[0] (-26000, -23000, -28700) 90deg
+	SoundPlay sound[293] 0 0 100
+	_ObjB0 object[8] 60
+	ObjFlagsSet object[8] 0x0020
+	ObjFrame object[8] 140
+	ObjPlay object[8] 150
+	EffStop eff_instance[147] 0
+	EffStop eff_instance[148] 0
+	EffStop eff_instance[149] 0
+	SystemFlagsUnset 0x00000010
+	Fork party[1] fork[1]:
+		CamPers 600 6000ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 2800 -10000 10000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[8] 0x0020
+	ObjWait object[8]
+	ObjFrame object[8] 150
+	ObjPlay object[8] 330
+	Sleep 1500ms
+	SoundPlay sound[221] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[221] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[221] 0 0 100
+	Sleep 300ms
+	ObjWait object[8]
+	ObjFlagsSet object[8] 0x0020
+	ObjFrame object[8] 330
+	ObjPlay object[8] 430
+	Sleep 1000ms
+	ForkFunc char[0] fork[0] fn[0,4]
+	Fork party[0] fork[0]:
+		CamLookPos (-19470, -22500, -28530) 4000ms
+	Sleep 2000ms
+	CrossFade 1000ms
+	ForkQuit party[1] fork[1]
+	ForkQuit party[0] fork[0]
+	ForkQuit party[0] fork[1]
+	ForkQuit party[0] fork[3]
+	CamLookPos (-30270, 6000, -42290) 0ms
+	CamSetDistance 0 7550 -10000 0ms
+	CamZoom 7990 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 579 0ms
+	Fork party[0] fork[0]:
+		CamLookPos (-30360, 6000, -59070) 6000ms
+	Sleep 5000ms
+	CrossFade 1000ms
+	ForkQuit party[0] fork[0]
+	CamLookPos (-18640, -20300, -44520) 0ms
+	CamSetDistance 0 9690 -10000 0ms
+	CamZoom 5670 0ms
+	CamRotate 212000mdeg 0ms
+	CamPers 498 0ms
+	Fork party[0] fork[0]:
+		CamZoom 7630 5000ms
+	ForkWait char[0] fork[0]
+	SoundPlay sound[345] 0 0 100
+	system[28] = 1
+	CrossFade 500ms
+	ForkQuit party[0] fork[0]
+	CamLookPos (-46080, -35750, -103180) 0ms
+	CamSetDistance 0 3680 -10000 0ms
+	CamZoom 8000 0ms
+	CamRotate 249000mdeg 0ms
+	CamPers 650 0ms
+	EffPlay eff[1] eff_instance[0] null 0 (-40680, -35000, -700010) 180 0 0 1500 1500 1500 null (0, 0, 0) 0ms
+	ForkLoop party[1] fork[3]:
+		Shake 200 200 3000 300ms
+	CharSetPos char[0] (-20680, -23000, -20010) 180deg
+	Fork party[0] fork[0]:
+		CamLookPos (-53480, -45650, -120930) 6000ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 4200 -10000 6000ms
+	Fork party[0] fork[2]:
+		CamZoom 9410 6000ms
+	Fork party[0] fork[3]:
+		CamRotate 224000mdeg 2000ms
+	Fork party[1] fork[1]:
+		CamPers 898 6000ms
+	EffPlay eff[2] eff_instance[255] char[0] 0 (0, 1500, 16000) 0 0 0 3000 3000 3000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[255] char[0] 0 (7300, -1600, 12000) 0 0 0 2500 2500 2500 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[255] char[0] 0 (-7300, -1600, 12000) 0 0 0 2500 2500 2500 null (0, 0, 0) 0ms
+	Sleep 500ms
+	ForkFunc char[0] fork[0] fn[0,5]
+	Sleep 1500ms
+	Sleep 1000ms
+	EffStop eff_instance[128] 2
+	Fork party[0] fork[0]:
+		CamLookPos (-52000, -30000, -180740) 4000ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 -2000 -10000 4000ms
+	Fork party[0] fork[2]:
+		CamRotate 220000mdeg 4000ms
+	Sleep 1000ms
+	ForkFunc party[3] fork[0] fn[0,7]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9479]
+	NewScene "e0811._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharWalkToPos2 self (-26000, -23000, -32700) 1000mm/s 0
+	ForkWait self fork[1]
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -45010) 2000mm/s 0
+	Fork self fork[2]:
+		CharTurnTo self 180deg 10deg/s
+	Sleep 500ms
+	Fork self fork[2]:
+		CharTurnTo self 180deg 15deg/s
+	Sleep 500ms
+	Fork self fork[2]:
+		CharTurnTo self 180deg 20deg/s
+	Sleep 2000ms
+	Fork self fork[2]:
+		CharTurnTo self 180deg 15deg/s
+	Sleep 500ms
+	Fork self fork[2]:
+		CharTurnTo self 180deg 10deg/s
+	ForkWait self fork[2]
+	ForkWait self fork[1]
+	Return
+
+fn[5]:
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 1000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 3000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 6000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 9000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 12000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 15000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 18000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 21000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 24000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 27000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 30000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 35000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 40000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 45000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 50000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 60000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 70000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 80000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 90000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-260680, -100000, -6500010) 100000mm/s 0
+	Sleep 100ms
+	Return
+
+fn[6]:
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 1000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 3000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 6000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 9000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 12000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 15000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 18000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 21000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 24000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 27000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 30000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 35000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 40000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 50000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 60000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 70000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 80000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 90000mm/s 0
+	Sleep 100ms
+	Fork self fork[1]:
+		CharWalkToPos2 self (-18680, -23000, -3500010) 100000mm/s 0
+	Return
+
+fn[7]:
+	SoundSetVolume sound[293] 90
+	SoundSetVolume sound[345] 90
+	Sleep 300ms
+	SoundSetVolume sound[293] 80
+	SoundSetVolume sound[345] 80
+	Sleep 300ms
+	SoundSetVolume sound[293] 70
+	SoundSetVolume sound[345] 70
+	Sleep 300ms
+	SoundSetVolume sound[293] 60
+	SoundSetVolume sound[345] 60
+	Sleep 300ms
+	SoundSetVolume sound[293] 50
+	SoundSetVolume sound[345] 50
+	Sleep 300ms
+	SoundSetVolume sound[293] 40
+	SoundSetVolume sound[345] 40
+	Sleep 300ms
+	SoundSetVolume sound[293] 30
+	SoundSetVolume sound[345] 30
+	Sleep 300ms
+	SoundSetVolume sound[293] 20
+	SoundSetVolume sound[345] 20
+	Sleep 300ms
+	SoundSetVolume sound[293] 10
+	SoundSetVolume sound[345] 10
+	Sleep 300ms
+	SoundSetVolume sound[293] 0
+	SoundSetVolume sound[345] 0
+	SoundStop sound[293]
+	SoundStop sound[345]
+	Return

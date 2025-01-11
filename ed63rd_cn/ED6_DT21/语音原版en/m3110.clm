@@ -1,0 +1,534 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M3110.x"
+	town town[1]
+	bgm bgm[232]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00330._ch" "npl/ch00330p._cp"
+chip[1] "npl/ch00331._ch" "npl/ch00331p._cp"
+chip[2] "npl/ch00430._ch" "npl/ch00430p._cp"
+chip[3] "npl/ch00431._ch" "npl/ch00431p._cp"
+
+monster char[0]:
+	name ""
+	pos (-117810, 0, -4690)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[654]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-139310, 0, 2420)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[655]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-27330, 0, 2970)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[654]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (14900, 0, -44370)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[655]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (69270, 0, -22860)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[655]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (20910, 0, 262330)
+	radius 1000mm
+	bubble_pos (21000, 3000, 263000)
+	flags 0x007C
+	func fn[0,13]
+	unk1 0
+
+look_point[1]:
+	pos (-95810, 0, 3940)
+	radius 1000mm
+	bubble_pos (-95810, 1000, 3940)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[2]:
+	pos (-106270, 0, 4200)
+	radius 1000mm
+	bubble_pos (-106270, 1000, 4200)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[3]:
+	pos (-121890, 0, 3090)
+	radius 1000mm
+	bubble_pos (-121890, 1000, 3090)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[4]:
+	pos (-129830, 0, 2950)
+	radius 1000mm
+	bubble_pos (-129830, 1000, 2950)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,15]
+	Return
+
+fn[1]:
+	if flag[0]:
+		ObjFlagsUnset object[26] 0x0010
+		ObjFrame object[26] 80
+	if flag[1]:
+		ObjFlagsUnset object[27] 0x0010
+		ObjFrame object[27] 80
+	if flag[2]:
+		ObjFlagsUnset object[28] 0x0010
+		ObjFrame object[28] 80
+	if flag[3]:
+		ObjFlagsUnset object[29] 0x0010
+		ObjFrame object[29] 80
+	if flag[4]:
+		ObjFlagsUnset object[30] 0x0010
+		ObjFrame object[30] 80
+	if flag[5]:
+		ObjFlagsUnset object[31] 0x0010
+		ObjFrame object[31] 80
+	_1C object[26] fn[0,6]
+	_1C object[27] fn[0,7]
+	_1C object[28] fn[0,8]
+	_1C object[29] fn[0,9]
+	_1C object[30] fn[0,10]
+	_1C object[31] fn[0,11]
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[14] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	if !flag[11140]:
+		ObjFrame object[41] 0
+	else:
+		ObjFrame object[41] 60
+	if !flag[11141]:
+		ObjFrame object[42] 0
+	else:
+		ObjFrame object[42] 60
+	if !flag[11142]:
+		ObjFrame object[43] 0
+	else:
+		ObjFrame object[43] 60
+	if !flag[11143]:
+		ObjFrame object[44] 0
+	else:
+		ObjFrame object[44] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11140]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[41] 60
+		Sleep 500ms
+		if ItemAdd item[821] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[821]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11140]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[821]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[821]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[41] 60
+			ObjPlay object[41] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}A small plate of windowglass lies on the bottom of the empty box. Alas,
+			another unexpected chest pane!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 28 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11141]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[42] 60
+		Sleep 500ms
+		if ItemAdd item[420] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[420]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11141]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[420]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[420]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[42] 60
+			ObjPlay object[42] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}You realize that was in my stomach until just now, right? Yuck!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 29 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[11142]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[43] 60
+		Sleep 500ms
+		if ItemAdd item[513] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[513]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11142]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[513]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[513]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[43] 60
+			ObjPlay object[43] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Kevin briefly considers taking the chest as a new weapon, but it's not
+			quite bow-y enough.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 30 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[11143]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[44] 60
+		Sleep 500ms
+		if ItemAdd item[667] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[667]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11143]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[667]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[667]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[44] 60
+			ObjPlay object[44] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Thieving attempt failed! -20 Charisma.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 31 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[6]:
+	if !flag[0]:
+		TextStart null
+		Sleep 500ms
+		FlagSet flag[0]
+		ObjFlagsUnset object[26] 0x0002
+		ObjFlagsUnset object[26] 0x0010
+		TextEnd null
+	Return
+
+fn[7]:
+	if !flag[1]:
+		TextStart null
+		Sleep 500ms
+		FlagSet flag[1]
+		ObjFlagsUnset object[27] 0x0002
+		ObjFlagsUnset object[27] 0x0010
+		TextEnd null
+	Return
+
+fn[8]:
+	if !flag[2]:
+		TextStart null
+		Sleep 500ms
+		FlagSet flag[2]
+		ObjFlagsUnset object[28] 0x0002
+		ObjFlagsUnset object[28] 0x0010
+		TextEnd null
+	Return
+
+fn[9]:
+	if !flag[3]:
+		TextStart null
+		Sleep 500ms
+		ObjFlagsUnset object[29] 0x0002
+		ObjFlagsUnset object[29] 0x0010
+		FlagSet flag[3]
+		TextEnd null
+	Return
+
+fn[10]:
+	if !flag[4]:
+		TextStart null
+		Sleep 500ms
+		ObjFlagsUnset object[30] 0x0002
+		ObjFlagsUnset object[30] 0x0010
+		FlagSet flag[4]
+		TextEnd null
+	Return
+
+fn[11]:
+	if !flag[5]:
+		TextStart null
+		Sleep 500ms
+		ObjFlagsUnset object[31] 0x0002
+		ObjFlagsUnset object[31] 0x0010
+		FlagSet flag[5]
+		TextEnd null
+	Return
+
+fn[12]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Open the Door?{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[13]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (21610, 0, 260060) 0deg
+	CharSetPos field_party[1] (20020, 0, 260000) 0deg
+	CharSetPos field_party[2] (21370, 0, 258140) 0deg
+	CharSetPos field_party[3] (19670, 0, 258010) 0deg
+	CamLookPos (19670, 0, 258010) 0ms
+	CamSetDistance 0 4600 -10000 0ms
+	CamZoom 3910 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	if !QuestFlagsGet quest[14] 0x02:
+		QuestFlagsSet quest[14] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99909v{color 5}#40WBring to me the repenting patriot.
+		#500W 
+		#40WOnly then shall the door open...{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if PartyPosition name[11] != -1:
+		Call fn[0,12]
+		if var[0] == 0:
+			Call fn[0,14]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[14]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[40] 0
+	ObjPlay object[40] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[40]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3280 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 20 0 0
+	NewScene "p9001._sn" 100 0 0
+	Hcf
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (21610, 0, 260060) 0deg
+	CharSetPos field_party[1] (20020, 0, 260000) 0deg
+	CharSetPos field_party[2] (21370, 0, 258140) 0deg
+	CharSetPos field_party[3] (19670, 0, 258010) 0deg
+	CamLookPos (19670, 0, 258010) 0ms
+	CamSetDistance 0 4600 -10000 0ms
+	CamZoom 3910 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return

@@ -1,0 +1,169 @@
+calmare fc scena
+scena:
+	name "Rolent" "T0310.x"
+	town town[15]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02220._ch" "npl/ch02220p._cp"
+chip[1] "npl/ch02750._ch" "npl/ch02750p._cp"
+chip[2] "apl/ch20021._ch" "apl/ch20021p._cp"
+
+npc char[0]:
+	name "Joshua"
+	pos (44200, 240, 18540)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Letter"
+	pos (3160, 600, 70700)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01F6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 17:
+		SystemFlagsSet 0x10000000
+		Event fn[0,3]
+	Return
+
+fn[1]:
+	EntranceSetDisabled entrance[8] 1
+	EntranceSetDisabled entrance[9] 1
+	EntranceSetDisabled entrance[10] 0
+	EntranceSetDisabled entrance[11] 0
+	EffStop eff_instance[129] 0
+	EffStop eff_instance[128] 0
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (4860, 0, 71900) 0ms
+	CamSetDistance 0 5600 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	CharSetPos name[0] (4790, 0, 74900) 270deg
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos char[8] (4850, 0, 71000) 270deg
+	CharSetChipPattern char[9] 17
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	Emote char[8] 0mm 1700mm 24 27 250ms 0
+	Sleep 1500ms
+	EmoteStop char[8]
+	Sleep 300ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (4300, 0, 71000) 1000mm/s 0
+	ForkWait char[8] fork[1]
+	Sleep 300ms
+	SoundPlay sound[143] 0 0 100
+	CrossFade 250ms
+	CharFlagsUnset char[9] 0x0080
+	Sleep 1500ms
+	TextTalk char[8] {
+		#78519v#1675F#11P...Thank you for everything.{wait}
+	}
+	TextWait
+	_59
+	Sleep 500ms
+	CharTurnTo char[8] 180deg 400deg/s
+	Sleep 300ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (4300, 0, 67580) 1500mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (3000, 0, 66700) 1500mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (3000, 0, 66300) 1500mm/s 0
+	ForkWait char[8] fork[1]
+	FadeOut 2000ms 0x00000000 255
+	SoundPlay sound[6] 0 0 100
+	Sleep 300ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (3000, 0, 64500) 1500mm/s 0
+	Fork char[8] fork[2]:
+		CharColor self 0x00FFFFFF 1000ms
+	ForkWait char[8] fork[1]
+	SoundPlay sound[7] 0 0 100
+	FadeWait
+	FlagSet flag[9478]
+	NewScene file[0x00210085] 100 0 0
+	Hcf
+	Return

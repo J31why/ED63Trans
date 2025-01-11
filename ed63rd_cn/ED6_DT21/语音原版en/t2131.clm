@@ -1,0 +1,421 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2131.x"
+	town town[1]
+	bgm bgm[12]
+	item fn[0,65535]
+	scp 0 "t2131._sn"
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20777._ch" "apl2/ch20777p._cp"
+chip[1] "npl/ch01560._ch" "npl/ch01560p._cp"
+chip[2] "npl/ch01270._ch" "npl/ch01270p._cp"
+
+npc char[0]:
+	name "Lechter"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Spiridon"
+	pos (26000, 0, 27230)
+	angle 135deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Primo"
+	pos (-5500, 300, 33800)
+	angle 90deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (28730, 0, 37220)
+	radius 800mm
+	bubble_pos (28730, 1800, 37220)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 8:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			Event fn[0,4]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[3] 0x0008
+	ObjFlagsSet object[3] 0x0020
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-720, 250, 31660) 0ms
+	CamSetDistance 0 4059 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 322000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0004
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[0] (27080, 500, 36860) 0deg
+	CharSetPos name[4] (0, -500, 24500) 180deg
+	CharColor name[4] 0x00FFFFFF 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Fork name[4] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (0, 250, 30800) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 300ms
+	CharTurnTo name[4] 90deg 600deg/s
+	Sleep 500ms
+	CharTurnTo name[4] 280deg 600deg/s
+	Sleep 1000ms
+	Fork char[3] fork[0]:
+		CamLookPos (4120, 750, 31660) 1500ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (6900, 250, 30800) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (6900, 2000, 37000) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (4500, 3500, 37000) 5000mm/s 0
+	Sleep 600ms
+	CrossFade 1000ms
+	CamLookPos (32759, -2000, 37520) 0ms
+	CamSetDistance 0 8080 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	ForkQuit name[4] fork[255]
+	CharColor name[4] 0x00FFFFFF 0ms
+	CharSetPos name[4] (35500, -3250, 34500) 0deg
+	Sleep 1000ms
+	Fork name[4] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (35500, -2000, 37200) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (31720, 0, 37200) 5000mm/s 0
+	ForkWait name[4] fork[1]
+	Emote name[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[3] fork[0]:
+		CamLookPos (26740, 0, 37440) 2000ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 5480 -10000 2000ms
+	Fork char[3] fork[2]:
+		CamZoom 3000 2000ms
+	Emote char[0] 150mm 1850mm 8 9 200ms 0
+	ForkWait char[3] fork[0]
+	Sleep 1000ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (30600, 0, 36300) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (28500, 0, 36300) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	CharTurnTo name[4] 315deg 400deg/s
+	Sleep 300ms
+	TextTalk name[4] {
+		#81862v#047F#12PLechter.{wait}
+	} {
+		#81863v#046FWhat are you doing here?!{wait}
+	} {
+		#81864vWe're students! Gambling is expressly forbidden!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97513v#1772FI know.{wait}
+	} {
+		#97514v#1778FI mean, I'm the Student Council president!
+		Of course I know!{wait}
+	}
+	TextWait
+	EmoteStop char[0]
+	Sleep 300ms
+	SoundPlay sound[260] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[260] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[260] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[261] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[15] 0 0 100
+	Emote char[0] 150mm 1850mm 10 11 200ms 2
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97515v#1771FYes! Come to Papa!{wait}
+	}
+	TextWait
+	SoundPlay sound[264] 0 0 100
+	Sleep 1000ms
+	Emote char[0] 150mm 1850mm 8 9 200ms 0
+	Sleep 1000ms
+	TextTalk name[4] {
+		#81865v#047F#12P...{wait}
+	} {
+		#81866v#043F(I find myself doubting how he could be more
+		by the minute...){wait}
+	} {
+		#81867v(Maybe I should ask the dean next time I see
+		him so I can make sure this isn't some kind of
+		elaborate ruse...){wait}
+	}
+	TextWait
+	ForkFunc char[0] fork[3] fn[0,3]
+	Sleep 2000ms
+	Emote name[4] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	CharTurnTo name[4] 270deg 500deg/s
+	Sleep 300ms
+	TextTalk name[4] {
+		#81868v#044F(That sounds like the bridge coming down.){wait}
+	} {
+		#81869v#047F(Finally! I can go visit the mayor now.){wait}
+	}
+	TextWait
+	CharTurnTo name[4] 315deg 500deg/s
+	Sleep 500ms
+	TextTalk name[4] {
+		#81870v#042F#12PI'll be leaving now. I need to go and take
+		care of your work for you.{wait}
+	} {
+		#81871vYou stay right where you are!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97516v#1773FRight...{wait}
+	} {
+		#97517v#1776FHmm... Right...{wait}
+	} {
+		#97518vJust a liiittle bit more...{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81872v#042F#12PAre you even paying attention?!{wait}
+	} {
+		#81873v#047FJust stay here! Please!{wait}
+	}
+	TextWait
+	CharTurnTo name[4] 90deg 500deg/s
+	Fork name[4] fork[1]:
+		CharWalkToPos self (30600, 0, 36300) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (31720, 0, 37200) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (35500, -2000, 37200) 2000mm/s 0
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	NewScene "t2200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[148] 0 0 100
+	Sleep 1000ms
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (28260, 0, 38200) 0ms
+	CamSetDistance 0 6520 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (26300, 250, 37100) 45deg
+	CharColor name[4] 0x00FFFFFF 0ms
+	CharSetPos name[4] (35500, -3250, 34500) 0deg
+	FadeIn 1000ms 0x00000000
+	Fork name[4] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (35500, -2000, 37200) 4500mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (31720, 0, 37200) 4500mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 300ms
+	Emote name[4] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[4] {
+		#81887v#042F#12P(I knew it!){wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (26260, 0, 38200) 1800ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 5520 -10000 1800ms
+	Fork char[3] fork[2]:
+		CamZoom 2900 1800ms
+	Fork name[4] fork[1]:
+		CharWalkToPos self (30800, 0, 36600) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Fork name[4] fork[1]:
+		CharWalkToPos self (28600, 0, 36600) 2000mm/s 0
+	ForkWait name[4] fork[1]
+	Sleep 300ms
+	TextTalk name[4] {
+		#81888v#045F#12PUmm... Excuse me...{wait}
+	} {
+		#81889vYou wouldn't happen to know where the
+		student who was sitting here has gone,
+		would you?{wait}
+	} {
+		#81890vI'm trying to find him.{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 90deg 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#99093v#5PAh, you must mean Master Lechter.{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81891v#044F#12P('Master' Lechter?){wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99094v#5PA young lady came to collect him not long ago.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99095v#5PShe did punch him before they departed,
+		however.{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[4] {
+		#81892v#045F#12P(Thank Aidios for Lucy.){wait}
+	} {
+		#81893v#043FI'm so sorry for the trouble he's caused you.{wait}
+	} {
+		#81894vOn behalf of the students of the academy,
+		I hope you won't think ill of us for the actions
+		of one of our students...{wait}
+	} {
+		#81895v#047FOur Student Council president, no less. I really
+		do apologize.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99096v#5POh, on the contrary! Master Lechter is a valued
+		customer of ours.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99097v#5PIncidentally, should you happen to have the
+		chance to speak to him...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99098v#5P...we've placed the coins from the game he was
+		in the middle of in his pool as usual.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99099v#5PIf you could let him know that, it would be 
+		greatly appreciated.{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81896v#542F#12PA-All right, then...{wait}
+	}
+	TextWait
+	Fork char[3] fork[2]:
+		CamZoom 3000 4000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t2100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Thrills and excitement await!
+		--Lavantar Casino & Bar{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

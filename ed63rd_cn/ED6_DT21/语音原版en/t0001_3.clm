@@ -1,0 +1,2140 @@
+calmare tc scena
+scena:
+	name "map" "T0001.x"
+	town town[1]
+	bgm bgm[10]
+	item fn[0,65535]
+	scp 0 "t0001._sn"
+	scp 1 "t0001_1._sn"
+	scp 2 "t0001_2._sn"
+	scp 3 "t0001_3._sn"
+	scp 4 "t0001_4._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,2]
+
+fn[0]:
+	TextMessage null {
+		{0x06}Which?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[1] 10 32 1
+			"3rd" // 0
+			"SC" // 1
+			"FC" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				Call fn[3,3]
+				break
+			case 1:
+				Call fn[3,1]
+				break
+			case 2:
+				Call fn[3,2]
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[1]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[1]:
+	TextMessage null {
+		{0x06}Which?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[2] 10 100 1
+			"A0020 Party and Dedicated NPL" // 0
+			"A0021 Battle Estelle, Joshua, Zin, Agate, Olivier" // 1
+			"A0022 Battle Scherazard, Tita, Kloe, Kloe Formal" // 2
+			"A0023 Battle Kevin, Anelace, Josette, Kurt, Ries" // 3
+			"A0024 Battle Julia, Mueller, Cid, Kanone" // 4
+			"A0025 Battle Walter, Renne, Lucciola, Blueblanc" // 5
+			"A0026 Battle Loewe, Weissman, Robo Joshua, Clown" // 6
+			"A0027 Battle Jaeger A, Jaeger B, Kurt, Carna, Gilbert" // 7
+			"A0039 SC Sitting Sprites" // 8
+			"Cancel" // 9
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "a0020._sn" 0 0 0
+				Hcf
+			case 1:
+				NewScene "a0021._sn" 0 0 0
+				Hcf
+			case 2:
+				NewScene "a0022._sn" 0 0 0
+				Hcf
+			case 3:
+				NewScene "a0023._sn" 0 0 0
+				Hcf
+			case 4:
+				NewScene "a0024._sn" 0 0 0
+				Hcf
+			case 5:
+				NewScene "a0025._sn" 0 0 0
+				Hcf
+			case 6:
+				NewScene "a0026._sn" 0 0 0
+				Hcf
+			case 7:
+				NewScene "a0027._sn" 0 0 0
+				Hcf
+			case 8:
+				NewScene "a0039._sn" 0 0 0
+				Hcf
+		var[0] = 255
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[2]:
+	TextMessage null {
+		{0x06}Which?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[2] 10 100 1
+			"30 General Purpose NPL" // 0
+			"31 Party and Dedicated NPL" // 1
+			"32 General Purpose and dedicated NPL2/APL" // 2
+			"33 PT battle Estelle, Joshua, Zin, Agate, Olivier" // 3
+			"34 PT battle Joshua, Scherazard, Tita, Kloe" // 4
+			"35 NPC Battle Bracer Female, Thug, Sky Pirate" // 5
+			"36 NPC Battle Thin Pirate, Bracer Female 2" // 6
+			"37 NPC Battle Royal Guard, OFficer, Agent, Lola, Risha, Kanoe" // 7
+			"39座りキャラ" // 8
+			"Cancel" // 9
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t0030._sn" 0 0 0
+				Hcf
+			case 1:
+				NewScene "t0031._sn" 0 0 0
+				Hcf
+			case 2:
+				NewScene "t0032._sn" 0 0 0
+				Hcf
+			case 3:
+				NewScene "t0033._sn" 0 0 0
+				Hcf
+			case 4:
+				NewScene "t0034._sn" 0 0 0
+				Hcf
+			case 5:
+				NewScene "t0035._sn" 0 0 0
+				Hcf
+			case 6:
+				NewScene "t0036._sn" 0 0 0
+				Hcf
+			case 7:
+				NewScene "t0037._sn" 0 0 0
+				Hcf
+			case 8:
+				NewScene "t0039._sn" 0 0 0
+				Hcf
+		var[0] = 255
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[3]:
+	TextMessage null {
+		{0x06}Which?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[2] 10 100 1
+			"A0040 Cassius, Kilika, Phillip (Battle)" // 0
+			"A0041 Morgan, Bodyguard, Black Hunter, Black Loewe (Battle)" // 1
+			"A0042 Dedicated NPCs 1" // 2
+			"A0045 Dedicated NPCs 2" // 3
+			"A0043 Main Character Costumes" // 4
+			"A0044 Main Character Costumes (Battle)" // 5
+			"Cancel" // 6
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "a0040._sn" 0 0 0
+				Hcf
+			case 1:
+				NewScene "a0041._sn" 0 0 0
+				Hcf
+			case 2:
+				NewScene "a0042._sn" 0 0 0
+				Hcf
+			case 3:
+				NewScene "a0045._sn" 0 0 0
+				Hcf
+			case 4:
+				NewScene "a0043._sn" 0 0 0
+				Hcf
+			case 5:
+				NewScene "a0044._sn" 0 0 0
+				Hcf
+		var[0] = 255
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[4]:
+	TextMessage null {
+		{0x06}Which?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[1] 10 32 1
+			"3rd" // 0
+			"SC" // 1
+			"FC" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				Call fn[3,7]
+				break
+			case 1:
+				Call fn[3,6]
+				break
+			case 2:
+				Call fn[3,5]
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[1]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[5]:
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Disabled. Please check in SC instead.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Return
+
+fn[6]:
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Disabled. Please check in SC instead.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Return
+
+fn[7]:
+	TextMessage null {
+		{0x06}Which?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[2] 10 32 1
+			"T0040 Monster List (14000-14250)" // 0
+			"T0041 Monster List (14260-14500)" // 1
+			"T0042 Monster List (14510-14750)" // 2
+			"T0043 Monster List (14760-14890)" // 3
+			"Cancel" // 4
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t0040._sn" 0 0 0
+				Hcf
+			case 1:
+				NewScene "t0041._sn" 0 0 0
+				Hcf
+			case 2:
+				NewScene "t0042._sn" 0 0 0
+				Hcf
+			case 3:
+				NewScene "t0043._sn" 0 0 0
+				Hcf
+		var[0] = 255
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[8]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[1] -1 32 1
+			"■Main" // 0
+			"■Episodes" // 1
+			"■Stone Monument Jump" // 2
+			"■Stone Monument Flag" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				Call fn[3,12]
+				break
+			case 1:
+				Call fn[3,11]
+				break
+			case 2:
+				Call fn[3,10]
+				break
+			case 3:
+				Call fn[3,9]
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[1]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[9]:
+	ItemAdd item[529] 1
+	while var[0] != 255:
+		Menu menu[2] -1 32 1
+			"▼Open All Monuments" // 0
+			"▼Enable All Monuments" // 1
+			"▼Disable All Monuments" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				TcMonumentOpen 0 0 0
+				TcMonumentOpen 1 0 0
+				TcMonumentOpen 2 0 0
+				TcMonumentOpen 3 0 0
+				TcMonumentOpen 4 0 0
+				TcMonumentOpen 5 0 0
+				TcMonumentOpen 6 0 0
+				TcMonumentOpen 7 0 0
+				TcMonumentOpen 8 0 0
+				TcMonumentOpen 9 0 0
+				TcMonumentOpen 10 0 0
+				TcMonumentOpen 11 0 0
+				TcMonumentOpen 12 0 0
+				TcMonumentOpen 13 0 0
+				TcMonumentOpen 14 0 0
+				TcMonumentOpen 15 0 0
+				TcMonumentOpen 16 0 0
+				TcMonumentOpen 17 0 0
+				TcMonumentOpen 18 0 0
+				TcMonumentOpen 19 0 0
+				TcMonumentOpen 20 0 0
+				TcMonumentOpen 21 0 0
+				TcMonumentOpen 22 0 0
+				TcMonumentOpen 23 0 0
+				TcMonumentOpen 24 0 0
+				TcMonumentOpen 25 0 0
+				TcMonumentOpen 27 0 0
+				TcMonumentOpen 28 0 0
+				TcMonumentOpen 29 0 0
+				TcMonumentOpen 30 0 0
+				TcMonumentOpen 26 0 0
+				TcMonumentOpen 31 0 0
+				TcMonumentOpen 32 0 0
+				break
+			case 1:
+				TcMonumentDisable 255 0 0
+				break
+			case 2:
+				TcMonumentEnable 255 0 0
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[10]:
+	ItemAdd item[529] 1
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[2] -1 32 1
+			"U7000 Hermit's Garden" // 0
+			"M7002 Jade Corridor 1" // 1
+			"M7005 Jade Corridor 2" // 2
+			"U4100 Grancel (Day)" // 3
+			"U4150 Grancel (Night)" // 4
+			"U4165 Grand Arena" // 5
+			"U4250 Grancel Castle" // 6
+			"M4302 Sealed Area" // 7
+			"M7100 Golden Road, Silver Road 1" // 8
+			"M7104 Golden Road Boss" // 9
+			"M7103 Silver Road Boss" // 10
+			"M7107 Golden Road, Silver Road 2" // 11
+			"U5110 Le-Locle Lodge (Day)" // 12
+			"U5111 Le-Locle Lodge (Night)" // 13
+			"M5503 Balstar Channel" // 14
+			"M5504 Saint-Croix Forest" // 15
+			"M5513 Grimsel Fortress" // 16
+			"M7200 Labyrinth of Light 1" // 17
+			"M7201 Labyrinth of Light 2" // 18
+			"M7203 Labyrinth of Shadow" // 19
+			"M7206 Labyrinth of Light Boss" // 20
+			"M4113 Erbe Scenic Route" // 21
+			"U2500 Jenis Royal Academy" // 22
+			"M5610 Lakeside Laboratory 1" // 23
+			"M5611 Lakeside Laboratory 2" // 24
+			"M5612 Lakeside Laboratory 3" // 25
+			"M5613 Lakeside Laboratory 4" // 26
+			"M3100 Leiston Fortress 1" // 27
+			"M3203 Leiston Fortress 2" // 28
+			"M3204 Leiston Fortress 3" // 29
+			"M5408 Glorious Deck" // 30
+			"M5412 Glorious Hangar" // 31
+			"M5400 Glorious Sanctuary" // 32
+			"M7310 Abyss Entrance" // 33
+			"Cancel" // 34
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "u7000._sn" 104 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "m7002._sn" 116 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "m7005._sn" 103 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "u4100._sn" 116 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "u4150._sn" 116 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "u4165._sn" 113 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "u4250._sn" 109 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "m4302._sn" 103 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "m7100._sn" 103 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "m7104._sn" 102 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "m7103._sn" 102 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "m7107._sn" 103 0 0
+				Hcf
+				break
+			case 12:
+				NewScene "u5110._sn" 116 0 0
+				Hcf
+				break
+			case 13:
+				NewScene "u5111._sn" 115 0 0
+				Hcf
+				break
+			case 14:
+				NewScene "m5503._sn" 103 0 0
+				Hcf
+				break
+			case 15:
+				NewScene "m5504._sn" 101 0 0
+				Hcf
+				break
+			case 16:
+				NewScene "m5513._sn" 115 0 0
+				Hcf
+				break
+			case 17:
+				NewScene "m7200._sn" 105 0 0
+				Hcf
+				break
+			case 18:
+				NewScene "m7201._sn" 107 0 0
+				Hcf
+				break
+			case 19:
+				NewScene "m7203._sn" 106 0 0
+				Hcf
+				break
+			case 20:
+				NewScene "m7206._sn" 102 0 0
+				Hcf
+				break
+			case 21:
+				NewScene "m4113._sn" 101 0 0
+				Hcf
+				break
+			case 22:
+				NewScene "u2500._sn" 131 0 0
+				Hcf
+				break
+			case 23:
+				NewScene "m5610._sn" 136 0 0
+				Hcf
+				break
+			case 24:
+				NewScene "m5611._sn" 137 0 0
+				Hcf
+				break
+			case 25:
+				NewScene "m5612._sn" 129 0 0
+				Hcf
+				break
+			case 26:
+				NewScene "m5613._sn" 112 0 0
+				Hcf
+				break
+			case 27:
+				NewScene "m3100._sn" 102 0 0
+				Hcf
+				break
+			case 28:
+				NewScene "m3203._sn" 130 0 0
+				Hcf
+				break
+			case 29:
+				NewScene "m3204._sn" 127 0 0
+				Hcf
+				break
+			case 30:
+				NewScene "m5408._sn" 102 0 0
+				Hcf
+				break
+			case 31:
+				NewScene "m5412._sn" 104 0 0
+				Hcf
+				break
+			case 32:
+				NewScene "m5400._sn" 129 0 0
+				Hcf
+				break
+			case 33:
+				NewScene "m7310._sn" 101 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[11]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[2] -1 32 1
+			"T3121 地下実験場" // 0
+			"E0102 飛行船（空賊)" // 1
+			"T4206 グランセル城外部(パーティ会場)" // 2
+			"C5416 グロリアス　星辰の間" // 3
+			"P9000 Episode Room 1" // 4
+			"P9001 Episode Room 2" // 5
+			"P9002 Episode Room 3" // 6
+			"T1500 Fishing 1" // 7
+			"C4203 Fishing 2" // 8
+			"R2201 Fishing 3" // 9
+			"R2201 Gull Seaside Way" // 10
+			"E1001 Grand Arena (Night)" // 11
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t3121._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "e0102._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t4206._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "c5416._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "p9000._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "p9001._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "p9002._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "t1500._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "c4203._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "r2201._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "r2201._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "e1001._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[12]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[2] -1 32 1
+			"Base, Clinic" // 0
+			"Prologue" // 1
+			"1st Plane (Jade Corridor)" // 2
+			"2nd Plane (Grancel)" // 3
+			"3rd Plane (Golden Road, Silver Road)" // 4
+			"4th Plane (Le-Locle)" // 5
+			"5th Plane (Labyrinth of Light and Shadows)" // 6
+			"6th Plane (Various)" // 7
+			"7th Plane (Purgatory)" // 8
+			"Phantasmagoria" // 9
+			"Epilogue" // 10
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				Call fn[3,13]
+				break
+			case 1:
+				Call fn[3,14]
+				break
+			case 2:
+				Call fn[3,15]
+				break
+			case 3:
+				Call fn[3,16]
+				break
+			case 4:
+				Call fn[3,17]
+				break
+			case 5:
+				Call fn[3,18]
+				break
+			case 6:
+				Call fn[3,19]
+				break
+			case 7:
+				Call fn[3,20]
+				break
+			case 8:
+				Call fn[3,21]
+				break
+			case 9:
+				Call fn[3,22]
+				break
+			case 10:
+				Call fn[3,23]
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[13]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"U7000 隠者の庭園（拠点）" // 0
+			"U7001 隠者の庭園（拠点）中央通路" // 1
+			"U7002 隠者の庭園（拠点）左通路" // 2
+			"U7003 隠者の庭園（拠点）右通路" // 3
+			"U7004 隠者の庭園（拠点）全体マップ" // 4
+			"P7000 紫苑の家（雪の救貧院）外" // 5
+			"P7010 紫苑の家（雪の救貧院）内" // 6
+			"P7011 紫苑の家（雪の救貧院）内" // 7
+			"P7012 紫苑の家/螺旋階段・通路" // 8
+			"P7013 紫苑の家/始まりの地（ドーム）" // 9
+			"Cancel" // 10
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "u7000._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "u7001._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "u7002._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "u7003._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "u7004._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "p7000._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "p7010._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "p7011._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "p7012._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "p7013._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[14]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"E1100 ルシタニア号外部" // 0
+			"E1110 ルシタニア号内部（舞踏会会場）" // 1
+			"E1111 ルシタニア号内部（プライベートエリア）" // 2
+			"E1200 メルカバ外部" // 3
+			"E1210 メルカバ内部" // 4
+			"E0811 スカイマップ（夜）" // 5
+			"E0700 国際定期船《グレトナ号》外部" // 6
+			"E0710 国際定期船《グレトナ号》内部" // 7
+			"T4105 グランセル飛行場(アルセイユ有り)" // 8
+			"T4131 大聖堂" // 9
+			"T4144 大聖堂地下（ドーム）" // 10
+			"T4145 大聖堂地下（螺旋階段/通路）" // 11
+			"E0900 水上マップ" // 12
+			"T4152 王都グランセル外部（西街区、夜）" // 13
+			"T4151 王都グランセル外部（東街区、夜）" // 14
+			"T4404 王都グランセル外部（波止場２、夜）" // 15
+			"Cancel" // 16
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "e1100._sn" 104 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "e1110._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "e1111._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "e1200._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "e1210._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "e0811._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "e0700._sn" 104 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "e0710._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "t4105._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "t4131._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "t4144._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "t4145._sn" 100 0 0
+				Hcf
+				break
+			case 12:
+				NewScene "e0900._sn" 100 0 0
+				Hcf
+				break
+			case 13:
+				NewScene "t4152._sn" 100 0 0
+				Hcf
+				break
+			case 14:
+				NewScene "t4151._sn" 100 0 0
+				Hcf
+				break
+			case 15:
+				NewScene "t4404._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[15]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"M7001 翡翠回廊①(ティータ)" // 0
+			"M7002 翡翠回廊②(アルセイユ)" // 1
+			"M7003 翡翠回廊③(螺旋階段１)" // 2
+			"M7004 翡翠回廊④(螺旋階段２)" // 3
+			"M7005 翡翠回廊⑤(ボス部屋)" // 4
+			"M7006 翡翠回廊⑥(エレベータ)" // 5
+			"M7007 翡翠回廊⑦(ｱﾙｾｲﾕ発進ｲﾍﾞﾝﾄ用)" // 6
+			"P0310 アルセイユ内部　甲板連絡通路" // 7
+			"P0311 アルセイユ内部　連絡通路１" // 8
+			"P0312 アルセイユ内部　連絡通路２" // 9
+			"P0313 アルセイユ内部　船倉" // 10
+			"Cancel" // 11
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "m7001._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "m7002._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "m7003._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "m7004._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "m7005._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "m7006._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "m7007._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "p0310._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "p0311._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "p0312._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "p0313._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[16]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"U4406 王都グランセル外部（波止場山猫号あり)" // 0
+			"U4100 王都グランセル外部（南街区）" // 1
+			"U4101 王都グランセル外部（東街区）" // 2
+			"U4102 王都グランセル外部（西街区）" // 3
+			"U4103 王都グランセル外部（北街区）" // 4
+			"U4104 王都グランセル外部（闘技場内側）" // 5
+			"U4106 グランセル飛行場(アルセイユなし)" // 6
+			"U4110 民家１.２.６.７.８" // 7
+			"U4111 民家３.４.５" // 8
+			"U4120 武器屋、工房" // 9
+			"U4121 ギルド、釣公師団本部" // 10
+			"U4122 エーデル百貨店、空港受付" // 11
+			"U4130 酒場、コーヒーハウス、リベール通信社" // 12
+			"U4131 大聖堂" // 13
+			"U4132 ホテル" // 14
+			"U4135 歴史資料館" // 15
+			"U4136 グランアリーナ" // 16
+			"U4138 帝國大使館内部" // 17
+			"U4139 共和国大使館内部" // 18
+			"U4143 闇商人の店内部" // 19
+			"U4400 王都グランセル外部（波止場１）" // 20
+			"U4401 王都グランセル外部（波止場２）" // 21
+			"U4402 王都グランセル外部（波止場倉庫内部）" // 22
+			"U4403 王都グランセル外部（波止場ｵﾙｸﾞｲﾕ倉庫内部）" // 23
+			"U4150 王都グランセル外部（南街区、夜）" // 24
+			"U4151 王都グランセル外部（東街区、夜）" // 25
+			"U4152 王都グランセル外部（西街区、夜）" // 26
+			"U4153 王都グランセル外部（北街区、夜）" // 27
+			"U4203 グランセル城外部(町と接続)（夜）" // 28
+			"U4204 グランセル城外部(空中庭園)（夜）" // 29
+			"U4205 グランセル城外部(女王のテラス)（夜）" // 30
+			"U4250 グランセル城内部(広間)（夜）" // 31
+			"U4251 グランセル城内部(饗応の間)（夜）" // 32
+			"U4252 グランセル城内部(行政区)（夜）" // 33
+			"U4253 グランセル城内部(親衛隊詰所)（夜）" // 34
+			"U4254 グランセル城内部(メイド部屋)（夜）" // 35
+			"U4255 グランセル城内部(厨房)（夜）" // 36
+			"U4260 グランセル城内部(謁見の間)（夜）" // 37
+			"U4261 グランセル城内部(二階右翼)（夜）" // 38
+			"U4262 グランセル城内部(二階左翼)（夜）" // 39
+			"U4270 グランセル城内部(女王宮)（夜）" // 40
+			"U4280 グランセル城内部(地下倉庫)（夜）" // 41
+			"U4241 グランセル城内部(封印の間)" // 42
+			"M4300 封印区画（最上層）" // 43
+			"M4302 封印区画（最下層）" // 44
+			"M4303 封印区画（ボス部屋）" // 45
+			"M4308 封印区画（エレベータ部屋）" // 46
+			"U4123 ギルド（夜）" // 47
+			"U4133 ホテル（夜）" // 48
+			"U4134 大聖堂（夜）" // 49
+			"U4137 コーヒーハウス（夜）" // 50
+			"U4404 王都グランセル外部（波止場２夜）" // 51
+			"U4405 王都グランセル外部（波止場倉庫内部夜）" // 52
+			"U4156 グランセル飛行場(夜アルセイユ無し)" // 53
+			"U4160 民家１.２.６.７.８（夜）" // 54
+			"U4161 民家３.４.５（夜）" // 55
+			"U4162 歴史資料館（夜）" // 56
+			"U4163 帝國大使館内部（夜）" // 57
+			"U4164 闇商人の店内部（夜）" // 58
+			"U4165 グランアリーナ(受付、控え室)（夜）" // 59
+			"U4166 グランアリーナ（闘技場内側）（夜）" // 60
+			"U4167 波止場倉庫内部（オルグイユ倉庫内部）（夜）" // 61
+			"U4168 王都グランセル外部（波止場山猫号あり）（夜）" // 62
+			"U4169 王都グランセル・発着場受付、釣公師団本部（夜）" // 63
+			"E0110 飛行船（空賊用）内部" // 64
+			"U4200 グランセル城外部(町と接続)" // 65
+			"Cancel" // 66
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "u4406._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "u4100._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "u4101._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "u4102._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "u4103._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "u4104._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "u4106._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "u4110._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "u4111._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "u4120._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "u4121._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "u4122._sn" 100 0 0
+				Hcf
+				break
+			case 12:
+				NewScene "u4130._sn" 100 0 0
+				Hcf
+				break
+			case 13:
+				NewScene "u4131._sn" 100 0 0
+				Hcf
+				break
+			case 14:
+				NewScene "u4132._sn" 100 0 0
+				Hcf
+				break
+			case 15:
+				NewScene "u4135._sn" 100 0 0
+				Hcf
+				break
+			case 16:
+				NewScene "u4136._sn" 100 0 0
+				Hcf
+				break
+			case 17:
+				NewScene "u4138._sn" 100 0 0
+				Hcf
+				break
+			case 18:
+				NewScene "u4139._sn" 100 0 0
+				Hcf
+				break
+			case 19:
+				NewScene "u4143._sn" 100 0 0
+				Hcf
+				break
+			case 20:
+				NewScene "u4400._sn" 100 0 0
+				Hcf
+				break
+			case 21:
+				NewScene "u4401._sn" 100 0 0
+				Hcf
+				break
+			case 22:
+				NewScene "u4402._sn" 100 0 0
+				Hcf
+				break
+			case 23:
+				NewScene "u4403._sn" 100 0 0
+				Hcf
+				break
+			case 24:
+				NewScene "u4150._sn" 100 0 0
+				Hcf
+				break
+			case 25:
+				NewScene "u4151._sn" 100 0 0
+				Hcf
+				break
+			case 26:
+				NewScene "u4152._sn" 100 0 0
+				Hcf
+				break
+			case 27:
+				NewScene "u4153._sn" 100 0 0
+				Hcf
+				break
+			case 28:
+				NewScene "u4203._sn" 100 0 0
+				Hcf
+				break
+			case 29:
+				NewScene "u4204._sn" 100 0 0
+				Hcf
+				break
+			case 30:
+				NewScene "u4205._sn" 100 0 0
+				Hcf
+				break
+			case 31:
+				NewScene "u4250._sn" 100 0 0
+				Hcf
+				break
+			case 32:
+				NewScene "u4251._sn" 100 0 0
+				Hcf
+				break
+			case 33:
+				NewScene "u4252._sn" 100 0 0
+				Hcf
+				break
+			case 34:
+				NewScene "u4253._sn" 100 0 0
+				Hcf
+				break
+			case 35:
+				NewScene "u4254._sn" 100 0 0
+				Hcf
+				break
+			case 36:
+				NewScene "u4255._sn" 100 0 0
+				Hcf
+				break
+			case 37:
+				NewScene "u4260._sn" 100 0 0
+				Hcf
+				break
+			case 38:
+				NewScene "u4261._sn" 100 0 0
+				Hcf
+				break
+			case 39:
+				NewScene "u4262._sn" 100 0 0
+				Hcf
+				break
+			case 40:
+				NewScene "u4270._sn" 100 0 0
+				Hcf
+				break
+			case 41:
+				NewScene "u4280._sn" 100 0 0
+				Hcf
+				break
+			case 42:
+				NewScene "u4241._sn" 100 0 0
+				Hcf
+				break
+			case 43:
+				NewScene "m4300._sn" 100 0 0
+				Hcf
+				break
+			case 44:
+				NewScene "m4302._sn" 100 0 0
+				Hcf
+				break
+			case 45:
+				NewScene "m4303._sn" 100 0 0
+				Hcf
+				break
+			case 46:
+				NewScene "m4308._sn" 100 0 0
+				Hcf
+				break
+			case 47:
+				NewScene "u4123._sn" 100 0 0
+				Hcf
+				break
+			case 48:
+				NewScene "u4133._sn" 100 0 0
+				Hcf
+				break
+			case 49:
+				NewScene "u4134._sn" 100 0 0
+				Hcf
+				break
+			case 50:
+				NewScene "u4137._sn" 100 0 0
+				Hcf
+				break
+			case 51:
+				NewScene "u4404._sn" 100 0 0
+				Hcf
+				break
+			case 52:
+				NewScene "u4405._sn" 100 0 0
+				Hcf
+				break
+			case 53:
+				NewScene "u4156._sn" 100 0 0
+				Hcf
+				break
+			case 54:
+				NewScene "u4160._sn" 100 0 0
+				Hcf
+				break
+			case 55:
+				NewScene "u4161._sn" 100 0 0
+				Hcf
+				break
+			case 56:
+				NewScene "u4162._sn" 100 0 0
+				Hcf
+				break
+			case 57:
+				NewScene "u4163._sn" 100 0 0
+				Hcf
+				break
+			case 58:
+				NewScene "u4164._sn" 100 0 0
+				Hcf
+				break
+			case 59:
+				NewScene "u4165._sn" 100 0 0
+				Hcf
+				break
+			case 60:
+				NewScene "u4166._sn" 100 0 0
+				Hcf
+				break
+			case 61:
+				NewScene "u4167._sn" 100 0 0
+				Hcf
+				break
+			case 62:
+				NewScene "u4168._sn" 100 0 0
+				Hcf
+				break
+			case 63:
+				NewScene "u4169._sn" 100 0 0
+				Hcf
+				break
+			case 64:
+				NewScene "e0110._sn" 100 0 0
+				Hcf
+				break
+			case 65:
+				NewScene "u4200._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[17]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"M7100 金の道・銀の道　分岐マップ" // 0
+			"M7101 銀の道エリア①" // 1
+			"M7102 金の道エリア①" // 2
+			"M7103 銀の道エリア②" // 3
+			"M7104 金の道エリア②" // 4
+			"M7105 銀の道エリア③(銀ボス部屋)" // 5
+			"M7106 金の道エリア③(金ボス部屋)" // 6
+			"M7107 金の道・銀の道　合流マップ" // 7
+			"Cancel" // 8
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "m7100._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "m7101._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "m7102._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "m7103._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "m7104._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "m7105._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "m7106._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "m7107._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[18]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"U5100 ル＝ロックル訓練場外観" // 0
+			"U5102 ル＝ロックル訓練場外観（夜異次元）" // 1
+			"U5110 ル＝ロックル訓練場内部" // 2
+			"U5111 ル＝ロックル訓練場内部（夜）" // 3
+			"M5503 バルスタール水道入口" // 4
+			"M5500 バルスタール水道①" // 5
+			"M5501 バルスタール水道②" // 6
+			"M5502 バルスタール水道③" // 7
+			"M5503 バルスタール水道ボス部屋" // 8
+			"M5504 サントクロワの森①" // 9
+			"M5505 サントクロワの森②" // 10
+			"M5506 サントクロワの森③" // 11
+			"M5512 サントクロワの森④" // 12
+			"M5507 サントクロワの森ボス部屋" // 13
+			"M5508 グリムゼル小要塞①" // 14
+			"M5509 グリムゼル小要塞②" // 15
+			"M5510 グリムゼル小要塞③" // 16
+			"M5511 グリムゼル小要塞④" // 17
+			"M5513 グリムゼル小要塞ボス部屋" // 18
+			"Cancel" // 19
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "u5100._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "u5102._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "u5110._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "u5111._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "m5503._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "m5500._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "m5501._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "m5502._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "m5503._sn" 102 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "m5504._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "m5505._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "m5506._sn" 100 0 0
+				Hcf
+				break
+			case 12:
+				NewScene "m5512._sn" 100 0 0
+				Hcf
+				break
+			case 13:
+				NewScene "m5507._sn" 100 0 0
+				Hcf
+				break
+			case 14:
+				NewScene "m5508._sn" 100 0 0
+				Hcf
+				break
+			case 15:
+				NewScene "m5509._sn" 100 0 0
+				Hcf
+				break
+			case 16:
+				NewScene "m5510._sn" 100 0 0
+				Hcf
+				break
+			case 17:
+				NewScene "m5511._sn" 100 0 0
+				Hcf
+				break
+			case 18:
+				NewScene "m5513._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[19]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"M7200 光エリアマップ　１－１" // 0
+			"M7201 光エリアマップ　１－２" // 1
+			"M7202 影エリアマップ　１" // 2
+			"M7203 影エリアマップ　２" // 3
+			"M7204 光エリアマップ　２－１" // 4
+			"M7205 光エリアマップ　２－２" // 5
+			"M7206 光エリアマップボス前通路" // 6
+			"M7207 光エリアマップボス部屋" // 7
+			"Cancel" // 8
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "m7200._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "m7201._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "m7202._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "m7203._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "m7204._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "m7205._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "m7206._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "m7207._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[20]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"M4110 エルベ周遊道①" // 0
+			"M4111 エルベ周遊道②" // 1
+			"M4112 エルベ周遊道③" // 2
+			"M4113 エルベ周遊道④" // 3
+			"U2500 ジェニス王立学院外部" // 4
+			"U2501 ジェニス王立学院旧校舎への道" // 5
+			"U2510 ジェニス王立学院（本館）" // 6
+			"U2511 ジェニス王立学院（クラブハウス）" // 7
+			"U2512 ジェニス王立学院（寮）" // 8
+			"U2513 ジェニス王立学院（講堂）" // 9
+			"U2600 王立学院旧校舎外部" // 10
+			"U2610 王立学院旧校舎内部" // 11
+			"M5400 グロリアス内部（エステル監禁部屋）" // 12
+			"M5401 グロリアス内部（ワイスマンの間）" // 13
+			"M5402 グロリアス内部（甲板方面通路）" // 14
+			"M5403 グロリアス内部（甲板～昇降口方面通路）" // 15
+			"M5404 グロリアス内部（昇降口～格納庫方面通路）" // 16
+			"M5405 グロリアス内部（格納庫ハズレ）" // 17
+			"M5406 グロリアス内部（格納庫アタリ）" // 18
+			"M5407 グロリアス内部（エレベーター箱）" // 19
+			"M5408 グロリアス外装（甲板）" // 20
+			"M5409 グロリアス外装（昇降口）" // 21
+			"M5410 グロリアス内部（格納庫入り口）" // 22
+			"M5412 グロリアス内部（格納庫ハズレ）" // 23
+			"M5413 グロリアス外装（甲板・夜）" // 24
+			"M5600 研究所外観" // 25
+			"M5610 研究所内部（１階）" // 26
+			"M5611 研究所内部（２階）" // 27
+			"M5612 研究所内部（３階）" // 28
+			"M5613 研究所内部（４階）" // 29
+			"M5614 研究所内エレベーター" // 30
+			"M5615 研究所内部（３階ボス部屋のみ）" // 31
+			"M3100 レイストン水上要塞外観(正門)" // 32
+			"M3101 レイストン水上要塞外観(中庭)" // 33
+			"M3102 レイストン水上要塞外観(格納庫)" // 34
+			"M3103 レイストン水上要塞外観(研究施設)" // 35
+			"M3110 レイストン水上要塞外観(司令塔)" // 36
+			"M3112 レイストン水上要塞外観(研究施設)" // 37
+			"M3116 レイストン水上要塞外観(夜司令室)" // 38
+			"M3200 レイストン水上要塞内部(兵舎1F)" // 39
+			"M3201 レイストン水上要塞内部(兵舎2F)" // 40
+			"M3202 レイストン水上要塞内部(司令部1F)" // 41
+			"M3203 レイストン水上要塞内部(司令部2F)" // 42
+			"M3204 レイストン水上要塞内部(司令部3F)" // 43
+			"M3205 レイストン水上要塞内部(司令部2F延長)" // 44
+			"M3206 レイストン水上要塞内部(司令部3F延長)" // 45
+			"M5414 異次元の舞台(開始)" // 46
+			"M5415 異次元の舞台(終端)" // 47
+			"H3300 ソルダート軍用路　通行止め" // 48
+			"Cancel" // 49
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "m4110._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "m4111._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "m4112._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "m4113._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "u2500._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "u2501._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "u2510._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "u2511._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "u2512._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "u2513._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "u2600._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "u2610._sn" 100 0 0
+				Hcf
+				break
+			case 12:
+				NewScene "m5400._sn" 100 0 0
+				Hcf
+				break
+			case 13:
+				NewScene "m5401._sn" 100 0 0
+				Hcf
+				break
+			case 14:
+				NewScene "m5402._sn" 100 0 0
+				Hcf
+				break
+			case 15:
+				NewScene "m5403._sn" 100 0 0
+				Hcf
+				break
+			case 16:
+				NewScene "m5404._sn" 100 0 0
+				Hcf
+				break
+			case 17:
+				NewScene "m5405._sn" 100 0 0
+				Hcf
+				break
+			case 18:
+				NewScene "m5406._sn" 100 0 0
+				Hcf
+				break
+			case 19:
+				NewScene "m5407._sn" 100 0 0
+				Hcf
+				break
+			case 20:
+				NewScene "m5408._sn" 100 0 0
+				Hcf
+				break
+			case 21:
+				NewScene "m5409._sn" 100 0 0
+				Hcf
+				break
+			case 22:
+				NewScene "m5410._sn" 100 0 0
+				Hcf
+				break
+			case 23:
+				NewScene "m5412._sn" 100 0 0
+				Hcf
+				break
+			case 24:
+				NewScene "m5413._sn" 100 0 0
+				Hcf
+				break
+			case 25:
+				NewScene "m5600._sn" 100 0 0
+				Hcf
+				break
+			case 26:
+				NewScene "m5610._sn" 100 0 0
+				Hcf
+				break
+			case 27:
+				NewScene "m5611._sn" 100 0 0
+				Hcf
+				break
+			case 28:
+				NewScene "m5612._sn" 100 0 0
+				Hcf
+				break
+			case 29:
+				NewScene "m5613._sn" 100 0 0
+				Hcf
+				break
+			case 30:
+				NewScene "m5614._sn" 100 0 0
+				Hcf
+				break
+			case 31:
+				NewScene "m5615._sn" 100 0 0
+				Hcf
+				break
+			case 32:
+				NewScene "m3100._sn" 100 0 0
+				Hcf
+				break
+			case 33:
+				NewScene "m3101._sn" 100 0 0
+				Hcf
+				break
+			case 34:
+				NewScene "m3102._sn" 100 0 0
+				Hcf
+				break
+			case 35:
+				NewScene "m3103._sn" 100 0 0
+				Hcf
+				break
+			case 36:
+				NewScene "m3110._sn" 100 0 0
+				Hcf
+				break
+			case 37:
+				NewScene "m3112._sn" 100 0 0
+				Hcf
+				break
+			case 38:
+				NewScene "m3116._sn" 100 0 0
+				Hcf
+				break
+			case 39:
+				NewScene "m3200._sn" 100 0 0
+				Hcf
+				break
+			case 40:
+				NewScene "m3201._sn" 100 0 0
+				Hcf
+				break
+			case 41:
+				NewScene "m3202._sn" 100 0 0
+				Hcf
+				break
+			case 42:
+				NewScene "m3203._sn" 100 0 0
+				Hcf
+				break
+			case 43:
+				NewScene "m3204._sn" 100 0 0
+				Hcf
+				break
+			case 44:
+				NewScene "m3205._sn" 100 0 0
+				Hcf
+				break
+			case 45:
+				NewScene "m3206._sn" 100 0 0
+				Hcf
+				break
+			case 46:
+				NewScene "m5414._sn" 100 0 0
+				Hcf
+				break
+			case 47:
+				NewScene "m5415._sn" 100 0 0
+				Hcf
+				break
+			case 48:
+				NewScene "h3300._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[21]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"M7300 煉獄（第７星層）①" // 0
+			"M7301 煉獄（第７星層）②" // 1
+			"M7302 煉獄（第７星層）③" // 2
+			"M7303 煉獄（第７星層）④" // 3
+			"M7304 煉獄（第７星層）⑤" // 4
+			"M7305 煉獄（第７星層）⑥" // 5
+			"M7306 煉獄（第７星層）⑦" // 6
+			"M7307 煉獄（第７星層）⑧" // 7
+			"M7308 煉獄（第７星層）⑨" // 8
+			"M7309 煉獄（第７星層）⑩" // 9
+			"M7310 煉獄（第７星層）無限①スタート" // 10
+			"M7311 煉獄（第７星層）無限②螺旋" // 11
+			"M7312 煉獄（第７星層）無限③中継" // 12
+			"M7313 煉獄（第７星層）無限④ボス" // 13
+			"Cancel" // 14
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "m7300._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "m7301._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "m7302._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "m7303._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "m7304._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "m7305._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "m7306._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "m7307._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "m7308._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "m7309._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "m7310._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "m7311._sn" 100 0 0
+				Hcf
+				break
+			case 12:
+				NewScene "m7312._sn" 100 0 0
+				Hcf
+				break
+			case 13:
+				NewScene "m7313._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[22]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"M7400 中枢広場/アルセイユ停泊地" // 0
+			"M7401 中枢Ａボス直前部屋" // 1
+			"M7402 中枢Ａボス部屋" // 2
+			"M7403 中枢Ｂボス直前部屋" // 3
+			"M7404 中枢Ｂボス部屋" // 4
+			"M7405 中枢Ｃボス直前部屋" // 5
+			"M7406 中枢Ｃボス部屋" // 6
+			"M7407 中枢ラスボス直前部屋" // 7
+			"M7408 中枢ラスボス部屋" // 8
+			"M7409 中枢Ａ通路①" // 9
+			"M7410 中枢Ａ通路②" // 10
+			"M7411 中枢Ａ通路③" // 11
+			"M7412 中枢Ａ通路④" // 12
+			"M7413 中枢Ｂ通路①" // 13
+			"M7414 中枢Ｂ通路②" // 14
+			"M7415 中枢Ｂ通路③" // 15
+			"M7416 中枢Ｂ通路④" // 16
+			"M7417 中枢Ｂ通路⑤" // 17
+			"M7418 中枢Ｃ通路①" // 18
+			"M7419 中枢Ｃ通路②" // 19
+			"M7420 中枢Ｃ通路③" // 20
+			"M7421 中枢Ｃ通路④" // 21
+			"M7422 中枢ラスト通路①" // 22
+			"M7423 中枢ラスト通路②" // 23
+			"M7424 中枢ラスト通路③" // 24
+			"M7425 中枢ラスト通路④" // 25
+			"M7426 中枢ラスト通路⑤" // 26
+			"M7427 中枢ラスト通路⑥" // 27
+			"P0800 ｽｶｲﾎﾞｯｸｽ荒野(ｱﾙｾｲﾕ突入用)" // 28
+			"M7499 ラスボスイベント用" // 29
+			"Cancel" // 30
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "m7400._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "m7401._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "m7402._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "m7403._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "m7404._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "m7405._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "m7406._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				NewScene "m7407._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				NewScene "m7408._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				NewScene "m7409._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				NewScene "m7410._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				NewScene "m7411._sn" 100 0 0
+				Hcf
+				break
+			case 12:
+				NewScene "m7412._sn" 100 0 0
+				Hcf
+				break
+			case 13:
+				NewScene "m7413._sn" 100 0 0
+				Hcf
+				break
+			case 14:
+				NewScene "m7414._sn" 100 0 0
+				Hcf
+				break
+			case 15:
+				NewScene "m7415._sn" 100 0 0
+				Hcf
+				break
+			case 16:
+				NewScene "m7416._sn" 100 0 0
+				Hcf
+				break
+			case 17:
+				NewScene "m7417._sn" 100 0 0
+				Hcf
+				break
+			case 18:
+				NewScene "m7418._sn" 100 0 0
+				Hcf
+				break
+			case 19:
+				NewScene "m7419._sn" 100 0 0
+				Hcf
+				break
+			case 20:
+				NewScene "m7420._sn" 100 0 0
+				Hcf
+				break
+			case 21:
+				NewScene "m7421._sn" 100 0 0
+				Hcf
+				break
+			case 22:
+				NewScene "m7422._sn" 100 0 0
+				Hcf
+				break
+			case 23:
+				NewScene "m7423._sn" 100 0 0
+				Hcf
+				break
+			case 24:
+				NewScene "m7424._sn" 100 0 0
+				Hcf
+				break
+			case 25:
+				NewScene "m7425._sn" 100 0 0
+				Hcf
+				break
+			case 26:
+				NewScene "m7426._sn" 100 0 0
+				Hcf
+				break
+			case 27:
+				NewScene "m7427._sn" 100 0 0
+				Hcf
+				break
+			case 28:
+				NewScene "p0800._sn" 0 0 0
+				Hcf
+				break
+			case 29:
+				NewScene "m7499._sn" 0 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[23]:
+	TextMessage null {
+		{0x06}Where?{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"E0810 スカイマップ（昼）" // 0
+			"E1210 メルカバ内部" // 1
+			"Cancel" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "e1210._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[24]:
+	Return
+
+fn[25]:
+	EventBegin 0
+	Sc_DA
+	TextClose 0
+	MenuClose menu[0]
+	MenuClose menu[1]
+	TextMessage null {
+		{0x06}どれ？{wait}
+	}
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[2] 10 100 1
+			"Opening" // 0
+			"Glorious Arrives" // 1
+			"Aureole Appears" // 2
+			"Glorgious Attacks, Aureole Airspace, Arseille Dive" // 3
+			"Aureole Collapse" // 4
+			"Cancel" // 5
+		MenuWait var[0]
+		MenuClose menu[2]
+		TextClose 0
+		system[40] = 65535
+		if var[0] < 0 | var[0] > 4:
+			break
+		FadeOut 2000ms 0x00000000 255
+		BgmStop 1000ms
+		FadeWait
+		BgmWait
+		Sc_C4Set 16
+		FadeIn 10ms 0x00000000
+		FadeWait
+		switch var[0]:
+			case 0:
+				VideoPlay "ed6_2_op.avi" 7 0
+				break
+			case 1:
+				BgmPlay bgm[28] 0
+				Sleep 5000ms
+				VideoPlay "ED6_DT40.dat" 0 0
+				break
+			case 2:
+				BgmPlay bgm[35] 0
+				VideoPlay "ED6_DT41.dat" 0 0
+				Sleep 1000ms
+				TextClose 2
+				if !system[45]:
+					FadeOut 2000ms 0x00000000 255
+					FadeWait
+					VideoEnd "" 0 0
+					FadeIn 1ms 0x00000000
+					FadeWait
+				VideoPlay "ED6_DT42.dat" 0 0
+				break
+			case 3:
+				BgmPlay bgm[119] 0
+				Sleep 2000ms
+				VideoPlay "ED6_DT43.dat" 0 0
+				Sleep 1000ms
+				TextClose 2
+				if !system[45]:
+					FadeOut 2000ms 0x00000000 255
+					FadeWait
+					VideoEnd "" 0 0
+					FadeIn 1ms 0x00000000
+					FadeWait
+				VideoPlay "ED6_DT44.dat" 0 0
+				Sleep 1000ms
+				TextClose 2
+				if !system[45]:
+					FadeOut 2000ms 0x00000000 255
+					FadeWait
+					VideoEnd "" 0 0
+					FadeIn 1ms 0x00000000
+					FadeWait
+				VideoPlay "ED6_DT45.dat" 0 0
+				break
+			case 4:
+				BgmPlay bgm[80] 0
+				Sleep 5000ms
+				VideoPlay "ED6_DT46.dat" 0 0
+				break
+		Sleep 1000ms
+		TextClose 2
+		FadeOut 2000ms 0x00000000 255
+		BgmStop 2000ms
+		BgmWait
+		FadeWait
+		VideoEnd "" 0 0
+		Sleep 500ms
+		Sc_C4Unset 16
+		FadeIn 10ms 0x00000000
+		FadeWait
+	system[40] = 24
+	Return

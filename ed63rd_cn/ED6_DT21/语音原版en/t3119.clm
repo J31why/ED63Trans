@@ -1,0 +1,927 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3119.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 0 "t3119._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02020._ch" "npl/ch02020p._cp"
+chip[1] "npl/ch02620._ch" "npl/ch02620p._cp"
+chip[2] "npl/ch01190._ch" "npl/ch01190p._cp"
+chip[3] "npl/ch01540._ch" "npl/ch01540p._cp"
+chip[4] "npl/ch01450._ch" "npl/ch01450p._cp"
+chip[5] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+chip[6] "npl2/ch03980._ch" "npl2/ch03980p._cp"
+
+npc char[0]:
+	name "Professor Russell"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Erika"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Dan"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Supervisor Travis"
+	pos (-440, 0, 10490)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[4]:
+	name "Wilmont"
+	pos (4650, 1000, 6180)
+	angle 90deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[5]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (-106990, 0, -550)
+	pos2 (1000, 2250, 0)
+	flags 0x0041
+	func fn[0,11]
+	unk1 0
+
+look_point[0]:
+	pos (-540, 0, 6300)
+	radius 800mm
+	bubble_pos (-540, 900, 6300)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[3] 0x0080
+		CharFlagsUnset char[4] 0x0080
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,5]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0004
+	ObjFlagsSet object[18] 0x0004
+	ObjFlagsSet object[21] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 8
+	switch var[1]:
+		case 0:
+			CharAnimation self 0 7 1450ms
+			break
+		case 1:
+			CharAnimation self 0 7 1550ms
+			break
+		case 2:
+			CharAnimation self 0 7 1600ms
+			break
+		case 3:
+			CharAnimation self 0 7 1400ms
+			break
+		case 4:
+			CharAnimation self 0 7 1650ms
+			break
+		case 5:
+			CharAnimation self 0 7 1350ms
+			break
+		case 6:
+			CharAnimation self 0 7 1500ms
+			break
+		default:
+			CharAnimation self 0 7 1500ms
+			break
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12165]:
+		if flag[0]:
+			TextTalk self {
+				Erika actually submitted an outline for the
+				Capel Project back in the day, you know.{wait}
+			}
+			TextWait
+			TextTalk self {
+				She had to back down after losing a bet to 
+				Professor Russell, though, so it never saw
+				the light of day.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Not that much would have likely changed even
+				if it had. Whichever of them is in charge,
+				we're basically bound to suffer all the same...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I swear, he's only just finished getting the Capel
+				back up and running, and he's off working on a
+				new invention.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It really is amazing what those Russells are 
+				capable of.{wait}
+			}
+			TextWait
+			TextTalk self {
+				They seem to have limitless energy when it
+				comes to technology.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				The Capel's a pretty complex thing, made up of
+				multiple different units connected together.{wait}
+			}
+			TextWait
+			TextTalk self {
+				So while the Capel itself was completely intact,
+				getting all the data back and everything up and
+				running again took over two months.{wait}
+			}
+			TextWait
+			TextTalk self {
+				That was an experience I hope I never have to
+				go through again...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				You remember that whole Orbal Shutdown 
+				Phenomenon thing that happened?{wait}
+			}
+			TextWait
+			TextTalk self {
+				After that was over and we switched the Capel
+				back on, it ended up malfunctioning on us.{wait}
+			}
+			TextWait
+			TextTalk self {
+				...Erasing ALL of the data on the thing. All of it!{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's taken us TWO WHOLE MONTHS to get it back
+				in order, too! Uuugh...{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (820, 0, 12190) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 37000mdeg 0ms
+	CamPers 280 0ms
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsUnset object[21] 0x0004
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[0] 0x0040
+	CharFlagsSet char[1] 0x0040
+	CharFlagsSet char[2] 0x0040
+	CharSetPos char[1] (-430, 0, 10460) 0deg
+	CharSetPos name[6] (-1670, 0, 2060) 0deg
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#97937v#1452FSo this is what we're up against...{wait}
+	} {
+		#97938vIt looks like it's not even performing at 10%
+		of its true capabilities, either.{wait}
+	} {
+		#97939v#1457FThese are some downright terrifying specs.{wait}
+	}
+	TextWait
+	SoundPlay sound[109] 0 0 100
+	Sleep 500ms
+	TextTalk name[6] {
+		#83201v#061F#1PMom!{wait}
+	}
+	TextWait
+	_59
+	Sleep 500ms
+	CharSetPos name[6] (950, 0, 2620) 0deg
+	Fork name[6] fork[1]:
+		CharWalkToPos self (950, 0, 7960) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-430, 0, 8950) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	CharTurnTo name[6] 0deg 500deg/s
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83202v#064F#12PWait! How in the world...?{wait}
+	} {
+		#83203vIsn't that data on Pater-Mater?{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnToChar char[1] name[6] 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#97940v#1450F#5PHi there, Tita. You came at just the right time.{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-430, 0, 10060) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	TextTalk char[1] {
+		#97941v#1456F#5PYou've seen this robot in person, right?{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83204v#560F#12PUmm... Well yeah, but...{wait}
+	} {
+		#83205v...why do you ask?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97942v#1451F#5PWhat was it like in person?!{wait}
+	} {
+		#97943vTell me everything you know!{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-430, 0, 9700) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	Fork name[6] fork[2]:
+		CharShake self 15 0 1000 2000ms
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83206v#067F#12PUmm... I... Umm...{wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83207v#561F#12PW-Well, it was really big...but other than that,
+		I couldn't tell much just from looking at it...{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-430, 0, 10060) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	TextTalk char[1] {
+		#97944v#1833F#5POh, right... I suppose you wouldn't be able to.{wait}
+	} {
+		#97945v#1833FIt's an awful lot taller than you, after all.{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83208v#0564F#12PUmm... Mom?{wait}
+	} {
+		#83209vWhat're you looking at Pater-Mater's data for,
+		anyway?{wait}
+	} {
+		#83210vI thought you were here to work on some new 
+		invention?{wait}
+	}
+	TextWait
+	CharTurnTo name[6] 270deg 500deg/s
+	Sleep 600ms
+	CharTurnTo name[6] 80deg 500deg/s
+	Sleep 600ms
+	CharTurnTo name[6] 0deg 500deg/s
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop name[6]
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83211v#064F#12PWait, you're not...{wait}
+	}
+	TextWait
+	CharSetPos char[0] (-1670, 0, 2060) 0deg
+	TextTalkNamed char[0] "Voice" {
+		#96601v#1PThat we are.{wait}
+	}
+	TextWait
+	_59
+	BgmStop 3000ms
+	CharSetPos char[0] (-170, 0, 500) 0deg
+	CharSetPos char[2] (-910, 0, -210) 0deg
+	Fork char[1] fork[2]:
+		CharTurnTo self 180deg 500deg/s
+	Fork name[6] fork[2]:
+		CharTurnTo self 180deg 500deg/s
+	Fork char[5] fork[0]:
+		CamLookPos (-430, 0, 8650) 2500ms
+	Fork char[5] fork[1]:
+		CamRotate 0mdeg 2500ms
+	Fork char[5] fork[2]:
+		CamSetDistance 0 5540 -10000 2500ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-170, 0, 4380) 2000mm/s 0
+	Sleep 500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-910, 0, 3600) 2000mm/s 0
+	ForkWait char[5] fork[0]
+	ForkWait char[2] fork[1]
+	Sleep 300ms
+	TextTalk char[2] {
+		#98242v#1460F#6PThe two of us are ready to start work at
+		any time.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97946v#1456F#5PAll right, then. {wait}
+	} {
+		#97947v#1457FThen it's time to get right to work on our task--
+		making an archaism capable of competing against
+		our buddy Pater-Mater.{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#97948v#1455F#3SLet the Orbal Gear Project begin!#2S{wait}
+	}
+	Shake 0 400 4000 300ms
+	TextWait
+	Emote name[6] 0mm 1700mm 40 43 100ms 0
+	Sleep 500ms
+	CharTurnToChar name[6] char[1] 600deg/s
+	Sleep 500ms
+	EmoteStop name[6]
+	TextTalk name[6] {
+		#83212v#065F#6P#3SWhaaaaaat?!{wait}
+	}
+	Shake 0 300 3000 300ms
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	Fork name[6] fork[3]:
+		CamZoom 3200 3000ms
+	FadeWait
+	ForkQuit char[0] fork[255]
+	ForkQuit char[1] fork[255]
+	ForkQuit char[2] fork[255]
+	CharFlagsSet char[0] 0x0080
+	CharFlagsSet char[1] 0x0080
+	CharFlagsSet char[2] 0x0080
+	Sleep 3000ms
+	CamLookPos (820, 0, 12190) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 37000mdeg 0ms
+	CamPers 280 0ms
+	CharSetPos name[6] (-430, 0, 10460) 0deg
+	BgmPlay bgm[83] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83213v#062F#40WWhy...?{wait}
+	} {
+		#83214vWhy do I feel like this...?{wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	CharTurnTo name[6] 180deg 400deg/s
+	Sleep 300ms
+	Fork name[6] fork[2]:
+		CamLookPos (630, 0, 11140) 2000ms
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-430, 0, 8720) 1000mm/s 0
+	ForkWait name[6] fork[1]
+	ForkWait name[6] fork[2]
+	Sleep 300ms
+	TextTalk name[6] {
+		#83215v#063F#5P(Usually when I hear about something
+		new being invented, I get all excited.){wait}
+	} {
+		#83216v(I get so caught up in what's happening
+		that I tune out to the world around me
+		and focus on helping Grandpa.){wait}
+	} {
+		#83217v(But today... I just feel a little bit sad...){wait}
+	}
+	TextWait
+	Sleep 500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS583._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	TextTalk name[6] {
+		#83218v#562F#5PThis doesn't feel right...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[6] fork[2]:
+		CamLookPos (630, 0, 12500) 1500ms
+	Fork name[6] fork[3]:
+		CamSetDistance 0 4500 -10000 1500ms
+	CharTurnTo name[6] 0deg 300deg/s
+	ForkWait name[6] fork[2]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83219v#063F#12P#40WRenne...{wait}
+	}
+	TextWait
+	Fork char[5] fork[3]:
+		CamZoom 2900 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	FlagSet flag[9476]
+	NewScene "t3115._sn" 104 0 0
+	Hcf
+	Return
+
+fn[6]:
+	CharTurnTo char[0] 180deg 500deg/s
+	Emote char[0] 0mm 2000mm 8 9 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-270, 0, 1130) 2500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-840, 0, 430) 2500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-840, 0, -1430) 2500mm/s 0
+	Return
+
+fn[7]:
+	CharTurnTo char[2] 180deg 500deg/s
+	Sleep 300ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-910, 0, -1490) 2000mm/s 0
+	Return
+
+fn[8]:
+	Emote char[1] 0mm 2000mm 8 9 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1820, 0, 8820) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1820, 0, 1500) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1020, 0, 700) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-1020, 0, -1490) 2500mm/s 0
+	ForkWait char[1] fork[1]
+	Return
+
+fn[9]:
+	Emote name[6] 0mm 1700mm 40 43 100ms 3
+	Sleep 300ms
+	CharTurnTo name[6] 0deg 600deg/s
+	Sleep 1000ms
+	CharTurnTo name[6] 180deg 600deg/s
+	Return
+
+fn[10]:
+	SystemFlagsUnset 0x00000001
+	EventBegin 0
+	CamLookPos (-200, 0, 7100) 1000ms
+	FadeOut 300ms 0x00000000 100
+	SoundPlay sound[157] 0 0 100
+	TextSetName "CAPEL"
+	TextSetPos 250 78 36 12
+	TextMessage null {
+		{color 2}#1SThe Orbal Calculator
+		CAPEL SYSTEM Ver.7.0
+		Copyright(C) Z.C.F. 1197-1202
+		MODE:Information Retrieval
+		#200W　#20W
+		MEMORY_CHECK#100W..........#20WOK!
+		#200W　#20W
+		#1SAccessing database.
+		Select information to search.{wait}
+	}
+	TextWait
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		var[0] = 0
+		Menu menu[0] 55 80 1
+			"[Central Factory]" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				while var[0] != 255:
+					var[0] = 0
+					Menu menu[1] 55 153 1
+						"[Establishment]" // 0
+						"[Universal Tech]" // 1
+						"[Related Topics]" // 2
+					MenuWait var[0]
+					switch var[0]:
+						case 0:
+							TextMessage null {
+								{color 2}#1S[S1154] (S: Septian Calendar) - Death of Professor
+								C. Epstein in the sovereign state of Leman.
+								[S1155] Professor A. Russell returns to the Liberl
+								Kingdom. He proposes the spread of orbment
+								technology to a chilly reception.
+								[S1157] Professor Russell forms a partnership
+								with the Zeiss Clockmaker's Union. Together,
+								they establish the Zeiss Engineering Factory
+								(later renamed the Central Factory).
+								[S1160] After numerous visits from Edgar III,
+								funding was received which allowed Professor Russell
+								to take his place at the head of the factory.{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S[S1162] Edgar III dies, and Alicia II assumes the
+								throne.
+								[S1164] Construction is completed on the
+								Langland Bridge.
+								[S1168] The first orbal-powered airship, the
+								Calatrava, is completed. (39 failed test flights
+								before success was achieved.)
+								[S1173] The Zeiss Engineering Factory is renamed 
+								Zeiss Central Factory and begins sharing 
+								technology with the Verne Company and Reinford 
+								Company.
+								[S1175] The Liberl Orbalship Corporation is
+								established, and the transit commuter airship,
+								the Linde, is commissioned.{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S[S1177] Transit commuter airship, the Cecilia,
+								is commissioned.
+								[S1178] Factory airship, the Leibnitz, is
+								completed.
+								[S1180] The Zeiss Central Factory is dismantled
+								and reconstructed at its current site. The
+								partially-underground factory in the Kaldia
+								Hills is completed.
+								[S1182] Professor Russell resigns from his
+								position as factory chief and is succeeded by
+								Murdock.
+								[S1185] Natural Science and Medical Research
+								divisions are founded.{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S[S1187] The passenger ship, Eterna, sinks in
+								Calvard waters. Crown prince Judis dies.
+								[S1190] The Orbal Network, a joint venture with
+								the Epstein Foundation, is publicly announced.
+								[S1192] Outbreak of the Hundred Days War. The
+								Central Factory is taken by the Erebonian Army.
+								Prof. Russell develops patrol airships at Leiston 
+								Fortress, which are used to mount a highly 
+								effective counteroffensive, and soon become 
+								central to the Royal Army.{wait}
+							}
+							TextWait
+							TextMessage null {
+								{color 2}#1S[S1193] Liberl and Erebonia sign a peace accord.
+								Orbment exports to the Erebonian Empire resume.
+								[S1197] Version 1.0 of the Capel orbal computer
+								is completed.
+								[S1199] Development commences on the high-speed
+								cruiser, the Arseille.
+								[S1202] The Arseille is completed and flight tests
+								commence.{wait}
+							}
+							TextWait
+							break
+						case 1:
+							while var[0] != 255:
+								var[0] = 0
+								if QuestTaskGet quest[108] 0x0004 && !QuestTaskGet quest[108] 0x0008 && !QuestFlagsGet quest[108] 0x40:
+									Menu menu[2] 55 259 1
+										"[Orbments]" // 0
+										"[Crystal Circuits]" // 1
+										"[Septium]" // 2
+										"[Airships]" // 3
+										"[Orbal Weaponry]" // 4
+										"[Tactical Orbments]" // 5
+										"[Bracer Guild Sign]" // 6
+								else:
+									Menu menu[2] 55 259 1
+										"[Orbments]" // 0
+										"[Crystal Circuits]" // 1
+										"[Septium]" // 2
+										"[Airships]" // 3
+										"[Orbal Weaponry]" // 4
+										"[Tactical Orbments]" // 5
+								MenuWait var[0]
+								switch var[0]:
+									case 0:
+										TextMessage null {
+											{color 2}#1SEntry: Orbment
+											General term for devices that draw orbal energy
+											from septium, invented 50 years ago by Prof. C.
+											Epstein. The clockwork mechanism inside causes a
+											reaction between quartz, which in turn produces
+											a variety of different phenomena. Their greatest
+											advantages over combustion engines is that the
+											orbal energy within them is gradually restored
+											over time and the variety of different phenomena
+											they can produce. They are also much more
+											economically efficient.{wait}
+										}
+										TextWait
+										break
+									case 1:
+										TextMessage null {
+											{color 2}#1SEntry: Crystal Circuit (Quartz)
+											An electrical circuit with a crystalline structure
+											made from processed septium fragments (sepith).
+											They serve as an energy source but also cause
+											varied phenomena, which are only seen when they
+											are placed inside an orbment.{wait}
+										}
+										TextWait
+										break
+									case 2:
+										TextMessage null {
+											{color 2}#1SEntry: Septium
+											A grouping of seven gemstones found throughout
+											the continent. Prized as jewels for eons, it was
+											also regarded as a symbol of mystery. The invention
+											of technology to refine and process septium 
+											fragments too small to use as jewels, called 
+											sepith, and make them into quartz, resulted in a 
+											massive increase in the importance of septium as
+											a resource across the continent.{wait}
+										}
+										TextWait
+										break
+									case 3:
+										TextMessage null {
+											{color 2}#1SEntry: Orbal Airships/'Orbalships'
+											Commonly regarded as the crowning achievement
+											of orbment technology. Enables the power of
+											flight by combining a flight engine to control
+											gravity and an orbal engine to provide vast
+											amounts of energy. Because of the need for 
+											high-efficiency orbal energy transfer and the
+											complexity of controlling the airship, many
+											modern orbalships are equipped with highly capable
+											orbal arithmetic logic units. Orbalships less than
+											20 arge in length are simply called 'airships.'{wait}
+										}
+										TextWait
+										break
+									case 4:
+										TextMessage null {
+											{color 2}#1SEntry: Orbal Weaponry
+											Any firearm or cannon powered with orbment tech-
+											nology. Currently the most common form of military
+											weaponry among many nations. With orbal firearms,
+											energy is focused in a helical path along the
+											barrel, down to a tiny point, which then forces a
+											large metal projectile outward at high velocity.
+											These guns can fire more rounds than traditional
+											gunpowder arms, and at adjustable levels of force.
+											Orbal Cannons, meanwhile, fire shells containing
+											energy which explode on impact. Similar to orbal
+											guns, these have less recoil than gunpowder-using
+											cannons, and their power can be similarly adjusted.{wait}
+										}
+										TextWait
+										break
+									case 5:
+										TextMessage null {
+											{color 2}#1SEntry: Tactical Orbments/'Battle Orbments'
+											Orbments used to manipulate orbal magics.
+											Usually no larger than a pocket watch, so its
+											internal workings are extremely minute and
+											elegantly constructed. When quartz designed
+											for tactical orbment use is installed, it improves
+											the abilities of its bearer.
+											When this quartz synchronizes with the bearer
+											(a.k.a. the 'Resonance Phenomenon'), the
+											internal mechanisms take over the otherwise
+											complex process that would be required to use
+											magic, allowing just about anyone to use it in
+											the form of orbal arts. Furthermore, the arts
+											the user is able to use can be changed depending
+											on the combination of quartz inside.{wait}
+										}
+										TextWait
+										TextMessage null {
+											{color 2}#1SEntry: New Model Orbments
+											A new class of tactical orbments massively
+											upgraded from the preceding models developed by
+											the Epstein Foundation. In comparison to the old
+											model's six quartz slots, the new model has seven
+											slots.
+											This new model allows for more flexible quartz
+											arrangements, new combinations of usable orbal
+											magic, and even drastic increases in power.
+											However, as the architecture is drastically
+											different from the predecessor model, there is
+											no interchangeability in quartz between models.{wait}
+										}
+										TextWait
+										break
+									case 6:
+										QuestTaskSet quest[108] 0x0008
+										TextMessage null {
+											{color 2}#1SEntry: Bracer Guild Sign
+											A metal sign removed from the Zeiss branch of the
+											incompetent Bracer Guild by the genius and dashing
+											Phantom Thief Bleublanc. While its financial value
+											is insignificant, the shock to guild members is likely
+											considerable, and reading this now must fill you with
+											shame. Ah, I have probably said enough. I need to
+											provide the next key.
+
+											---The third key is in the city. Gaze up at
+											the [Three Hatted Brothers].---
+
+											Note: this entry will self-delete. You are
+											recommended to commit this entry to a memo
+											immediately.{wait}
+										}
+										TextWait
+										break
+									default:
+										var[0] = 255
+										break
+							var[0] = 0
+							MenuClose menu[2]
+							break
+						case 2:
+							while var[0] != 255:
+								var[0] = 0
+								Menu menu[2] 55 255 1
+									"[Combustion Engine]" // 0
+									"[Gasoline]" // 1
+									"[Haulage Vehicle]" // 2
+								MenuWait var[0]
+								switch var[0]:
+									case 0:
+										TextMessage null {
+											{color 2}#1SEntry: Combustion Engine
+											A machine which generates usable energy by
+											burning fuel within. Less efficient than its
+											orbal counterpart, due to issues with gaseous
+											exhaust and noise pollution.
+
+											[Combustion Engine] 
+											Number Owned: 1
+											Owner: Maintenance Chief Gustav{wait}
+										}
+										TextWait
+										break
+									case 1:
+										TextMessage null {
+											{color 2}#1SEntry: Gasoline
+											A liquid derived from the purification of the
+											naturally-occurring hydrocarbon compound known as
+											petroleum. Used primarily as fuel for combustion
+											engines and as an industrial solvent.
+
+											[Republic-Manufactured Gasoline]
+											Emergency Stores: 20 mid-sized tanks
+											Repository: Orbment Manufacturing Factory{wait}
+										}
+										TextWait
+										break
+									case 2:
+										QuestTaskSet quest[41] 0x8000
+										TextMessage null {
+											{color 2}#1SEntry: Orbal Haulage Vehicle
+											Any wheeled vehicle powered by orbal energy.
+											Widely considered uncomfortable to ride and
+											very limited in speed. Primarily used for
+											transporting cargo.
+
+											[Orbment-Powered Vehicle]
+											Owner: No Data
+											Repository: Underground Factory Entrance{wait}
+										}
+										TextWait
+										break
+									default:
+										var[0] = 255
+										break
+							var[0] = 0
+							MenuClose menu[2]
+							break
+						default:
+							var[0] = 255
+							break
+				var[0] = 0
+				MenuClose menu[1]
+				break
+			default:
+				var[0] = 255
+				break
+	TextSetPos 72 320 56 3
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	EventEnd 1
+	Return
+
+fn[11]:
+	PlaceSetName town[154]
+	Return

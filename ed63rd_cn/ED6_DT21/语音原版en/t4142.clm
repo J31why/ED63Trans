@@ -1,0 +1,849 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4142.x"
+	town town[1]
+	bgm bgm[34]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01100._ch" "npl/ch01100p._cp"
+chip[1] "npl/ch01150._ch" "npl/ch01150p._cp"
+chip[2] "npl/ch01023._ch" "npl/ch01023p._cp"
+chip[3] "npl/ch02060._ch" "npl/ch02060p._cp"
+chip[4] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[5] "npl/ch01143._ch" "npl/ch01143p._cp"
+chip[6] "npl/ch01620._ch" "npl/ch01620p._cp"
+chip[7] "apl/ch20020._ch" "apl/ch20020p._cp"
+chip[8] "apl/ch20021._ch" "apl/ch20021p._cp"
+chip[9] "npl2/ch03233._ch" "npl2/ch03233p._cp"
+chip[10] "apl2/ch20692._ch" "apl2/ch20692p._cp"
+
+npc char[0]:
+	name "Cready"
+	pos (4560, 0, 2500)
+	angle 186deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Spencer"
+	pos (4500, 100, -3850)
+	angle 90deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Kurt"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Glass"
+	pos (5080, 4700, 1340)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 5
+	ch chip[8]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Glass"
+	pos (5000, 4700, 440)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 5
+	ch chip[8]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (60700, 0, 550)
+	radius 400mm
+	bubble_pos (61020, 1500, 2490)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (4530, 0, 590)
+	radius 400mm
+	bubble_pos (4560, 1500, 2500)
+	flags 0x007E
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		SystemFlagsSet 0x10000000
+		system[1] = 15
+		Event fn[0,6]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	Return
+
+fn[4]:
+	Call fn[0,5]
+	Return
+
+fn[5]:
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SystemFlagsUnset 0x02000000
+	CamLookPos (1320, 0, -2340) 0ms
+	CamSetDistance 0 5840 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 25000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsSet name[2] 0x0004
+	CharFlagsSet name[2] 0x0040
+	CharFlagsSet name[80] 0x0004
+	CharFlagsSet name[80] 0x0040
+	CharSetPos name[2] (5300, 4100, -400) 0deg
+	CharSetPos name[80] (5200, 4100, 2320) 180deg
+	CharSetChipBase name[2] chip[9]
+	CharSetChipPattern name[2] 0
+	CharSetChipBase name[80] chip[10]
+	CharSetChipPattern name[80] 0
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	Fork char[5] fork[0]:
+		CamLookPos (6420, 4000, 1900) 5000ms
+	Fork char[5] fork[1]:
+		CamZoom 2700 5000ms
+	Fork char[5] fork[2]:
+		CamRotate 45000mdeg 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[5] fork[0]
+	Sleep 500ms
+	TextTalk name[2] {
+		#1641F#3SCheers!#2S{wait}
+	}
+	TextTalk name[80] {
+		#94580v#1651F#3S#1PCheers!#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextClose 1
+	_59
+	SoundPlay sound[178] 0 0 100
+	TextTalk name[80] {
+		#94581v#1654F#1P*gulp* *gulp*{wait}
+	}
+	TextWait
+	SoundPlay sound[178] 0 0 100
+	TextTalk name[2] {
+		#79677v#1646F*gulp* *gulp*{wait}
+	} {
+		#79678v#1641F#3SAhhhh!#2S{wait}
+	}
+	TextWait
+	CrossFade 500ms
+	CharSetChipPattern char[3] 1
+	CharSetChipPattern char[4] 1
+	FadeWait
+	TextTalk name[2] {
+		#79679v#1640FI still can't believe you gave ALL of that money
+		away.{wait}
+	} {
+		#79680vOkay, maybe you don't need all of it...but you'll
+		still need some to live, right?{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94582v#1650F#1PI suppose you're right. What I did was a little
+		strange.{wait}
+	} {
+		#94583v#1654FBut I made up my mind to do this from the very
+		beginning as a matter of principle.{wait}
+	} {
+		#94584vWhen I said I didn't do any of this for the money,
+		I meant it.{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk name[80] {
+		#94585v#1651F#1PStill, congratulations on becoming a senior bracer.{wait}
+	} {
+		#94586vI'm not sure what the difference between a senior
+		and junior bracer is, but it's clear this is something
+		you really worked for.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79681v#1640FIt means I have a lot more authority, but I've got
+		a lot more responsibility to go with it.{wait}
+	} {
+		#79682vIt also means I get a nice new badge, but I wasn't
+		ever interested in that, personally.{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94587v#1653F#1POh, really?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79683v#1641FYup.{wait}
+	}
+	TextWait
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[2] 0x0008
+	CharSetPos char[2] (2820, 4000, 4780) 90deg
+	TextTalkNamed char[2] "Young Man's Voice" {
+		#94149v#2P...I'm relieved to hear that.{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 50ms
+	Emote name[80] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharFlagsUnset char[2] 0x0008
+	CharSetPos char[2] (-4220, 2000, 4780) 90deg
+	ForkFunc char[2] fork[3] fn[0,7]
+	Fork char[5] fork[0]:
+		CamLookPos (3420, 4000, 4900) 1500ms
+	ForkWait char[5] fork[0]
+	Sleep 2000ms
+	Fork char[5] fork[0]:
+		CamLookPos (6420, 4000, 1900) 3000ms
+	ForkWait char[5] fork[0]
+	ForkWait char[2] fork[3]
+	TextTalk char[2] {
+		#94150v#840FI see you're finally beginning to understand the
+		necessary mindset to be a bracer, Scherazard.{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 40 43 100ms 3
+	TextTalk name[2] {
+		#79684v#1643FCrap... It's Kurt.{wait}
+	} {
+		#79685v#1646FUmm... This... This might LOOK like alcohol to you,
+		but it's actually... water...?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94151v#840FAs today is admittedly a cause for celebration,
+		I will turn a blind eye to your drinking tonight.{wait}
+	} {
+		#94152vJust don't go drinking so much that it interferes
+		with your ability to do your job.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79686v#1645FFiiiiiine.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94153v#843F...{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79687v#1641FWh-What is it?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94154v#843FAs you're fully aware, Scherazard, you are now a
+		senior bracer, which means you must behave with
+		more responsibility.{wait}
+	} {
+		#94155vThat means I expect to see an end to you drinking 
+		in every free moment between jobs, day or night, 
+		and sneaking out at night for it, too.{wait}
+	} {
+		#94156vI also expect to no longer discover that you've
+		been taking advantage of the busiest times in my
+		schedule to behave like a drunken lunatic.{wait}
+	}
+	TextWait
+	Fork name[2] fork[2]:
+		CharShake self 20 0 1000 2000ms
+	TextTalk name[2] {
+		#79688v#1645FI... Uhhh...{wait}
+	}
+	TextWait
+	CharSetChipPattern name[80] 0
+	Sleep 100ms
+	TextTalk name[80] {
+		#94588v#1653F#1PIs that really what you usually do, Scherazard?{wait}
+	} {
+		#94589vYou sound like a tried and true troublemaker...{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79689v#1645FDon't say anything...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94157v#843FAre we clear?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79690v#1643F#3SY-Yes, sir!#2S{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk char[2] {
+		#94158v#840FHaha. There's no need for the sir, of course.{wait}
+	} {
+		#94159vWe're both senior bracers now, which means
+		we're both on equal standing.{wait}
+	} {
+		#94160v#841FWhy, I'm hardly even a veteran. I'm still very
+		much a rookie.{wait}
+	}
+	TextWait
+	CharSetChipPattern name[80] 1
+	Sleep 1000ms
+	TextTalk name[2] {
+		#1648FSays who?{wait}
+	}
+	TextTalk name[80] {
+		#94590v#1653F#1PAre you, now?{wait}
+	}
+	TextClose 1
+	_59
+	Emote char[2] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1500ms
+	CharTurnTo char[2] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#94161v#843FRegardless, this isn't what I'm here to discuss.{wait}
+	} {
+		#94162v#842FThe matter I came for concerns your uncle,
+		Aina.{wait}
+	} {
+		#94163vI came to make you aware of the fact that the
+		Bracer Guild is capable of asking for leniency
+		in his punishment.{wait}
+	} {
+		#94164v#844FHiring a jaeger corps for personal use carries
+		a very grave punishment, you see...{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 30ms
+	Emote name[80] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79692v#1643F#3SA-A jaeger corps?!#2S{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk name[80] {
+		#94591v#1653F#1PAre you referring to those men dressed in black?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94165v#842FYes. They're one of many corps that are known
+		to be active here in Liberl.{wait}
+	} {
+		#94166vRecently, there have been many such corps
+		making their way into the country...and they've
+		been successful in finding work, too.{wait}
+	} {
+		#94167vHiring them is, of course, very illegal, but with 
+		the army as slow to act as they currently are...{wait}
+	} {
+		#94168v#843FI've taken this chance to take care of them,
+		though, so we shouldn't see any sign of any 
+		in the near future.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79693v#1643FT-Take care of them? All of them?{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79694v#1642F(Now it makes sense. So it wasn't a coincidence
+		that he showed up when he did...){wait}
+	} {
+		#79695v(He's been investigating all of the jaeger corps in
+		Liberl so that he could start an operation to wipe
+		them all out?){wait}
+	} {
+		#79696v(#1645FNo wonder he's seemed so swamped...){wait}
+	}
+	TextWait
+	EmoteStop name[2]
+	TextTalk char[2] {
+		#94169v#843FThe jaegers in the country have been targeting
+		wealthy individuals in hopes of getting them to
+		sign contracts.{wait}
+	} {
+		#94170v#842FThere have been countless cases like this all
+		around the country as of late, with civilians getting
+		caught up in it at a worrying frequently.{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94592v#1654F#1PG-Goodness...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94171v#843FI believe the case we're dealing with here was no
+		exception, in that it was the jaegers who came to
+		your uncle rather than the other way round.{wait}
+	} {
+		#94172vIt's hard to feel too much sympathy under these
+		circumstances, but in a sense, your uncle was a
+		victim in all of this as well.{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 30ms
+	Emote name[80] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[80] {
+		#94593v#1653F#1P...What?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79697v#1642FWh-What are you trying to pull?!{wait}
+	}
+	TextWait
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79698v#1644FJust because the jaegers approached him and
+		not the other way around, he's a victim? That
+		he deserves to get off with a slap on the wrist?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79699v#1644F#3SAnd Aina's supposed to be OKAY with that?!{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk name[2] {
+		#79700v#1647F#3SHe tried to kill her!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk char[2] {
+		#94173v#843FSchera, please calm down.{wait}
+	} {
+		#94174v#842FThere's no need to shout.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79701v#1647FI-I'm sorry. But still!{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94175v#843FNo one is saying he doesn't deserve to
+		be punished for his actions.{wait}
+	} {
+		#94176v#845FAll I'm here to say is that if--and only if--
+		Aina wishes, the guild is able to request
+		leniency in his sentencing. That is all.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79702v#1643FO-Oh...{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop name[2]
+	TextTalk name[2] {
+		#79703v#1645FWh-Whew... You scared me for a minute...{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94594v#1654F#1P...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94177v#843FYou needn't make your decision immediately.{wait}
+	} {
+		#94178vQuestioning him will take roughly a week as
+		it is, based on what I've heard.{wait}
+	} {
+		#94179v#840FYou bear no responsibility to even make any
+		choice at all, so please don't feel as though
+		you have to think long and hard about this.{wait}
+	} {
+		#94180vJust please be aware that the possibility to 
+		forgive him exists. That is all.{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94595v#1652F#1PAll right.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94181v#840FIncidentally, should you ever find yourself in
+		need of assistance with anything in the future,
+		the Bracer Guild is always available to aid you.{wait}
+	} {
+		#94182vWe're certainly not omnipotent or infallible,
+		but we'll at least strive to do what we can to
+		aid those who want our help.{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94596v#1650F#1PThank you.{wait}
+	} {
+		#94597vI'm really sorry for not telling you the whole
+		story from the start, too...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94183v#843FPlease, don't be. With the situation you were in,
+		your reluctance is quite understandable.{wait}
+	} {
+		#94184vFurthermore...{wait}
+	}
+	TextWait
+	CharTurnToChar char[2] name[2] 500deg/s
+	Sleep 200ms
+	TextTalk char[2] {
+		#94185v#842F...one who is worthy of being a full-fledged bracer
+		should be able to tell roughly what a client wants
+		just from looking at them.{wait}
+	} {
+		#94186vThey should also not, under any circumstances,
+		try to chase away a potential client in genuine
+		need. {wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79704v#1642FOuch...{wait}
+	} {
+		#79705v#1645FI've still got a long way to go, then, huh?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#94187v#841FCertainly, but don't we all?{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 0deg 500deg/s
+	Sleep 200ms
+	TextTalk char[2] {
+		#94188v#840FAll right. I've said what I came to say,
+		so I'll be excusing myself now.{wait}
+	}
+	TextWait
+	Fork char[2] fork[1]:
+		CharWalkToPos self (6880, 4000, 3500) 2000mm/s 0
+	Sleep 300ms
+	CharSetChipPattern name[2] 0
+	Sleep 300ms
+	TextTalk name[2] {
+		#79706v#1643FAww. Really?{wait}
+	} {
+		#79707vYou could stand to join us for one drink!{wait}
+	}
+	TextWait
+	ForkWait char[2] fork[1]
+	TextTalk char[2] {
+		#94189v#843F#3PI'm afraid not. I still have my duties as guild
+		receptionist remaining, after all.{wait}
+	} {
+		#94190v#845FAs for you, Schera...be careful you don't have
+		too much 'water'.{wait}
+	}
+	TextWait
+	_59
+	CharTurnTo char[2] 315deg 500deg/s
+	Fork char[2] fork[1]:
+		CharWalkToPos self (5880, 4000, 4500) 2200mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-1220, 4000, 4500) 2200mm/s 0
+	Sleep 500ms
+	CharSetChipPattern name[80] 0
+	ForkWait char[2] fork[1]
+	TextTalk name[2] {
+		#79708v#1645FCrud... Why's he always gotta be so serious?{wait}
+	} {
+		#79709v#1640FOh! Actually!{wait}
+	} {
+		#79710vHow 'bout you, Aina? Can you handle your liquor?
+		If you can, you should join me for a few drinks. ♪{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94598v#1650F#1PW-Well...all right, then.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#79711v#1643FU-Umm... You're sure? Really, really sure?{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#94599v#1650F#1POf course! You've done so much for me,
+		so how could I refuse?{wait}
+	} {
+		#94600v#1651FJoining you for a few drinks is the least
+		I can do. ㈱{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 1700mm 10 11 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Sleep 1000ms
+	TextTalk name[2] {
+		#79712v#1640FHeehee! Then let's get to boozin'! Tonight's
+		gonna be fuuun...{wait}
+	} {
+		#79713v#1641F(I can't wait to see what a prim and proper
+		girl like her looks like when she's drunk out
+		of her mind...){wait}
+	} {
+		#79714v#3S(This is going to be AWESOME!)#2S{wait}
+	}
+	TextWait
+	Emote name[80] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[249] 0 0 100
+	CrossFade 1000ms
+	CharSetChipPattern char[3] 5
+	CharSetChipPattern char[4] 5
+	FadeWait
+	Sleep 300ms
+	TextTalk name[2] {
+		#79715v#1641F#3SWell, cheeeeers! #2S{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#79716v{0x18}{color 12}#40WI'd seen girls just like her on the other side of
+		that river.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79717v{0x18}{color 12}#40WSilky blonde hair, beautiful blue eyes, smooth
+		skin...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79718v{0x18}{color 12}#40WThe blessed, blissful children on the other side
+		dressed like royalty and smiling like angels.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79719v{0x18}{color 12}#40WSeeing them, I asked myself the same question
+		over and over again...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		#79720v{0x18}{color 12}#40W'Why aren't I on that side?'{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79721v{0x18}{color 12}#40WI envied them. I hated them. I both longed to be 
+		one of them and rejected their very existence. {wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79722v{0x18}{color 12}#40WI knew the answer to my question from the very
+		beginning.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79723v{0x18}{color 12}#40WI despaired in myself. I always tried to avoid others
+		getting too close, believing that to be what I needed
+		to do in order to live...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79724v{0x18}{color 12}#40W...but I could never completely get rid of the tiny,
+		lingering hope deep within my heart.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		#79725v{0x18}{color 12}#40WThat eventually, no matter how long it took, the day
+		would finally come when I could smile from the heart.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79726v{0x18}{color 12}#40WThat the day would come when I would finally be able
+		to accept and forgive myself for how I was.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetName ""
+	TextMessage null {
+		#79727v{0x18}{color 12}#40WThe next day, Aina visited the Bracer Guild and
+		registered her desire for her uncle to be shown
+		leniency in his sentencing.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		#79728v{0x18}{color 12}#40W...Unfortunately, I wasn't able to accompany her,
+		having been drunk under the table by her the night
+		before.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	BgmStop 4000ms
+	BgmWait
+	Sc_C4Unset 536870912
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	ScAchievement 10 2 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Client] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Tc_C2 1 0
+	PartyClear
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_E6_1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[4] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[4] 0x10
+		QuestFlagsSet quest[4] 0x20
+		ItemAdd item[726] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[726]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 4000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}4,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	if flag[9999]:
+		NewScene "u4123._sn" 100 0 0
+		Hcf
+	else:
+		NewScene "u4121._sn" 100 0 0
+		Hcf
+	Return
+
+fn[7]:
+	Fork char[2] fork[1]:
+		CharWalkToPos self (5880, 4000, 4780) 2200mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (6880, 4000, 3780) 2200mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (6880, 4000, 1160) 2200mm/s 0
+	Sleep 800ms
+	CharSetChipPattern name[2] 2
+	Sleep 100ms
+	CharSetChipPattern name[80] 1
+	ForkWait char[2] fork[1]
+	CharTurnToChar char[2] name[2] 400deg/s
+	Sleep 300ms
+	Return

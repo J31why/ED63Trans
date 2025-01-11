@@ -1,0 +1,253 @@
+calmare fc scena
+scena:
+	name "Zeiss" "T3131.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01020._ch" "npl/ch01020p._cp"
+chip[1] "npl/ch01270._ch" "npl/ch01270p._cp"
+chip[2] "npl/ch01003._ch" "npl/ch01003p._cp"
+chip[3] "npl/ch01050._ch" "npl/ch01050p._cp"
+
+npc char[0]:
+	name "Ben"
+	pos (-2470, -1000, 4710)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[1]:
+	name "Ursus"
+	pos (5480, -1000, 5320)
+	angle 90deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[2]:
+	name "Randall"
+	pos (-450, -650, 3980)
+	angle 270deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01B5
+	init fn[65535,65535]
+	talk fn[0,8]
+
+npc char[3]:
+	name "Muriel"
+	pos (50, -1000, 8500)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,7]
+
+look_point[0]:
+	pos (-530, -1000, 4660)
+	radius 400mm
+	bubble_pos (-2470, 500, 4710)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (660, -1000, 6600)
+	radius 400mm
+	bubble_pos (50, 500, 8500)
+	flags 0x007E
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[8] 0x0080
+		CharFlagsUnset char[9] 0x0080
+		CharFlagsUnset char[10] 0x0080
+		CharFlagsUnset char[11] 0x0080
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (400, null, 5540) (5960, null, 4780) 2000mm/s
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Return
+
+fn[4]:
+	TextStart char[8]
+	if flag[12165]:
+		if flag[0]:
+			CharTurnTo char[8] 90deg 0deg/s
+			TextTalk char[8] {
+				Don't freak out so much, Randall.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				She might not look or act like it, but she's not
+				stupid. She knows what she's doing.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				H-Hey... You need something?{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				If you want to order something, go and speak
+				to the new girl.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				I've left her in charge of the counter.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd char[8]
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				...Oops. I forgot to go and wake Louise up.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Still, Yuriel is there... I'm sure she woke her
+				up in my place. ...Probably.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				The newbie working here is Randall's 
+				granddaughter, apparently.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Her cooking's not half bad, and she's got a
+				knack for dealing with customers...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but thanks to her being around, the owner's
+				gonna have an even better excuse to slack off.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[6]:
+	Call fn[0,7]
+	Return
+
+fn[7]:
+	TextStart char[11]
+	if flag[12165]:
+		if flag[3]:
+			TextTalk char[11] {
+				I only work here at this time of day, actually.{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				Why? I'd much rather be here at lunchtime
+				than over at ZCF. All there is to do there is
+				boring crap. The menial stuff.{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				And I'd say I'm MUCH more suited to being chirpy 
+				and cheery and luring all the boys in here than
+				being a receptionist in a gloomy factory, right?{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[11] {
+				Welcome, welcome!{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				We're currently running a lunchtime special offer!{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				Come on in and try out our delicious grub. ㈱{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd char[11]
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12165]:
+		if flag[2]:
+			TextTalk self {
+				As long as Dan's with them, they shouldn't be able
+				to cause TOO much trouble, but to say I'm worried
+				is...an understatement.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Those two working on the same project can only
+				spell trouble... *sigh*{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				It sounds like old Russell's stirrin' up trouble
+				again...{wait}
+			}
+			TextWait
+			TextTalk self {
+				And if that's not scary enough, this time he's
+				got Erika with him.{wait}
+			}
+			TextWait
+			TextTalk self {
+				*sigh* I've never heard two bigger ingredients
+				for a disaster than that...{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return

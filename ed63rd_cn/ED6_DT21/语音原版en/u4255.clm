@@ -1,0 +1,145 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4255.x"
+	town town[1]
+	bgm bgm[230]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (-65370, 0, 76630)
+	radius 1000mm
+	bubble_pos (-65370, 1000, 76630)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-63850, 0, 76630)
+	radius 1000mm
+	bubble_pos (-63850, 1000, 76630)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if !flag[10145]:
+		ObjFrame object[5] 0
+	else:
+		ObjFrame object[5] 60
+	if !flag[10146]:
+		ObjFrame object[6] 0
+	else:
+		ObjFrame object[6] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10145]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[5] 30
+		ObjWait object[5]
+		ObjFrame object[5] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		ItemAdd item[480] 1
+		TextMessage null {
+			{color 5}Found {item item[480]}{color 5}.{wait}
+		}
+		if ItemHas item[525] 0 != 0:
+			if RecipeLearn 20:
+			else:
+				TextWait
+				TextMessage null {
+					{color 5}Found a scrap of paper with a recipe written on it.{wait}
+				}
+				TextWait
+				SoundPlay sound[17] 0 0 100
+				TextMessage null {
+					{color 5}Learned the recipe for {item item[480]}{color 5}.{wait}
+				}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10145]
+	else:
+		TextMessage null {
+			{color 5}This is a nice chest
+			This is also a haiku
+			Chest chest chest chest chest{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 297 0
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[10146]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[6] 60
+		Sleep 500ms
+		if ItemAdd item[444] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[444]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10146]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[444]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[444]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[6] 60
+			ObjPlay object[6] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}[8/36] 'I shall await your answer at midnight.
+			{}                                                    From my heart to yours,
+			{}                                                                  -Jubilee'{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 298 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

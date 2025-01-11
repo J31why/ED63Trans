@@ -1,0 +1,1119 @@
+calmare tc scena
+scena:
+	name "Zeiss" "C3110.x"
+	town town[1]
+	bgm bgm[34]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03670._ch" "npl2/ch03670p._cp"
+chip[1] "npl2/ch03673._ch" "npl2/ch03673p._cp"
+chip[2] "npl/ch01600._ch" "npl/ch01600p._cp"
+chip[3] "npl/ch01640._ch" "npl/ch01640p._cp"
+
+npc char[0]:
+	name "Cassius"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Royal Army Officer"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Guard"
+	pos (22110, 0, 157150)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[3]:
+	name "Guard"
+	pos (-24850, 0, 38600)
+	angle 270deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[4]:
+	name "Guard"
+	pos (23150, 0, 127870)
+	angle 270deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[5]:
+	name "Guard"
+	pos (-2240, 0, 1150)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,6]
+
+npc char[6]:
+	name "Guard"
+	pos (-10400, 0, -3510)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,7]
+
+trigger[0]:
+	pos1 (-30350, -2500, 38060)
+	pos2 (-28450, -250, 41960)
+	flags 0x0000
+	func fn[0,16]
+	unk1 0
+
+look_point[0]:
+	pos (21040, 0, 158020)
+	radius 1000mm
+	bubble_pos (21040, 800, 158020)
+	flags 0x007C
+	func fn[0,15]
+	unk1 0
+
+fn[0]:
+	if system[66] == 18:
+		if flag[9478]:
+			system[1] = 101
+			FlagUnset flag[9478]
+			SystemFlagsSet 0x10000000
+			Event fn[0,17]
+	Return
+
+fn[1]:
+	if system[66] == 18:
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	TextTalk char[2] {
+		The general is waiting for you on the training
+		ground.{wait}
+	}
+	TextWait
+	TextTalk self {
+		After checking your equipment, make your way to
+		the rooftop.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	TextTalk char[3] {
+		◆Guard dialogue{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	TextTalk char[4] {
+		◆Guard dialogue{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	TextTalk char[5] {
+		◆Guard dialogue{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	TextTalk char[6] {
+		◆Guard dialogue{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[9] (21070, 0, 136950) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20650, 0, 138370) 0deg
+	CharSetPos char[0] (21360, 0, 159470) 180deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (22110, 0, 157150) 180deg
+	_Char4A char[2] 255
+	CamLookPos (22020, 0, 137120) 0ms
+	CamSetDistance 0 5120 -10000 0ms
+	CamZoom 2890 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 291 0ms
+	Fork name[9] fork[2]:
+		CamLookPos (23210, 0, 157170) 4000ms
+	Fork name[9] fork[3]:
+		CamPers 297 4000ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21050, 0, 154380) 2000mm/s 0
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21610, 0, 153380) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[9] fork[2]
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	TextTalk char[2] {
+		#5PThis is the commander's room.{wait}
+	} {
+		What business have you here?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6PI'm Warrant Officer Belc of the garrison, and
+		this is Anelace, a bracer.{wait}
+	} {
+		We would like to request a meeting with the
+		general.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F#4PP-Please!{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5PVery well. Wait a moment.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (20980, 0, 157780) 2000mm/s 0
+	Sleep 300ms
+	SoundPlay sound[113] 0 0 100
+	Sleep 500ms
+	TextTalk char[2] {
+		#4PWarrant Officer Belc and a bracer from the guild
+		are here to see you, sir.{wait}
+	}
+	TextWait
+	TextTalkNamed char[0] "Man's Voice" {
+		#2PLet them through.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#4PYes, sir!{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 90deg 400deg/s
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (22110, 0, 157150) 2000mm/s 0
+	CharTurnTo char[2] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#5PPlease enter.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6PThank you.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[9] fork[3]:
+		CamLookPos (22290, 0, 158760) 2500ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (20980, 0, 157780) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 156450) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Sleep 300ms
+	ObjFrame object[0] 0
+	ObjPlay object[0] 9
+	ObjWait object[0]
+	Sleep 300ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Fork char[1] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	Fork name[9] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	_Char4B char[2] 255
+	Call fn[0,9]
+	Return
+
+fn[9]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharColor name[9] 0x00FFFFFF 0ms
+	CharSetPos name[9] (20740, 0, 250590) 0deg
+	CharColor char[1] 0x00FFFFFF 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20740, 0, 250590) 0deg
+	CharColor char[1] 0xFFFFFFFF 0ms
+	CharFlagsSet char[0] 0x0004
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (20940, 0, 260040) 180deg
+	CamLookPos (21250, 0, 251550) 0ms
+	CamSetDistance 0 5040 -10000 0ms
+	CamZoom 2830 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 297 0ms
+	Fork name[9] fork[2]:
+		CamLookPos (22440, 0, 258519) 3000ms
+	Fork name[9] fork[3]:
+		CamPers 305 3000ms
+	ForkFunc char[1] fork[0] fn[0,13]
+	ForkFunc name[9] fork[0] fn[0,14]
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	ForkWait name[9] fork[2]
+	ForkWait name[9] fork[3]
+	TextTalk char[1] {
+		I've brought your visitor, sir.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FVery good.{wait}
+	} {
+		You may return to your duties, then.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Yes, sir!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[1] fork[0] fn[0,12]
+	ForkWait char[1] fork[0]
+	TextTalk char[0] {
+		#1120FWell, hello. It's good to see you again.{wait}
+	} {
+		It sounds like my daughter owes you quite a lot,
+		Anelace.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FOh, if anything, it's me who owes her.{wait}
+	} {
+		Umm... I'm really sorry for making you take time
+		out of your busy schedule to speak with me, by 
+		the way.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FOh, don't worry about it.{wait}
+	} {
+		I'm relieved to hear your grandfather still seems
+		to be in good health, too.{wait}
+	} {
+		I believe it was because of him that you came here
+		today?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FY-Yes, that's right...{wait}
+	} {
+		So you really do know him, then?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FIndeed I do. I owe a lot to him as a swordsman.{wait}
+	} {
+		I haven't seen him since I put down my blade ten
+		years ago, though...{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FI see...{wait}
+	} {
+		Actually, the reason I came here today was to
+		continue the conversation he had with you ten
+		years ago.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FOh?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F...To tell you the truth, Granddad still laments
+		the fact that you left the path of the sword to
+		begin with.{wait}
+	} {
+		That was why when he heard that you had returned
+		to the army, he decided to write to me.{wait}
+	} {
+		Because he wondered whether you returning to the
+		military may mean you were also ready to pick up
+		a sword again...{wait}
+	} {
+		That was why he told me to come and meet you.
+		To ask you directly how you felt.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FHmm... I see...{wait}
+	} {
+		Well, it's certainly a great honor that ten years
+		on, he still cares so much about an inexperienced
+		and utterly lacking swordsman like myself...{wait}
+	} {
+		...But I'm afraid my answer is that I still have
+		no intention of taking up a blade again.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FC-Can I ask you why, then?{wait}
+	} {
+		Do you believe the staff to be stronger than the
+		blade?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FNo. In the hands of a skilled wielder, no weapon
+		is inferior to another.{wait}
+	} {
+		I just believe a staff to be a more fitting weapon
+		for me as I am now. That's all.{wait}
+	} {
+		Given that staffs are a symbol of protection,
+		which are used more for keeping enemies at bay
+		rather than cleaving through them.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FY-You say that as if all swords are good for is
+		cutting and killing! That's not true at all!{wait}
+	} {
+		I fight because I want to protect things just
+		like you do!{wait}
+	} {
+		Are you saying that with a sword, I can't do that?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FI'm afraid I don't have the answer to that 
+		question.{wait}
+	} {
+		Still... Hmm...{wait}
+	} {
+		...I suppose this is just fate. Perhaps she will
+		be able to answer your question for you.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FWhat?{wait}
+	}
+	TextWait
+	Fork name[9] fork[2]:
+		CamLookPos (22330, 0, 254190) 2500ms
+	ForkFunc char[0] fork[0] fn[0,10]
+	ForkLoop name[9] fork[0]:
+		CharTurnToChar self char[0] 400deg/s
+	Sleep 2500ms
+	TextTalk name[9] {
+		#810F#5PWh-Who?{wait}
+	}
+	TextWait
+	ForkWait name[9] fork[2]
+	ForkQuit name[9] fork[0]
+	CharTurnTo name[9] 180deg 400deg/s
+	ForkWait char[0] fork[0]
+	CharTurnTo char[0] 0deg 400deg/s
+	TextTalk char[0] {
+		#1120FI need to go and sort a few things out.{wait}
+	} {
+		Once your equipment is ready, come to the training
+		ground outside.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F#5PM-My equipment?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1120FThat's right. This might end up getting a little
+		violent.{wait}
+	} {
+		Anyway, I'll be waiting for you.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810F#5PR-Right!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[0] fork[0] fn[0,11]
+	ForkWait char[0] fork[0]
+	CamLookPos (22800, 0, 255550) 1000ms
+	TextTalk name[9] {
+		#810F#5PWh-Whew...{wait}
+	} {
+		I guess I should what he says...{wait}
+	} {
+		Time to check my equipment over.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CharSetPos name[9] (20820, 0, 156030) 180deg
+	CamLookPos (20820, 0, 156030) 0ms
+	CamSetDistance 0 6000 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	LookPointFlagsUnset look_point[0] 0x0001
+	ObjFrame object[0] 0
+	ObjPlay object[0] 0
+	ObjFlagsUnset object[0] 0x0008
+	ObjFlagsUnset object[0] 0x0010
+	ObjFlagsUnset object[0] 0x0020
+	Sleep 1000ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[10]:
+	CharWalkToPos self (20220, 0, 258820) 2000mm/s 0
+	CharWalkToPos self (20220, 0, 254700) 2000mm/s 0
+	Return
+
+fn[11]:
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (20520, 0, 252500) 2000mm/s 0
+	Sleep 200ms
+	SoundPlay sound[106] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	CharWalkToPos self (20520, 0, 250500) 2000mm/s 0
+	CharFlagsSet self 0x0080
+	Return
+
+fn[12]:
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (20380, 0, 254240) 2000mm/s 0
+	CharWalkToPos self (20800, 0, 252130) 2000mm/s 0
+	SoundPlay sound[106] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharWalkToPos self (20800, 0, 250000) 2000mm/s 0
+	CharFlagsSet self 0x0080
+	SoundPlay sound[230] 0 0 100
+	Return
+
+fn[13]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (20650, 0, 255390) 2000mm/s 0
+	Return
+
+fn[14]:
+	Sleep 600ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (21490, 0, 254430) 2000mm/s 0
+	Sleep 700ms
+	ForkWait self fork[2]
+	Return
+
+fn[15]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}The door is locked.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[16]:
+	if system[66] == 255:
+		Return
+	EventBegin 1
+	_Char4A char[3] 255
+	TextTalk char[3] {
+		The area beyond here is restricted.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		Kindly turn around.{wait}
+	}
+	TextWait
+	_Char90 field_party[0] 1500 0 0 3000 0
+	_Char4B char[3] 255
+	Sleep 50ms
+	EventEnd 4
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[9] (21070, 0, 136950) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20650, 0, 138370) 0deg
+	CharSetPos char[0] (21360, 0, 159470) 180deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (22110, 0, 157150) 180deg
+	CamLookPos (22020, 0, 137120) 0ms
+	CamSetDistance 0 7520 -10000 0ms
+	CamZoom 2890 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 337 0ms
+	Fork name[9] fork[2]:
+		CamLookPos (23210, 0, 157170) 7000ms
+	Fork name[9] fork[3]:
+		CamPers 297 7000ms
+	Fork char[2] fork[3]:
+		CamSetDistance 0 5120 -10000 7000ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21050, 0, 154380) 2000mm/s 0
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21610, 0, 153380) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 4000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	SoundPlay sound[106] 0 0 100
+	Sleep 1500ms
+	SoundPlay sound[230] 0 0 100
+	Sleep 1000ms
+	Call fn[0,18]
+	ForkWait name[9] fork[2]
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	TextTalk char[2] {
+		#5PThis way leads to the commander's room.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5PPlease state your business.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6PI've brought a bracer under orders from the
+		general.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6PShe is due to have a meeting with him.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#812F#4PP-Please!{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5PUnderstood. Wait a moment, then, please.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (20980, 0, 157780) 2000mm/s 0
+	Sleep 300ms
+	SoundPlay sound[113] 0 0 100
+	Sleep 500ms
+	TextTalk char[2] {
+		#4PGeneral, your visitor from the Bracer Guild is
+		here to see you!{wait}
+	}
+	TextWait
+	TextTalkNamed char[0] "Man's Voice" {
+		#2PLet her through.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#4PYes, sir!{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 90deg 400deg/s
+	CharWalkToPos char[2] (20980, 0, 157150) 2000mm/s 0
+	CharWalkToPos char[2] (22110, 0, 157150) 2000mm/s 0
+	CharTurnTo char[2] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#5PPlease enter.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#6PGood work.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[9] fork[3]:
+		CamLookPos (22290, 0, 158760) 2500ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (20980, 0, 157780) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 156450) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Sleep 300ms
+	ObjFrame object[0] 0
+	ObjPlay object[0] 9
+	ObjWait object[0]
+	Sleep 300ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (21390, 0, 159500) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	Fork char[1] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	Fork name[9] fork[1]:
+		CharColor self 0x00FFFFFF 300ms
+	ForkWait name[9] fork[0]
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	_Char4B char[2] 255
+	Call fn[0,18]
+	Return
+
+fn[18]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sleep 1000ms
+	CharColor name[9] 0x00FFFFFF 0ms
+	CharSetPos name[9] (20740, 0, 250590) 0deg
+	CharColor char[1] 0x00FFFFFF 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (20740, 0, 250590) 0deg
+	CharColor char[1] 0xFFFFFFFF 0ms
+	CharFlagsSet char[0] 0x0004
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (20940, 0, 260040) 180deg
+	char[0].45 = 1030
+	char[0].46 = 1050
+	char[0].47 = 1030
+	char[0].7 = 1030
+	char[0].41 = 1030
+	CamLookPos (21250, 0, 251550) 0ms
+	CamSetDistance 0 5040 -10000 0ms
+	CamZoom 2830 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 297 0ms
+	Fork char[0] fork[2]:
+		CamLookPos (22360, 0, 258519) 3000ms
+	Fork char[0] fork[3]:
+		CamPers 305 3000ms
+	ForkFunc char[1] fork[0] fn[0,13]
+	ForkFunc name[9] fork[0] fn[0,14]
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	ForkWait name[9] fork[2]
+	ForkWait name[9] fork[3]
+	Sleep 500ms
+	TextTalk char[1] {
+		#99356v#6PI've brought your visitor, sir.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87611v#1125F#5PVery good.{wait}
+	} {
+		#87612v#1120FYou may return to your duties.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#99357v#6PThank you, sir.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[1] fork[0] fn[0,12]
+	Sleep 3000ms
+	Fork name[9] fork[2]:
+		CamLookPos (22360, 0, 259980) 1500ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 257220) 2000mm/s 0
+	ForkWait char[1] fork[0]
+	ForkWait name[9] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#87613v#1123F#5PI'm really sorry about the delay, there,
+		Anelace.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86430v#816F#12P#12POh, don't be.{wait}
+	} {
+		#86431v#1316FI'm more thankful you took the time out
+		of your busy schedule to speak with me
+		at all.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87614v#1121F#5PHaha. This is the least I could do for someone
+		from my old line of work!{wait}
+	} {
+		#87615v#1120FIt's been a while since we last met, though,
+		hasn't it?{wait}
+	} {
+		#87616vYou've become a seasoned veteran before
+		I knew it.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86432v#819F#12PHeehee. I'd certainly like to think I have.{wait}
+	} {
+		#86433v#816FI can't have Estelle soar ahead of me while
+		she's abroad, can I?{wait}
+	} {
+		#86434vThis is just what rivals do!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87617v#1125F#5PHaha. So they do.{wait}
+	} {
+		#87618v#1120FI'll be looking forward to seeing just how much
+		stronger the two of you can become.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86435v#811F#12PYou won't be disappointed!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87619v#1120F#5PGetting to the point...I was pleased to hear
+		that old Master Ka-fai is still in good health.{wait}
+	} {
+		#87620vI believe it was because of him that you came
+		here today?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86436v#1316F#12PY-Yes. That's right...{wait}
+	} {
+		#86437v#818FI didn't realize you were an acquaintance of his
+		before this.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87621v#1125F#5PI certainly am. In short, he's the man who taught
+		me the way of the sword.{wait}
+	} {
+		#87622v#1120FThat was over twenty years ago by this point...
+		The first time we met was when I was back at
+		the military academy, so I studied it under him.{wait}
+	} {
+		#87623v#1121FHaha. I still remember the harsh training sessions
+		he gave here at Leiston like they were yesterday.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86438v#819F#12PR-Really...?{wait}
+	} {
+		#86439v#814FIs there any special reason you didn't say you
+		knew him before?{wait}
+	} {
+		#86440vYou knew I was his granddaughter, didn't you?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87624v#1125F#5P...I did.{wait}
+	} {
+		#87625v#1120FBy the time I first met you, I had long given up
+		the path of the sword.{wait}
+	} {
+		#87626vIt didn't feel appropriate in my eyes to act as if
+		I was his student in light of that.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86441v#813F#12POh... Got'cha.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87627v#1125F#5PI haven't seen him in...about ten years, I think?{wait}
+	} {
+		#87628v#1120FHe does write to me on occasion, but how is he
+		these days? Does he still have that same old vim
+		and vigor?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86442v#819F#12PHaha... Yup. He really doesn't act his age at
+		all.{wait}
+	} {
+		#86443v#812FStill...if you'll let me get right to the point...{wait}
+	} {
+		#86444v...the reason I came here is to continue the 
+		discussion he had with you ten years ago.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87629v#1124F#5POh?{wait}
+	}
+	TextWait
+	BgmStop 1500ms
+	BgmWait
+	BgmPlay bgm[173] 0
+	Sleep 500ms
+	TextTalk name[9] {
+		#86445v#1316F#12PTo tell you the truth, Pappy still laments the
+		fact that you left the path of the sword.{wait}
+	} {
+		#86446vThat was why he wrote to me when he heard
+		you'd returned to the army.{wait}
+	} {
+		#86447v#813FHe wondered whether you returning to the
+		military may mean you were also ready to pick
+		up a sword again...{wait}
+	} {
+		#86448v#812FSo, this is it. He'd like to know, directly from
+		you, how you feel.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87630v#1128F#5PHmm... I see...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	Emote char[0] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#87631v#1125F#5PWell, it's a great honor that after so many years,
+		he still cares so much about an inexperienced
+		and utterly lacking swordsman like me.{wait}
+	} {
+		#87632v#1122FAnd yet I'm afraid my answer is that I still have
+		no intention of taking up a blade again.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86449v#1317F#12P...{wait}
+	} {
+		#86450v#813FC-Can I ask you why?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87633v#1123F#5PHmm... You certainly can, but I'm not sure
+		how to put my answer.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86451v#1316F#12PThis has always been on my mind, too...{wait}
+	} {
+		#86452vI've always wondered what would prompt someone
+		so skilled with a sword that they even gained the
+		title Divine Blade to leave it all behind...{wait}
+	} {
+		#86453v#813FAnd I don't mean to make light of your skill with
+		your staff or say it's inferior. Nothing like that.{wait}
+	} {
+		#86454v#812FIt's just hard to wrap my head around why you did
+		what you did, and there's a little part of me that
+		can't accept it, either!{wait}
+	} {
+		#86455vEspecially now that you've returned to the army!
+		Why CAN'T you return to being a swordsman?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87634v#1122F#5PHmm...{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86456v#1316F#12PU-Unless...{wait}
+	} {
+		#86457v#813FUnless you believe that the staff is stronger
+		than the sword after all?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87635v#1125F#5PNo. Not at all.{wait}
+	} {
+		#87636vI just believe a staff to be a more fitting weapon
+		for me as I am now.{wait}
+	} {
+		#87637v#1120FStaves are a symbol of protection which are used
+		more for keeping enemies at bay than cleaving
+		through them.{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#86458v#1317F#12PY-You say that as if all swords are good for
+		is cutting and killing! That's not true!{wait}
+	} {
+		#86459v#813FI fight because I want to protect things just
+		like you do!{wait}
+	} {
+		#86460v#30WAs a swordsman, as a bracer, and as myself...{wait}
+	} {
+		#86461v#815F#20WAre you telling me the swordsmanship Pappy
+		taught me isn't going to let me do that?!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87638v#1122F#5P...{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86462v#1316F#12PI-I'm sorry... I didn't ask for you to take time
+		out of your day so I could come and shout at
+		you.{wait}
+	} {
+		#86463v#813F#30WBut I...I can't accept what you're saying.{wait}
+	} {
+		#86464vUp until all of what happened here in Liberl,
+		I'd never felt any doubts that swordsmanship
+		was the right path for me.{wait}
+	} {
+		#86465vIn the end, all of what happened just served
+		to remind me of how powerless I really am.{wait}
+	} {
+		#86466v#1316FAnd now, I...I feel like no matter how hard
+		I try, I'll always be a rookie. I'll never be strong
+		enough to do what I want to.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87639v#1125F#5P...Now I see.{wait}
+	} {
+		#87640vHmm... Perhaps this is fate.{wait}
+	} {
+		#87641v#1120FI see Master Ka-fai hasn't changed one bit.
+		He's the same firecracker he always was.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#86467v#814F#12PWhat do you mean?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#87642v#1125F#5PI'm afraid as I am now, I'm not able to answer
+		the questions you're asking me.{wait}
+	} {
+		#87643v#1122FBut I know someone else who can.{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	CamZoom 3130 3000ms
+	FadeWait
+	SystemFlagsSet 0x02000000
+	NewScene "c3101._sn" 100 0 0
+	Hcf
+	Fork name[9] fork[2]:
+		CamLookPos (22360, 0, 257980) 2500ms
+	ForkFunc char[0] fork[0] fn[0,10]
+	ForkLoop name[9] fork[0]:
+		CharTurnToChar self char[0] 400deg/s
+	Sleep 2500ms
+	TextTalk name[9] {
+		#812F#5PWh-Where are you going?{wait}
+	}
+	TextWait
+	ForkWait name[9] fork[2]
+	ForkQuit name[9] fork[0]
+	CharTurnTo name[9] 180deg 400deg/s
+	ForkWait char[0] fork[0]
+	CharTurnTo char[0] 0deg 400deg/s
+	TextTalk char[0] {
+		#1120FYou'll understand soon enough.{wait}
+	} {
+		Follow me.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#813F#5PR-Right...{wait}
+	}
+	TextWait
+	ForkFunc char[0] fork[0] fn[0,11]
+	Sleep 600ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 252500) 2000mm/s 0
+	ForkWait name[9] fork[0]
+	Fork name[9] fork[0]:
+		CharWalkToPos self (20940, 0, 250500) 2000mm/s 0
+	Fork name[9] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	NewScene "c3101._sn" 100 0 0
+	Hcf
+	Return

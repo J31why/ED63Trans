@@ -1,0 +1,639 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4131.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01400._ch" "npl/ch01400p._cp"
+chip[1] "npl/ch01670._ch" "npl/ch01670p._cp"
+chip[2] "npl/ch01410._ch" "npl/ch01410p._cp"
+chip[3] "npl/ch01033._ch" "npl/ch01033p._cp"
+chip[4] file[0x00270222] file[0x00270227]
+chip[5] file[0x002701D4] file[0x002701D9]
+chip[6] "npl/ch02490._ch" "npl/ch02490p._cp"
+chip[7] "npl/ch01660._ch" "npl/ch01660p._cp"
+
+npc char[0]:
+	name "Archbishop Currant"
+	pos (-50, 1000, 20410)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "Father Reval"
+	pos (2870, 1000, 18870)
+	angle 272deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[2]:
+	name "Sister Noah"
+	pos (-7950, 0, 1210)
+	angle 270deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,5]
+
+npc char[3]:
+	name "Cisna"
+	pos (-3190, 150, 10800)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0195
+	init fn[65535,65535]
+	talk fn[0,7]
+
+npc char[4]:
+	name "May"
+	pos (-5220, 0, 3260)
+	angle 225deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,6]
+
+npc char[5]:
+	name "Nielsen"
+	pos (-131950, 0, 2700)
+	angle 0deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,8]
+
+npc char[6]:
+	name "Erika Russell"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[7]:
+	name "Lt. Colonel Cid"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (200, 1000, 17890)
+	radius 400mm
+	bubble_pos (-50, 2500, 20410)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-74990, 0, 66030)
+	radius 800mm
+	bubble_pos (-74990, 1000, 66030)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		CharFlagsUnset char[8] 0x0080
+		CharFlagsUnset char[9] 0x0080
+		CharFlagsUnset char[10] 0x0080
+		CharFlagsUnset char[12] 0x0080
+		CharFlagsUnset char[11] 0x0080
+		CharFlagsUnset char[13] 0x0080
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,10]
+	Return
+
+fn[1]:
+	OpLoad "t4131_n"
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	TextStart char[8]
+	if flag[12112]:
+		if flag[0]:
+			TextTalk char[8] {
+				It may be necessary at times to pluck up the
+				courage to look back at the path we've tread.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Still, there is nothing to be afraid of in doing so.
+				Aidios will always show us the way if we look to
+				Her.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				At times, all of us lose our way. That in itself
+				is nothing to be feared.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				What is truly terrifying is not noticing that it has
+				happened, or realizing and willingly turning one's
+				eyes from that truth.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				It may be necessary at times to pluck up the
+				courage to look back at the path we've tread.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Still, there is nothing to be afraid of in doing so.
+				Aidios will always show us the way if we look to
+				Her.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd char[8]
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12112]:
+		if flag[1]:
+			TextTalk self {
+				It's been five whole years now since the war
+				came to an end...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Oh, Aidios, please grant peace to all those who
+				lost their lives during that terrible conflict...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Many people came flocking to this cathedral in
+				search of safety during the Hundred Days War,
+				too.{wait}
+			}
+			TextWait
+			TextTalk self {
+				That's no surprise, of course. To the people of
+				the time, Grancel, protected by the Ahnenburg
+				Wall, was their final hope.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12112]:
+		if flag[2]:
+			CharTurnTo self 270deg 0deg/s
+			TextTalk self {
+				Ugh... Doing all of this cleaning alone takes
+				foreeever!{wait}
+			}
+			TextWait
+			TextTalk self {
+				It was so much faster when I had Sister Rosa
+				to help me. We were always done in a flash...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				This cathedral is one of the oldest buildings in
+				Liberl, incidentally.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's stood here for hundreds of years, acting as
+				a guiding light for the people of this nation for
+				generations.{wait}
+			}
+			TextWait
+			TextTalk self {
+				...It's also very large, which makes cleaning it
+				all a mega pain.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12112]:
+		if flag[4]:
+			TextTalk self {
+				Wh-What?! Is that the time already?!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I need to get back and help with the cooking!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Sisters of the church sure are amazing,
+				aren't they?{wait}
+			}
+			TextWait
+			TextTalk self {
+				They spend their days offering prayers to the
+				Goddess so that we might be able to live our
+				lives in peace...{wait}
+			}
+			TextWait
+			TextTalk self {
+				*sigh* What a wonderful job...{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[12112]:
+		TextTalk self {
+			Oh, Aidios... Please guide us all...{wait}
+		}
+		TextWait
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12112]:
+		if flag[12121]:
+			if flag[5]:
+				CharTurnTo self 0deg 0deg/s
+				TextTalk self {
+					#99788vSo this is Grancel Cathedral...{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99789vIt has a truly solemn air to it that even I can
+					sense.{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					#99783vI'm due to meet someone here. I'm just waiting
+					for them to arrive.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99784vI'm planning on doing some research on Liberl
+					while I'm here, too.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99785vAfter all, this is the nation now known for
+					repelling the mighty Erebonian Empire.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99786vI'm eager to see if I can find exactly where
+					that strength came from.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99787vHaha. This should prove to be some very 
+					interesting research!{wait}
+				}
+				TextWait
+				FlagSet flag[5]
+		else:
+			CharTurnTo self 0deg 0deg/s
+			TextTalk self {
+				#99777vOh? Who might the two of you be?{wait}
+			}
+			TextWait
+			CharTurnToChar self name[2] 500deg/s
+			Sleep 300ms
+			TextTalk self {
+				#99778vThe sound of your footsteps is unfamiliar to me...
+				I presume this must be the first time we've met?{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#79591v#1643FY-Yes. It certainly is...{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#94530v#1653FUmm...{wait}
+			} {
+				#94531v#1650FAm I correct in assuming that you must be
+				visually impaired, sir?{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99779vYes, I am.{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99780vIf you'll forgive me for saying so, you're a rather
+				unusual pair, aren't you? One of you is a bracer,
+				I believe?{wait}
+			}
+			TextWait
+			Emote name[2] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 50ms
+			Emote name[80] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk self {
+				#99781vHaha. There's no need to be so surprised. The air
+				you have about you reminds me of other bracers
+				I know, that's all.{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99782vI may have lost my vision, but that has allowed me
+				to see things in a way I couldn't before.{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#79592v#1643FR-Really...?{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#94532v#1650FThat's incredible...{wait}
+			}
+			TextWait
+			FlagSet flag[12121]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[9]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}The door is locked.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[10]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsUnset char[14] 0x0080
+	CharSetPos char[14] (850, 0, 14500) 180deg
+	_Char4A char[8] 255
+	CharSetPos char[8] (-360, 0, 14000) 180deg
+	CharFlagsSet name[8] 0x0080
+	CharSetPos name[8] (840, -250, -3240) 0deg
+	CharSetPos char[15] (-610, -250, -3250) 0deg
+	CamLookPos (-600, 0, 280) 0ms
+	CamSetDistance 0 5520 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 295 0ms
+	FadeIn 2000ms 0x00000000
+	Sleep 500ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	ForkFunc name[8] fork[0] fn[0,11]
+	ForkFunc char[15] fork[0] fn[0,12]
+	ForkWait name[8] fork[0]
+	ForkWait char[15] fork[0]
+	Sleep 300ms
+	TextTalkNamed char[8] "Old Man's Voice" {
+		#99295v#3PAh, there you are.{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	Fork char[14] fork[0]:
+		CamLookPos (-730, 0, 14290) 4000ms
+	Fork char[14] fork[1]:
+		CamSetDistance 0 4300 -10000 4000ms
+	Fork char[14] fork[2]:
+		CamZoom 2800 4000ms
+	Fork char[14] fork[3]:
+		CamPers 290 4000ms
+	Sleep 300ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (730, 0, 11800) 2000mm/s 0
+	Sleep 300ms
+	Fork char[15] fork[0]:
+		CharWalkToPos self (-300, 0, 11200) 2000mm/s 0
+	ForkWait char[14] fork[0]
+	ForkWait name[8] fork[0]
+	ForkWait char[15] fork[0]
+	TextTalk name[8] {
+		#87957v#1060F#6PIt's good to see you again, Archbishop. 
+		You look very well.{wait}
+	} {
+		#87958v#1064FHuh? And you must be...{wait}
+	}
+	TextWait
+	Fork char[14] fork[1]:
+		CamLookPos (-730, 0, 13900) 800ms
+	CharWalkToPos char[14] (650, 0, 13500) 1500mm/s 0
+	ForkWait char[14] fork[1]
+	Sleep 300ms
+	TextTalkNamed char[14] "Woman in White" {
+		#97726v#1450F#2PHmm... I wasn't expecting you to be quite
+		THIS young.{wait}
+	} {
+		#97727vHow old are you?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87959v#1064F#6PDwuh?{wait}
+	} {
+		#87960vTw-Twenty two, but...{wait}
+	}
+	TextWait
+	TextTalkNamed char[14] "Woman in White" {
+		#97728v#1457F#2PThat's a lot younger than I expected.{wait}
+	} {
+		#97729v#1452FAre the Gralsritter really so short-staffed that
+		they're handing out their most important posts
+		to kids?{wait}
+	} {
+		#97730vYou can't blame me for assuming the Fifth
+		Dominion would look like more of a veteran,
+		can you?{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#87961v#1063F#6P...{wait}
+	}
+	TextWait
+	TextTalkNamed char[14] "Woman in White" {
+		#97731v#1458F#2PHeh. Your surprise is written all over your face.{wait}
+	} {
+		#97732v#1456FSomeone in your position should have a much
+		better poker face than that. Maybe you need to
+		redo your training from scratch?{wait}
+	} {
+		#97733vOr are you just acting, I wonder?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87962v#1063F#6PHow do you...?{wait}
+	}
+	TextWait
+	TextTalk char[15] {
+		#97097v#703F#6P*sigh* Professor Russell, please...{wait}
+	} {
+		#97098v#701FHe isn't here for you to try and pick a fight with
+		him. Please try and be a little less deliberately
+		provocative. {wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87963v#1064F#6PWha...?{wait}
+	}
+	TextWait
+	TextTalkNamed char[14] "Woman in White" {
+		#97734v#1832F#2P#3SHell. No.#2S{wait}
+	}
+	TextWait
+	Sleep 400ms
+	TextTalkNamed char[14] "Woman in White" {
+		#97735v#1457F#2PHe's here to steal the thing we went through
+		so much effort to bring up, and you want me
+		to play nice?{wait}
+	} {
+		#97736v#1459FAnd kindly don't call me THAT ever again.{wait}
+	} {
+		#97737vI don't want to be addressed in the same way
+		as that old coot.{wait}
+	}
+	TextWait
+	TextTalk char[15] {
+		#97099v#701F#6P...Of course, ma'am.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87964v#1064F#6PW-Wait. Russell?{wait}
+	} {
+		#87965vThen are you...?{wait}
+	}
+	TextWait
+	TextTalkNamed char[14] "Woman in White" {
+		#97738v#1458F#2PHeh. I suppose I should introduce myself.{wait}
+	}
+	TextWait
+	Sleep 400ms
+	TextTalkNamed char[14] "Erika Russell" {
+		#97739v#1456F#2PI'm Erika Russell.{wait}
+	} {
+		#97740vI'm sure it's not a name you're going to be
+		forgetting any time soon.{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	SystemFlagsUnset 0x02000000
+	FlagSet flag[9476]
+	NewScene file[0x002101E2] 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[11]:
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (810, 0, -1370) 2000mm/s 0
+	Return
+
+fn[12]:
+	Sleep 500ms
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (-560, 0, -1940) 2000mm/s 0
+	Return

@@ -1,0 +1,459 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4111.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01220._ch" "npl/ch01220p._cp"
+chip[1] "npl/ch01230._ch" "npl/ch01230p._cp"
+chip[2] "npl/ch01020._ch" "npl/ch01020p._cp"
+chip[3] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[4] "npl/ch02490._ch" "npl/ch02490p._cp"
+chip[5] "npl/ch01180._ch" "npl/ch01180p._cp"
+chip[6] "npl/ch01350._ch" "npl/ch01350p._cp"
+chip[7] "npl/ch01480._ch" "npl/ch01480p._cp"
+chip[8] "npl/ch01220._ch" "npl/ch01220p._cp"
+chip[9] "npl/ch01150._ch" "npl/ch01150p._cp"
+chip[10] "npl/ch02730._ch" "npl/ch02730p._cp"
+chip[11] file[0x00260308] file[0x0026030D]
+
+npc char[0]:
+	name "Katrina"
+	pos (6600, 0, -55460)
+	angle 90deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,5]
+
+npc char[1]:
+	name "Dalia"
+	pos (6600, 0, -56390)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,8]
+
+npc char[2]:
+	name "Irving"
+	pos (-3550, 0, 68290)
+	angle 270deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,6]
+
+npc char[3]:
+	name "Rachel"
+	pos (-5000, -100, 68700)
+	angle 0deg
+	x 0
+	cp chip[11]
+	frame 0
+	ch chip[11]
+	flags 0x01D5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Martin"
+	pos (115690, 0, 60750)
+	angle 90deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,9]
+
+npc char[5]:
+	name "Marian"
+	pos (113990, 0, -55210)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,10]
+
+npc char[6]:
+	name "Helena"
+	pos (114980, 0, -55400)
+	angle 0deg
+	x 0
+	cp chip[10]
+	frame 0
+	ch chip[10]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,11]
+
+npc char[7]:
+	name "Norche"
+	pos (57440, 0, 2570)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,4]
+	talk fn[0,12]
+
+look_point[0]:
+	pos (-5000, 0, 68840)
+	radius 1000mm
+	bubble_pos (-4840, 1200, 68840)
+	flags 0x007E
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		CharFlagsUnset char[8] 0x0080
+		CharFlagsUnset char[9] 0x0080
+		CharFlagsUnset char[10] 0x0080
+		CharFlagsUnset char[11] 0x0080
+		CharFlagsSet char[9] 0x0010
+		CharFlagsUnset char[12] 0x0080
+		CharFlagsUnset char[13] 0x0080
+		CharFlagsUnset char[14] 0x0080
+		CharFlagsUnset char[15] 0x0080
+	Return
+
+fn[1]:
+	OpLoad "t4111_n"
+	LookPointFlagsSet look_point[0] 0x0001
+	if system[66] == 7:
+		LookPointFlagsUnset look_point[0] 0x0001
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (113830, null, 62500) (117900, null, 58880) 2000mm/s
+	Return
+
+fn[3]:
+	while 1:
+		CharIdle self (-1150, null, 59690) (-3770, null, 62520) 3000mm/s
+	Return
+
+fn[4]:
+	while 1:
+		CharIdle self (56680, null, 3500) (58350, null, 1840) 2000mm/s
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12112]:
+		if flag[0]:
+			TextTalk self {
+				At times like these, the worst thing you can
+				do is go to pieces and lose your composure.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's no real surprise why young people do,
+				of course. I can certainly understand.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Rachel's in her final month of pregnancy now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				My husband should be coming over from Haken
+				Gate any day now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Heehee! I can hardly wait to see my grandchild.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12112]:
+		if flag[2]:
+			TextTalk self {
+				My wife's currently pregnant, and the baby is
+				due relatively soon.{wait}
+			}
+			TextWait
+			TextTalk self {
+				So right now, I just want to be by her side as
+				much as possible.{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo self 270deg 0deg/s
+			TextTalk self {
+				You've got nothing to worry about.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'm right here with you.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart char[11]
+	if flag[12112]:
+		if flag[3]:
+			TextTalk char[11] {
+				Oh, Goddess... Please bestow your blessings
+				upon my child...{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[11] {
+				Yes... Yes... I understand.{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				I'm sure everything will be fine.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd char[11]
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12112]:
+		if flag[1]:
+			TextTalk self {
+				Umm... Umm...{wait}
+			}
+			TextWait
+			TextTalk self {
+				I-I can't think of anything at all!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'm so useless...and at a time when my help's
+				needed the most, too!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Wh-What should I do, though?{wait}
+			}
+			TextWait
+			_Char4A char[8] 255
+			CharTurnToChar char[8] self 500deg/s
+			Sleep 300ms
+			TextTalk char[8] {
+				First, you need to try and calm down.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				How about starting by giving some thought
+				on what to call the baby?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Wh-What to call it?{wait}
+			}
+			TextWait
+			_Char4B char[8] 255
+			CharTurnTo char[8] 90deg 0deg/s
+			FlagSet flag[1]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12112]:
+		if flag[4]:
+			TextTalk self {
+				The queen's birthday isn't for another five 
+				months, either...{wait}
+			}
+			TextWait
+			TextTalk self {
+				What am I supposed to do?!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				H-Hey, you two!{wait}
+			}
+			TextWait
+			TextTalk self {
+				You don't know of any exciting events around
+				this time of year, do you?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Anything will do! Even your birthdays
+				will be good enough if it comes down
+				to it! I. MUST. CELEBRATE.{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#1640FI've had mine already.{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#1651FMine isn't for a while, I'm afraid...{wait}
+			}
+			TextWait
+			Emote self 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1000ms
+			TextTalk self {
+				O-Oh, right... Sorry for troubling you, then...{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12112]:
+		if flag[5]:
+			TextTalk self {
+				My husband always ends up like this at this
+				time of year.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				He always needs some kind of event to enjoy or
+				look forward to in the near future, or he goes
+				bonkers.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Maybe I'll have to make up some kind of occasion
+				for us to celebrate.{wait}
+			}
+			TextWait
+			FlagSet flag[5]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[11]:
+	TextStart self
+	if flag[12112]:
+		if flag[6]:
+			CharTurnTo self 0deg 0deg/s
+			TextTalk self {
+				Mommy, are you sure you shouldn't do something
+				about him?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Doesn't he need 'restraining' or something?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Daddy's really high up at a super big company!{wait}
+			}
+			TextWait
+			TextTalk self {
+				...He just doesn't act like it.{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[12]:
+	TextStart self
+	if flag[12112]:
+		if flag[7]:
+			TextTalk self {
+				My husband never comes home before midnight.
+				Never.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's quite obvious he doesn't care about me
+				in the slightest!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				My husband barely spends any time in the
+				house at all. {wait}
+			}
+			TextWait
+			TextTalk self {
+				On days when he has work, he's out doing that
+				until past midnight. On days he doesn't, he's out
+				messing around instead!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I can't take any more of this!{wait}
+			}
+			TextWait
+			FlagSet flag[7]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return

@@ -1,0 +1,226 @@
+calmare tc scena
+scena:
+	name "Minigame" "MG05_00.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 0, 0)
+	cam_at (0, 0, 10000)
+	cam_zoom 2800
+	cam_pers 1400
+	cam_deg 0deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 0, 0)
+	cam_at (0, 0, 10000)
+	cam_zoom 2800
+	cam_pers 1400
+	cam_deg 0deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "Gilbert"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0184
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[0] == 0:
+		Event fn[0,4]
+	elif system[0] == 1:
+		Event fn[0,5]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Tc_E2_3 2
+	Menu menu[0] -1 330 0
+		"[Play] (Debug)" // 0
+		"[Skip] (Debug)" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[255]
+	switch var[0]:
+		case 1:
+			FlagSet flag[0]
+			break
+	Return
+
+fn[3]:
+	FadeOut 0ms 0x00000000 255
+	Tc_E2_3 2
+	BgmPlay bgm[194] 0
+	ImageShow "c_vis518._ch" 0 0 500ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"Start" // 0
+			"Rules" // 1
+			"Settings" // 2
+		MenuWait var[0]
+		MenuClose menu[255]
+		switch var[0]:
+			case 0:
+				Menu menu[1] -1 330 1
+					"[Normal]" // 0
+					"[Easy]" // 1
+				MenuWait var[2]
+				system[40] = 65535
+				MenuClose menu[255]
+				var[0] = 255
+				switch var[2]:
+					case 0:
+						Tc_E2_11 0
+						break
+					case 1:
+						Tc_E2_11 1
+						break
+					default:
+						var[0] = 0
+				break
+			case 1:
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――――――――――――――――――――
+					　
+					　Shoot down approaching enemies and missiles
+					　using Josette's machine gun.
+					　The controls are as follows.
+					　
+					　Arrow Keys/Mouse    : Aim
+					　OK Key/Button       : Fire (Hold)
+					　Cancel Key/Button   : Zoom (Hold)
+					{}  Notebook Key/Button : Change View
+					　
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――――――――――――――――――――
+					　
+					　You have unlimited ammo, but take heed:
+					　Shoot for too long, and you'll shoot slower.
+					　Shot speed recovers gradually when not shooting.
+					　
+					　If the Bobcat's health falls to 0,
+					　you'll get a Game Over, so be careful!
+					　
+					　
+					　
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				Tc_E2_7
+				break
+			case 3:
+				break
+	FadeIn 0ms 0x00000000
+	ImageHide 500ms
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	Return
+
+fn[4]:
+	Call fn[0,3]
+	Tc_E2_9 1
+	if !flag[0]:
+		Sleep 1000ms
+		Tc_E2_8
+		Sleep 1000ms
+		Tc_E2_4 0
+		Sleep 1000ms
+		Tc_E2_0 1
+		Tc_E2_1
+		if Tc_E2_10:
+			FlagSet flag[9481]
+			Tc_E2_5 499 33 0
+	FlagSet flag[9478]
+	Tc_E2_5 167 33 256
+
+fn[5]:
+	Tc_E2_9 0
+	if !flag[0]:
+		Tc_E2_4 0
+		Tc_E2_0 2
+		Tc_E2_1
+		if Tc_E2_10:
+			FlagSet flag[9481]
+			Tc_E2_5 499 33 100
+		Tc_E2_3 0
+		Sleep 1000ms
+		FadeOut 2000ms 0x00000000 255
+		Sleep 4000ms
+	FlagSet flag[9478]
+	Tc_E2_5 499 33 256
+
+fn[6]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return

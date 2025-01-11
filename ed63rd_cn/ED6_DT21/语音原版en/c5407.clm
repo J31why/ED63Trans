@@ -1,0 +1,103 @@
+calmare fc scena
+scena:
+	name "Other" "C5407.x"
+	town town[1]
+	bgm bgm[28]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	CamLookPos (1570, 0, 1270) 0ms
+	CamSetDistance 0 6720 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsSet name[35] 0x0080
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkFunc name[35] fork[1] fn[0,3]
+	ForkWait name[35] fork[1]
+	Sleep 500ms
+	SoundPlay sound[157] 0 0 90
+	Sleep 1000ms
+	TextSetPos 360 60 -1 -1
+	TextSetName "Voice"
+	TextMessage null {
+		{color 5}Access to the sanctuary and engine room is
+		currently limited.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName "Voice"
+	TextMessage null {
+		{color 5}Please confirm your identity.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextTalk name[35] {
+		#120F#6PEnforcer No. II, Leonardt the Bladelord.{wait}
+	} {
+		I'm on my way to the sanctuary.{wait}
+	}
+	TextWait
+	Sleep 500ms
+	SoundPlay sound[156] 0 0 100
+	Sleep 500ms
+	TextSetName "Voice"
+	TextMessage null {
+		Acknowledged.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 500ms
+	NewScene file[0x00210318] 125 0 0
+	Hcf
+	Return
+
+fn[3]:
+	CharColor self 0x00FFFFFF 0ms
+	CharSetPos self (340, 0, -1480) 0deg
+	CharFlagsUnset self 0x0080
+	Fork self fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	CharWalkToPos self (520, 0, -70) 2000mm/s 0
+	CharWalkToPos self (1650, 0, -70) 2000mm/s 0
+	Return
+
+fn[4]:
+	EventBegin 0
+	CamLookPos (990, 0, 1420) 0ms
+	CamSetDistance 0 8620 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos field_party[0] (1590, 0, -160) 90deg
+	CharSetPos field_party[1] (830, 0, 1050) 90deg
+	CharSetPos field_party[2] (-790, 0, 1400) 90deg
+	CharSetPos field_party[3] (-580, 0, -150) 90deg
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Return

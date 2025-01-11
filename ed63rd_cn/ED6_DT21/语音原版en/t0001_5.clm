@@ -1,0 +1,3466 @@
+calmare tc scena
+scena:
+	name "Rolent" "T0001.x"
+	town town[1]
+	bgm bgm[10]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,2]
+
+fn[0]:
+	TextMessage null {
+		{0x06}エピソード選択。◎＝スクリプト調整済。
+		▼未入力データあり。Ａ＝ＡＰＬ。Ｅ＝エフェクト。
+		Ｐ＝ポートレート。Ｂ＝ＢＧＭ＆ＳＥ。Ｓ＝シーン未入力{wait}
+	}
+	while var[0] != 255:
+		Menu menu[3] -1 32 1
+			"◎EP00 Julia's Day Off" // 0
+			"◎EP01 Capua's Delivery Service (Minigame)" // 1
+			"◎EP02 Journey's End" // 2
+			"◎EP03 Paradise" // 3
+			"◎EP05 The Banquet" // 4
+			"◎EP06 Return to the Empire" // 5
+			"◎EP07 Client" // 6
+			"◎EP08 Descended Wings" // 7
+			"◎EP09 The Happiness Stone" // 8
+			"◎EP10 Campanella's Quiz Game (Minigame)" // 9
+			"◎EP11 The Casino (Minigame)" // 10
+			"◎EP12 Legendary Angler Estelle (Minigame)" // 11
+			"◎EP13 Training, Agate-Style" // 12
+			"◎EP16 Arena (Minigame)" // 13
+			"◎EP17 Departure" // 14
+			"◎EP18 Swordsmanship" // 15
+			"◎EP19 Like a Mother" // 16
+			"◎EP20 I Accept Your Request" // 17
+			"◎EP25 Orbal Gear Project Part 1" // 18
+			"◎EP26 Orbal Gear Project Part 2" // 19
+			"◎EP29 Phantasmal Blaze" // 20
+			"◎EP30 The Salt Pale (Lore)" // 21
+			"◎EP31 Phantom Thief B Report (Lore)" // 22
+			"◎EP32 The Epstein Foundation (Lore)" // 23
+			"◎EP33 Assault on the Imperial Guilds (Lore)" // 24
+			"◎EP34 Gordias-Class Experiment Report (Lore)" // 25
+		MenuWait var[0]
+		Call fn[5,1]
+		FlagSet flag[12032]
+		switch var[0]:
+			case 0:
+				Call fn[5,3]
+				break
+			case 1:
+				Sc_D6 0
+				TcEpisodeStart 1 1024 0
+				PartyClear
+				PartyAdd name[10] party[0] 255
+				FlagSet flag[9476]
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				Sc_D6 0
+				TcEpisodeStart 2 0 0
+				FlagSet flag[9476]
+				NewScene "t4121._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				Call fn[5,4]
+				break
+			case 4:
+				Call fn[5,5]
+				break
+			case 5:
+				Call fn[5,6]
+				break
+			case 6:
+				Call fn[5,9]
+				break
+			case 7:
+				Call fn[5,10]
+				break
+			case 8:
+				Call fn[5,11]
+				break
+			case 9:
+				TcEpisodeStart 10 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				TcEpisodeStart 11 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			case 11:
+				Sc_D6 0
+				TcEpisodeStart 12 1 0
+				PartyClear
+				PartyAdd name[0] party[0] 255
+				FlagSet flag[9476]
+				NewScene "t1500._sn" 100 0 0
+				Hcf
+				break
+			case 12:
+				FlagUnset flag[12176]
+				FlagUnset flag[12177]
+				FlagUnset flag[12178]
+				FlagUnset flag[12179]
+				FlagUnset flag[12180]
+				FlagUnset flag[12181]
+				FlagUnset flag[12182]
+				FlagUnset flag[12183]
+				Sc_D6 0
+				TcEpisodeStart 13 0 0
+				PartyClear
+				PartyAdd name[18] party[2] 255
+				PartyAdd name[16] party[0] 255
+				PartyAdd name[17] party[1] 255
+				Tc_C2 1 4
+				FlagSet flag[9476]
+				NewScene "c1401._sn" 100 0 0
+				Hcf
+				break
+			case 13:
+				Call fn[5,2]
+				break
+			case 14:
+				Call fn[5,12]
+				break
+			case 15:
+				FlagUnset flag[12198]
+				Sc_D6 0
+				TcEpisodeStart 18 512 0
+				PartyClear
+				PartyAdd name[9] party[0] 255
+				FlagSet flag[9476]
+				NewScene "t1101._sn" 100 0 0
+				Hcf
+				break
+			case 16:
+				Sc_D6 0
+				TcEpisodeStart 19 0 0
+				FlagSet flag[9476]
+				NewScene "t1101._sn" 100 0 0
+				Hcf
+				break
+			case 17:
+				Call fn[5,13]
+				break
+			case 18:
+				Call fn[5,7]
+				break
+			case 19:
+				Call fn[5,8]
+				break
+			case 20:
+				TcEpisodeStart 29 0 0
+				FlagSet flag[9476]
+				NewScene "c5408._sn" 100 0 0
+				Hcf
+				break
+			case 21:
+				TcEpisodeStart 30 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			case 22:
+				TcEpisodeStart 31 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			case 23:
+				TcEpisodeStart 32 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			case 24:
+				TcEpisodeStart 33 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			case 25:
+				TcEpisodeStart 34 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[3]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[1]:
+	FlagUnset flag[12032]
+	Return
+
+fn[2]:
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■タイトルから（未達成）" // 1
+			"■タイトルから（初級達成済）" // 2
+			"■タイトルから（中級達成済）" // 3
+			"■タイトルから（上級達成済）" // 4
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				TcTeamMemberEnable name[14]
+				TcTeamMemberEnable name[6]
+				TcTeamMemberEnable name[13]
+				TcTeamMemberEnable name[1]
+				TcTeamMemberEnable name[12]
+				TcTeamMemberEnable name[10]
+				TcTeamMemberEnable name[4]
+				TcTeamMemberEnable name[9]
+				TcTeamMemberEnable name[2]
+				TcTeamMemberEnable name[5]
+				TcTeamMemberEnable name[11]
+				TcTeamMemberEnable name[3]
+				TcTeamMemberEnable name[7]
+				TcTeamMemberEnable name[0]
+				TcTeamMemberEnable name[15]
+				TcOrganizeTeams 1 0 0 0x00000000 0x00000000 0x00000000 0x00000000
+				TcEpisodeStart 16 0 0
+				FlagSet flag[9476]
+				NewScene "e1001._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				TcTeamMemberEnable name[14]
+				TcTeamMemberEnable name[6]
+				TcTeamMemberEnable name[13]
+				TcTeamMemberEnable name[1]
+				TcTeamMemberEnable name[12]
+				TcTeamMemberEnable name[10]
+				TcTeamMemberEnable name[4]
+				TcTeamMemberEnable name[9]
+				TcTeamMemberEnable name[2]
+				TcTeamMemberEnable name[5]
+				TcTeamMemberEnable name[11]
+				TcTeamMemberEnable name[3]
+				TcTeamMemberEnable name[7]
+				TcTeamMemberEnable name[0]
+				TcTeamMemberEnable name[15]
+				TcOrganizeTeams 1 0 0 0x00000000 0x00000000 0x00000000 0x00000000
+				FlagSet flag[12051]
+				QuestFlagsUnset quest[33] 0x20
+				QuestFlagsUnset quest[34] 0x20
+				QuestFlagsUnset quest[35] 0x20
+				TcEpisodeStart 16 0 0
+				FlagSet flag[9476]
+				NewScene "e1001._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				TcTeamMemberEnable name[14]
+				TcTeamMemberEnable name[6]
+				TcTeamMemberEnable name[13]
+				TcTeamMemberEnable name[1]
+				TcTeamMemberEnable name[12]
+				TcTeamMemberEnable name[10]
+				TcTeamMemberEnable name[4]
+				TcTeamMemberEnable name[9]
+				TcTeamMemberEnable name[2]
+				TcTeamMemberEnable name[5]
+				TcTeamMemberEnable name[11]
+				TcTeamMemberEnable name[3]
+				TcTeamMemberEnable name[7]
+				TcTeamMemberEnable name[0]
+				TcTeamMemberEnable name[15]
+				TcOrganizeTeams 1 0 0 0x00000000 0x00000000 0x00000000 0x00000000
+				FlagSet flag[12051]
+				QuestFlagsSet quest[33] 0x20
+				QuestFlagsSet quest[34] 0x08
+				QuestFlagsUnset quest[34] 0x20
+				QuestFlagsUnset quest[35] 0x20
+				TcEpisodeStart 16 0 0
+				FlagSet flag[9476]
+				NewScene "e1001._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				TcTeamMemberEnable name[14]
+				TcTeamMemberEnable name[6]
+				TcTeamMemberEnable name[13]
+				TcTeamMemberEnable name[1]
+				TcTeamMemberEnable name[12]
+				TcTeamMemberEnable name[10]
+				TcTeamMemberEnable name[4]
+				TcTeamMemberEnable name[9]
+				TcTeamMemberEnable name[2]
+				TcTeamMemberEnable name[5]
+				TcTeamMemberEnable name[11]
+				TcTeamMemberEnable name[3]
+				TcTeamMemberEnable name[7]
+				TcTeamMemberEnable name[0]
+				TcTeamMemberEnable name[15]
+				TcOrganizeTeams 1 0 0 0x00000000 0x00000000 0x00000000 0x00000000
+				FlagSet flag[12051]
+				QuestFlagsSet quest[33] 0x20
+				QuestFlagsSet quest[34] 0x08
+				QuestFlagsSet quest[34] 0x20
+				QuestFlagsSet quest[35] 0x08
+				QuestFlagsUnset quest[35] 0x20
+				TcEpisodeStart 16 0 0
+				FlagSet flag[9476]
+				NewScene "e1001._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				TcTeamMemberEnable name[14]
+				TcTeamMemberEnable name[6]
+				TcTeamMemberEnable name[13]
+				TcTeamMemberEnable name[1]
+				TcTeamMemberEnable name[12]
+				TcTeamMemberEnable name[10]
+				TcTeamMemberEnable name[4]
+				TcTeamMemberEnable name[9]
+				TcTeamMemberEnable name[2]
+				TcTeamMemberEnable name[5]
+				TcTeamMemberEnable name[11]
+				TcTeamMemberEnable name[3]
+				TcTeamMemberEnable name[7]
+				TcTeamMemberEnable name[0]
+				TcTeamMemberEnable name[15]
+				TcOrganizeTeams 1 0 0 0x00000000 0x00000000 0x00000000 0x00000000
+				FlagSet flag[12051]
+				QuestFlagsSet quest[33] 0x20
+				QuestFlagsSet quest[34] 0x20
+				QuestFlagsSet quest[35] 0x20
+				TcEpisodeStart 16 0 0
+				FlagSet flag[9476]
+				NewScene "e1001._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[3]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■ユリア様に突撃" // 1
+			"■シスター・エレン登場" // 2
+			"■ミュラーとの会話" // 3
+			"■城でクローゼと会う" // 4
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 0 8192 0
+		PartyClear
+		PartyAdd name[13] party[0] 255
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "t4220._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9477]
+				NewScene "t4200._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[9478]
+				NewScene "t4200._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				FlagSet flag[9477]
+				NewScene "t4101._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				FlagSet flag[9476]
+				NewScene "t4201._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[4]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■１．楽園" // 0
+			"■２．お姫様" // 1
+			"■３．遊戯" // 2
+			"■４．レン" // 3
+			"■～幕間～" // 4
+			"■５．夢の続き" // 5
+			"■街道・夜　クロスベルへ" // 6
+			"■夜スカイマップ" // 7
+		MenuWait var[0]
+		TcEpisodeStart 3 0 0
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9477]
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[9478]
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				FlagSet flag[9479]
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				FlagSet flag[9480]
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				FlagSet flag[9481]
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				FlagSet flag[9482]
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				FlagSet flag[9476]
+				NewScene "e0811._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[5]:
+	FlagUnset flag[12186]
+	FlagUnset flag[12187]
+	FlagUnset flag[12188]
+	FlagUnset flag[12189]
+	FlagUnset flag[12190]
+	FlagUnset flag[12191]
+	FlagUnset flag[12192]
+	FlagUnset flag[12193]
+	FlagUnset flag[12194]
+	FlagUnset flag[12195]
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■フリー移動から" // 1
+			"■クローゼの告白" // 2
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 5 2 0
+		PartyClear
+		PartyAdd name[1] party[0] 255
+		PartySetPortrait name[1] 1 28 0 0 0
+		PartySetPortraitFinish
+		Tc_C2 1 31
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "t4203._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[12186]
+				NewScene "t4206._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[12186]
+				FlagSet flag[12187]
+				FlagSet flag[12188]
+				FlagSet flag[12189]
+				FlagSet flag[12190]
+				FlagSet flag[12191]
+				FlagSet flag[12192]
+				FlagSet flag[12193]
+				FlagSet flag[12194]
+				FlagSet flag[12195]
+				NewScene "t4206._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[6]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■城・謁見の間" // 1
+			"■対話×２" // 2
+			"■発着場にて" // 3
+			"■皇子の祝福" // 4
+		MenuWait var[0]
+		TcEpisodeStart 6 0 0
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "u4163._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9477]
+				NewScene "t4200._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[9476]
+				NewScene "t4221._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				FlagSet flag[9477]
+				NewScene "t4105._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				FlagSet flag[9476]
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[7]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■夕食後" // 1
+			"■２日目・朝" // 2
+			"■開発開始" // 3
+			"■ＶＳエリカ" // 4
+			"■オーバルギア完成" // 5
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 25 64 0
+		PartyClear
+		PartyAdd name[6] party[0] 255
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9476]
+				NewScene "t3172._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[9476]
+				NewScene "t3100._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				FlagSet flag[9476]
+				NewScene "t3115._sn" 104 0 0
+				Hcf
+				break
+			case 4:
+				FlagSet flag[9476]
+				NewScene "t3116._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				FlagSet flag[9477]
+				NewScene "t3121._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[8]:
+	FlagUnset flag[12165]
+	FlagUnset flag[12166]
+	FlagUnset flag[12167]
+	FlagUnset flag[12168]
+	FlagUnset flag[12169]
+	FlagUnset flag[12170]
+	FlagUnset flag[12171]
+	FlagUnset flag[12172]
+	FlagUnset flag[12173]
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■ギルドでエリカに会う" // 1
+			"■地下実験場へ" // 2
+			"■テスト開始" // 3
+			"■オーバルギア暴走" // 4
+			"■エピローグ" // 5
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 26 32 0
+		PartyClear
+		PartyAdd name[5] party[0] 255
+		Tc_C2 1 31
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "t3102._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9476]
+				NewScene "t3100._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[12165]
+				FlagSet flag[9477]
+				NewScene "t3121._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				FlagSet flag[12165]
+				FlagSet flag[9479]
+				NewScene "t3121._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				FlagSet flag[12165]
+				FlagSet flag[9482]
+				NewScene "t3121._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				FlagSet flag[12165]
+				FlagSet flag[9476]
+				NewScene "t3103._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[9]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	FlagUnset flag[12106]
+	FlagUnset flag[12107]
+	FlagUnset flag[12108]
+	FlagUnset flag[12109]
+	FlagUnset flag[12110]
+	FlagUnset flag[12111]
+	FlagUnset flag[12112]
+	FlagUnset flag[12113]
+	FlagUnset flag[12114]
+	FlagUnset flag[12115]
+	FlagUnset flag[12116]
+	FlagUnset flag[12117]
+	FlagUnset flag[12118]
+	FlagUnset flag[12119]
+	FlagUnset flag[12120]
+	FlagUnset flag[12121]
+	FlagUnset flag[12122]
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■エーデル百貨店にて" // 1
+			"■ホテル前にて" // 2
+			"■闘技場前" // 3
+			"■地下水道で回想" // 4
+			"■地下から脱出する" // 5
+			"■翌日グランセル城へ向かう" // 6
+			"■城前、叔父との対決" // 7
+			"■エピローグ" // 8
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 7 0 0
+		PartyClear
+		PartyAdd name[2] party[0] 255
+		PartySetPortrait name[2] 1 24 0 0 0
+		PartySetPortraitFinish
+		Tc_C2 1 4
+		PartySetAttr name[2] 0 10
+		PartySetAttr name[2] 254 0
+		PartyEquip name[2] item[1102] 255
+		PartyEquip name[2] item[1599] 255
+		PartyEquip name[2] item[127] 255
+		PartyAddCraft name[2] magic[0]
+		switch var[0]:
+			case 0:
+				NewScene "t0135._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				NewScene "t4122._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				FlagSet flag[12107]
+				FlagSet flag[12108]
+				NewScene "t4103._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				FlagSet flag[12107]
+				FlagSet flag[12108]
+				FlagSet flag[9478]
+				NewScene "t4101._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				FlagSet flag[12107]
+				FlagSet flag[12108]
+				FlagSet flag[12109]
+				NewScene "c4201._sn" 115 0 0
+				Hcf
+				break
+			case 5:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				FlagSet flag[12107]
+				FlagSet flag[12108]
+				FlagSet flag[12109]
+				FlagSet flag[12110]
+				FlagSet flag[12111]
+				NewScene "c4200._sn" 114 0 0
+				Hcf
+				break
+			case 6:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				FlagSet flag[12107]
+				FlagSet flag[12108]
+				FlagSet flag[12109]
+				FlagSet flag[12110]
+				FlagSet flag[12111]
+				FlagSet flag[12112]
+				NewScene "t4102._sn" 111 0 0
+				Hcf
+				break
+			case 7:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				FlagSet flag[12107]
+				FlagSet flag[12108]
+				FlagSet flag[12109]
+				FlagSet flag[12110]
+				FlagSet flag[12111]
+				FlagSet flag[12112]
+				NewScene "t4200._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				PartyAdd name[80] null 255
+				FlagSet flag[12106]
+				FlagSet flag[12107]
+				FlagSet flag[12108]
+				FlagSet flag[12109]
+				FlagSet flag[12110]
+				FlagSet flag[12111]
+				FlagSet flag[12112]
+				NewScene "t4150._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[10]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	FlagUnset flag[12133]
+	FlagUnset flag[12134]
+	FlagUnset flag[12135]
+	FlagUnset flag[12136]
+	FlagUnset flag[12137]
+	FlagUnset flag[12138]
+	FlagUnset flag[12139]
+	FlagUnset flag[12140]
+	FlagUnset flag[12141]
+	FlagUnset flag[12142]
+	FlagUnset flag[12143]
+	FlagUnset flag[12144]
+	FlagUnset flag[12145]
+	FlagUnset flag[12146]
+	FlagUnset flag[12147]
+	FlagUnset flag[12148]
+	FlagUnset flag[12149]
+	FlagUnset flag[12150]
+	FlagUnset flag[12151]
+	FlagUnset flag[12152]
+	FlagUnset flag[12153]
+	FlagUnset flag[12154]
+	FlagUnset flag[12155]
+	FlagUnset flag[12156]
+	FlagUnset flag[12157]
+	FlagUnset flag[12158]
+	FlagUnset flag[12159]
+	FlagUnset flag[12160]
+	FlagUnset flag[12161]
+	FlagUnset flag[12162]
+	FlagUnset flag[12163]
+	FlagUnset flag[12199]
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■プリントを配る" // 1
+			"■レクターを探せ" // 2
+			"■定期試験" // 3
+			"■ルーアンへ行こう" // 4
+			"■クラムと会う" // 5
+			"■ジルと喧嘩する" // 6
+			"■ジル、ハンスに会う" // 7
+			"■ジル、孤児院に行く" // 8
+			"■エピローグ" // 9
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 8 0 0
+		PartyClear
+		PartyAdd name[4] party[0] 255
+		PartySetPortrait name[4] 1 4 0 0 0
+		PartySetPortraitFinish
+		Tc_C2 1 31
+		switch var[0]:
+			case 0:
+				NewScene "t2500._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9476]
+				NewScene "t2510._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[9476]
+				NewScene "t2511._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[9477]
+				NewScene "t2511._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[12140]
+				FlagSet flag[9476]
+				NewScene "t2511._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[12140]
+				FlagSet flag[12141]
+				NewScene "r2202._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[12140]
+				FlagSet flag[12141]
+				FlagSet flag[9476]
+				NewScene "t2800._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				PartyClear
+				PartyAdd name[58] party[0] 255
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[12140]
+				FlagSet flag[12141]
+				FlagSet flag[12142]
+				NewScene "t2812._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[12140]
+				FlagSet flag[12141]
+				FlagSet flag[12142]
+				NewScene "t2400._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				FlagSet flag[12133]
+				FlagSet flag[12134]
+				FlagSet flag[12135]
+				FlagSet flag[12136]
+				FlagSet flag[12137]
+				FlagSet flag[12138]
+				FlagSet flag[12139]
+				FlagSet flag[12140]
+				FlagSet flag[12141]
+				FlagSet flag[12142]
+				FlagSet flag[12143]
+				FlagSet flag[9476]
+				NewScene "t2500._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[11]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	FlagUnset flag[12055]
+	FlagUnset flag[12056]
+	FlagUnset flag[12057]
+	FlagUnset flag[12058]
+	FlagUnset flag[12059]
+	FlagUnset flag[12060]
+	FlagUnset flag[12061]
+	FlagUnset flag[12062]
+	FlagUnset flag[12063]
+	FlagUnset flag[12064]
+	FlagUnset flag[12065]
+	FlagUnset flag[12066]
+	FlagUnset flag[12067]
+	FlagUnset flag[12068]
+	FlagUnset flag[12069]
+	FlagUnset flag[12070]
+	FlagUnset flag[12072]
+	FlagUnset flag[12073]
+	FlagUnset flag[12090]
+	FlagUnset flag[12091]
+	FlagUnset flag[12092]
+	FlagUnset flag[12093]
+	FlagUnset flag[12094]
+	FlagUnset flag[12095]
+	FlagUnset flag[12096]
+	FlagUnset flag[12097]
+	FlagUnset flag[12098]
+	FlagUnset flag[12099]
+	FlagUnset flag[12100]
+	FlagUnset flag[12101]
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■砂浜で貝殻を集める" // 1
+			"■バザー会場にて" // 2
+			"■マノリア間道で迷子になる" // 3
+			"■クローネ峠で迷子になる" // 4
+			"■薪を拾う" // 5
+			"■朝、魔獣がいない" // 6
+			"■実は飛べるんです" // 7
+			"■エピローグ" // 8
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 9 0 0
+		PartyClear
+		PartyAdd name[77] party[0] 255
+		Tc_C2 1 31
+		switch var[0]:
+			case 0:
+				NewScene "t2402._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				PartyAdd name[78] null 255
+				FlagSet flag[12055]
+				NewScene "r2200._sn" 101 0 0
+				Hcf
+				break
+			case 2:
+				PartyAdd name[78] null 255
+				FlagSet flag[12055]
+				FlagSet flag[12059]
+				FlagSet flag[12060]
+				FlagSet flag[12061]
+				FlagSet flag[12062]
+				FlagSet flag[12063]
+				FlagSet flag[12064]
+				NewScene "t2310._sn" 102 0 0
+				Hcf
+				break
+			case 3:
+				PartyAdd name[78] null 255
+				FlagSet flag[12055]
+				FlagSet flag[12059]
+				FlagSet flag[12060]
+				FlagSet flag[12061]
+				FlagSet flag[12062]
+				FlagSet flag[12063]
+				FlagSet flag[12064]
+				FlagSet flag[12065]
+				NewScene "r2101._sn" 101 0 0
+				Hcf
+				break
+			case 4:
+				FlagSet flag[12055]
+				FlagSet flag[12059]
+				FlagSet flag[12060]
+				FlagSet flag[12061]
+				FlagSet flag[12062]
+				FlagSet flag[12063]
+				FlagSet flag[12064]
+				FlagSet flag[12065]
+				FlagSet flag[12066]
+				FlagSet flag[12067]
+				FlagSet flag[12068]
+				NewScene "c1500._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				FlagSet flag[12055]
+				FlagSet flag[12064]
+				FlagSet flag[12065]
+				FlagSet flag[12066]
+				FlagSet flag[12067]
+				FlagSet flag[12068]
+				FlagSet flag[12069]
+				FlagSet flag[9476]
+				NewScene "c1500._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				FlagSet flag[12055]
+				FlagSet flag[12059]
+				FlagSet flag[12060]
+				FlagSet flag[12061]
+				FlagSet flag[12062]
+				FlagSet flag[12063]
+				FlagSet flag[12064]
+				FlagSet flag[12065]
+				FlagSet flag[12066]
+				FlagSet flag[12067]
+				FlagSet flag[12068]
+				FlagSet flag[12069]
+				FlagSet flag[12070]
+				FlagSet flag[9478]
+				NewScene "c1500._sn" 100 0 0
+				Hcf
+				break
+			case 7:
+				FlagSet flag[12055]
+				FlagSet flag[12059]
+				FlagSet flag[12060]
+				FlagSet flag[12061]
+				FlagSet flag[12062]
+				FlagSet flag[12063]
+				FlagSet flag[12064]
+				FlagSet flag[12065]
+				FlagSet flag[12066]
+				FlagSet flag[12067]
+				FlagSet flag[12068]
+				FlagSet flag[12069]
+				FlagSet flag[12070]
+				FlagSet flag[9478]
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			case 8:
+				FlagSet flag[12055]
+				FlagSet flag[12059]
+				FlagSet flag[12060]
+				FlagSet flag[12061]
+				FlagSet flag[12062]
+				FlagSet flag[12063]
+				FlagSet flag[12064]
+				FlagSet flag[12065]
+				FlagSet flag[12066]
+				FlagSet flag[12067]
+				FlagSet flag[12068]
+				FlagSet flag[12069]
+				FlagSet flag[12070]
+				FlagSet flag[9476]
+				NewScene "r2101._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[12]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	FlagUnset flag[12128]
+	FlagUnset flag[12129]
+	FlagUnset flag[12130]
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■２週目" // 1
+			"■夜・カシウスと話す" // 2
+			"■パーゼル農園にて" // 3
+			"■芳香剤を作る" // 4
+			"■ミストヴァルトの森" // 5
+			"■エピローグ" // 6
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 17 0 0
+		PartyClear
+		PartyAdd name[0] party[0] 255
+		PartySetPortrait name[0] 1 68 0 0 0
+		PartySetPortraitFinish
+		switch var[0]:
+			case 0:
+				NewScene "t0311._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9477]
+				NewScene "t0300._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t0301._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "r0201._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "t0100._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				FlagSet flag[12129]
+				FlagSet flag[12130]
+				NewScene "c0301._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				FlagSet flag[12129]
+				FlagSet flag[12130]
+				NewScene "t0700._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[13]:
+	TextMessage null {
+		{0x06}どっから？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 32 1
+			"■最初から" // 0
+			"■夜・発着場に向かう" // 1
+			"■翌日" // 2
+		MenuWait var[0]
+		Sc_D6 0
+		TcEpisodeStart 20 2048 0
+		PartyClear
+		PartyAdd name[11] party[0] 255
+		PartySetPortrait name[11] 1 83 0 0 0
+		PartySetPortraitFinish
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "t2101._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				FlagSet flag[9478]
+				NewScene "t2101._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				FlagSet flag[9477]
+				NewScene "t2102._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[14]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T3100  工房都市ツァイス外部（街区）" // 0
+			"T3111  工房都市ツァイス内部（工房区）B1/1F" // 1
+			"T3133  ラッセル工房" // 2
+			"T3121  (新規）地下実験場" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t3100._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t3111._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t3133._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t3121._sn" 0 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[15]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"R1204 （新規）西ボース街道（R1203改造）" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "r1204._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[16]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"C3100  工房都市ツァイス外部（街区）" // 0
+			"C3101  工房都市ツァイス内部（工房区）B1/1F" // 1
+			"C3110  レイストン水上要塞内部（司令塔）" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "c3100._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "c3101._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "c3110._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[17]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"C5400  グロリアス内部（エステル監禁部屋）" // 0
+			"C5407  グロリアス内部　エレベーター箱" // 1
+			"C5401  グロリアス内部（ワイスマンの間）" // 2
+			"C5408  グロリアス外装（甲板）" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "c5400._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "c5407._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "c5401._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "c5408._sn" 0 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[18]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T4101  王都グランセル外部（東街区）" // 0
+			"T4138  帝國大使館内部" // 1
+			"T4200  グランセル城外部(町と接続)" // 2
+			"T4220  グランセル城内部(謁見の間)" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t4101._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t4138._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t4200._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t4220._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[19]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"R4103  キルシェ通り王都前（夜）" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "r4103._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[20]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T4210  グランセル城内部(広間)" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t4210._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	Return
+
+fn[21]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T0100  ロレント外部" // 0
+			"T0101  (夜)ロレント外部" // 1
+			"T0121  商店１F・２F、遊撃士協会１F・２F" // 2
+			"T0135  (夜)酒場、厨房、２F" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t0100._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t0101._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t0121._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t0135._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[22]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T3200  エルモ外部" // 0
+			"T3201  エルモ外部（夜）" // 1
+			"T3221  エルモ内部（宿屋）" // 2
+			"T3223  エルモ内部（宿屋夜）" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t3200._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t3201._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t3221._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t3223._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[23]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"E0810  スカイボックス（空壁あり）＜前半＞" // 0
+			"E0102 （新規）飛行船（空賊用）外側昼" // 1
+			"E0110  飛行船（空賊用夜）内部" // 2
+			"E0810  スカイボックス（空壁あり）＜後半＞" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				FlagSet flag[9476]
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "e0102._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "e0110._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				FlagSet flag[9477]
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[24]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T4142  酒場　リベール通信社（夜）" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t4142._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[25]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T4206 （新規）グランセル城外部(空中庭園)（夜）" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t4206._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[26]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"C5408  グロリアス外装（甲板）" // 0
+			"C5401  グロリアス内部（ワイスマンの間）" // 1
+			"C5416 （新規）グロリアス内部（星辰の間）" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "c5408._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "c5401._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "c5416._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[27]:
+	TextMessage null {
+		{0x06}！注意！
+		※保留項目のためジャンプできません。あしからず。{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"R2201  メーヴェ海道（中央）" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[28]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"C3101  レイストン水上要塞外観(中庭)）" // 0
+			"C3110  レイストン水上要塞内部（司令塔）" // 1
+			"C3102  レイストン水上要塞外観(格納庫)" // 2
+			"E0610  紅い高速飛行艇内部" // 3
+			"E0810  スカイボックス（空壁あり）" // 4
+			"T4202  グランセル城外部(女王のテラス)" // 5
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "c3101._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "c3110._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "c3102._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "e0610._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "t4202._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[29]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T4220  グランセル城内部(謁見の間)" // 0
+			"T4230  グランセル城内部(女王宮)" // 1
+			"T4202  グランセル城外部(女王のテラス)" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t4220._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t4230._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t4202._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[30]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"？？？？" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t3100._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[31]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T4400  王都グランセル外部（波止場１）" // 0
+			"T4401  王都グランセル外部（波止場２）" // 1
+			"T4106  グランセル飛行場(アルセイユ無し)/(緑)セシリア号" // 2
+			"T4100  王都グランセル外部（南街区）" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t4400._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t4401._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t4106._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t4100._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[32]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T2402  マーシア孤児院外部（再建後）" // 0
+			"T2412  マーシア孤児院内部（再建後)" // 1
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t2402._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t2412._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[33]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T2500  ジェニス王立学院外部" // 0
+			"T2510  ジェニス王立学院（本館）" // 1
+			"T2511  ジェニス王立学院（クラブハウス）" // 2
+			"T2512  ジェニス王立学院（寮）" // 3
+			"T2513  ジェニス王立学院（講堂）" // 4
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t2500._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t2510._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t2511._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t2512._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "t2513._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[34]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T1101  ボース外部　北" // 0
+			"T1100  ボース外部　南" // 1
+			"T1122  ボースマーケット内部" // 2
+			"T1111  ボース市長邸内部" // 3
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t1101._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t1100._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t1122._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t1111._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[35]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"T4200  グランセル城外部(町と接続)" // 0
+			"T4106  グランセル飛行場(アルセイユ無し)/(白)アルセイユ" // 1
+			"T4213  グランセル城内部(親衛隊詰所)" // 2
+			"T4214  グランセル城内部(メイド部屋)" // 3
+			"T4201  グランセル城外部(空中庭園)" // 4
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "t4200._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t4106._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t4213._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t4214._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "t4201._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[36]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"C3110  レイストン水上要塞内部（司令塔）" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "c3110._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[37]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"R0100  エリーズ街道(ロレント側、ブライト家)" // 0
+			"T0100  ロレント外部" // 1
+			"T0120  武器屋１F・２F、工房" // 2
+			"T0121  商店１F・２F、遊撃士協会１F・２F" // 3
+			"T0131  酒場、厨房、２F" // 4
+			"T0700  ロレント飛行場(セシリア号停泊中)" // 5
+			"E0810  スカイボックス（空壁あり）" // 6
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "r0100._sn" 100 0 0
+				Hcf
+				break
+			case 1:
+				NewScene "t0100._sn" 100 0 0
+				Hcf
+				break
+			case 2:
+				NewScene "t0120._sn" 100 0 0
+				Hcf
+				break
+			case 3:
+				NewScene "t0121._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				NewScene "t0131._sn" 100 0 0
+				Hcf
+				break
+			case 5:
+				NewScene "t0700._sn" 100 0 0
+				Hcf
+				break
+			case 6:
+				NewScene "e0810._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[38]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"？？？？" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[39]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"？？？？" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[40]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"？？？？" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[41]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"？？？？" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[42]:
+	TextMessage null {
+		{0x06}どこ？{wait}
+	}
+	while var[0] != 255:
+		Menu menu[4] -1 -1 1
+			"？？？？" // 0
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[4]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[43]:
+	QuestFlagsSet quest[1] 0x04
+	QuestFlagsSet quest[1] 0x02
+	QuestFlagsSet quest[1] 0x08
+	QuestFlagsSet quest[1] 0x10
+	QuestFlagsSet quest[1] 0x20
+	QuestTaskSet quest[1] 0x0001
+	QuestTaskSet quest[1] 0x0002
+	QuestTaskSet quest[1] 0x0004
+	QuestTaskSet quest[1] 0x0008
+	QuestTaskSet quest[1] 0x0010
+	QuestTaskSet quest[1] 0x0020
+	QuestTaskSet quest[1] 0x0040
+	QuestTaskSet quest[1] 0x0080
+	QuestTaskSet quest[1] 0x0100
+	QuestTaskSet quest[1] 0x0200
+	QuestTaskSet quest[1] 0x0400
+	QuestTaskSet quest[1] 0x0800
+	QuestTaskSet quest[1] 0x1000
+	QuestTaskSet quest[1] 0x2000
+	QuestTaskSet quest[1] 0x4000
+	QuestTaskSet quest[1] 0x8000
+	QuestFlagsSet quest[2] 0x04
+	QuestFlagsSet quest[2] 0x02
+	QuestFlagsSet quest[2] 0x08
+	QuestFlagsSet quest[2] 0x10
+	QuestFlagsSet quest[2] 0x20
+	QuestTaskSet quest[2] 0x0001
+	QuestTaskSet quest[2] 0x0002
+	QuestTaskSet quest[2] 0x0004
+	QuestTaskSet quest[2] 0x0008
+	QuestTaskSet quest[2] 0x0010
+	QuestTaskSet quest[2] 0x0020
+	QuestTaskSet quest[2] 0x0040
+	QuestTaskSet quest[2] 0x0080
+	QuestTaskSet quest[2] 0x0100
+	QuestTaskSet quest[2] 0x0200
+	QuestTaskSet quest[2] 0x0400
+	QuestTaskSet quest[2] 0x0800
+	QuestTaskSet quest[2] 0x1000
+	QuestTaskSet quest[2] 0x2000
+	QuestTaskSet quest[2] 0x4000
+	QuestTaskSet quest[2] 0x8000
+	QuestFlagsSet quest[3] 0x04
+	QuestFlagsSet quest[3] 0x02
+	QuestFlagsSet quest[3] 0x08
+	QuestFlagsSet quest[3] 0x10
+	QuestFlagsSet quest[3] 0x20
+	QuestTaskSet quest[3] 0x0001
+	QuestTaskSet quest[3] 0x0002
+	QuestTaskSet quest[3] 0x0004
+	QuestTaskSet quest[3] 0x0008
+	QuestTaskSet quest[3] 0x0010
+	QuestTaskSet quest[3] 0x0020
+	QuestTaskSet quest[3] 0x0040
+	QuestTaskSet quest[3] 0x0080
+	QuestTaskSet quest[3] 0x0100
+	QuestTaskSet quest[3] 0x0200
+	QuestTaskSet quest[3] 0x0400
+	QuestTaskSet quest[3] 0x0800
+	QuestTaskSet quest[3] 0x1000
+	QuestTaskSet quest[3] 0x2000
+	QuestTaskSet quest[3] 0x4000
+	QuestTaskSet quest[3] 0x8000
+	QuestFlagsSet quest[4] 0x04
+	QuestFlagsSet quest[4] 0x02
+	QuestFlagsSet quest[4] 0x08
+	QuestFlagsSet quest[4] 0x10
+	QuestFlagsSet quest[4] 0x20
+	QuestTaskSet quest[4] 0x0001
+	QuestTaskSet quest[4] 0x0002
+	QuestTaskSet quest[4] 0x0004
+	QuestTaskSet quest[4] 0x0008
+	QuestTaskSet quest[4] 0x0010
+	QuestTaskSet quest[4] 0x0020
+	QuestTaskSet quest[4] 0x0040
+	QuestTaskSet quest[4] 0x0080
+	QuestTaskSet quest[4] 0x0100
+	QuestTaskSet quest[4] 0x0200
+	QuestTaskSet quest[4] 0x0400
+	QuestTaskSet quest[4] 0x0800
+	QuestTaskSet quest[4] 0x1000
+	QuestTaskSet quest[4] 0x2000
+	QuestTaskSet quest[4] 0x4000
+	QuestTaskSet quest[4] 0x8000
+	QuestFlagsSet quest[5] 0x04
+	QuestFlagsSet quest[5] 0x02
+	QuestFlagsSet quest[5] 0x08
+	QuestFlagsSet quest[5] 0x10
+	QuestFlagsSet quest[5] 0x20
+	QuestTaskSet quest[5] 0x0001
+	QuestTaskSet quest[5] 0x0002
+	QuestTaskSet quest[5] 0x0004
+	QuestTaskSet quest[5] 0x0008
+	QuestTaskSet quest[5] 0x0010
+	QuestTaskSet quest[5] 0x0020
+	QuestTaskSet quest[5] 0x0040
+	QuestTaskSet quest[5] 0x0080
+	QuestTaskSet quest[5] 0x0100
+	QuestTaskSet quest[5] 0x0200
+	QuestTaskSet quest[5] 0x0400
+	QuestTaskSet quest[5] 0x0800
+	QuestTaskSet quest[5] 0x1000
+	QuestTaskSet quest[5] 0x2000
+	QuestTaskSet quest[5] 0x4000
+	QuestTaskSet quest[5] 0x8000
+	QuestFlagsSet quest[6] 0x04
+	QuestFlagsSet quest[6] 0x02
+	QuestFlagsSet quest[6] 0x08
+	QuestFlagsSet quest[6] 0x10
+	QuestFlagsSet quest[6] 0x20
+	QuestTaskSet quest[6] 0x0001
+	QuestTaskSet quest[6] 0x0002
+	QuestTaskSet quest[6] 0x0004
+	QuestTaskSet quest[6] 0x0008
+	QuestTaskSet quest[6] 0x0010
+	QuestTaskSet quest[6] 0x0020
+	QuestTaskSet quest[6] 0x0040
+	QuestTaskSet quest[6] 0x0080
+	QuestTaskSet quest[6] 0x0100
+	QuestTaskSet quest[6] 0x0200
+	QuestTaskSet quest[6] 0x0400
+	QuestTaskSet quest[6] 0x0800
+	QuestTaskSet quest[6] 0x1000
+	QuestTaskSet quest[6] 0x2000
+	QuestTaskSet quest[6] 0x4000
+	QuestTaskSet quest[6] 0x8000
+	QuestFlagsSet quest[7] 0x04
+	QuestFlagsSet quest[7] 0x02
+	QuestFlagsSet quest[7] 0x08
+	QuestFlagsSet quest[7] 0x10
+	QuestFlagsSet quest[7] 0x20
+	QuestTaskSet quest[7] 0x0001
+	QuestTaskSet quest[7] 0x0002
+	QuestTaskSet quest[7] 0x0004
+	QuestTaskSet quest[7] 0x0008
+	QuestTaskSet quest[7] 0x0010
+	QuestTaskSet quest[7] 0x0020
+	QuestTaskSet quest[7] 0x0040
+	QuestTaskSet quest[7] 0x0080
+	QuestTaskSet quest[7] 0x0100
+	QuestTaskSet quest[7] 0x0200
+	QuestTaskSet quest[7] 0x0400
+	QuestTaskSet quest[7] 0x0800
+	QuestTaskSet quest[7] 0x1000
+	QuestTaskSet quest[7] 0x2000
+	QuestTaskSet quest[7] 0x4000
+	QuestTaskSet quest[7] 0x8000
+	QuestFlagsSet quest[8] 0x04
+	QuestFlagsSet quest[8] 0x02
+	QuestFlagsSet quest[8] 0x08
+	QuestFlagsSet quest[8] 0x10
+	QuestFlagsSet quest[8] 0x20
+	QuestTaskSet quest[8] 0x0001
+	QuestTaskSet quest[8] 0x0002
+	QuestTaskSet quest[8] 0x0004
+	QuestTaskSet quest[8] 0x0008
+	QuestTaskSet quest[8] 0x0010
+	QuestTaskSet quest[8] 0x0020
+	QuestTaskSet quest[8] 0x0040
+	QuestTaskSet quest[8] 0x0080
+	QuestTaskSet quest[8] 0x0100
+	QuestTaskSet quest[8] 0x0200
+	QuestTaskSet quest[8] 0x0400
+	QuestTaskSet quest[8] 0x0800
+	QuestTaskSet quest[8] 0x1000
+	QuestTaskSet quest[8] 0x2000
+	QuestTaskSet quest[8] 0x4000
+	QuestTaskSet quest[8] 0x8000
+	QuestFlagsSet quest[9] 0x04
+	QuestFlagsSet quest[9] 0x02
+	QuestFlagsSet quest[9] 0x08
+	QuestFlagsSet quest[9] 0x10
+	QuestFlagsSet quest[9] 0x20
+	QuestTaskSet quest[9] 0x0001
+	QuestTaskSet quest[9] 0x0002
+	QuestTaskSet quest[9] 0x0004
+	QuestTaskSet quest[9] 0x0008
+	QuestTaskSet quest[9] 0x0010
+	QuestTaskSet quest[9] 0x0020
+	QuestTaskSet quest[9] 0x0040
+	QuestTaskSet quest[9] 0x0080
+	QuestTaskSet quest[9] 0x0100
+	QuestTaskSet quest[9] 0x0200
+	QuestTaskSet quest[9] 0x0400
+	QuestTaskSet quest[9] 0x0800
+	QuestTaskSet quest[9] 0x1000
+	QuestTaskSet quest[9] 0x2000
+	QuestTaskSet quest[9] 0x4000
+	QuestTaskSet quest[9] 0x8000
+	QuestFlagsSet quest[10] 0x04
+	QuestFlagsSet quest[10] 0x02
+	QuestFlagsSet quest[10] 0x08
+	QuestFlagsSet quest[10] 0x10
+	QuestFlagsSet quest[10] 0x20
+	QuestTaskSet quest[10] 0x0001
+	QuestTaskSet quest[10] 0x0002
+	QuestTaskSet quest[10] 0x0004
+	QuestTaskSet quest[10] 0x0008
+	QuestTaskSet quest[10] 0x0010
+	QuestTaskSet quest[10] 0x0020
+	QuestTaskSet quest[10] 0x0040
+	QuestTaskSet quest[10] 0x0080
+	QuestTaskSet quest[10] 0x0100
+	QuestTaskSet quest[10] 0x0200
+	QuestTaskSet quest[10] 0x0400
+	QuestTaskSet quest[10] 0x0800
+	QuestTaskSet quest[10] 0x1000
+	QuestTaskSet quest[10] 0x2000
+	QuestTaskSet quest[10] 0x4000
+	QuestTaskSet quest[10] 0x8000
+	QuestFlagsSet quest[11] 0x04
+	QuestFlagsSet quest[11] 0x02
+	QuestFlagsSet quest[11] 0x08
+	QuestFlagsSet quest[11] 0x10
+	QuestFlagsSet quest[11] 0x20
+	QuestTaskSet quest[11] 0x0001
+	QuestTaskSet quest[11] 0x0002
+	QuestTaskSet quest[11] 0x0004
+	QuestTaskSet quest[11] 0x0008
+	QuestTaskSet quest[11] 0x0010
+	QuestTaskSet quest[11] 0x0020
+	QuestTaskSet quest[11] 0x0040
+	QuestTaskSet quest[11] 0x0080
+	QuestTaskSet quest[11] 0x0100
+	QuestTaskSet quest[11] 0x0200
+	QuestTaskSet quest[11] 0x0400
+	QuestTaskSet quest[11] 0x0800
+	QuestTaskSet quest[11] 0x1000
+	QuestTaskSet quest[11] 0x2000
+	QuestTaskSet quest[11] 0x4000
+	QuestTaskSet quest[11] 0x8000
+	QuestFlagsSet quest[12] 0x04
+	QuestFlagsSet quest[12] 0x02
+	QuestFlagsSet quest[12] 0x08
+	QuestFlagsSet quest[12] 0x10
+	QuestFlagsSet quest[12] 0x20
+	QuestTaskSet quest[12] 0x0001
+	QuestTaskSet quest[12] 0x0002
+	QuestTaskSet quest[12] 0x0004
+	QuestTaskSet quest[12] 0x0008
+	QuestTaskSet quest[12] 0x0010
+	QuestTaskSet quest[12] 0x0020
+	QuestTaskSet quest[12] 0x0040
+	QuestTaskSet quest[12] 0x0080
+	QuestTaskSet quest[12] 0x0100
+	QuestTaskSet quest[12] 0x0200
+	QuestTaskSet quest[12] 0x0400
+	QuestTaskSet quest[12] 0x0800
+	QuestTaskSet quest[12] 0x1000
+	QuestTaskSet quest[12] 0x2000
+	QuestTaskSet quest[12] 0x4000
+	QuestTaskSet quest[12] 0x8000
+	QuestFlagsSet quest[13] 0x04
+	QuestFlagsSet quest[13] 0x02
+	QuestFlagsSet quest[13] 0x08
+	QuestFlagsSet quest[13] 0x10
+	QuestFlagsSet quest[13] 0x20
+	QuestTaskSet quest[13] 0x0001
+	QuestTaskSet quest[13] 0x0002
+	QuestTaskSet quest[13] 0x0004
+	QuestTaskSet quest[13] 0x0008
+	QuestTaskSet quest[13] 0x0010
+	QuestTaskSet quest[13] 0x0020
+	QuestTaskSet quest[13] 0x0040
+	QuestTaskSet quest[13] 0x0080
+	QuestTaskSet quest[13] 0x0100
+	QuestTaskSet quest[13] 0x0200
+	QuestTaskSet quest[13] 0x0400
+	QuestTaskSet quest[13] 0x0800
+	QuestTaskSet quest[13] 0x1000
+	QuestTaskSet quest[13] 0x2000
+	QuestTaskSet quest[13] 0x4000
+	QuestTaskSet quest[13] 0x8000
+	QuestFlagsSet quest[14] 0x04
+	QuestFlagsSet quest[14] 0x02
+	QuestFlagsSet quest[14] 0x08
+	QuestFlagsSet quest[14] 0x10
+	QuestFlagsSet quest[14] 0x20
+	QuestTaskSet quest[14] 0x0001
+	QuestTaskSet quest[14] 0x0002
+	QuestTaskSet quest[14] 0x0004
+	QuestTaskSet quest[14] 0x0008
+	QuestTaskSet quest[14] 0x0010
+	QuestTaskSet quest[14] 0x0020
+	QuestTaskSet quest[14] 0x0040
+	QuestTaskSet quest[14] 0x0080
+	QuestTaskSet quest[14] 0x0100
+	QuestTaskSet quest[14] 0x0200
+	QuestTaskSet quest[14] 0x0400
+	QuestTaskSet quest[14] 0x0800
+	QuestTaskSet quest[14] 0x1000
+	QuestTaskSet quest[14] 0x2000
+	QuestTaskSet quest[14] 0x4000
+	QuestTaskSet quest[14] 0x8000
+	QuestFlagsSet quest[15] 0x04
+	QuestFlagsSet quest[15] 0x02
+	QuestFlagsSet quest[15] 0x08
+	QuestFlagsSet quest[15] 0x10
+	QuestFlagsSet quest[15] 0x20
+	QuestTaskSet quest[15] 0x0001
+	QuestTaskSet quest[15] 0x0002
+	QuestTaskSet quest[15] 0x0004
+	QuestTaskSet quest[15] 0x0008
+	QuestTaskSet quest[15] 0x0010
+	QuestTaskSet quest[15] 0x0020
+	QuestTaskSet quest[15] 0x0040
+	QuestTaskSet quest[15] 0x0080
+	QuestTaskSet quest[15] 0x0100
+	QuestTaskSet quest[15] 0x0200
+	QuestTaskSet quest[15] 0x0400
+	QuestTaskSet quest[15] 0x0800
+	QuestTaskSet quest[15] 0x1000
+	QuestTaskSet quest[15] 0x2000
+	QuestTaskSet quest[15] 0x4000
+	QuestTaskSet quest[15] 0x8000
+	QuestFlagsSet quest[18] 0x04
+	QuestFlagsSet quest[18] 0x02
+	QuestFlagsSet quest[18] 0x08
+	QuestFlagsSet quest[18] 0x10
+	QuestFlagsSet quest[18] 0x20
+	QuestTaskSet quest[18] 0x0001
+	QuestTaskSet quest[18] 0x0002
+	QuestTaskSet quest[18] 0x0004
+	QuestTaskSet quest[18] 0x0008
+	QuestTaskSet quest[18] 0x0010
+	QuestTaskSet quest[18] 0x0020
+	QuestTaskSet quest[18] 0x0040
+	QuestTaskSet quest[18] 0x0080
+	QuestTaskSet quest[18] 0x0100
+	QuestTaskSet quest[18] 0x0200
+	QuestTaskSet quest[18] 0x0400
+	QuestTaskSet quest[18] 0x0800
+	QuestTaskSet quest[18] 0x1000
+	QuestTaskSet quest[18] 0x2000
+	QuestTaskSet quest[18] 0x4000
+	QuestTaskSet quest[18] 0x8000
+	QuestFlagsSet quest[19] 0x04
+	QuestFlagsSet quest[19] 0x02
+	QuestFlagsSet quest[19] 0x08
+	QuestFlagsSet quest[19] 0x10
+	QuestFlagsSet quest[19] 0x20
+	QuestTaskSet quest[19] 0x0001
+	QuestTaskSet quest[19] 0x0002
+	QuestTaskSet quest[19] 0x0004
+	QuestTaskSet quest[19] 0x0008
+	QuestTaskSet quest[19] 0x0010
+	QuestTaskSet quest[19] 0x0020
+	QuestTaskSet quest[19] 0x0040
+	QuestTaskSet quest[19] 0x0080
+	QuestTaskSet quest[19] 0x0100
+	QuestTaskSet quest[19] 0x0200
+	QuestTaskSet quest[19] 0x0400
+	QuestTaskSet quest[19] 0x0800
+	QuestTaskSet quest[19] 0x1000
+	QuestTaskSet quest[19] 0x2000
+	QuestTaskSet quest[19] 0x4000
+	QuestTaskSet quest[19] 0x8000
+	QuestFlagsSet quest[20] 0x04
+	QuestFlagsSet quest[20] 0x02
+	QuestFlagsSet quest[20] 0x08
+	QuestFlagsSet quest[20] 0x10
+	QuestFlagsSet quest[20] 0x20
+	QuestTaskSet quest[20] 0x0001
+	QuestTaskSet quest[20] 0x0002
+	QuestTaskSet quest[20] 0x0004
+	QuestTaskSet quest[20] 0x0008
+	QuestTaskSet quest[20] 0x0010
+	QuestTaskSet quest[20] 0x0020
+	QuestTaskSet quest[20] 0x0040
+	QuestTaskSet quest[20] 0x0080
+	QuestTaskSet quest[20] 0x0100
+	QuestTaskSet quest[20] 0x0200
+	QuestTaskSet quest[20] 0x0400
+	QuestTaskSet quest[20] 0x0800
+	QuestTaskSet quest[20] 0x1000
+	QuestTaskSet quest[20] 0x2000
+	QuestTaskSet quest[20] 0x4000
+	QuestTaskSet quest[20] 0x8000
+	QuestFlagsSet quest[21] 0x04
+	QuestFlagsSet quest[21] 0x02
+	QuestFlagsSet quest[21] 0x08
+	QuestFlagsSet quest[21] 0x10
+	QuestFlagsSet quest[21] 0x20
+	QuestTaskSet quest[21] 0x0001
+	QuestTaskSet quest[21] 0x0002
+	QuestTaskSet quest[21] 0x0004
+	QuestTaskSet quest[21] 0x0008
+	QuestTaskSet quest[21] 0x0010
+	QuestTaskSet quest[21] 0x0020
+	QuestTaskSet quest[21] 0x0040
+	QuestTaskSet quest[21] 0x0080
+	QuestTaskSet quest[21] 0x0100
+	QuestTaskSet quest[21] 0x0200
+	QuestTaskSet quest[21] 0x0400
+	QuestTaskSet quest[21] 0x0800
+	QuestTaskSet quest[21] 0x1000
+	QuestTaskSet quest[21] 0x2000
+	QuestTaskSet quest[21] 0x4000
+	QuestTaskSet quest[21] 0x8000
+	QuestFlagsSet quest[22] 0x04
+	QuestFlagsSet quest[22] 0x02
+	QuestFlagsSet quest[22] 0x08
+	QuestFlagsSet quest[22] 0x10
+	QuestFlagsSet quest[22] 0x20
+	QuestTaskSet quest[22] 0x0001
+	QuestTaskSet quest[22] 0x0002
+	QuestTaskSet quest[22] 0x0004
+	QuestTaskSet quest[22] 0x0008
+	QuestTaskSet quest[22] 0x0010
+	QuestTaskSet quest[22] 0x0020
+	QuestTaskSet quest[22] 0x0040
+	QuestTaskSet quest[22] 0x0080
+	QuestTaskSet quest[22] 0x0100
+	QuestTaskSet quest[22] 0x0200
+	QuestTaskSet quest[22] 0x0400
+	QuestTaskSet quest[22] 0x0800
+	QuestTaskSet quest[22] 0x1000
+	QuestTaskSet quest[22] 0x2000
+	QuestTaskSet quest[22] 0x4000
+	QuestTaskSet quest[22] 0x8000
+	QuestFlagsSet quest[23] 0x04
+	QuestFlagsSet quest[23] 0x02
+	QuestFlagsSet quest[23] 0x08
+	QuestFlagsSet quest[23] 0x10
+	QuestFlagsSet quest[23] 0x20
+	QuestTaskSet quest[23] 0x0001
+	QuestTaskSet quest[23] 0x0002
+	QuestTaskSet quest[23] 0x0004
+	QuestTaskSet quest[23] 0x0008
+	QuestTaskSet quest[23] 0x0010
+	QuestTaskSet quest[23] 0x0020
+	QuestTaskSet quest[23] 0x0040
+	QuestTaskSet quest[23] 0x0080
+	QuestTaskSet quest[23] 0x0100
+	QuestTaskSet quest[23] 0x0200
+	QuestTaskSet quest[23] 0x0400
+	QuestTaskSet quest[23] 0x0800
+	QuestTaskSet quest[23] 0x1000
+	QuestTaskSet quest[23] 0x2000
+	QuestTaskSet quest[23] 0x4000
+	QuestTaskSet quest[23] 0x8000
+	QuestFlagsSet quest[25] 0x04
+	QuestFlagsSet quest[25] 0x02
+	QuestFlagsSet quest[25] 0x08
+	QuestFlagsSet quest[25] 0x10
+	QuestFlagsSet quest[25] 0x20
+	QuestTaskSet quest[25] 0x0001
+	QuestTaskSet quest[25] 0x0002
+	QuestTaskSet quest[25] 0x0004
+	QuestTaskSet quest[25] 0x0008
+	QuestTaskSet quest[25] 0x0010
+	QuestTaskSet quest[25] 0x0020
+	QuestTaskSet quest[25] 0x0040
+	QuestTaskSet quest[25] 0x0080
+	QuestTaskSet quest[25] 0x0100
+	QuestTaskSet quest[25] 0x0200
+	QuestTaskSet quest[25] 0x0400
+	QuestTaskSet quest[25] 0x0800
+	QuestTaskSet quest[25] 0x1000
+	QuestTaskSet quest[25] 0x2000
+	QuestTaskSet quest[25] 0x4000
+	QuestTaskSet quest[25] 0x8000
+	QuestFlagsSet quest[26] 0x04
+	QuestFlagsSet quest[26] 0x02
+	QuestFlagsSet quest[26] 0x08
+	QuestFlagsSet quest[26] 0x10
+	QuestFlagsSet quest[26] 0x20
+	QuestTaskSet quest[26] 0x0001
+	QuestTaskSet quest[26] 0x0002
+	QuestTaskSet quest[26] 0x0004
+	QuestTaskSet quest[26] 0x0008
+	QuestTaskSet quest[26] 0x0010
+	QuestTaskSet quest[26] 0x0020
+	QuestTaskSet quest[26] 0x0040
+	QuestTaskSet quest[26] 0x0080
+	QuestTaskSet quest[26] 0x0100
+	QuestTaskSet quest[26] 0x0200
+	QuestTaskSet quest[26] 0x0400
+	QuestTaskSet quest[26] 0x0800
+	QuestTaskSet quest[26] 0x1000
+	QuestTaskSet quest[26] 0x2000
+	QuestTaskSet quest[26] 0x4000
+	QuestTaskSet quest[26] 0x8000
+	QuestFlagsSet quest[27] 0x04
+	QuestFlagsSet quest[27] 0x02
+	QuestFlagsSet quest[27] 0x08
+	QuestFlagsSet quest[27] 0x10
+	QuestFlagsSet quest[27] 0x20
+	QuestTaskSet quest[27] 0x0001
+	QuestTaskSet quest[27] 0x0002
+	QuestTaskSet quest[27] 0x0004
+	QuestTaskSet quest[27] 0x0008
+	QuestTaskSet quest[27] 0x0010
+	QuestTaskSet quest[27] 0x0020
+	QuestTaskSet quest[27] 0x0040
+	QuestTaskSet quest[27] 0x0080
+	QuestTaskSet quest[27] 0x0100
+	QuestTaskSet quest[27] 0x0200
+	QuestTaskSet quest[27] 0x0400
+	QuestTaskSet quest[27] 0x0800
+	QuestTaskSet quest[27] 0x1000
+	QuestTaskSet quest[27] 0x2000
+	QuestTaskSet quest[27] 0x4000
+	QuestTaskSet quest[27] 0x8000
+	QuestFlagsSet quest[28] 0x04
+	QuestFlagsSet quest[28] 0x02
+	QuestFlagsSet quest[28] 0x08
+	QuestFlagsSet quest[28] 0x10
+	QuestFlagsSet quest[28] 0x20
+	QuestTaskSet quest[28] 0x0001
+	QuestTaskSet quest[28] 0x0002
+	QuestTaskSet quest[28] 0x0004
+	QuestTaskSet quest[28] 0x0008
+	QuestTaskSet quest[28] 0x0010
+	QuestTaskSet quest[28] 0x0020
+	QuestTaskSet quest[28] 0x0040
+	QuestTaskSet quest[28] 0x0080
+	QuestTaskSet quest[28] 0x0100
+	QuestTaskSet quest[28] 0x0200
+	QuestTaskSet quest[28] 0x0400
+	QuestTaskSet quest[28] 0x0800
+	QuestTaskSet quest[28] 0x1000
+	QuestTaskSet quest[28] 0x2000
+	QuestTaskSet quest[28] 0x4000
+	QuestTaskSet quest[28] 0x8000
+	QuestFlagsSet quest[29] 0x04
+	QuestFlagsSet quest[29] 0x02
+	QuestFlagsSet quest[29] 0x08
+	QuestFlagsSet quest[29] 0x10
+	QuestFlagsSet quest[29] 0x20
+	QuestTaskSet quest[29] 0x0001
+	QuestTaskSet quest[29] 0x0002
+	QuestTaskSet quest[29] 0x0004
+	QuestTaskSet quest[29] 0x0008
+	QuestTaskSet quest[29] 0x0010
+	QuestTaskSet quest[29] 0x0020
+	QuestTaskSet quest[29] 0x0040
+	QuestTaskSet quest[29] 0x0080
+	QuestTaskSet quest[29] 0x0100
+	QuestTaskSet quest[29] 0x0200
+	QuestTaskSet quest[29] 0x0400
+	QuestTaskSet quest[29] 0x0800
+	QuestTaskSet quest[29] 0x1000
+	QuestTaskSet quest[29] 0x2000
+	QuestTaskSet quest[29] 0x4000
+	QuestTaskSet quest[29] 0x8000
+	QuestFlagsSet quest[30] 0x04
+	QuestFlagsSet quest[30] 0x02
+	QuestFlagsSet quest[30] 0x08
+	QuestFlagsSet quest[30] 0x10
+	QuestFlagsSet quest[30] 0x20
+	QuestTaskSet quest[30] 0x0001
+	QuestTaskSet quest[30] 0x0002
+	QuestTaskSet quest[30] 0x0004
+	QuestTaskSet quest[30] 0x0008
+	QuestTaskSet quest[30] 0x0010
+	QuestTaskSet quest[30] 0x0020
+	QuestTaskSet quest[30] 0x0040
+	QuestTaskSet quest[30] 0x0080
+	QuestTaskSet quest[30] 0x0100
+	QuestTaskSet quest[30] 0x0200
+	QuestTaskSet quest[30] 0x0400
+	QuestTaskSet quest[30] 0x0800
+	QuestTaskSet quest[30] 0x1000
+	QuestTaskSet quest[30] 0x2000
+	QuestTaskSet quest[30] 0x4000
+	QuestTaskSet quest[30] 0x8000
+	QuestFlagsSet quest[31] 0x04
+	QuestFlagsSet quest[31] 0x02
+	QuestFlagsSet quest[31] 0x08
+	QuestFlagsSet quest[31] 0x10
+	QuestFlagsSet quest[31] 0x20
+	QuestTaskSet quest[31] 0x0001
+	QuestTaskSet quest[31] 0x0002
+	QuestTaskSet quest[31] 0x0004
+	QuestTaskSet quest[31] 0x0008
+	QuestTaskSet quest[31] 0x0010
+	QuestTaskSet quest[31] 0x0020
+	QuestTaskSet quest[31] 0x0040
+	QuestTaskSet quest[31] 0x0080
+	QuestTaskSet quest[31] 0x0100
+	QuestTaskSet quest[31] 0x0200
+	QuestTaskSet quest[31] 0x0400
+	QuestTaskSet quest[31] 0x0800
+	QuestTaskSet quest[31] 0x1000
+	QuestTaskSet quest[31] 0x2000
+	QuestTaskSet quest[31] 0x4000
+	QuestTaskSet quest[31] 0x8000
+	QuestFlagsSet quest[32] 0x04
+	QuestFlagsSet quest[32] 0x02
+	QuestFlagsSet quest[32] 0x08
+	QuestFlagsSet quest[32] 0x10
+	QuestFlagsSet quest[32] 0x20
+	QuestTaskSet quest[32] 0x0001
+	QuestTaskSet quest[32] 0x0002
+	QuestTaskSet quest[32] 0x0004
+	QuestTaskSet quest[32] 0x0008
+	QuestTaskSet quest[32] 0x0010
+	QuestTaskSet quest[32] 0x0020
+	QuestTaskSet quest[32] 0x0040
+	QuestTaskSet quest[32] 0x0080
+	QuestTaskSet quest[32] 0x0100
+	QuestTaskSet quest[32] 0x0200
+	QuestTaskSet quest[32] 0x0400
+	QuestTaskSet quest[32] 0x0800
+	QuestTaskSet quest[32] 0x1000
+	QuestTaskSet quest[32] 0x2000
+	QuestTaskSet quest[32] 0x4000
+	QuestTaskSet quest[32] 0x8000
+	QuestFlagsSet quest[33] 0x04
+	QuestFlagsSet quest[33] 0x02
+	QuestFlagsSet quest[33] 0x08
+	QuestFlagsSet quest[33] 0x10
+	QuestFlagsSet quest[33] 0x20
+	QuestTaskSet quest[33] 0x0001
+	QuestTaskSet quest[33] 0x0002
+	QuestTaskSet quest[33] 0x0004
+	QuestTaskSet quest[33] 0x0008
+	QuestTaskSet quest[33] 0x0010
+	QuestTaskSet quest[33] 0x0020
+	QuestTaskSet quest[33] 0x0040
+	QuestTaskSet quest[33] 0x0080
+	QuestTaskSet quest[33] 0x0100
+	QuestTaskSet quest[33] 0x0200
+	QuestTaskSet quest[33] 0x0400
+	QuestTaskSet quest[33] 0x0800
+	QuestTaskSet quest[33] 0x1000
+	QuestTaskSet quest[33] 0x2000
+	QuestTaskSet quest[33] 0x4000
+	QuestTaskSet quest[33] 0x8000
+	QuestFlagsSet quest[34] 0x04
+	QuestFlagsSet quest[34] 0x02
+	QuestFlagsSet quest[34] 0x08
+	QuestFlagsSet quest[34] 0x10
+	QuestFlagsSet quest[34] 0x20
+	QuestTaskSet quest[34] 0x0001
+	QuestTaskSet quest[34] 0x0002
+	QuestTaskSet quest[34] 0x0004
+	QuestTaskSet quest[34] 0x0008
+	QuestTaskSet quest[34] 0x0010
+	QuestTaskSet quest[34] 0x0020
+	QuestTaskSet quest[34] 0x0040
+	QuestTaskSet quest[34] 0x0080
+	QuestTaskSet quest[34] 0x0100
+	QuestTaskSet quest[34] 0x0200
+	QuestTaskSet quest[34] 0x0400
+	QuestTaskSet quest[34] 0x0800
+	QuestTaskSet quest[34] 0x1000
+	QuestTaskSet quest[34] 0x2000
+	QuestTaskSet quest[34] 0x4000
+	QuestTaskSet quest[34] 0x8000
+	QuestFlagsSet quest[35] 0x04
+	QuestFlagsSet quest[35] 0x02
+	QuestFlagsSet quest[35] 0x08
+	QuestFlagsSet quest[35] 0x10
+	QuestFlagsSet quest[35] 0x20
+	QuestTaskSet quest[35] 0x0001
+	QuestTaskSet quest[35] 0x0002
+	QuestTaskSet quest[35] 0x0004
+	QuestTaskSet quest[35] 0x0008
+	QuestTaskSet quest[35] 0x0010
+	QuestTaskSet quest[35] 0x0020
+	QuestTaskSet quest[35] 0x0040
+	QuestTaskSet quest[35] 0x0080
+	QuestTaskSet quest[35] 0x0100
+	QuestTaskSet quest[35] 0x0200
+	QuestTaskSet quest[35] 0x0400
+	QuestTaskSet quest[35] 0x0800
+	QuestTaskSet quest[35] 0x1000
+	QuestTaskSet quest[35] 0x2000
+	QuestTaskSet quest[35] 0x4000
+	QuestTaskSet quest[35] 0x8000
+	QuestFlagsSet quest[36] 0x04
+	QuestFlagsSet quest[36] 0x02
+	QuestFlagsSet quest[36] 0x08
+	QuestFlagsSet quest[36] 0x10
+	QuestFlagsSet quest[36] 0x20
+	QuestTaskSet quest[36] 0x0001
+	QuestTaskSet quest[36] 0x0002
+	QuestTaskSet quest[36] 0x0004
+	QuestTaskSet quest[36] 0x0008
+	QuestTaskSet quest[36] 0x0010
+	QuestTaskSet quest[36] 0x0020
+	QuestTaskSet quest[36] 0x0040
+	QuestTaskSet quest[36] 0x0080
+	QuestTaskSet quest[36] 0x0100
+	QuestTaskSet quest[36] 0x0200
+	QuestTaskSet quest[36] 0x0400
+	QuestTaskSet quest[36] 0x0800
+	QuestTaskSet quest[36] 0x1000
+	QuestTaskSet quest[36] 0x2000
+	QuestTaskSet quest[36] 0x4000
+	QuestTaskSet quest[36] 0x8000
+	QuestFlagsSet quest[40] 0x04
+	QuestFlagsSet quest[40] 0x02
+	QuestFlagsSet quest[40] 0x08
+	QuestFlagsSet quest[40] 0x10
+	QuestFlagsSet quest[40] 0x20
+	QuestTaskSet quest[40] 0x0001
+	QuestTaskSet quest[40] 0x0002
+	QuestTaskSet quest[40] 0x0004
+	QuestTaskSet quest[40] 0x0008
+	QuestTaskSet quest[40] 0x0010
+	QuestTaskSet quest[40] 0x0020
+	QuestTaskSet quest[40] 0x0040
+	QuestTaskSet quest[40] 0x0080
+	QuestTaskSet quest[40] 0x0100
+	QuestTaskSet quest[40] 0x0200
+	QuestTaskSet quest[40] 0x0400
+	QuestTaskSet quest[40] 0x0800
+	QuestTaskSet quest[40] 0x1000
+	QuestTaskSet quest[40] 0x2000
+	QuestTaskSet quest[40] 0x4000
+	QuestTaskSet quest[40] 0x8000
+	QuestFlagsSet quest[41] 0x04
+	QuestFlagsSet quest[41] 0x02
+	QuestFlagsSet quest[41] 0x08
+	QuestFlagsSet quest[41] 0x10
+	QuestFlagsSet quest[41] 0x20
+	QuestTaskSet quest[41] 0x0001
+	QuestTaskSet quest[41] 0x0002
+	QuestTaskSet quest[41] 0x0004
+	QuestTaskSet quest[41] 0x0008
+	QuestTaskSet quest[41] 0x0010
+	QuestTaskSet quest[41] 0x0020
+	QuestTaskSet quest[41] 0x0040
+	QuestTaskSet quest[41] 0x0080
+	QuestTaskSet quest[41] 0x0100
+	QuestTaskSet quest[41] 0x0200
+	QuestTaskSet quest[41] 0x0400
+	QuestTaskSet quest[41] 0x0800
+	QuestTaskSet quest[41] 0x1000
+	QuestTaskSet quest[41] 0x2000
+	QuestTaskSet quest[41] 0x4000
+	QuestTaskSet quest[41] 0x8000
+	QuestFlagsSet quest[42] 0x04
+	QuestFlagsSet quest[42] 0x02
+	QuestFlagsSet quest[42] 0x08
+	QuestFlagsSet quest[42] 0x10
+	QuestFlagsSet quest[42] 0x20
+	QuestTaskSet quest[42] 0x0001
+	QuestTaskSet quest[42] 0x0002
+	QuestTaskSet quest[42] 0x0004
+	QuestTaskSet quest[42] 0x0008
+	QuestTaskSet quest[42] 0x0010
+	QuestTaskSet quest[42] 0x0020
+	QuestTaskSet quest[42] 0x0040
+	QuestTaskSet quest[42] 0x0080
+	QuestTaskSet quest[42] 0x0100
+	QuestTaskSet quest[42] 0x0200
+	QuestTaskSet quest[42] 0x0400
+	QuestTaskSet quest[42] 0x0800
+	QuestTaskSet quest[42] 0x1000
+	QuestTaskSet quest[42] 0x2000
+	QuestTaskSet quest[42] 0x4000
+	QuestTaskSet quest[42] 0x8000
+	QuestFlagsSet quest[43] 0x04
+	QuestFlagsSet quest[43] 0x02
+	QuestFlagsSet quest[43] 0x08
+	QuestFlagsSet quest[43] 0x10
+	QuestFlagsSet quest[43] 0x20
+	QuestTaskSet quest[43] 0x0001
+	QuestTaskSet quest[43] 0x0002
+	QuestTaskSet quest[43] 0x0004
+	QuestTaskSet quest[43] 0x0008
+	QuestTaskSet quest[43] 0x0010
+	QuestTaskSet quest[43] 0x0020
+	QuestTaskSet quest[43] 0x0040
+	QuestTaskSet quest[43] 0x0080
+	QuestTaskSet quest[43] 0x0100
+	QuestTaskSet quest[43] 0x0200
+	QuestTaskSet quest[43] 0x0400
+	QuestTaskSet quest[43] 0x0800
+	QuestTaskSet quest[43] 0x1000
+	QuestTaskSet quest[43] 0x2000
+	QuestTaskSet quest[43] 0x4000
+	QuestTaskSet quest[43] 0x8000
+	QuestFlagsSet quest[44] 0x04
+	QuestFlagsSet quest[44] 0x02
+	QuestFlagsSet quest[44] 0x08
+	QuestFlagsSet quest[44] 0x10
+	QuestFlagsSet quest[44] 0x20
+	QuestTaskSet quest[44] 0x0001
+	QuestTaskSet quest[44] 0x0002
+	QuestTaskSet quest[44] 0x0004
+	QuestTaskSet quest[44] 0x0008
+	QuestTaskSet quest[44] 0x0010
+	QuestTaskSet quest[44] 0x0020
+	QuestTaskSet quest[44] 0x0040
+	QuestTaskSet quest[44] 0x0080
+	QuestTaskSet quest[44] 0x0100
+	QuestTaskSet quest[44] 0x0200
+	QuestTaskSet quest[44] 0x0400
+	QuestTaskSet quest[44] 0x0800
+	QuestTaskSet quest[44] 0x1000
+	QuestTaskSet quest[44] 0x2000
+	QuestTaskSet quest[44] 0x4000
+	QuestTaskSet quest[44] 0x8000
+	QuestFlagsSet quest[45] 0x04
+	QuestFlagsSet quest[45] 0x02
+	QuestFlagsSet quest[45] 0x08
+	QuestFlagsSet quest[45] 0x10
+	QuestFlagsSet quest[45] 0x20
+	QuestTaskSet quest[45] 0x0001
+	QuestTaskSet quest[45] 0x0002
+	QuestTaskSet quest[45] 0x0004
+	QuestTaskSet quest[45] 0x0008
+	QuestTaskSet quest[45] 0x0010
+	QuestTaskSet quest[45] 0x0020
+	QuestTaskSet quest[45] 0x0040
+	QuestTaskSet quest[45] 0x0080
+	QuestTaskSet quest[45] 0x0100
+	QuestTaskSet quest[45] 0x0200
+	QuestTaskSet quest[45] 0x0400
+	QuestTaskSet quest[45] 0x0800
+	QuestTaskSet quest[45] 0x1000
+	QuestTaskSet quest[45] 0x2000
+	QuestTaskSet quest[45] 0x4000
+	QuestTaskSet quest[45] 0x8000
+	QuestFlagsSet quest[46] 0x04
+	QuestFlagsSet quest[46] 0x02
+	QuestFlagsSet quest[46] 0x08
+	QuestFlagsSet quest[46] 0x10
+	QuestFlagsSet quest[46] 0x20
+	QuestTaskSet quest[46] 0x0001
+	QuestTaskSet quest[46] 0x0002
+	QuestTaskSet quest[46] 0x0004
+	QuestTaskSet quest[46] 0x0008
+	QuestTaskSet quest[46] 0x0010
+	QuestTaskSet quest[46] 0x0020
+	QuestTaskSet quest[46] 0x0040
+	QuestTaskSet quest[46] 0x0080
+	QuestTaskSet quest[46] 0x0100
+	QuestTaskSet quest[46] 0x0200
+	QuestTaskSet quest[46] 0x0400
+	QuestTaskSet quest[46] 0x0800
+	QuestTaskSet quest[46] 0x1000
+	QuestTaskSet quest[46] 0x2000
+	QuestTaskSet quest[46] 0x4000
+	QuestTaskSet quest[46] 0x8000
+	QuestFlagsSet quest[47] 0x04
+	QuestFlagsSet quest[47] 0x02
+	QuestFlagsSet quest[47] 0x08
+	QuestFlagsSet quest[47] 0x10
+	QuestFlagsSet quest[47] 0x20
+	QuestTaskSet quest[47] 0x0001
+	QuestTaskSet quest[47] 0x0002
+	QuestTaskSet quest[47] 0x0004
+	QuestTaskSet quest[47] 0x0008
+	QuestTaskSet quest[47] 0x0010
+	QuestTaskSet quest[47] 0x0020
+	QuestTaskSet quest[47] 0x0040
+	QuestTaskSet quest[47] 0x0080
+	QuestTaskSet quest[47] 0x0100
+	QuestTaskSet quest[47] 0x0200
+	QuestTaskSet quest[47] 0x0400
+	QuestTaskSet quest[47] 0x0800
+	QuestTaskSet quest[47] 0x1000
+	QuestTaskSet quest[47] 0x2000
+	QuestTaskSet quest[47] 0x4000
+	QuestTaskSet quest[47] 0x8000
+	QuestFlagsSet quest[48] 0x04
+	QuestFlagsSet quest[48] 0x02
+	QuestFlagsSet quest[48] 0x08
+	QuestFlagsSet quest[48] 0x10
+	QuestFlagsSet quest[48] 0x20
+	QuestTaskSet quest[48] 0x0001
+	QuestTaskSet quest[48] 0x0002
+	QuestTaskSet quest[48] 0x0004
+	QuestTaskSet quest[48] 0x0008
+	QuestTaskSet quest[48] 0x0010
+	QuestTaskSet quest[48] 0x0020
+	QuestTaskSet quest[48] 0x0040
+	QuestTaskSet quest[48] 0x0080
+	QuestTaskSet quest[48] 0x0100
+	QuestTaskSet quest[48] 0x0200
+	QuestTaskSet quest[48] 0x0400
+	QuestTaskSet quest[48] 0x0800
+	QuestTaskSet quest[48] 0x1000
+	QuestTaskSet quest[48] 0x2000
+	QuestTaskSet quest[48] 0x4000
+	QuestTaskSet quest[48] 0x8000
+	QuestFlagsSet quest[49] 0x04
+	QuestFlagsSet quest[49] 0x02
+	QuestFlagsSet quest[49] 0x08
+	QuestFlagsSet quest[49] 0x10
+	QuestFlagsSet quest[49] 0x20
+	QuestTaskSet quest[49] 0x0001
+	QuestTaskSet quest[49] 0x0002
+	QuestTaskSet quest[49] 0x0004
+	QuestTaskSet quest[49] 0x0008
+	QuestTaskSet quest[49] 0x0010
+	QuestTaskSet quest[49] 0x0020
+	QuestTaskSet quest[49] 0x0040
+	QuestTaskSet quest[49] 0x0080
+	QuestTaskSet quest[49] 0x0100
+	QuestTaskSet quest[49] 0x0200
+	QuestTaskSet quest[49] 0x0400
+	QuestTaskSet quest[49] 0x0800
+	QuestTaskSet quest[49] 0x1000
+	QuestTaskSet quest[49] 0x2000
+	QuestTaskSet quest[49] 0x4000
+	QuestTaskSet quest[49] 0x8000
+	QuestFlagsSet quest[50] 0x04
+	QuestFlagsSet quest[50] 0x02
+	QuestFlagsSet quest[50] 0x08
+	QuestFlagsSet quest[50] 0x10
+	QuestFlagsSet quest[50] 0x20
+	QuestTaskSet quest[50] 0x0001
+	QuestTaskSet quest[50] 0x0002
+	QuestTaskSet quest[50] 0x0004
+	QuestTaskSet quest[50] 0x0008
+	QuestTaskSet quest[50] 0x0010
+	QuestTaskSet quest[50] 0x0020
+	QuestTaskSet quest[50] 0x0040
+	QuestTaskSet quest[50] 0x0080
+	QuestTaskSet quest[50] 0x0100
+	QuestTaskSet quest[50] 0x0200
+	QuestTaskSet quest[50] 0x0400
+	QuestTaskSet quest[50] 0x0800
+	QuestTaskSet quest[50] 0x1000
+	QuestTaskSet quest[50] 0x2000
+	QuestTaskSet quest[50] 0x4000
+	QuestTaskSet quest[50] 0x8000
+	QuestFlagsSet quest[51] 0x04
+	QuestFlagsSet quest[51] 0x02
+	QuestFlagsSet quest[51] 0x08
+	QuestFlagsSet quest[51] 0x10
+	QuestFlagsSet quest[51] 0x20
+	QuestTaskSet quest[51] 0x0001
+	QuestTaskSet quest[51] 0x0002
+	QuestTaskSet quest[51] 0x0004
+	QuestTaskSet quest[51] 0x0008
+	QuestTaskSet quest[51] 0x0010
+	QuestTaskSet quest[51] 0x0020
+	QuestTaskSet quest[51] 0x0040
+	QuestTaskSet quest[51] 0x0080
+	QuestTaskSet quest[51] 0x0100
+	QuestTaskSet quest[51] 0x0200
+	QuestTaskSet quest[51] 0x0400
+	QuestTaskSet quest[51] 0x0800
+	QuestTaskSet quest[51] 0x1000
+	QuestTaskSet quest[51] 0x2000
+	QuestTaskSet quest[51] 0x4000
+	QuestTaskSet quest[51] 0x8000
+	QuestFlagsSet quest[52] 0x04
+	QuestFlagsSet quest[52] 0x02
+	QuestFlagsSet quest[52] 0x08
+	QuestFlagsSet quest[52] 0x10
+	QuestFlagsSet quest[52] 0x20
+	QuestTaskSet quest[52] 0x0001
+	QuestTaskSet quest[52] 0x0002
+	QuestTaskSet quest[52] 0x0004
+	QuestTaskSet quest[52] 0x0008
+	QuestTaskSet quest[52] 0x0010
+	QuestTaskSet quest[52] 0x0020
+	QuestTaskSet quest[52] 0x0040
+	QuestTaskSet quest[52] 0x0080
+	QuestTaskSet quest[52] 0x0100
+	QuestTaskSet quest[52] 0x0200
+	QuestTaskSet quest[52] 0x0400
+	QuestTaskSet quest[52] 0x0800
+	QuestTaskSet quest[52] 0x1000
+	QuestTaskSet quest[52] 0x2000
+	QuestTaskSet quest[52] 0x4000
+	QuestTaskSet quest[52] 0x8000
+	QuestFlagsSet quest[53] 0x04
+	QuestFlagsSet quest[53] 0x02
+	QuestFlagsSet quest[53] 0x08
+	QuestFlagsSet quest[53] 0x10
+	QuestFlagsSet quest[53] 0x20
+	QuestTaskSet quest[53] 0x0001
+	QuestTaskSet quest[53] 0x0002
+	QuestTaskSet quest[53] 0x0004
+	QuestTaskSet quest[53] 0x0008
+	QuestTaskSet quest[53] 0x0010
+	QuestTaskSet quest[53] 0x0020
+	QuestTaskSet quest[53] 0x0040
+	QuestTaskSet quest[53] 0x0080
+	QuestTaskSet quest[53] 0x0100
+	QuestTaskSet quest[53] 0x0200
+	QuestTaskSet quest[53] 0x0400
+	QuestTaskSet quest[53] 0x0800
+	QuestTaskSet quest[53] 0x1000
+	QuestTaskSet quest[53] 0x2000
+	QuestTaskSet quest[53] 0x4000
+	QuestTaskSet quest[53] 0x8000
+	QuestFlagsSet quest[54] 0x04
+	QuestFlagsSet quest[54] 0x02
+	QuestFlagsSet quest[54] 0x08
+	QuestFlagsSet quest[54] 0x10
+	QuestFlagsSet quest[54] 0x20
+	QuestTaskSet quest[54] 0x0001
+	QuestTaskSet quest[54] 0x0002
+	QuestTaskSet quest[54] 0x0004
+	QuestTaskSet quest[54] 0x0008
+	QuestTaskSet quest[54] 0x0010
+	QuestTaskSet quest[54] 0x0020
+	QuestTaskSet quest[54] 0x0040
+	QuestTaskSet quest[54] 0x0080
+	QuestTaskSet quest[54] 0x0100
+	QuestTaskSet quest[54] 0x0200
+	QuestTaskSet quest[54] 0x0400
+	QuestTaskSet quest[54] 0x0800
+	QuestTaskSet quest[54] 0x1000
+	QuestTaskSet quest[54] 0x2000
+	QuestTaskSet quest[54] 0x4000
+	QuestTaskSet quest[54] 0x8000
+	QuestFlagsSet quest[55] 0x04
+	QuestFlagsSet quest[55] 0x02
+	QuestFlagsSet quest[55] 0x08
+	QuestFlagsSet quest[55] 0x10
+	QuestFlagsSet quest[55] 0x20
+	QuestTaskSet quest[55] 0x0001
+	QuestTaskSet quest[55] 0x0002
+	QuestTaskSet quest[55] 0x0004
+	QuestTaskSet quest[55] 0x0008
+	QuestTaskSet quest[55] 0x0010
+	QuestTaskSet quest[55] 0x0020
+	QuestTaskSet quest[55] 0x0040
+	QuestTaskSet quest[55] 0x0080
+	QuestTaskSet quest[55] 0x0100
+	QuestTaskSet quest[55] 0x0200
+	QuestTaskSet quest[55] 0x0400
+	QuestTaskSet quest[55] 0x0800
+	QuestTaskSet quest[55] 0x1000
+	QuestTaskSet quest[55] 0x2000
+	QuestTaskSet quest[55] 0x4000
+	QuestTaskSet quest[55] 0x8000
+	QuestFlagsSet quest[56] 0x04
+	QuestFlagsSet quest[56] 0x02
+	QuestFlagsSet quest[56] 0x08
+	QuestFlagsSet quest[56] 0x10
+	QuestFlagsSet quest[56] 0x20
+	QuestTaskSet quest[56] 0x0001
+	QuestTaskSet quest[56] 0x0002
+	QuestTaskSet quest[56] 0x0004
+	QuestTaskSet quest[56] 0x0008
+	QuestTaskSet quest[56] 0x0010
+	QuestTaskSet quest[56] 0x0020
+	QuestTaskSet quest[56] 0x0040
+	QuestTaskSet quest[56] 0x0080
+	QuestTaskSet quest[56] 0x0100
+	QuestTaskSet quest[56] 0x0200
+	QuestTaskSet quest[56] 0x0400
+	QuestTaskSet quest[56] 0x0800
+	QuestTaskSet quest[56] 0x1000
+	QuestTaskSet quest[56] 0x2000
+	QuestTaskSet quest[56] 0x4000
+	QuestTaskSet quest[56] 0x8000
+	QuestFlagsSet quest[57] 0x04
+	QuestFlagsSet quest[57] 0x02
+	QuestFlagsSet quest[57] 0x08
+	QuestFlagsSet quest[57] 0x10
+	QuestFlagsSet quest[57] 0x20
+	QuestTaskSet quest[57] 0x0001
+	QuestTaskSet quest[57] 0x0002
+	QuestTaskSet quest[57] 0x0004
+	QuestTaskSet quest[57] 0x0008
+	QuestTaskSet quest[57] 0x0010
+	QuestTaskSet quest[57] 0x0020
+	QuestTaskSet quest[57] 0x0040
+	QuestTaskSet quest[57] 0x0080
+	QuestTaskSet quest[57] 0x0100
+	QuestTaskSet quest[57] 0x0200
+	QuestTaskSet quest[57] 0x0400
+	QuestTaskSet quest[57] 0x0800
+	QuestTaskSet quest[57] 0x1000
+	QuestTaskSet quest[57] 0x2000
+	QuestTaskSet quest[57] 0x4000
+	QuestTaskSet quest[57] 0x8000
+	QuestFlagsSet quest[58] 0x04
+	QuestFlagsSet quest[58] 0x02
+	QuestFlagsSet quest[58] 0x08
+	QuestFlagsSet quest[58] 0x10
+	QuestFlagsSet quest[58] 0x20
+	QuestTaskSet quest[58] 0x0001
+	QuestTaskSet quest[58] 0x0002
+	QuestTaskSet quest[58] 0x0004
+	QuestTaskSet quest[58] 0x0008
+	QuestTaskSet quest[58] 0x0010
+	QuestTaskSet quest[58] 0x0020
+	QuestTaskSet quest[58] 0x0040
+	QuestTaskSet quest[58] 0x0080
+	QuestTaskSet quest[58] 0x0100
+	QuestTaskSet quest[58] 0x0200
+	QuestTaskSet quest[58] 0x0400
+	QuestTaskSet quest[58] 0x0800
+	QuestTaskSet quest[58] 0x1000
+	QuestTaskSet quest[58] 0x2000
+	QuestTaskSet quest[58] 0x4000
+	QuestTaskSet quest[58] 0x8000
+	QuestFlagsSet quest[59] 0x04
+	QuestFlagsSet quest[59] 0x02
+	QuestFlagsSet quest[59] 0x08
+	QuestFlagsSet quest[59] 0x10
+	QuestFlagsSet quest[59] 0x20
+	QuestTaskSet quest[59] 0x0001
+	QuestTaskSet quest[59] 0x0002
+	QuestTaskSet quest[59] 0x0004
+	QuestTaskSet quest[59] 0x0008
+	QuestTaskSet quest[59] 0x0010
+	QuestTaskSet quest[59] 0x0020
+	QuestTaskSet quest[59] 0x0040
+	QuestTaskSet quest[59] 0x0080
+	QuestTaskSet quest[59] 0x0100
+	QuestTaskSet quest[59] 0x0200
+	QuestTaskSet quest[59] 0x0400
+	QuestTaskSet quest[59] 0x0800
+	QuestTaskSet quest[59] 0x1000
+	QuestTaskSet quest[59] 0x2000
+	QuestTaskSet quest[59] 0x4000
+	QuestTaskSet quest[59] 0x8000
+	QuestFlagsSet quest[60] 0x02
+	QuestFlagsSet quest[60] 0x08
+	QuestFlagsSet quest[60] 0x10
+	QuestFlagsSet quest[60] 0x20
+	QuestTaskSet quest[60] 0x0001
+	QuestTaskSet quest[60] 0x0002
+	QuestTaskSet quest[60] 0x0004
+	QuestTaskSet quest[60] 0x0008
+	QuestTaskSet quest[60] 0x0010
+	QuestTaskSet quest[60] 0x0020
+	QuestTaskSet quest[60] 0x0040
+	QuestTaskSet quest[60] 0x0080
+	QuestTaskSet quest[60] 0x0100
+	QuestTaskSet quest[60] 0x0200
+	QuestTaskSet quest[60] 0x0400
+	QuestTaskSet quest[60] 0x0800
+	QuestTaskSet quest[60] 0x1000
+	QuestTaskSet quest[60] 0x2000
+	QuestTaskSet quest[60] 0x4000
+	QuestTaskSet quest[60] 0x8000
+	QuestFlagsSet quest[61] 0x04
+	QuestFlagsSet quest[61] 0x02
+	QuestFlagsSet quest[61] 0x08
+	QuestFlagsSet quest[61] 0x10
+	QuestFlagsSet quest[61] 0x20
+	QuestTaskSet quest[61] 0x0001
+	QuestTaskSet quest[61] 0x0002
+	QuestTaskSet quest[61] 0x0004
+	QuestTaskSet quest[61] 0x0008
+	QuestTaskSet quest[61] 0x0010
+	QuestTaskSet quest[61] 0x0020
+	QuestTaskSet quest[61] 0x0040
+	QuestTaskSet quest[61] 0x0080
+	QuestTaskSet quest[61] 0x0100
+	QuestTaskSet quest[61] 0x0200
+	QuestTaskSet quest[61] 0x0400
+	QuestTaskSet quest[61] 0x0800
+	QuestTaskSet quest[61] 0x1000
+	QuestTaskSet quest[61] 0x2000
+	QuestTaskSet quest[61] 0x4000
+	QuestTaskSet quest[61] 0x8000
+	QuestFlagsSet quest[62] 0x04
+	QuestFlagsSet quest[62] 0x02
+	QuestFlagsSet quest[62] 0x08
+	QuestFlagsSet quest[62] 0x10
+	QuestFlagsSet quest[62] 0x20
+	QuestTaskSet quest[62] 0x0001
+	QuestTaskSet quest[62] 0x0002
+	QuestTaskSet quest[62] 0x0004
+	QuestTaskSet quest[62] 0x0008
+	QuestTaskSet quest[62] 0x0010
+	QuestTaskSet quest[62] 0x0020
+	QuestTaskSet quest[62] 0x0040
+	QuestTaskSet quest[62] 0x0080
+	QuestTaskSet quest[62] 0x0100
+	QuestTaskSet quest[62] 0x0200
+	QuestTaskSet quest[62] 0x0400
+	QuestTaskSet quest[62] 0x0800
+	QuestTaskSet quest[62] 0x1000
+	QuestTaskSet quest[62] 0x2000
+	QuestTaskSet quest[62] 0x4000
+	QuestTaskSet quest[62] 0x8000
+	QuestFlagsSet quest[63] 0x04
+	QuestFlagsSet quest[63] 0x02
+	QuestFlagsSet quest[63] 0x08
+	QuestFlagsSet quest[63] 0x10
+	QuestFlagsSet quest[63] 0x20
+	QuestTaskSet quest[63] 0x0001
+	QuestTaskSet quest[63] 0x0002
+	QuestTaskSet quest[63] 0x0004
+	QuestTaskSet quest[63] 0x0008
+	QuestTaskSet quest[63] 0x0010
+	QuestTaskSet quest[63] 0x0020
+	QuestTaskSet quest[63] 0x0040
+	QuestTaskSet quest[63] 0x0080
+	QuestTaskSet quest[63] 0x0100
+	QuestTaskSet quest[63] 0x0200
+	QuestTaskSet quest[63] 0x0400
+	QuestTaskSet quest[63] 0x0800
+	QuestTaskSet quest[63] 0x1000
+	QuestTaskSet quest[63] 0x2000
+	QuestTaskSet quest[63] 0x4000
+	QuestTaskSet quest[63] 0x8000
+	QuestFlagsSet quest[64] 0x04
+	QuestFlagsSet quest[64] 0x02
+	QuestFlagsSet quest[64] 0x08
+	QuestFlagsSet quest[64] 0x10
+	QuestFlagsSet quest[64] 0x20
+	QuestTaskSet quest[64] 0x0001
+	QuestTaskSet quest[64] 0x0002
+	QuestTaskSet quest[64] 0x0004
+	QuestTaskSet quest[64] 0x0008
+	QuestTaskSet quest[64] 0x0010
+	QuestTaskSet quest[64] 0x0020
+	QuestTaskSet quest[64] 0x0040
+	QuestTaskSet quest[64] 0x0080
+	QuestTaskSet quest[64] 0x0100
+	QuestTaskSet quest[64] 0x0200
+	QuestTaskSet quest[64] 0x0400
+	QuestTaskSet quest[64] 0x0800
+	QuestTaskSet quest[64] 0x1000
+	QuestTaskSet quest[64] 0x2000
+	QuestTaskSet quest[64] 0x4000
+	QuestTaskSet quest[64] 0x8000
+	Return
+
+fn[44]:
+	RecipeLearn 1
+	RecipeLearn 2
+	RecipeLearn 3
+	RecipeLearn 4
+	RecipeLearn 5
+	RecipeLearn 6
+	RecipeLearn 7
+	RecipeLearn 8
+	RecipeLearn 9
+	RecipeLearn 10
+	RecipeLearn 11
+	RecipeLearn 12
+	RecipeLearn 20
+	RecipeLearn 21
+	RecipeLearn 22
+	RecipeLearn 23
+	RecipeLearn 24
+	RecipeLearn 25
+	RecipeLearn 26
+	RecipeLearn 27
+	RecipeLearn 28
+	RecipeLearn 29
+	RecipeLearn 30
+	RecipeLearn 31
+	RecipeLearn 32
+	RecipeLearn 33
+	RecipeLearn 34
+	RecipeLearn 35
+	RecipeLearn 36
+	RecipeLearn 37
+	RecipeLearn 38
+	RecipeLearn 39
+	RecipeLearn 40
+	RecipeLearn 41
+	RecipeLearn 42
+	RecipeLearn 43
+	RecipeLearn 44
+	RecipeLearn 45
+	RecipeLearn 46
+	RecipeLearn 47
+	RecipeLearn 48
+	RecipeLearn 49
+	RecipeLearn 50
+	RecipeLearn 51
+	RecipeLearn 52
+	RecipeLearn 53
+	RecipeLearn 54
+	RecipeLearn 55
+	RecipeLearn 56
+	RecipeLearn 57
+	RecipeLearn 58
+	RecipeLearn 59
+	RecipeLearn 60
+	RecipeLearn 61
+	RecipeLearn 62
+	RecipeLearn 63
+	RecipeLearn 64
+	RecipeLearn 65
+	RecipeLearn 66
+	RecipeLearn 67
+	RecipeLearn 68
+	RecipeLearn 69
+	RecipeLearn 70
+	RecipeLearn 71
+	RecipeLearn 72
+	RecipeLearn 73
+	RecipeLearn 74
+	RecipeLearn 75
+	RecipeLearn 76
+	Return

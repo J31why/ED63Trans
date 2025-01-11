@@ -1,0 +1,541 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7302.x"
+	town town[1]
+	bgm bgm[175]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14430._ch" "mons2/ch14430p._cp"
+chip[1] "mons2/ch14431._ch" "mons2/ch14431p._cp"
+chip[2] "mons2/ch14720._ch" "mons2/ch14720p._cp"
+chip[3] "mons2/ch14721._ch" "mons2/ch14721p._cp"
+chip[4] "mons2/ch14550._ch" "mons2/ch14550p._cp"
+chip[5] "mons2/ch14551._ch" "mons2/ch14551p._cp"
+chip[6] "mons2/ch14440._ch" "mons2/ch14440p._cp"
+chip[7] "mons2/ch14440._ch" "mons2/ch14440p._cp"
+chip[8] "mons2/ch14760._ch" "mons2/ch14760p._cp"
+chip[9] "mons2/ch14761._ch" "mons2/ch14761p._cp"
+chip[10] "mons2/ch14770._ch" "mons2/ch14770p._cp"
+chip[11] "mons2/ch14771._ch" "mons2/ch14771p._cp"
+chip[12] "mons2/ch14340._ch" "mons2/ch14340p._cp"
+chip[13] "mons2/ch14340._ch" "mons2/ch14340p._cp"
+
+npc char[0]:
+	name "Owen"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[1]:
+	name ""
+	pos (48930, 24880, 31960)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[702]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (83950, 32280, 27430)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[700]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (71720, 44750, 74240)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[702]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (107030, 51110, 99980)
+	angle 180deg
+	chip chip[12]
+	flags 0x0141
+	unk2 -1
+	battle battle[705]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (73680, 63540, 75170)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[700]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (50530, 69690, 94080)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[702]
+	flag flag[0]
+	unk3 0
+
+trigger[0]:
+	pos1 (-5750, 9000, 5930)
+	pos2 (5180, 15000, 10020)
+	flags 0x0000
+	func fn[0,4]
+	unk1 0
+
+look_point[0]:
+	pos (65980, 45750, 75530)
+	radius 1000mm
+	bubble_pos (65980, 45750, 75530)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (134920, 57350, 103670)
+	radius 1000mm
+	bubble_pos (134920, 57350, 103670)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-60000, null, -83000) "mm7302._ch"
+	SoundPlay sound[379] 1 0 100
+	SystemFlagsSet 0x00100000
+	char[4].36 = 239
+	if !flag[11364]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[11365]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11364]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[382] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[382]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11364]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[382]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[382]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}The chest is empty.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11365]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[455] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[455]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11365]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[455]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[455]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}The chest is empty.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	if flag[11276]:
+		Return
+	EventBegin 0
+	ED6LoadChip "npl2/ch04080._ch" "npl2/ch04080p._cp" chip[14]
+	ED6LoadChip "npl2/ch04081._ch" "npl2/ch04081p._cp" chip[15]
+	ED6LoadChip "npl2/ch04082._ch" "npl2/ch04082p._cp" chip[16]
+	ED6LoadChip "npl2/ch04470._ch" "npl2/ch04470p._cp" chip[17]
+	ED6LoadChip "npl2/ch04471._ch" "npl2/ch04471p._cp" chip[18]
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-580, 11630, 19530) 180deg
+	CharColor char[0] 0x00FFFFFF 0ms
+	ForkLoop char[0] fork[3]:
+		CharAnimation self 0 7 1000ms
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 80 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99949v{color 2}#80W#3SRaaaaaaaaagh!{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	Emote field_party[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote field_party[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork party[0] fork[1]:
+		CamLookPos (-1690, 11630, 20500) 2500ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 6220 -10000 2500ms
+	Fork party[0] fork[3]:
+		CamZoom 2560 2500ms
+	Fork party[1] fork[1]:
+		CamRotate 315000mdeg 2500ms
+	Fork party[1] fork[2]:
+		CamPers 335 2500ms
+	Fork field_party[0] fork[0]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 100ms
+	CharTurnTo field_party[1] 0deg 400deg/s
+	ForkWait party[0] fork[1]
+	SoundPlay sound[473] 0 0 100
+	CrossFade 1000ms
+	Fork party[0] fork[0]:
+		CamZoom 2300 500ms
+	Fork party[0] fork[1]:
+		CamPers 360 1500ms
+	Fork char[0] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	SoundPlay sound[480] 0 0 100
+	FadeWait
+	ForkWait char[0] fork[1]
+	ForkWait party[0] fork[0]
+	ForkWait party[0] fork[1]
+	SoundStop sound[473]
+	Sleep 1000ms
+	CharSetPos name[8] (-20, 11000, 7770) 0deg
+	CharSetPos name[14] (-1290, 10700, 7080) 0deg
+	Fork party[0] fork[1]:
+		CamLookPos (-2090, 11630, 16880) 2500ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 6000 -10000 2500ms
+	Fork party[0] fork[3]:
+		CamZoom 2660 2500ms
+	Fork party[1] fork[1]:
+		CamPers 334 2500ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-260, 11630, 12750) 2000mm/s 0
+	Sleep 400ms
+	Fork name[14] fork[0]:
+		CharWalkToPos self (-1660, 11630, 12520) 2000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait party[0] fork[1]
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 80 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99950v{color 2}#60WKevin...Graham...
+		#3385W 
+		#60W...You son of a bitch...
+		How dare...you...?{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	TextTalk name[14] {
+		#92697v#1934F#6PWhat...?!{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89987v#1075F#6POne of the heretics I killed, huh?{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 60 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99951v{color 2}#60WDamn right, I am!
+		I'm...Owen...!
+		#6000W 
+		#60WThe first of so many
+		lives you claimed...{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	TextTalk name[14] {
+		#92698v#1942F#6PO-Owen...?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89988v#1065F#6PHe was a bishop in the Congregation for Divine 
+		Worship.{wait}
+	} {
+		#89989v#1072FHe was also the one who hired those jaegers
+		to attack Aster House--all as a pathetic act of 
+		revenge after being exiled for corruption.{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#92699v#1931F#6PHim?!{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89990v#1075F#6PLike he says, he was my first target after taking
+		up my role as Heretic Hunter.{wait}
+	} {
+		#89991v#1073FHeh. I never thought I'd have the chance to see
+		your ugly mug again.{wait}
+	} {
+		#89992vHow's it feel to crawl around in this flaming pit
+		for all eternity, unable to even die to break free
+		from it all?{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99952v{color 2}#80WIt's hot... It hurts... I hate it...{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	ForkFunc char[0] fork[1] fn[0,5]
+	TextSetPos -1 50 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#99953v{color 2}#60WI hate it... It's hot... I hate it...
+		#50WI hate... I hurt... Hate... Help me...
+		#40WHot... Hate... Pain... Hate...
+		#30WHelp... Hot... Hate... Hate...
+		#20WHate... Help... Hate... Hot...
+		#15WHelp... Help... Help... Help...
+		#10WHelp... Help... Help... Help...
+		#10WHelp... Help... Help... Help...
+		#10WHelp... Help... Help... Help...
+		#10WHelp... Help... Help... Help...
+		#10WHelp... Help... Help... Help...
+		#10WHelp... Help... Help... Help...{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	ForkWait party[0] fork[0]
+	TextTalk name[14] {
+		#92700v#1935F#6P...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89993v#1075F#6PHaha. What a pitiful sight you are now.{wait}
+	} {
+		#89994v#1073FWell, hey. I guess you've suffered enough
+		that I can put you out of your misery.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase name[8] chip[14]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 300ms
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase name[14] chip[17]
+	CharSetChipPattern name[14] 0
+	FadeWait
+	Sleep 500ms
+	system[28] = 1
+	TextTalk name[8] {
+		#89995v#1065F#6PNo more heat or suffering for you.{wait}
+	} {
+		#89996v#1072FJust a quick death and eternal rest as a
+		grimoire!{wait}
+	}
+	TextWait
+	Fork party[0] fork[0]:
+		CamLookPos (-2340, 11630, 14590) 300ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 6290 -10000 300ms
+	Fork party[0] fork[2]:
+		CamZoom 2000 300ms
+	Fork party[0] fork[3]:
+		CamPers 290 300ms
+	CharSetChipBase char[0] chip[1]
+	Fork char[0] fork[0]:
+		CharWalkToPos2 self (-960, 11630, 13630) 13000mm/s 0
+	ForkWait party[0] fork[0]
+	ForkWait party[0] fork[1]
+	ForkWait party[0] fork[2]
+	ForkWait party[0] fork[3]
+	ED6Battle battle[716] null 0 0 null
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	system[28] = 0
+	ForkQuit char[0] fork[0]
+	CharFlagsSet char[0] 0x0080
+	CharSetPos name[8] (-800, 11630, 15130) 0deg
+	CharSetPos name[14] (-750, 11630, 13340) 0deg
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	CharSetChipBase name[14] chip[65535]
+	CharSetChipPattern name[14] 0
+	CamLookPos (-2500, 11630, 16000) 0ms
+	CamSetDistance 0 5350 -10000 0ms
+	CamZoom 3900 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 220 0ms
+	Fork party[0] fork[0]:
+		CamZoom 3600 2500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	TextTalk name[8] {
+		#89997v#1067F#5P...{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92701v#1949F#6P...Kevin...{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#89998v#1075F#11P...All right. Let's keep this up. I doubt we're
+		near the exit just yet.{wait}
+	} {
+		#89999v#1840FWe can't dawdle here for too long.{wait}
+	}
+	TextWait
+	FlagSet flag[11276]
+	QuestTaskSet quest[61] 0x0002
+	Sleep 300ms
+	EventEnd 0
+	SystemFlagsSet 0x00100000
+	Return
+
+fn[5]:
+	Sleep 3000ms
+	Fork party[0] fork[0]:
+		CamZoom 2500 3000ms
+	Return

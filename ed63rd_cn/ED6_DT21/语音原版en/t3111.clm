@@ -1,0 +1,628 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3111.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02030._ch" "npl/ch02030p._cp"
+chip[1] "npl2/chdummy._ch" "npl2/chdummyp._cp"
+chip[2] "npl2/chdummy._ch" "npl2/chdummyp._cp"
+chip[3] "mons2/ch14010._ch" "mons2/ch14010p._cp"
+chip[4] "mons2/ch14131._ch" "mons2/ch14131p._cp"
+chip[5] "mons2/ch14160._ch" "mons2/ch14160p._cp"
+chip[6] "mons2/ch14190._ch" "mons2/ch14190p._cp"
+chip[7] "mons2/ch14300._ch" "mons2/ch14300p._cp"
+chip[8] "npl2/ch03980._ch" "npl2/ch03980p._cp"
+chip[9] "apl/ch20053._ch" "apl/ch20053p._cp"
+chip[10] "npl/ch01450._ch" "npl/ch01450p._cp"
+chip[11] "npl/ch01540._ch" "npl/ch01540p._cp"
+chip[12] "npl/ch02620._ch" "npl/ch02620p._cp"
+chip[13] "npl/ch01550._ch" "npl/ch01550p._cp"
+
+npc char[0]:
+	name "Dan"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Agate"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[9]
+	frame 0
+	ch chip[9]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Factory Chief Murdock"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[12]
+	frame 0
+	ch chip[12]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Erick"
+	pos (8650, 0, -1430)
+	angle 270deg
+	x 0
+	cp chip[10]
+	frame 0
+	ch chip[10]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,8]
+
+npc char[4]:
+	name "Hazel"
+	pos (0, 0, 6130)
+	angle 180deg
+	x 0
+	cp chip[11]
+	frame 0
+	ch chip[11]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,6]
+
+npc char[5]:
+	name "Faye"
+	pos (-111900, -4000, -111000)
+	angle 0deg
+	x 0
+	cp chip[13]
+	frame 0
+	ch chip[13]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[6]:
+	name "Ochre"
+	pos (-110300, -4000, -111440)
+	angle 315deg
+	x 0
+	cp chip[10]
+	frame 0
+	ch chip[10]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[7]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (50, 0, 3900)
+	radius 400mm
+	bubble_pos (0, 1500, 6130)
+	flags 0x007E
+	func fn[0,5]
+	unk1 0
+
+look_point[1]:
+	pos (6900, 0, -1410)
+	radius 400mm
+	bubble_pos (8650, 1500, -1430)
+	flags 0x007E
+	func fn[0,7]
+	unk1 0
+
+look_point[2]:
+	pos (-200120, 0, 118010)
+	radius 1200mm
+	bubble_pos (-200120, 1500, 118010)
+	flags 0x007C
+	func fn[0,11]
+	unk1 0
+
+look_point[3]:
+	pos (-121030, -4000, -99900)
+	radius 800mm
+	bubble_pos (-121030, -3000, -99900)
+	flags 0x007C
+	func fn[0,12]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[5] 0x0080
+		CharFlagsUnset char[6] 0x0080
+		CharFlagsUnset char[3] 0x0080
+		CharFlagsUnset char[4] 0x0080
+		if !flag[12172]:
+			CharFlagsSet char[5] 0x0010
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,9]
+	Return
+
+fn[1]:
+	if system[66] == 26:
+		OpLoad "T3111_1"
+		EffStop eff_instance[128] 0
+		ObjFlagsSet object[32] 0x0004
+		ObjFlagsSet object[33] 0x0004
+		ObjFlagsSet object[34] 0x0004
+		ObjFlagsSet object[35] 0x0004
+		ObjFlagsSet object[36] 0x0004
+		ObjFlagsSet object[37] 0x0004
+	if system[66] == 25:
+		OpLoad "T3111_1"
+		EffStop eff_instance[128] 0
+		ObjFlagsSet object[32] 0x0004
+		ObjFlagsSet object[33] 0x0004
+		ObjFlagsSet object[34] 0x0004
+		ObjFlagsSet object[35] 0x0004
+		ObjFlagsSet object[36] 0x0004
+		ObjFlagsSet object[37] 0x0004
+	switch system[0]:
+		case 108:
+		case 109:
+			SoundPlay sound[160] 1 0 100
+			break
+		default:
+			SoundStop sound[160]
+			break
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12165]:
+		if flag[12172]:
+			if flag[0]:
+				TextTalk self {
+					I'm in the middle of talking Ochre here through
+					my work so he can take over my position.{wait}
+				}
+				TextWait
+				TextTalk self {
+					This job's something you need every detail spelled
+					out for you, you see. It's kind of hard to pick up
+					on your own.{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					I'm actually going to be becoming an on-board
+					engineer for the Arseille soon.{wait}
+				}
+				TextWait
+				TextTalk self {
+					I guess ending up on it that time was just fate,
+					or something.{wait}
+				}
+				TextWait
+				TextTalk self {
+					I was offered the job with some vacation time,
+					so I wasn't about to tell 'em no!{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			Emote char[5] 0mm 2000mm 38 38 250ms 1
+			Sleep 500ms
+			CharTurnToChar self name[5] 500deg/s
+			Sleep 300ms
+			TextTalk self {
+				W-Wait! I recognize you...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Weren't you one of the bracers on
+				the Arseille?{wait}
+			}
+			TextWait
+			TextTalk name[5] {
+				#050FYeah...{wait}
+			} {
+				#051FI remember you, too. You and the other engineers
+				did a great job when it ended up falling out of the
+				sky.{wait}
+			} {
+				Thanks again for what you did.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Ahaha. Think nothing of it.{wait}
+			}
+			TextWait
+			TextTalk self {
+				We were just doing our jobs.{wait}
+			}
+			TextWait
+			CharFlagsUnset char[5] 0x0010
+			FlagSet flag[12172]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				There are conveyor belts like this all throughout
+				ZCF's underground, connecting various factories
+				together in a big, complex network.{wait}
+			}
+			TextWait
+			TextTalk self {
+				ZCF itself is like one tall structure, with only
+				part of it visible above ground.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Not many people know this, but there are
+				actually a whole five underground floors.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I was foreman in an underground orbment
+				factory at one point...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but now I'm going to be working over here
+				for a while.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Faye's in the middle of explaining the work
+				she does here to me.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[5]:
+	Call fn[0,6]
+	Return
+
+fn[6]:
+	TextStart char[4]
+	if flag[12165]:
+		if flag[3]:
+			TextTalk char[4] {
+				Professor Russell boarded the elevator not
+				long ago.{wait}
+			}
+			TextWait
+			TextTalk char[4] {
+				I'm afraid I have no idea where she could've
+				gone after that, though.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[4] {
+				What? You're looking for Professor Russell?{wait}
+			}
+			TextWait
+			TextTalk char[4] {
+				She passed by here not long ago, actually.{wait}
+			}
+			TextWait
+			TextTalk char[4] {
+				I saw her boarding the elevator with Tita,
+				but I'm afraid I have no idea where she
+				could've gone after that.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd char[4]
+	Return
+
+fn[7]:
+	Call fn[0,8]
+	Return
+
+fn[8]:
+	TextStart char[3]
+	if flag[12165]:
+		if flag[2]:
+			TextTalk char[3] {
+				It's oddly quiet today, though...{wait}
+			}
+			TextWait
+			TextTalk char[3] {
+				Somehow that just makes me nervous rather
+				than happy...{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[3] {
+				If you happen to hear any strange shouts or
+				loud explosions while you're here, just...ignore
+				them, okay?{wait}
+			}
+			TextWait
+			TextTalk char[3] {
+				It's for the best. Just trust me.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd char[3]
+	Return
+
+fn[9]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-170, 0, -3880) 0ms
+	CamSetDistance 0 8480 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 310 0ms
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-5000, 0, 9500) 0deg
+	CharColor char[2] 0x00FFFFFF 0ms
+	CharSetPos name[6] (0, 0, -13500) 0deg
+	CharColor name[6] 0x00FFFFFF 0ms
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	FadeIn 2000ms 0x00000000
+	Fork char[7] fork[0]:
+		CamLookPos (-3950, 0, 4690) 4000ms
+	Fork char[7] fork[1]:
+		CamRotate 40000mdeg 4000ms
+	Fork char[7] fork[2]:
+		CamSetDistance 0 5240 -10000 4000ms
+	Fork char[7] fork[3]:
+		CamZoom 2760 4000ms
+	ForkFunc name[6] fork[3] fn[0,10]
+	Sleep 2500ms
+	ObjFlagsUnset object[0] 0x0010
+	ObjPlay object[0] 30
+	ObjWait object[0]
+	Fork char[2] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-5000, 0, 6850) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	ObjPlay object[0] 0
+	ObjWait object[0]
+	ForkWait name[6] fork[3]
+	Emote name[6] 0mm 1700mm 38 38 250ms 1
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83188v#061F#12POh! Good morning, Mr. Murdock!{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-5000, 0, 4370) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Sleep 300ms
+	TextTalk char[2] {
+		#96652v#800F#5PO-Oh, it's you, Tita. Good morning.{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83189v#560F#12PUmm... You wouldn't happen to know where
+		Mom and Grandpa are, would you?{wait}
+	} {
+		#83190vDad said they came here early this morning...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#96653v#803F#5POooh, they did... I know that very well, indeed...{wait}
+	} {
+		#96654vErika came charging in with a look on her face
+		that signaled all hell was about to break loose...{wait}
+	} {
+		#96655v#804FAll the while, she was shouting, 'We've got a new
+		invention to make, so we need somewhere really,
+		REALLY big! Hop to it!'#1340W #20W 
+		#803FShe wouldn't take no for an answer, either.{wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83191v#562F#12PI-I'm so sorry about her...{wait}
+	} {
+		#83192vShe causes you so much trouble every time she
+		decides she wants to invent something new.{wait}
+	} {
+		#83193v#067FAt least she's better than Grandpa. Maybe...{wait}
+	} {
+		#83194vShe doesn't scare the daylights out of
+		you by suddenly yelling, 'Fire in the hole!'
+		riiight before an unexpected explosion.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#96656v#801F#5PIf only I could wipe that from my memory...
+		Ahahaha...{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	TextTalk char[2] {
+		#96657v#800F#5PIn any case, your mother should be up in the
+		operations room.{wait}
+	} {
+		#96658vI've got no idea what she's planning, but she said
+		she had something she wanted to look into using
+		the Capel.{wait}
+	} {
+		#96659v#805FAs for your grandfather, he's in the design room.
+		I-In a very good mood...{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 2000mm 20 23 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 200ms
+	Fork char[2] fork[0]:
+		CharShake self 15 0 1000 3000ms
+	Sleep 1000ms
+	TextTalk char[2] {
+		#96660v#806F#5PI can't believe the two of them are working
+		together on something. This can't end well...{wait}
+	} {
+		#96661vP-Please, Goddess... Pleeease don't let them
+		break anything...{wait}
+	} {
+		#96662v#803FUgh... My stomach hurts...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	ForkLoop name[6] fork[2]:
+		CharTurnToChar self char[2] 500deg/s
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-3300, 0, 3040) 1500mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-3300, 0, 2000) 1500mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[0]:
+		CharShake self 15 0 1000 3000ms
+	Sleep 1000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-3300, 0, -460) 1500mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[0]:
+		CharShake self 15 0 1000 3000ms
+	Sleep 1000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-3300, 0, -8660) 1500mm/s 0
+	Sleep 3000ms
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83195v#064F#5PActually, now that I think about it, I think this
+		is the first time they HAVE worked on the same
+		thing together.{wait}
+	} {
+		#83196vUsually they're competing over who can make
+		the best invention, not joining forces on one...{wait}
+	} {
+		#83197v#060FGrandpa's amazing on his own, but Mom's just
+		as capable an engineer, too, even if she is kind
+		of scary when she gets into her work.{wait}
+	} {
+		#83198vIf the two of them are actually going to put 
+		their heads together on something...{wait}
+	} {
+		#83199v#067FHeehee. I can't wait to see the result! ♪{wait}
+	} {
+		#83200vI wanna go see right away!{wait}
+	}
+	TextWait
+	ForkQuit name[6] fork[2]
+	CharTurnTo name[6] 0deg 600deg/s
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-5000, 0, 7280) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	ObjPlay object[0] 30
+	ObjWait object[0]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-5000, 0, 9500) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	ObjFrame object[0] 30
+	ObjPlay object[0] 0
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	FlagSet flag[9476]
+	NewScene "t3119._sn" 100 0 0
+	Hcf
+	Return
+
+fn[10]:
+	Fork name[6] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[6] fork[1]:
+		CharWalkToPos self (0, 0, -2240) 4500mm/s 0
+	Sleep 1000ms
+	SoundPlay sound[109] 0 0 100
+	ForkWait name[6] fork[1]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-5000, 0, 2680) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	CharTurnTo name[6] 0deg 500deg/s
+	Return
+
+fn[11]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Left: Elevator
+		Right: Basement Orbment Workshop{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[12]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}The door is locked.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

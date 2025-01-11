@@ -1,0 +1,172 @@
+calmare tc scena
+scena:
+	name "gaiden2" "U4123.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (117130, 0, -1810)
+	radius 1000mm
+	bubble_pos (116000, 3000, -1500)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (-6080, 0, -90)
+	radius 1000mm
+	bubble_pos (-6080, 1000, -90)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,5]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[4] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	Return
+
+fn[2]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Open the Door?{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (119150, 0, -1320) 270deg
+	CharSetPos field_party[1] (119160, 0, -2640) 270deg
+	CharSetPos field_party[2] (120770, 0, -1370) 270deg
+	CharSetPos field_party[3] (121190, 0, -2760) 270deg
+	CamLookPos (117190, 0, -1720) 0ms
+	CamSetDistance 0 4270 -10000 0ms
+	CamZoom 3690 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	if !QuestFlagsGet quest[4] 0x02:
+		QuestFlagsSet quest[4] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99886v{color 5}#40WBring to me the dancer with silver locks.
+		#500W 
+		#40WOnly then shall the door open...{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if PartyPosition name[2] != -1:
+		Call fn[0,2]
+		if var[0] == 0:
+			Call fn[0,4]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[4]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[6] 0
+	ObjPlay object[6] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[6]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2750 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 7 0 0
+	NewScene "p9000._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (119150, 0, -1320) 270deg
+	CharSetPos field_party[1] (119160, 0, -2640) 270deg
+	CharSetPos field_party[2] (120770, 0, -1370) 270deg
+	CharSetPos field_party[3] (121190, 0, -2760) 270deg
+	CamLookPos (117190, 0, -1720) 0ms
+	CamSetDistance 0 4270 -10000 0ms
+	CamZoom 3690 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return
+
+fn[6]:
+	TextStart null
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}Orbal communications aren't usable.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	Return

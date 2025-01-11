@@ -1,0 +1,445 @@
+calmare sc scena
+scena:
+	name "Gaiden3" "M5507.x"
+	town town[1]
+	bgm bgm[231]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (5300, 0, 9990)
+	radius 800mm
+	bubble_pos (5670, 1500, 10510)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	if flag[10501] && !flag[10502]:
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -121000) file[0x002300A4]
+	_1B look_point[1] fn[0,3]
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (950, 0, 25250) 180deg
+	CharSetPos name[1] (2360, 0, 25120) 180deg
+	CharSetPos party[2] (1230, 0, 26610) 180deg
+	CharSetPos party[3] (2670, 0, 26530) 180deg
+	CamLookPos (2700, 3000, -24000) 0ms
+	CamSetDistance 0 14750 -10000 0ms
+	CamZoom 2930 0ms
+	CamRotate 89000mdeg 0ms
+	CamPers 428 0ms
+	Fork name[8] fork[1]:
+		CamLookPos (2700, 3000, 13000) 12000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 12710 -10000 9000ms
+	Fork name[8] fork[3]:
+		CamZoom 2930 9000ms
+	Fork name[1] fork[2]:
+		CamPers 428 9000ms
+	ED6_12 35000 160000 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-1510, 0, 13210) 2000mm/s 0
+	Sleep 200ms
+	Fork name[1] fork[0]:
+		CharWalkToPos self (-10, 0, 13030) 2000mm/s 0
+	Sleep 130ms
+	Fork party[2] fork[0]:
+		CharWalkToPos self (-1430, 0, 14740) 2000mm/s 0
+	Sleep 150ms
+	Fork party[3] fork[0]:
+		CharWalkToPos self (290, 0, 14490) 2000mm/s 0
+	Sleep 1000ms
+	CrossFade 1000ms
+	ED6_12 35000 200000 0
+	ForkQuit name[8] fork[1]
+	ForkQuit name[8] fork[2]
+	ForkQuit name[8] fork[3]
+	ForkQuit name[1] fork[2]
+	CamLookPos (1500, 0, -2430) 0ms
+	CamSetDistance 0 12990 -10000 0ms
+	CamZoom 3480 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 427 0ms
+	Fork name[8] fork[1]:
+		CamLookPos (-350, 2000, 10660) 5500ms
+	Fork name[8] fork[3]:
+		CamZoom 3800 5500ms
+	FadeWait
+	ForkWait name[8] fork[0]
+	ForkWait name[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait name[8] fork[1]
+	ForkWait name[1] fork[1]
+	Sleep 1000ms
+	CrossFade 1000ms
+	ED6_12 35000 130000 0
+	CamLookPos (520, 0, 15250) 0ms
+	CamSetDistance 0 5650 -10000 0ms
+	CamZoom 2540 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 337 0ms
+	FadeWait
+	Sleep 500ms
+	if PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#85935v#1310F#5POh, wow! Look at how pretty the trees are!{wait}
+		} {
+			#85936v#819FThey were still green when Estelle and I were
+			here. It's like a whole different forest now.{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#82714v#560F#5PLook at all this! It's so pretty!{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#81190v#1168F#5PWow... This forest is so beautiful.{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#84150v#415F#5PWow... This forest is so beautiful.{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#79853v#1540F#5POh, my... This is just stunning.{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#84865v#171F#5PMy... How stunning.{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83567v#070F#5PWow... Now, this is a real sight to behold.{wait}
+		}
+		TextWait
+	TextTalk name[1] {
+		#77700v#1504F#5P...{wait}
+	} {
+		#77701v#1502FIt certainly is pretty...but don't you think it's odd?{wait}
+	} {
+		#77702vThe leaves of coniferous trees don't usually turn
+		orange like this, do they?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89127v#1065F#6PMost don't, but there are some varieties that lose
+		their leaves in the fall, for sure.{wait}
+	} {
+		#89128v#1067FCan't remember their names, though. Ries would
+		know better than me, but, well...{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#77703v#1500F#5PI see. Don't mind me, then.{wait}
+	} {
+		#77704v#1503FActually, wait. The trees near the lodge are
+		the same variety as these, aren't they?{wait}
+	}
+	TextWait
+	if PartyPosition name[12] != -1:
+		FlagSet flag[2]
+		TextTalk name[12] {
+			#85542v#270F#5PHmm... Those were still green, too.{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		FlagSet flag[7]
+		TextTalk name[7] {
+			#83568v#072F#5PHmm... Those were still green, too.{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		FlagSet flag[1]
+		TextTalk name[13] {
+			#84866v#178F#5PHmm... Those were still green, too.{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		FlagSet flag[6]
+		TextTalk name[3] {
+			#79854v#1542F#5PHmm... Those were still green, too.{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		FlagSet flag[3]
+		TextTalk name[10] {
+			#84151v#212F#5PThose weren't showing any signs of losing their
+			leaves at all, either...{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		FlagSet flag[5]
+		TextTalk name[4] {
+			#81191v#1162F#5PThose weren't showing any signs of losing their
+			leaves at all, either...{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		FlagSet flag[0]
+		TextTalk name[6] {
+			#82715v#062F#5PThose weren't showing any signs of losing their
+			leaves, either...{wait}
+		}
+		TextWait
+	if flag[2] | flag[7] | flag[6] | flag[1] | flag[5]:
+		TextTalk name[8] {
+			#89129v#1065F#6PYeah... So your first guess might've been wrong,
+			but there's definitely SOMETHING off here.{wait}
+		} {
+			#89130v#1063FWe'd better be careful.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#89131v#1065F#6PYeah... So your first guess might've been wrong,
+			but there's definitely SOMETHING off here.{wait}
+		} {
+			#89132v#1063FWe'd better be careful.{wait}
+		}
+		TextWait
+	FlagSet flag[10502]
+	QuestTaskSet quest[51] 0x0001
+	QuestTaskSet quest[51] 0x0002
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	SystemFlagsUnset 0x02000000
+	var[3] = 0
+	if flag[10506]:
+		var[3] = 2
+	elif flag[10501]:
+		var[3] = 1
+	SystemFlagsSet 0x00000080
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	switch var[3]:
+		case 0:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP001._CH"
+			break
+		case 1:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP002._CH"
+			break
+		case 2:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP003._CH"
+			break
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisWait vis[0] 3
+	MapColor 0x00000000 0ms
+	var[2] = 255
+	while var[2] == 255:
+		system[40] = 24
+		switch var[3]:
+			case 0:
+				Menu menu[0] 30 80 0
+					"[Guild Lodge]" // 0
+					"[Balstar Channel]" // 1
+				break
+			case 1:
+				Menu menu[0] 30 80 0
+					"[Guild Lodge]" // 0
+					"[Balstar Channel]" // 1
+					"[Saint-Croix Forest]" // 2
+				break
+			case 2:
+				Menu menu[0] 30 80 0
+					"[Guild Lodge]" // 0
+					"[Balstar Channel]" // 1
+					"[Saint-Croix Forest]" // 2
+					"[Grimsel Fortress]" // 3
+				break
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[0]
+		TextClose 0
+		switch var[0]:
+			case 0:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Guild Lodge]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 0
+						break
+					case 1:
+						break
+				break
+			case 1:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Balstar Channel]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 1
+						break
+					case 1:
+						break
+				break
+			case 2:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Saint-Croix Forest]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 2
+						break
+					case 1:
+						break
+				break
+			case 3:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Grimsel Fortress]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 3
+						break
+					case 1:
+						break
+				break
+	switch var[2]:
+		case 0:
+			VisSet vis[0] 0 -640000 0 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 1:
+			VisSet vis[0] 0 -358000 -37000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 2:
+			VisSet vis[0] 0 -362000 -266000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 3:
+			VisSet vis[0] 0 -64000 -340000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+	MapColor 0x00FFFFFF 0ms
+	switch var[2]:
+		case 0:
+			if !flag[10510]:
+				NewScene file[0x0021040A] 100 0 0
+				Hcf
+			else:
+				NewScene "snres227.   " 100 0 0
+				Hcf
+			break
+		case 1:
+			NewScene file[0x00210411] 100 0 0
+			Hcf
+			break
+		case 2:
+			NewScene file[0x00210415] 101 0 0
+			Hcf
+			break
+		case 3:
+			NewScene file[0x00210417] 101 0 0
+			Hcf
+			break
+	Return
+
+fn[4]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Saint-Croix Forest{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		{color 5}Recommended for ranger training and other
+		survival lessons.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

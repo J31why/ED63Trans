@@ -1,0 +1,146 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4103.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14500._ch" "mons2/ch14500p._cp"
+chip[1] "mons2/ch14501._ch" "mons2/ch14501p._cp"
+chip[2] "mons2/ch14510._ch" "mons2/ch14510p._cp"
+chip[3] "mons2/ch14511._ch" "mons2/ch14511p._cp"
+chip[4] "mons2/ch14520._ch" "mons2/ch14520p._cp"
+chip[5] "mons2/ch14521._ch" "mons2/ch14521p._cp"
+
+monster char[0]:
+	name ""
+	pos (4500, 0, 40200)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-4240, 0, 49590)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-22550, 0, 49960)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (12800, 0, 63090)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (4500, 0, 40200)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[210]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (-4240, 0, 49590)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[203]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (-22550, 0, 49960)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[203]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (12800, 0, 63090)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[210]
+	flag flag[0]
+	unk3 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-138000, null, -78000) "mt4103._ch"
+	if flag[10017]:
+		OpLoad "U4103_y"
+	else:
+		OpLoad "U4103_n"
+	if flag[10017]:
+		CharFlagsSet char[0] 0x0080
+		CharFlagsSet char[1] 0x0080
+		CharFlagsSet char[2] 0x0080
+		CharFlagsSet char[3] 0x0080
+	else:
+		CharFlagsSet char[4] 0x0080
+		CharFlagsSet char[5] 0x0080
+		CharFlagsSet char[6] 0x0080
+		CharFlagsSet char[7] 0x0080
+	if !flag[10017]:
+		EntranceSetDisabled entrance[5] 0
+	else:
+		ObjFlagsSet object[7] 0x0004
+	if !flag[9999]:
+		EntranceSetDisabled entrance[4] 0
+	else:
+		ObjFlagsSet object[8] 0x0004
+	Return

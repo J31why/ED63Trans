@@ -1,0 +1,303 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M5414.x"
+	town town[1]
+	bgm bgm[114]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	if system[66] == 255:
+		switch system[0]:
+			case 100:
+				Event fn[0,3]
+				break
+	Return
+
+fn[1]:
+	_1B look_point[0] fn[0,4]
+	if !flag[11051]:
+		EffStop eff_instance[130] 0
+		EffStop eff_instance[131] 0
+		EffStop eff_instance[132] 0
+		EffStop eff_instance[133] 0
+		EffStop eff_instance[134] 0
+		EffStop eff_instance[135] 0
+		system[1] = 175
+		SystemFlagsSet 0x02000000
+	Return
+
+fn[2]:
+	Tc_DE 0 1638656
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-850, -3000, -71360) 0deg
+	if CharInSlot 0 party[1] == 1:
+		CharSetPos name[1] (370, -3000, -71400) 0deg
+		CharSetPos party[2] (-840, -3000, -72800) 0deg
+		CharSetPos party[3] (410, -3000, -72820) 0deg
+	elif CharInSlot 0 party[2] == 1:
+		CharSetPos name[1] (370, -3000, -71400) 0deg
+		CharSetPos party[1] (-840, -3000, -72800) 0deg
+		CharSetPos party[3] (410, -3000, -72820) 0deg
+	elif CharInSlot 0 party[3] == 1:
+		CharSetPos name[1] (370, -3000, -71400) 0deg
+		CharSetPos party[1] (-840, -3000, -72800) 0deg
+		CharSetPos party[2] (410, -3000, -72820) 0deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (-5000, 21350, -30840) 0ms
+	CamSetDistance 0 0 -10000 0ms
+	CamZoom 5510 0ms
+	CamRotate 33000mdeg 0ms
+	CamPers 599 0ms
+	Fork party[0] fork[0]:
+		CamLookPos (500, -3000, -71300) 8000ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 7300 -10000 8500ms
+	Fork party[0] fork[3]:
+		CamZoom 4370 8500ms
+	Fork party[1] fork[0]:
+		CamRotate 45000mdeg 8000ms
+	Fork party[1] fork[2]:
+		CamPers 613 8500ms
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	Sc_C8 512 70 "C_PLAC41._CH" 0 2000
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	Fork party[0] fork[0]:
+		CamLookPos (500, -3000, -71300) 8000ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 7550 -10000 8000ms
+	Fork party[0] fork[3]:
+		CamZoom 2000 8000ms
+	Fork party[1] fork[0]:
+		CamRotate 45000mdeg 8000ms
+	Fork party[1] fork[2]:
+		CamPers 383 8000ms
+	Sleep 2000ms
+	CrossFade 1000ms
+	ForkQuit party[0] fork[0]
+	ForkQuit party[0] fork[2]
+	ForkQuit party[0] fork[3]
+	ForkQuit party[1] fork[0]
+	ForkQuit party[1] fork[2]
+	CamLookPos (500, -3000, -71300) 0ms
+	CamSetDistance 0 7600 -10000 0ms
+	CamZoom 2150 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 374 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp204_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-200, -3000, -71890) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Fork field_party[0] fork[1]:
+		CharColor self 0xFFFFFFFF 800ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0xFFFFFFFF 800ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0xFFFFFFFF 800ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0xFFFFFFFF 800ms
+	Sleep 1500ms
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	if CharInSlot 0 party[0] == 7:
+		Emote party[0] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[0] == 6:
+		Emote party[0] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[0] == 15:
+		Emote party[0] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[0] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1500ms
+	if PartyPosition name[0] != -1 | PartyPosition name[14] != -1:
+		if PartyPosition name[0] != -1:
+			TextTalk name[0] {
+				#76797v#1020F#12PWhere are we...?{wait}
+			}
+			TextWait
+		elif PartyPosition name[14] != -1:
+			TextTalk name[14] {
+				#92476v#1443F#12PWhere are we...?{wait}
+			}
+			TextWait
+		TextTalk name[8] {
+			#89669v#1067F#6PLooks like our friend's prepped an
+			arena to have our final battle in.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#89670v#1079F#6PWhere are we...?{wait}
+		} {
+			#89671v#1067FLooks like our friend's prepped an
+			arena to have our final battle in.{wait}
+		}
+		TextWait
+	TextTalk name[1] {
+		#78124v#1505F#5PIt seems that way.{wait}
+	} {
+		#78125v#1502FI can sense someone waiting for us right at the 
+		top of the staircase―someone really powerful.{wait}
+	} {
+		#78126vLet's go.{wait}
+	}
+	TextWait
+	FlagSet flag[11050]
+	TcMonumentEnable 255 0 0
+	QuestFlagsSet quest[59] 0x04
+	QuestFlagsSet quest[59] 0x08
+	QuestTaskSet quest[59] 0x0001
+	Sleep 300ms
+	EventEnd 0
+	SystemFlagsSet 0x02000000
+	Return
+
+fn[3]:
+	if flag[11049] && !flag[11050]:
+		Call fn[0,2]
+		Return
+	Tc_DE 0 35193088
+	system[40] = 65535
+	CharSetPos field_party[0] (-30, -3000, -71200) 0deg
+	CharSetPos field_party[1] (700, -3000, -72200) 0deg
+	CharSetPos field_party[2] (-1080, -3000, -71960) 0deg
+	CharSetPos field_party[3] (-290, -3000, -72860) 0deg
+	CamLookChar field_party[0] 0ms
+	EffLoad eff[0] "map\\mp204_02.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-200, -3000, -71890) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,5]
+	TcMonumentEnable 255 0 0
+	EventEnd 0
+	SystemFlagsSet 0x02000000
+	Minigame 22 0 0 0 0 0 0 0 0
+	Return
+
+fn[4]:
+	EventBegin 1
+	system[40] = 65535
+	SystemFlagsUnset 0x02000000
+	CrossFade 500ms
+	CharSetPos field_party[3] (-30, -3000, -71200) 180deg
+	CharSetPos field_party[2] (700, -3000, -72200) 180deg
+	CharSetPos field_party[1] (-1080, -3000, -71960) 180deg
+	CharSetPos field_party[0] (-290, -3000, -72860) 180deg
+	CamLookChar field_party[0] 0ms
+	FadeWait
+	EffLoad eff[0] "map\\mp204_01.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-200, -3000, -71890) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Call fn[0,6]
+	TcMonumentDisable 255 0 0
+	NewScene "m5401._sn" 101 0 0
+	Hcf
+	Return
+
+fn[5]:
+	if system[10] != 255:
+		CharColor field_party[0] 0x00FFFFFF 0ms
+		Fork field_party[0] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[11] != 255:
+		CharColor field_party[1] 0x00FFFFFF 0ms
+		Fork field_party[1] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[12] != 255:
+		CharColor field_party[2] 0x00FFFFFF 0ms
+		Fork field_party[2] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	if system[13] != 255:
+		CharColor field_party[3] 0x00FFFFFF 0ms
+		Fork field_party[3] fork[1]:
+			CharColor self 0xFFFFFFFF 800ms
+	Sleep 800ms
+	ForkQuit field_party[0] fork[1]
+	ForkQuit field_party[1] fork[1]
+	ForkQuit field_party[2] fork[1]
+	ForkQuit field_party[3] fork[1]
+	if system[10] != 255:
+		CharColor field_party[0] 0xFFFFFFFF 0ms
+	if system[11] != 255:
+		CharColor field_party[1] 0xFFFFFFFF 0ms
+	if system[12] != 255:
+		CharColor field_party[2] 0xFFFFFFFF 0ms
+	if system[13] != 255:
+		CharColor field_party[3] 0xFFFFFFFF 0ms
+	Return
+
+fn[6]:
+	Fork field_party[0] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[1] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[2] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Fork field_party[3] fork[1]:
+		CharColor self 0x00FFFFFF 800ms
+	Sleep 1000ms
+	Return

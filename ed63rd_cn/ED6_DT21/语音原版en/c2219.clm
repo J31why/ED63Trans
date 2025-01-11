@@ -1,0 +1,319 @@
+calmare fc scena
+scena:
+	name "Ruan" "C2219.x"
+	town town[84]
+	bgm bgm[15]
+	item fn[0,65535]
+	scp 0 file[0x00210281]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01000._ch" "npl/ch01000p._cp"
+
+npc char[0]:
+	name "Vogt"
+	pos (-2870, 0, 202000)
+	angle 270deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,3]
+
+fn[0]:
+	Return
+
+fn[1]:
+	_ObjB0 object[0] 120
+	_1C object[0] fn[0,5]
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12066]:
+		if flag[12099]:
+			if flag[0]:
+				TextTalk self {
+					I reckon my happiness is right here in this
+					lighthouse.{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					There's actually a shining stone here in this
+					lighthouse, though, even if it's not what you
+					are looking for.{wait}
+				}
+				TextWait
+				TextTalk self {
+					I reckon that's my happiness...{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		elif flag[12100]:
+			if flag[0]:
+				TextTalk self {
+					There's no shame in relying on others for
+					help if you need it! Grab 'em by the collar
+					and scream for help if you need it!{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					You lookin' for some help, young lady?{wait}
+				}
+				TextWait
+				TextTalk self {
+					What do you need?{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1714FN-No. I'll be fine, honestly...{wait}
+				} {
+					#1713FThank you for offering, sir.{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			EventBegin 1
+			CharTurnTo self 270deg 0deg/s
+			CrossFade 1000ms
+			CamLookPos (-1600, 0, 202380) 0ms
+			CamSetDistance 0 6000 -10000 0ms
+			CamZoom 3000 0ms
+			CamRotate 45000mdeg 0ms
+			CamPers 280 0ms
+			CharSetPos name[77] (-1280, 0, 202300) 270deg
+			Sleep 1000ms
+			TextTalk self {
+				I swear, this is EXACTLY what's wrong
+				with youngins these days...{wait}
+			}
+			TextWait
+			Emote char[8] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			CharTurnTo self 90deg 500deg/s
+			Sleep 500ms
+			TextTalk self {
+				Wh-What are you doing here, young lady?{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1712FU-Umm... Excuse me, sir...{wait}
+			} {
+				You haven't seen a young girl other
+				than me in here recently have you?{wait}
+			}
+			TextWait
+			TextTalk self {
+				A young girl? 'Fraid not.{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1713FI-I see...{wait}
+			} {
+				Sorry for troubling you...{wait}
+			}
+			TextWait
+			ForkLoop char[8] fork[3]:
+				CharTurnToChar self name[77] 0deg/s
+			ForkFunc name[77] fork[3] fn[0,4]
+			Sleep 3000ms
+			Emote char[8] 0mm 2000mm 24 27 250ms 0
+			Sleep 3000ms
+			EmoteStop char[8]
+			TextTalk self {
+				I swear, kids these days...{wait}
+			}
+			TextWait
+			TextTalk self {
+				They sure are a pain.{wait}
+			}
+			TextWait
+			FlagSet flag[12100]
+			FadeOut 2000ms 0x00000000 255
+			FadeWait
+			ForkQuit char[8] fork[3]
+			NewScene file[0x00210281] 107 0 0
+			Hcf
+	elif flag[12064]:
+		if flag[12099]:
+			TextTalk self {
+				A happiness stone, you say?{wait}
+			}
+			TextWait
+			TextTalk self {
+				You think somethin' like that exists?{wait}
+			}
+			TextWait
+		else:
+			EventBegin 1
+			CharTurnTo self 270deg 0deg/s
+			CrossFade 1000ms
+			CamLookPos (-1600, 0, 202380) 0ms
+			CamSetDistance 0 6000 -10000 0ms
+			CamZoom 3000 0ms
+			CamRotate 45000mdeg 0ms
+			CamPers 280 0ms
+			CharSetPos name[77] (-1250, 0, 202480) 270deg
+			CharSetPos name[78] (-1060, 0, 201620) 270deg
+			Sleep 1000ms
+			TextTalk self {
+				I swear, kids these days...{wait}
+			}
+			TextWait
+			Emote char[8] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			CharTurnTo self 90deg 500deg/s
+			Sleep 500ms
+			TextTalk self {
+				Wh-What might you two be doing here?{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1718FHello!{wait}
+			}
+			TextWait
+			Emote name[77] 0mm 1600mm 38 39 250ms 1
+			Sleep 500ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#1714FActually, lighthouses are pretty high up,
+				aren't they?{wait}
+			} {
+				#1718FSir, you haven't seen a happiness stone before,
+				have you?{wait}
+			}
+			TextWait
+			TextTalk self {
+				A-A happiness stone?!{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1730FThey're really shiny and pretty!{wait}
+			}
+			TextWait
+			TextTalk self {
+				N-No, I don't recall ever seein' any
+				such thing in all my years...{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1716FOh... That's too bad...{wait}
+			} {
+				#1710FWell, thank you, anyway.{wait}
+			}
+			TextWait
+			CharTurnToChar name[77] name[78] 400deg/s
+			Sleep 400ms
+			TextTalk name[77] {
+				#1718FLet's keep looking, Polly! {wait}
+			}
+			TextWait
+			ForkFunc name[77] fork[3] fn[0,4]
+			Sleep 2000ms
+			TextTalk name[78] {
+				#1731FI hope your back feels better, mister!{wait}
+			}
+			TextWait
+			Emote char[8] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			ForkLoop char[8] fork[3]:
+				CharTurnToChar self name[78] 0deg/s
+			ForkFunc name[78] fork[3] fn[0,4]
+			Sleep 3000ms
+			Emote char[8] 0mm 2000mm 24 27 250ms 0
+			Sleep 3000ms
+			EmoteStop char[8]
+			TextTalk self {
+				I swear, kids these days...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...They're sharp little devils, aren't they?{wait}
+			}
+			TextWait
+			Sleep 500ms
+			TextTalk self {
+				A happiness stone, hmm...?{wait}
+			}
+			TextWait
+			FlagSet flag[12099]
+			FadeOut 2000ms 0x00000000 255
+			FadeWait
+			ForkQuit char[8] fork[3]
+			NewScene file[0x00210281] 107 0 0
+			Hcf
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharWalkToPos self (2820, 0, 205060) 2000mm/s 0
+	ForkWait self fork[1]
+	Fork self fork[1]:
+		CharWalkToPos self (2820, 0, 206910) 2000mm/s 0
+	ForkWait self fork[1]
+	Fork self fork[1]:
+		CharWalkToPos self (-3500, -2000, 207090) 2000mm/s 0
+	ForkWait self fork[1]
+	Return
+
+fn[5]:
+	TextStart null
+	TextEnd null
+	Return

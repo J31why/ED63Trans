@@ -1,0 +1,225 @@
+calmare fc scena
+scena:
+	name "Zeiss" "T3132.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[1] "npl/ch01350._ch" "npl/ch01350p._cp"
+chip[2] "npl/ch01210._ch" "npl/ch01210p._cp"
+chip[3] "npl/ch01140._ch" "npl/ch01140p._cp"
+
+npc char[0]:
+	name "Martina"
+	pos (-1700, 0, 2400)
+	angle 192deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[1]:
+	name "Emma"
+	pos (68290, 0, 91600)
+	angle 90deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[2]:
+	name "Dodge"
+	pos (68100, 0, 56310)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,6]
+
+look_point[0]:
+	pos (-1290, 0, 550)
+	radius 400mm
+	bubble_pos (-1700, 1500, 2400)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (-4000, 0, 4000)
+	radius 800mm
+	bubble_pos (-4000, 1000, 4000)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[8] 0x0080
+		CharFlagsUnset char[9] 0x0080
+		CharFlagsUnset char[10] 0x0080
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (67200, null, 90290) (68610, null, 92730) 2000mm/s
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Return
+
+fn[4]:
+	TextStart char[8]
+	if flag[12165]:
+		if flag[0]:
+			TextTalk char[8] {
+				We've been getting an increasing number
+				of guests from Calvard lately, which is great
+				news for us...{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				...but the way Emma's been behaving lately,
+				I can't help but worry she'll do something
+				stupid and drive them away. I hope not...{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				I was in the linen room earlier, and I was
+				weirdly...shocked by what I found there.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Someone has hidden a disturbing number
+				of lamps under the shelves.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				...I know who's responsible, too. It's that Emma.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				What in Aidios' name possessed her to buy THAT
+				many of them? What are we ever going to need 
+				them for?{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd char[8]
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				Now, even if we can't turn the regular lights on,
+				we'll have a massive supply of lamps to light the
+				rooms. It's perfect!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I can focus on my work without any worries!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Ever since that time when I couldn't turn on the
+				orbal lamps in here, I've been worried about the
+				same thing happening again...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...so I decided to make sure it couldn't by buying
+				every single lamp I could get my hands on.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Now I'll never have to worry about that
+				happening ever again! ...Right?{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12165]:
+		if flag[2]:
+			TextTalk self {
+				So far, I haven't run into any trouble while
+				I've been here.{wait}
+			}
+			TextWait
+			TextTalk self {
+				My business talks have been going well, too...
+				Maybe this trip will be a little more successful
+				than the last?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I make a living buying orbments, and this isn't
+				my first time coming here to do it.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Last time I did, all the power in the town went
+				off, unfortunately.{wait}
+			}
+			TextWait
+			TextTalk self {
+				So I ended up going back empty handed...
+				I hope nothing happens this time.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[7]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Linen Room
+		{0x09}{0x09}{0x09}{0x09}※Employees Only{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

@@ -1,0 +1,1193 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4144.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+chip[1] "npl2/ch03590._ch" "npl2/ch03590p._cp"
+chip[2] "apl2/ch20607._ch" "apl2/ch20607p._cp"
+chip[3] "apl2/ch20622._ch" "apl2/ch20622p._cp"
+
+npc char[0]:
+	name "Erika Russell"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Lt. Colonel Cid"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Recluse Cube"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Recluse Cube"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9479]:
+		FlagUnset flag[9479]
+		SystemFlagsSet 0x10000000
+		system[1] = 210
+		Event fn[0,3]
+	elif flag[9478]:
+		FlagUnset flag[9478]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset name[8] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[8] (-280, 0, 310) 0deg
+	CharSetPos char[1] (460, 0, -2310) 0deg
+	CharSetPos char[0] (-780, 0, -1580) 0deg
+	CamLookPos (-1630, -1000, 27520) 0ms
+	CamSetDistance 0 8029 -10000 0ms
+	CamZoom 6000 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 354 0ms
+	Fork name[8] fork[2]:
+		CamZoom 7650 6000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sc_C8 512 70 "C_PLAC31._CH" 0 1000
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-70, -1000, 18210) 2000mm/s 0
+	Sleep 50ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-720, -1000, 16300) 2000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (610, -1000, 16180) 2000mm/s 0
+	ForkWait name[8] fork[2]
+	Sleep 2000ms
+	CrossFade 1000ms
+	CamLookPos (1280, -1000, 18410) 0ms
+	CamSetDistance 0 5460 -10000 0ms
+	CamZoom 3600 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 226 0ms
+	FadeWait
+	ForkWait name[8] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#97766v#1459F#6PWow...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97113v#703F#4PUnbelievable...{wait}
+	} {
+		#97114v#701FAll these years, I had no idea that such a place
+		lay hidden beneath Grancel Cathedral.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 180deg 400deg/s
+	TextTalk name[8] {
+		#87992v#1060F#5PWell, it's not exactly something we publicize.
+		It was built in accordance with the agreements
+		between the church and royal family.{wait}
+	} {
+		#87993v#1065FIt has but one purpose:{wait}
+	} {
+		#87994v#1063FTo suppress the power of ancient artifacts and
+		keep their influence in check.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97767v#1457F#6P...I see.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97115v#701F#4PIts importance to you Gralsritter is quite clear, 
+		then.{wait}
+	} {
+		#97116vI'd assume there are similar ones in places other
+		than Liberl, too.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87995v#1075F#5PWell, I won't deny it.{wait}
+	} {
+		#87996v#1060FAnyway, we call this place a 'primal ground.'{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97768v#1458F#6PNow, there's a deep name if I ever heard one.{wait}
+	} {
+		#97769v#1456FIs the original ground the others are based on
+		in Arteria?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87997v#1064F#5P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97770v#1450F#6PI'll take that as a 'yes.'{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#87998v#1066F#5POh, I'm not confirming anything.{wait}
+	} {
+		#87999vI was just thinking about how much you take
+		after the other Professor Russell, 's all.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97771v#1457F#6PUgh. I'll thank you not to associate me with him.{wait}
+	} {
+		#97772v#1456FHe might trump me a little in the theoretical side
+		of things, but when it comes to the practical
+		side of orbal science, I could beat him in my sleep.{wait}
+	} {
+		#97773vAnd I WAS the one who designed the fundamental
+		systems of the Capel AND the Arseille, you know.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88000v#1060F#5PReally? Nice.{wait}
+	} {
+		#88001v#1064F...Buuut I think we're getting off topic here.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 0deg 400deg/s
+	Fork char[0] fork[0]:
+		CamLookPos (1480, -1000, 24030) 2000ms
+	Fork char[0] fork[1]:
+		CamSetDistance 0 5460 -10000 2000ms
+	Fork char[0] fork[2]:
+		CamZoom 3850 2000ms
+	Fork char[0] fork[3]:
+		CamPers 254 2000ms
+	ForkWait char[0] fork[0]
+	Sleep 800ms
+	Fork name[8] fork[1]:
+		CamLookPos (1840, -1000, 29250) 4000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 4570 -10000 4000ms
+	Fork name[8] fork[3]:
+		CamZoom 3790 4000ms
+	Fork char[0] fork[1]:
+		CamPers 229 4000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-240, -1000, 26900) 2000mm/s 0
+	Sleep 150ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-1020, -1000, 24980) 2000mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (450, -1000, 25170) 2000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[0]
+	ForkWait name[8] fork[1]
+	Sleep 300ms
+	TextTalk name[8] {
+		#88002v#1063F#6PThis is the object in question, right?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97117v#703F#4PThat's correct.{wait}
+	} {
+		#97118v#700FIt was pulled up three days ago from the area 
+		where the Liber Ark sank, and we believe it to 
+		be an artifact.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	BgmStop 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmWait
+	FlagSet flag[9476]
+	NewScene "e0900._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	EventBegin 0
+	SystemFlagsUnset 0x02000000
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset name[8] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[8] (-240, -1000, 26900) 0deg
+	CharSetPos char[1] (450, -1000, 25170) 0deg
+	CharSetPos char[0] (-1020, -1000, 24980) 0deg
+	TcTeamMemberEnable name[14]
+	TcTeamClear 255
+	TcTeamAddMember 0 name[8]
+	TcTeamAddMember 0 name[14]
+	PartyClear
+	PartyAdd name[8] party[0] 255
+	PartyAdd name[14] party[1] 255
+	Call fn[6,9]
+	CharFlagsUnset name[14] 0x0080
+	CharSetPos name[14] (240, -1000, 15420) 0deg
+	FlagSet flag[9685]
+	CamLookPos (1930, -1000, 30500) 0ms
+	CamSetDistance 0 4900 -10000 0ms
+	CamZoom 4000 0ms
+	CamZoom 3800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 229 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[8] fork[0]
+	Sleep 300ms
+	TextTalk name[8] {
+		#88003v#1065F#6PI see...{wait}
+	} {
+		#88004v#1067FStill, looking at it...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97799v#1457F#6PCorrect.{wait}
+	} {
+		#97800vThere were orbal readings coming from the
+		artifact when we found it, but not anymore.{wait}
+	} {
+		#97801v#1452FAnd I'm sure I don't need to spell out the
+		significance of that, do I?{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamLookPos (1200, -1000, 27440) 1500ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 4650 -10000 1500ms
+	Fork name[8] fork[2]:
+		CamZoom 4000 1500ms
+	Fork name[8] fork[3]:
+		CamPers 229 1500ms
+	CharTurnTo name[8] 180deg 400deg/s
+	ForkWait name[8] fork[0]
+	TextTalk name[8] {
+		#88005v#1065F#5PNo, it's plain as day why you decided to stay
+		and wait for me now.{wait}
+	} {
+		#88006v#1060FIf an artifact has lost its power, it's exempt from
+		the traditional agreements governing them and
+		doesn't need to be given to the church. That it?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97802v#1456F#6PHeehee. You already understand me so well.
+		We can cut right to the chase, then.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97136v#703F#4PThe orbal readings disappeared just before we
+		handed the artifact over to the cathedral, as it
+		so happens.{wait}
+	} {
+		#97137vIt's currently being looked after here, but the
+		formal procedures to transfer ownership have yet 
+		to be completed, making its legal owner unclear.{wait}
+	} {
+		#97138v#700FSo, in your expert opinion, what should be done
+		here?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88007v#1067F#5PHmm... This is a tricky one...{wait}
+	} {
+		#88008v#1063FI'm assuming Liberl wants to assert ownership
+		of it in this scenario, right?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97139v#701F#4PIf anything, it's the professor here who
+		wants to do that.{wait}
+	} {
+		#97140vI'm merely here accompanying her as a 
+		representative of the Royal Army.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97803v#1450F#6PThe only reason it's not lying at the bottom of
+		Valleria Lake right now is because of ZCF's
+		salvage efforts.{wait}
+	} {
+		#97804vI'd say we have every right to keep it, personally.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88009v#1065F#5PFrom what I've heard, it's completely impossible to
+		analyze an artifact that's no longer active.{wait}
+	} {
+		#88010vI don't see how it'd be of any use to your research
+		as things stand now...{wait}
+	} {
+		#88011v#1840F...but you're sure you want it that badly?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97805v#1450F#6POh, absolutely.{wait}
+	} {
+		#97806v#1457FWe're talking about an object found at the site
+		of where a massive flying city used to be.{wait}
+	} {
+		#97807vI might not have seen it happen, but it sounds  
+		like everything we thought we knew about the 
+		world was more or less proven wrong.{wait}
+	} {
+		#97808v#1452FYou know, by the truth that you people in the
+		church have kept hidden for the past...oh, I don't
+		know...thousand years.{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#88012v#1063F#5P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97809v#1453F#6PAs for that Ouroboros group, they don't
+		make much more sense than you guys.{wait}
+	} {
+		#97810vThe more I hear about their advances in
+		technology, the less I can work out how
+		it's even possible.{wait}
+	} {
+		#97811v#1457FI don't know what the truth is or what's
+		really happening here in this land...{wait}
+	} {
+		#97812v...but I can't stand by and feign disinterest
+		in knowing the answers anymore--and I'm far
+		from alone.{wait}
+	} {
+		#97813v#1459FSo long as there's the slightest chance that
+		artifact could shed light on all of what I want
+		to know, I want it. {wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88013v#1067F#5P...{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#97141v#701F#2PI think you've made your point, Professor.{wait}
+	} {
+		#97142vIt's not as though interrogating him will
+		achieve anything.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97814v#1457F#6P...True enough.{wait}
+	}
+	TextWait
+	Fork char[1] fork[0]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 400ms
+	TextTalk char[0] {
+		#97815v#1450F#6PWell, you've heard what I've got to say.{wait}
+	} {
+		#97816vIt's now up to you to tell us what you're
+		going to do.{wait}
+	} {
+		#97817vWill you hand over that lump of metal?
+		Or won't you?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88014v#1067F#5P#40WWell...{wait}
+	}
+	TextWait
+	BgmStop 2000ms
+	TextTalkNamed name[14] "Girl's Voice" {
+		#91421v#1P'That brief hesitation was all it took to
+		spawn a great evil.'{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[0] fork[1]:
+		CharTurnTo self 180deg 400deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 180deg 400deg/s
+	BgmPlay bgm[183] 0
+	CrossFade 1000ms
+	CamLookPos (0, -1000, 223790) 0ms
+	CamSetDistance 0 5270 -10000 0ms
+	CamZoom 2910 0ms
+	CamRotate 180000mdeg 0ms
+	CamPers 294 0ms
+	CharSetPos name[14] (0, -1000, 212020) 0deg
+	CharSetChipBase name[14] chip[2]
+	CharSetChipPattern name[14] 0
+	CharSetPos name[8] (-90, -1000, 227080) 180deg
+	CharSetPos char[1] (610, -1000, 225560) 180deg
+	CharSetPos char[0] (-760, -1000, 225640) 180deg
+	Fork name[8] fork[0]:
+		CamLookPos (0, -1000, 211000) 4000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 3600 -10000 4000ms
+	Fork name[8] fork[2]:
+		CamZoom 3000 4000ms
+	Fork name[8] fork[3]:
+		CamPers 294 4000ms
+	FadeWait
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#97143v#702F#5P...?!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97818v#1454F#5PWho is she?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88015v#1079F#5P(No...way...){wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalkNamed name[14] "Sister" {
+		#91422v#1446F#5P'It crawled through the fields, ran through the 
+		hills, and spread disaster in the skies above.'{wait}
+	} {
+		#91423vAn excerpt from the Book of Ezer, Verse 2,
+		'Disaster Unleashed.'{wait}
+	}
+	TextWait
+	ForkWait name[8] fork[0]
+	Sleep 200ms
+	CharSetChipPattern name[14] 1
+	Sleep 200ms
+	CharSetChipPattern name[14] 2
+	Sleep 300ms
+	CrossFade 250ms
+	SoundPlay sound[143] 0 0 100
+	CharSetChipBase name[14] chip[65535]
+	CharSetChipPattern name[14] 0
+	FadeWait
+	Sleep 500ms
+	CrossFade 500ms
+	CamLookPos (1650, -1000, 210300) 0ms
+	CamSetDistance 0 4080 -10000 0ms
+	CamZoom 3020 0ms
+	CamRotate 134000mdeg 0ms
+	CamPers 299 0ms
+	Fork name[14] fork[0]:
+		CharWalkToPos self (-30, -1000, 222300) 2000mm/s 0
+	Fork name[8] fork[0]:
+		CamLookPos (1430, -1000, 222830) 5000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 4350 -10000 5000ms
+	Fork name[8] fork[2]:
+		CamZoom 2700 5000ms
+	Fork name[8] fork[3]:
+		CamPers 320 5000ms
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	Sleep 500ms
+	TextTalkNamed name[14] "Sister" {
+		#91424v#1440F#11PI apologize for the delay in coming,
+		Father Graham.{wait}
+	} {
+		#91425vMy name is Ries Argent, and I am a
+		squire of the Gralsritter.{wait}
+	} {
+		#91426vI look forward to working under you.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88016v#1064F#5P#6P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97819v#1452F#6PI didn't think we'd end up having more company.{wait}
+	} {
+		#97820v#1454FWait a second.{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1500ms
+	TextTalk name[14] {
+		#91427v#1444F#11P...Is something the matter?{wait}
+	}
+	TextWait
+	CharShake char[0] 15 0 300 3000ms
+	Emote char[0] 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97821v#1830F#6PSo that's how they think they can get me,
+		is it?!{wait}
+	} {
+		#97822vBut they can't just bribe me so easily!
+		I'm better than that!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91428v#1802F#11P...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97823v#1457F#6PM-Maybe I underestimated the Gralsritter...{wait}
+	} {
+		#97824vThey think they can break my will to fight by
+		sending a girl like you my way, do they?{wait}
+	} {
+		#97825v#1834FBut I'm not going to go down so easily, because
+		I've got a secret weapon of my own!{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97826v#1455F#6P#4SBehold!
+		The most powerful force in the universe!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	SoundPlay sound[143] 0 0 100
+	ImageShow "c_vis402._ch" 150 120 500ms
+	Sleep 1500ms
+	CharTurnTo char[1] 270deg 400deg/s
+	TextSetPos 100 60 -1 -1
+	TextSetName "Lieutenant Colonel Cid"
+	TextMessage null {
+		#97144v{color 0}#702FIsn't that...?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 70 300 -1 -1
+	TextSetName "Father Kevin"
+	TextMessage null {
+		#88017v{color 0}#1064FThat's Tita isn't it...?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 350 50 -1 -1
+	TextSetName "Sister Ries"
+	TextMessage null {
+		#91429v{color 0}#1442F...How cute.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	ImageHide 500ms
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97827v#1834F#6PIsn't she?! ISN'T SHE?!{wait}
+	} {
+		#97828v#1831FI bet you just want to jump into this photo and 
+		squeeze her like a stuffed toy right now, don't
+		you?!{wait}
+	} {
+		#97829vI should've known a cutie-patootie like you would
+		be able to appreciate the same qualities in others!{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 24 27 250ms 0
+	Emote name[14] 0mm 2000mm 24 27 250ms 0
+	Emote char[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 1500ms
+	Emote char[0] 0mm 2000mm 38 38 250ms 1
+	Sleep 1500ms
+	Emote char[0] 0mm 2000mm 40 43 100ms 3
+	CharTurnTo char[0] 90deg 600deg/s
+	Sleep 400ms
+	CharTurnTo char[0] 0deg 600deg/s
+	Sleep 400ms
+	CharTurnTo char[0] 90deg 600deg/s
+	CharTurnTo char[0] 180deg 600deg/s
+	EmoteStop name[8]
+	EmoteStop name[14]
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[0] {
+		#97830v#1457F#6P*cough* A-Anyway!{wait}
+	} {
+		#97831v#1452FThat's why no matter how frickin' adorable
+		you may happen to be, you can't take ME
+		down, because I've got a natural immunity!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91430v#1802F#11PUmm... I beg your pardon, but I'm afraid
+		I'm not really following.{wait}
+	} {
+		#91431vYou keep saying that someone is cute, but...
+		are you referring to me?{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97832v#1451F#6P#4SWho else would I be talking about?!#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 300ms
+	TextTalk char[0] {
+		#97833v#1831F#6PYou've got such an aura of maturity about you,
+		and yet your features still have that irresistible
+		trace of innocence to them.{wait}
+	} {
+		#97834vAnd then they throw you into a sister's habit to
+		complement it all like a little cherry on top!
+		That's the most flattering habit I've ever SEEN!{wait}
+	} {
+		#97835vUgh... If I didn't have my protective field, I'd be
+		in real danger here.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91432v#1805F#11P...{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97836v#1836F#6PWh-Why are you looking at me like that?! 
+		I-I'm just saying!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91433v#1446F#11P...Might I inquire as to the identities of the
+		people with you, Father Graham?{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharTurnTo self 180deg 400deg/s
+	Sleep 100ms
+	TextTalk name[8] {
+		#88018v#1064F#6PS-Sure...{wait}
+	} {
+		#88019v#1065FThe lady's Professor Erika Russell of ZCF, while
+		the gentleman is Lieutenant Colonel Cid of the
+		Royal Army.{wait}
+	} {
+		#88020v#1063FSeriously, though. 'Father Graham'? Really?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91434v#1440F#11PAh, so you're the people who initially discovered
+		the artifact, then?{wait}
+	} {
+		#91435v#1446FThank you for your cooperation in our work.
+		We will take over looking after it from here on
+		out.{wait}
+	} {
+		#91436vThat will be all.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97837v#1454F#6PWait a...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97145v#702F#5P...What?{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[8] {
+		#88021v#1064F#6PH-Hold on a minute! We hadn't finished deciding
+		what to do with it yet! {wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91437v#1446F#11PPerhaps not, but my intention was to save you
+		the time and effort required to do so by making
+		the correct judgment myself.{wait}
+	} {
+		#91438v#1443FWhether it has lost its power or not, that is no
+		ordinary artifact. It is potentially related to one
+		of the Sept-Terrions.{wait}
+	} {
+		#91439vI'm surprised that you even humored the option
+		of letting an outsider take custody of it.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88022v#1063F#6PI-I mean...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97838v#1458F#6PWell, well. You sure know how to pick a fight.{wait}
+	} {
+		#97839v#1456FGo on, then. What legal basis do you have for
+		taking it from us? {wait}
+	} {
+		#97840vThe agreements with the church quite clearly
+		say that artifacts that have lost their power
+		are exempt from the usual rules.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91440v#1447F#11PI have no legal basis, but you have no more of
+		one for keeping it.{wait}
+	} {
+		#91441v#1448FIf we are following the agreements to the letter, 
+		no one is allowed to assert ownership of inactive
+		artifacts.{wait}
+	} {
+		#91442vIt belongs to neither you nor me; it is simply an
+		abandoned object with no owner whatsoever.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97841v#1459F#6PWhat? So all you got is, 'I don't need a reason!
+		It's mine and that's final'?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91443v#1446F#11PTo put it bluntly, yes.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97842v#1457F#6PHmph. Well, if that's how you want to play it...{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamLookPos (1430, -1000, 223800) 800ms
+	Fork char[0] fork[0]:
+		CharTurnTo self 0deg 500deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 315deg 400deg/s
+	ForkWait name[8] fork[0]
+	TextTalk char[0] {
+		#97843v#1455F#11PWhat's YOUR take on this, Kevin Graham?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91444v#1443F#11PWell? By all means.{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[8] {
+		#88023v#1064F#6PM-Me?! I thought I'd been kicked out of this
+		conversation!{wait}
+	} {
+		#88024v#1068F...But, well, I can't say I don't want to take it
+		back to Arteria with us.{wait}
+	} {
+		#88025v#1066FBut after all the help Liberl's given us, I'd feel
+		kinda bad just snatching it from them without
+		even giving them a valid reason.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#97146v#703F#5PHmm... Both arguments have a degree of merit,
+		but neither is clearly more correct.{wait}
+	} {
+		#97147v#701FI'm not quite sure how you'll solve this one.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88026v#1068F#6PYou, uh, DO know that you're smack dab
+		in the middle of this, too, right?{wait}
+	}
+	TextWait
+	BgmStop 0ms
+	SoundPlay sound[351] 0 0 100
+	Sc_C4Set 1024
+	Sleep 500ms
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#88027v#1064F#6PWhoa...{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91445v#1444F#11PMy...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	Sc_C4Unset 1024
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 50ms
+	Emote char[0] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[0] 180deg 400deg/s
+	TextTalk char[1] {
+		#97148v#702F#5PWhat is it?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97844v#1452F#6PWhy do you both look so surprised?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88028v#1067F#6PWhat do you mean, 'Why'?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91446v#1443F#11PDid the two of you not hear that?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97845v#1459F#6PHear what?{wait}
+	}
+	TextWait
+	_59
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[0] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#97846v#1454F#11PWait a...{wait}
+	}
+	TextWait
+	Fork name[8] fork[1]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 100ms
+	CharTurnTo char[1] 0deg 400deg/s
+	TextTalk name[14] {
+		#91447v#1444F#11POh...{wait}
+	}
+	TextWait
+	_59
+	BgmPlay bgm[184] 0
+	EffLoad eff[0] "map\\mp256_00.eff"
+	EffLoad eff[1] "map\\mp252_01.eff"
+	EffLoad eff[2] "map\\mp256_01.eff"
+	SoundPlay sound[326] 1 0 50
+	EffPlay eff[2] eff_instance[0] null 0 (0, 400, 230000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[1] null 0 (0, 400, 30000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Tc_E5_0 10 name[0] 0 4
+	Tc_E5_0 10 name[1] 0 4
+	Tc_E5_0 10 name[2] 0 4
+	Tc_E5_0 10 name[3] 0 4
+	Tc_E5_0 10 name[4] 0 4
+	Tc_E5_0 10 name[5] 0 4
+	Tc_E5_0 10 name[6] 0 4
+	Tc_E5_0 10 name[7] 0 4
+	Tc_E5_0 10 name[8] 0 4
+	Tc_E5_0 10 name[9] 0 4
+	Tc_E5_0 10 name[10] 0 4
+	Tc_E5_0 11 name[0] 0 4
+	Tc_E5_0 11 name[1] 0 4
+	Tc_E5_0 11 name[2] 0 4
+	Tc_E5_0 11 name[3] 0 4
+	Tc_E5_0 11 name[4] 0 4
+	Tc_E5_0 11 name[5] 0 4
+	Tc_E5_0 11 name[6] 0 4
+	Tc_E5_0 11 name[7] 0 4
+	Tc_E5_0 11 name[8] 0 4
+	Tc_E5_0 11 name[9] 0 4
+	Tc_E5_0 11 name[10] 0 4
+	Tc_E5_2 10 name[0] 700
+	Tc_E5_2 10 name[1] 700
+	Tc_E5_2 10 name[2] 700
+	Tc_E5_2 10 name[3] 700
+	Tc_E5_2 10 name[4] 700
+	Tc_E5_2 10 name[5] 700
+	Tc_E5_2 10 name[6] 700
+	Tc_E5_2 10 name[7] 700
+	Tc_E5_2 10 name[8] 700
+	Tc_E5_2 10 name[10] 700
+	Tc_E5_2 11 name[0] 700
+	Tc_E5_2 11 name[1] 700
+	Tc_E5_2 11 name[2] 700
+	Tc_E5_2 11 name[3] 700
+	Tc_E5_2 11 name[4] 700
+	Tc_E5_2 11 name[5] 700
+	Tc_E5_2 11 name[6] 700
+	Tc_E5_2 11 name[7] 700
+	Tc_E5_2 11 name[8] 700
+	Tc_E5_2 11 name[10] 700
+	Sleep 1000ms
+	CrossFade 1000ms
+	CamLookPos (-130, -1000, 30000) 0ms
+	CamSetDistance 0 3500 -10000 0ms
+	CamZoom 3870 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 208 0ms
+	CharSetPos name[8] (-60, -1000, 25760) 0deg
+	CharSetPos char[1] (670, -1000, 24300) 0deg
+	CharSetPos char[0] (-780, -1000, 23650) 0deg
+	CharSetPos name[14] (-60, -1000, 20930) 0deg
+	Fork name[8] fork[0]:
+		CamLookPos (0, -1650, 32000) 8000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 7700 -10000 8000ms
+	Fork name[8] fork[2]:
+		CamZoom 3080 8000ms
+	Fork name[8] fork[3]:
+		CamPers 176 8000ms
+	Sleep 500ms
+	_ObjB0 object[10] 15
+	_ObjB0 object[11] 15
+	ObjFrame object[10] 1
+	ObjPlay object[10] 105
+	ObjFrame object[11] 1
+	ObjPlay object[11] 105
+	ForkWait name[8] fork[0]
+	ObjWait object[10]
+	ObjWait object[11]
+	EffStop eff_instance[0] 2
+	EffStop eff_instance[1] 2
+	ForkFunc char[1] fork[0] fn[0,4]
+	Sleep 1000ms
+	_ObjB0 object[10] 15
+	_ObjB0 object[11] 15
+	ObjFrame object[10] 105
+	ObjPlay object[10] 180
+	ObjFrame object[11] 105
+	ObjPlay object[11] 180
+	Fork name[8] fork[0]:
+		CamLookPos (0, -1050, 34120) 6000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 4700 -10000 6000ms
+	Fork name[8] fork[2]:
+		CamZoom 2350 6000ms
+	ObjWait object[10]
+	ObjWait object[11]
+	ObjFlagsSet object[10] 0x0020
+	ObjFlagsSet object[11] 0x0020
+	ObjFrame object[10] 181
+	ObjPlay object[10] 300
+	ObjFrame object[11] 181
+	ObjPlay object[11] 300
+	Sleep 300ms
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (0, 1000, 230000) 30deg
+	CharColor char[2] 0x00FFFFFF 0ms
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (0, 1000, 30000) 30deg
+	CharColor char[3] 0x00FFFFFF 0ms
+	Sleep 300ms
+	SoundPlay sound[201] 0 0 100
+	EffPlay eff[1] eff_instance[2] char[2] 0 (0, 0, 0) 30 30 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[1] eff_instance[3] char[3] 0 (0, 0, 0) 30 30 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ForkWait name[8] fork[0]
+	ForkWait name[8] fork[0]
+	Sleep 1000ms
+	TextTalk char[1] {
+		#97149v#702F#5PWow...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97847v#1455F#5POh, no WAY...{wait}
+	} {
+		#97848vThat thing wasn't giving off any orbal readings
+		at all anymore! Zero! Zip!{wait}
+	} {
+		#97849vWhy's it suddenly active again?!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91448v#1443F#5P...{wait}
+	} {
+		#91449v#1446FI believe that settles our dispute.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88029v#1065F#5PIt sure does.{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CrossFade 500ms
+	CamLookPos (-2130, -1000, 28840) 0ms
+	CamSetDistance 0 4570 -10000 0ms
+	CamZoom 3780 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 225 0ms
+	FadeWait
+	Fork name[14] fork[0]:
+		CamLookPos (-2050, -1000, 31170) 2000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (0, -1000, 28090) 1000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	Sleep 500ms
+	TextTalk name[8] {
+		#88030v#1063F#6PSo the real artifact was inside, huh?{wait}
+	} {
+		#88031vI've never seen one quite like it.{wait}
+	} {
+		#88032vIt looks like a box of some kind. Or a cube,
+		maybe.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 1000ms
+	ObjFlagsUnset object[10] 0x0020
+	ObjFlagsUnset object[11] 0x0020
+	ObjFrame object[10] 301
+	ObjPlay object[10] 301
+	ObjFrame object[11] 301
+	ObjPlay object[11] 301
+	EffStop eff_instance[2] 0
+	EffStop eff_instance[3] 0
+	SoundPlay sound[143] 0 0 100
+	EffPlay eff[1] eff_instance[1] name[8] 0 (270, 1250, 100) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	CharSetChipBase name[8] chip[3]
+	CharSetChipPattern name[8] 0
+	CharFlagsSet name[8] 0x0020
+	Fork name[14] fork[0]:
+		CamLookPos (-1950, -1000, 30670) 1000ms
+	FadeWait
+	Sleep 1500ms
+	FadeOut 300ms 0x00000000 100
+	ImageShow "c_vis405._ch" 190 130 500ms
+	Sleep 1500ms
+	TextClose 2
+	ImageHide 500ms
+	FadeIn 300ms 0x00000000
+	Sleep 1000ms
+	Sleep 1000ms
+	CrossFade 1000ms
+	EffStop eff_instance[1] 2
+	SoundStop sound[201]
+	Tc_E5_2 10 name[0] 0
+	Tc_E5_2 10 name[1] 0
+	Tc_E5_2 10 name[2] 0
+	Tc_E5_2 10 name[3] 0
+	Tc_E5_2 10 name[4] 0
+	Tc_E5_2 10 name[5] 0
+	Tc_E5_2 10 name[6] 0
+	Tc_E5_2 10 name[7] 0
+	Tc_E5_2 10 name[8] 0
+	Tc_E5_2 10 name[10] 0
+	Tc_E5_2 11 name[0] 0
+	Tc_E5_2 11 name[1] 0
+	Tc_E5_2 11 name[2] 0
+	Tc_E5_2 11 name[3] 0
+	Tc_E5_2 11 name[4] 0
+	Tc_E5_2 11 name[5] 0
+	Tc_E5_2 11 name[6] 0
+	Tc_E5_2 11 name[7] 0
+	Tc_E5_2 11 name[8] 0
+	Tc_E5_2 11 name[10] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#97850v#1454F#5POh...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88033v#1065F#5P...{wait}
+	}
+	TextWait
+	Fork name[14] fork[0]:
+		CamLookPos (-2050, -1000, 28810) 1000ms
+	CharTurnTo name[8] 180deg 400deg/s
+	ForkWait name[14] fork[0]
+	Sleep 500ms
+	TextTalk name[8] {
+		#88034v#1075F#11PI'd like to thank you two for your cooperation
+		in the recovery of this artifact.{wait}
+	} {
+		#88035vIn accordance with the pacts of the church,
+		I, Kevin Graham, will be assuming custody of
+		it from here on out.{wait}
+	} {
+		#88036v#1060FYou, and all who aided you, have the Septian 
+		Church's deepest appreciation.{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamZoom 4200 4000ms
+	FadeOut 3000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	ItemAdd item[808] 1
+	ForkQuit name[8] fork[0]
+	FlagSet flag[9477]
+	Sleep 3000ms
+	NewScene "t4152._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[4]:
+	SoundSetVolume sound[326] 40
+	Sleep 200ms
+	SoundSetVolume sound[326] 30
+	Sleep 200ms
+	SoundSetVolume sound[326] 20
+	Sleep 200ms
+	SoundSetVolume sound[326] 10
+	Sleep 200ms
+	SoundSetVolume sound[326] 0
+	SoundStop sound[326]
+	Return

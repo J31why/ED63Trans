@@ -1,0 +1,522 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2600.x"
+	town town[1]
+	bgm bgm[32]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02900._ch" "npl/ch02900p._cp"
+chip[1] "apl2/ch20783._ch" "apl2/ch20783p._cp"
+chip[2] "npl/ch01080._ch" "npl/ch01080p._cp"
+
+npc char[0]:
+	name "Anton"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[1]:
+	name "Ricky"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0195
+	init fn[65535,65535]
+	talk fn[0,5]
+
+npc char[2]:
+	name "Mickey"
+	pos (0, 0, 800)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,3]
+	talk fn[0,6]
+
+npc char[3]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Academy - Back Road"
+	pos (170, 0, -16239)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (0, 1000, 9720)
+	radius 800mm
+	bubble_pos (0, 2000, 9720)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+fn[0]:
+	if system[66] == 8:
+		if flag[12143]:
+			CharFlagsUnset char[0] 0x0080
+			CharFlagsUnset char[1] 0x0080
+			CharSetPos char[0] (200, 500, 4560) 180deg
+			CharSetPos char[1] (-640, 750, 5900) 180deg
+		elif flag[12142]:
+		elif flag[12140]:
+			CharFlagsUnset char[2] 0x0080
+		elif flag[12139]:
+			CharFlagsUnset char[0] 0x0080
+			CharFlagsUnset char[1] 0x0080
+			CharSetPos char[0] (200, 500, 4560) 0deg
+			CharSetPos char[1] (-640, 750, 5900) 180deg
+		elif flag[12133]:
+			CharFlagsUnset char[0] 0x0080
+			CharFlagsUnset char[1] 0x0080
+			CharSetPos char[0] (200, 500, 4560) 0deg
+			CharSetPos char[1] (-550, 750, 5900) 180deg
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -106000) "mt2600._ch"
+	ObjFlagsUnset object[0] 0x0010
+	ObjFlagsSet object[2] 0x0000
+	ObjFlagsSet object[2] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	while 1:
+		CharIdle self (-1300, null, 1420) (1300, null, -1760) 2000mm/s
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12143]:
+		if flag[0]:
+			TextTalk self {
+				I'm feeling really bright today.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Good morning, sunlight! Good morning, new day!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Last night, I found a tiny flower in the moonlight.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Seeing it try its hardest to bloom despite its
+				small size just made me feel like my worries
+				are all so silly. Weird, right?{wait}
+			}
+			TextWait
+			TextTalk self {
+				It made me feel...at ease with the world.{wait}
+			}
+			TextWait
+			TextTalk self {
+				What have I been wasting all this time worrying
+				about?{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12142]:
+	elif flag[12140]:
+	elif flag[12139]:
+		CharTurnTo self 0deg 0deg/s
+		if flag[0]:
+			TextTalk self {
+				Ricky's always trying to find ways to avoid
+				answering my questions.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I bet deep down, he finds all my woes funny
+				or something!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Why won't you say anything, Ricky?!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Are you okay with the two of us staying like
+				this forever?! Well?!{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				Give it a rest, Anton.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				Nothing you're saying makes any sense.{wait}
+			}
+			TextWait
+			TextTalk self {
+				That's what you always say, Ricky!
+				You're always trying to avoid answering
+				my questions!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Refusing to face up to things isn't going
+				to get you anywhere in life, you know!{wait}
+			}
+			TextWait
+			TextTalk self {
+				You'll just end up a loser!{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12133]:
+		if flag[12134]:
+			if flag[0]:
+				TextTalk self {
+					I should've known me being able to come
+					here was too good to be true...{wait}
+				}
+				TextWait
+				TextTalk self {
+					*sigh* All I was being set up for was a fall.
+					I almost wish I hadn't passed the exam to
+					come here after all...{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					*sigh* I was so excited when I found out
+					I could attend here, and look at me now...{wait}
+				}
+				TextWait
+				TextTalk self {
+					I feel like I'm being toyed with at this point.{wait}
+				}
+				TextWait
+				TextTalk self {
+					Fate just has it in for me... *sigh*{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			Call fn[0,7]
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12143]:
+		if flag[1]:
+			TextTalk self {
+				Anton ran off somewhere, but he's back now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				He says he's fine, but I'm not sure I buy it.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Haha. I've heard that a whooole lot of times
+				before this, you know.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				*yaaawn*{wait}
+			}
+			TextWait
+			TextTalk self {
+				Hey there. Nice weather, huh?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Wonder what I should do today?{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12142]:
+	elif flag[12140]:
+	elif flag[12139]:
+		if flag[1]:
+			TextTalk self {
+				Calm down, Anton.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Whining like this isn't going to change anything.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Anton's started whining again.{wait}
+			}
+			TextWait
+			TextTalk self {
+				He doesn't seem to realize that won't help his
+				situation any...and he probably never will.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12133]:
+		if flag[1]:
+			TextTalk self {
+				For some bizarre reason, Anton decided to major
+				in social studies.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Haha. I told him enrolling in a course where you
+				have to do that much memorization was only
+				going to end badly for him, but he didn't listen.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Hey there! You look like you're in a hurry.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Oh, you're looking for social studies students?{wait}
+			}
+			TextWait
+			TextTalk self {
+				There's one standing right here: Anton.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Personally, I think he made a major mistake
+				picking that course in the first place, though.
+				He's not built for all that work.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12140]:
+		if flag[2]:
+			TextTalk self {
+				It feels like wherever I go lately, Mr. Effort
+				isn't far behind.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Eeep... I hope it's just a coincidence and he isn't
+				onto me or something.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				There was me thinking I'd be able to enjoy taking
+				it easy back here.{wait}
+			}
+			TextWait
+			TextTalk self {
+				But now Mr. Effort's on the road out front,
+				so now I'm actually stuck here!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Ugh... It's not as fun when you're here
+				just 'cause you have to be.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[7]:
+	EventBegin 0
+	Sc_C4Set 536870912
+	CharTurnTo char[0] 0deg 0deg/s
+	CrossFade 1000ms
+	CharSetChipPattern char[0] 0
+	CamLookPos (1330, 250, 4710) 0ms
+	CamSetDistance 0 6320 -10000 0ms
+	CamZoom 3190 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 252 0ms
+	CharSetPos name[4] (200, 250, 3320) 0deg
+	Sleep 1000ms
+	TextTalk char[0] {
+		#99562v#11PHey, Ricky...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99563v#11PWhy are we here?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99564v#11PSpring has come, and yet in my heart,
+		it's still the middle of winter.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99565v#11P*sigh* Why does everything in my life
+		have to go wrong?{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81628v#044F#12PUmm... Excuse me...{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[0] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#99566v#5POh, I know you...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99567v#5PYou're the transfer student, right?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99568v#5P*sigh* I wish I was smart like you...{wait}
+	}
+	TextWait
+	Emote name[4] 0mm 2000mm 40 43 100ms 3
+	TextTalk name[4] {
+		#81629v#043F#12PU-Umm...{wait}
+	} {
+		#81630v#045FMs. Wiola told me to deliver this to you.{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}Kloe handed Anton a printout.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	FadeWait
+	TextTalk char[0] {
+		#99569v#5P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99570v#5P*sigh* I shouldn't even need this. I should
+		have graduated...but here I am redoing the
+		year again.{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81631v#044F#12PWhat...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99571v#5PI can't believe I have to do my third year all
+		over again... This is the worst...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#99572v#5PI was so full of hope when I first enrolled here,
+		and look at me now...{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81632v#043F#12PU-Umm...{wait}
+	} {
+		#81633v#540F(I-I'm not sure what to say in this situation...){wait}
+	}
+	TextWait
+	FlagSet flag[12134]
+	EventEnd 0
+	Return
+
+fn[8]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}The door is locked.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

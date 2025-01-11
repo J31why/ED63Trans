@@ -1,0 +1,85 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2105.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "Aurian Causeway"
+	pos (73210, 0, -16650)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Ruan - North Block"
+	pos (50980, 400, 77990)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (31200, 0, 25340)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,2]
+	unk1 0
+
+trigger[1]:
+	pos1 (77280, 0, 22060)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	system[1] = 110
+	Return
+
+fn[1]:
+	MapSet 4000 (-88000, null, -100000) "mt2101._ch"
+	SoundPlay sound[453] 0 0 100
+	ObjFlagsSet object[24] 0x0004
+	ObjFlagsSet object[25] 0x0004
+	ObjFlagsSet object[26] 0x0004
+	ObjFlagsSet object[27] 0x0004
+	ObjFlagsSet object[28] 0x0004
+	ObjFlagsSet object[29] 0x0004
+	ObjFlagsSet object[30] 0x0004
+	ObjFlagsSet object[31] 0x0004
+	Return
+
+fn[2]:
+	PlaceSetName town[105]
+	Return
+
+fn[3]:
+	PlaceSetName town[82]
+	Return

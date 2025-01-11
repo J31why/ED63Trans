@@ -1,0 +1,87 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "H3300.x"
+	town town[1]
+	bgm bgm[232]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (-10700, -70, 79960)
+	radius 1000mm
+	bubble_pos (-10700, 1070, 79760)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if !flag[11260]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11260]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[516] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[516]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11260]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[516]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[516]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}You've taken away my one purpose in life.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 24 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

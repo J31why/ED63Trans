@@ -1,0 +1,346 @@
+calmare sc scena
+scena:
+	name "Gaiden3" "M5508.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	if flag[10506] && !flag[10507]:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	_1B look_point[1] fn[0,3]
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-1700, 0, -31490) 0deg
+	CharSetPos name[1] (-360, 0, -31750) 0deg
+	CharSetPos party[2] (-1810, 0, -33150) 0deg
+	CharSetPos party[3] (-440, 0, -33460) 0deg
+	CamLookPos (-800, 20100, -21880) 0ms
+	CamSetDistance 0 6330 -10000 0ms
+	CamZoom 3730 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 293 0ms
+	Fork name[8] fork[1]:
+		CamLookPos (-800, 6500, -20080) 6000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 4600 -10000 6000ms
+	Fork name[8] fork[3]:
+		CamZoom 4000 6000ms
+	Fork name[1] fork[2]:
+		CamPers 293 6000ms
+	FadeIn 2000ms 0x00000000
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-1390, 0, -16570) 2000mm/s 0
+	Sleep 200ms
+	Fork name[1] fork[0]:
+		CharWalkToPos self (-20, 0, -16720) 2000mm/s 0
+	Sleep 230ms
+	Fork party[2] fork[0]:
+		CharWalkToPos self (-1780, 0, -18390) 2000mm/s 0
+	Sleep 150ms
+	Fork party[3] fork[0]:
+		CharWalkToPos self (420, 0, -18720) 2000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait name[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait name[8] fork[1]
+	CrossFade 1000ms
+	CamLookPos (130, 0, -15780) 0ms
+	CamSetDistance 0 7280 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 269 0ms
+	CharSetPos name[8] (-1620, 0, -16239) 0deg
+	CharSetPos name[1] (-100, 0, -16370) 0deg
+	CharSetPos party[2] (-1760, 0, -17880) 0deg
+	CharSetPos party[3] (-180, 0, -17880) 0deg
+	FadeWait
+	Sleep 500ms
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#85554v#270F#6PThis is quite an impressive training facility.{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#84878v#178F#6PThis is quite an impressive training facility.{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#83586v#073F#6PMan... They spared no expense with this one.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#89176v#1079F#5PNow THIS is one fancy-lookin'
+			training facility.{wait}
+		}
+		TextWait
+	if PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#85960v#1316F#6PIt's crazy complicated inside, too. Estelle and
+			I had a blast trying to get through it when we
+			were here.{wait}
+		} {
+			#85961v#812FEspecially the rooms where it's pitch black.
+			Those were juuust aweeesome... Not.{wait}
+		}
+		TextWait
+		if PartyPosition name[2] != -1:
+			TextTalk name[2] {
+				#78858v#1525F#6PI remember having my fair share of trouble
+				with those, too.{wait}
+			}
+			TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#78856v#1525F#6PIt's a real maze inside. I can still remember
+			what a major pain it was getting through it
+			to this day.{wait}
+		} {
+			#78857v#1522FThere're even rooms which have no lighting 
+			whatsoever...and I'm sure you can imagine
+			how dangerous THOSE are.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#77732v#1502F#11PI think this is the place Estelle did her final
+			training exercise.{wait}
+		} {
+			#77733v#1505FSupposedly the inside's similar to a maze,
+			and there are even parts that are pitch
+			black.{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#89177v#1067F#5PCan't wait to see what kinda traps we bump
+		into inside, then.{wait}
+	} {
+		#89178v#1063FAnyway, as far as I can tell, this should be our
+		final ordeal on this plane... Let's get this done!{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#77734v#1502F#11PRight!{wait}
+	}
+	TextWait
+	FlagSet flag[10507]
+	QuestTaskSet quest[52] 0x0001
+	QuestTaskSet quest[52] 0x0002
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	SystemFlagsUnset 0x02000000
+	var[3] = 0
+	if flag[10506]:
+		var[3] = 2
+	elif flag[10501]:
+		var[3] = 1
+	SystemFlagsSet 0x00000080
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	switch var[3]:
+		case 0:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP001._CH"
+			break
+		case 1:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP002._CH"
+			break
+		case 2:
+			VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_MAP003._CH"
+			break
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisWait vis[0] 3
+	MapColor 0x00000000 0ms
+	var[2] = 255
+	while var[2] == 255:
+		system[40] = 24
+		switch var[3]:
+			case 0:
+				Menu menu[0] 30 80 0
+					"[Guild Lodge]" // 0
+					"[Balstar Channel]" // 1
+				break
+			case 1:
+				Menu menu[0] 30 80 0
+					"[Guild Lodge]" // 0
+					"[Balstar Channel]" // 1
+					"[Saint-Croix Forest]" // 2
+				break
+			case 2:
+				Menu menu[0] 30 80 0
+					"[Guild Lodge]" // 0
+					"[Balstar Channel]" // 1
+					"[Saint-Croix Forest]" // 2
+					"[Grimsel Fortress]" // 3
+				break
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[0]
+		TextClose 0
+		switch var[0]:
+			case 0:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Guild Lodge]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 0
+						break
+					case 1:
+						break
+				break
+			case 1:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Balstar Channel]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 1
+						break
+					case 1:
+						break
+				break
+			case 2:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Saint-Croix Forest]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 2
+						break
+					case 1:
+						break
+				break
+			case 3:
+				TextSetName ""
+				TextSetPos -1 120 -1 -1
+				TextMessage null {
+					{color 5}Travel to [Grimsel Fortress]?{wait}
+				}
+				TextWait
+				system[40] = 24
+				Menu menu[1] 10 -1 0
+					"Yes" // 0
+					"No" // 1
+				MenuWait var[0]
+				system[40] = 65535
+				MenuClose menu[1]
+				TextClose 0
+				switch var[0]:
+					case 0:
+						var[2] = 3
+						break
+					case 1:
+						break
+				break
+	switch var[2]:
+		case 0:
+			VisSet vis[0] 0 -640000 0 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 1:
+			VisSet vis[0] 0 -358000 -37000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 2:
+			VisSet vis[0] 0 -362000 -266000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+		case 3:
+			VisSet vis[0] 0 -64000 -340000 2000ms 0
+			VisSet vis[0] 1 2000 2000 2000ms 0
+			VisSet vis[0] 3 0x00FFFFFF 2000ms 0 0
+			VisWait vis[0] 3
+			break
+	MapColor 0x00FFFFFF 0ms
+	switch var[2]:
+		case 0:
+			if !flag[10510]:
+				NewScene file[0x0021040A] 100 0 0
+				Hcf
+			else:
+				NewScene "snres227.   " 100 0 0
+				Hcf
+			break
+		case 1:
+			NewScene file[0x00210411] 100 0 0
+			Hcf
+			break
+		case 2:
+			NewScene file[0x00210415] 101 0 0
+			Hcf
+			break
+		case 3:
+			NewScene file[0x00210417] 101 0 0
+			Hcf
+			break
+	Return

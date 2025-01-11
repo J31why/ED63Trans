@@ -1,0 +1,1320 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U7003.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	if flag[11296]:
+		if !flag[6]:
+			if PartyPosition name[14] != -1:
+				TextStart self
+				TextTalk char[16] {
+					#91160v#265FThe Arseille's that really pretty white ship,
+					right?{wait}
+				} {
+					#91161v#261FHeehee. I've wanted to have a ride on it for 
+					ages.{wait}
+				} {
+					#91162vThe view from the deck sounds like it's amazing.{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				Emote self 0mm 2000mm 38 38 250ms 1
+				Sleep 500ms
+				CharTurnToChar self char[1] 400deg/s
+				Sleep 300ms
+				TextTalk char[16] {
+					#91163v#264FOh, dear! Are you being naughty again, Ries?{wait}
+				} {
+					#91164v#260FYou're supposed to be getting ready, not stuffing
+					yourself full of food when you think no one's looking.{wait}
+				}
+				TextWait
+				_Char4A char[1] 255
+				Emote char[1] 0mm 2000mm 40 43 100ms 3
+				Sleep 200ms
+				CharTurnToChar char[1] char[16] 600deg/s
+				Sleep 200ms
+				TextTalk char[1] {
+					#92796v#1933FI-I'm doing no such thing!{wait}
+				} {
+					#92797v#1940FThis is purely a taste-testing exercise.{wait}
+				}
+				TextWait
+				CharTurnTo char[1] 0deg 0deg/s
+				_Char4B char[1] 255
+			FlagSet flag[6]
+		else:
+			TextStart self
+			TextTalk char[16] {
+				#91165v#265FI can't wait to ride on the Arseille!{wait}
+			} {
+				#91166v#261FTeehee. This is going to be such a wonderful trip.{wait}
+			}
+			TextWait
+			if PartyPosition name[8] != -1:
+				TextTalk name[8] {
+					#90169v#1066FWe're not going on a picnic, you know...{wait}
+				}
+				TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11029]:
+		if !flag[9832]:
+			EventBegin 0
+			_Char4A char[16] 255
+			_Char4A char[1] 255
+			_Char4A char[14] 255
+			CharSetPos char[1] (93410, -14000, -52280) 90deg
+			if PartyPosition name[14] != -1:
+				CrossFade 500ms
+				CamLookPos (97110, -14000, -51710) 0ms
+				CamSetDistance 0 5080 -10000 0ms
+				CamZoom 1920 0ms
+				CamRotate 48000mdeg 0ms
+				CamPers 476 0ms
+				CharSetPos party[0] (95350, -14000, -52580) 90deg
+				if CharInSlot 0 party[1] == 14:
+					CharSetPos party[1] (94630, -14000, -54700) 45deg
+					CharSetPos party[2] (94280, -14000, -51660) 90deg
+					CharSetPos party[3] (93340, -14000, -53740) 90deg
+				elif CharInSlot 0 party[2] == 14:
+					CharSetPos party[2] (94630, -14000, -54700) 45deg
+					CharSetPos party[1] (94280, -14000, -51660) 90deg
+					CharSetPos party[3] (93340, -14000, -53740) 90deg
+				elif CharInSlot 0 party[3] == 14:
+					CharSetPos party[3] (94630, -14000, -54700) 45deg
+					CharSetPos party[1] (94280, -14000, -51660) 90deg
+					CharSetPos party[2] (93340, -14000, -53740) 90deg
+				CharTurnToChar char[16] name[8] 0deg/s
+				FadeWait
+				Sleep 500ms
+				TextTalk name[8] {
+					#89515v#1079F#6PHuh? What're you doing here, Renne?{wait}
+				} {
+					#89516v#1066FTrying to guess who the next guardian will be
+					or something?{wait}
+				} {
+					#89517v#1068FIt'd sure help if we knew how they fought before
+					we actually ended up in battle with them...{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90954v#263F#11PI suppose it would.{wait}
+				} {
+					#90955v#269FThe Lord of Phantasma always picks really exciting
+					people for us to fight, don't they?{wait}
+				} {
+					#90956v#265FI can hardly wait to see who makes an appearance
+					in our fairy tale next.{wait}
+				} {
+					#90957v#261FWhoever will it be? ♪{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89518v#1061F#6PU-Umm... You're looking forward to the next fight?{wait}
+				} {
+					#89519v#1066FSo you're not trying to work out who it'll be against,
+					then?{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90958v#264F#11PWhy would I want to do that?{wait}
+				} {
+					#90959v#1305FFairy tales are always more exciting when you
+					don't know what's going to happen.{wait}
+				}
+				TextWait
+				Emote name[14] 0mm 2000mm 24 27 250ms 1
+				Sleep 2000ms
+				TextTalk name[14] {
+					#92387v#1446F#12P...I was reluctant to comment at first, but now
+					I feel obliged to do so.{wait}
+				} {
+					#92388v#1805FDo you not find such remarks a little imprudent?{wait}
+				}
+				TextWait
+				Emote char[16] 0mm 1700mm 0 1 250ms 2
+				SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				Fork field_party[0] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				Fork field_party[1] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				Fork field_party[2] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				Fork field_party[3] fork[1]:
+					CharTurnToChar self name[14] 400deg/s
+				CharTurnToChar char[16] name[14] 400deg/s
+				Sleep 200ms
+				TextTalk char[16] {
+					#90960v#264F#11PImprudent?{wait}
+				}
+				TextWait
+			elif flag[17]:
+				CrossFade 500ms
+				CamLookPos (88090, -14000, -51890) 0ms
+				CamSetDistance 0 6720 -10000 0ms
+				CamZoom 2070 0ms
+				CamRotate 47000mdeg 0ms
+				CamPers 512 0ms
+				CharSetPos party[0] (84050, -14000, -53200) 90deg
+				CharSetPos party[1] (84000, -14000, -51820) 90deg
+				CharSetPos party[2] (82700, -14000, -53630) 90deg
+				CharSetPos party[3] (82660, -14000, -51800) 90deg
+				FadeWait
+				Sleep 500ms
+				TextTalk char[1] {
+					#92387v#1446F#6P...I was reluctant to comment at first, but now
+					I feel obliged to do so.{wait}
+				} {
+					#92388v#1805FDo you not find such remarks a little imprudent?{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90960v#264F#12PImprudent?{wait}
+				}
+				TextWait
+				if CharInSlot 0 party[0] == 7:
+					Emote party[0] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 6:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 15:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[0] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[1] == 7:
+					Emote party[1] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 6:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 15:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[1] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[2] == 7:
+					Emote party[2] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 6:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 15:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[2] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[3] == 7:
+					Emote party[3] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 6:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 15:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[3] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+			elif flag[18]:
+				CrossFade 500ms
+				CamLookPos (93730, -14000, -51100) 0ms
+				CamSetDistance 0 5330 -10000 0ms
+				CamZoom 2670 0ms
+				CamRotate 51000mdeg 0ms
+				CamPers 394 0ms
+				CharSetPos party[0] (87290, -14000, -53260) 270deg
+				CharSetPos party[1] (87420, -14000, -51850) 270deg
+				CharSetPos party[2] (88980, -14000, -53460) 270deg
+				CharSetPos party[3] (89350, -14000, -52010) 270deg
+				FadeWait
+				Sleep 500ms
+				TextTalk char[1] {
+					#92387v#1446F#6P...I was reluctant to comment at first, but now
+					I feel obliged to do so.{wait}
+				} {
+					#92388v#1805FDo you not find such remarks a little imprudent?{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90960v#264F#11PImprudent?{wait}
+				}
+				TextWait
+				if CharInSlot 0 party[0] == 7:
+					Emote party[0] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 6:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[0] == 15:
+					Emote party[0] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[0] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[1] == 7:
+					Emote party[1] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 6:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[1] == 15:
+					Emote party[1] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[1] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[2] == 7:
+					Emote party[2] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 6:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[2] == 15:
+					Emote party[2] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[2] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 50ms
+				if CharInSlot 0 party[3] == 7:
+					Emote party[3] 0mm 2300mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 6:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				elif CharInSlot 0 party[3] == 15:
+					Emote party[3] 0mm 1700mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				else:
+					Emote party[3] 0mm 2000mm 0 1 250ms 2
+					SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				Fork party[0] fork[1]:
+					CharTurnTo self 90deg 400deg/s
+				Sleep 50ms
+				Fork party[1] fork[1]:
+					CharTurnTo self 90deg 400deg/s
+				Sleep 50ms
+				Fork party[2] fork[1]:
+					CharTurnTo self 90deg 400deg/s
+				Sleep 50ms
+				CharTurnTo party[3] 90deg 400deg/s
+				Sleep 300ms
+			else:
+				CrossFade 500ms
+				CamLookPos (97110, -14000, -51710) 0ms
+				CamSetDistance 0 5080 -10000 0ms
+				CamZoom 1920 0ms
+				CamRotate 48000mdeg 0ms
+				CamPers 476 0ms
+				CharSetPos party[0] (95350, -14000, -52580) 90deg
+				CharSetPos party[1] (94480, -14000, -51660) 90deg
+				CharSetPos party[2] (94630, -14000, -54700) 45deg
+				CharSetPos party[3] (93370, -14000, -53970) 90deg
+				CharSetPos char[1] (93000, -14000, -52320) 90deg
+				CharTurnToChar char[16] name[8] 0deg/s
+				FadeWait
+				Sleep 500ms
+				TextTalk name[8] {
+					#89515v#1079F#6PHuh? What're you doing here, Renne?{wait}
+				} {
+					#89516v#1066FTrying to guess who the next guardian will be
+					or something?{wait}
+				} {
+					#89517v#1068FIt'd sure help if we knew how they fought before
+					we actually ended up in battle with them...{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#91261v#263F#11PI suppose it would.{wait}
+				} {
+					#90955v#269FThe Lord of Phantasma always picks really exciting
+					people for us to fight, don't they?{wait}
+				} {
+					#90956v#265FI can hardly wait to see who makes an appearance
+					in our fairy tale next.{wait}
+				} {
+					#90957v#261FWhoever will it be? ♪{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89518v#1061F#6PU-Umm... You're looking forward to the next fight?{wait}
+				} {
+					#89519v#1066FSo you're not trying to work out who it'll be against,
+					then?{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#91262v#264F#11PWhy would I want to do that?{wait}
+				} {
+					#90959v#1305FFairy tales are always more exciting when you
+					don't know what's going to happen.{wait}
+				}
+				TextWait
+				Fork party[0] fork[3]:
+					CamLookPos (96000, -14000, -51710) 1500ms
+				Emote char[1] 0mm 2000mm 24 27 250ms 1
+				Sleep 2000ms
+				ForkWait party[0] fork[3]
+				TextTalk char[1] {
+					#92387v#1446F#6P...I was reluctant to comment at first, but now
+					I feel obliged to do so.{wait}
+				} {
+					#92388v#1805FDo you not find such remarks a little imprudent?{wait}
+				}
+				TextWait
+				Emote char[16] 0mm 1700mm 0 1 250ms 2
+				SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				Fork field_party[0] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				Fork field_party[1] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				Fork field_party[2] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				Fork field_party[3] fork[1]:
+					CharTurnToChar self char[1] 400deg/s
+				CharTurnToChar char[16] char[1] 400deg/s
+				Sleep 400ms
+				TextTalk char[16] {
+					#90960v#264F#11PImprudent?{wait}
+				}
+				TextWait
+				Sleep 300ms
+			FadeOut 1000ms 0x00000000 255
+			FadeWait
+			CharTurnTo char[16] 270deg 0deg/s
+			if PartyPosition name[14] != -1:
+				CharFlagsSet name[14] 0x0008
+				CharFlagsUnset char[1] 0x0080
+			CharSetPos char[1] (94850, -14000, -52390) 90deg
+			CharSetPos party[0] (93550, -14000, -53440) 90deg
+			if CharInSlot 0 party[1] == 14:
+				CharSetPos party[1] (94850, -14000, -52390) 90deg
+				if CharInSlot 0 party[2] == 0:
+					CharSetPos party[2] (92780, -14000, -51830) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+				elif CharInSlot 0 party[3] == 0:
+					CharSetPos party[3] (92780, -14000, -51830) 90deg
+					CharSetPos party[2] (92390, -14000, -54300) 90deg
+				else:
+					CharSetPos party[2] (91700, -14000, -52850) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+			elif CharInSlot 0 party[2] == 14:
+				CharSetPos party[2] (94630, -14000, -54700) 90deg
+				if CharInSlot 0 party[1] == 0:
+					CharSetPos party[1] (92780, -14000, -51830) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+				elif CharInSlot 0 party[3] == 0:
+					CharSetPos party[3] (92780, -14000, -51830) 90deg
+					CharSetPos party[1] (92390, -14000, -54300) 90deg
+				else:
+					CharSetPos party[1] (91700, -14000, -52850) 90deg
+					CharSetPos party[3] (92390, -14000, -54300) 90deg
+			elif CharInSlot 0 party[3] == 14:
+				CharSetPos party[3] (94630, -14000, -54700) 90deg
+				if CharInSlot 0 party[1] == 0:
+					CharSetPos party[1] (92780, -14000, -51830) 90deg
+					CharSetPos party[2] (92390, -14000, -54300) 90deg
+				elif CharInSlot 0 party[2] == 0:
+					CharSetPos party[2] (92780, -14000, -51830) 90deg
+					CharSetPos party[1] (92390, -14000, -54300) 90deg
+				else:
+					CharSetPos party[1] (91700, -14000, -52850) 90deg
+					CharSetPos party[2] (92390, -14000, -54300) 90deg
+			elif CharInSlot 0 party[1] == 0:
+				CharSetPos party[1] (92780, -14000, -51830) 90deg
+				CharSetPos party[2] (92390, -14000, -54300) 90deg
+				CharSetPos party[3] (91700, -14000, -52850) 90deg
+			elif CharInSlot 0 party[2] == 0:
+				CharSetPos party[2] (92780, -14000, -51830) 90deg
+				CharSetPos party[1] (92390, -14000, -54300) 90deg
+				CharSetPos party[3] (91700, -14000, -52850) 90deg
+			elif CharInSlot 0 party[3] == 0:
+				CharSetPos party[3] (92780, -14000, -51830) 90deg
+				CharSetPos party[1] (92390, -14000, -54300) 90deg
+				CharSetPos party[2] (91700, -14000, -52850) 90deg
+			else:
+				CharSetPos party[1] (92780, -14000, -51830) 90deg
+				CharSetPos party[2] (92390, -14000, -54300) 90deg
+				CharSetPos party[3] (91700, -14000, -52850) 90deg
+			if PartyPosition name[0] != -1:
+				CharFlagsSet name[0] 0x0008
+				CharFlagsUnset char[14] 0x0080
+				CharSetPos char[14] (92780, -14000, -51830) 90deg
+				ForkQuit char[14] fork[255]
+			else:
+				CharSetPos char[14] (80540, -13100, -52040) 90deg
+			CamLookPos (94920, -14000, -51020) 0ms
+			CamSetDistance 0 6000 -10000 0ms
+			CamZoom 2160 0ms
+			CamRotate 315000mdeg 0ms
+			CamPers 406 0ms
+			Sleep 500ms
+			FadeIn 1000ms 0x00000000
+			FadeWait
+			Sleep 500ms
+			TextTalk char[1] {
+				#92389v#1446F#5PIt's clear from all they've done so far that the
+				Lord of Phantasma is our enemy.{wait}
+			} {
+				#92390vFurthermore, while the guardians we are
+				fighting may not be the individuals themselves,
+				their personalities are still being violated.{wait}
+			} {
+				#92391v#1443FIn light of that, I hardly find it appropriate to
+				be talking about all of this like it's some sort
+				of game orchestrated for your entertainment.{wait}
+			}
+			TextWait
+			Emote name[8] 0mm 2000mm 40 43 100ms 3
+			Sleep 500ms
+			TextTalk name[8] {
+				#89520v#1079F#5PU-Umm... Ries...{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90961v#262F#12P...{wait}
+			} {
+				#90962v#268FWhat's got you so mad all of a sudden?{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92392v#1446F#5PI'm not.{wait}
+			} {
+				#92393v#1445FHowever, I was under the distinct impression
+				that we were all in agreement on one thing:
+				the Lord of Phantasma was our enemy.{wait}
+			} {
+				#92394v#1443FSo I will not stand by and listen to them being,
+				of all things, praised.{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90963v#263F#12PReally, now?{wait}
+			} {
+				#90964v#260FCome to think of it, every time we've encountered
+				them, they've always made a point of taunting you
+				and Kevin, haven't they?{wait}
+			} {
+				#90965v#261FHeeheehee. That wouldn't have anything to do with 
+				why you're angry, would it?{wait}
+			}
+			TextWait
+			Emote char[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk char[1] {
+				#92395v#1441F#5P...{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90966v#263F#12POooh. I bet it does.{wait}
+			} {
+				#90967vThe Lord of Phantasma seems to have a peculiar
+				fascination with Kevin, and yet you just can't
+				work out why...{wait}
+			} {
+				#90968v#1306FThat's why you're getting so worked up, isn't it?{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89521v#1067F#5P...{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92396v#1443F#5P...{wait}
+			} {
+				#92397v#1446FThis isn't a game, Renne.{wait}
+			} {
+				#92398v#1805FYou might be a genius, but that doesn't mean
+				everything in life will go the way you want it to,
+				and to assume otherwise is sheer arrogance.{wait}
+			}
+			TextWait
+			ForkQuit char[14] fork[255]
+			if PartyPosition name[0] == -1:
+				TextTalkNamed char[14] "Voice" {
+					#77436v#4P...Okay, okay! That's enough.{wait}
+				}
+				TextWait
+				Fork party[0] fork[3]:
+					CamLookPos (90000, -14000, -51430) 1500ms
+				ForkFunc char[14] fork[0] fn[3,3]
+				if PartyPosition name[14] != 0:
+					Emote field_party[0] 0mm 2000mm 38 38 250ms 1
+				Emote char[16] 0mm 2000mm 38 38 250ms 1
+				Sleep 50ms
+				if PartyPosition name[14] != 2:
+					Emote field_party[2] 0mm 2000mm 38 38 250ms 1
+				if PartyPosition name[14] != 3:
+					Emote field_party[3] 0mm 2000mm 38 38 250ms 1
+				Sleep 50ms
+				if PartyPosition name[14] != 1:
+					Emote field_party[1] 0mm 2000mm 38 38 250ms 1
+				Emote char[1] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				ForkLoop field_party[0] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[1] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[2] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[3] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop char[1] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop char[16] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkWait party[0] fork[3]
+				Sleep 1000ms
+				Fork party[0] fork[3]:
+					CamLookPos (95010, -14000, -50480) 3000ms
+				Fork party[1] fork[3]:
+					CamSetDistance 0 5350 -10000 3000ms
+				Fork party[2] fork[3]:
+					CamZoom 2160 3000ms
+				Fork party[3] fork[3]:
+					CamRotate 327000mdeg 3000ms
+				ForkWait char[14] fork[0]
+				ForkWait party[0] fork[3]
+				ForkQuit char[16] fork[0]
+				ForkQuit char[1] fork[0]
+				ForkQuit field_party[0] fork[0]
+				ForkQuit field_party[1] fork[0]
+				ForkQuit field_party[2] fork[0]
+				ForkQuit field_party[3] fork[0]
+				Sleep 200ms
+			else:
+				Fork party[0] fork[3]:
+					CamLookPos (94660, -14000, -50260) 2000ms
+				Fork party[1] fork[3]:
+					CamSetDistance 0 5350 -10000 2000ms
+				Fork party[2] fork[3]:
+					CamZoom 2160 2000ms
+				Fork party[3] fork[3]:
+					CamRotate 327000mdeg 2000ms
+				CharFlagsSet char[14] 0x0040
+				Fork char[14] fork[0]:
+					CharWalkToPos self (93970, -14000, -51040) 3000mm/s 0
+				ForkWait char[14] fork[0]
+				Fork char[14] fork[0]:
+					CharWalkToPos self (95570, -14000, -50890) 3000mm/s 0
+				ForkLoop field_party[0] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[1] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[2] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkLoop field_party[3] fork[0]:
+					CharTurnToChar self char[14] 400deg/s
+				ForkWait char[14] fork[0]
+				ForkQuit field_party[0] fork[0]
+				ForkQuit field_party[1] fork[0]
+				ForkQuit field_party[2] fork[0]
+				ForkQuit field_party[3] fork[0]
+				CharTurnTo char[14] 180deg 800deg/s
+				CharFlagsUnset char[14] 0x0040
+				ForkWait party[0] fork[3]
+				TextTalk char[14] {
+					#76659v#1007F#5P...Okay, okay! That's enough.{wait}
+				}
+				TextWait
+				Fork char[16] fork[1]:
+					CharTurnToChar self char[14] 400deg/s
+				Sleep 100ms
+				CharTurnToChar char[1] char[14] 400deg/s
+			TextTalk char[14] {
+				#76660v#1009F#11PLet's stop this before it gets nasty.{wait}
+			}
+			TextWait
+			CharTurnTo char[14] 135deg 400deg/s
+			Sleep 300ms
+			TextTalk char[14] {
+				#76661v#1019F#5PRenne, bringing up things that clearly bother
+				people and teasing them with them isn't a very
+				nice to thing to do.{wait}
+			}
+			TextWait
+			CharTurnTo char[14] 180deg 400deg/s
+			Sleep 300ms
+			TextTalk char[14] {
+				#76662v#1007F#11PAs for you, Ries...{wait}
+			} {
+				#76663v#1002FShe might be smarter than other girls her age,
+				but that doesn't change the fact that Renne is
+				still an ordinary 12-year-old girl.{wait}
+			}
+			TextWait
+			Sleep 300ms
+			Emote char[16] 0mm 2000mm 24 27 250ms 1
+			Sleep 1300ms
+			TextTalk char[16] {
+				#90969v#264F#12P...Excuse me?{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92399v#1443F#6P...{wait}
+			} {
+				#92400v#1446FI'm not sure I understand what you mean.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76664v#1003F#11PWell, let me put it this way.{wait}
+			} {
+				#76665v#1002FShe's smart and she's strong. We both know that.{wait}
+			} {
+				#76666vBut do those two things really make her that much
+				different from other girls her age? Or make it so
+				that she can't act like they do?{wait}
+			} {
+				#76667v#1007FBecause I think you'd find plenty of 12-year-olds
+				out there who're a little selfish and cheeky or like
+				to cause trouble. That's pretty normal.{wait}
+			} {
+				#76668v#1006FPlus she's got tons of good points, too, like how
+				she's always considerate toward others when the
+				situation calls for it.{wait}
+			} {
+				#76669v#1016FSee? She's just like your average girl who goes
+				to Sunday School, right? Just a little brighter
+				and a little stronger.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92401v#1802F#6P...{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90970v#1307F#12P...You think so...?{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76670v#1025F#11PIt just doesn't seem fair to me to hold her to a
+				totally different standard than everyone else her
+				age because you see her as somehow different.{wait}
+			} {
+				#76671v#1007FThat's not to say don't tell her off if she's been
+				bad, because you do that to kids, too...{wait}
+			} {
+				#76672v#1003FIt's more you're being unusually hard on her.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92402v#1445F#6P...{wait}
+			} {
+				#92403v#1446FI suppose you may be right.{wait}
+			}
+			TextWait
+			CharTurnToChar char[1] char[16] 400deg/s
+			Sleep 300ms
+			TextTalk char[1] {
+				#92404v#1446F#5PYou have my apologies, Renne.{wait}
+			}
+			TextWait
+			CharTurnToChar char[16] char[1] 400deg/s
+			Sleep 300ms
+			TextTalk char[16] {
+				#90971v#269F#12PReally...? I wasn't expecting an apology from you.{wait}
+			} {
+				#90972v#263F...Although, your face says you've still got a lot
+				you want to say to me.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92405v#1447F#5PNaturally.{wait}
+			} {
+				#92406v#1448FAfter all, admonishing unreasonable children is
+				the duty of their elders, however special or not
+				special they may be.{wait}
+			}
+			TextWait
+			CharTurnToChar char[14] char[16] 400deg/s
+			Sleep 300ms
+			TextTalk char[14] {
+				#76673v#1006F#5PYup. Like I said, I'm not gonna disagree on that
+				point.{wait}
+			} {
+				#76674vAs long as we're all here, we're basically her
+				guardians and stuff.{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90973v#266F#12POh, please... You can say what you like.{wait}
+			}
+			TextWait
+			CharTurnToChar char[16] char[14] 400deg/s
+			Sleep 300ms
+			TextTalk char[16] {
+				#90974v#262F#12PBut by the way, Estelle...{wait}
+			} {
+				#90975vYou said I was 'just like your average girl
+				who goes to Sunday School,' right?{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76675v#1011F#5PSure did. Am I wrong?{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90976v#266F#12PYou can think whatever you like about me--
+				I don't care.{wait}
+			} {
+				#90977vBut I do want to make one correction.{wait}
+			} {
+				#90978v#269FI wouldn't be attending school as a student.
+				I'd be teaching there.{wait}
+			} {
+				#90979vI've got three doctorates, after all.{wait}
+			}
+			TextWait
+			Emote char[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 50ms
+			Emote char[14] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 50ms
+			Emote name[8] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1500ms
+			TextTalk char[14] {
+				#76676v#1004F#5P#3S...You what?#2S{wait}
+			}
+			Shake 0 200 3000 100ms
+			TextWait
+			TextTalk char[1] {
+				#92407v#1444F#5PWha...?{wait}
+			}
+			TextWait
+			TextTalk char[16] {
+				#90980v#263F#12POne's in chemistry, one's in mathematics,
+				and the third is in information theory.
+				I even publish regular papers in those fields.{wait}
+			} {
+				#90981v#1305FI do it through someone else because I don't
+				want the hassle of someone finding out who
+				I am, though.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#76677v#1016F#5PHaha...haha... R-Right...{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				#92408v#1446F#5P(Disciplining her appears as if it will be an even
+				more difficult task than I'd anticipated...){wait}
+			}
+			TextWait
+			_59
+			FadeOut 2000ms 0x00000000 255
+			FadeWait
+			_30 1
+			CharSetPos char[14] (55220, 1800, -49210) 0deg
+			if PartyPosition name[0] != -1:
+				CharFlagsUnset char[14] 0x0080
+				CharFlagsUnset name[0] 0x0008
+				CharFlagsSet char[14] 0x0080
+			else:
+				_85 char[14]
+			if PartyPosition name[14] != -1:
+				CharFlagsUnset name[14] 0x0008
+			CharFlagsSet char[1] 0x0080
+			CharSetPos char[16] (97450, -14000, -47720) 37deg
+			_Char4B char[16] 255
+			_Char4B char[14] 255
+			_Char4B char[1] 255
+			ForkFunc char[16] fork[0] fn[6,2]
+			ForkFunc char[14] fork[0] fn[6,2]
+			ForkFunc char[1] fork[0] fn[6,2]
+			CamLookPos (95860, -14000, -52680) 0ms
+			CamSetDistance 0 7900 -10000 0ms
+			CamZoom 2530 0ms
+			CamRotate 315000mdeg 0ms
+			CamPers 450 0ms
+			CharSetPos field_party[0] (95860, -14000, -52680) 90deg
+			CharSetPos field_party[1] (95860, -14000, -52680) 90deg
+			CharSetPos field_party[2] (95860, -14000, -52680) 90deg
+			CharSetPos field_party[3] (95860, -14000, -52680) 90deg
+			CharSetChipBase field_party[0] chip[65535]
+			CharSetChipBase field_party[1] chip[65535]
+			CharSetChipBase field_party[2] chip[65535]
+			CharSetChipBase field_party[3] chip[65535]
+			CharSetChipPattern field_party[0] 0
+			CharSetChipPattern field_party[1] 0
+			CharSetChipPattern field_party[2] 0
+			CharSetChipPattern field_party[3] 0
+			CamLookChar field_party[0] 0ms
+			Sleep 500ms
+			SystemFlagsSet 0x00000080
+			FadeIn 1000ms 0x00000000
+			EventEnd 0
+			SystemFlagsUnset 0x00000080
+			FlagSet flag[9832]
+		else:
+			TextStart self
+			TextTalk char[16] {
+				#90982v#266F*sigh* Don't go underestimating me, if you
+				wouldn't mind.{wait}
+			} {
+				#90983v#262FAnd don't forget: you've got no chance of
+				getting out of this world unless I'm with you
+				to help.{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#76678v#1007FWe won't, we won't...{wait}
+				} {
+					#76679v#1006FWe're counting on you, Renne.{wait}
+				}
+				TextWait
+			TextEnd self
+	elif flag[11016]:
+		var[2] = self.8
+		CharFlagsSet self 0x0010
+		TextStart self
+		if PartyPosition name[6] != -1:
+			name[6].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[6] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[6].5
+			name[6].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+		else:
+			char[2].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self char[2] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = char[2].5
+			char[2].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+		if !flag[0]:
+			TextTalk char[16] {
+				#90929v#263FI wasn't expecting the Lord of Phantasma to
+				make a copy of that narrow-eyed old man.{wait}
+			} {
+				#90930v#269FThey really know how to make their games
+				interesting.{wait}
+			} {
+				#90931vI can't wait to finally get to face off against
+				them directly...{wait}
+			} {
+				#90932v#261F...Maaaybe I should try and sneak on ahead.{wait}
+			}
+			TextWait
+			if PartyPosition name[6] != -1:
+				TextTalk name[6] {
+					#82887v#562FTh-That's dangerous, Renne...{wait}
+				} {
+					#82888vJust be patient and stick with us, okay?{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[2] {
+					#82887v#562FTh-That's dangerous, Renne...{wait}
+				} {
+					#82888vJust be patient and stick with us, okay?{wait}
+				}
+				TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92375v#1440F...{wait}
+				}
+				TextWait
+			FlagSet flag[0]
+		else:
+			TextTalk char[16] {
+				#90933v#266FBeing stuck here is so boring.{wait}
+			} {
+				#90934v#265F...Maaaybe I should try and sneak on ahead.{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92376v#1440F...{wait}
+				}
+				TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+		self.8 = var[2]
+	elif flag[11008]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[6]:
+			TextTalk char[16] {
+				#90908v#260FI've got looots of plushies.{wait}
+			} {
+				#90909vMy room's full of them!{wait}
+			} {
+				#90910v#261FI wish I could show you them.{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+		else:
+			TextTalk char[16] {
+				#90911v#260FMy room's full of plushies.{wait}
+			} {
+				#90912v#261FI wish I could show you them all.{wait}
+			}
+			TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[10759]:
+		if !flag[9826]:
+			if PartyPosition name[6] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				name[6].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[6] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[6].5
+				name[6].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk name[6] {
+					#82844v#560FOooh, Renne!{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90859v#264FOh, are you going off with Estelle, Tita?{wait}
+				} {
+					#90860v#266FWhy can't I go, too? It's boring being here
+					all on my own.{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82845v#065FS-Sorry...{wait}
+				} {
+					#82846v#066FI know! I'll go shopping with you again
+					to make up for it!{wait}
+				} {
+					#82847v#067FMaybe we can try to find something as
+					nice as those brooches we bought last
+					time?{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90861v#260FTeehee. I'm sure we can.{wait}
+				} {
+					#90862v#267FThat reminds me, though...
+					I found one exactly like them in a tiny little
+					shop a while back.{wait}
+				} {
+					#90863v#261FThe jewel in the middle was red, though.{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82848v#064FAww... You're so lucky.{wait}
+				} {
+					#82849vThey were all sold out of those in the shop
+					in Grancel.{wait}
+				} {
+					#82850v#562F*sigh* I really wanted a red one, too...{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90866v#265FI know! Why don't we go on a shopping trip
+					together sometime, then? We could go to
+					somewhere reeeally far away.{wait}
+				} {
+					#90867v#269FYou'd like the Eastern Quarter in Calvard,
+					that's for sure. You could spend a whole day
+					shopping there and never feel bored.{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82851v#064FR-Really?{wait}
+				} {
+					#82852v#061FI wonder what kinds of cute accessories
+					they'd have there?{wait}
+				} {
+					#82853v#560FOh, yeah! Let me tell you about the pendant 
+					I bought a while back!{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76529v#1016F(These two sure are having fun together.){wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[16] {
+					#90864v#261F...But guess what? I found a brooch exactly
+					like the ones we bought a while back there.{wait}
+				} {
+					#90865v#265FThe jewel in the middle was red, though.{wait}
+				}
+				TextWait
+				TextTalk char[2] {
+					#82832v#064FAww... You're so lucky.{wait}
+				} {
+					#82833vThey were all sold out of those in the shop
+					in Grancel.{wait}
+				} {
+					#82834v#562F*sigh* I really wanted one, too...{wait}
+				}
+				TextWait
+				TextTalk char[16] {
+					#90855v#265FI know! Why don't we go on a shopping trip
+					together sometime, then? We could go to
+					somewhere reeeally far away.{wait}
+				} {
+					#90856v#269FYou'd like the Eastern Quarter in Calvard,
+					that's for sure. You could spend a whole day
+					shopping there and never feel bored.{wait}
+				}
+				TextWait
+				TextTalk char[2] {
+					#82835v#064FR-Really?{wait}
+				} {
+					#82836v#061FI wonder what kinds of cute accessories
+					they'd have there?{wait}
+				} {
+					#82837v#560FOh, yeah! Let me tell you about the pendant 
+					I bought a while back!{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76528v#1016F(These two sure are having fun together.){wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[9826]
+		elif !flag[6]:
+			if PartyPosition name[6] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				name[6].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[6] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[6].5
+				name[6].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[16] {
+					#90868v#261FI found a reeeally huge stuffed bear in
+					a shop in the Empire a while back.{wait}
+				} {
+					#90869v#265FIt was as big as a grown man!{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82854v#065FWh-What? Really?!{wait}
+				} {
+					#82855v#067F...I kinda want to see it now.{wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[16] {
+					#90870v#260FThere are loads of big shops in the Empire,
+					too.{wait}
+				} {
+					#90871v#261FI found a huge stuffed bear in one of them
+					a while back.{wait}
+				} {
+					#90872vIt was as big as a grown man!{wait}
+				}
+				TextWait
+				TextTalk char[2] {
+					#82840v#065FWh-What? Really?!{wait}
+				} {
+					#82841v#067F...I kinda want to see it now.{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[6]
+		elif PartyPosition name[6] != -1:
+			CharFlagsSet self 0x0010
+			TextStart self
+			name[6].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[6] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[6].5
+			name[6].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[16] {
+				#90870v#260FThere are loads of big shops in the Empire,
+				too.{wait}
+			} {
+				#90871v#261FI found a huge stuffed bear in one of them
+				a while back.{wait}
+			} {
+				#90872vIt was as big as a grown man!{wait}
+			}
+			TextWait
+			CharSetChipPattern self 0
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[16] {
+				#90868v#261FI found a reeeally huge stuffed bear in
+				a shop in the Empire a while back.{wait}
+			} {
+				#90869v#265FIt was as big as a grown man!{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	Return
+
+fn[3]:
+	CharFlagsSet self 0x0040
+	CharWalkToPos self (90170, -14000, -51960) 3000mm/s 0
+	CharWalkToPos self (92620, -14000, -50470) 3000mm/s 0
+	CharWalkToPos self (95570, -14000, -50890) 3000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	CharFlagsSet self 0x0040
+	Return
+
+fn[4]:
+	CharFlagsSet char[8] 0x0010
+	TextStart char[8]
+	if !flag[15]:
+		TextTalk char[8] {
+			#95449v#311F...Scree! ☆{wait}
+		}
+		TextWait
+		Emote char[8] 0mm 1200mm 8 9 250ms 2
+		SoundPlay sound[15] 0 0 100
+		Sleep 1000ms
+		EmoteStop char[8]
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Sieg is happily eating food from Kloe's hand.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[15]
+	else:
+		Emote char[8] 0mm 1200mm 8 9 250ms 2
+		SoundPlay sound[15] 0 0 100
+		Sleep 1000ms
+		EmoteStop char[8]
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Sieg is happily eating food from Kloe's hand.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	CharFlagsUnset char[8] 0x0010
+	TextEnd char[8]
+	Return

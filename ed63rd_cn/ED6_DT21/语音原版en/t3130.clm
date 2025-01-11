@@ -1,0 +1,542 @@
+calmare fc scena
+scena:
+	name "Zeiss" "T3130.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01400._ch" "npl/ch01400p._cp"
+chip[1] "npl/ch01410._ch" "npl/ch01410p._cp"
+chip[2] "npl/ch01450._ch" "npl/ch01450p._cp"
+chip[3] "npl/ch01030._ch" "npl/ch01030p._cp"
+chip[4] "npl/ch02620._ch" "npl/ch02620p._cp"
+
+npc char[0]:
+	name "Father Vixen"
+	pos (59010, 1000, 52150)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "Sister Kiera"
+	pos (56310, 1000, 50360)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[2]:
+	name "Lane"
+	pos (63750, 0, 45060)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,6]
+
+npc char[3]:
+	name "Ada"
+	pos (59010, 1000, 50160)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Factory Chief Murdock"
+	pos (59000, 0, 47000)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,5]
+
+npc char[5]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (58950, 1000, 50290)
+	radius 400mm
+	bubble_pos (58800, 2500, 52200)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[10] 0x0080
+		CharFlagsUnset char[12] 0x0080
+		CharFlagsSet char[12] 0x0010
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,7]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	TextStart char[8]
+	if flag[12165]:
+		if flag[12167]:
+			TextTalk char[8] {
+				Only a select few people know about Kilika
+				leaving. She hasn't told all that many yet.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				I can't help but wonder whether she intends
+				to keep it that way and depart without telling
+				the townsfolk, too...{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				Oh, if it isn't Agate.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				...Have you already heard about Kilika
+				returning to Calvard?{wait}
+			}
+			TextWait
+			if flag[12168]:
+				TextTalk name[5] {
+					#050FYeah. Was talking to her about it earlier.{wait}
+				}
+				TextWait
+			else:
+				TextTalk name[5] {
+					#050FYeah...{wait}
+				} {
+					Jean was the one who told me back in Ruan.{wait}
+				}
+				TextWait
+			TextTalk char[8] {
+				I see...{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				All of us in Zeiss owe some kind of debt to her,
+				big or small.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				So I just hope that we can all come together to
+				do something for her before she leaves us.{wait}
+			}
+			TextWait
+			FlagSet flag[12167]
+	TextEnd char[8]
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12165]:
+		if flag[0]:
+			Emote self 0mm 2000mm 24 27 250ms 0
+			Sleep 1000ms
+			EmoteStop self
+			Sleep 500ms
+			TextTalk self {
+				It's a difficult call to make, but I think it would
+				be best to keep this from the factory chief for
+				now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I don't think we would be doing him any favors
+				by telling him now...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I don't think I was supposed to hear about her
+				departure, but I accidentally did when she was
+				talking to Father Vixen yesterday.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's hard to believe that she's going to be leaving
+				us...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Zeiss isn't going to be the same without her.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12165]:
+		switch var[2]:
+			case 0:
+				TextTalk char[12] {
+					#96678v#803FOh, Aidios above...{wait}
+				} {
+					#96679vThe time has finally come for the Orbal Gear
+					experiments to begin...{wait}
+				} {
+					#96680vPlease let them finish without causing any
+					major catastrophes...{wait}
+				}
+				TextWait
+				var[2] = 1
+				break
+			case 1:
+				TextTalk char[12] {
+					#96681v#803FO-Oh, and one more thing...{wait}
+				} {
+					#96682vProfessor Russell seems to be in contact with
+					an acquaintance of his over in Leman State.{wait}
+				} {
+					#96683vA-And he seems to be intent on visiting them
+					at some point, too...{wait}
+				} {
+					#96684v#805FI-I hope he doesn't go and cause any more 
+					trouble...{wait}
+				}
+				TextWait
+				var[2] = 2
+				break
+			case 2:
+				Fork char[12] fork[2]:
+					CharShake self 10 0 1000 3000ms
+				Sleep 1000ms
+				TextTalk char[12] {
+					#96685v#803FOh, Aidios... Oh, Kilika... Please protect all of
+					us in Zeiss from harm...{wait}
+				}
+				TextWait
+				var[2] = 0
+				break
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				Factory Chief Murdock has been coming here
+				to pray an awful lot lately.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Haha. I wonder what suddenly turned him into
+				such a pious man?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Whew... I think that'll do for today's afternoon
+				prayers.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'd normally feel bad about skipping work to
+				come here and pray...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but considering the factory chief is right here,
+				I think I can probably be let off for it today...
+				Right?{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (59900, 0, 49800) 0ms
+	CamSetDistance 0 6000 -10000 0ms
+	CamZoom 2940 0ms
+	CamRotate 35000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[12] 0x0080
+	CharSetPos char[12] (59000, 0, 47000) 0deg
+	_Char4A char[12] 0
+	CharSetPos name[6] (59000, 0, 37520) 0deg
+	CharColor name[6] 0x00FFFFFF 0ms
+	Fork char[13] fork[0]:
+		CamLookPos (59900, 0, 44300) 6000ms
+	Fork char[13] fork[1]:
+		CamRotate 45000mdeg 6000ms
+	FadeIn 2000ms 0x00000000
+	Sleep 4500ms
+	SoundPlay sound[6] 0 0 100
+	Fork name[6] fork[2]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork name[6] fork[1]:
+		CharWalkToPos self (59000, 0, 43400) 2200mm/s 0
+	Sleep 800ms
+	SoundPlay sound[7] 0 0 100
+	ForkWait name[6] fork[1]
+	Emote name[6] 0mm 1700mm 38 38 250ms 1
+	Sleep 500ms
+	TextTalk name[6] {
+		#83234v#061F#12PFound you, Mr. Murdock!{wait}
+	}
+	TextWait
+	Fork char[13] fork[0]:
+		CamLookPos (60340, 0, 47520) 1300ms
+	Fork char[13] fork[1]:
+		CamSetDistance 0 5040 -10000 1300ms
+	Fork name[6] fork[1]:
+		CharWalkToPos self (59000, 0, 45500) 2000mm/s 0
+	ForkWait name[6] fork[1]
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83235v#064F#12P...Mr. Murdock?{wait}
+	}
+	TextWait
+	TextTalk char[12] {
+		#96663v#803F#5POh, Aidios above... Please protect us all...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote char[12] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo char[12] 180deg 500deg/s
+	Sleep 300ms
+	TextTalk char[12] {
+		#96664v#802F#5PHmm? Hello again, Tita... Can I help you with
+		something?{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote char[12] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[12] {
+		#96665v#805F#5PW-Wait. You aren't here to tell me that the
+		experiment was a failure and the building is
+		now full of poisonous gases, are you?!{wait}
+	} {
+		#96666vOr that there was a giant explosion and half
+		of it was destroyed?! Or... Or...{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83236v#561F#12PI'm so sorry...{wait}
+	} {
+		#83237vI really can't apologize enough for all the stress
+		Mom and Grandpa cause you...{wait}
+	} {
+		#83238v#560FNothing like that's happened yet, though,
+		so don't worry.{wait}
+	}
+	TextWait
+	TextTalk char[12] {
+		#96667v#802F#5PR-Really? #803FWhew... That's a relief...{wait}
+	} {
+		#96668vMaybe that's a sign my prayers reached the
+		Goddess after all...{wait}
+	} {
+		#96669v#806FPerhaps I should say my prayers for tomorrow
+		while I'm here, too, then.{wait}
+	}
+	TextWait
+	CharTurnTo char[12] 0deg 500deg/s
+	Sleep 500ms
+	Emote char[12] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	Emote name[6] 0mm 1700mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83239v#560F#12PUmm... That said...{wait}
+	} {
+		#83240v...I do have a little favor to ask of you.{wait}
+	}
+	TextWait
+	EmoteStop char[12]
+	Sleep 300ms
+	Emote char[12] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[12] 180deg 500deg/s
+	Sleep 300ms
+	TextTalk char[12] {
+		#96670v#802F#5PWhat kind of favor?{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}Tita passed on what her mother had told her and asked if Murdock could sort
+		out the necessary paperwork.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	TextTalk char[12] {
+		#96671v#801F#5PThey arrived by air, did they?{wait}
+	} {
+		#96672vI can only imagine how surprised you must
+		have been...{wait}
+	}
+	TextWait
+	Emote char[12] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop char[12]
+	Sleep 500ms
+	TextTalk char[12] {
+		#96673v#802F#3S#5PTh-They entered the country illegally?!{wait}
+	}
+	Sleep 50ms
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk name[6] {
+		#83241v#064F#12PIt sounds that way...{wait}
+	}
+	TextWait
+	TextTalk char[12] {
+		#96674v#806F#5POh, no... I need to go and sort that out right
+		away!{wait}
+	} {
+		#96675v#800FCould you stay and pray to Aidios in my place,
+		Tita?{wait}
+	} {
+		#96676vPlease, just pray that nothing gets destroyed
+		because of that new invention of theirs and it
+		all goes to plan!{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#83242v#065F#12POkay! I will.{wait}
+	}
+	TextWait
+	TextTalk char[12] {
+		#96677v#800F#5PTh-Thank you!{wait}
+	}
+	TextWait
+	ForkLoop name[6] fork[2]:
+		CharTurnToChar self char[12] 500deg/s
+	Emote char[12] 0mm 2000mm 40 43 100ms 3
+	CharTurnTo char[12] 135deg 500deg/s
+	Fork char[12] fork[1]:
+		CharWalkToPos self (60000, 0, 46000) 4500mm/s 0
+	ForkWait char[12] fork[1]
+	Fork char[12] fork[1]:
+		CharWalkToPos self (60000, 0, 37500) 4500mm/s 0
+	ForkWait char[12] fork[1]
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83243v#062F#5PPhew...{wait}
+	}
+	TextWait
+	ForkQuit name[6] fork[2]
+	CharTurnTo name[6] 0deg 500deg/s
+	Sleep 300ms
+	CharWalkToPos name[6] (59000, 0, 46800) 1200mm/s 0
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83244v#563F#12P(Please keep Mom and Grandpa from doing
+		anything too reckless...){wait}
+	}
+	TextWait
+	Emote name[6] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[6]
+	Sleep 500ms
+	TextTalk name[6] {
+		#83245v#063F#12P(...I wish I knew what I could do, though.){wait}
+	} {
+		#83246v(I'm not strong like Estelle...){wait}
+	} {
+		#83247v(I couldn't say anything to Renne like she did.){wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote name[6] 0mm 1700mm 38 38 250ms 1
+	Sleep 1000ms
+	TextTalk name[6] {
+		#83248v#064F#12P(I-I know!){wait}
+	} {
+		#83249v#062F(I'll get them to let me help with the Orbal
+		Gear's development!){wait}
+	} {
+		#83250v(If it really does end up having the same
+		amount of power as Pater-Mater...){wait}
+	} {
+		#83251v(...maybe then I'll finally be able to have
+		a proper conversation with her.){wait}
+	} {
+		#83252v(Time to go and ask!){wait}
+	}
+	TextWait
+	CharTurnTo name[6] 180deg 600deg/s
+	Fork name[6] fork[1]:
+		CharWalkToPos self (59000, 0, 37880) 4500mm/s 0
+	Sleep 1000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9476]
+	NewScene file[0x0021015E] 100 0 0
+	Hcf
+	Return

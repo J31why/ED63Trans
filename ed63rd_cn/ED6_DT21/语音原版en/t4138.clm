@@ -1,0 +1,338 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4138.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02190._ch" "npl/ch02190p._cp"
+chip[1] "npl/ch00030._ch" "npl/ch00030p._cp"
+chip[2] file[0x002701EF] file[0x002701F4]
+
+npc char[0]:
+	name "Major Vander"
+	pos (1160, 4000, 16920)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Olivier"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Ambassador Crainagh"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 0
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	if system[66] != 255:
+		OpLoad "t4138_n"
+	else:
+		OpLoad "t4138_y"
+	if system[66] != 255:
+		EffStop eff_instance[128] 0
+		LookPointFlagsSet look_point[1] 0x0001
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	Sleep 500ms
+	BgmPlay bgm[17] 0
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}Some time had passed since the crisis involving
+		the Aureole came to an end.{wait}
+	} {
+		One by one, many of those who fought to bring it
+		to an end set off from the land of Liberl to 
+		begin new lives...{wait}
+	} {
+		And today, yet another of their group was ready
+		to leave the kingdom behind as well.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[8] (2610, 0, 72170) 225deg
+	CharSetPos char[9] (1380, 0, 72520) 180deg
+	CharSetPos char[10] (1430, 0, 70600) 0deg
+	CamLookPos (3610, 0, 73730) 0ms
+	CamSetDistance 0 4450 -10000 0ms
+	CamZoom 2940 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 277 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[10] {
+		#97354v#1100FI-I can't believe that you...{wait}
+	} {
+		#97355vI mean, my deepest apologies for not noticing that
+		you were His Highness Prince Olivert sooner!{wait}
+	} {
+		#97356vWhile I may not have had the opportunity to see
+		you in public before now, I realize that is no
+		excuse... I do hope you will forgive my ignorance.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#5PHaha. There's no need to be so apologetic, 
+		Ambassador.{wait}
+	} {
+		If anyone deserves to be blamed here, it's me for
+		falsifying my identity, and not you.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#97357v#1100FI-I thank you for your mercy...{wait}
+	} {
+		#97358vStill, I can hardly believe that you went so far
+		just to come here and enjoy yourself.{wait}
+	} {
+		#97359vIt's just as well you came out of it all safely,
+		or this could have become a major international
+		incident.{wait}
+	} {
+		#97360vI dread to think what would have happened to me
+		in that case... You were really playing with 
+		fire this time, Your Highness.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#5PHeh. Still, thanks to that, I was able to get the
+		kind of firsthand knowledge about this country
+		that no amount of books could have given me.{wait}
+	} {
+		Regardless, this won't be the last this country
+		sees of me, so I hope I'll be able to count on
+		you on future visits, too.{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#97361v#1100FWh-What?!{wait}
+	}
+	TextWait
+	Emote char[9] 0mm 2000mm 38 39 250ms 2
+	Sleep 1000ms
+	TextTalk char[9] {
+		#030F#5PPerhaps next time I could even involve you more
+		directly in the proceedings. What say you to a
+		little hot springs trip together?{wait}
+	} {
+		Heh. We could even invite Ambassador Cochrane to
+		join us.{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	TextTalk char[10] {
+		#97362v#1100FY-Your Highness...{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 2000mm 14 15 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#270F#2P*cough* Ambassador, if I may...{wait}
+	} {
+		Please don't take every one of his worthless jokes
+		at face value, or this meeting will take the rest
+		of the day.{wait}
+	} {
+		I think it would be best to get right to the point
+		and discuss the request regarding our return home
+		that we made  earlier.{wait}
+	}
+	TextWait
+	CharTurnTo char[10] 45deg 400deg/s
+	TextTalk char[10] {
+		#97363v#1100FY-Yes, of course... I'll arrange an airship at
+		once.{wait}
+	} {
+		#97364vI should be able to have one of the high-speed
+		airships for diplomats arranged for tomorrow.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#5PHeh. You have our thanks.{wait}
+	}
+	TextWait
+	CharTurnTo char[10] 0deg 400deg/s
+	TextTalk char[10] {
+		#97365v#1100FIt's an honor to be able to do anything to help
+		you, Your Highness.{wait}
+	} {
+		#97366vBesides, I think you're right that in these times,
+		returning on a military airship would be an unwise
+		move...{wait}
+	} {
+		#97367vEspecially with how tense the situation at the
+		border is...{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharFlagsSet char[10] 0x0080
+	CharSetPos char[9] (61690, 0, 10180) 90deg
+	CharSetPos char[8] (59140, 0, 10300) 90deg
+	CamLookPos (61850, 0, 11710) 0ms
+	CamSetDistance 0 4780 -10000 0ms
+	CamZoom 2940 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 277 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	TextTalk char[8] {
+		#270F#6PSo, regarding what the ambassador said...{wait}
+	} {
+		What exactly is it that you're on the alert for?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2PHeh. I just want to avoid the possibility of any
+		unfortunate accidents.{wait}
+	} {
+		What I did will have caused the hawk faction in
+		the Empire to completely lose face.{wait}
+	} {
+		There's just no telling what they'll choose to do.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#270F#6PIn other words...{wait}
+	} {
+		You think there's a possibility that there may be
+		an attempt on your life disguised as an accident?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2PMy instinct is that the chancellor is far too 
+		patient a man to try doing something so rash.{wait}
+	} {
+		Still, if I was in his position, I can't deny the
+		possibility I may try to use this opportunity.{wait}
+	} {
+		Once that thought occurred to me, no precaution
+		seemed too great, I suppose.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#270F#6P...{wait}
+	} {
+		The 7th Armored Division I serve is your ally,
+		as you well know.{wait}
+	} {
+		If anything were to happen, they would be right
+		there for you.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2PWell, that's certainly reassuring to know...{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#030F#2PBut as I'm sure you know, acting rashly in the
+		current situation is just what our enemy would
+		want us to do.{wait}
+	} {
+		It's similar to street fights in a sense -- the
+		first one to draw their weapon is the one in the
+		wrong.{wait}
+	} {
+		If I decide to rely on brute force, they'll have
+		every reason to decry me as a rebellious traitor.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#270F#6PI suppose you're right...{wait}
+	} {
+		Sometimes trying too hard to defend yourself can
+		end up cornering you instead.{wait}
+	} {
+		Perhaps sometimes the best method of self-defense
+		is to do nothing at all.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#2PHeh. Indeed.{wait}
+	} {
+		As long as our enemy doesn't know what we plan to
+		do, they can't do anything to counter it, either.{wait}
+	} {
+		First, we need to return to Heimdallr and tell
+		His Majesty the truth of all that happened here.{wait}
+	} {
+		We can decide what we're going to after seeing
+		what kind of a reaction we get.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	Sleep 500ms
+	FlagSet flag[9477]
+	NewScene file[0x0021019E] 100 0 0
+	Hcf
+	Return

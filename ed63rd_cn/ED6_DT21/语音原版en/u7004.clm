@@ -1,0 +1,418 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U7004.x"
+	town town[1]
+	bgm bgm[210]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch04150._ch" "npl2/ch04150p._cp"
+chip[1] "apl2/ch20219._ch" "apl2/ch20219p._cp"
+chip[2] "npl2/ch03084._ch" "npl2/ch03084p._cp"
+chip[3] "npl2/ch03085._ch" "npl2/ch03085p._cp"
+chip[4] "apl2/ch20609._ch" "apl2/ch20609p._cp"
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 0
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	if flag[9602] && system[4] == 0:
+		system[1] = 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (630, -11150, -97460) 180deg
+	CharSetChipBase name[8] chip[1]
+	CharSetChipPattern name[8] 0
+	CharFlagsSet name[8] 0x0800
+	CharFlagsUnset name[8] 0x0001
+	CharSetPos name[14] (-230, -11150, -100420) 90deg
+	CharSetChipBase name[14] chip[4]
+	CharSetChipPattern name[14] 0
+	CharFlagsSet name[14] 0x0002
+	CharFlagsSet name[14] 0x0800
+	CharFlagsUnset name[14] 0x0001
+	CamLookPos (290, -11150, -97800) 0ms
+	CamSetDistance 0 7200 -10000 0ms
+	CamZoom 1600 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 547 0ms
+	Tc_E5_1 255 name[19] 0 4
+	Tc_E5_1 255 name[20] 0 4
+	Tc_E5_1 255 name[27] 0 4
+	Tc_E5_1 255 name[29] 0 4
+	EffStop eff_instance[129] 0
+	EffStop eff_instance[130] 0
+	EffStop eff_instance[131] 0
+	EffStop eff_instance[132] 0
+	EffStop eff_instance[133] 0
+	EffStop eff_instance[134] 0
+	EffStop eff_instance[135] 0
+	EffStop eff_instance[136] 0
+	EffStop eff_instance[137] 0
+	EffStop eff_instance[138] 0
+	EffStop eff_instance[139] 0
+	Sleep 2000ms
+	TextSetPos 250 50 -1 -1
+	TextSetName "Kevin"
+	TextMessage null {
+		#88140v{color 0}#1065F(Hmm...?){wait}
+	} {
+		#88141v#1067F(What happened? Why did I...?){wait}
+	} {
+		#88142v#1063F#3S...!!!{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Fork name[8] fork[0]:
+		CamZoom 1350 3000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[8] fork[0]
+	CharShake name[8] 15 0 600 3000ms
+	Sleep 100ms
+	CrossFade 250ms
+	SoundPlay sound[143] 0 0 100
+	CharSetChipBase name[8] chip[2]
+	CharSetChipPattern name[8] 0
+	CharFlagsUnset name[8] 0x0800
+	CharFlagsSet name[8] 0x0001
+	CharSetPos name[8] (630, -11150, -97200) 180deg
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#88143v#1067F#5PWhere am I?{wait}
+	}
+	TextWait
+	Emote name[8] -400mm 1300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	EmoteStop name[8]
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[3]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 300ms
+	TextTalk name[8] {
+		#88144v#1069F#11PHey, Ries!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 300ms
+	Fork name[8] fork[0]:
+		CamLookPos (-790, -11150, -99080) 1000ms
+	CharWalkToPos name[8] (170, -11150, -99340) 4000mm/s 0
+	ForkWait name[8] fork[0]
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[3]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 300ms
+	TextTalk name[8] {
+		#88145v#1069F#11PRies! Are you okay?!{wait}
+	} {
+		#88146v#1067FUgh... What's going on?{wait}
+	}
+	TextWait
+	CharShake name[14] 15 0 300 3000ms
+	CharAnimation name[14] 0 2 500ms
+	TextTalk name[14] {
+		#91532v#1445F#6P#40WMm...{wait}
+	}
+	TextWait
+	CrossFade 500ms
+	SoundPlay sound[143] 0 0 100
+	CharAnimation name[14] 3 5 500ms
+	FadeWait
+	name[14].8 = 6
+	Sleep 200ms
+	name[14].8 = 7
+	Sleep 1000ms
+	name[14].8 = 6
+	Sleep 200ms
+	name[14].8 = 5
+	Sleep 200ms
+	name[14].8 = 8
+	Sleep 200ms
+	name[14].8 = 9
+	Sleep 500ms
+	TextTalk name[14] {
+		#91533v#1802F#6P#40W...Kevin?{wait}
+	} {
+		#91534vWhere are we...?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88147v#1068F#11PWhew... I'm glad you're okay.{wait}
+	} {
+		#88148v#1840FHow're you feeling? Any pain?{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[14] {
+		#91535v#1445F#6P#40W...I feel sick.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88149v#1069F#11PY-You do?!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91536v#1446F#6PMy stomach's going to implode if it doesn't
+		get any food soon.{wait}
+	} {
+		#91537v#1801FI'm starting on all that food we bought.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88150v#1068F#11PUgh... Sure, I'd normally be just as down for
+		food as you are, but come ON!{wait}
+	} {
+		#88151v#1069FIs that really what you should be thinking about
+		right now?!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91538v#1805F#6PThere's nothing in this world more important
+		or fundamental than eating.{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 1600mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	EmoteStop name[14]
+	CrossFade 250ms
+	SoundPlay sound[143] 0 0 100
+	CharSetChipBase name[14] chip[65535]
+	CharSetChipPattern name[14] 0
+	CharFlagsUnset name[14] 0x0002
+	CharFlagsUnset name[14] 0x0800
+	CharFlagsSet name[14] 0x0001
+	CharSetPos name[14] (-30, -11150, -100600) 90deg
+	FadeWait
+	Sleep 500ms
+	TextTalk name[14] {
+		#91539v#1802F#6P...But if we must change the subject...{wait}
+	} {
+		#91540vI remember a strange man appearing, then that
+		cube glowing white all of a sudden...{wait}
+	} {
+		#91541v#1445F#40W...then...{wait}
+	}
+	TextWait
+	Sleep 150ms
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#88152v#1065F#11PYeah. I don't remember any more than that, either.{wait}
+	} {
+		#88153v#1063FBut take a look around us.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91542v#1802F#6P...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CamLookPos (1240, -6070, -99140) 0ms
+	CamSetDistance 0 5270 -10000 0ms
+	CamZoom 1750 0ms
+	CamRotate 351000mdeg 0ms
+	CamPers 626 0ms
+	Fork name[8] fork[0]:
+		CamRotate 314000mdeg 5000ms
+	CharTurnTo name[14] 270deg 400deg/s
+	Sleep 300ms
+	CharTurnTo name[8] 315deg 400deg/s
+	Sleep 300ms
+	CharTurnTo name[14] 315deg 400deg/s
+	Sleep 300ms
+	CharTurnTo name[8] 0deg 400deg/s
+	Sleep 800ms
+	ForkWait name[8] fork[0]
+	CrossFade 500ms
+	CamLookPos (-790, -11150, -99080) 0ms
+	CamSetDistance 0 7600 -10000 0ms
+	CamZoom 1550 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 465 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk name[14] {
+		#91543v#1802F#6PStone...bookcases?{wait}
+	} {
+		#91544vAre we inside some kind of ruin? No, wait...{wait}
+	}
+	TextWait
+	CharTurnTo name[14] 0deg 400deg/s
+	Sleep 300ms
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#91545v#1444F#6P...What?{wait}
+	}
+	TextWait
+	BgmPlay bgm[184] 0
+	Fork name[8] fork[0]:
+		CamLookPos (3910, -1150, -54470) 7000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 6340 -10000 7000ms
+	Fork name[8] fork[2]:
+		CamZoom 12640 10000ms
+	Fork name[8] fork[3]:
+		CamRotate 315000mdeg 7000ms
+	Fork name[14] fork[1]:
+		CamPers 728 7000ms
+	Sleep 4000ms
+	CrossFade 1000ms
+	ForkQuit name[8] fork[0]
+	ForkQuit name[8] fork[1]
+	ForkQuit name[8] fork[2]
+	ForkQuit name[8] fork[3]
+	ForkQuit name[14] fork[1]
+	CamLookPos (43530, -13900, -40220) 0ms
+	CamSetDistance 0 8550 -10000 0ms
+	CamZoom 4870 0ms
+	CamRotate 327000mdeg 0ms
+	CamPers 618 0ms
+	Fork name[8] fork[0]:
+		CamLookPos (42230, -13900, -22970) 7000ms
+	Sleep 5000ms
+	CrossFade 1000ms
+	ForkQuit name[8] fork[0]
+	ForkQuit name[8] fork[1]
+	ForkQuit name[8] fork[2]
+	ForkQuit name[8] fork[3]
+	ForkQuit name[14] fork[1]
+	CamLookPos (-81350, -11900, -62590) 0ms
+	CamSetDistance 0 8550 -10000 0ms
+	CamZoom 4870 0ms
+	CamRotate 267000mdeg 0ms
+	CamPers 618 0ms
+	Fork name[8] fork[0]:
+		CamLookPos (-104910, -11900, -78140) 7000ms
+	Sleep 5000ms
+	CrossFade 1000ms
+	ForkQuit name[8] fork[0]
+	ForkQuit name[8] fork[1]
+	ForkQuit name[8] fork[2]
+	ForkQuit name[8] fork[3]
+	ForkQuit name[14] fork[1]
+	CamLookPos (-13220, -11900, 5130) 0ms
+	CamSetDistance 0 8550 -10000 0ms
+	CamZoom 4870 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 618 0ms
+	Fork name[8] fork[0]:
+		CamLookPos (-14770, -11900, 28930) 7000ms
+	Sleep 5000ms
+	CrossFade 1000ms
+	ForkQuit name[8] fork[0]
+	ForkQuit name[8] fork[1]
+	ForkQuit name[8] fork[2]
+	ForkQuit name[8] fork[3]
+	ForkQuit name[14] fork[1]
+	CamLookPos (-11930, -5200, -30050) 0ms
+	CamSetDistance 0 6450 -10000 0ms
+	CamZoom 10780 0ms
+	CamRotate 321000mdeg 0ms
+	CamPers 660 0ms
+	Fork name[8] fork[0]:
+		CamLookPos (3910, -1150, -54470) 7000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 6340 -10000 7000ms
+	Fork name[8] fork[2]:
+		CamZoom 12640 10000ms
+	Fork name[8] fork[3]:
+		CamRotate 315000mdeg 7000ms
+	Fork name[14] fork[1]:
+		CamPers 728 7000ms
+	Sc_C8 512 70 "C_PLAC31._CH" 1 2000
+	ForkWait name[8] fork[2]
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (-790, -11150, -99080) 0ms
+	CamSetDistance 0 6770 -10000 0ms
+	CamZoom 1550 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 465 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#88154v#1067F#5PYeah.{wait}
+	} {
+		#88155v#1065FSo much for this being an easy assignment...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[8] fork[0]:
+		CamZoom 2200 5000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9703]
+	Sc_C4Unset 16384
+	Sleep 500ms
+	ForkWait name[8] fork[0]
+	ImageShow "c_vis380._ch" 0 0 100ms
+	ScAchievement 0 0 0
+	Sleep 4000ms
+	TextClose 2
+	FlagSet flag[9602]
+	system[49] = 341
+	Sc_C4Set 16
+	FadeOut 0ms 0x00000000 255
+	system[40] = 24
+	Menu menu[0] 240 180 0
+		"[Save]" // 0
+		"[Next Chapter]" // 1
+	MenuWait var[0]
+	MenuClose menu[0]
+	if var[0] == 0:
+		Save
+	system[40] = 65535
+	FadeOut 0ms 0x00000000 255
+	ImageHide 200ms
+	Sleep 2000ms
+	BgmStop 2000ms
+	BgmWait
+	Sleep 2000ms
+	Sc_C4Unset 16
+	FlagUnset flag[9602]
+	system[4] = 1
+	FlagSet flag[9476]
+	NewScene "u7001._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return

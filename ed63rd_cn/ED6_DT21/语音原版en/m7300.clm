@@ -1,0 +1,589 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7300.x"
+	town town[1]
+	bgm bgm[175]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20722._ch" "apl2/ch20722p._cp"
+chip[1] "apl2/ch20718._ch" "apl2/ch20718p._cp"
+
+look_point[0]:
+	pos (3410, 4950, 27060)
+	radius 1000mm
+	bubble_pos (3410, 5800, 27060)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 0
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -128000) "mm7300._ch"
+	if flag[11275]:
+		SoundPlay sound[379] 1 0 100
+		SystemFlagsSet 0x00100000
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (440, 1550, -12260) 180deg
+	CharSetPos name[14] (440, 1550, -12260) 90deg
+	CharFlagsSet name[8] 0x0008
+	CharSetChipBase name[14] chip[0]
+	CharSetChipPattern name[14] 0
+	CharFlagsSet name[14] 0x0002
+	CharFlagsSet name[14] 0x0800
+	CamLookPos (-350, 1550, -11450) 0ms
+	CamSetDistance 0 6760 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 266 0ms
+	TextSetPos 250 100 -1 -1
+	TextSetName "Young Man's Voice"
+	TextMessage null {
+		#89946v{color 0}...Hey...{wait}
+	} {
+		#89947v...Hey, Ries...
+		...ke...up...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 300 -1 -1
+	TextSetName "Ries"
+	TextMessage null {
+		#92664v{color 0}#1633F#40WMm...{wait}
+	} {
+		#92665v#1632F...Kev...in...?{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc name[8] fork[3] fn[0,3]
+	Fork party[0] fork[0]:
+		CamZoom 2500 3000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait party[0] fork[0]
+	name[14].8 = 0
+	Sleep 200ms
+	name[14].8 = 32
+	Sleep 200ms
+	name[14].8 = 33
+	Sleep 200ms
+	name[14].8 = 34
+	Sleep 200ms
+	Sleep 300ms
+	TextTalk name[14] {
+		#92666v#1631F#6P#40W...Ah...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89948v#1840F#2PYou okay? Feeling any pain?{wait}
+	}
+	TextWait
+	name[14].8 = 33
+	Sleep 150ms
+	name[14].8 = 32
+	Sleep 150ms
+	name[14].8 = 0
+	Sleep 300ms
+	name[14].8 = 1
+	Sleep 150ms
+	name[14].8 = 2
+	Sleep 150ms
+	name[14].8 = 3
+	Sleep 300ms
+	Sleep 300ms
+	TextTalk name[14] {
+		#92667v#1635F#6P#40WN-No... I'm okay... I think.{wait}
+	}
+	TextWait
+	name[14].8 = 3
+	Sleep 150ms
+	name[14].8 = 40
+	Sleep 150ms
+	name[14].8 = 41
+	Sleep 150ms
+	name[14].8 = 42
+	Sleep 150ms
+	name[14].8 = 41
+	Sleep 150ms
+	name[14].8 = 40
+	Sleep 150ms
+	name[14].8 = 3
+	Sleep 500ms
+	Sleep 300ms
+	TextTalk name[14] {
+		#92668v#1632F#6P#40WBut why...are you...?{wait}
+	} {
+		#92669vI fell through...that crack...alone.{wait}
+	} {
+		#92670v#1634FSo why...are you....?{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#89949v#1069F#2P#4SYou big dummy!{wait}
+	}
+	Shake 0 300 3000 100ms
+	TextWait
+	Sleep 150ms
+	CharAnimation name[14] 3 6 1000ms
+	SoundPlay sound[414] 0 0 100
+	CharAnimation name[14] 7 15 1500ms
+	Sleep 300ms
+	TextTalk name[14] {
+		#92671v#1631F#6P...Me?{wait}
+	}
+	TextWait
+	BgmPlay bgm[173] 0
+	Sleep 500ms
+	TextTalk name[8] {
+		#89950v#1069F#2PWhat were you thinking with all that taunting?!{wait}
+	} {
+		#89951v'Go ahead and do your worst!'?!{wait}
+	} {
+		#89952v'Drop me wherever you like! I'll live!'?!{wait}
+	} {
+		#89953vAnd just how do you know you'll live?!
+		Oh, right. YOU DON'T.{wait}
+	}
+	TextWait
+	Sleep 150ms
+	name[14].8 = 17
+	Sleep 300ms
+	Sleep 300ms
+	TextTalk name[14] {
+		#92672v#1634F#6P...B-But...{wait}
+	}
+	TextWait
+	name[14].8 = 18
+	Sleep 150ms
+	name[14].8 = 19
+	Sleep 300ms
+	Sleep 300ms
+	TextTalk name[8] {
+		#89954v#1069F#2PYou're a squire, aren't you?!{wait}
+	} {
+		#89955vA rookie like you with no experience or
+		proper judgment has no business making
+		calls that put her own safety at risk!{wait}
+	} {
+		#89956vIf you can't promise to NEVER do that again,
+		then you and I both know you're not cut out
+		to be part of the Gralsritter!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92673v#1632F#6P...{wait}
+	}
+	TextWait
+	Sleep 150ms
+	name[14].8 = 19
+	Sleep 120ms
+	name[14].8 = 20
+	Sleep 120ms
+	name[14].8 = 21
+	Sleep 120ms
+	name[14].8 = 37
+	Sleep 120ms
+	name[14].8 = 38
+	Sleep 500ms
+	TextTalk name[8] {
+		#89957v#1841F#2P...That's probably what I should be saying,
+		anyway, but it'd be real rich coming from me,
+		huh?{wait}
+	}
+	TextWait
+	Sleep 150ms
+	name[14].8 = 37
+	Sleep 150ms
+	name[14].8 = 21
+	Sleep 300ms
+	Sleep 300ms
+	TextTalk name[8] {
+		#89958v#1840F#2PSo I'll let you off with that little bop there.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92674v#1631F#6P...Huh?{wait}
+	}
+	TextWait
+	CharAnimation name[14] 21 23 1000ms
+	SoundPlay sound[143] 0 0 100
+	Sleep 300ms
+	CharAnimation name[14] 23 25 1500ms
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipPattern name[14] 26
+	CharFlagsUnset name[8] 0x0008
+	CharSetPos name[8] (450, 1550, -11800) 180deg
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	CharTurnTo name[8] 90deg 400deg/s
+	Fork name[8] fork[0]:
+		CharWalkToPos self (2240, 1550, -11690) 1000mm/s 0
+	Fork name[8] fork[1]:
+		CamLookPos (600, 1550, -11450) 2000ms
+	CharAnimation name[14] 26 29 1500ms
+	ForkWait name[8] fork[0]
+	ForkWait name[8] fork[1]
+	Sleep 500ms
+	TextTalk name[8] {
+		#89959v#1067F#5PLook around us.{wait}
+	} {
+		#89960vThis is it. The seventh plane.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92675v#1634F#5PWow...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 1000ms
+	CamLookPos (600, 1550, -11450) 0ms
+	CamSetDistance 0 9250 -10000 0ms
+	CamZoom 3100 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 335 0ms
+	ForkFunc name[8] fork[2] fn[0,4]
+	Fork party[0] fork[0]:
+		CamZoom 7000 6000ms
+	Fork party[0] fork[3]:
+		CamRotate 330000mdeg 6000ms
+	Sc_C8 512 70 "C_PLAC37._CH" 0 2000
+	ForkWait party[0] fork[0]
+	Sleep 1000ms
+	CrossFade 1000ms
+	CamLookPos (600, 1550, -11450) 0ms
+	CamSetDistance 0 6760 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 266 0ms
+	ForkFunc name[8] fork[2] fn[0,5]
+	FadeWait
+	Sleep 500ms
+	CrossFade 250ms
+	CharSetChipBase name[14] chip[1]
+	CharSetChipPattern name[14] 0
+	CharFlagsUnset name[14] 0x0002
+	CharFlagsUnset name[14] 0x0800
+	CharSetPos name[14] (500, 1550, -12260) 90deg
+	FadeWait
+	Sleep 300ms
+	Fork party[0] fork[0]:
+		CamLookPos (1040, 1550, -11290) 1500ms
+	Fork name[14] fork[0]:
+		CharWalkToPos self (2020, 1550, -12780) 1000mm/s 0
+	ForkWait name[14] fork[0]
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	TextTalk name[14] {
+		#92676v#1630F#5PGehenna...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89961v#1065F#5PYep. It's just like the Testaments brought to life.{wait}
+	} {
+		#89962v#1067FAnd I'm the one responsible for bringing it all.{wait}
+	}
+	TextWait
+	CharTurnTo name[14] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk name[14] {
+		#92677v#1634F#6POh...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89963v#1067F#5PAfter all, if there's one place that's possible, it's
+		Phantasma.{wait}
+	} {
+		#89964vI don't know how Rufina came back, but she did,
+		with both memories and personality intact.{wait}
+	} {
+		#89965vAnd now I have the good fortune of being punished
+		by one of the very people I wronged.{wait}
+	} {
+		#89966v#1065FI really couldn't think of a more fitting punishment
+		for a bastard like me.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92678v#1632F#6P...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89967v#1075F#5PEverything she said was dead on. More than
+		anything, I wanted to be punished.{wait}
+	} {
+		#89968vI figured that by accepting that punishment,
+		all of this would be done, and everyone else
+		could go back to their lives.{wait}
+	} {
+		#89969vI thought I could be just like her: sacrificing
+		my own life so everyone else could be saved.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#89970v#1840F#11PBut that wouldn't make me like her at all,
+		would it?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92679v#1635F#6PNo...{wait}
+	} {
+		#92680v#1632FShe might have given up her life to save ours...{wait}
+	} {
+		#92681v...but that wasn't because she was happy to
+		throw away her life to protect someone else's;
+		it was because she saw literally no other option.{wait}
+	} {
+		#92682v#1633FWith me unconscious, she didn't even have the
+		choice to retreat.{wait}
+	} {
+		#92683vThere was no way out of the situation without
+		one of the three of us losing our lives.{wait}
+	} {
+		#92684v#1630FThat's the only reason she chose to do what
+		she did.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89971v#1075F#11P...Yeah.{wait}
+	} {
+		#89972vShe was never the kind of person who would
+		praise self-sacrifice as some kind of virtue.{wait}
+	} {
+		#89973v#1840FShe'd only ever accept it as an option if all the
+		others had been exhausted, and it was truly the
+		only way.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92685v#1633F#6PRight. But this time, that's not the case.{wait}
+	} {
+		#92686vYou're here. I'm here. All of our friends are here.{wait}
+	} {
+		#92687v#1632FIf we put our heads together, I'm sure we could
+		have found another way out of here.{wait}
+	} {
+		#92688vOne where no one would have to die.{wait}
+	} {
+		#92689vYou must have realized that...and yet you
+		tried to take the easy way out.{wait}
+	} {
+		#92690v#1635FDidn't you?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89974v#1841F#11PI hate to say it, but yeah. I did.{wait}
+	} {
+		#89975vThat's a pretty shameful thing for a Dominion
+		to be doing, huh?{wait}
+	} {
+		#89976v#1840FHaha... See? I've got no right to be criticizing
+		you. I'm even less fit to be a knight than you.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92691v#1634F#6P...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89977v#1075F#11PStill, standing around lamenting my own failings
+		isn't gonna get us anywhere.{wait}
+	} {
+		#89978v#1078FSo if you're up for walking, let's get ourselves
+		out of here.{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#92692v#1631F#6P...Come again?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89979v#1840F#11PWhat're you looking so surprised for?{wait}
+	} {
+		#89980vYou didn't think I was gonna stay here and accept
+		being punished for all eternity, did you?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92693v#1632F#6P...Well...{wait}
+	} {
+		#92694vEither that, or stay here and wait for Rufina to
+		show up again...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#89981v#1075F#11PListen here, Ries.{wait}
+	} {
+		#89982v#1840FI'm not gonna deny that there's a part of me--
+		a big part--that wants to be punished for what
+		I did.{wait}
+	} {
+		#89983vOr that there's a part of me that was overjoyed
+		to see Rufina again, however it came to be.{wait}
+	} {
+		#89984v#1065FBut I'm not alone down here. You're here with
+		me, and believe me, that changes EVERYTHING.{wait}
+	} {
+		#89985v#1063FAs long as you're here, I'm not staying in this
+		hellhole a second longer than I have to.{wait}
+	} {
+		#89986v#1069FWe're getting out of here, you and me. No matter
+		what it takes!{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#92695v#1631F#6P...!{wait}
+	} {
+		#92696v#1635FRight... Right!{wait}
+	}
+	TextWait
+	Fork party[0] fork[0]:
+		CamZoom 3500 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 5000ms
+	BgmWait
+	ForkQuit party[0] fork[0]
+	FlagSet flag[11275]
+	PartySetPortrait name[14] 1 22 0 0 0
+	PartySetPortraitFinish
+	TcMonumentEnable 255 0 0
+	QuestFlagsSet quest[60] 0x10
+	QuestFlagsSet quest[60] 0x20
+	QuestFlagsSet quest[61] 0x04
+	QuestFlagsSet quest[61] 0x08
+	QuestTaskSet quest[61] 0x0001
+	CamLookPos (10, 1550, -11670) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 4000 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos field_party[0] (0, 1550, -11670) 0deg
+	CharSetPos field_party[1] (0, 1550, -11670) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookChar field_party[0] 0ms
+	Tc_E6_2
+	Minigame 21 0 0 0 0 0 0 0 0
+	Sleep 1000ms
+	BgmPlay bgm[175] 0
+	system[1] = 175
+	SoundSetVolume sound[379] 100
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	SystemFlagsSet 0x00100000
+	Return
+
+fn[3]:
+	SoundPlay sound[379] 1 0 0
+	Sleep 300ms
+	SoundSetVolume sound[379] 10
+	Sleep 300ms
+	SoundSetVolume sound[379] 20
+	Sleep 300ms
+	SoundSetVolume sound[379] 30
+	Sleep 300ms
+	SoundSetVolume sound[379] 40
+	Sleep 300ms
+	SoundSetVolume sound[379] 50
+	Sleep 300ms
+	SoundSetVolume sound[379] 60
+	Sleep 300ms
+	SoundSetVolume sound[379] 70
+	Return
+
+fn[4]:
+	SoundSetVolume sound[379] 80
+	Sleep 300ms
+	SoundSetVolume sound[379] 90
+	Sleep 300ms
+	SoundSetVolume sound[379] 100
+	Return
+
+fn[5]:
+	SoundSetVolume sound[379] 90
+	Sleep 300ms
+	SoundSetVolume sound[379] 80
+	Sleep 300ms
+	SoundSetVolume sound[379] 70
+	Return
+
+fn[6]:
+	TextStart null
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}Strange power is overflowing from the orb.{wait}
+	}
+	TextWait
+	TextClose 0
+	system[40] = 24
+	var[0] = 0
+	Menu menu[1] -1 150 1
+		"Rest" // 0
+		"Cancel" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	FadeIn 300ms 0x00000000
+	FadeWait
+	switch var[0]:
+		case 0:
+			EffPlay eff[134] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+			system[40] = 65535
+			Sleep 300ms
+			BgmStop 1000ms
+			SoundPlay sound[12] 0 0 100
+			FadeOut 1000ms 0x00000000 255
+			FadeWait
+			SoundPlay sound[13] 0 0 100
+			Minigame 21 0 0 0 0 0 0 0 0
+			_30 1
+			Sleep 3500ms
+			EffStop eff_instance[134] 0
+			BgmPlay bgm[175] 0
+			system[40] = 24
+			FadeIn 1000ms 0x00000000
+			FadeWait
+		case 1:
+	TextEnd null
+	SystemFlagsSet 0x00100000
+	Return

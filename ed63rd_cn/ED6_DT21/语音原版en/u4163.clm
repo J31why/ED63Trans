@@ -1,0 +1,954 @@
+calmare tc scena
+scena:
+	name "gaiden2" "U4163.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00030._ch" "npl/ch00030p._cp"
+chip[1] "npl2/ch03570._ch" "npl2/ch03570p._cp"
+chip[2] "npl2/ch03713._ch" "npl2/ch03713p._cp"
+chip[3] "apl2/ch20805._ch" "apl2/ch20805p._cp"
+chip[4] "npl/ch00033._ch" "npl/ch00033p._cp"
+
+npc char[0]:
+	name "Ambassador Crainagh"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Prince Olivert"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Major Vander"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Secretary Lechter"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (4970, 0, 76130)
+	radius 1000mm
+	bubble_pos (4970, 1000, 76130)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[1]:
+	pos (54740, 0, 65190)
+	radius 1000mm
+	bubble_pos (54740, 1000, 65190)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 6:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			system[1] = 0
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	if !flag[10174]:
+		ObjFrame object[23] 0
+	else:
+		ObjFrame object[23] 60
+	if !flag[10175]:
+		ObjFrame object[24] 0
+	else:
+		ObjFrame object[24] 60
+	if system[66] == 6:
+		ObjFlagsSet object[23] 0x0004
+		ObjFlagsSet object[24] 0x0004
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sleep 2000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WOne month after the collapse of the Liber Ark...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WThe banquet to celebrate the crisis' successful resolution was
+		over, with Estelle and her friends having largely left the capital
+		to go elsewhere...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WOne of them, however--Prince Olivert Reise Arnor--sat rather
+		comfortably in the ambassador's office in Grancel's Erebonian
+		embassy, his work in the country not quite settled.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	CamLookPos (1000, 0, 75500) 0ms
+	CamSetDistance 0 5950 -10000 0ms
+	CamZoom 3140 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharSetPos field_party[0] (-4460, 0, 78260) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsSet char[1] 0x0004
+	CharSetPos char[1] (-4600, 200, 71920) 180deg
+	CharSetChipBase char[1] chip[4]
+	CharSetChipPattern char[1] 0
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-4460, 200, 68060) 0deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-5440, 0, 73080) 180deg
+	Sleep 1000ms
+	Sleep 1000ms
+	TextSetPos 250 250 -1 -1
+	TextSetName "Man's Voice"
+	TextMessage null {
+		#97326vI-I can't believe that you...{wait}
+	} {
+		#97327vI mean, my deepest apologies for not noticing that
+		you were His Highness Prince Olivert sooner!{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	BgmPlay bgm[84] 0
+	Sleep 500ms
+	Fork char[4] fork[0]:
+		CamLookPos (-2500, 0, 72000) 4000ms
+	Fork char[4] fork[1]:
+		CamSetDistance 0 4950 -10000 4000ms
+	Fork char[4] fork[2]:
+		CamRotate 45000mdeg 4000ms
+	Fork char[4] fork[3]:
+		CamZoom 3128 4000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[4] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#80193v#030F#5POh I'm not surprised you never realized. I may be a
+		prince, but my mother was a commoner. What point
+		is there in bothering to remember my face?{wait}
+	} {
+		#80194vIt's not as though I often showed myself in the palace
+		or attended high society gatherings.{wait}
+	} {
+		#80195v#031FKnowing me certainly isn't going to help you in moving
+		up the ranks, my friend.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97328v#1102F#12PHaha...ha...hmm... There's no need to be so humble,
+		Your Highness...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80196v#035F#5PBesides, I'm actually rather grateful to you,
+		ambassador.{wait}
+	} {
+		#80197v#030FYou gave me all kinds of useful advice during
+		my stay here at the embassy that I'm sure will
+		be to my benefit in the future.{wait}
+	} {
+		#80198v#031FWell-meant words such as, 'Act like a man of the 
+		Empire for once in your life!' and, 'Stop idling
+		here, go home, and try doing some damned work!'{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97329v#1103F#12P#3SI...!{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	Sleep 300ms
+	Emote char[0] 0mm 1700mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk char[0] {
+		#97330v#1101F#12PY-Your Highness, I was only... I mean, I...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85861v#272F#5PYour Highness, I think you've tormented him enough
+		for one day.{wait}
+	} {
+		#85862v#276FThe ambassador behaved in the same way any other
+		sane man would in his position.{wait}
+	} {
+		#85863vIf anything, I'd say he has every right to be angry at
+		US for keeping the truth from him for so long.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97331v#1100F#12PBut, M-Mueller...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80199v#031F#5PAhh, I suppose you're right. I'll spare him any more
+		teasing for now.{wait}
+	} {
+		#80200v#030FI actually wasn't joking about being grateful to you,
+		though. You truly have done admirable work over the
+		past month.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#97332v#1101F#12P...I have?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80201v#035F#5PActing as a pipeline with the Empire, checking the
+		safety of Erebonians residing in Liberl, helping the
+		international liner service to resume...{wait}
+	} {
+		#80202vAnd those are only the tip of the iceberg! You've
+		done so much more.{wait}
+	} {
+		#80203v#030FYou have my deepest thanks as a prince of the
+		Empire.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97333v#1102F#12PI-I am not worthy of such praise, Your Highness...{wait}
+	} {
+		#97334v#1100FYou, however, deserve the utmost for braving the
+		danger you did flying up to the Liber Ark.{wait}
+	} {
+		#97335vAll of what happened seems to have caused quite
+		the commotion in our homeland.{wait}
+	} {
+		#97336vSo the people seem to be rather relieved now that
+		they know the danger has passed.{wait}
+	} {
+		#97337v#1102FIt's all thanks to your courage that they are able
+		to rest easy.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80204v#035F#5POh, there's no point in flattering me, ambassador.{wait}
+	} {
+		#80205v#030FI just did what I could. Nothing more, nothing less.{wait}
+	} {
+		#80206vAnd I couldn't have done anything alone. All I was
+		able to accomplish was thanks to the help of those
+		around me.{wait}
+	} {
+		#80207v#031FI'm fairly removed from the stereotype of Erebonians
+		as stern, strong, and self-sufficient, if I do say so
+		myself.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97338v#1102F#12PHaha... As rude as it may be to agree, perhaps
+		you're correct.{wait}
+	} {
+		#97339v#1100FAnd yet I believe your willingness to be flexible
+		most definitely helped rather than hindered you
+		here.{wait}
+	} {
+		#97340vI believe people like you are exactly what the
+		Empire is going to need in the future.{wait}
+	} {
+		#97341v#1102FRegardless of how I may feel about His Excellency
+		the Chancellor's approach...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85864v#276F#5PAmbassador...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80208v#033F#5PWell, this is a surprise. I was under the impression
+		that you supported the chancellor.{wait}
+	} {
+		#80209v#030FThen again you are a noble... Does that lead you to
+		oppose his reformist policies, perhaps?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97342v#1102F#12PI may be a noble on paper, but I'm only a baron.{wait}
+	} {
+		#97343vAll in all, I generally fall in favor of his reformist
+		policies.{wait}
+	} {
+		#97344v#1100FBe that as it may, while this may just be the result
+		of being in Liberl for so long and being influenced
+		by the ways of its people...{wait}
+	} {
+		#97345v...I do sometimes find myself becoming frightened
+		by his hardline approach.{wait}
+	} {
+		#97346v#1102FI can't help but wonder exactly what direction he's
+		trying to take our old nation.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80210v#032F#5P...Interesting.{wait}
+	} {
+		#80211v#035F...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97347v#1100F#12PYour Highness?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80212v#035F#5P...Oh, I was just thinking that I'm quite glad to
+		have taken the chance to engage in such fruitful
+		talk with you just before departing the country.{wait}
+	} {
+		#80213v#030FI pray you will continue doing all you can to
+		ensure the peace of Liberl and its surrounding
+		nations while I'm gone.{wait}
+	} {
+		#80214v#031FPreferably in cooperation with Ambassador
+		Cochrane.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97348v#1102F#12PHmm... Yes. Let's not forget her, I suppose.{wait}
+	} {
+		#97349v#1100FStill, it's true that since the Non-Aggression 
+		Pact was signed, there has been some progress 
+		with regards to the Crossbell Problem.{wait}
+	} {
+		#97350vAnd given that it was Liberl who proposed said
+		pact, that makes my role in future negotiations
+		very important indeed...{wait}
+	} {
+		#97351v#1102FI presume that is what you are trying to say?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80215v#031F#5PHeh. You're a sharp one, my good man!
+		Excellent.{wait}
+	} {
+		#80216v#030FNow I can return to the capital with my mind
+		at ease.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#97352v#1102F#12PLeave everything here to me, Your Highness.{wait}
+	} {
+		#97353v#1100FI will be looking forward to hearing what you
+		achieve back in our homeland.{wait}
+	}
+	TextWait
+	Fork char[4] fork[0]:
+		CamZoom 2940 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1500ms
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-41290, 0, 15350) 0ms
+	CamSetDistance 0 4350 -10000 0ms
+	CamZoom 5360 0ms
+	CamRotate 35000mdeg 0ms
+	CamPers 164 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharSetPos field_party[0] (-64260, 0, 6540) 0deg
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-52700, 0, 13800) 0deg
+	CharSetChipBase char[1] chip[0]
+	CharSetChipPattern char[1] 0
+	CharFlagsSet char[0] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-50940, 0, 13800) 270deg
+	Fork char[4] fork[0]:
+		CamLookPos (-50290, 0, 15350) 5000ms
+	Fork char[4] fork[1]:
+		CamZoom 5160 5000ms
+	Fork char[4] fork[2]:
+		CamRotate 45000mdeg 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[4] fork[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#80217v#035F#6PThis truly is a country like no other.{wait}
+	} {
+		#80218vI never thought the day would come when
+		I would hear things like that from a noble
+		of the Empire.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85865v#277F#11PIndeed. He's apparently somewhat less of an
+		obstinate man than I thought he was. {wait}
+	} {
+		#85866v#278FPerhaps this nation's very air has the power
+		to genuinely change people.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80219v#030F#6PIt seems to have had an effect on you, too.{wait}
+	} {
+		#80220v#031FI feel like I'm seeing a lot more smiles from
+		you these days than I used to.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85867v#278F#11PHeh. I'm loath to admit it, but that may well be
+		true.{wait}
+	} {
+		#85868v#270FI still find myself wishing that you would learn
+		from Liberlians' dignity and sense of restraint,
+		however...{wait}
+	} {
+		#85869v#274FTwo qualities you don't particularly possess in
+		any measure. In fact, you have far too much of
+		their opposites.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80221v#035F#6PYou SAY that, but these qualities are the only
+		weapon that I have.{wait}
+	} {
+		#80222v#032FI don't have much that will allow me to compete
+		against the chancellor. I need to use what little
+		happens to be tucked in my corner as best I can.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85870v#276F#11P...{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] char[2] 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#80223v#032F#6PHave there been any changes to our plans?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85871v#270F#11PNone. We should we able to proceed as arranged.{wait}
+	} {
+		#85872v#272FThree days ago, the chancellor left the capital on
+		a tour of eastern Erebonia.{wait}
+	} {
+		#85873vTomorrow, you will be returning there aboard the
+		Arseille while he's still out in the east.{wait}
+	} {
+		#85874vAll those who need to be made aware of our return
+		have been given proper notice.{wait}
+	} {
+		#85875v#277FYour arrival in Erebonia will make a real impact--
+		of that I am certain.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80224v#035F#6PWhat potential obstructions to the plan are there
+		at present?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85876v#272F#11PNothing major. There have been some movements
+		in the Intelligence Division's 4th subdivision, but not
+		much.{wait}
+	} {
+		#85877v#276FThere's a chance that everyone is being cautious
+		because the Arseille is involved...{wait}
+	} {
+		#85878v#277F...but I'd put greater odds on the idea that everyone
+		is just treating this is a pompous performance by you
+		and not taking it seriously.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80225v#034F#6PWell, they'd be right to! It is.{wait}
+	} {
+		#80226v#030FI've no choice but to start here, even if this means
+		I have to use Liberl.{wait}
+	} {
+		#80227v#031FAnd if I'm going to put on a show, why not put on
+		the finest one the skies have ever seen?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85879v#278F#11P...I suppose I can't argue that.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (-45500, -500, 10100) 270deg
+	CharColor char[3] 0x00FFFFFF 0ms
+	SoundPlay sound[113] 0 0 100
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[2] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[4] fork[0]:
+		CamLookPos (-47780, 0, 13150) 1500ms
+	Fork char[4] fork[1]:
+		CamSetDistance 0 3750 -10000 1500ms
+	Fork char[4] fork[2]:
+		CamRotate 58000mdeg 1500ms
+	ForkLoop char[1] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	Sleep 50ms
+	ForkLoop char[2] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	ForkWait char[4] fork[0]
+	Sleep 500ms
+	TextTalkNamed char[3] "Young Man's Voice" {
+		#97555v#5PI'm sorry to trouble you at this late hour,
+		Your Highness.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Young Man's Voice" {
+		#97556v#5PA message has arrived for you from Heimdallr.
+		What would you have me do?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80228v#030F#6PReally? All right. Come in.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Young Man's Voice" {
+		#97557v#5P...Pardon me.{wait}
+	}
+	TextWait
+	_59
+	ObjFlagsUnset object[4] 0x0010
+	ObjPlay object[4] 60
+	ObjWait object[4]
+	Fork char[4] fork[0]:
+		CamLookPos (-48660, 0, 14480) 3500ms
+	Fork char[4] fork[2]:
+		CamRotate 62000mdeg 3500ms
+	CharSetPos char[3] (-44500, 0, 10000) 270deg
+	Fork char[3] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-47000, 0, 10000) 2000mm/s 0
+	Sleep 1000ms
+	ObjFlagsUnset object[4] 0x0800
+	ObjFrame object[4] 60
+	SoundPlay sound[7] 0 0 100
+	ObjPlay object[4] 0
+	ForkWait char[3] fork[1]
+	ForkLoop char[3] fork[2]:
+		CharTurnToChar self char[1] 0deg/s
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-49840, 0, 12400) 2000mm/s 0
+	ForkWait char[3] fork[1]
+	ForkQuit char[3] fork[2]
+	ForkWait char[4] fork[2]
+	TextTalk char[1] {
+		#80229v#031F#6PWell, if it isn't Lechter.{wait}
+	} {
+		#80230v#030FI was wondering where you'd been.
+		I haven't seen you all day.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97558v#1885F#11PI've been exceptionally busy with work since this
+		morning, I'm afraid.{wait}
+	} {
+		#97559v#1880FI'd hoped to be able to come and see you earlier
+		since you will be leaving tomorrow... I'm terribly
+		sorry for not being able to.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80231v#035F#6PHeh. Oh, never mind that.{wait}
+	} {
+		#80232v#037FIf that work of yours is done now, we three could
+		always enjoy some...sensual quality time together
+		for the remainder of the night...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85880v#270F#5PSo, what was the message from the capital,
+		Secretary?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97560v#1884F#11PThey've acknowledged receipt of His Highness'
+		message.{wait}
+	} {
+		#97561v#1887FHowever, they didn't anticipate that you may be
+		able to arrive all the way from Grancel in less
+		than half a day...{wait}
+	} {
+		#97562vAs such, they're currently in a minor panic trying
+		to ensure everything's ready for the ceremony
+		tomorrow.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85881v#278F#5PThat doesn't come as a surprise. There's nothing
+		like the Arseille when it comes to speed at home.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80233v#034F#6P*whine* How cruel you both are for so deftly
+		ignoring my proposal!{wait}
+	} {
+		#80234v#030FAlthough, it sounds as though the stage will be
+		set in time.{wait}
+	} {
+		#80235v#031FNow I need to decide on an outfit that will leave
+		everyone's jaws on the floor to sweeten my arrival.{wait}
+	} {
+		#80236v#037FPerhaps a glistening coat and white loincloth will
+		do the trick.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85882v#274F#5P...{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97563v#1881F#11PHaha. That'd make a grand impact, all right.{wait}
+	} {
+		#97564vI almost wish I could go along and see it myself.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85883v#276F#5PPlease don't encourage him...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80237v#031F#6PHeh. You show remarkable promise for someone
+		so young.{wait}
+	} {
+		#80238v#030FWhat do you say to coming back on the Arseille
+		with me? I'd welcome your company.{wait}
+	} {
+		#80239vYour work here in Liberl is just about done as it
+		is, isn't it?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97565v#1885F#11PYour offer's certainly tempting, but I'm afraid
+		I have another job to take care of soon.{wait}
+	} {
+		#97566v#1887FThe thought is appreciated, of course.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80240v#035F#6PReally? Well, that is a shame.{wait}
+	} {
+		#80241v#030FGood luck with that 'next job' of yours.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#97567v#1885F#11PThank you. Well, if you'll excuse me...{wait}
+	}
+	TextWait
+	Sleep 150ms
+	CharTurnTo char[3] 90deg 400deg/s
+	Sleep 300ms
+	Fork char[4] fork[0]:
+		CamLookPos (-47780, 0, 13150) 3000ms
+	Fork char[4] fork[2]:
+		CamRotate 58000mdeg 3000ms
+	Fork char[3] fork[1]:
+		CharWalkToPos2 self (-47000, 0, 10000) 2000mm/s 0
+	ForkWait char[3] fork[1]
+	CharTurnTo char[3] 90deg 400deg/s
+	Sleep 500ms
+	ObjFlagsSet object[4] 0x0800
+	ObjFrame object[4] 0
+	ObjPlay object[4] 60
+	ObjWait object[4]
+	Sleep 500ms
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-45500, 0, 10000) 2000mm/s 0
+	Fork char[3] fork[2]:
+		CharColor self 0x00FFFFFF 1000ms
+	ForkWait char[3] fork[1]
+	Sleep 300ms
+	ObjFlagsUnset object[4] 0x0800
+	ObjFrame object[4] 60
+	SoundPlay sound[7] 0 0 100
+	ObjPlay object[4] 0
+	Sleep 1000ms
+	ForkQuit char[1] fork[2]
+	ForkQuit char[2] fork[2]
+	CharTurnTo char[2] 135deg 0deg/s
+	Fork char[4] fork[0]:
+		CamLookPos (-50290, 0, 15350) 2000ms
+	Fork char[4] fork[1]:
+		CamSetDistance 0 4350 -10000 2000ms
+	Fork char[4] fork[2]:
+		CamRotate 45000mdeg 2000ms
+	Sleep 1000ms
+	CharTurnToChar char[1] char[2] 400deg/s
+	ForkWait char[4] fork[0]
+	Sleep 500ms
+	CharTurnToChar char[2] char[1] 400deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#85884v#272F#11PSo, that is Second Secretary Lechter Arundel?{wait}
+	} {
+		#85885v#276FIs it safe to assume he's one of the chancellor's?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80242v#031F#6PAlmost definitely, yes.{wait}
+	} {
+		#80243v#030FHe came through Haken Gate on foot and took up
+		his new position at the embassy a month ago.{wait}
+	} {
+		#80244vAnd right around the same time we headed to the
+		Liber Ark aboard the Arseille, at that.{wait}
+	} {
+		#80245v#035FThere's no way that could possibly be coincidence.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85886v#272F#11P...No, it couldn't.{wait}
+	} {
+		#85887v#276FThe most likely possibility seems to be that he's
+		part of the Intelligence Division.{wait}
+	} {
+		#85888v...Are you sure not doing anything regarding him
+		all this time was a good idea?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80246v#035F#6POh, absolutely. We needed some way to find out 
+		what the chancellor was up to, after all.{wait}
+	} {
+		#80247v#030FWe'll probably get some kind of reaction from the
+		chancellor through his reports at some point.{wait}
+	} {
+		#80248v#031FProbably in about two weeks when the chancellor's
+		tour has finished.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85889v#278F#11PYou'd planned that far ahead all along, had you?{wait}
+	} {
+		#85890v#277FWell, in that case, I'll be sure that we're ready.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80249v#031F#6PI'll be counting on you,
+		love.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo char[1] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#80250v#033F#6POh...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#85891v#273F#11PSomething the matter?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#80251v#030F#6PNot really. It's just that the moon has come
+		out.{wait}
+	} {
+		#80252v#031FAnd what a beautiful full moon it is.{wait}
+	}
+	TextWait
+	Fork char[4] fork[0]:
+		CamLookPos (-49620, 0, 17860) 3000ms
+	Fork char[4] fork[1]:
+		CamZoom 5060 3000ms
+	Fork char[4] fork[2]:
+		CamRotate 28000mdeg 3000ms
+	FadeOut 1500ms 0x00000000 255
+	FadeWait
+	ForkQuit char[4] fork[255]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "e0811._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[10174]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[23] 60
+		Sleep 500ms
+		if ItemAdd item[1553] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1553]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10174]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1553]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[1553]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[23] 60
+			ObjPlay object[23] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}(10/12) ...apartment and kept to herself most days. *sigh*
+			She wasn't sure why she sighed. Probably just life catching up with her.
+			Then, suddenly...{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 291 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[10175]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[24] 60
+		Sleep 500ms
+		if ItemAdd item[502] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[502]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10175]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[502]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[502]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[24] 60
+			ObjPlay object[24] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}You're...not going to kidnap me, are you?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 292 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

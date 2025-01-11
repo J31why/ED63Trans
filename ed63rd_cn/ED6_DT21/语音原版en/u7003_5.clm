@@ -1,0 +1,4193 @@
+calmare fc scena
+scena:
+	name "Gaiden2" "U7003.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	if flag[11296]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[9829]:
+			if PartyPosition name[8] != -1:
+				TextTalk char[9] {
+					#92780v#1936F...{wait}
+				} {
+					#92781vFive years ago, Kevin and Rufina did all they could
+					to help me and save me from danger.{wait}
+				} {
+					#92782v#1938FThey might have regretted the outcome, but that
+					doesn't change their intentions--or how important
+					they both are to me.{wait}
+				}
+				TextWait
+				CharTurnToChar self name[8] 400deg/s
+				Sleep 300ms
+				TextTalk char[9] {
+					#92783v#1932FThat's why we need to defeat the Lord of
+					Phantasma. Together.{wait}
+				} {
+					#92784vFor Rufina as well as anyone else.{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#90166v#1075FYeah. You're right.{wait}
+				} {
+					#90167v...{wait}
+				} {
+					#90168v#1079FWhat're you doing here, by the way?{wait}
+				}
+				TextWait
+				Emote self 0mm 2000mm 40 43 100ms 3
+				Sleep 300ms
+				TextTalk char[9] {
+					#92785v#1940FE-Ensuring the army has enough in the
+					way of rations is key to any operation.
+					That's what I'm doing.{wait}
+				} {
+					#92786v...Laugh, and I will whack you.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					#92789v#1936F...{wait}
+				} {
+					#92790vFive years ago, Kevin and Rufina did all they could
+					to help me and save me from danger.{wait}
+				} {
+					#92791v#1938FThey might have regretted the outcome, but that
+					doesn't change their intentions--or how important
+					they both are to me.{wait}
+				}
+				TextWait
+				CharTurnToChar self field_party[0] 400deg/s
+				Sleep 300ms
+				TextTalk char[9] {
+					#92792v#1932FThat's why we need to defeat the Lord of
+					Phantasma. Together.{wait}
+				} {
+					#92793v#1932FFor Rufina as well as anyone else.{wait}
+				}
+				TextWait
+			FlagSet flag[9829]
+		elif PartyPosition name[8] != -1:
+			CharTurnToChar self name[8] 0deg/s
+			TextTalk char[9] {
+				#92787v#1936FWe need to defeat the Lord of Phantasma
+				with our own hands.{wait}
+			} {
+				#92788v#1932FFor Rufina as well as anyone else.{wait}
+			}
+			TextWait
+		else:
+			CharTurnToChar self field_party[0] 0deg/s
+			TextTalk char[9] {
+				#92794v#1936FWe need to defeat the Lord of Phantasma
+				with our own hands.{wait}
+			} {
+				#92795v#1932FFor Rufina as well as anyone else.{wait}
+			}
+			TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11264]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		name[8].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self name[8] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = name[8].5
+		name[8].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[11]:
+			TextTalk char[9] {
+				#92522v#1446FKevin, you know as well as I do that you'll need
+				me with you to go inside Aster House.{wait}
+			} {
+				#92523v#1801FYou're not kicking me off the team on purpose,
+				are you?{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89736v#1077FD-Don't be silly!{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				#92524v#1801F*stare*{wait}
+			}
+			TextWait
+			FlagSet flag[11]
+		else:
+			TextTalk char[9] {
+				#92525v#1446FKevin, you know as well as I do that you'll need
+				me with you to go inside Aster House.{wait}
+			} {
+				#92526v#1801FYou're not kicking me off the team on purpose,
+				are you?{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11052]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[11]:
+			TextTalk name[8] {
+				#89698v#1065FUmm... Ries?{wait}
+			}
+			TextWait
+			Emote self 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			name[8].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[8] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[8].5
+			name[8].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			Sleep 200ms
+			TextTalk char[9] {
+				#92499v#1802FYes? What is it?{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89699v#1060FCould you come with me for a bit?{wait}
+			} {
+				#89700v#1075FI'll explain why later.
+				Although I probably won't need to.{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				#92500v#1440F...{wait}
+			} {
+				#92501v#1446FOkay. I'll come.{wait}
+			}
+			TextWait
+			FlagSet flag[11]
+		else:
+			name[8].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[8] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[8].5
+			name[8].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[9] {
+				#92502v#1445F...{wait}
+			} {
+				#92503v#1443FI'm ready whenever you are.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11051]:
+		if !flag[9828]:
+			if PartyPosition name[6] != -1:
+				if PartyPosition name[9] != -1:
+					CharFlagsSet self 0x0010
+					TextStart self
+					TextTalk char[9] {
+						#92497v#1445F(Leonhardt the Bladelord...){wait}
+					} {
+						#92498v#1446F(He sounded like he knew Rufina, too...but how?){wait}
+					}
+					TextWait
+					CharFlagsUnset self 0x0010
+					TextEnd self
+				else:
+					CharFlagsSet self 0x0010
+					TextStart self
+					TextTalk char[9] {
+						#92504v#1446F...{wait}
+					} {
+						#92505v#1445FI see...{wait}
+					}
+					TextWait
+					CharFlagsUnset self 0x0010
+					TextEnd self
+			else:
+				Call fn[5,8]
+		else:
+			var[2] = self.8
+			if !flag[11]:
+				if flag[16]:
+					CharFlagsSet self 0x0010
+					TextStart self
+					TextTalk char[9] {
+						#92508v#1447F#32WThe droplets from the spirits called forth
+						a morning mist in the forest.{wait}
+					} {
+						#92509vAnd by that spring, seven bells gathered...#20W{wait}
+					}
+					TextWait
+					CharFlagsUnset self 0x0010
+					TextEnd self
+				else:
+					field_party[0].5 = self.4
+					self.5 = self.4
+					TextStart self
+					CharFlagsUnset self 0x0010
+					CharTurnToChar self field_party[0] 0deg/s
+					self.4 = (self.4 + 360) % 360
+					self.4 = self.4 + 360 - self.5
+					self.5 = self.4 / 180
+					if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+					elif self.5 < 1:
+						self.8 = 2
+					elif self.5 > 2:
+						self.8 = 1
+					else:
+						self.8 = self.5
+					self.4 = field_party[0].5
+					field_party[0].5 = 0
+					self.5 = 0
+					CharFlagsSet self 0x0010
+					TextTalk char[9] {
+						#92506v#1448FPerhaps this would be a good time to read
+						a story from one of the Testaments.{wait}
+					} {
+						#92507v#1442FI am a sister of the church, after all.{wait}
+					}
+					TextWait
+					CharSetChipPattern self 0
+					TextEnd self
+				FlagSet flag[11]
+			elif flag[16]:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[9] {
+					#92512v#1447F#32WMay the two of them rest in peace.{wait}
+				} {
+					#92513v#1442FAnd may all those who live have courage
+					and be blessed.#20W{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				field_party[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self field_party[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = field_party[0].5
+				field_party[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[9] {
+					#92510v#1448FPerhaps this would be a good time to read
+					a story from one of the Testaments.{wait}
+				} {
+					#92511v#1442FI am a sister of the church, after all.{wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				TextEnd self
+			self.8 = var[2]
+	elif flag[11040]:
+	elif flag[11029]:
+		if !flag[9827] && PartyPosition name[15] == -1:
+			Call fn[3,2]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if !flag[11]:
+				TextTalk char[9] {
+					#92409v#1445F...{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89522v#1079FSomething wrong, Ries?{wait}
+				}
+				TextWait
+				TextTalk char[9] {
+					#92410v#1446F...No. It's nothing.{wait}
+				}
+				TextWait
+				Emote name[8] 0mm 2000mm 0 1 250ms 2
+				SoundPlay sound[38] 0 0 100
+				Sleep 1000ms
+				FlagSet flag[11]
+			else:
+				TextTalk char[9] {
+					#92411v#1445F...{wait}
+				} {
+					#92412v(Why did both Kevin and Rufina...?){wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11016]:
+		EmoteStop self
+		if !flag[11]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[9] {
+				#92368v#1447F#40W...#20W{wait}
+			} {
+				#92369v#1442FAhh...{wait}
+			}
+			TextWait
+			Emote self 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			CharSetChipBase self chip[2]
+			CharSetChipPattern self 0
+			Emote self 0mm 2000mm 40 43 100ms 3
+			CharTurnToChar self field_party[0] 800deg/s
+			Sleep 200ms
+			TextTalk char[9] {
+				#92370v#1802FWh-What is it?!{wait}
+			}
+			TextWait
+			TextEnd self
+			CharFlagsUnset self 0x0010
+			ForkFunc self fork[0] fn[0,13]
+			FlagSet flag[11]
+		else:
+			TextStart self
+			TextTalk char[9] {
+				#92371v#1800F*cough*{wait}
+			} {
+				#92372vThe Testaments exist to bring peace to the
+				hearts of Aidios' children.{wait}
+			} {
+				#92373v#1805FWould you like me to read you an excerpt
+				from them?{wait}
+			}
+			TextWait
+			TextEnd self
+			ForkFunc self fork[0] fn[0,13]
+	Return
+
+fn[3]:
+	if flag[11296]:
+		if !flag[7]:
+			TextStart self
+			TextTalk char[22] {
+				#76885v#1008FIt's gonna be a long journey, right?{wait}
+			} {
+				#76886v#1017FSo we'll probably get hungry on the way.
+				And if we don't have any food with us,
+				we're gonna be in biiig trouble!{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92777v#1932F...I like the way you think.{wait}
+				}
+				TextWait
+				if PartyPosition name[8] != -1:
+					TextTalk name[8] {
+						#90154v#1066FHahaha...{wait}
+					}
+					TextWait
+			FlagSet flag[7]
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[22] {
+				#76887v#1015FUmm... Celeste says she's not going to need any,
+				so that leaves, like, what?{wait}
+			} {
+				#76888vEnough food for 16 people, I guess?{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92778v#1932F...I think you should bring enough for 18.{wait}
+				} {
+					#92779v#1938FI need about three people's worth of it.{wait}
+				}
+				TextWait
+				CharTurnToChar char[22] name[14] 0deg/s
+				CharSetChipPattern self 0
+				TextTalk char[22] {
+					#76889v#1004FF-For real...?{wait}
+				} {
+					#76890v#1006FOkay, then!{wait}
+				}
+				TextWait
+				if PartyPosition name[8] != -1:
+					TextTalk name[8] {
+						#90155v#1068F(I hope Gilbert's got a small stomach... 
+						Sounds like he's gettin' jack all.){wait}
+					}
+					TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11029]:
+		if !flag[7]:
+			if !flag[9832]:
+				TextStart self
+				TextTalk char[22] {
+					#76681v#1008FI'm feeling kinda hungry, so I came over here
+					to get something to eat.{wait}
+				} {
+					#76682v#1019FWh-What are you looking at me like that for?! 
+					Exercise makes you hungry! It's a fact of life!{wait}
+				}
+				TextWait
+				if PartyPosition name[14] != -1:
+					TextTalk name[14] {
+						#92418v#1447FI couldn't agree more, Estelle.{wait}
+					} {
+						#92419v#1448FThat's a universal rule of this world.
+						To try to deny it would be folly.{wait}
+					}
+					TextWait
+					TextTalk name[8] {
+						#89523v#1068F(These two sure have a lot in common...){wait}
+					}
+					TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[22] {
+					#76685v#1007F*sigh* I wish those two could get along...{wait}
+				} {
+					#76686vI wanna do something to help on that front,
+					but I'm not sure what I can do.{wait}
+				}
+				TextWait
+				if PartyPosition name[15] == -1 && PartyPosition name[14] == -1:
+					TextTalk name[8] {
+						#89524v#1061F(Oh, I'm sure you could if you put
+						your mind to it, Estelle.){wait}
+					}
+					TextWait
+				elif PartyPosition name[14] != -1:
+					TextTalk name[14] {
+						#92420v#1440F...{wait}
+					}
+					TextWait
+				elif PartyPosition name[15] != -1:
+					TextTalk name[15] {
+						#90984v#1300F...{wait}
+					}
+					TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[7]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if !flag[9832]:
+				TextTalk char[22] {
+					#76683v#1015FI'm feeling kinda thirsty, too...{wait}
+				} {
+					#76684v#1006FMaybe I could go for some ice cream
+					or something?{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[22] {
+					#76687v#1007F*sigh* I wish those two could get along...{wait}
+				} {
+					#76688vI wanna do something to help on that front,
+					but I'm not sure what I can do.{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	Return
+
+fn[4]:
+	if flag[11296]:
+		TextStart self
+		if !flag[9831] && PartyPosition name[8] != -1:
+			CharTurnToChar char[14] name[8] 0deg/s
+			TextTalk char[14] {
+				#78255v#1500FIt's weird how it feels like we've known each
+				other for such a long time...but when you
+				think about it, it hasn't been that long at all.{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90156v#1075FHahaha. True enough.{wait}
+			} {
+				#90157v#1840FYou know...I might as well tell you this now.{wait}
+			} {
+				#90158vRight now, I'm pretty damn jealous of you,
+				Joshua.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#78256v#1504F...You are?{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90159v#1844FWhen you think about it, we've walked fairly
+				similar paths in life, right?{wait}
+			} {
+				#90160vBut while I'm still feeling my way around in the
+				dark, you managed to make it back out into the
+				light again.{wait}
+			} {
+				#90161v#1846FI didn't really feel this way when you were finally
+				free from the Stigma and able to move on and all...{wait}
+			} {
+				#90162v...but now? That's a whole different story.{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#78257v#1514F...You know? I think I know why, too.{wait}
+			} {
+				#78258v#1513FIt's probably because before now, you'd given
+				up on ever being able to come back to the light.
+				Except now, you want to believe you can again.{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90163v#1068FMan...you've got me all figured out.{wait}
+			} {
+				#90164v#1066FHaha... Pretty pitiful of me, huh?{wait}
+			}
+			TextWait
+			TextTalk char[14] {
+				#78259v#1509FMaybe, but there's no harm in that.{wait}
+			} {
+				#78260v#1501FBefore that, though, we've got to get
+				out of this world. {wait}
+			} {
+				#78261vBut as long as we believe in ourselves,
+				I'm sure we can manage that.{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#90165v#1840FFor sure.{wait}
+			}
+			TextWait
+			FlagSet flag[9831]
+		elif !flag[1]:
+			TextTalk char[14] {
+				#78262v#1505FThe Lord of Phantasma keeps referring to us as
+				pieces on a game board.{wait}
+			} {
+				#78263v#1502FAnd it's obvious enough that unless we all work
+				together, there's no way we're getting out of
+				here.{wait}
+			} {
+				#78264vEspecially with how fixated she is on playing by
+				the rules she's established.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+		else:
+			TextTalk char[14] {
+				#78265v#1502FIt's obvious enough that unless we all work
+				together, there's no way we're getting out of
+				here.{wait}
+			} {
+				#78266v#1503FThat's probably one of the rules that governs
+				the world itself.{wait}
+			} {
+				#78267vBut at the same time, it feels like the Lord of
+				Phantasma herself is defined by the rules of
+				this world, too.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		if !flag[9830]:
+			if PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk name[15] {
+					#90841v#264F...Joshua?{wait}
+				} {
+					#90842v#260FWhat are you doing here?{wait}
+				}
+				TextWait
+				Emote self 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[14] name[15] 400deg/s
+				Sleep 300ms
+				TextTalk char[14] {
+					#77879v#1513FOh, not much...{wait}
+				} {
+					#77880v#1500FI was just giving some thought to what we
+					might find ourselves up against during the
+					remainder of our time here.{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90843v#266F*sigh* Why would you waste time doing that
+					when we'll find out by proceeding anyway?{wait}
+				} {
+					#90844v#262FYou don't need to worry about anything as
+					long as I'm with you all.{wait}
+				}
+				TextWait
+				TextTalk char[14] {
+					#77881v#1509FHaha. I suppose you're right.{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				var[2] = char[14].4
+				var[3] = char[15].4
+				EventBegin 0
+				_Char4A char[14] 0
+				_Char4A char[15] 0
+				CharTurnToChar char[14] name[0] 0deg/s
+				CharTurnToChar field_party[0] char[14] 0deg/s
+				CharTurnToChar field_party[1] char[14] 0deg/s
+				CharTurnToChar field_party[2] char[14] 0deg/s
+				CharTurnToChar field_party[3] char[14] 0deg/s
+				var[4] = field_party[0].1
+				var[5] = field_party[0].2
+				var[6] = field_party[0].3
+				var[7] = field_party[0].4
+				if PartyPosition name[4] != -1:
+					CharTurnToChar name[4] name[0] 0deg/s
+					TextTalk name[0] {
+						#76505v#1000F...Joshua?{wait}
+					} {
+						#76506vWhat're you doing here?{wait}
+					}
+					TextWait
+					TextTalk char[14] {
+						#77883v#1505FOh, I was just thinking about Renne...{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58170, 1000, -57430) 147deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (60320, 1000, -59930) 129deg
+					CharSetPos name[4] (58640, 1000, -59150) 133deg
+					CharTurnToChar name[0] name[4] 0deg/s
+					CharTurnToChar char[14] name[4] 0deg/s
+					CharTurnToChar name[4] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk name[4] {
+						#81272v#1382FThe two of you have been trying to find
+						her ever since you left Liberl, right?{wait}
+					}
+					TextWait
+				else:
+					CharTurnToChar char[15] name[0] 0deg/s
+					TextTalk name[0] {
+						#76507v#1000F...Hmm?{wait}
+					} {
+						#76508vWhat're you guys doing here?{wait}
+					}
+					TextWait
+					TextTalk char[14] {
+						#77882v#1505FWe were just talking about Renne.{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58040, 1000, -58350) 129deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (59430, 1000, -60340) 129deg
+					CharTurnToChar name[0] char[15] 0deg/s
+					CharTurnToChar char[14] char[15] 0deg/s
+					CharTurnToChar char[15] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk char[15] {
+						#81272v#1382FThe two of you have been trying to find her
+						ever since you left Liberl, right?{wait}
+					}
+					TextWait
+				TextTalk name[0] {
+					#76509v#1003FYeah... I don't feel like we got to talk to her
+					properly back at the Axis Pillar.{wait}
+				} {
+					#76510v#1007FThere's something I really want to tell her,
+					too...and I'm not going to be satisfied until
+					I've done it.{wait}
+				}
+				TextWait
+				CharTurnTo name[0] 129deg 400deg/s
+				CharTurnTo char[15] 129deg 400deg/s
+				CharTurnTo char[14] 129deg 400deg/s
+				Emote name[0] 0mm 2000mm 24 27 250ms 0
+				Sleep 2000ms
+				EmoteStop name[0]
+				Sleep 300ms
+				TextTalk name[0] {
+					#76511v#1016FHeehee. Still, she looks like she's doing okay.{wait}
+				} {
+					#76512v#1017FSo I think the best thing to do for now is keep
+					watching over her and see what happens.{wait}
+				}
+				TextWait
+				TextTalk char[14] {
+					#77884v#1501F...That might be for the best, yeah.{wait}
+				} {
+					#77885v#1513FAt the end of the day, she needs to be the one who
+					chooses what to do. Nothing good's going to come
+					from pushing her to make that call any faster.{wait}
+				} {
+					#77886vI just hope that ending up here with us and
+					everyone else has a positive effect on her.{wait}
+				} {
+					#77887v#1500FBut all we can really do is wait and see, huh?{wait}
+				}
+				TextWait
+				if PartyPosition name[4] != -1:
+					TextTalk name[4] {
+						#81273v#1168F...Yes, I think you're right.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[15] {
+						#81280v#1168F...Yes, I think you're right.{wait}
+					}
+					TextWait
+				Sleep 500ms
+				CrossFade 500ms
+				CharFlagsUnset field_party[0] 0x0008
+				CharFlagsUnset field_party[1] 0x0008
+				CharFlagsUnset field_party[2] 0x0008
+				CharFlagsUnset field_party[3] 0x0008
+				field_party[0].1 = var[4]
+				field_party[0].2 = var[5]
+				field_party[0].3 = var[6]
+				field_party[0].4 = var[7]
+				_Char4B char[14] 0
+				_Char4B char[15] 0
+				char[14].4 = var[2]
+				char[15].4 = var[3]
+				FlagSet flag[9830]
+				EventEnd 6
+		else:
+			TextStart self
+			if !flag[1]:
+				FlagSet flag[1]
+				if PartyPosition name[15] != -1:
+					TextTalk char[14] {
+						#77891v#1505FIf Renne's theory that this world was molded into
+						its current form by the Lord of Phantasma is true...{wait}
+					} {
+						#77892v...I can only assume the rest of the planes in here
+						will be tailored to forwarding whatever their goal
+						is, too.{wait}
+					} {
+						#77893v#1503FI doubt said goal is in our best interests, either.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[14] {
+						#77888v#1501FWe're better off just keeping watch over Renne for
+						the time being.{wait}
+					} {
+						#77889vAt the end of the day, she needs to be the one who
+						chooses what to do. Nothing good's going to come
+						from pushing her to make that call any faster.{wait}
+					} {
+						#77890v#1513F...Personally, I'm hoping that meeting everyone here
+						like this will end up having a positive effect on her
+						in the long run.{wait}
+					}
+					TextWait
+			elif PartyPosition name[15] != -1:
+				TextTalk char[14] {
+					#77893v#1505FThe Lord of Phantasma clearly has some kind of
+					'game' for us in mind...#1200W #20W 
+					#1503FI can't see it being very enjoyable for us, either.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[14] {
+					#77888v#1501FWe're better off just keeping watch over Renne for
+					the time being.{wait}
+				} {
+					#77889vAt the end of the day, she needs to be the one who
+					chooses what to do. Nothing good's going to come
+					from pushing her to make that call any faster.{wait}
+				}
+				TextWait
+			TextEnd self
+	Return
+
+fn[5]:
+	if flag[11016]:
+		if !flag[14]:
+			TextStart self
+			var[2] = char[12].4
+			if PartyPosition name[13] != -1:
+				CharTurnToChar self name[13] 0deg/s
+				TextTalk char[17] {
+					#79978v#1541FWhy, hello, Julia.{wait}
+				} {
+					#79979vIt's occurred to me that I never did properly
+					thank you for your assistance during my return
+					to Erebonia.{wait}
+				} {
+					#79980v#1547FSo, what say you? Would you like to accompany
+					me for a drink or two? On me, of course.{wait}
+				}
+				TextWait
+				TextTalk name[13] {
+					#84970v#172FI... Well... I'm not sure that would be...{wait}
+				}
+				TextWait
+				_Char4A char[12] 255
+				if PartyPosition name[13] != -1:
+					if PartyPosition name[12] != -1:
+						CharTurnToChar name[12] name[13] 400deg/s
+					else:
+						CharTurnToChar char[12] name[13] 400deg/s
+				elif PartyPosition name[12] != -1:
+					CharTurnToChar name[12] char[11] 400deg/s
+				else:
+					CharTurnToChar char[12] char[11] 400deg/s
+				if PartyPosition name[12] != -1:
+					TextTalk name[12] {
+						#85623v#272FFeel free to ignore him, Captain.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[12] {
+						#85623v#272FFeel free to ignore him, Captain.{wait}
+					}
+					TextWait
+				_Char4B char[12] 255
+				char[12].4 = var[2]
+			else:
+				TextTalk char[17] {
+					#79981v#1545FHeh. I've begun to think this may be a good
+					chance to get to know Julia a little better.{wait}
+				} {
+					#79982v#1542FI've been waiting for my chance to strike...{wait}
+				}
+				TextWait
+				if PartyPosition name[12] != -1:
+					if PartyPosition name[1] != -1:
+						TextTalk name[1] {
+							#77963v#1505FI...wouldn't recommend it, Olivier. Really.{wait}
+						}
+						TextWait
+					elif PartyPosition name[0] != -1:
+						TextTalk name[0] {
+							#76631v#1007F*sigh* If you thought my staff was bad,
+							wait until you meet her sword...{wait}
+						}
+						TextWait
+					elif PartyPosition name[4] != -1:
+						TextTalk name[4] {
+							#81371v#1165FA-Ahaha...{wait}
+						} {
+							#81372vI...strongly wouldn't recommend it. Really,
+							I say that for your own good.{wait}
+						}
+						TextWait
+					TextTalk name[12] {
+						#85624v#274FHow many times must I tell you not to cause
+						trouble before it gets through that seemingly
+						impenetrable skull of yours?{wait}
+					} {
+						#85625vStay here and behave.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[17] {
+						#79985v#1541F...but unfortunately, Mueller caught me before 
+						I could make good on my plans.{wait}
+					}
+					TextWait
+			FlagSet flag[14]
+			TextEnd self
+		elif PartyPosition name[12] != -1:
+			TextStart self
+			if PartyPosition name[13] != -1:
+				CharTurnToChar char[17] name[13] 0deg/s
+				TextTalk char[17] {
+					#80362v#1547FHohoho! It would be my pleasure to treat you
+					to a drink later, Julia.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[17] {
+					#79983v#1542FHmm... Now, how shall I go about this...?{wait}
+				} {
+					#79984vA good chance just doesn't seem to be
+					presenting itself...{wait}
+				}
+				TextWait
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			_Char4A char[12] 255
+			TextTalk char[17] {
+				#79986v#1541FMy dear friend, you misunderstand me!{wait}
+			}
+			TextWait
+			Emote char[12] 0mm 2000mm 12 13 250ms 2
+			SoundPlay sound[49] 0 0 100
+			Sleep 1000ms
+			_Char4B char[12] 255
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11008]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[14]:
+			TextTalk char[17] {
+				#79960v#1540FHello, Kevin.{wait}
+			} {
+				#79961v#1545FIt sure seems like you've got quite a lot on your
+				mind.{wait}
+			} {
+				#79962vI won't force you to tell us everything, but given
+				that we've all been caught up in this, I think it's
+				fair to expect some kind of explanation. {wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89382v#1843FYou'll get one. I promise.{wait}
+			} {
+				#89383v#1060FHope you don't mind waiting a little bit longer.{wait}
+			}
+			TextWait
+			FlagSet flag[14]
+		else:
+			TextTalk char[17] {
+				#79963v#1545FI can appreciate that someone in your line of
+				work will have plenty of things they can't speak
+				of freely...{wait}
+			} {
+				#79964v#1540F...but given that we've all been caught up in this,
+				I think it's fair to expect some kind of explanation
+				eventually.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10501]:
+		if PartyPosition name[12] != -1:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			if !flag[14]:
+				TextTalk char[17] {
+					#79845v#1545FHaha. It's been one fancy party after another 
+					for me lately.{wait}
+				} {
+					#79846v#1540FSo truthfully, it's actually nice to have some
+					time to sit and relax once in a while.{wait}
+				}
+				TextWait
+				TextTalk name[12] {
+					#85535v#272F...Does the possibility of 'doing some work'
+					not occur to you?{wait}
+				}
+				TextWait
+				FlagSet flag[14]
+			else:
+				TextStart self
+				TextTalk char[17] {
+					#79847v#1545FBe sure to work Mueller to the bone in my place,
+					my wonderful friends.{wait}
+				} {
+					#79848vHe knows how to make himself useful.{wait}
+				}
+				TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+		elif !flag[14]:
+			CharFlagsSet char[17] 0x0010
+			TextStart char[17]
+			_Char4A char[17] 255
+			_Char4A char[12] 255
+			TextTalk char[17] {
+				#79842v#1542F...No. I think it's safe to say that His Excellency
+				the Chancellor isn't in any way involved in this.{wait}
+			} {
+				#79843vThis is far too roundabout a plan of attack even
+				for him.{wait}
+			} {
+				#79844v#1551FI can't be so sure that Ouroboros isn't, however...{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				#85533v#272FWell, I can't disagree that this doesn't feel like
+				something he would do.{wait}
+			} {
+				#85534v#276FNot least because if he wanted to harm you,
+				he had plenty of chances to do so in Heimdallr.{wait}
+			}
+			TextWait
+			FlagSet flag[14]
+			CharFlagsUnset char[17] 0x0010
+			_Char4B char[17] 255
+			_Char4B char[12] 255
+			TextEnd char[17]
+		else:
+			TextStart self
+			TextTalk char[17] {
+				#79849v#1540FGreetings! How fares the investigation?{wait}
+			} {
+				#79850v#1541FIf you find anything out, do come and let me know.
+				I'm ever so curious.{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[10496]:
+		if !flag[9824]:
+			_Char4A char[15] 255
+			if PartyPosition name[12] == -1:
+				_Char4A char[12] 255
+			if PartyPosition name[13] == -1 && PartyPosition name[7] != -1:
+				_Char4A char[11] 255
+			CharFlagsSet char[17] 0x0010
+			TextStart char[17]
+			if PartyPosition name[4] != -1:
+				name[4].5 = char[17].4
+				char[17].5 = char[17].4
+				TextStart char[17]
+				CharFlagsUnset char[17] 0x0010
+				CharTurnToChar char[17] name[4] 0deg/s
+				char[17].4 = (char[17].4 + 360) % 360
+				char[17].4 = char[17].4 + 360 - char[17].5
+				char[17].5 = char[17].4 / 180
+				if char[17].4 <= 45 | char[17].4 >= 315 && char[17].4 <= 405 | char[17].4 >= 675:
+				elif char[17].5 < 1:
+					char[17].8 = 2
+				elif char[17].5 > 2:
+					char[17].8 = 1
+				else:
+					char[17].8 = char[17].5
+				char[17].4 = name[4].5
+				name[4].5 = 0
+				char[17].5 = 0
+				CharFlagsSet char[17] 0x0010
+				TextTalk name[4] {
+					#81161v#1382FHow have you been since we last met, 
+					Your Highness?{wait}
+				} {
+					#81162vWord of your popularity in Erebonian high
+					society has been reaching us over in Liberl,
+					too.{wait}
+				}
+				TextWait
+			else:
+				CharSetChipPattern char[17] 0
+				TextTalk char[15] {
+					#81161v#1382FHow have you been since we last met, 
+					Your Highness?{wait}
+				} {
+					#81162vWord of your popularity in Erebonian high
+					society has been reaching us over in Liberl,
+					too.{wait}
+				}
+				TextWait
+			TextTalk char[17] {
+				#79813v#1545FWell, I'm doing a good enough job of convincing
+				them I'm little more than an elegant-yet-harmless
+				prince at the moment.{wait}
+			} {
+				#79814v#1542FStill, spending so much of my time pretending to 
+				be someone I'm not can be terribly exhausting.{wait}
+			} {
+				#79815v#1544FSo I'm biding my time and waiting for the perfect
+				chance to cast it all aside and reveal my true form
+				to the world...{wait}
+			}
+			TextWait
+			Sleep 500ms
+			TextTalk char[17] {
+				#79816v#1541F#3SThen all shall know Olivier, the Gospeler of Love!{wait}
+			}
+			Shake 0 200 3000 100ms
+			TextWait
+			Emote char[17] 300mm 1600mm 54 57 250ms 0
+			SoundPlay sound[137] 0 0 100
+			Sleep 2000ms
+			Emote field_party[0] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Emote field_party[1] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Emote field_party[2] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Emote field_party[3] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			if PartyPosition name[4] == -1:
+				Emote char[15] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+			if PartyPosition name[12] == -1:
+				Emote char[12] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+			if PartyPosition name[13] == -1 && PartyPosition name[7] != -1:
+				Emote char[11] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+			Sleep 1000ms
+			if PartyPosition name[12] != -1:
+				TextTalk name[12] {
+					#85512v#274FYou moron...{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[12] {
+					#85512v#274FYou moron...{wait}
+				}
+				TextWait
+			TextTalk name[8] {
+				#89075v#1068F'Gospeler of Love'? THAT'S what you're going
+				with?{wait}
+			}
+			TextWait
+			if PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#77650v#1508FWho else thinks he's going to be even more of
+					a menace to society than the black orbment
+					Gospels ever were?{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[14] {
+					#77650v#1508FWho else thinks he's going to be even more of
+					a menace to society than the black orbment
+					Gospels ever were?{wait}
+				}
+				TextWait
+			if PartyPosition name[4] != -1:
+				TextTalk name[4] {
+					#81163v#1165FHeehee. It's reassuring to see how little
+					he's changed at heart, though.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[15] {
+					#81163v#1165FHeehee. It's reassuring to see how little
+					he's changed at heart, though.{wait}
+				}
+				TextWait
+			EmoteStop char[17]
+			_Char4B char[15] 255
+			if PartyPosition name[12] == -1:
+				_Char4B char[12] 255
+			if PartyPosition name[13] == -1 && PartyPosition name[7] != -1:
+				_Char4B char[11] 255
+			CharSetChipPattern char[17] 0
+			CharFlagsUnset char[17] 0x0010
+			TextEnd char[17]
+			FlagSet flag[9824]
+		else:
+			field_party[0].5 = char[17].4
+			char[17].5 = char[17].4
+			TextStart char[17]
+			CharFlagsUnset char[17] 0x0010
+			CharTurnToChar char[17] field_party[0] 0deg/s
+			char[17].4 = (char[17].4 + 360) % 360
+			char[17].4 = char[17].4 + 360 - char[17].5
+			char[17].5 = char[17].4 / 180
+			if char[17].4 <= 45 | char[17].4 >= 315 && char[17].4 <= 405 | char[17].4 >= 675:
+			elif char[17].5 < 1:
+				char[17].8 = 2
+			elif char[17].5 > 2:
+				char[17].8 = 1
+			else:
+				char[17].8 = char[17].5
+			char[17].4 = field_party[0].5
+			field_party[0].5 = 0
+			char[17].5 = 0
+			CharFlagsSet char[17] 0x0010
+			if !flag[14]:
+				TextTalk char[17] {
+					#79817v#1545FStill, the thought of that ghost has yet to
+					leave my mind since I first heard about her.{wait}
+				} {
+					#79818vJust imagine the spirit of a beautiful woman,
+					left all alone in this empty realm...{wait}
+				} {
+					#79819v#1547FHahaha! Doesn't the thought just get your
+					imagination racing?{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#77651v#1508F...{wait}
+				}
+				TextWait
+				FlagSet flag[14]
+			else:
+				TextTalk char[17] {
+					#79820v#1540FStill, the thought of that ghost has yet to
+					leave my mind since I first heard about her.{wait}
+				} {
+					#79821vI wonder whether this garden's appearance is
+					a reflection of her interests?{wait}
+				} {
+					#79822v#1541FIf so, I have to commend her for her tastes.{wait}
+				}
+				TextWait
+			CharSetChipPattern char[17] 0
+			TextEnd char[17]
+	Return
+
+fn[6]:
+	if flag[11051]:
+		if PartyPosition name[1] != -1 && !flag[9798] && !flag[9833]:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[15] {
+				#81454v#1383FSo...{wait}
+			} {
+				#81455v#1382F...you got to say farewell, Joshua?{wait}
+			}
+			TextWait
+			Emote name[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk name[1] {
+				#78194v#1513F...Yeah. Thanks.{wait}
+			} {
+				#78195v#1514FI'm impressed you worked that out without me
+				saying anything, Kloe. Heh. You're too sharp
+				for your own good.{wait}
+			}
+			TextWait
+			TextTalk char[15] {
+				#81456v#1165FAww. Hardly.{wait}
+			} {
+				#81457v#1168FYou just look like a huge burden's been lifted
+				from your shoulders, that's all. Kind of gave it
+				away to me.{wait}
+			}
+			TextWait
+			FlagSet flag[9833]
+			CharSetChipPattern self 0
+			TextEnd self
+		elif !flag[12]:
+			if PartyPosition name[10] != -1:
+				field_party[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self field_party[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = field_party[0].5
+				field_party[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[15] {
+					#81449v#1164FOh... Umm...{wait}
+				} {
+					#81450v#1382FHeehee. I'm just taking a break for now.{wait}
+				} {
+					#81451v#1165FI got a little too engrossed in reading the
+					books over in the library area, you see. {wait}
+				}
+				TextWait
+				CharSetChipPattern self 0
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[15] {
+					#81447v#1165FA-Ahaha... Sorry, Josette.{wait}
+				} {
+					#81448vI've always had this habit of getting really 
+					engrossed in things when I'm doing them.{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[12]
+		else:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[15] {
+				#81452v#1168FThis place is incredibly calming somehow, isn't it?{wait}
+			} {
+				#81453v#1168FI might've been more surprised than anything when
+				I first found myself here, but now I'm actually quite
+				comfortable.{wait}
+			}
+			TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+	elif flag[10759]:
+		if !flag[9830]:
+			if PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				Emote self 0mm 2000mm 2 7 80ms 1
+				SoundPlay sound[39] 0 0 100
+				Sleep 1000ms
+				CharTurnToChar char[15] name[15] 400deg/s
+				TextTalk char[15] {
+					#81286v#1164FE-Erm... Renne...?{wait}
+				} {
+					#81287v#1165FAhaha... Umm...{wait}
+				} {
+					#81288vTake care, okay?{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			else:
+				var[2] = char[14].4
+				var[3] = char[15].4
+				EventBegin 0
+				_Char4A char[14] 0
+				_Char4A char[15] 0
+				CharTurnToChar char[14] name[0] 0deg/s
+				CharTurnToChar char[15] name[0] 0deg/s
+				CharTurnToChar field_party[0] char[15] 0deg/s
+				CharTurnToChar field_party[1] char[15] 0deg/s
+				CharTurnToChar field_party[2] char[15] 0deg/s
+				CharTurnToChar field_party[3] char[15] 0deg/s
+				var[4] = field_party[0].1
+				var[5] = field_party[0].2
+				var[6] = field_party[0].3
+				var[7] = field_party[0].4
+				if PartyPosition name[1] != -1:
+					TextTalk name[0] {
+						#76513v#1000FKloe?{wait}
+					} {
+						#76514vWhat're you doing here?{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81274v#1164FOh, it's just...{wait}
+					} {
+						#81275v#1382FI was just curious how Renne was doing,
+						that's all.{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58040, 1000, -58350) 129deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (59430, 1000, -60340) 129deg
+					if PartyPosition name[4] != -1:
+						CharSetPos name[4] (59050, 1000, -59340) 129deg
+					if PartyPosition name[1] != -1:
+						CharSetPos name[1] (59020, 1000, -59390) 81deg
+					CharFlagsUnset name[0] 0x0008
+					CharFlagsUnset name[14] 0x0008
+					CharTurnToChar name[1] char[15] 0deg/s
+					CharTurnToChar name[0] char[15] 0deg/s
+					CharTurnToChar char[15] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk char[15] {
+						#81276v#1382FThe two of you have been trying to find
+						her ever since you left Liberl, right?{wait}
+					}
+					TextWait
+					TextTalk name[1] {
+						#77894v#1503FYeah... I don't feel like we got to talk to
+						her properly back at the Axis Pillar.{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76515v#1011FThere's something I really want to tell her,
+						too...and I'm not going to be satisfied until
+						I've done it.{wait}
+					}
+					TextWait
+					CharTurnTo name[0] 129deg 400deg/s
+					CharTurnTo char[15] 129deg 400deg/s
+					CharTurnTo name[1] 129deg 400deg/s
+					Emote name[0] 0mm 2000mm 24 27 250ms 0
+					Sleep 2000ms
+					EmoteStop name[0]
+					Sleep 300ms
+					TextTalk name[0] {
+						#76520v#1016FHeehee. Still, she looks like she's doing okay.{wait}
+					} {
+						#76521v#1017FSo I think the best thing to do for now is keep
+						watching over her and see what happens.{wait}
+					}
+					TextWait
+					TextTalk name[1] {
+						#77895v#1501F...That might be for the best, yeah.{wait}
+					} {
+						#77896v#1513FAt the end of the day, she needs to be the one who
+						chooses what to do. Nothing good's going to come
+						from pushing her to make that call any faster.{wait}
+					} {
+						#77897vI just hope that ending up here with us and
+						everyone else has a positive effect on her.{wait}
+					} {
+						#77898v#1500FBut all we can really do is wait and see, huh?{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81280v#1168F...Yes, I think you're right.{wait}
+					}
+					TextWait
+				else:
+					TextTalk name[0] {
+						#76516v#1000FHmm?{wait}
+					} {
+						#76517vWhat are the two of you doing here?{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81277v#1164FOh, Estelle.{wait}
+					} {
+						#81278v#1382FWe were just talking about Renne.{wait}
+					}
+					TextWait
+					Sleep 500ms
+					CrossFade 800ms
+					CharSetPos name[14] (58260, 1000, -58840) 129deg
+					CharSetPos party[2] (58610, 1000, -57100) 129deg
+					CharSetPos party[3] (60960, 1000, -56480) 129deg
+					CharSetPos name[0] (59430, 1000, -60340) 129deg
+					if PartyPosition name[4] != -1:
+						CharSetPos name[4] (59050, 1000, -59340) 129deg
+					if PartyPosition name[1] != -1:
+						CharFlagsSet name[1] 0x0008
+						CharFlagsUnset char[14] 0x0080
+					CharFlagsUnset name[0] 0x0008
+					CharFlagsUnset name[14] 0x0008
+					CharTurnToChar char[14] char[15] 0deg/s
+					CharTurnToChar name[0] char[15] 0deg/s
+					CharTurnToChar char[15] name[0] 0deg/s
+					CamLookPos (64870, -50, -60500) 0ms
+					CamSetDistance 0 4290 -10000 0ms
+					CamZoom 6020 0ms
+					CamRotate 71000mdeg 0ms
+					CamPers 203 0ms
+					FadeWait
+					Sleep 500ms
+					TextTalk char[15] {
+						#81279v#1382FThe two of you have been trying to find
+						her ever since you left Liberl, right?{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76518v#1003FYeah... I don't feel like we got to talk to
+						her properly back at the Axis Pillar.{wait}
+					} {
+						#76519v#1007FThere's something I really want to tell her,
+						too...and I'm not going to be satisfied until
+						I've done it.{wait}
+					}
+					TextWait
+					CharTurnTo name[0] 129deg 400deg/s
+					CharTurnTo char[15] 129deg 400deg/s
+					CharTurnTo char[14] 129deg 400deg/s
+					Emote name[0] 0mm 2000mm 24 27 250ms 0
+					Sleep 2000ms
+					EmoteStop name[0]
+					Sleep 300ms
+					TextTalk name[0] {
+						#76520v#1016FHeehee. Still, she looks like she's doing okay.{wait}
+					} {
+						#76521v#1017FSo I think the best thing to do for now is keep
+						watching over her and see what happens.{wait}
+					}
+					TextWait
+					TextTalk char[14] {
+						#77895v#1501F...That might be for the best, yeah.{wait}
+					} {
+						#77896v#1513FAt the end of the day, she needs to be the one who
+						chooses what to do. Nothing good's going to come
+						from pushing her to make that call any faster.{wait}
+					} {
+						#77897vI just hope that ending up here with us and
+						everyone else has a positive effect on her.{wait}
+					} {
+						#77898v#1500FBut all we can really do is wait and see, huh?{wait}
+					}
+					TextWait
+					TextTalk char[15] {
+						#81280v#1168F...Yes, I think you're right.{wait}
+					}
+					TextWait
+				Sleep 500ms
+				CrossFade 500ms
+				CharFlagsUnset field_party[0] 0x0008
+				CharFlagsUnset field_party[1] 0x0008
+				CharFlagsUnset field_party[2] 0x0008
+				CharFlagsUnset field_party[3] 0x0008
+				field_party[0].1 = var[4]
+				field_party[0].2 = var[5]
+				field_party[0].3 = var[6]
+				field_party[0].4 = var[7]
+				_Char4B char[14] 0
+				_Char4B char[15] 0
+				char[14].4 = var[2]
+				char[15].4 = var[3]
+				FlagSet flag[9830]
+				EventEnd 6
+		else:
+			TextStart self
+			if !flag[12]:
+				if PartyPosition name[15] != -1:
+					TextTalk char[15] {
+						#81289v#1162FIf this world really does change as a result
+						of people's thoughts...{wait}
+					} {
+						#81290v...then it seems reasonable to assume that
+						someone must have wished for all of us to
+						come together, too.{wait}
+					} {
+						#81291v#1169FCould that someone be the Lord of Phantasma?
+						Or is it that ghost?{wait}
+					} {
+						#81292v#1167F...Or maybe even us?{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[15] {
+						#81281v#1167FI'm sure it's not going to be easy to come to an
+						understanding with Renne after all she's been
+						through, but you know what? {wait}
+					} {
+						#81282v#1168FIf anyone can do it, it's you and Joshua, Estelle.{wait}
+					} {
+						#81283vThe bond between the two of you is so strong
+						that I'm not sure there's anything you couldn't
+						do together.{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76522v#1008FAwww...{wait}
+					} {
+						#76523v#1006FThanks, Kloe. I hope you're right.{wait}
+					}
+					TextWait
+				FlagSet flag[12]
+			elif PartyPosition name[15] != -1:
+				TextTalk char[15] {
+					#81293v#1167FNo sooner have we solved one mystery, another
+					presents itself...{wait}
+				} {
+					#81294v#1162FAs a game, this is certainly well thought out,
+					to say the least.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[15] {
+					#81284v#1383FI'm not sure how much I'll be able to do to help
+					you when it comes to Renne, but I do want to do
+					everything within my power.{wait}
+				} {
+					#81285v#1382FSo if there's anything I can do, say the word.{wait}
+				}
+				TextWait
+			TextEnd self
+	elif flag[10756]:
+		TextStart self
+		if !flag[12]:
+			TextTalk char[15] {
+				#81263v#1160FThis is my first time meeting Richard ever since
+				he officially left the army.{wait}
+			} {
+				#81264v#1161FI'd heard his company's name mentioned on a
+				number of occasions since then, though.{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#76451v#1004FOh, really?{wait}
+			} {
+				#76452v#1015FMaybe it's doing pretty well for itself, then.{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81265v#1160FI've heard about Richard's company a number
+				of times since it was first established.{wait}
+			} {
+				#81266v#1383FThere've been small adverts for it in magazines,
+				too, I believe.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10510]:
+		TextStart self
+		if !flag[12]:
+			TextTalk char[15] {
+				#81207v#1167FWe have every reason to believe that there
+				are still people sealed in stones in this land
+				that we have yet to discover.{wait}
+			} {
+				#81208v#1167FWhether that is somewhere in Le Locle or on
+				the next plane, I don't know...but we need to
+				find them.{wait}
+			} {
+				#81209v#1162FSo let's keep going. Together.{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81210v#1162FI'm worried about all the people still trapped
+				in sealing stones here. We should hurry on.{wait}
+			} {
+				#81211v#1167F...Althooough, I'm also worried about Ries...{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#89208v#1840F(Erk... Why do I get the feeling she knows
+				more than she's letting on?){wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#77757v#1514F(She's a sharp girl. She probably does.){wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10506]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[12]:
+			TextTalk char[15] {
+				#81199v#1164FOh, I'm just feeding Sieg. He said he was hungry.{wait}
+			} {
+				#81200v#1165FHeehee. It won't take long. Promise.{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81201v#1160FStill, I'm truly glad that we were able to find
+				plenty of food and water here.{wait}
+			} {
+				#81202vWe probably owe that to that ghost, too.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 1
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[10501]:
+		TextStart self
+		if !flag[12]:
+			TextTalk char[15] {
+				#81184v#1167FI certainly wasn't expecting Anelace to have
+				been drawn in here, too...{wait}
+			} {
+				#81185v...{wait}
+			} {
+				#81186v#1162FWe should keep up with our investigation as
+				quickly as we can.{wait}
+			} {
+				#81187vIf you need anything from me, let me know. 
+				I'm always happy to lend a hand.{wait}
+			}
+			TextWait
+			FlagSet flag[12]
+		else:
+			TextTalk char[15] {
+				#81188v#1162FWe should keep up with our investigation as
+				quickly as we can.{wait}
+			} {
+				#81189vIf you need anything from me, let me know. 
+				I'm always happy to lend a hand.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10496]:
+		if !flag[9824] && PartyPosition name[3] == -1:
+			Call fn[5,5]
+		else:
+			TextStart self
+			if !flag[12]:
+				TextTalk char[15] {
+					#81164v#1383FIt has always felt like we were being somehow
+					protected when we were in this garden
+					as opposed to anywhere else in Phantasma...{wait}
+				} {
+					#81165v#1160F...so I can certainly believe the idea that it may
+					be connected to that ghost.{wait}
+				}
+				TextWait
+				FlagSet flag[12]
+			else:
+				TextTalk char[15] {
+					#81166v#1160FIt don't see any reason why this garden wouldn't
+					be connected to that ghost somehow.{wait}
+				} {
+					#81167v#1168FHeehee. And I don't mind that one bit. It feels
+					reassuring to know she's watching over us.{wait}
+				}
+				TextWait
+			TextEnd self
+	Return
+
+fn[7]:
+	if flag[11296]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		if !flag[5]:
+			if PartyPosition name[6] == -1 && PartyPosition name[0] != -1:
+				name[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[0].5
+				name[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk name[0] {
+					#76893v#1015FHuh? Why aren't you hanging out with Tita,
+					Agate?{wait}
+				}
+				TextWait
+				if PartyPosition name[15] != -1:
+					TextTalk char[21] {
+						#80678v#551FThe hell kinda question is that? I'm not her dad.{wait}
+					} {
+						#80679v#053F...Besides, she's not a little kid.{wait}
+					} {
+						#80680vShe knows what she needs to do without me
+						telling her or breathin' over her neck.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[21] {
+						#80676v#551FThe hell kinda question is that? I'm not her dad.{wait}
+					} {
+						#80677v#051FBesides, she's with her friend right now. It's fine.{wait}
+					}
+					TextWait
+				TextTalk name[0] {
+					#76894v#1028FOh-hooo...{wait}
+				}
+				TextWait
+				TextTalk char[21] {
+					#80681v#555F...What? You got a problem?{wait}
+				}
+				TextWait
+				if PartyPosition name[3] != -1:
+					TextTalk name[3] {
+						#80120v#1541FThere's no need to be so flustered, dearest. ㈱
+						Your feelings are nothing to be ashamed of.{wait}
+					}
+					TextWait
+					Emote self 0mm 2000mm 12 13 250ms 2
+					SoundPlay sound[49] 0 0 100
+					Sleep 1000ms
+			elif PartyPosition name[6] == -1 && PartyPosition name[14] != -1:
+				name[14].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self name[14] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = name[14].5
+				name[14].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk name[14] {
+					#92798v#1936FUmm...{wait}
+				} {
+					#92799v#1938FYou do know Tita is over there at the moment,
+					don't you?{wait}
+				}
+				TextWait
+				TextTalk char[21] {
+					#80685v#052FYeah, sure...{wait}
+				} {
+					#80686v#051FWhy're you asking?{wait}
+				}
+				TextWait
+				TextTalk name[14] {
+					#92800v#1938FWell, it's just that you always seemed
+					to be with her...{wait}
+				} {
+					#92801v#1937FI thought you may have been wondering
+					where she was.{wait}
+				}
+				TextWait
+				TextTalk char[21] {
+					#80687v#055FI ain't some chick separated from its
+					mother hen, you know!{wait}
+				}
+				TextWait
+				if PartyPosition name[15] != -1:
+					TextTalk name[15] {
+						#91167v#261FTeehee...{wait}
+					}
+					TextWait
+			else:
+				field_party[0].5 = self.4
+				self.5 = self.4
+				TextStart self
+				CharFlagsUnset self 0x0010
+				CharTurnToChar self field_party[0] 0deg/s
+				self.4 = (self.4 + 360) % 360
+				self.4 = self.4 + 360 - self.5
+				self.5 = self.4 / 180
+				if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+				elif self.5 < 1:
+					self.8 = 2
+				elif self.5 > 2:
+					self.8 = 1
+				else:
+					self.8 = self.5
+				self.4 = field_party[0].5
+				field_party[0].5 = 0
+				self.5 = 0
+				CharFlagsSet self 0x0010
+				TextTalk char[21] {
+					#80672v#053FSounds like this is it. The end's finally in sight.{wait}
+				} {
+					#80673v#051FBetter train myself up as best I can--I'm gonna
+					need it.{wait}
+				}
+				TextWait
+			FlagSet flag[5]
+		elif PartyPosition name[6] == -1 && PartyPosition name[0] != -1:
+			name[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[0].5
+			name[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[21] {
+				#80682v#053FShe's not a kid anymore, so I'm sure she'll be
+				fine without me.{wait}
+			} {
+				#80683v#051FIf she needs me, I'm always there, but I know
+				she can otherwise handle herself.{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#76895v#1028FOh, my... ☆{wait}
+			}
+			TextWait
+			TextTalk char[21] {
+				#80684v#055FWhat's with that starry-eyed look?!{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] == -1 && PartyPosition name[14] != -1:
+			name[14].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[14] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[14].5
+			name[14].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[21] {
+				#80688v#551FWe're not always with one another! We just happen
+				to be together sometimes.{wait}
+			} {
+				#80689v#051FBesides, she's not a kid anymore. She doesn't need
+				me looking after her every second of the day.{wait}
+			}
+			TextWait
+			TextTalk name[14] {
+				#92802v#1930F...{wait}
+			}
+			TextWait
+			TextTalk char[21] {
+				#80690v#055FWh-What's with that look?!{wait}
+			}
+			TextWait
+		else:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[21] {
+				#80674v#050FFrom here on, we ain't gonna have time for standin'
+				still. We've gotta push on, on, and on.{wait}
+			} {
+				#80675v#051FSo make sure you train up while you can, okay?{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	Return
+
+fn[8]:
+	if flag[11296]:
+		TextStart self
+		if !flag[0]:
+			TextTalk char[10] {
+				#83039v#060FWith the Arseille's speed, I don't think it'll take long
+				at all for us to break out of the planes.{wait}
+			} {
+				#83040v#067FMom was actually able to raise its top speed with a
+				few improvements the other month, too, so that'll
+				be a huge help.{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#76891v#1001FHuh. Really?{wait}
+				} {
+					#76892v#1006FI hope I can meet your mom someday.{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#83041v#067FHeehee... I'd love you to meet her, too!{wait}
+				} {
+					#83042v#560FI'll have to introduce you to both my parents one day.
+					I know they've been looking forward to meeting you
+					and Joshua!{wait}
+				} {
+					#83043v#061FCome over any time when you get back to Liberl!{wait}
+				}
+				TextWait
+			elif PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#78268v#1504FTheir names were, uh...{wait}
+				} {
+					#78269v#1500F...Dan and Erika, right?{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#83044v#067FYup. That's right.{wait}
+				} {
+					#83045v#560FThe two of them have been really looking forward
+					to meeting you and Estelle.{wait}
+				} {
+					#83046v#061FCome over any time when you get back to Liberl!{wait}
+				}
+				TextWait
+			elif PartyPosition name[5] != -1:
+				TextTalk name[5] {
+					#80670v#552F(Oh, I'd forgotten about her messing around with
+					it before.){wait}
+				} {
+					#80671v#551F(...I just remember being hit by a flying spanner
+					when she was.){wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#83047v#565F...Hmm?{wait}
+				}
+				TextWait
+			FlagSet flag[0]
+		else:
+			TextTalk char[10] {
+				#83048v#062FR-Right!{wait}
+			} {
+				#83049vIf I wanna get back to Mom and Dad,
+				I've gotta give it my all!{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11051]:
+		if !flag[9828] && PartyPosition name[14] == -1 && !flag[11052]:
+			CharFlagsSet char[10] 0x0010
+			CharFlagsSet char[9] 0x0010
+			TextStart char[10]
+			_Char4A char[19] 255
+			if PartyPosition name[9] == -1:
+				TextTalk char[19] {
+					#86227v#1314F...Oh, I see.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					#92487v#1445FReally...{wait}
+				}
+				TextWait
+			TextTalk char[10] {
+				#82976v#060F...Yeah.{wait}
+			} {
+				#82977v#563FI only know part of the story...{wait}
+			} {
+				#82978v...but I think Loewe must've always wanted
+				a chance to properly say goodbye to Joshua,
+				too.{wait}
+			} {
+				#82979vI'm happy he was finally given that chance.{wait}
+			} {
+				#82980vAnd that Joshua was able to say a proper
+				goodbye to him, too.{wait}
+			} {
+				#82981v#066FI'm sure Joshua's just as happy in his own way.{wait}
+			}
+			TextWait
+			if PartyPosition name[9] == -1:
+				TextTalk char[19] {
+					#86228v#816FYeah. Me, too.{wait}
+				}
+				TextWait
+			TextTalk char[9] {
+				#92488v#1448F...Indeed.{wait}
+			}
+			TextWait
+			Sleep 300ms
+			if PartyPosition name[15] != -1:
+				name[15].5 = char[9].4
+				char[9].5 = char[9].4
+				TextStart char[9]
+				CharFlagsUnset char[9] 0x0010
+				CharTurnToChar char[9] name[15] 0deg/s
+				char[9].4 = (char[9].4 + 360) % 360
+				char[9].4 = char[9].4 + 360 - char[9].5
+				char[9].5 = char[9].4 / 180
+				if char[9].4 <= 45 | char[9].4 >= 315 && char[9].4 <= 405 | char[9].4 >= 675:
+				elif char[9].5 < 1:
+					char[9].8 = 2
+				elif char[9].5 > 2:
+					char[9].8 = 1
+				else:
+					char[9].8 = char[9].5
+				char[9].4 = name[15].5
+				name[15].5 = 0
+				char[9].5 = 0
+				CharFlagsSet char[9] 0x0010
+				Sleep 200ms
+				if flag[9796]:
+					TextTalk char[9] {
+						#92489v#1962FI'm glad Renne was able to say goodbye to him
+						as well.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[9] {
+						#92490v#1802FStill...{wait}
+					} {
+						#92491v#1445F...it's a shame you weren't able to say goodbye
+						to him as well, Renne.{wait}
+					}
+					TextWait
+				TextTalk name[15] {
+					#91110v#269FA shame, huh? I never expected to hear something
+					like that from you.{wait}
+				} {
+					#91111v#263FNevertheless, I appreciate the sentiment.{wait}
+				} {
+					#91112vPerhaps now that you have, you could read him
+					a story from the Testaments?{wait}
+				}
+				TextWait
+				TextTalk char[9] {
+					#92492v#1448F...It would be my pleasure.{wait}
+				}
+				TextWait
+				CharSetChipPattern char[9] 0
+			elif flag[9796]:
+				TextTalk char[9] {
+					#92493v#1447FI'm glad Renne was able to say goodbye to him
+					as well.{wait}
+				} {
+					#92494v#1806FIt's always a painful thing to have to part with
+					someone, but it's even more painful to not have
+					the chance to say farewell.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					#92495v#1806FI just wish Renne would have had a chance to say
+					goodbye to him as well.{wait}
+				} {
+					#92496v#1445FIt's always a painful thing to have to part with
+					someone, but it's even more painful to not have
+					the chance to say farewell...especially to family.{wait}
+				}
+				TextWait
+			FlagSet flag[9828]
+			CharFlagsUnset char[10] 0x0010
+			CharFlagsUnset char[9] 0x0010
+			_Char4B char[19] 255
+			TextEnd char[10]
+		else:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			if !flag[0]:
+				TextTalk char[10] {
+					#82982v#060FI only know part of the story...{wait}
+				} {
+					#82983v#563F...but I think Loewe must've always wanted
+					a chance to properly say goodbye to Joshua.{wait}
+				} {
+					#82984v#066FAnd to Renne, too.{wait}
+				}
+				TextWait
+				if PartyPosition name[15] != -1:
+					TextTalk name[15] {
+						#91113v#263F...Heehee. Maybe.{wait}
+					}
+					TextWait
+				FlagSet flag[0]
+			else:
+				TextTalk char[10] {
+					#82985v#060FWhenever I met Loewe back when he was still alive,
+					he always looked so...lonely, somehow.{wait}
+				} {
+					#82986v#564FThat was my first impression of him when we first
+					met, too.{wait}
+				} {
+					#82987v#067FHeehee. At least he's not lonely any more, though.{wait}
+				}
+				TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+			if PartyPosition name[14] == -1:
+				CharSetChipPattern self 2
+	elif flag[11016]:
+		if !flag[0]:
+			var[2] = char[10].8
+			var[3] = char[24].8
+			CharFlagsSet self 0x0010
+			TextStart self
+			field_party[0].5 = char[10].4
+			char[10].5 = char[10].4
+			TextStart char[10]
+			CharFlagsUnset char[10] 0x0010
+			CharTurnToChar char[10] field_party[0] 0deg/s
+			char[10].4 = (char[10].4 + 360) % 360
+			char[10].4 = char[10].4 + 360 - char[10].5
+			char[10].5 = char[10].4 / 180
+			if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+			elif char[10].5 < 1:
+				char[10].8 = 2
+			elif char[10].5 > 2:
+				char[10].8 = 1
+			else:
+				char[10].8 = char[10].5
+			char[10].4 = field_party[0].5
+			field_party[0].5 = 0
+			char[10].5 = 0
+			CharFlagsSet char[10] 0x0010
+			TextTalk char[10] {
+				#82881v#064FPhillip is Duke Dunan's butler, isn't he?{wait}
+			} {
+				#82882v#063FWhat was the Lord of Phantasma thinking by
+				dragging him into all of this? He's got nothing
+				to do with it...{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				TextTalk name[15] {
+					#90926v#263FOh, but if you ask me, they really know how to
+					keep things interesting.{wait}
+				} {
+					#90927v#260FI've taken a liking to them, to be honest.{wait}
+				} {
+					#90928v#261FI can't wait to finally get to face them head on.{wait}
+				}
+				TextWait
+			else:
+				char[10].5 = char[24].4
+				char[24].5 = char[24].4
+				TextStart char[24]
+				CharFlagsUnset char[24] 0x0010
+				CharTurnToChar char[24] char[10] 0deg/s
+				char[24].4 = (char[24].4 + 360) % 360
+				char[24].4 = char[24].4 + 360 - char[24].5
+				char[24].5 = char[24].4 / 180
+				if char[24].4 <= 45 | char[24].4 >= 315 && char[24].4 <= 405 | char[24].4 >= 675:
+				elif char[24].5 < 1:
+					char[24].8 = 2
+				elif char[24].5 > 2:
+					char[24].8 = 1
+				else:
+					char[24].8 = char[24].5
+				char[24].4 = char[10].5
+				char[10].5 = 0
+				char[24].5 = 0
+				CharFlagsSet char[24] 0x0010
+				TextTalk char[24] {
+					#90926v#263FOh, but if you ask me, they really know how to
+					keep things interesting.{wait}
+				} {
+					#90927v#260FI've taken a liking to them, to be honest.{wait}
+				} {
+					#90928v#261FI can't wait to finally get to face them head on.{wait}
+				}
+				TextWait
+			TextTalk name[8] {
+				#89444v#1066FJuuust don't think of trying to go off
+				on your own, okay?{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				name[15].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] name[15] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = name[15].5
+				name[15].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			else:
+				char[24].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] char[24] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = char[24].5
+				char[24].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			TextTalk char[10] {
+				#82883v#562FS-Seriously...{wait}
+			} {
+				#82884vThat'd be really, really dangerous...{wait}
+			}
+			TextWait
+			if PartyPosition name[14] != -1:
+				TextTalk name[14] {
+					#92374v#1440F...{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[0]
+			TextEnd self
+			char[10].8 = var[2]
+			char[24].8 = var[3]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if PartyPosition name[15] != -1:
+				name[15].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] name[15] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = name[15].5
+				name[15].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			else:
+				char[24].5 = char[10].4
+				char[10].5 = char[10].4
+				TextStart char[10]
+				CharFlagsUnset char[10] 0x0010
+				CharTurnToChar char[10] char[24] 0deg/s
+				char[10].4 = (char[10].4 + 360) % 360
+				char[10].4 = char[10].4 + 360 - char[10].5
+				char[10].5 = char[10].4 / 180
+				if char[10].4 <= 45 | char[10].4 >= 315 && char[10].4 <= 405 | char[10].4 >= 675:
+				elif char[10].5 < 1:
+					char[10].8 = 2
+				elif char[10].5 > 2:
+					char[10].8 = 1
+				else:
+					char[10].8 = char[10].5
+				char[10].4 = char[24].5
+				char[24].5 = 0
+				char[10].5 = 0
+				CharFlagsSet char[10] 0x0010
+			TextTalk char[10] {
+				#82885v#562FTrying to proceed on your own would be really,
+				REALLY dangerous, Renne.{wait}
+			} {
+				#82886vPlease don't try and do that...{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				CharSetChipPattern self 0
+			else:
+				CharSetChipPattern self 1
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11008]:
+		if PartyPosition name[15] != -1:
+			field_party[0].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self field_party[0] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = field_party[0].5
+			field_party[0].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			TextTalk char[10] {
+				#82868v#064FOh, Renne! Heehee.
+				#061FWe'll have to talk again later.{wait}
+			} {
+				#82869vI still want to finish our conversation from
+				earlier.{wait}
+			}
+			TextWait
+			TextTalk name[15] {
+				#90905v#261FI'd be delighted.{wait}
+			}
+			TextWait
+			CharSetChipPattern self 0
+			TextEnd self
+			if PartyPosition name[9] == -1:
+				CharSetChipPattern self 1
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[10] {
+				#82870v#061FSo then I decided to give him a name...{wait}
+			}
+			TextWait
+			TextTalk char[24] {
+				#90906v#261FI raised a cat once before, too, you know.{wait}
+			} {
+				#90907v#265FThe professor called him a Steel Cougar,
+				if I recall...{wait}
+			}
+			TextWait
+			Emote self 0mm 1700mm 40 43 100ms 3
+			Sleep 1000ms
+			TextTalk char[10] {
+				#82871v#065FTh-That doesn't sound like the kind of cat
+				I'm thinking of!{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[10759]:
+		if !flag[9826]:
+			if PartyPosition name[15] != -1:
+				TextStart self
+				CharTurnToChar self name[15] 0deg/s
+				TextTalk char[10] {
+					#82828v#064FOooh, Renne!{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90849v#264FWhat are you doing here, Tita?{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#82829v#060FOh, I was sort of just wandering aimlessly
+					while I was preoccupied.{wait}
+				} {
+					#82830v#061FSeeing you again made me remember all the
+					fun things we did together before, so I've been
+					thinking about those.{wait}
+				} {
+					#82831vLike that time we went shopping and bought
+					those really pretty brooches and stuff.{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90850v#260FHeehee. Oh, right.{wait}
+				} {
+					#90851v#267FThat reminds me, though...
+					I found one exactly like them in a tiny little
+					shop a while back.{wait}
+				} {
+					#90852v#261FThe jewel in the middle was red, though.{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[24] {
+					#90853v#261F...But guess what? I found a brooch exactly
+					like the ones we bought a while back there.{wait}
+				} {
+					#90854v#265FThe jewel in the middle was red, though.{wait}
+				}
+				TextWait
+			TextTalk char[10] {
+				#82832v#064FAww... You're so lucky.{wait}
+			} {
+				#82833vThey were all sold out of those in the shop
+				in Grancel.{wait}
+			} {
+				#82834v#562F*sigh* I really wanted a red one, too...{wait}
+			}
+			TextWait
+			if PartyPosition name[15] != -1:
+				TextTalk name[15] {
+					#90855v#265FI know! Why don't we go on a shopping trip
+					together sometime, then? We could go to
+					somewhere reeeally far away.{wait}
+				} {
+					#90856v#269FYou'd like the Eastern Quarter in Calvard,
+					that's for sure. You could spend a whole day
+					shopping there and never feel bored.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[24] {
+					#90855v#265FI know! Why don't we go on a shopping trip
+					together sometime, then? We could go to
+					somewhere reeeally far away.{wait}
+				} {
+					#90856v#269FYou'd like the Eastern Quarter in Calvard,
+					that's for sure. You could spend a whole day
+					shopping there and never feel bored.{wait}
+				}
+				TextWait
+			TextTalk char[10] {
+				#82835v#064FR-Really?{wait}
+			} {
+				#82836v#061FI wonder what kinds of cute accessories
+				they'd have there?{wait}
+			} {
+				#82837v#560FOh, yeah! Let me tell you about the pendant 
+				I bought a while back!{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#76528v#1016F(It looks like they're back to good times
+				in no time.){wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9826]
+			TextEnd self
+		elif !flag[0]:
+			if PartyPosition name[15] != -1:
+				TextStart self
+				CharTurnToChar char[10] name[15] 0deg/s
+				TextTalk char[10] {
+					#82838v#061FWe'll have to go shopping together again
+					sometime!{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#90857v#260F...Sure. I wouldn't mind.{wait}
+				} {
+					#90858v#263FBut first we're going to have to get out of
+					Phantasma, aren't we?{wait}
+				}
+				TextWait
+				TextTalk char[10] {
+					#82839v#064F...Oh, right.{wait}
+				}
+				TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[10] {
+					#82840v#065FWh-What? Really?!{wait}
+				} {
+					#82841v#067F...I kinda want to see it now.{wait}
+				}
+				TextWait
+				TextEnd self
+				CharFlagsUnset self 0x0010
+			FlagSet flag[0]
+		else:
+			TextStart self
+			TextTalk char[10] {
+				#82842v#560FRenne's so lucky to be able to visit all
+				those shops, isn't she?{wait}
+			} {
+				#82843v#067FI want to go and see more of them, too!{wait}
+			}
+			TextWait
+			TextEnd self
+	Return
+
+fn[9]:
+	if flag[11052]:
+		TextStart self
+		TextTalk char[19] {
+			#86229v#814FHuh? Did something happen?{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#89701v#1075FNothing to worry about, no.{wait}
+		}
+		TextWait
+		TextEnd self
+	elif flag[11051]:
+		if flag[9828] | PartyPosition name[14] != -1 && PartyPosition name[6] != -1:
+			TextStart self
+			if !flag[9] && PartyPosition name[1] != -1:
+				CharTurnToChar self name[1] 0deg/s
+				TextTalk char[19] {
+					#86230v#1316FHmm... Okay, so...I'm not really sure on the
+					details of what happened...{wait}
+				} {
+					#86231v#816F...but I know one thing for sure.{wait}
+				} {
+					#86232v#811FYou're looking a lot brighter and more positive
+					now, Joshua.{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#78200v#1504FReally?{wait}
+				} {
+					#78201v#1513F...Thanks.{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					CharTurnToChar self name[0] 400deg/s
+					Sleep 300ms
+					TextTalk char[19] {
+						#86247v#816FThat goes for you, too, Estelle!{wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#76827v#1017FA-Ahaha... Really?{wait}
+					}
+					TextWait
+				FlagSet flag[9]
+			elif PartyPosition name[1] != -1:
+				CharTurnToChar self name[1] 0deg/s
+				TextTalk char[19] {
+					#86248v#816FYou look a lot more positive now, Joshua.{wait}
+				} {
+					#86249v#811FI'm so happy for you!{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[19] {
+					#86242v#817FI don't know that much about Joshua and Loewe's
+					relationship, either...{wait}
+				} {
+					#86243v#1314F...but what happened seems to have gone a long
+					way in helping him move forward, at least. That's
+					a good thing, right?{wait}
+				}
+				TextWait
+			TextEnd self
+		elif PartyPosition name[14] == -1 && PartyPosition name[6] == -1:
+			Call fn[5,8]
+		elif PartyPosition name[14] == -1:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[19] {
+				#86236v#1314FWell, I'm not really that filled in on the whole
+				thing, to be honest.{wait}
+			} {
+				#86237v#813FFrom what I know, Loewe was like a brother
+				to Joshua.{wait}
+			} {
+				#86238v#817FBut during what happened on the Liber Ark,
+				he...{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		else:
+			TextStart self
+			TextTalk char[19] {
+				#86239v#817FUmm...{wait}
+			} {
+				#86240vLoewe was basically like a brother to Joshua,
+				right?{wait}
+			} {
+				#86241v#813FI wasn't able to go to the Liber Ark with you guys,
+				so I'm not clued up on all this stuff...{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[11040]:
+		if !flag[9]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[19] {
+				#86201v#814FH-Huh...?!{wait}
+			} {
+				#86202v#1317FWhere did everyone go?!{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9]
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if PartyPosition name[6] != -1 && PartyPosition name[15] != -1:
+				Emote char[19] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[19] name[6] 500deg/s
+				TextTalk char[19] {
+					#86205v#1310FOh! There you two are!{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82945v#067FHeehee...{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#91044v#263FWe're off for a while.{wait}
+				} {
+					#91045v#260FWe'll talk with you again later,
+					though, okay?{wait}
+				}
+				TextWait
+				if PartyPosition name[14] != -1:
+					TextTalk char[19] {
+						#86206v#818FAww...{wait}
+					} {
+						#86207v#1311FOkay, then... But you'll have to come and join us,
+						too, Ries. ㈱{wait}
+					}
+					TextWait
+					TextTalk name[14] {
+						#92458v#1802FO-Oh...{wait}
+					}
+					TextWait
+			elif PartyPosition name[6] != -1:
+				Emote char[19] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[19] name[6] 500deg/s
+				TextTalk char[19] {
+					#86208v#1310FOh!! I spy a Tita!{wait}
+				} {
+					#86209v#811FC'mere and give me a cuddle!{wait}
+				}
+				TextWait
+				TextTalk name[6] {
+					#82946v#067FU-Umm...{wait}
+				} {
+					#82947v#560FI-I've gotta head out now... We'll talk later,
+					though, okay?{wait}
+				}
+				TextWait
+			elif PartyPosition name[15] != -1:
+				Emote char[19] 0mm 2000mm 38 38 250ms 1
+				Sleep 1000ms
+				CharTurnToChar char[19] name[15] 500deg/s
+				TextTalk char[19] {
+					#86210v#1310FOh!! I spy a Renne!{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#91046v#263FHeehee. We're off to explore now.{wait}
+				} {
+					#91047v#260FWe can talk again later, though.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[19] {
+					#86203v#1316FTita and Renne were here before, too.{wait}
+				} {
+					#86204v#818FI guess they must've wandered off while
+					I was taking a nap here.{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[11029]:
+		CharFlagsSet char[25] 0x0010
+		TextStart char[25]
+		if !flag[9]:
+			FlagSet flag[9]
+			TextTalk char[25] {
+				#86171v#1311F#60WZzz... Mmm...#20W{wait}
+			} {
+				#86172v#819F#60WAhaha... Wait for meee...#20W{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#76689v#1016FU-Umm... Anelace...?{wait}
+				}
+				TextWait
+			if PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#77985v#1514FShe's fast asleep...{wait}
+				}
+				TextWait
+			elif PartyPosition name[2] != -1:
+				TextTalk name[2] {
+					#78995v#1526F*sigh* She really can sleep anywhere, can't she?{wait}
+				}
+				TextWait
+			else:
+				TextTalk name[8] {
+					#89525v#1068FI wonder what she's chasing in that bizarre
+					dream of hers...?{wait}
+				}
+				TextWait
+		else:
+			CharShake char[25] 20 0 200 3000ms
+			Sleep 300ms
+			CharShake char[25] 20 0 500 4000ms
+			Sleep 200ms
+			TextTalk char[25] {
+				#86173v#1311F#60WHeehee... I got youuu...{wait}
+			} {
+				#86174vNow I can go to the Plushy Kingdom, too... ♪{wait}
+			}
+			TextWait
+		CharFlagsUnset char[25] 0x0010
+		TextEnd char[25]
+	elif flag[11016]:
+		if flag[11017]:
+			TextStart self
+			if !flag[11019]:
+				TextTalk char[19] {
+					#86102v#814FOh, 'sup? Anything wrong?{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89455v#1078FWell...{wait}
+				}
+				TextWait
+				FadeOut 300ms 0x00000000 100
+				TextSetName ""
+				TextSetPos 72 320 56 3
+				TextMessage null {
+					{color 5}Kevin explained to Anelace that they thought she was the person the amberl
+					monument's inscription was asking for.{wait}
+				}
+				TextWait
+				TextClose 0
+				FadeIn 300ms 0x00000000
+				FadeWait
+				Sleep 500ms
+				TextTalk char[19] {
+					#86103v#814FMe? The 'sword-wielding dame'?{wait}
+				} {
+					#86104v#818FI dunnooo... I mean, it's a cool-sounding title
+					and all, but does it really fit me?{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#89456v#1066FIt does if you ask me. But hey, even if you're
+					not sure, it's worth a try, right?{wait}
+				} {
+					#89457vDo you mind coming with us and giving it a go?{wait}
+				}
+				TextWait
+				TextTalk char[19] {
+					#86105v#814FYou got it.{wait}
+				} {
+					#86106v#810FOff we go, then!{wait}
+				}
+				TextWait
+				FlagSet flag[11019]
+			else:
+				TextTalk char[19] {
+					#86107v#818FI'm still not sure I'm the person that monument
+					wants, but it's worth a try, at least.{wait}
+				} {
+					#86108v#810FSo just let me know when you're ready to go back
+					there. I'm ready to go any time.{wait}
+				}
+				TextWait
+			TextEnd self
+		else:
+			TextStart self
+			if !flag[9]:
+				if flag[9791]:
+					TextTalk char[19] {
+						#86085v#1317FD-Damn. I didn't think he was going to be
+						that powerful...{wait}
+					} {
+						#86086v#1316FThat fancy-schmancy skill of his was just
+						cheating...{wait}
+					} {
+						#86087v#815FHow can you even DO that with a sword?!{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[19] {
+						#86088v#814FPhillip was that duke's butler, right?{wait}
+					} {
+						#86089v#818FWas he really that strong?{wait}
+					} {
+						#86090vHe didn't really look it when I last saw him.{wait}
+					}
+					TextWait
+				FlagSet flag[9]
+			else:
+				TextTalk char[19] {
+					#86091v#1316F*sigh* I guess if I couldn't tell his true strength,
+					that means I've got a long way to go.{wait}
+				} {
+					#86092v#812FAll right! Time to get Richard to join me for 
+					some more training!{wait}
+				}
+				TextWait
+				if PartyPosition name[11] != -1:
+					CharTurnToChar char[19] name[11] 400deg/s
+					Sleep 500ms
+					TextTalk char[19] {
+						#86093v#815FWell? Would you be willing to?{wait}
+					}
+					TextWait
+					TextTalk name[11] {
+						#86785v#111FHaha... I'll give it some thought.{wait}
+					}
+					TextWait
+			TextEnd self
+	elif flag[11008]:
+		if !flag[9]:
+			if PartyPosition name[15] != -1 && PartyPosition name[6] != -1:
+				TextStart self
+				TextTalk char[19] {
+					#86060v#817FSooo...{wait}
+				} {
+					#86061v...this world is on a high-level plane, repeating a 
+					process of self-organization and creation in order
+					to realize the desires of humanity, operating on...{wait}
+				} {
+					#86062v...
+					...
+					...{wait}
+				}
+				TextWait
+				CharShake char[19] 20 0 800 3000ms
+				Sleep 1000ms
+				TextTalk char[19] {
+					#86063v#819F...Blaaarghhh...{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					TextTalk name[0] {
+						#76596v#1004FI think her head just exploded.{wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#77931v#1512FAnelace, you don't need to force yourself to
+						understand how this world works, you know.{wait}
+					}
+					TextWait
+				elif PartyPosition name[2] != -1:
+					TextTalk name[2] {
+						#78959v#1525FAnelace, you don't need to force yourself to
+						understand how this world works, you know.{wait}
+					}
+					TextWait
+				else:
+					TextTalk name[6] {
+						#82867v#065FA-Anelace! Hang in there!{wait}
+					}
+					TextWait
+					TextTalk name[8] {
+						#89384v#1068FI think her head just exploded.{wait}
+					}
+					TextWait
+			elif PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				CharTurnToChar self name[15] 0deg/s
+				TextTalk char[19] {
+					#86067v#816FSo you like plushies, too, huh, Renne?{wait}
+				} {
+					#86068v#811FWe're gonna have to sit and talk about
+					them later, then!{wait}
+				} {
+					#86069vI need to find out just HOW MUCH.{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[19] {
+					#86072v#814FWhat? You've got that really rare Landmore
+					limited edition plushie?{wait}
+				} {
+					#86073v#1317FI really want that one, too! You're so lucky...{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					TextTalk name[0] {
+						#76597v#1016F(A-Anelace...){wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#77932v#1512F(Umm... Anelace...){wait}
+					}
+					TextWait
+				elif PartyPosition name[2] != -1:
+					TextTalk name[2] {
+						#78960v#1525F(I swear...){wait}
+					}
+					TextWait
+				TextTalk name[8] {
+					#89385v#1068F(I think she's probably the one least bothered
+					about what's going on here out of all of us...){wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9]
+			TextEnd self
+		else:
+			if PartyPosition name[15] != -1 && PartyPosition name[6] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[19] {
+					#86064v#817FSo what's a girl gotta do to get plushies to pop
+					up out of nowhere?{wait}
+				} {
+					#86065vHmm...{wait}
+				} {
+					#86066v#1312FHmmmmm...{wait}
+				}
+				TextWait
+			elif PartyPosition name[15] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				CharTurnToChar self name[15] 0deg/s
+				TextTalk char[19] {
+					#86070v#816FSo you like plushies, too, huh, Renne?{wait}
+				} {
+					#86071v#811FWe're gonna have to sit and talk about them later,
+					then! I need to find out just HOW MUCH.{wait}
+				}
+				TextWait
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[19] {
+					#86074v#812FI was all set on going to get that one when it 
+					came out...{wait}
+				} {
+					#86075v#1316F...but then this major job came in all of a sudden
+					and I couldn't go out and buy it.{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	Return
+
+fn[10]:
+	if flag[11051]:
+		if !flag[4]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			if PartyPosition name[4] != -1:
+				TextTalk char[13] {
+					#84345v#416F...Okay. That should do for now.{wait}
+				} {
+					#84346v#210FIt always pays to give your gun a good polish once
+					in a while to keep it in top working condition.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[13] {
+					#84341v#213FHey, take it easy. Everyone needs to rest from
+					time to time, you know.{wait}
+				} {
+					#84342v#212FCome on! Have a drink of this and take a load
+					off.{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[4]
+			TextEnd self
+		else:
+			if PartyPosition name[1] != -1:
+				CharFlagsSet self 0x0010
+				TextStart self
+				CharTurnToChar self name[1] 0deg/s
+				TextTalk char[13] {
+					#84348v#213FOh, Joshua...{wait}
+				} {
+					#84349v#215FUmm... Umm...{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#78196v#1513FI'm fine.{wait}
+				} {
+					#78197v#1501FThanks for worrying about me, Josette.{wait}
+				}
+				TextWait
+				TextTalk char[13] {
+					#84350v#414FO-Oh, right...{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+			else:
+				TextStart self
+				if PartyPosition name[4] != -1:
+					TextTalk char[13] {
+						#84347v#210FOrbal guns are pretty delicate things, so you need
+						to take them apart and give them a good clean once
+						in a while to keep them in top working condition.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[13] {
+						#84343v#416FI swear, this princess...{wait}
+					} {
+						#84344v#212FI don't know why she won't just rely on us some
+						instead of trying to investigate by herself.{wait}
+					}
+					TextWait
+			TextEnd self
+	Return
+
+fn[11]:
+	if flag[11051]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#85040v#175FWhile this is just my personal belief, and I will never
+				have a chance to find out if it is right...{wait}
+			} {
+				#85041v#170F...I can't help but feel that 2nd Lieutenant Lorence
+				may have admired the colonel on a personal level,
+				too.{wait}
+			} {
+				#85042v#179FI don't have any hard evidence to back up my
+				belief, of course. Just call it instinct.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#85043v#176FWhile there's no doubt that 2nd Lieutenant Lorence
+				used the Intelligence Division, I don't think that was
+				the only reason he served in it.{wait}
+			} {
+				#85044v#170FWhile I don't have any hard evidence to back up
+				my belief, I feel as though he felt a genuine sense
+				of loyalty to the organization, too.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11040]:
+	elif flag[11029]:
+		TextStart self
+		if !flag[2]:
+			if flag[9794]:
+				TextTalk char[11] {
+					#84981v#179FI had hoped to meet Kilika one day...{wait}
+				} {
+					#84982v#178F...but I hadn't expected she would be quite that
+					much of a force to be reckoned with.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[11] {
+					#84979v#178FI'd heard Kilika was able to make her way through
+					one of the shadow towers alone, so she is clearly
+					a force to be reckoned with.{wait}
+				} {
+					#84980v#179FI wish I had been able to meet her while she was
+					still in Liberl, to be honest.{wait}
+				}
+				TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84983v#175FRegardless, at least now we are half way through
+				this plane.{wait}
+			} {
+				#84984v#176FPerhaps now would be a good time to make sure
+				everyone is well trained and battle ready.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11016]:
+		TextStart self
+		if !flag[2]:
+			if PartyPosition name[3] != -1:
+				CharTurnToChar self name[3] 0deg/s
+				TextTalk name[3] {
+					#79975v#1541FWhy, hello, Julia.{wait}
+				} {
+					#79976vIt's occurred to me that I never did properly
+					thank you for your assistance during my return
+					to Erebonia.{wait}
+				} {
+					#79977v#1547FSo, what say you? Would you like to accompany
+					me for a drink or two? On me, of course.{wait}
+				}
+				TextWait
+				TextTalk char[11] {
+					#84964v#172FI... Well... I'm not sure that would be...{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[11] {
+					#84965v#175FPrince Olivert seems rather insistent on me
+					accompanying him for drinks. I'm not sure
+					what to do...{wait}
+				} {
+					#84966v#176FP-Perhaps it would be best for me to accept
+					his offer?{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					TextTalk name[0] {
+						#76629v#1007FI swear, that Olivier...{wait}
+					} {
+						#76630v#1009FThe best thing to do is to ignore him, Julia!
+						Just pretend he doesn't even exist.{wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#77962v#1512FI think the best thing to do would be to refuse.
+						In no uncertain terms.{wait}
+					}
+					TextWait
+				elif PartyPosition name[4] != -1:
+					TextTalk name[4] {
+						#81370v#1165FAhaha... Weeeeeell...{wait}
+					}
+					TextWait
+			if PartyPosition name[12] != -1:
+				TextTalk name[12] {
+					#85622v#272FFeel free to ignore him, Captain.{wait}
+				}
+				TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84967v#176F*cough* The prince aside...{wait}
+			} {
+				#84968v#178F...I'm still rather surprised that Phillip was one of
+				those recreated in this world.{wait}
+			} {
+				#84969v#175FAll of this just makes me wish that I could have
+				the chance to learn from him in the real world...{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11008]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84941v#179FI never would have imagined the very ghost who
+				aided us all this time was an ancestor of the
+				Liberlian royal family.{wait}
+			} {
+				#84942v#171FHaha. Still, I can hardly imagine a more reassuring
+				revelation.{wait}
+			} {
+				#84943v#170FI'd like to think that with her help, we may be
+				able to compete against the Lord of Phantasma
+				after all.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84944v#170FIt's far too soon to be getting optimistic about
+				our odds of success...{wait}
+			} {
+				#84945v...but with Celeste's help, we may be able to
+				compete against the Lord of Phantasma after
+				all.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[2]:
+			TextTalk char[11] {
+				#84923v#176FIt's amazing to think that this world is where
+				people's thoughts become reality...{wait}
+			} {
+				#84924v#175FEven after all we've seen so far, I still find
+				myself doubting that could even be possible,
+				but it certainly makes sense.{wait}
+			} {
+				#84925vStill, if we assume that everything that's 
+				happened so far has gone according to plan
+				for the Lord of Phantasma...{wait}
+			} {
+				#84926v#170F...then I think it's about time we started trying
+				to change that, hmm?{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84927v#176FEven after all we've seen so far, I still find
+				myself doubting that what Renne said could even
+				be possible, but I can't deny her logic...{wait}
+			} {
+				#84928vStill, enough is enough.{wait}
+			} {
+				#84929v#170FI think the Lord of Phantasma has had things their
+				way for far too long.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10756]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84913v#170FBoth General Morgan and Brigadier General Bright
+				did their best to stop Richard from leaving the army
+				when he made his decision to do so.{wait}
+			} {
+				#84914vNo one denies that he made a mistake, but he was
+				an exceptionally skilled soldier, and the military is
+				worse off without him.{wait}
+			} {
+				#84915v#179FI've heard rumors that Brigadier General Bright
+				hasn't given up on bringing him back into the
+				ranks yet, even.{wait}
+			}
+			TextWait
+			if PartyPosition name[4] != -1:
+				TextTalk name[4] {
+					#81262v#1165FThat sounds just like something he would do.{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76450v#1007FYeah... He's never been one for giving people
+					a break.{wait}
+				}
+				TextWait
+			elif PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#77853v#1508FPresumably so that he can offload more of
+					his work onto him.{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#76450v#1007FYeah... He's never been one for giving people
+					a break.{wait}
+				}
+				TextWait
+			else:
+				TextTalk name[0] {
+					#76449v#1019FYou've got to be kidding me...{wait}
+				} {
+					#76450v#1007FHe really doesn't believe in giving people
+					a break, does he?{wait}
+				}
+				TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84916v#178FRegardless, I wasn't expecting Richard of all
+				people to end up here...{wait}
+			} {
+				#84917v#176FBut he does fit within the rule that only those
+				who have aided us end up in sealing stones.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10752]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84898v#176FI was aware that Father Graham was a member
+				of the Gralsritter...{wait}
+			} {
+				#84899v#175FI certainly wasn't aware that he was such a high-
+				ranking member of the group, however.{wait}
+			} {
+				#84900vAnd one of its most powerful members, at that.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84901v#176FI was aware that Father Graham was a member
+				of the Gralsritter...{wait}
+			} {
+				#84902v#175FI certainly wasn't aware that he was such a high-
+				ranking member of the group, however.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10510]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84882v#178FWe've now conquered all three of the ordeals
+				that this garden's master mentioned.{wait}
+			} {
+				#84883vI presume that means our next destination must be
+				the fifth plane.{wait}
+			} {
+				#84884v#176FI wonder what kind of place that will be.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84885v#178FI presume that since we've conquered all three
+				of the ordeals here, our next destination will be
+				the fifth plane.{wait}
+			} {
+				#84886vI wonder what kind of place that will be.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10506]:
+		if !flag[2]:
+			if PartyPosition name[4] != -1:
+				TextStart self
+				TextTalk char[11] {
+					#84873v#176F*sigh* I had an important meeting to attend at
+					military HQ tomorrow, too.{wait}
+				} {
+					#84874vBut it looks like I'll have no choice but to miss it.{wait}
+				}
+				TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[11] {
+					#84872v#178FShould you not rest, Your Highness?{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[2]
+		elif PartyPosition name[4] != -1:
+			TextStart self
+			TextTalk char[11] {
+				#84875v#172FOr is the meeting today, now? {wait}
+			} {
+				#84876v#175FBeing in this place truly distorts your sense
+				of time's passing...{wait}
+			} {
+				#84877vIt's even possible the meeting could've been
+				days ago, thinking about it...{wait}
+			}
+			TextWait
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[11] {
+				#84872v#178FShould you not rest, Your Highness?{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[10501]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84859v#178FIt's clear from everything they've said and done
+				so far that our foes have thoroughly researched
+				all of us.{wait}
+			} {
+				#84860v#175FAnd yet recreating a place from outside Liberl
+				was certainly not something I expected them to
+				do...{wait}
+			} {
+				#84861vJust who is the Lord of Phantasma, anyway?{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84862v#178FWe know now that the Lord of Phantasma
+				is challenging us with a significant amount
+				of research on us under their belt.{wait}
+			} {
+				#84863v#176FIt doesn't make sense to me. The more they do,
+				the more I can't fathom what it is they want.{wait}
+			} {
+				#84864v#175FOr who they are...{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10496]:
+		TextStart self
+		if !flag[2]:
+			TextTalk char[11] {
+				#84838v#176FIt's disturbing to think that we are literally
+				fighting fiends taken from the church's texts...{wait}
+			} {
+				#84839v#175FThen again, our enemies are capable of making
+				a replica of an entire city. I suppose summoning
+				mirrors and tanks are child's play to them.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+		else:
+			TextTalk char[11] {
+				#84840v#178FHaving listened to the archbishop's sermons often,
+				I am fairly familiar with the Testaments...{wait}
+			} {
+				#84841v#175FI never thought I would one day find myself face to
+				face with some of the monstrosities within them,
+				however.{wait}
+			}
+			TextWait
+		TextEnd self
+	Return
+
+fn[12]:
+	if flag[11051]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85688v#270FIt seems like we're finally able to see the light at
+				the end of the tunnel.{wait}
+			} {
+				#85689v#270FNow we just need to keep walking towards it.
+				For the sake of everyone we know, including
+				those no longer with us because of the Aureole.{wait}
+			} {
+				#85690v#278FLet's see what this seventh plane has in store
+				for us, shall we?{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		elif PartyPosition name[3] != -1:
+			CharTurnToChar self name[3] 0deg/s
+			TextTalk char[12] {
+				#85691v#277FIt seems like we're finally able to see the light
+				at the end of the tunnel.{wait}
+			} {
+				#85692v#276FBe careful, Olivier.{wait}
+			}
+			TextWait
+			TextTalk name[3] {
+				#80059v#1541FHeh. But of course, my love!{wait}
+			}
+			TextWait
+			TextTalk char[12] {
+				#85693v#274FAnd who, exactly, is your love?{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[12] {
+				#85694v#277FIt seems like we're finally able to see the light
+				at the end of the tunnel.{wait}
+			} {
+				#85695v#278FPerhaps I'd best go and grab Olivier.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11040]:
+		if flag[9786]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[12] {
+				#85669v#276FSo that is how a true master fights...{wait}
+			} {
+				#85670v#278FHeh. That was a worthwhile reminder of just how
+				much room I still have to improve my own skills.{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		else:
+			TextStart self
+			TextTalk char[12] {
+				#85671v#272FSo you were able to test your skills against the
+				famed Cassius Bright, were you?{wait}
+			} {
+				#85672v#277FI can't help but wish that I had been able to see
+				him fight up close and personal.{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[11029]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85640v#276FThe Lord of Phantasma appears to have some
+				rather capable warriors under his command.{wait}
+			} {
+				#85641v#272FIf that's the strength of the second guardian,
+				I dread to think how powerful the rest will be.{wait}
+			} {
+				#85642v*sigh* This is going to be quite the challenge.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85643v#270FThe Lord of Phantasma really seems to have
+				some capable warriors under his command.{wait}
+			} {
+				#85644v#276FCome to think of it, that Schwarzritter said
+				that he's one of the guardians, too, yes?{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11016]:
+		if !flag[3]:
+			if PartyPosition name[3] != -1:
+				TextStart self
+				CharTurnToChar self name[3] 0deg/s
+				TextTalk char[12] {
+					#85626v#272F...Olivier, don't go causing any trouble while
+					you're here.{wait}
+				} {
+					#85627vJust because we're not in the real world
+					right now doesn't mean your actions can't
+					cause international problems.{wait}
+				}
+				TextWait
+				TextTalk name[3] {
+					#79987v#1541FHahaha! Why must you always be so paranoid
+					about me?{wait}
+				}
+				TextWait
+				TextTalk char[12] {
+					#85628v#274FBecause you never take me seriously.
+					Like you're not doing now.{wait}
+				}
+				TextWait
+				TextEnd self
+			else:
+				CharFlagsSet self 0x0010
+				TextStart self
+				TextTalk char[12] {
+					#85629v#274F...You really are a few gears short of a
+					functioning battle orbment.{wait}
+				} {
+					#85630vPerhaps you need to be taught a lesson
+					so you don't get any more silly ideas.{wait}
+				}
+				TextWait
+				CharFlagsUnset self 0x0010
+				TextEnd self
+			FlagSet flag[3]
+		else:
+			TextStart self
+			if PartyPosition name[3] != -1:
+				CharTurnToChar self name[3] 0deg/s
+				TextTalk char[12] {
+					#85626v#272F...Olivier, don't go causing any trouble while
+					you're here.{wait}
+				} {
+					#85627vJust because we're not in the real world
+					right now doesn't mean your actions can't
+					cause international problems.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[12] {
+					#85631v#272FJust leave this idiot to me.{wait}
+				} {
+					#85632v#270FI'll take responsibility for making sure he
+					behaves--no matter what it takes to do it.{wait}
+				}
+				TextWait
+			TextEnd self
+	elif flag[11008]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85607v#276FI never imagined that would be the origin of
+				the cube we've been reliant on all this time.{wait}
+			} {
+				#85608vAt least now we understand how we came
+				to be drawn in here...to a degree.{wait}
+			} {
+				#85609v#270FIt seems like the one directly responsible for
+				that happening was the Lord of Phantasma,
+				too.{wait}
+			} {
+				#85610v#272FHmph. I can't wait to make them pay for what
+				they've done.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85611v#272FAt least now that we know where the Recluse Cube
+				came from, we've got a relatively good idea how we
+				all ended up here.{wait}
+			} {
+				#85612v#276FThe one directly responsible for that happening was
+				no doubt the Lord of Phantasma.{wait}
+			} {
+				#85613vHmph. I can't wait to make them pay for what
+				they've done.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85595v#272FIt seems like the situation we're in is even more
+				severe than I feared.{wait}
+			} {
+				#85596v#276FWe've discovered a number of rules that govern
+				this world, all implemented by that Lord of
+				Phantasma...{wait}
+			} {
+				#85597v...but what if they created a rule that dictates
+				we can't actually leave this world?{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85598v#272FOur only hope may turn out to be that ghost.{wait}
+			} {
+				#85599v#276FEspecially given how the Lord of Phantasma's
+				power seems unable to affect the garden.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10756]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85588v#277FSo our latest ally is the former Royal Army
+				officer Colonel Richard, is it?{wait}
+			} {
+				#85589vI've heard many great things about his skill in
+				battle and espionage, as well as his intellect.{wait}
+			} {
+				#85590v#278FHeh. He doesn't sound like the kind of man
+				I would want as an enemy.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85591v#277FSo our latest ally is the former Royal Army
+				officer Colonel Richard, is it?{wait}
+			} {
+				#85592vHe's not someone I would want as an enemy,
+				but I'll welcome him any day as a powerful ally.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10752]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[3]:
+			TextTalk char[12] {
+				#85574v#272FThere was a point when Olivier tried delving
+				into research on the Gralsritter.{wait}
+			} {
+				#85575vHe wasn't able to ascertain much in the end
+				no matter how hard he tried, though...{wait}
+			} {
+				#85576v#276FAfter seeing for myself what their strongest
+				members are capable of, I can understand why
+				he would want to look into them.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85577v#276FThe ability to slay a devil of that strength in
+				one blow is...unusual, to say the least.{wait}
+			} {
+				#85578vUnnatural, too.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10510]:
+		TextStart self
+		if !flag[3]:
+			if PartyPosition name[3] == -1:
+				TextTalk char[12] {
+					#85558v#276FWhere has that fool gotten himself to, anyway?{wait}
+				} {
+					#85559v#272FI swear, I take my eyes off him for one moment...{wait}
+				} {
+					#85560vYou'd think he could at least manage to play the
+					good prince during times of serious crisis like this...{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[12] {
+					#276FSo all of the sealing stones in that bracer training
+					area contained bracers in the end.{wait}
+				} {
+					That masked jester has thankfully proven to play
+					by their own rules thus far, at least.{wait}
+				}
+				TextWait
+				TextTalk name[1] {
+					#78793v#1503F...{wait}
+				}
+				TextWait
+			FlagSet flag[3]
+		elif PartyPosition name[3] == -1:
+			TextTalk char[12] {
+				#85561v#272FHmph. Well, whatever. I'll leave him to his own
+				devices for now.{wait}
+			} {
+				#85562vIt's not as though he can leave this garden
+				without the cube regardless.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[12] {
+				#270FI may loathe that masked jester, but at least
+				they seem to always play by their own rules, 
+				if nothing else.{wait}
+			} {
+				#276FI just hope there's some way that we can take
+				advantage of that in order to defeat them.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10506]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[3]:
+			TextTalk char[12] {
+				#85548v#276FI take it those armed beastmen we encountered
+				are another reflection of the Lord of Phantasma's 
+				unpleasant tastes.{wait}
+			} {
+				#85549v#272F...But whatever. I'm tired of putting up with their
+				ridiculous games at this point.{wait}
+			} {
+				#85550vLet's keep pressing on.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85551v#272FI've got no idea what the Lord of Phantasma
+				is planning...{wait}
+			} {
+				#85552v...but I'm tired of having to put up with their
+				ridiculous games at this point.{wait}
+			} {
+				#85553v#270FLet's keep pressing on.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10501]:
+		if PartyPosition name[3] != -1:
+			CharFlagsSet self 0x0010
+			TextStart self
+			name[3].5 = self.4
+			self.5 = self.4
+			TextStart self
+			CharFlagsUnset self 0x0010
+			CharTurnToChar self name[3] 0deg/s
+			self.4 = (self.4 + 360) % 360
+			self.4 = self.4 + 360 - self.5
+			self.5 = self.4 / 180
+			if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+			elif self.5 < 1:
+				self.8 = 2
+			elif self.5 > 2:
+				self.8 = 1
+			else:
+				self.8 = self.5
+			self.4 = name[3].5
+			name[3].5 = 0
+			self.5 = 0
+			CharFlagsSet self 0x0010
+			if !flag[3]:
+				TextTalk char[12] {
+					#85536v#272F...Olivier. I need to talk to you later.{wait}
+				}
+				TextWait
+				TextTalk name[3] {
+					#79851v#1540FOh, my! My, my, my! Whatever for?{wait}
+				} {
+					#79852v#1541FHave you finally decided you cannot contain
+					your burning passion for me locked within
+					that rugged heart of yours a moment longer?{wait}
+				}
+				TextWait
+				TextTalk char[12] {
+					#85537v#270FNo, idiot. I just need to check up on how you're
+					doing.{wait}
+				} {
+					#85538v#276FAs well as how you were doing before we were
+					drawn in here.{wait}
+				}
+				TextWait
+				FlagSet flag[3]
+			else:
+				TextTalk char[12] {
+					#85539v#272FDon't go getting too carried away, Olivier.{wait}
+				}
+				TextWait
+			CharSetChipPattern self 0
+			CharFlagsUnset self 0x0010
+			TextEnd self
+		elif !flag[14]:
+			Call fn[5,5]
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[12] {
+				#85540v#276FWe must find a way out of here as soon as
+				possible.{wait}
+			} {
+				#85541v#272FWho knows what's happening in the outside
+				world while we're in here?{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif flag[10496]:
+		TextStart self
+		if !flag[3]:
+			TextTalk char[12] {
+				#85513v#270FIt's seeming more and more like we were all
+				drawn in here at the same time.{wait}
+			} {
+				#85514v#272F...Which is a relief in some ways. If that pitiful THING
+				had been left in the outside world without me to watch
+				it, I shudder to think what would have happened.{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#77652v#1505FI'd come to his defense but...no, I can't blame you.{wait}
+			}
+			TextWait
+			if PartyPosition name[3] != -1:
+				TextTalk name[3] {
+					#79823v#1542FTruly, I am offended.{wait}
+				} {
+					#79824v#1541FAt the very worst, I would have thrown
+					a luxurious banquet for all to enjoy.{wait}
+				}
+				TextWait
+				TextTalk char[12] {
+					#85515v#274F...{wait}
+				}
+				TextWait
+			FlagSet flag[3]
+		else:
+			TextTalk char[12] {
+				#85516v#272FIt's seeming more and more like we were all
+				drawn in here at the same time.{wait}
+			} {
+				#85517vWhich is a relief, as guilty as I feel to say so.{wait}
+			}
+			TextWait
+		TextEnd self
+	Return

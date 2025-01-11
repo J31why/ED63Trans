@@ -1,0 +1,309 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U2513.x"
+	town town[1]
+	bgm bgm[231]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch15140._ch" "mons2/ch15140p._cp"
+chip[1] "mons2/ch15141._ch" "mons2/ch15141p._cp"
+chip[2] "mons2/ch14650._ch" "mons2/ch14650p._cp"
+chip[3] "mons2/ch14651._ch" "mons2/ch14651p._cp"
+
+monster char[0]:
+	name ""
+	pos (8070, 4000, 10260)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[625]
+	flag flag[11092]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-36570, 1000, 9550)
+	angle 0deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[626]
+	flag flag[11093]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-470, 0, 3310)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11094]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (8070, 4000, 10260)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11092]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (-36570, 1000, 9550)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11093]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (-470, 0, 3310)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11094]
+	unk3 0
+
+trigger[0]:
+	pos1 (0, 0, 0)
+	pos2 (0, 0, 0)
+	flags 0x0020
+	func fn[0,3]
+	unk1 0
+
+look_point[0]:
+	pos (-65519, 1000, 10110)
+	radius 1000mm
+	bubble_pos (-65519, 2000, 10110)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		_B6 0
+		Event fn[0,6]
+	if flag[11014]:
+		CharFlagsSet char[0] 0x0080
+		CharFlagsSet char[1] 0x0080
+		CharFlagsSet char[2] 0x0080
+	elif !flag[11095]:
+		CharFlagsSet char[3] 0x0080
+		CharFlagsSet char[4] 0x0080
+		CharFlagsSet char[5] 0x0080
+	else:
+		CharFlagsSet char[0] 0x0080
+		CharFlagsSet char[1] 0x0080
+		CharFlagsSet char[3] 0x0080
+		CharFlagsSet char[4] 0x0080
+		CharFlagsSet char[2] 0x0080
+	if !flag[11014]:
+		if flag[11092]:
+			CharFlagsSet char[0] 0x0080
+		if flag[11093]:
+			CharFlagsSet char[1] 0x0080
+	Return
+
+fn[1]:
+	OpLoad "U2513_n"
+	if !flag[11014]:
+		if system[41] == 625:
+			global[3] = 0
+		if system[41] == 626:
+			global[3] = 1
+		if system[41] == 624:
+			global[3] = 2
+		if flag[11092] && flag[11093]:
+			if !flag[11095]:
+				Event fn[0,4]
+		if flag[11094]:
+			if flag[11095]:
+				Event fn[0,5]
+			else:
+				CharFlagsSet char[0] 0x0080
+				CharFlagsSet char[3] 0x0080
+				CharFlagsSet char[1] 0x0080
+				CharFlagsSet char[4] 0x0080
+				FlagUnset flag[11092]
+				FlagUnset flag[11093]
+				FlagUnset flag[11094]
+	if !flag[11174]:
+		ObjFrame object[6] 0
+	else:
+		ObjFrame object[6] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11174]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[6] 60
+		Sleep 500ms
+		if ItemAdd item[1190] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1190]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11174]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1190]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[1190]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[6] 60
+			ObjPlay object[6] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}I have some ideas for you but I'm keeping 'em close to my chest, sorry.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 240 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	if flag[11095]:
+		Minigame 31 1 0 0 0 0 0 0 0
+	else:
+		Minigame 31 0 0 0 0 0 0 0 0
+	Return
+
+fn[4]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11092]
+	FlagUnset flag[11093]
+	FlagUnset flag[11094]
+	FlagSet flag[11095]
+	QuestTaskSet quest[55] 0x0020
+	FlagSet flag[9476]
+	NewScene "u2513._sn" 100 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11092]
+	FlagUnset flag[11093]
+	FlagUnset flag[11094]
+	FlagUnset flag[11095]
+	QuestTaskSet quest[55] 0x0040
+	FlagSet flag[9476]
+	NewScene "u2513._sn" 100 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	if !flag[11014]:
+		if flag[11075] && flag[11079] && flag[11083] && flag[11087] && flag[11091] && flag[11095]:
+			global[4] = 5
+			FlagSet flag[9478]
+			NewScene "u2500._sn" 100 0 1
+			Hcf
+			Return
+	if global[3] == 0:
+		CamSetDistance 0 6000 -10000 0ms
+		CamZoom 3300 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 280 0ms
+		CharSetPos field_party[0] (8070, 4000, 10260) 180deg
+		CharSetPos field_party[1] (8070, 4000, 10260) 180deg
+		CharSetPos field_party[2] (8070, 4000, 10260) 180deg
+		CharSetPos field_party[3] (8070, 4000, 10260) 180deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 1:
+		CamSetDistance 0 6000 -10000 0ms
+		CamZoom 3300 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 280 0ms
+		CharSetPos field_party[0] (-36570, 1000, 9550) 180deg
+		CharSetPos field_party[1] (-36570, 1000, 9550) 180deg
+		CharSetPos field_party[2] (-36570, 1000, 9550) 180deg
+		CharSetPos field_party[3] (-36570, 1000, 9550) 180deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 2:
+		CamSetDistance 0 6000 -10000 0ms
+		CamZoom 3300 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 280 0ms
+		CharSetPos field_party[0] (-470, 0, 3310) 180deg
+		CharSetPos field_party[1] (-470, 0, 3310) 180deg
+		CharSetPos field_party[2] (-470, 0, 3310) 180deg
+		CharSetPos field_party[3] (-470, 0, 3310) 180deg
+		CamLookChar field_party[0] 0ms
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return

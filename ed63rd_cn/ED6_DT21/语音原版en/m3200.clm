@@ -1,0 +1,307 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M3200.x"
+	town town[1]
+	bgm bgm[232]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00320._ch" "npl/ch00320p._cp"
+chip[1] "npl/ch00321._ch" "npl/ch00321p._cp"
+chip[2] "mons/ch11210._ch" "mons/ch11210p._cp"
+chip[3] "mons/ch11211._ch" "mons/ch11211p._cp"
+
+npc char[0]:
+	name ""
+	pos (3320, 1000, 42150)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C5
+	init fn[0,2]
+	talk fn[65535,65535]
+
+monster char[1]:
+	name ""
+	pos (82850, 0, 44690)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[653]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-53160, 0, 65780)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[653]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (3320, 0, 42150)
+	radius 1000mm
+	bubble_pos (3320, 1000, 42150)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (84710, 0, 9160)
+	radius 1000mm
+	bubble_pos (84710, 1000, 9160)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[2]:
+	pos (-54000, 0, 68710)
+	radius 1000mm
+	bubble_pos (-54000, 1000, 68710)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if !flag[11136]:
+		ObjFrame object[6] 0
+	else:
+		ObjFrame object[6] 60
+	if !flag[11158]:
+		ObjFrame object[23] 0
+	else:
+		ObjFrame object[23] 60
+	if !flag[11159]:
+		ObjFrame object[24] 0
+	else:
+		ObjFrame object[24] 60
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11136]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[6] 60
+		Sleep 500ms
+		if !flag[11136]:
+			CharColor char[0] 0x00FFFFFF 0ms
+			CharTurnToChar char[0] field_party[0] 0deg/s
+			_Char91 char[0] 0 1000 0 0 0
+			Fork char[0] fork[1]:
+				_Char91 self 0 -1000 0 600 0
+			Fork char[0] fork[2]:
+				CharColor self 0xFFFFFFFF 600ms
+			CharFlagsUnset char[0] 0x0080
+			TextMessage null {
+				{color 5}Monsters appeared!{color 0}{wait}
+			}
+			TextWait
+			TextClose 0
+			ED6Battle battle[690] null 0 0 null
+			CharFlagsSet char[0] 0x0080
+			switch system[3]:
+				case 0:
+					FlagSet flag[11136]
+					ObjFrame object[6] 60
+					Sleep 500ms
+					break
+				case 2:
+					ObjFrame object[6] 0
+					TextEnd null
+					SystemFlagsUnset 0x08000000
+					Return
+				case 1:
+					ReturnToTitle 0
+					Return
+		if ItemAdd item[819] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextMessage null {
+				Found {item item[819]}{color 0}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11136]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextMessage null {
+				{color 5}Found {item item[819]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[819]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[6] 60
+			ObjPlay object[6] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextMessage null {
+			{color 5}What if the world you live in is actually a gigantic chest?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 32 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[11158]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[23] 60
+		Sleep 500ms
+		if ItemAdd item[503] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[503]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11158]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[503]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[503]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[23] 60
+			ObjPlay object[23] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}There's some green hair inside. The chest prays to Aidios this sinful
+			priest gets his just desserts.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 33 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[11159]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[24] 60
+		Sleep 500ms
+		if ItemAdd item[1006] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1006]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11159]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1006]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[1006]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[24] 60
+			ObjPlay object[24] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Isn't it convenient that you always find weapons that someone in your
+			group specializes in? You're welcome, by the way.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 34 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

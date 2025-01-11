@@ -1,0 +1,930 @@
+calmare sc scena
+scena:
+	name "Ruan" "T2512.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01080._ch" "npl/ch01080p._cp"
+chip[1] "npl/ch02550._ch" "npl/ch02550p._cp"
+chip[2] "npl/ch02690._ch" "npl/ch02690p._cp"
+chip[3] "npl/ch01430._ch" "npl/ch01430p._cp"
+chip[4] "npl/ch01460._ch" "npl/ch01460p._cp"
+chip[5] "npl/ch01090._ch" "npl/ch01090p._cp"
+chip[6] "npl/ch01360._ch" "npl/ch01360p._cp"
+chip[7] "npl/ch01590._ch" "npl/ch01590p._cp"
+
+npc char[0]:
+	name "Logic"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,7]
+
+npc char[1]:
+	name "Hans"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,4]
+	talk fn[0,9]
+
+npc char[2]:
+	name "Lucy"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,3]
+	talk fn[0,14]
+
+npc char[3]:
+	name "Ms. Millia"
+	pos (-120030, 0, 30750)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,11]
+
+npc char[4]:
+	name "Mr. Effort"
+	pos (29010, 0, 28300)
+	angle 270deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,12]
+
+npc char[5]:
+	name "Thelma"
+	pos (-61790, 0, -1780)
+	angle 270deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,13]
+
+npc char[6]:
+	name "Dennis"
+	pos (-29380, 0, 880)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,8]
+
+npc char[7]:
+	name "Alice"
+	pos (-60240, 0, 24290)
+	angle 180deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[0,5]
+	talk fn[0,10]
+
+npc char[8]:
+	name "Mickey"
+	pos (-29120, 0, 24590)
+	angle 45deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,6]
+	talk fn[0,15]
+
+npc char[9]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 8:
+		if flag[12143]:
+			CharFlagsUnset char[12] 0x0080
+			CharFlagsUnset char[13] 0x0080
+			CharFlagsUnset char[9] 0x0080
+			CharSetPos char[9] (1620, 0, -4100) 90deg
+			CharFlagsUnset char[10] 0x0080
+			CharSetPos char[10] (-720, 0, -4100) 270deg
+			CharFlagsUnset char[15] 0x0080
+		elif flag[12140]:
+			CharFlagsUnset char[11] 0x0080
+		elif flag[12139]:
+			CharFlagsUnset char[14] 0x0080
+			CharFlagsUnset char[16] 0x0080
+		elif flag[12133]:
+			CharFlagsUnset char[8] 0x0080
+			CharSetPos char[8] (1480, 0, -2400) 0deg
+			if !flag[12136]:
+				CharFlagsSet char[8] 0x0010
+			CharFlagsUnset char[14] 0x0080
+			CharFlagsUnset char[15] 0x0080
+	if system[66] == 8:
+		if flag[12143]:
+			if system[0] == 100:
+				if !flag[12144]:
+					SystemFlagsSet 0x10000000
+					Event fn[0,17]
+	Return
+
+fn[1]:
+	OpLoad "t2512_n"
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	while 1:
+		CharIdle self (-1040, null, -3130) (-430, null, -5120) 2000mm/s
+	Return
+
+fn[4]:
+	while 1:
+		CharIdle self (1840, null, -4950) (1050, null, -3130) 2000mm/s
+	Return
+
+fn[5]:
+	while 1:
+		CharIdle self (-59450, null, 25230) (-61220, null, 23390) 2000mm/s
+	Return
+
+fn[6]:
+	while 1:
+		CharIdle self (-30480, null, 23230) (-28100, null, 25610) 1500mm/s
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[12133]:
+		if flag[12136]:
+			if flag[0]:
+				TextTalk self {
+					The upcoming examinations will be vital to our
+					futures, and I have no intention of being bested
+					by anyone in them!{wait}
+				}
+				TextWait
+				TextTalk self {
+					I hope you feel the same way!{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					A kind senior student has agreed to lend me some
+					reference books to aid me in my studies.{wait}
+				}
+				TextWait
+				TextTalk self {
+					He's in the process of choosing some fitting ones
+					for me this very moment, I believe.{wait}
+				}
+				TextWait
+				TextTalk self {
+					I have no intention of not delivering to my full
+					potential during the examinations, and I hope
+					you feel the same way!{wait}
+				}
+				TextWait
+				TextTalk self {
+					Make sure you study thoroughly for them!{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			Call fn[0,16]
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12143]:
+	elif flag[12142]:
+	elif flag[12140]:
+	elif flag[12139]:
+		if flag[1]:
+			TextTalk self {
+				If you want to score well on an examination,
+				it's never too early to start studying. That's
+				key to doing well.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I should probably start by making some summaries
+				first. Those will be very helpful.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Haha. It's almost time for the examinations to
+				begin.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I should probably start seriously studying for
+				them.{wait}
+			}
+			TextWait
+			TextTalk self {
+				If you want to score well, it's never too early
+				to start studying.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12133]:
+		if flag[1]:
+			CharTurnTo self 0deg 0deg/s
+			TextTalk self {
+				Hmm... Whiiich should I go with...?{wait}
+			}
+			TextWait
+			TextTalk self {
+				This one? No, this one might be a little too 
+				difficult for him right now...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Logic asked if he could borrow some of my 
+				reference books, so I'm in the process of
+				choosing ones to give him.{wait}
+			}
+			TextWait
+			TextTalk self {
+				He really is alarmingly dedicated to his studies.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Haha. That's no bad thing, though. On the
+				contrary, I think it's great.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12143]:
+		if flag[12156]:
+			if flag[2]:
+				TextTalk char[9] {
+					#96510v#730FLucy and I are going to stay here and search
+					for a while longer.{wait}
+				} {
+					#96511vMaybe you should go and check up on Jill?{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[9] {
+					#96507v#730FLechter's not here...{wait}
+				} {
+					#96508v#736F...Then again, what if he is and just wants us to
+					THINK he's not here so that we'll mosey our way
+					elsewhere?{wait}
+				} {
+					#96509v#734FUgh. This is why he's such a pain to deal with!{wait}
+				}
+				TextWait
+				FlagSet flag[2]
+		else:
+			TextTalk char[9] {
+				#96502v#733FOh. 'Sup, Kloe?{wait}
+			} {
+				#96503v#732F...{wait}
+			}
+			TextWait
+			Emote name[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			TextTalk name[4] {
+				#82131v#044FUmm... Is something wrong?{wait}
+			}
+			TextWait
+			TextTalk char[9] {
+				#96504v#735FOh, no. It's nothing.{wait}
+			} {
+				#96505v#730FIt looks like Lechter isn't here.{wait}
+			} {
+				#96506vMaybe you should go and see what Jill is up to?{wait}
+			}
+			TextWait
+			FlagSet flag[12156]
+	elif flag[12142]:
+	elif flag[12140]:
+	elif flag[12139]:
+	elif flag[12133]:
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12143]:
+		if flag[3]:
+			TextTalk self {
+				We've still got lessons for a while longer,
+				though...{wait}
+			}
+			TextWait
+			TextTalk self {
+				I kind of feel like I'm the only one excited
+				right now.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				It's almost time for the holidays! Yaaay!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'd better start thinking about how I should
+				spend them. ㈱{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12142]:
+	elif flag[12140]:
+	elif flag[12139]:
+	elif flag[12133]:
+		if flag[3]:
+			TextTalk self {
+				Lucy sure is gorgeous, isn't she?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I wish I had hair as soft and silky looking
+				as hers...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Lucy sure is gorgeous, isn't she?{wait}
+			}
+			TextWait
+			TextTalk self {
+				She's here as an exchange student from the
+				Principality of Remiferia to the north. I wonder 
+				if all the girls there are as pretty?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I sure wish I was... ㈱{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd self
+	Return
+
+fn[11]:
+	TextStart self
+	if flag[12140]:
+		if flag[4]:
+			TextTalk self {
+				...I'm not here being lazy, for the record.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'm just way too angry to be grading papers right
+				now, so I came here to cool off. Uuuuuurgh!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I was in the faculty lounge grading papers until not
+				long ago...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but then that damned Lechter just showed up
+				out of nowhere!{wait}
+			}
+			TextWait
+			TextTalk self {
+				He's all, like, 'Hey, Millia! What'cha doing?'{wait}
+			}
+			TextWait
+			TextTalk self {
+				'Oh, grading papers already, huh? Must suck
+				being a teacher! ☆'{wait}
+			}
+			TextWait
+			Emote char[11] 0mm 2000mm 12 13 250ms 2
+			SoundPlay sound[49] 0 0 100
+			Sleep 1000ms
+			TextTalk self {
+				It sucks when YOU'RE THERE JUDGING ME!{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	TextEnd self
+	Return
+
+fn[12]:
+	TextStart self
+	if flag[12143]:
+		CharTurnTo self 270deg 0deg/s
+		if flag[5]:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Mr. Effort has both of his eyes closed.{wait}
+			}
+			TextWait
+			TextClose 0
+			_59
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FadeWait
+			Emote char[12] 0mm 2000mm 40 43 100ms 3
+			Fork self fork[3]:
+				CharShake self 15 0 1000 3000ms
+			TextTalk self {
+				Y-You monster!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Noooooo!{wait}
+			}
+			TextWait
+			Sleep 500ms
+			TextTalk name[4] {
+				#047F(Just what did Lechter say to him...?){wait}
+			}
+			TextWait
+			ForkQuit self fork[3]
+		else:
+			Emote char[12] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			Emote char[12] 0mm 2000mm 40 43 100ms 3
+			Fork self fork[3]:
+				CharShake self 15 0 1000 3000ms
+			TextTalk self {
+				N-No, Lechter! That's not me! I swear!{wait}
+			}
+			TextWait
+			TextTalk name[4] {
+				#044FU-Umm...{wait}
+			}
+			TextWait
+			Emote char[12] 0mm 2000mm 38 38 250ms 1
+			Sleep 500ms
+			CharTurnToChar self name[4] 400deg/s
+			Sleep 300ms
+			TextTalk self {
+				O-Oh, it's you... Don't scare me like that.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I thought you were him...{wait}
+			}
+			TextWait
+			TextTalk name[4] {
+				#045F(Here we have another of Lechter's victims,
+				I see...){wait}
+			}
+			TextWait
+			ForkQuit self fork[3]
+			FlagSet flag[5]
+	TextEnd self
+	Return
+
+fn[13]:
+	TextStart self
+	if flag[12143]:
+		if flag[6]:
+			TextTalk self {
+				At first, my parents were dead set against
+				me coming here, but I'm so glad I was able
+				to in the end.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Studying is so much FUN. Heehee.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I should probably start doing some prep work
+				for tomorrow's classes now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Heehee. Studying is such FUN.{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	TextEnd self
+	Return
+
+fn[14]:
+	TextStart self
+	if flag[12143]:
+		if flag[7]:
+			TextTalk char[10] {
+				#97684v#1793F...There's no sign of him anywhere.{wait}
+			} {
+				#97685vWhat should I even do when I find him...?{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[10] {
+				#97681v#1790F...? Hi there, Kloe.{wait}
+			} {
+				#97682v#1790FHave you found any sign of Lechter?{wait}
+			}
+			TextWait
+			TextTalk name[4] {
+				#82132v#045FI wish I could say yes, but unfortunately not...{wait}
+			}
+			TextWait
+			TextTalk char[10] {
+				#97683v#1795FOh...{wait}
+			}
+			TextWait
+			FlagSet flag[7]
+	TextEnd self
+	Return
+
+fn[15]:
+	TextStart self
+	if flag[12139]:
+		if flag[8]:
+			TextTalk self {
+				Ugh... Why does he have to hang out in front
+				of the dorm, anyway?!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I hope he's not waiting for me because
+				he knows I skipped class that one time...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I'm starving, so I wanna head over to the
+				cafeteria and get some grub...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but Mr. Effort's hanging around outside
+				the dorm, so I'm stuck.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'll be in trouble if he finds me... Waaah...{wait}
+			}
+			TextWait
+			FlagSet flag[8]
+	TextEnd self
+	Return
+
+fn[16]:
+	EventBegin 0
+	Sc_C4Set 536870912
+	CrossFade 1000ms
+	CamLookPos (700, 0, -2400) 0ms
+	CamSetDistance 0 5720 -10000 0ms
+	CamZoom 3100 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[4] (1480, 0, -3900) 0deg
+	CharSetChipPattern char[8] 0
+	Sleep 1000ms
+	Emote char[8] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	CharTurnToChar char[8] name[4] 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#99123v#11PHmm... I know you.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99124v#11PKloe Rinz, wasn't it? Do you have some business
+		with me?{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81620v#045F#6PWell, not personally, no...{wait}
+	} {
+		#81621v#542FI've been entrusted with the task of giving
+		a printout to you by Ms. Wiola.{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}Kloe handed Logic a printout.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	TextTalk char[8] {
+		#99125v#11POh, this is a list of this year's credits.{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[8] 0deg 500deg/s
+	Sleep 100ms
+	TextTalk char[8] {
+		#99126v#5PWh-What?!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99127v#5PJoint classes seem to be worth an awful lot while
+		we're first years...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99128v#5PWait. Physical education is worth
+		FIVE WHOLE CREDITS?!{wait}
+	} {
+		#99129vAidios, help me...{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81622v#542F#6P(Erm...){wait}
+	} {
+		#81623v(I suppose I should probably leave him
+		alone for a while...){wait}
+	} {
+		#81624v#045FWell, if you'll excuse me...{wait}
+	}
+	TextWait
+	CharTurnTo name[4] 180deg 600deg/s
+	Fork name[4] fork[1]:
+		CharWalkToPos self (1480, 0, -5500) 1000mm/s 0
+	Sleep 100ms
+	Emote char[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 800ms
+	CharTurnTo char[8] 180deg 600deg/s
+	TextTalk char[8] {
+		#99130v#11PW-Wait a moment!{wait}
+	}
+	TextWait
+	ForkWait name[4] fork[1]
+	TextTalk name[4] {
+		#81625v#044F#6P...Y-Yes?{wait}
+	}
+	TextWait
+	CharTurnTo name[4] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#99131v#11POh, no.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99132v#11PIt's just that according to this printout,
+		our examinations will be taking place in
+		six weeks' time.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99133v#11PMake sure you study thoroughly for them!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#99134v#11PI don't want to hear any excuses
+		if you don't strive for the top!{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#81626v#044F#6PA-Absolutely.{wait}
+	} {
+		#81627v#543FI'll devote myself fully to my studies.{wait}
+	}
+	TextWait
+	FlagSet flag[12136]
+	CharTurnTo char[8] 0deg 400deg/s
+	CharFlagsUnset char[8] 0x0010
+	_Char4B char[8] 255
+	EventEnd 0
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CamLookPos (-840, 0, -2820) 0ms
+	CamSetDistance 0 4920 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsUnset char[10] 0x0080
+	CharFlagsSet char[8] 0x0080
+	_Char4A char[9] 255
+	_Char4A char[10] 255
+	CharSetPos char[9] (1620, 0, -4100) 90deg
+	CharSetPos char[10] (-720, 0, -4100) 270deg
+	CharFlagsSet name[4] 0x0008
+	Fork char[17] fork[0]:
+		CamZoom 3100 6000ms
+	FadeIn 1000ms 0x00000000
+	ForkFunc char[10] fork[3] fn[0,18]
+	Sleep 200ms
+	CharTurnTo char[9] 45deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[9] 135deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[9] 45deg 500deg/s
+	Sleep 800ms
+	CharTurnTo char[9] 90deg 500deg/s
+	Sleep 1000ms
+	Emote char[9] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop char[9]
+	Sleep 500ms
+	TextTalk char[9] {
+		#96494v#737F#5P(I'm all alone with Lucy... This is like a dream
+		come true...){wait}
+	}
+	TextWait
+	Emote char[9] 0mm 2000mm 10 11 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Sleep 1000ms
+	CharTurnToChar char[9] char[10] 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#96495v#738F#12POh, Luuuuuucy...{wait}
+	}
+	TextWait
+	ForkQuit char[10] fork[3]
+	Emote char[10] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnToChar char[10] char[9] 400deg/s
+	Sleep 300ms
+	TextTalk char[10] {
+		#97675v#1790F#5PWhat is it?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#96496v#739F#12PHeheh... I just wanted to ask you something.{wait}
+	} {
+		#96497v#738FWhat do you think the most important thing
+		in the world is?{wait}
+	} {
+		#96498vIt's #200WL O V E#120W..#20W. Right? ㈱{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#97676v#1794F#5PHmm...{wait}
+	} {
+		#97677vIf you ask me, it's probably...{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[10]
+	Sleep 500ms
+	TextTalk char[10] {
+		#97678v#1792F#5P#80WHmm...#20W Strength, I suppose?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#96499v#731F#12P...Bwuh?{wait}
+	}
+	TextWait
+	CharTurnTo char[10] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[10] {
+		#97679v#1793F#5P*sigh* Speaking of strength...{wait}
+	} {
+		#97680v...I feel like smacking Lechter upside the
+		head right now...{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#96500v#735F#12PWell...{wait}
+	} {
+		#96501v#737F(If you need someone to hit, you can smack
+		me around much as you like!){wait}
+	}
+	TextWait
+	Emote char[9] 0mm 2000mm 10 11 250ms 2
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CharFlagsUnset name[4] 0x0008
+	CamLookPos (0, -250, -7230) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	_Char4B char[9] 255
+	_Char4B char[10] 255
+	CharSetPos char[9] (1620, 0, -4100) 90deg
+	CharSetPos char[10] (-720, 0, -4100) 270deg
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	FlagSet flag[12144]
+	EventEnd 0
+	Return
+
+fn[18]:
+	while 1:
+		CharTurnTo char[10] 225deg 500deg/s
+		Sleep 800ms
+		CharTurnTo char[10] 315deg 500deg/s
+		Sleep 800ms
+		CharTurnTo char[10] 270deg 500deg/s
+		Sleep 1200ms
+		CharTurnTo char[10] 315deg 500deg/s
+		Sleep 800ms
+		CharTurnTo char[10] 225deg 500deg/s
+		Sleep 800ms
+		CharTurnTo char[10] 270deg 500deg/s
+		Sleep 1200ms
+	Return

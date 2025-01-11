@@ -1,0 +1,245 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4132.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01220._ch" "npl/ch01220p._cp"
+chip[1] "npl/ch01660._ch" "npl/ch01660p._cp"
+
+npc char[0]:
+	name "Fritz"
+	pos (6940, 0, 3300)
+	angle 166deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "Nielsen"
+	pos (-24500, 0, 113310)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+look_point[0]:
+	pos (7060, 0, 1700)
+	radius 800mm
+	bubble_pos (6940, 1500, 3300)
+	flags 0x007E
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (7000, 0, 4890)
+	radius 800mm
+	bubble_pos (7000, 1000, 4890)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	OpLoad "t4132_n"
+	Return
+
+fn[2]:
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	TextStart char[8]
+	if flag[12112]:
+		if flag[0]:
+			TextTalk char[8] {
+				A number of men in black suits came in here
+				the other day, as truth would have it.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				From what I could tell, they were on the hunt
+				for someone, but I don't know much more than
+				that.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				The whole story was a little fishy if you ask me.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				Have you come to stay at our hotel,
+				perchance?{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				I'm terribly sorry, but guests are only able to
+				check in from three o'clock onward.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Could I ask you to come back then?{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd char[8]
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12112]:
+		if flag[12121]:
+			if flag[1]:
+				TextTalk self {
+					#99774vA couple of strange men came in here earlier.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99775vThey had a truly murderous aura about them
+					that felt eerily familiar...{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99776vBut they couldn't be...could they?{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					#99769vI'm due to meet someone here. I'm just waiting
+					for them to arrive.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99770vI'm planning on doing some research on Liberl
+					while I'm here, too.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99771vAfter all, this is the nation now known for
+					repelling the mighty Erebonian Empire.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99772vI'm fascinated to see if I can find exactly
+					where that strength came from.{wait}
+				}
+				TextWait
+				TextTalk self {
+					#99773vHaha. This should prove to be some very 
+					interesting research.{wait}
+				}
+				TextWait
+				FlagSet flag[1]
+		else:
+			CharTurnTo self 0deg 0deg/s
+			TextTalk self {
+				#99763vOh? Who might the two of you be?{wait}
+			}
+			TextWait
+			CharTurnToChar self name[2] 500deg/s
+			Sleep 300ms
+			TextTalk self {
+				#99764vThe sound of your footsteps is unfamiliar to me...
+				I presume this must be the first time we've met?{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#79236v#1643FY-Yes. It certainly is...{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#94272v#1653FUmm...{wait}
+			} {
+				#94273v#1650FAm I right in assuming that you must be
+				visually impaired, sir?{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99765vYes, that's right. I'm completely blind in
+				both eyes.{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99766vStill, if you'll forgive me for saying so,
+				you're rather an unusual pair, aren't you?
+				And one of you is a bracer, I believe?{wait}
+			}
+			TextWait
+			Emote name[2] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 50ms
+			Emote name[80] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk self {
+				#99767vHaha. There's no need to be so surprised. The air
+				you have about you reminds me of other bracers
+				I know, that's all.{wait}
+			}
+			TextWait
+			TextTalk self {
+				#99768vI may have lost my vision, but that has allowed me
+				to see new things I couldn't before, too.{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#79237v#1643FR-Really?{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#94274v#1650FThat's incredible...{wait}
+			}
+			TextWait
+			FlagSet flag[12121]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[5]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Office
+		※Authorized Personnel Only{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

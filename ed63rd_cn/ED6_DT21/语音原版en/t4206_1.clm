@@ -1,0 +1,1550 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4206.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 "t4206._sn"
+	scp 1 "t4206_1._sn"
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	TextStart self
+	if flag[32]:
+		TextTalk char[29] {
+			#94204v#843FStill, I'm feeling keenly these days just how much
+			I need to improve myself.{wait}
+		} {
+			#94205vI'd love to go on some kind of extensive training
+			program, but this hardly seems the time for that.{wait}
+		} {
+			#94206v#840FPerhaps I'll bring up the matter with Elnan once
+			things have calmed down a little.{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[29] {
+			#94191v#840FGreetings, Joshua.{wait}
+		} {
+			#94192vYou've done some fine work these past couple
+			of weeks.{wait}
+		} {
+			#94193vThe damage reports on the regions of Liberl
+			you've been providing have proved invaluable
+			in allocating personnel.{wait}
+		} {
+			#94194vI really can't thank you enough.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78673v#1040FOh, you needn't thank me...{wait}
+		} {
+			#78674v#1035FBy the way, Kurt...I feel like I need to say
+			something regarding my bracer badge.{wait}
+		}
+		TextWait
+		Emote name[1] 0mm 2000mm 24 27 250ms 0
+		Sleep 1000ms
+		EmoteStop name[1]
+		Sleep 500ms
+		TextTalk name[1] {
+			#78675v#1043FAs you probably already know, what power
+			I have was given to me by the society.{wait}
+		} {
+			#78676vBefore becoming a bracer, I used it to commit
+			many unforgivable crimes, too...{wait}
+		} {
+			#78677vNo matter how much I think about it, I just can't
+			see how someone like me is fit to call himself a
+			a bracer.{wait}
+		}
+		TextWait
+		TextTalk char[29] {
+			#94195v#843FYou know, Joshua...{wait}
+		} {
+			#94196v...I've always seen power as an imperfect
+			concept.{wait}
+		} {
+			#94197vAnd that's why I believe people are able to
+			use it.{wait}
+		} {
+			#94198v#842FAm I wrong?{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78678v#1044F...No, I suppose not...{wait}
+		}
+		TextWait
+		TextTalk char[29] {
+			#94199v#845FThen what difference is there between us?{wait}
+		} {
+			#94200vWe are both keenly aware of our flaws, and yet
+			we both use what limited power we have to do
+			what we believe to be right. I see no difference.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78679v#1054F...Well, I can't really argue with that logic.{wait}
+		} {
+			#78680vI still can't pretend to be completely confident
+			in myself, though...{wait}
+		}
+		TextWait
+		TextTalk char[29] {
+			#94201v#841FBe that as it may, that's nothing to be ashamed of--
+			you should simply continue striving to overcome it.{wait}
+		} {
+			#94202v#840FAnd while this is but my personal opinion...{wait}
+		} {
+			#94203v...I'd say you're a model bracer.{wait}
+		}
+		TextWait
+		FlagSet flag[32]
+	TextEnd self
+	Return
+
+fn[1]:
+	TextStart self
+	if flag[33]:
+		TextTalk char[30] {
+			#94051v#820FIt's wild just how much energy these two
+			have.{wait}
+		} {
+			#94052vAre they always like this?{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[30] {
+			#94049v#821FHaha. After all the work we've been doing lately,
+			it's great to be able to come to a swanky place
+			like this and put our feet up.{wait}
+		} {
+			#94050v#823FThe food's pretty good, too! *munch*{wait}
+		}
+		TextWait
+		FlagSet flag[33]
+	TextEnd self
+	Return
+
+fn[2]:
+	TextStart self
+	TextTalk char[31] {
+		#94065v#835FI swear, it's like watching two children squabble.{wait}
+	} {
+		#94066vIt's great that we're peaceful again and all, but
+		I think these two are taking things a little TOO
+		easy.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12189]:
+		if flag[9]:
+			TextTalk char[9] {
+				#86351v#811FSeriously! They'd both look amazing in dresses
+				if they took my advice!{wait}
+			} {
+				#86352vMaybe they'll let me test my theory if I ask them
+				nicely!{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo char[9] 270deg 0deg/s
+			TextTalk char[9] {
+				#86347v#818FHmm... Well, if you ask me...{wait}
+			} {
+				#86348v...throw some red earrings and a little ribbon on
+				Josette, then top it off with a nice, white dress.{wait}
+			} {
+				#86349vSame goes for Estelle if she let her hair down.{wait}
+			}
+			TextWait
+			CharTurnToChar char[9] name[1] 500deg/s
+			Sleep 300ms
+			TextTalk char[9] {
+				#86350v#816FWhat do you think, Joshua?{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#78684v#1048FWhat are you asking me for?{wait}
+			}
+			TextWait
+			FlagSet flag[9]
+	else:
+		TextTalk char[9] {
+			#86344v#814FWow! I didn't know Josette was from the nobility.{wait}
+		} {
+			#86345vI always pictured Erebonian nobles as being real
+			stuffy and scary...{wait}
+		} {
+			#86346v#1311FHeehee. But maybe there are a few cute ones mixed
+			in there?{wait}
+		}
+		TextWait
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[26]:
+		TextTalk char[27] {
+			#97373v#1110FSpeaking of the Republic, parliament is still
+			very much in confusion over the Orbal Shutdown
+			Phenomenon.{wait}
+		} {
+			#97374vTo say nothing of those steam tanks of Erebonia's.{wait}
+		} {
+			#97375vIt's going to be quite a while before things 
+			settle down there, too, I'd wager.{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[27] {
+			#97368v#1111FIt's nice to be able to attend a banquet like this.{wait}
+		} {
+			#97369vIt truly drives home the point that this nation is
+			back at peace again.{wait}
+		} {
+			#97370v#1113FThe trouble regarding the Liber Ark and subsequent
+			restoration efforts have really shown me anew how
+			capable a ruler Queen Alicia is.{wait}
+		} {
+			#97371vShe's handled all that's happened impeccably.{wait}
+		} {
+			#97372vIf all of this had happened in the Republic,
+			it wouldn't have been resolved anywhere near
+			as smoothly, let me tell you.{wait}
+		}
+		TextWait
+		FlagSet flag[26]
+	TextEnd self
+	Return
+
+fn[5]:
+	_Char4A char[22] 0
+	_Char4A char[23] 0
+	CharTurnToChar char[22] name[1] 0deg/s
+	CharTurnToChar char[23] name[1] 0deg/s
+	Sleep 300ms
+	TextTalk char[22] {
+		#97261v#221FAh! Just the man, just the man!{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78661v#1044F#2PPardon...?{wait}
+	}
+	TextWait
+	TextTalk char[23] {
+		#97317v#1101FOh?{wait}
+	} {
+		#97318vIs this the boy you were speaking of earlier?{wait}
+	}
+	TextWait
+	TextTalk char[22] {
+		#97262v#225FThat's correct. This is Joshua.{wait}
+	} {
+		#97263v#220FI was just telling the ambassador here about
+		your various accomplishments, Joshua.{wait}
+	}
+	TextWait
+	TextTalk char[23] {
+		#97319v#1100FIt's an honor to finally meet you.{wait}
+	} {
+		#97320vI'm the resident Erebonian ambassador here
+		in Liberl, Davil Crainagh.{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78662v#1054F#2PI-It's nice to meet you...{wait}
+	}
+	TextWait
+	TextTalk char[23] {
+		#97321v#1102FThe tale of how you flew on top of that flying city
+		all while knowing it may be the last thing you did
+		brought tears to my eyes.{wait}
+	} {
+		#97322vHow you were able to participate in an operation
+		that may have brought your death, casting aside 
+		even your girlfriend's objections, I don't know...{wait}
+	} {
+		#97323v#1100F...but I know this: Liberl needs more young men and
+		women like you.{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78663v#1049F#2PTh-Thank you for saying so, sir...{wait}
+	} {
+		#78664v(Just what has the duke been telling him?){wait}
+	}
+	TextWait
+	CharTurnTo char[22] 180deg 0deg/s
+	CharTurnTo char[23] 0deg 0deg/s
+	_Char4B char[22] 0
+	_Char4B char[23] 0
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[21]:
+		CharTurnTo char[22] 180deg 0deg/s
+		TextTalk char[22] {
+			#97264v#225FBut all was well that ended well, for by 
+			miraculous chance, the two were able to
+			reunite...{wait}
+		}
+		TextWait
+	else:
+		Call fn[1,5]
+		FlagSet flag[21]
+		FlagSet flag[22]
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[22]:
+		TextTalk char[23] {
+			#97324v#1102FIt should go without saying how touched
+			I am to see such spirit from our youths of
+			today.{wait}
+		} {
+			#97325v#1100FYou are truly Liberl's greatest treasures.{wait}
+		}
+		TextWait
+	else:
+		CharTurnTo self 0deg 0deg/s
+		Call fn[1,5]
+		FlagSet flag[21]
+		FlagSet flag[22]
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[10]:
+		TextTalk char[13] {
+			#87035v#115FThanks to Brigadier General Bright's mercy,
+			I was able to receive a full pardon for my
+			actions...{wait}
+		} {
+			#87036v...but I still feel as though I need to settle things
+			within myself after what I did.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#78608v#1040FYou were able to make it, Richard?{wait}
+		}
+		TextWait
+		TextTalk char[13] {
+			#87027v#110FThanks to Brigadier General Bright's generosity,
+			yes.{wait}
+		} {
+			#87028vI've received an official pardon from Her Majesty
+			for my actions.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78609v#1040FProbably for foiling the society's attack
+			on Grancel, right?{wait}
+		} {
+			#78610vThat's good news. I'm happy for you.{wait}
+		}
+		TextWait
+		TextTalk char[13] {
+			#87029v#115FI wish I could say the same...but I don't feel
+			as though I deserve to be pardoned at all.{wait}
+		} {
+			#87030vNow that the nation is at peace, I feel this is
+			the time I should be facing up to my crimes--
+			not having them swept under the rug.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78611v#1043FI can't say I don't understand, but still...{wait}
+		}
+		TextWait
+		TextTalk char[13] {
+			#87031v#111FHaha. Please, Joshua. You needn't look so
+			concerned.{wait}
+		} {
+			#87032v#115FI have no intention of refusing Her Majesty's 
+			kindness or going against her will.{wait}
+		} {
+			#87033vI merely feel a strong desire to settle things
+			within myself, and I fully intend on following
+			through.{wait}
+		} {
+			#87034v#110FThat is all.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78612v#1040F...All right, then.{wait}
+		}
+		TextWait
+		FlagSet flag[10]
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[14]:
+		TextTalk char[15] {
+			#97034v#183FI-I presume your business here is finished?
+			Then kindly begone.{wait}
+		} {
+			#97035vYou'll get in His Excellency's way standing
+			around here.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#78613v#1044FOh. I wasn't expecting to find you here...{wait}
+		} {
+			#78614v#1040FStill, thank you very much for your support
+			during the attack on Grancel. It really did
+			help us all.{wait}
+		}
+		TextWait
+		TextTalk char[15] {
+			#97032v#183FOh, please. I only did what I did because it
+			was one of His Excellency's bail conditions.{wait}
+		} {
+			#97033vMake no mistake: I wouldn't have helped any
+			of you worthless drecks otherwise.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78615v#1048F(You wouldn't think it would be so hard to
+			accept a thank you...){wait}
+		}
+		TextWait
+		FlagSet flag[14]
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart char[26]
+	if flag[25]:
+		TextTalk char[26] {
+			#95461v#311FScree! Scree!{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[26] {
+			#95459v#310FScree! Scree!{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78698v#1040FWell, well, Sieg! It's good to see you.{wait}
+		}
+		TextWait
+		TextTalk char[26] {
+			#95460v#311FScreeeee! ☆{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#78699v#1054F(After all he did, I'd say he deserves a good
+			party as much as any human.){wait}
+		}
+		TextWait
+		FlagSet flag[25]
+	TextEnd char[26]
+	Return
+
+fn[11]:
+	TextStart self
+	TextTalk self {
+		#0215vIt was an honor to be able to put my skills to
+		the test making tonight's many dishes.{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0216vI do hope they will be to your satisfaction.
+		Please, have your fill.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[12]:
+	TextStart self
+	TextTalk self {
+		#0213vIs there enough food available for you?{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0214vIf there's anything you would like more of,
+		please feel free to let me know.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[13]:
+	TextStart self
+	CharTurnTo self 180deg 0deg/s
+	TextTalk self {
+		#0233vU-Umm...{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0234vCould you two stop fighting?{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[14]:
+	TextStart self
+	if flag[45]:
+		TextTalk self {
+			#99486vI normally work as a chef over at Sanktheim Gate,
+			but I was called over here to help.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99487vIt's a real huge honor to be able to help out at
+			an occasion this spectacular. I doubt I'll ever
+			get an opportunity like THIS again.{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#99483vMan, this is one hell of a party!{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99484vI normally work as a chef over at Sanktheim Gate,
+			but I was called over here to help.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99485vIt's a real huge honor to be able to help out at
+			an occasion this spectacular. I doubt I'll ever
+			get an opportunity like THIS again.{wait}
+		}
+		TextWait
+		FlagSet flag[45]
+	TextEnd self
+	Return
+
+fn[15]:
+	TextStart self
+	if flag[46]:
+		TextTalk self {
+			#99293vYou're always welcome to the castle, Joshua.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99294vI'd be more than happy to help you get dolled
+			up for the occasion, too. ㈱{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#99290vOh!{wait}
+		}
+		TextWait
+		Emote self 0mm 2000mm 10 11 250ms 2
+		SoundPlay sound[15] 0 0 100
+		Sleep 1000ms
+		TextTalk self {
+			#99291vYou're always welcome back to the castle
+			any time.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#99292vI'd be more than happy to help you get dolled
+			up for the occasion, too. ㈱{wait}
+		}
+		TextWait
+		Emote name[1] 0mm 2000mm 16 19 250ms 1
+		SoundPlay sound[49] 0 0 100
+		Sleep 1000ms
+		TextTalk name[1] {
+			#78702v#1048FI'm never wearing a maid outfit again. Just so
+			you know.{wait}
+		}
+		TextWait
+		FlagSet flag[46]
+	TextEnd self
+	Return
+
+fn[16]:
+	TextStart self
+	if flag[47]:
+		TextTalk self {
+			#0220vNow that everything's back to normal, it feels
+			like all that happened that day was some sort
+			of dream.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0221vDream or real life, though, I'm just relieved it's
+			all finally over.{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#0217v*sigh* Now that everything's back to normal,
+			it feels like all that happened that day was
+			some sort of dream.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0218vI'd certainly rather believe it was... Seeing the 
+			castle gates fall and those scary people charging
+			through was like a nightmare...{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0219vI thought I was going to faint at the sight of it all.{wait}
+		}
+		TextWait
+		FlagSet flag[47]
+	TextEnd self
+	Return
+
+fn[17]:
+	TextStart self
+	if flag[48]:
+		TextTalk self {
+			#0229vI don't know what those society people were trying
+			to achieve by causing us so much trouble...{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0230v...but that was an experience I hope I never have to
+			go through again.{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#0227vHolding a party like this makes it feel like peace
+			has finally returned to the castle.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0228vIt certainly hasn't felt like that in the days leading
+			up to it. We were all busy clearing things up until
+			a few days ago.{wait}
+		}
+		TextWait
+		FlagSet flag[48]
+	TextEnd self
+	Return
+
+fn[18]:
+	TextStart self
+	TextTalk self {
+		#0211vRight! Next up, I need to give that guest their
+		drink...{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0212vUmm... But what did I need to do after that?{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[19]:
+	TextStart self
+	if flag[49]:
+		TextTalk self {
+			#0225vErm... Excuse me...{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0226vHave I given you some food already?{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			#0222vWhew... There sure are a lot of guests today!{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0223vBy all means, help yourself to any of the food
+			here.{wait}
+		}
+		TextWait
+		TextTalk self {
+			#0224vIt'll all taste much better while it's still hot!{wait}
+		}
+		TextWait
+		FlagSet flag[49]
+	TextEnd self
+	Return
+
+fn[20]:
+	TextStart self
+	TextTalk self {
+		#0231vDo you need something to drink, sir?{wait}
+	}
+	TextWait
+	TextTalk self {
+		#0232vWe have plenty available, alcoholic or otherwise.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[21]:
+	TextStart self
+	TextTalk self {
+		#99377vWe're delighted to see you were able
+		to attend tonight's banquet.{wait}
+	}
+	TextWait
+	TextTalk self {
+		#99378vPlease do enjoy yourself.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[22]:
+	TextStart self
+	TextTalk self {
+		#99379vThe whole garden terrace is accessible to
+		guests of tonight's party.{wait}
+	}
+	TextWait
+	TextTalk self {
+		#99380vSo please don't feel restricted, and do enjoy
+		yourself.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[23]:
+	TextStart self
+	TextTalk self {
+		#99414vPlease, do enjoy yourself at the banquet.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[24]:
+	TextStart self
+	TextTalk self {
+		#99720vI'm terribly sorry, but I'm afraid you may not
+		pass beyond this point. These stairs lead to
+		Her Highness' private chamber.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[25]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundLoad sound[191]
+	CharSetPos name[1] (10620, 14000, 77890) 270deg
+	Call fn[0,10]
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsSet object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	CharFlagsUnset char[21] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[22] 0x0080
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[25] 0x0080
+	CharFlagsUnset char[24] 0x0080
+	CharFlagsSet char[21] 0x0040
+	CharFlagsSet char[5] 0x0040
+	CharFlagsSet char[22] 0x0040
+	CharFlagsSet char[11] 0x0040
+	CharFlagsSet char[25] 0x0040
+	CharFlagsSet char[24] 0x0040
+	_Char4A char[49] 0
+	_Char4A char[50] 0
+	CharSetChipBase char[49] chip[49]
+	CharSetChipBase char[50] chip[49]
+	CharSetChipPattern char[49] 0
+	CharSetChipPattern char[50] 0
+	_Char4A char[51] 0
+	_Char4A char[52] 0
+	CharSetChipBase char[51] chip[49]
+	CharSetChipBase char[52] chip[49]
+	CharSetChipPattern char[51] 0
+	CharSetChipPattern char[52] 0
+	CharSetPos char[21] (570, 14000, 79770) 180deg
+	CharSetPos char[5] (-550, 14000, 80170) 180deg
+	CharSetPos char[22] (1010, 14000, 81490) 180deg
+	CharSetPos char[11] (10, 14000, 83200) 180deg
+	CharSetPos char[25] (-1420, 14000, 83200) 180deg
+	CharSetPos char[24] (1350, 14000, 83200) 180deg
+	_Char4A char[21] 0
+	_Char4A char[5] 0
+	_Char4A char[22] 0
+	_Char4A char[11] 0
+	_Char4A char[25] 0
+	_Char4A char[24] 0
+	CharTurnTo char[0] 0deg 0deg/s
+	CharTurnTo char[3] 0deg 0deg/s
+	CharTurnTo char[4] 0deg 0deg/s
+	CharTurnTo char[6] 0deg 0deg/s
+	CharTurnTo char[8] 0deg 0deg/s
+	CharTurnTo char[9] 0deg 0deg/s
+	CharTurnTo char[10] 0deg 0deg/s
+	CharTurnTo char[30] 0deg 0deg/s
+	CharTurnTo char[31] 0deg 0deg/s
+	CharTurnTo char[34] 0deg 0deg/s
+	CharTurnTo char[35] 0deg 0deg/s
+	CharTurnTo char[12] 0deg 0deg/s
+	CharTurnTo char[16] 90deg 0deg/s
+	CharTurnTo char[17] 90deg 0deg/s
+	CharTurnTo char[18] 90deg 0deg/s
+	CharTurnTo char[19] 90deg 0deg/s
+	CharTurnTo char[20] 90deg 0deg/s
+	CharTurnTo char[32] 90deg 0deg/s
+	CharTurnTo char[33] 90deg 0deg/s
+	CharTurnTo char[7] 315deg 0deg/s
+	CharTurnTo char[36] 315deg 0deg/s
+	_Char4A char[0] 0
+	_Char4A char[1] 0
+	_Char4A char[3] 0
+	_Char4A char[4] 0
+	_Char4A char[5] 0
+	_Char4A char[6] 0
+	_Char4A char[7] 0
+	_Char4A char[8] 0
+	_Char4A char[9] 0
+	_Char4A char[10] 0
+	_Char4A char[11] 0
+	_Char4A char[12] 0
+	_Char4A char[13] 0
+	_Char4A char[14] 0
+	_Char4A char[15] 0
+	_Char4A char[16] 0
+	_Char4A char[17] 0
+	_Char4A char[18] 0
+	_Char4A char[19] 0
+	_Char4A char[20] 0
+	_Char4A char[21] 0
+	_Char4A char[22] 0
+	_Char4A char[23] 0
+	_Char4A char[24] 0
+	_Char4A char[25] 0
+	_Char4A char[26] 0
+	_Char4A char[27] 0
+	_Char4A char[28] 0
+	_Char4A char[29] 0
+	_Char4A char[30] 0
+	_Char4A char[31] 0
+	_Char4A char[32] 0
+	_Char4A char[33] 0
+	_Char4A char[34] 0
+	_Char4A char[35] 0
+	_Char4A char[36] 0
+	_Char4A char[37] 0
+	_Char4A char[38] 0
+	_Char4A char[39] 0
+	_Char4A char[40] 0
+	_Char4A char[41] 0
+	_Char4A char[42] 0
+	_Char4A char[43] 0
+	_Char4A char[44] 0
+	_Char4A char[45] 0
+	_Char4A char[46] 0
+	_Char4A char[47] 0
+	_Char4A char[48] 0
+	_Char4A char[53] 0
+	_Char4A char[49] 0
+	_Char4A char[50] 0
+	_Char4A char[51] 0
+	_Char4A char[52] 0
+	CharFlagsSet char[37] 0x0080
+	CharFlagsSet char[38] 0x0080
+	Sleep 1500ms
+	CamLookPos (-840, 14000, 79350) 0ms
+	CamSetDistance 0 4120 -10000 0ms
+	CamZoom 3210 0ms
+	CamRotate 60000mdeg 0ms
+	CamPers 334 0ms
+	Fork char[55] fork[0]:
+		CamLookPos (-9700, 14000, 74820) 8000ms
+	Fork char[55] fork[1]:
+		CamRotate 45000mdeg 8000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Queen Alicia"
+	TextMessage null {
+		#97206v{color 0}#40AAt one point, this very capital was placed in
+		grave danger...{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sleep 500ms
+	CrossFade 1000ms
+	ForkQuit char[55] fork[255]
+	CamLookPos (500, 12000, 56180) 0ms
+	CamSetDistance 0 5460 -10000 0ms
+	CamZoom 3840 0ms
+	CamRotate 36000mdeg 0ms
+	CamPers 262 0ms
+	Fork char[55] fork[0]:
+		CamLookPos (-500, 12000, 68180) 9000ms
+	Fork char[55] fork[1]:
+		CamRotate 53000mdeg 9000ms
+	FadeWait
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Queen Alicia"
+	TextMessage null {
+		#97207v{color 0}#50A...but thanks to the efforts of everyone here
+		and many others, all is well.{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sleep 500ms
+	EffLoad eff[0] "map\\mp032_00.eff"
+	CrossFade 1000ms
+	ForkQuit char[55] fork[255]
+	CamLookPos (0, 14000, 83260) 0ms
+	CamSetDistance 0 2810 -10000 0ms
+	CamZoom 2540 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 368 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk char[21] {
+		#97208v#094F#5PThis humble banquet is intended to be an occasion
+		to celebrate that fact, as well as to honor all those
+		who contributed to making it a reality.{wait}
+	} {
+		#97209v#090FIf you would, Klaudia?{wait}
+	}
+	TextWait
+	TextTalk char[5] {
+		#82213v#1873F#5POf course.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork char[5] fork[1]:
+		CharWalkToPos self (-550, 14000, 79170) 1500mm/s 0
+	ForkWait char[5] fork[1]
+	Sleep 500ms
+	TextTalk char[5] {
+		#82214v#1810F#5PAll those invited to today's party contributed in
+		one way or another to protecting the peace of 
+		Liberl by ending the peril we were faced with.{wait}
+	} {
+		#82215v#1817FWhether it was extending a helping hand to those
+		in need or working to fight off the threats that
+		instilled fear in the hearts of our people.{wait}
+	} {
+		#82216vAs this country's future monarch, I would like to 
+		extend my deepest gratitude to each and every
+		one of you.{wait}
+	} {
+		#82217v#1818FThank you all very much.{wait}
+	} {
+		#82218vHolding this party is nothing compared to all that
+		you have done, but...{wait}
+	}
+	TextWait
+	CharFlagsUnset char[37] 0x0080
+	CharFlagsSet char[37] 0x0040
+	CharSetPos char[37] (9720, 14000, 76650) 270deg
+	CharFlagsUnset char[38] 0x0080
+	CharFlagsSet char[38] 0x0040
+	CharSetPos char[38] (8750, 14000, 77790) 270deg
+	TextTalk char[37] {
+		#93656v#1PWe JUST made it!{wait}
+	}
+	TextWait
+	TextTalk char[38] {
+		#93775v#1PWh-Whew... We're finally here...{wait}
+	} {
+		#93776vF-Food! Someone give me fooood!{wait}
+	}
+	TextWait
+	Fork char[37] fork[1]:
+		CharWalkToPos self (4030, 14000, 76650) 4000mm/s 0
+	ForkWait char[37] fork[1]
+	Sleep 150ms
+	ForkLoop char[37] fork[2]:
+		CharTurnToChar self char[38] 400deg/s
+	Sleep 500ms
+	TextTalk char[37] {
+		#93657v#142F#3PThe hell are you doing?! Eating can wait!
+		You've got pictures to take!{wait}
+	} {
+		#93658v#144FThe crown princess' speech might be finishing
+		soon!{wait}
+	}
+	TextWait
+	TextTalk char[38] {
+		#93777v#1P*sigh* Awwwwww, okay...{wait}
+	}
+	TextWait
+	Fork char[38] fork[1]:
+		CharWalkToPos self (5000, 14000, 77790) 2500mm/s 0
+	ForkWait char[38] fork[1]
+	ForkQuit char[37] fork[2]
+	Fork char[37] fork[2]:
+		CharTurnTo self 315deg 500deg/s
+	CharTurnTo char[38] 315deg 500deg/s
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase char[38] chip[50]
+	CharSetChipPattern char[38] 0
+	FadeWait
+	ForkFunc char[38] fork[1] fn[0,8]
+	Sleep 2000ms
+	TextTalk char[5] {
+		#82219v#1815F#5P...Erm...{wait}
+	} {
+		#82220vWell, I do hope you will all enjoy your time 
+		here all the same.{wait}
+	}
+	TextWait
+	TextTalk char[22] {
+		#97257v#225F#5PI'm sure you are all busy men and women, burdened
+		by a great many responsibilities and concerns...{wait}
+	} {
+		#97258v#220F...but today, I would ask that you all cast those
+		aside in order to rest, relax, and enjoy yourselves.{wait}
+	} {
+		#97259vThe food on offer here is some of the finest in
+		Liberl, so by all means, partake until you can no
+		more!{wait}
+	} {
+		#97260v#221FAnd may the Goddess bless this nation!{wait}
+	}
+	TextWait
+	SoundPlay sound[191] 0 0 100
+	BgmStop 2000ms
+	Sleep 2000ms
+	BgmWait
+	ForkQuit char[38] fork[1]
+	FadeIn 100ms 0x00FFFFFF
+	BgmPlay bgm[75] 0
+	Sleep 500ms
+	ForkLoop char[38] fork[2]:
+		CharTurnToChar self char[5] 400deg/s
+	ForkLoop char[37] fork[2]:
+		CharTurnToChar self char[5] 400deg/s
+	Fork char[21] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[5] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[22] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[11] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[25] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 100ms
+	Fork char[24] fork[1]:
+		_Char90 self 0 0 -20000 1000 0
+	Sleep 3000ms
+	CrossFade 1000ms
+	CamLookPos (12000, 14000, 80820) 0ms
+	CamSetDistance 0 4830 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 285 0ms
+	ForkQuit char[21] fork[1]
+	ForkQuit char[5] fork[1]
+	ForkQuit char[22] fork[1]
+	ForkQuit char[11] fork[1]
+	ForkQuit char[25] fork[1]
+	ForkQuit char[24] fork[1]
+	ForkQuit char[38] fork[1]
+	ForkQuit char[38] fork[2]
+	ForkQuit char[37] fork[2]
+	_Char4B char[21] 0
+	_Char4B char[5] 0
+	_Char4B char[22] 0
+	_Char4B char[11] 0
+	_Char4B char[25] 0
+	_Char4B char[24] 0
+	CharSetChipBase char[38] chip[43]
+	CharSetChipPattern char[38] 0
+	_Char4B char[49] 0
+	_Char4B char[50] 0
+	CharSetChipBase char[49] chip[48]
+	CharSetChipBase char[50] chip[48]
+	CharSetChipPattern char[49] 0
+	CharSetChipPattern char[50] 0
+	_Char4B char[51] 0
+	_Char4B char[52] 0
+	CharSetChipBase char[51] chip[48]
+	CharSetChipBase char[52] chip[48]
+	CharSetChipPattern char[51] 0
+	CharSetChipPattern char[52] 0
+	CharFlagsUnset char[21] 0x0040
+	CharFlagsUnset char[5] 0x0040
+	CharFlagsUnset char[22] 0x0040
+	CharFlagsUnset char[11] 0x0040
+	CharFlagsUnset char[25] 0x0040
+	CharFlagsUnset char[24] 0x0040
+	Call fn[0,9]
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsUnset object[5] 0x0004
+	_Char4A char[45] 0
+	_Char4A char[46] 0
+	_Char4A char[47] 0
+	_Char4A char[48] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#77349v#1017F#5PKloe really is something else, huh?{wait}
+	} {
+		#77350vI'm not sure I could dress super nice,
+		get up in front of a crowd like this, and
+		make a big speech the way she just did.{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78585v#1053F#11PYeah, she is. She said she wasn't feeling
+		confident about how she'd do as crown
+		princess before...{wait}
+	} {
+		#78586v#1041F...but from where I'm standing, she's doing
+		just fine.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#77351v#1008F#5PSeeing her is making me kinda jealous, though.{wait}
+	} {
+		#77352v#1016FI wish I could pull off fancy dresses the way
+		she does...{wait}
+	}
+	TextWait
+	CharTurnToChar name[1] char[1] 400deg/s
+	Sleep 300ms
+	TextTalk name[1] {
+		#78587v#1044F#12P...{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	CharTurnToChar char[1] name[1] 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#77353v#1019F#5PYou got somethin' to say, mister?{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78588v#1053F#12POh, it's nothing.{wait}
+	} {
+		#78589v#1041FYou're just not all that girly most of the time,
+		so it always takes me by surprise when you
+		suddenly are.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#77354v#1013F#5PWhat do you mean, I'm not girly?!{wait}
+	} {
+		#77355v#1007FSure, lately we've been so busy with helping
+		get Liberl back in shape so I haven't even had
+		time to go back home...{wait}
+	} {
+		#77356v#1019F...but that doesn't mean I don't wanna wear
+		a pretty dress or something once in a while,
+		you know!{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78590v#1049F#12PI know, I know.{wait}
+	} {
+		#78591v#1054FStill, it really is surprising just how much
+		you've grown even in these past few weeks.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[1] {
+		#77357v#1004F#5P...I have?{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78592v#1053F#12PWell, it's been pretty tough running up and
+		down the country so much, but you've kept
+		up with ease.{wait}
+	} {
+		#78593vAnd your judgments as a bracer are getting
+		more spot on with every decision you make.{wait}
+	} {
+		#78594v#1041FFancy dress or not, I think you're a pretty
+		wonderful person, Estelle.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#77358v#1008F#5PA-Ahaha...{wait}
+	} {
+		#77359v#1016FI don't know why, but it's weird hearing you pile
+		on the compliments so much...{wait}
+	} {
+		#77360v#1017FBut what can I say? I'm glad that things seem
+		to have finally calmed down a bit on the work
+		front these past few days.{wait}
+	} {
+		#77361vThe capital might not be entirely the way it was,
+		but it's getting there.{wait}
+	} {
+		#77362vI think we can finally afford to take a breather.{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78595v#1053F#12P...Yeah.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo char[1] 225deg 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#77363v#1004F#5POh, look!{wait}
+	}
+	TextWait
+	_59
+	Fork name[1] fork[2]:
+		CharTurnTo name[1] 225deg 300deg/s
+	CharSetPos char[41] (-9350, 12000, 61660) 180deg
+	CharSetPos char[30] (-3880, 12000, 59720) 315deg
+	CharSetPos char[31] (-3900, 12000, 61790) 225deg
+	CharSetPos char[10] (-8100, 12000, 57040) 270deg
+	CharSetPos char[9] (-8100, 12000, 58540) 270deg
+	Fork char[55] fork[0]:
+		CamLookPos (-7020, 12000, 59000) 2500ms
+	Fork char[55] fork[1]:
+		CamRotate 40000mdeg 2500ms
+	Fork char[55] fork[2]:
+		CamZoom 2720 2500ms
+	Fork char[55] fork[3]:
+		CamSetDistance 0 6700 -10000 2500ms
+	ForkWait char[55] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#77364v#1008F#6PLook at all that food!{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78596v#1040F#12PThe chefs in the castle supposedly made
+		the entire spread, too.{wait}
+	}
+	TextWait
+	_59
+	CrossFade 800ms
+	CamLookPos (12000, 14000, 80820) 0ms
+	CamSetDistance 0 4830 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 285 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[1] {
+		#77365v#1006F#5PThere's no way I'm missing out on this!{wait}
+	} {
+		#77366vI didn't get to enjoy the food back during
+		the birthday festivities, so now's my time
+		to pig out big time!{wait}
+	} {
+		#77367v#1001FHeehee! I'm gonna eat until I barf!{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] name[1] 500deg/s
+	Sleep 400ms
+	TextTalk char[1] {
+		#77368v#1018F#5PStay right here, okay, Joshua? I'm gonna
+		go scope out the goods!{wait}
+	}
+	TextWait
+	ForkLoop name[1] fork[1]:
+		CharTurnToChar self char[1] 400deg/s
+	CharTurnTo char[1] 270deg 400deg/s
+	Sleep 300ms
+	ForkFunc char[1] fork[1] fn[0,7]
+	Fork char[55] fork[0]:
+		CamLookPos (7900, 14000, 79710) 2000ms
+	Fork char[55] fork[1]:
+		CamZoom 3100 2000ms
+	ForkWait char[55] fork[0]
+	Sleep 3000ms
+	ForkQuit name[1] fork[1]
+	Emote name[1] 0mm 2000mm 24 27 250ms 0
+	CamLookPos (11610, 14000, 78880) 1500ms
+	ForkQuit char[1] fork[1]
+	CharSetPos char[41] (-8189, 12000, 60260) 180deg
+	CharSetPos char[30] (-5950, 12000, 59520) 225deg
+	CharSetPos char[31] (-6530, 12000, 60440) 225deg
+	CharSetPos char[10] (-8100, 12000, 57040) 0deg
+	CharSetPos char[9] (-5220, 12000, 57140) 270deg
+	CharSetPos char[1] (-8100, 12000, 58540) 180deg
+	CharSetChipPattern char[1] 0
+	Sleep 1000ms
+	EmoteStop name[1]
+	Sleep 500ms
+	TextTalk name[1] {
+		#78597v#1054F#5P...She might have grown in some areas,
+		but she's still got a ways to go in others.{wait}
+	}
+	TextWait
+	CharSetPos char[37] (800, 14000, 77890) 90deg
+	CharSetPos char[38] (800, 14000, 78900) 90deg
+	Fork char[37] fork[1]:
+		CharWalkToPos self (8730, 14000, 77890) 2500mm/s 0
+	Sleep 600ms
+	Fork char[38] fork[1]:
+		CharWalkToPos self (6100, 14000, 78900) 2000mm/s 0
+	Sleep 1000ms
+	Emote name[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	ForkLoop name[1] fork[2]:
+		CharTurnToChar self char[37] 400deg/s
+	ForkWait char[37] fork[1]
+	TextTalk char[37] {
+		#93659v#141F#6PHey, look! How you doin', Joshua?{wait}
+	} {
+		#93660vEstelle not here with you?{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78598v#1053F#11PShe just went to get food a second ago,
+		actually.{wait}
+	} {
+		#78599v#1040FAre you two here more for work than fun?{wait}
+	}
+	TextWait
+	TextTalk char[37] {
+		#93661v#147F#6PBingo. There aren't many occasions where this
+		many famous faces are gathered in one place.{wait}
+	} {
+		#93662vThere was no way we could pass up the chance
+		to come and score some interviews!{wait}
+	} {
+		#93663v#141FDon't think you're getting out of here without 
+		answering some questions, either. We'll get to
+		you two later.{wait}
+	} {
+		#93664vSo no going home until you've spoken to us, all
+		right?{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#78600v#1054F#11PHaha... All right.{wait}
+	}
+	TextWait
+	TextTalk char[37] {
+		#93665v#147F#6PGreat! Next up is the crown princess!{wait}
+	}
+	TextWait
+	CharTurnToChar char[37] char[38] 500deg/s
+	Sleep 300ms
+	TextTalk char[37] {
+		#93666v#144F#11PHop to it, Dorothy!{wait}
+	}
+	TextWait
+	TextTalk char[38] {
+		#93778v#154F#6P#40WI-I can't go on... I need something to eat...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[352] 0 0 100
+	Sleep 1000ms
+	CharShake char[38] 20 0 400 2500ms
+	Sleep 800ms
+	TextTalk char[38] {
+		#93779v#152F#6P#40WLet me have something to eat...{wait}
+	}
+	TextWait
+	TextTalk char[37] {
+		#93667v#144F#11PNot until we're done! Questions to ask,
+		photos to take!{wait}
+	}
+	TextWait
+	ForkFunc char[37] fork[3] fn[0,18]
+	ForkLoop char[38] fork[2]:
+		CharTurnToChar self char[37] 1000deg/s
+	Sleep 200ms
+	Emote char[38] 0mm 2000mm 40 43 100ms 3
+	Sleep 800ms
+	ForkQuit char[38] fork[2]
+	TextTalk char[38] {
+		#93780v#152F#5P#30AWhy are you so meeeeeeeeean?{0x05}{wait}
+	}
+	TextWait
+	ForkFunc char[38] fork[3] fn[0,19]
+	ForkWait char[38] fork[3]
+	TextTalk name[1] {
+		#78601v#1053F#5PHaha... He's even more fired up today than usual.{wait}
+	} {
+		#78602v#1044FI wonder how Estelle's doing?{wait}
+	}
+	TextWait
+	ForkWait char[38] fork[3]
+	ForkQuit name[1] fork[2]
+	CharFlagsUnset char[37] 0x0040
+	CharFlagsUnset char[38] 0x0040
+	_Char4B char[37] 0
+	_Char4B char[38] 0
+	CharSetPos char[37] (12210, 12000, 57070) 270deg
+	CharSetPos char[38] (6500, 12000, 60670) 270deg
+	Fork char[55] fork[0]:
+		CamLookPos (-7020, 12000, 59000) 2500ms
+	Fork char[55] fork[1]:
+		CamRotate 40000mdeg 2500ms
+	Fork char[55] fork[2]:
+		CamZoom 2720 2500ms
+	Fork char[55] fork[3]:
+		CamSetDistance 0 6700 -10000 2500ms
+	ForkWait char[55] fork[0]
+	Emote char[10] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[10] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[1] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 1000ms
+	Emote char[10] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[10] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Fork char[1] fork[1]:
+		CharJump self 0 0 0 400 4000mm/s
+	Sleep 2000ms
+	CrossFade 800ms
+	CamLookPos (11640, 14000, 79050) 0ms
+	CamSetDistance 0 4830 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 285 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk name[1] {
+		#78603v#1052F#5P*sigh* So much for scoping out the food...{wait}
+	} {
+		#78604v#1043F...{wait}
+	}
+	TextWait
+	Emote name[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[65278]
+	Sleep 500ms
+	CharTurnTo name[1] 270deg 300deg/s
+	Sleep 400ms
+	TextTalk name[1] {
+		#78605v#1035F#11P(I suppose this is as good a chance as any.){wait}
+	} {
+		#78606v(I owe a lot to the people here on a personal
+		level, too.){wait}
+	} {
+		#78607v#1041F(Maybe I should go around and thank them while
+		I have the chance.){wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 1000ms
+	CamLookPos (10620, 14000, 77890) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	_Char4B char[0] 0
+	_Char4B char[1] 0
+	_Char4B char[3] 0
+	_Char4B char[4] 0
+	_Char4B char[5] 0
+	_Char4B char[6] 0
+	_Char4B char[7] 0
+	_Char4B char[8] 0
+	_Char4B char[9] 0
+	_Char4B char[10] 0
+	_Char4B char[11] 0
+	_Char4B char[12] 0
+	_Char4B char[13] 0
+	_Char4B char[14] 0
+	_Char4B char[15] 0
+	_Char4B char[16] 0
+	_Char4B char[17] 0
+	_Char4B char[18] 0
+	_Char4B char[19] 0
+	_Char4B char[20] 0
+	_Char4B char[21] 0
+	_Char4B char[22] 0
+	_Char4B char[23] 0
+	_Char4B char[24] 0
+	_Char4B char[25] 0
+	_Char4B char[26] 0
+	_Char4B char[27] 0
+	_Char4B char[28] 0
+	_Char4B char[29] 0
+	_Char4B char[30] 0
+	_Char4B char[31] 0
+	_Char4B char[32] 0
+	_Char4B char[33] 0
+	_Char4B char[34] 0
+	_Char4B char[35] 0
+	_Char4B char[36] 0
+	_Char4B char[37] 0
+	_Char4B char[38] 0
+	_Char4B char[39] 0
+	_Char4B char[40] 0
+	_Char4B char[41] 0
+	_Char4B char[42] 0
+	_Char4B char[43] 0
+	_Char4B char[44] 0
+	_Char4B char[45] 0
+	_Char4B char[46] 0
+	_Char4B char[47] 0
+	_Char4B char[48] 0
+	_Char4B char[53] 0
+	_Char4B char[49] 0
+	_Char4B char[50] 0
+	_Char4B char[51] 0
+	_Char4B char[52] 0
+	_Char4B char[45] 0
+	_Char4B char[47] 0
+	_Char4B char[46] 0
+	_Char4B char[48] 0
+	FlagSet flag[12186]
+	EventEnd 0
+	Return

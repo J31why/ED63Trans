@@ -1,0 +1,225 @@
+calmare sc scena
+scena:
+	name "Rolent" "R0100.x"
+	town town[23]
+	bgm bgm[29]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons/ch10520._ch" "mons/ch10520p._cp"
+chip[1] file[0x002603D2] file[0x002603D7]
+
+npc char[0]:
+	name "Insect"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Rolent"
+	pos (-14030, 1000, 217340)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Bright Family House"
+	pos (-60890, 1030, 216800)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Gurune Gate"
+	pos (-39320, 1000, 90280)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (-36800, 1000, 152300)
+	radius 1500mm
+	bubble_pos (-36800, 2500, 152800)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[1]:
+	pos (-39100, 1000, 153300)
+	radius 1500mm
+	bubble_pos (-39100, 2200, 153300)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 17:
+		SystemFlagsSet 0x10000000
+		system[1] = 20
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[8] 0x0080
+	char[8].40 = 8
+	char[8].45 = 600
+	char[8].46 = 600
+	char[8].47 = 600
+	char[8].7 = 600
+	CharSetPos char[8] (-42840, 2210, 171630) 315deg
+	PartyClear
+	PartyAdd name[84] party[0] 255
+	CharSetPos name[84] (-41130, 1010, 173360) 315deg
+	CamLookPos (-53050, 1000, 176590) 0ms
+	CamSetDistance 0 5590 -10000 0ms
+	CamZoom 3360 0ms
+	CamRotate 344000mdeg 0ms
+	CamPers 262 0ms
+	Fork char[9] fork[0]:
+		CamLookPos (-48850, 1230, 182000) 6000ms
+	Fork char[9] fork[1]:
+		CamRotate 0mdeg 6000ms
+	FadeIn 4000ms 0x00000000
+	Sleep 2000ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-48850, 2210, 181080) 3000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-55380, 3500, 188250) 3000mm/s 0
+	Sleep 700ms
+	Fork name[84] fork[1]:
+		CharWalkToPos self (-48850, 1010, 181080) 7000mm/s 0
+	ForkWait name[84] fork[1]
+	Sleep 500ms
+	TextTalk name[84] {
+		#77074v#296FAww... He ran away.{wait}
+	} {
+		#77075vHe had a real funny face, too.{wait}
+	} {
+		#77076v#292F...No. I can't let this get me down!{wait}
+	}
+	TextWait
+	ForkFunc char[8] fork[3] fn[0,3]
+	CharTurnTo name[84] 135deg 500deg/s
+	Sleep 500ms
+	TextTalk name[84] {
+		#77077v#295FNot with how sad Joshua looks like now.
+		He's in so much pain...and he can't move
+		around or do anything fun, either.{wait}
+	} {
+		#77078v#290FWhich means I gotta find him the ultimate
+		bug to cheer him up!{wait}
+	}
+	TextWait
+	ForkWait char[8] fork[3]
+	Emote name[84] 0mm 1700mm 38 38 250ms 1
+	Sleep 500ms
+	CharTurnTo name[84] 225deg 500deg/s
+	TextTalk name[84] {
+		#77079v#293FOh, it's back!{wait}
+	} {
+		#77080v#294FYou get back here!{wait}
+	}
+	TextWait
+	Fork char[9] fork[0]:
+		CamZoom 3460 3000ms
+	Fork name[84] fork[1]:
+		CharWalkToPos self (-60680, 1010, 169250) 7000mm/s 0
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	PartyClear
+	PartyAdd name[0] party[0] 255
+	FlagSet flag[9476]
+	NewScene "t0300._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	ForkQuit char[8] fork[1]
+	CharSetPos char[8] (-43240, 3210, 190470) 225deg
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-62530, 1510, 171190) 3000mm/s 0
+	Sleep 4000ms
+	Return
+
+fn[4]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}North: Rolent - 49 selge
+		South: Gurune Gate - 259 selge{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[5]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}West: Bright House{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

@@ -1,0 +1,1262 @@
+calmare tc scena
+scena:
+	name "Event" "E1000.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 "e1000._sn"
+	scp 1 "e1000_1._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03600._ch" "npl2/ch03600p._cp"
+chip[1] "apl2/ch20305._ch" "apl2/ch20305p._cp"
+
+npc char[0]:
+	name "Campanella"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	Event fn[0,2]
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,15]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sc_C4Set 2048
+	Sleep 1000ms
+	BgmPlay bgm[33] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS336._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0240v{color 0}#0241vOrbments are devices that use the orbal energy
+		contained within septium to cause a variety of
+		useful effects.{wait}
+		#0242vIt has only been a little over half a century since they
+		were first invented, but even in such a short time,
+		they have already revolutionized the world
+		as we know it.{wait}
+	}
+	TextWait
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0243v{color 0}From daily necessities, such as lighting and heating,
+		to tanks and other similar weapons used to defend our
+		nations, orbments are used in just about every facet
+		of our lives.{wait}
+		#0244vIn fact, it's now hard to imagine life without them--
+		so much of what we take for granted in life now
+		involves them in some way.{wait}
+		#0245vAnd it is to proliferate and advance the development
+		of these orbments that we exist.{wait}
+		#0246vWe, the Epstein Foundation.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0247v{color 0}Our foundation was first established in year 1155
+		of the Septian Calendar.{wait}
+		#0248vThat was the year after Professor Epstein's passing, and
+		was created by his brilliant-minded disciples in
+		order to honor his wishes.{wait}
+		#0249vThe foundation is based in his home state of Leman,
+		where it remains in operation to this day.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0250v{color 0}It was rather limited in size in the beginning, and its
+		attempts to spread orbal technology was initially met
+		with little success.{wait}
+		#0251vSensing that the professor's dream would never be
+		realized at the rate they were going, three key
+		researchers left Leman to try and spread the seeds
+		of orbal technology across the continent themselves.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0252v{color 0}One of these was Professor G. Schmidt.{wait}
+		#0253vThe professor, who had gained a fine reputation of his
+		own for his skill in the field of mechanical engineering,
+		went around and visited corporations in various nations
+		to persuade them of the benefits of orbments.{wait}
+	} {
+		#0254vThe second was Professor L. Hamilton.{wait}
+		#0255vMindful of the technological gap between regions,
+		he long believed it was rural and remote areas that
+		needed orbment technology more than any other. {wait}
+		#0256vAs such, he enlisted the help of the Bracer Guild,
+		which already had a close relationship with the
+		foundation, and formed a mission with the intent
+		of promoting and spreading the technology where
+		applicable.{wait}
+		#0257vThe professor himself also toured the regions with
+		the aim of spreading public awareness and laying
+		foundations for others to build on in the future. {wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0258v{color 0}The third was Professor A. Russell, now known far
+		and wide as the 'father of the Orbal Revolution.'{wait}
+	} {
+		#0259vProfessor Russell returned to his home nation of
+		Liberl and continued to work tirelessly to advance
+		orbment technology there...{wait}
+		#0260vand within a year of returning, he had set up the
+		Zeiss Engineering Factory (now known as Zeiss
+		Central Factory/ZCF) and created the first orbment
+		to be made outside Leman State.{wait}
+		#0261vThree years later, the reigning king of Liberl at the
+		time, Edgar III, visited the factory to inspect it,
+		and he decided to donate a large amount of money to
+		further its research.{wait}
+		#0262vWith His Majesty's endorsement, orbments began to
+		spread like wildfire throughout the kingdom, bringing
+		such prosperity that the people of other nations were
+		filled with envy.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0263v{color 0}Up until then, most people didn't see orbments in a
+		particularly positive light, but their success in Liberl
+		changed those impressions virtually overnight.{wait}
+		#0264vOne nation after another began to reach out to our
+		foundation to share orbment technology, and both
+		our foundation's financial and social standing became
+		that much more secure.{wait}
+		#0265vIn the eyes of the world, the Orbal Revolution was a
+		sudden, far-reaching transformation...{wait}
+		#0266vbut it was only because of years of reaching out to
+		people and diligent, largely-unnoticed research that
+		it was able to happen at all.{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS337._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 3500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0267v{color 0}The foundation's activities center around the
+		following three guiding principles:{wait}
+		#0268v1. Carrying out fundamental research on orbments.{wait}
+		#0269v2. Spreading orbal technology and informing the
+		public of its benefits.{wait}
+		#0270v3. Contributing to world peace through technology.{wait}
+		#0271vNow, then, let's discuss each of these three guiding
+		principles in more depth.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0235v{color 0}[1. Carrying out fundamental research on orbments.]{wait}
+		#0236vThe foundation's most important mission is, naturally,
+		the improvement and development of orbal technology.{wait}
+		#0272vThe fundamental principles behind how orbments work
+		need no improvement as such, but their architectures--
+		their internal structures--have been improved upon
+		countless times in the past and will surely continue to
+		be perfected by the curious mind as the years go on.{wait}
+		#0273vOrbments' architecture concerns the mechanical parts
+		inside them such as the cogs and screws, and there is
+		still plenty of room for change as this new technology
+		develops.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0274v{color 0}These improvements can reap great rewards, but the
+		research necessary to make them is known to be as
+		lengthy as it is expensive. As a result, companies who
+		prioritize profit over all else are less inclined to pursue
+		them.{wait}
+		#0275vThat makes our foundation's research all the more
+		important from a social perspective.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0237v{color 0}[2. Spreading orbal technology and informing the
+		public of its benefits.]{wait}
+		#0276vTwo other important goals of the foundation are to
+		spread orbal technology as widely as possible and
+		to educate the public on the correct way to use it.{wait}
+		#0277vWhile orbments have become part of the daily lives
+		of most who live in advanced nations and populated
+		urban areas, the reality in remote and mountainous
+		regions is very different.{wait}
+		#0278vTo counter this, we have long worked to send missions
+		of engineers and bracers to these regions to try and
+		better the standard of living for these people, and will
+		continue to do so.{wait}
+	} {
+		#0279vWe also continue to work on other ways to spread 
+		awareness of orbal technology, such as working
+		closely with the Septian Church to have it added to
+		the curriculum of Sunday School classes.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0238v{color 0}[3. Contributing to world peace through technology.]{wait}
+		#0280v{color 0}#0281vIt is to pursue this noble yet extremely difficult goal
+		that the foundation has had a close relationship with
+		the Bracer Guild ever since its initial founding.{wait}
+		#0282vThe guild was established as an international peace-
+		keeping organization and can mediate on conflicts
+		between nations from a neutral point of view, making
+		it essential to the stability of our world as it stands.{wait}
+		#0283vThe Epstein Foundation continues to back them up
+		fully in their cause, both with financial aid and using
+		the fact that Leman State is the only place where
+		tactical orbments are produced to provide them with
+		equipment.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0284v{color 0}Just as well, this relationship also provides ideal
+		feedback towards tweaking the quality of tactical
+		orbments as they are used in combat, too.{wait}
+		#0285vEvery machine and every invention goes through
+		a long, grueling process behind the scenes before 
+		eventually reaching its finished, refined form, 
+		and tactical orbments are no exception.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0286v{color 0}Then, in S1190...{wait}
+		#0287vOur foundation unveiled the Orbal Network Project,
+		which will be implemented in partnership with ZCF.{wait}
+		#0288vSaid project aims to join all of Zemuria together with
+		a single united communications network, but our hope
+		is that it will do much more than that.{wait}
+		#0289vOur hope is that it will help to realize a peaceful world
+		through communication.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0290v{color 0}Sadly, orbments' relationship with peace as a
+		concept has become somewhat complicated.{wait}
+		#0291vAre they aiding in its realization, or are they doing the exact
+		opposite? Professor Epstein expressed his hopes that
+		their ability to realize the limitless looping of energy
+		would be able to bring lasting peace to the world.{wait}
+		#0292vInstead, recent years have thoroughly betrayed
+		those hopes, and the post-revolution world has
+		been a chaotic one indeed.{wait}
+		#0293vThe conflict between Liberl and Erebonia, for one,
+		made significant use of orbal weaponry--airships
+		included.{wait}
+		#0294vIt seems beyond a doubt that orbal weaponry will
+		continue to become more and more advanced,
+		making war an even more tragic event than ever.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0295v{color 0}In the face of all of this, how should we go about
+		trying to create a peaceful world?{wait}
+		#0296vWe believe the best way to do this is to rely on the
+		power of communication and a means to do so with
+		people of different nationalities and #0297vraces.{wait}
+		#0298vIf these people can more easily interact and more
+		easily deepen their understanding of one another,
+		perhaps that will allow us to create the world we all
+		so dearly desire.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0239v{color 0}In the end, one thing is for certain: our challenges
+		to try and realize Professor Epstein's ideals are only
+		just beginning.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	Sleep 1000ms
+	VisHide vis[0] 0
+	_59
+	BgmStop 2000ms
+	BgmWait
+	VisHide vis[255] 0
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	ScAchievement 9 7 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [The Epstein Foundation] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[21] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[21] 0x10
+		QuestFlagsSet quest[21] 0x20
+		ItemAdd item[748] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[748]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 7000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}7,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sc_C4Set 2048
+	Sleep 1500ms
+	BgmPlay bgm[56] 0
+	Sleep 1500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS340._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 2500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0552v{color 0}#80W[Report on the Attack on Erebonia's Bracer Guilds]{wait}
+		#0553v　
+		　
+
+		　#20W
+		In S1202, many of the branches of the Bracer Guild
+		in Erebonia came under attack in quick succession.{wait}
+		#0554v　
+		The perpetrators were an armed group, but all else
+		about them was unknown, {wait}#0555vand the guild along with
+		all connected to it in the nation fell into a state of
+		confusion.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0556v{color 0}Before long, the orbal communications network in
+		the capital was rife with calls and messages...{wait}
+		#0557vand the situation grew increasingly grave.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[195] 0 0 100
+	Sleep 3000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]{wait}
+		#0588v[At dawn yesterday, the capital's guildhouses were
+		completely destroyed by powerful explosives.{wait}
+		#0589vAccording to the 2nd subdivision's analysis,
+		the explosives were likely set directly below those
+		buildings in the city's underground waterways.{wait}
+		#0590vJudging by explosives used and means employed,
+		this was the work of professionals.{wait}
+		#0591vCurrently working to confirm the locations of
+		potentially dangerous persons within the country.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 20 240 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 3rd Subdivision]
+		[To: Intelligence Division, 1st Subdivision]{wait}
+		#0621v[A jaeger member has been found among those
+		suspected of entering the country illegally.{wait}
+		#0622vConfirmed to be responsible for logistics in
+		the Jester jaeger corps. {wait}#0623vKeep an eye on other
+		members of the same corps in the country.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 420 20 -1 -1
+	TextMessage null {
+		{color 4}[From: Erebonian Bracer Guild]
+		[To: Liberlian Bracer Guild, Grancel Branch]
+		{wait}#0624v[At dawn today, the guildhouses in Heimdallr
+		came under attack.{wait}
+		#0625vWe are unable to contact the bracers
+		charged with overseeing them.{wait}
+		#0626vWe request the aid of high-ranking bracers.
+		This is urgent. We repeat: this is urgent.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 420 240 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]
+		{wait}#0592v[The Bracer Guild here in Erebonia has sent a
+		message to the guild's Grancel branch.{wait}
+		#0593vJudging by the content of the message, at least
+		one high-ranking bracer will be entering Erebonia
+		in the coming days.{wait}
+		#0594vWe request they be pursued and put under strict
+		surveillance upon arrival.]{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS341._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[18] 0 0 100
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0558v{color 0}Two days after the assaults began,#1250W #0559v#20WCassius Bright
+		(S-rank) arrived in the Imperial capital.{wait}
+		#0560vHe assumed the post of provisional representative
+		of the Erebonian guild.{wait}
+		#0561vAfter doing so, he assessed the damage to the guilds
+		and called for the bracers assigned to them, who had
+		become scattered in the chaos, to reconvene outside
+		the city.{wait}
+		#0562vHe also ordered a halt to all orbal communications
+		to prevent interception by the enemy.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0563v{color 0}By this point, guilds in six cities had been attacked,
+		and the Bracer Guild in Erebonia was beginning to
+		struggle to function.{wait}
+		#0564vThe branches that had not yet been attacked
+		requested the army's protection...{wait}
+		#0565vHowever, they seemed to be in no hurry to grant 
+		their support, making it clear that they could not
+		be counted upon.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0566v{color 0}Meanwhile, the provisional representative was able
+		to estimate the rough location of the enemy supply
+		base from their movements up to that point...{wait}
+		#0567vand after choosing a small number of bracers who
+		were familiar with the area, he sent them to try and
+		find it.{wait}
+		#0568vHis reasoning for going with this approach was that
+		he had concluded the enemy would have to build a
+		supply base inside the country because of how strict
+		Erebonia's border controls are.{wait}
+		#0569vIt did not take long for his 'lose the battle, but win
+		the war' strategy to produce results.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]{wait}
+		#0595v[The bracer sent by Liberl's guild is confirmed to be
+		one Cassius Bright.{wait}
+		#0596vBright is an S-rank bracer {wait}#0597vwhose file in our subdivision
+		has him rated as a L4 threat, the second-highest level
+		possible.{wait}
+		#0598vHe is also the man believed to have commanded the
+		counteroffensive against the Imperial Army during
+		the Hundred Days War.{wait}
+		#0599vMay potentially pose a threat to national security,{wait}
+		#0600vso he is being carefully watched.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	Sleep 1000ms
+	TextSetPos 20 240 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]{wait}
+		#0601v[Attempt to track CB failed.{wait}
+		#0602vCurrent whereabouts are unknown.{wait}
+		#0603vHowever, as requested by HQ, we have not raised
+		the alert level and have left it at it stands.{wait}
+		#0604vSeveral bracers are currently traveling aboard
+		a train. {wait}#0605vWe believe them to be taking part in
+		some kind of operation.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]{wait}
+		#0606v[Six bracers assaulted the jaegers' base.{wait}
+		#0607vThe jaegers inside the base were apprehended.{wait}
+		#0608vWe have identified them to be members of the
+		Jester jaeger corps.]{wait}
+	}
+	TextWait
+	TextClose 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS342._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[18] 0 0 100
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0570v{color 0}The discovery of the enemy's base revealed that it
+		was a jaeger corps known as Jester who was behind
+		the attacks.{wait}
+		#0571vAfter this, however, the jaegers' movements became
+		much more passive, and the two sides entered a 
+		deadlock.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0572v{color 0}The stalemate continued for roughly two months.{wait}
+		#0573vDuring this time, the guild representative made
+		contact with the Intelligence Division...{wait}
+		#0574vand began preparing for an operation that would
+		ultimately allow him to bring the trouble to an end.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]{wait}
+		#0609v[CB has made contact with a member of our subdivision.{wait}
+		#0610vCurrently in the process of confirming...]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 20 240 -1 -1
+	TextMessage null {
+		{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]{wait}
+		#0611v[The target, CB, has proposed a joint operation.{wait}
+		#0612vIntending to meet him again at the specified date and time.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS343._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 2500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[18] 0 0 100
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0575v{color 0}--Strategic Analysis of the Bracer Guild Attack--{wait}
+		#0576v         Intelligence Division, 2nd Subdivision{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0577v{color 0}What eventually broke the deadlock was a brilliant
+		strategy devised by CB.{wait}
+		#0578vHaving successfully made contact with a member
+		of the Intelligence Division, he made them send a
+		message to HQ in the hopes it would be intercepted
+		by the enemy.{wait}
+		#0579vWhat happened was exactly that; from the message,
+		they were able to deduce the time and place the next
+		meeting would be happen, and set about plotting his
+		assassination.{wait}
+		#0580v...Exactly what CB hoped would happen.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0581v{color 0}During the meeting, CB had also given said 
+		Intelligence Division member an encoded message...{wait}
+		#0582vIt contained detailed plans for an operation in 
+		which the Imperial Army would defeat the jaegers
+		after they had been lured out by false information.{wait}
+		#0583vThe general staff office chose to go ahead with
+		the proposed plan, {wait}#0584vand after a joint operation
+		with the Bracer Guild...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0585v{color 0}...the jaegers, who had gathered to assassinate CB,
+		were surrounded and forced to surrender.{wait}
+		#0586vFurthermore, the remnants of their forces who were
+		in other bases were also defeated after the initial
+		prisoners gave up their locations.{wait}
+		#0587vSeveral months after the trouble began, Jester was
+		completely dismantled.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[18] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	BgmStop 2500ms
+	BgmWait
+	Sleep 1000ms
+	TextSetPos 20 20 -1 -1
+	TextMessage null {
+		#0613v{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]
+		[Raising the threat level of Cassius Bright
+		(S-rank bracer), effective immediately.{wait}
+		#0614vHenceforth, he will be regarded as a L5 threat.{wait}
+		#0615vHe poses a severe threat to national security{wait}
+		#0616vand must be placed under strict surveillance if
+		he ever enters the country again.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 420 240 -1 -1
+	TextMessage null {
+		#0617v{color 12}[From: Intelligence Division, 1st Subdivision]
+		[To: General Staff Office]
+		[Confirmed that the surveillance target left the
+		country today.{wait}
+		#0618vHis departure was without incident.{wait}
+		#0619vHanding control over the mission over to our
+		foreign agencies.{wait}
+		#0620vTransmission over.]{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 3000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0627v{color 5}[From: GSO Special Investigative Department]
+		[To: His Excellency the Imperial Chancellor]
+		[We have also confirmed CB's departure.{wait}
+		#0628vWe shall continue to pursue him, but he has not
+		shown any suspicious behaviors to date.{wait}
+		#0629vWe have yet to confirm any interactions between
+		him and the minstrel. {wait}#0630vWill continue to follow
+		their movements.]{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 536870912
+	Sc_C4Unset 2048
+	VisHide vis[255] 0
+	Sleep 2000ms
+	Sleep 1000ms
+	ScAchievement 9 13 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Assault on the Imperial Guilds] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[22] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[22] 0x10
+		QuestFlagsSet quest[22] 0x20
+		ItemAdd item[1566] 1
+		SoundPlay sound[17] 0 0 100
+		FadeOut 300ms 0x00000000 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[1566]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 10000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}10,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5404._sn" 103 0 0
+	Hcf
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sleep 2000ms
+	SoundPlay sound[156] 0 0 100
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#0339v{color 5}Loading#200W　>　>　>　>　>　#20WComplete{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	BgmPlay bgm[61] 0
+	Sleep 1500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS344._CH"
+	VisShow vis[1] 0 0 20 25 615 450 256 256 0 0 40 50 0x00FFFFFF 0 "C_VIS349._CH"
+	SoundPlay sound[157] 0 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	SoundPlay sound[156] 0 0 100
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0370v{color 0}Gordias-Class Tactical Archaism Development Plan
+		Author: Thirteen#0371v Factories{wait}
+	} {
+		#0372vCodename: Pater-Mater{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"Plan Overview" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0373v{color 0}We intend to develop a cutting-edge archaism that inherits the DNA of the
+		#0374vrest of the Gordias series while containing a more advanced control system.{wait}
+	} {
+		#0375vIt will retain the same tactical effectiveness that was the primary development
+		goal in previous models while allowing for more flexible and precise strategic
+		usage as well.{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[2] 210 280 0
+		"Effective Radius" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0340v{color 0}The archaism is intended to be accessible across the whole continent.{wait}
+	} {
+		#0341vPowerful main and sub engines should allow it to operate for several years
+		without resupplying.{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[3] 340 280 0
+		"Autonomous Combat Ability" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0342v{color 0}The use of the Mars integrated orbal arithmetic logic unit will allow for
+		advanced autonomous combat and effective identifying of targets.{wait}
+	} {
+		#0343vIn addition, the archaism's control system will make use of the operator's
+		nervous system, allowing for reflexive, instinctive movements in combat.{wait}
+	} {
+		#0344vThe operator will communicate with the archaism without being in physical
+		contact with it. This will require a compatible candidate to be found and
+		chosen.{wait}
+	}
+	TextWait
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[3]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[2]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[1]
+	Sleep 400ms
+	Sleep 400ms
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"Dimensions" // 0
+	MenuWait var[0]
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 65535
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[184] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS345._CH"
+	SoundPlay sound[157] 0 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 30 280 0
+		"Height/Weight" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 220 290 48 4
+	TextMessage null {
+		#0376v{color 0}Overall Height: 15.5 arge{wait}
+		#0377vUnit Weight: 55 torim
+		(68 torim when fully armed){wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[2] 30 340 0
+		"Armaments" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0345v{color 0}The archaism's primary weaponry will be its orbal energy cannons,
+		but it will have other kinds of orbal weaponry and even several
+		gunpowder-powered weapons as backup.{wait}
+	} {
+		#0346vIt will also have a Revival System, which will use an orbment to
+		generate healing energy to heal or revive its operator in times of
+		danger.{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[3] 30 400 0
+		"Armor Material" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextMessage null {
+		#0347v{color 0}The armor plating will be made using kurdalegon alloy.{wait}
+	} {
+		#0348vKurdalegon is the most fitting material to use, given that it is the
+		most capable we have access to in all regards.{wait}
+	} {
+		#0349vFor data regarding strength, see files on Gospel Plan.{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[3]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[2]
+	Sleep 400ms
+	SoundPlay sound[2] 0 0 100
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 400ms
+	Sleep 400ms
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 30 280 0
+		"Current Progress" // 0
+	MenuWait var[0]
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 65535
+	Sleep 1500ms
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 260 310 0
+		"New Engines" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 310 360 -1 -1
+	TextMessage null {
+		#0350v{color 0}Development is proceeding smoothly in line with the
+		plans drawn up by Professor Novartis.{wait}
+	} {
+		#0351vTests have also confirmed that they are already
+		capable of providing power to the actuators.{wait}
+	} {
+		#0352vHowever, the professor has raised concerns about the
+		low responsiveness of the flight engine.
+		(This is especially true for the anti-gravity generator.){wait}
+	} {
+		#0353vHe concluded that the engine as it stands cannot be
+		put into actual use. The possibility of using boosters
+		to provide additional propulsion is under consideration.{wait}
+	}
+	TextWait
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 40 255 0
+		"Actuators" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 120 295 -1 -1
+	TextMessage null {
+		#0354v{color 0}Development of the actuators is experiencing
+		significant difficulty, as it isn't possible to simply
+		use the same ones as other archaisms.{wait}
+	} {
+		#0355vThe increased size of the main weaponry means
+		the archaism's weight during combat is significant,
+		and as a result, problems have been occurring in
+		durability tests, especially with the leg joints.{wait}
+	} {
+		#0356vIt may be possible to make improvements in this
+		area by using precise control so the weight burden
+		is spread evenly rather than focused on one point.{wait}
+	}
+	TextWait
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 20 75 0
+		"Main Armaments" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 20 115 -1 -1
+	TextMessage null {
+		#0357v{color 0}The orbal energy cannons that will serve as its
+		primary armaments have been successfully tested.{wait}
+	} {
+		#0358vHowever, by order of Professor Novartis, the
+		possibility of them becoming twin mounts is
+		being analyzed, so they have yet to be equipped.{wait}
+	} {
+		#0359vThe new orbal engines are expected to be able
+		to provide enough energy to compensate for the
+		necessary increase in output.{wait}
+	}
+	TextWait
+	MenuClose menu[1]
+	TextClose 0
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 200 75 0
+		"Control System" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextSetPos 220 115 -1 -1
+	TextMessage null {
+		#0360v{color 0}Experiments regarding the control system are
+		currently ongoing.{wait}
+	} {
+		#0361vFor the results of the experiments that have been
+		carried out so far, see a separate entry.{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[2] 340 75 0
+		"Experiment Results" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[2]
+	MenuClose menu[1]
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[184] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	FlagUnset flag[0]
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS346._CH"
+	SoundPlay sound[157] 0 0 100
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	VisSet vis[0] 4 0 0 0 0
+	Sleep 1500ms
+	ForkFunc field_party[0] fork[0] fn[0,18]
+	TextClose 2
+	ForkQuit field_party[0] fork[0]
+	FlagSet flag[0]
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0362v{color 0}Tests of the control system continue to be performed.{wait}
+	} {
+		#0363vHowever, none of the test subjects have been able to realize the expected
+		level of precision we are aiming for.{wait}
+	} {
+		#0364vThe results of the main tests conducted by Professor Novartis and his team
+		can be viewed above.{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"Test Results" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextClose 0
+	MenuClose menu[1]
+	TextSetPos 310 40 -1 -1
+	TextMessage null {
+		#0378v{color 0}Test Subject: Subject A1{wait}
+		#0379vAbnormality during phase 2. Comatose.{wait}
+		#0380vTest Subject: Subject B3{wait}
+		#0381vAbnormality during phase 3. Cardiac arrest.{wait}
+		#0382vTest Subject: Subject C1{wait}
+		#0383vAbnormality during phase 1. Insanity.{wait}
+		#0384vTest Subject: Subject D7{wait}
+		#0385vAbnormality during phase 2. Comatose.{wait}
+		#0386vTest Subject: Subject E3{wait}
+		#0387vAbnormality during phase 2. Cardiac arrest.{wait}
+	} {
+		#0388vTest Subject: Subject F2{wait}
+		#0389vAbnormality during phase 2. Comatose.{wait}
+		#0390vTest Subject: Subject G4{wait}
+		#0391vAbnormality during phase 3. Comatose.{wait}
+		#0392vTest Subject: Subject H1{wait}
+		#0393vAbnormality during phase 2. Comatose.{wait}
+		#0394vTest Subject: Subject I6{wait}
+		#0395vAbnormality during phase 4. Mental breakdown.{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0365v{color 0}As can be seen, all of the test subjects failed to adapt to the control system.{wait}
+	} {
+		#0366vNonetheless, the society continues to supply test subjects, and we intend to
+		keep performing further experiments.{wait}
+	}
+	TextWait
+	system[40] = 24
+	SoundPlay sound[156] 0 0 100
+	Menu menu[1] 80 280 0
+		"Future Development" // 0
+	MenuWait var[0]
+	system[40] = 65535
+	TextClose 0
+	MenuClose menu[1]
+	VisSet vis[0] 3 0x00FFFFFF 500ms 0 0
+	SoundPlay sound[184] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	SoundPlay sound[156] 0 0 100
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0367v{color 0}We have received word from the society that development is to be
+		temporarily frozen.{wait}
+	} {
+		#0368vTheir reasoning is that the stability of the control system is in question.{wait}
+	} {
+		#0369vFrom now on, only test subjects carefully chosen by the society will be taking
+		part in connection tests.{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmStop 3000ms
+	BgmWait
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS347._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	SoundPlay sound[156] 0 0 100
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		#0396v{color 5}Test Subject: Subject R3{wait}
+		#0397vSuccessfully completed all four testing phases.{wait}
+		#0398vNote: the subject did experience a small degree of flashbacks.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	SoundPlay sound[156] 0 0 100
+	TextMessage null {
+		#0399v{color 5}Test Subject: Subject R3{wait}
+		#0400vSucceeded in communicating with Pater-Mater.{wait}
+	} {
+		#0401vAscertaining the society's intentions in regards to resuming development...
+		Subject R3 has succeeded in operating Pater-Mater.{wait}
+	} {
+		#0402vAscertaining the society's intentions in regards to resuming development...{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 536870912
+	VisSet vis[0] 3 0x00FFFFFF 2500ms 0 0
+	Sleep 3000ms
+	Sleep 1500ms
+	TcEpisodeEnd 0
+	VisHide vis[255] 0
+	Sleep 1000ms
+	ScAchievement 9 10 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Gordias-Class Experiment Report] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[23] 0x10:
+		Sleep 1000ms
+		QuestFlagsSet quest[23] 0x10
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 10000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}10,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5612._sn" 130 0 0
+	Hcf
+	Return

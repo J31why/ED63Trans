@@ -1,0 +1,444 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4200.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14510._ch" "mons2/ch14510p._cp"
+
+npc char[0]:
+	name "Armored Soldier"
+	pos (0, 0, 35780)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[0,2]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (-5190, -1000, 32000)
+	pos2 (4870, 2000, 34610)
+	flags 0x0000
+	func fn[0,3]
+	unk1 0
+
+look_point[0]:
+	pos (7050, 0, 11870)
+	radius 1000mm
+	bubble_pos (8000, 3000, 12000)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	if !flag[9988]:
+		CharFlagsUnset char[0] 0x0080
+	else:
+		char[0].36 = 175
+	if system[66] == 255:
+		switch system[0]:
+			case 103:
+				if flag[9999]:
+					SystemFlagsSet 0x10000000
+					system[1] = 0
+					Event fn[0,9]
+				break
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,8]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,4]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -112000) "mt4200._ch"
+	SoundPlay sound[460] 1 0 100
+	if flag[10017]:
+		OpLoad "U4200_y"
+	else:
+		OpLoad "U4200_n"
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[13] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	if flag[9988]:
+		Return
+	EventBegin 1
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}A large armored soldier is blocking the path to the castle.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}Attempt to defeat it?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 -1 1
+			"Yes" // 0
+			"No" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		FadeIn 300ms 0x00000000
+		switch var[0]:
+			case 0:
+				ED6Battle battle[240] null 0 0 null
+				FadeOut 0ms 0x00000000 255
+				switch system[3]:
+					case 0:
+						FlagSet flag[9476]
+						NewScene "u4100._sn" 100 0 0
+						Hcf
+						break
+					case 2:
+						EventBegin 1
+						CharSetPos field_party[0] (0, 0, 30130) 180deg
+						CharSetPos field_party[1] (0, 0, 30130) 180deg
+						CharSetPos field_party[2] (0, 0, 30130) 180deg
+						CharSetPos field_party[3] (0, 0, 30130) 180deg
+						CharSetChipPattern field_party[0] 0
+						CharSetChipPattern field_party[1] 0
+						CharSetChipPattern field_party[2] 0
+						CharSetChipPattern field_party[3] 0
+						CharSetChipBase field_party[0] chip[65535]
+						CharSetChipBase field_party[1] chip[65535]
+						CharSetChipBase field_party[2] chip[65535]
+						CharSetChipBase field_party[3] chip[65535]
+						CamLookChar field_party[0] 0ms
+						FadeIn 1000ms 0x00000000
+						EventEnd 0
+						break
+					case 1:
+						ReturnToTitle 0
+						break
+				var[0] = 255
+				break
+			default:
+				Sleep 300ms
+				CrossFade 500ms
+				CharSetPos field_party[0] (0, 0, 30130) 180deg
+				CharSetPos field_party[1] (0, 0, 30130) 180deg
+				CharSetPos field_party[2] (0, 0, 30130) 180deg
+				CharSetPos field_party[3] (0, 0, 30130) 180deg
+				CharSetChipPattern field_party[0] 0
+				CharSetChipPattern field_party[1] 0
+				CharSetChipPattern field_party[2] 0
+				CharSetChipPattern field_party[3] 0
+				CharSetChipBase field_party[0] chip[65535]
+				CharSetChipBase field_party[1] chip[65535]
+				CharSetChipBase field_party[2] chip[65535]
+				CharSetChipBase field_party[3] chip[65535]
+				CamLookChar field_party[0] 0ms
+				EventEnd 0
+				var[0] = 255
+				break
+	Return
+
+fn[4]:
+	EventBegin 0
+	CharSetPos name[13] (0, 0, 28790) 0deg
+	CharSetPos name[8] (-950, 0, 27120) 0deg
+	CharSetPos name[14] (830, 0, 26490) 0deg
+	CharSetPos name[6] (-160, 0, 24800) 0deg
+	CharFlagsSet char[0] 0x0080
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CamLookPos (0, 5750, 42120) 0ms
+	CamSetDistance 0 4100 -10000 0ms
+	CamZoom 3150 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 300 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Fork name[8] fork[1]:
+		CamLookPos (0, 4600, 36000) 5000ms
+	Fork name[8] fork[2]:
+		CamSetDistance 0 3200 -10000 5000ms
+	Fork name[14] fork[3]:
+		CamZoom 3300 5000ms
+	Fork name[14] fork[1]:
+		CamPers 343 5000ms
+	Fork name[13] fork[0]:
+		CharWalkToPos self (-40, 0, 39740) 2000mm/s 0
+	Sleep 100ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-960, 0, 37870) 2000mm/s 0
+	Sleep 100ms
+	Fork name[14] fork[0]:
+		CharWalkToPos self (950, 0, 37260) 2000mm/s 0
+	Sleep 100ms
+	Fork name[6] fork[0]:
+		CharWalkToPos self (-60, 0, 35840) 2000mm/s 0
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait name[6] fork[0]
+	ForkWait name[13] fork[0]
+	ForkWait name[8] fork[1]
+	CrossFade 500ms
+	CamLookPos (2350, 600, 43360) 0ms
+	CamSetDistance 0 3900 -10000 0ms
+	CamZoom 3370 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 327 0ms
+	CharSetPos name[13] (-30, 0, 40240) 0deg
+	CharSetPos name[8] (-1110, 0, 38370) 0deg
+	CharSetPos name[14] (780, 0, 38590) 0deg
+	CharSetPos name[6] (-380, 0, 37000) 0deg
+	FadeWait
+	ForkWait name[13] fork[0]
+	Sleep 500ms
+	TextTalk name[13] {
+		#84630v#178F#5PNo...{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#82539v#065F#4PWh-What's this magical symbol for?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#91860v#1443FI believe it's locked by a spiritual power of some
+		kind.{wait}
+	} {
+		#91861vWe're unlikely to be able to force our way through
+		as long as it remains active, I'm afraid.{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#84631v#176F#5PThat's certainly how it seems.{wait}
+	} {
+		#84632v#175FWhich means that we're going to need to find
+		some way to remove it, or we won't be able to
+		get inside.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88575v#1065F#6PMost likely, yeah.{wait}
+	} {
+		#88576v#1063FYou all right with us leaving the castle
+		until later, then?{wait}
+	}
+	TextWait
+	CharTurnTo name[13] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[13] {
+		#84633v#178F#5PI fear we have little choice... I can only hope
+		that Aidios keeps everyone inside safe until
+		we can return.{wait}
+	} {
+		#84634vShall we resume our search of the city in the
+		meantime?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#88577v#1060F#6PThat works.{wait}
+	} {
+		#88578vHopefully, we can find some way of getting
+		inside while we're making the rounds.{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CamLookPos (30, 0, 38110) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[13] (30, 0, 38110) 180deg
+	CharSetPos name[8] (30, 0, 38110) 180deg
+	CharSetPos name[14] (30, 0, 38110) 180deg
+	CharSetPos name[6] (30, 0, 38110) 180deg
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	FlagSet flag[9988]
+	QuestTaskSet quest[43] 0x0020
+	EventEnd 0
+	Return
+
+fn[5]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Open the Door?{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[6]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (5590, 0, 12650) 90deg
+	CharSetPos field_party[1] (5450, 0, 10750) 90deg
+	CharSetPos field_party[2] (3540, 0, 12510) 90deg
+	CharSetPos field_party[3] (3520, 0, 10430) 90deg
+	CamLookPos (5630, 0, 11740) 0ms
+	CamSetDistance 0 6820 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	if !QuestFlagsGet quest[13] 0x02:
+		QuestFlagsSet quest[13] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		#99891v{color 5}#40WBring to me the guardian of the royal family
+		and the blade that serves the Imperial house.
+		#500W 
+		#40WOnly then shall the door open...{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if PartyPosition name[13] != -1 && PartyPosition name[12] != -1:
+		Call fn[0,5]
+		if var[0] == 0:
+			Call fn[0,7]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[7]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[3] 0
+	ObjPlay object[3] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[3]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2830 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 0 0 0
+	NewScene "p9001._sn" 100 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (5590, 0, 12650) 90deg
+	CharSetPos field_party[1] (5450, 0, 10750) 90deg
+	CharSetPos field_party[2] (3540, 0, 12510) 90deg
+	CharSetPos field_party[3] (3520, 0, 10430) 90deg
+	CamLookPos (5630, 0, 11740) 0ms
+	CamSetDistance 0 6820 -10000 0ms
+	CamZoom 3520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return
+
+fn[9]:
+	EventBegin 1
+	system[40] = 65535
+	NewScene "u4203._sn" 103 0 0
+	Hcf
+	Return

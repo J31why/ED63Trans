@@ -1,0 +1,109 @@
+calmare fc scena
+scena:
+	name "Zeiss" "R3403.x"
+	town town[1]
+	bgm bgm[30]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01500._ch" "npl/ch01500p._cp"
+chip[1] "npl/ch01760._ch" "npl/ch01760p._cp"
+
+npc char[0]:
+	name "Rudi"
+	pos (609110, 0, -64290)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,2]
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[8] 0x0080
+	Return
+
+fn[1]:
+	MapSet 4000 (487000, null, -180000) file[0x0023003A]
+	if system[66] == 26:
+		_1B look_point[0] fn[0,3]
+	Return
+
+fn[2]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			CharTurnTo self 90deg 0deg/s
+			TextTalk self {
+				I... I've gotta try and tell her how I feel about
+				her. This might be the last chance I ever get!{wait}
+			}
+			TextWait
+			TextTalk self {
+				But how am I best going about doing it?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Hmm...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Y-You there! Listen to my tale of woe!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I heard Faye's going to be a mechanic on
+				board the Arseille now!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Which means I won't be able to see her again!
+				Nooooooooo!{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[3]:
+	EventBegin 2
+	if flag[0]:
+		TextTalk name[5] {
+			#80820v#552FI can't see how they could have ended up in
+			Kaldia Tunnel. I should stick to searching the
+			factory.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[5] {
+			#80818v#050FWait. This way leads to Kaldia Tunnel.{wait}
+		} {
+			#80819v#552FI can't see how they could have ended up in
+			Kaldia Tunnel. I should stick to searching the
+			factory.{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+	_Char90 name[5] 1500 0 0 2000 0
+	EventEnd 2
+	Return
