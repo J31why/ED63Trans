@@ -1,0 +1,443 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4403.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14790._ch" "mons2/ch14790p._cp"
+chip[1] "npl2/ch03084._ch" "npl2/ch03084p._cp"
+
+npc char[0]:
+	name "Wisp"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Wisp"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Wisp"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Wisp"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (-100, 0, 7900)
+	radius 1000mm
+	bubble_pos (-100, 300, 7900)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if flag[9993] && !flag[9995]:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	if flag[10017]:
+		OpLoad "U4403_y"
+	else:
+		OpLoad "U4403_n"
+	if flag[9996]:
+		LookPointFlagsSet look_point[0] 0x0001
+	elif flag[9995]:
+		EffLoad eff[0] "map\\mp257_00.eff"
+		EffPlay eff[0] eff_instance[0] null 0 (-100, 300, 7900) 0 0 0 800 800 800 null (0, 0, 0) 0ms
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Tc_E0 party[0] 66 2
+	Tc_E0 party[1] 67 2
+	Tc_E0 party[2] 68 2
+	Tc_E0 party[3] 69 2
+	CharSetPos name[8] (90, 0, 2660) 0deg
+	CharSetPos name[14] (-1450, 0, 2730) 0deg
+	CharSetPos party[2] (410, 0, 1110) 0deg
+	CharSetPos party[3] (-1480, 0, 1320) 0deg
+	CamLookPos (-890, 2950, 16120) 0ms
+	CamSetDistance 0 5620 -10000 0ms
+	CamZoom 3020 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 355 0ms
+	Fork party[0] fork[0]:
+		CamLookPos (-1730, 0, 3570) 5000ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 6240 -10000 5000ms
+	Fork party[0] fork[2]:
+		CamZoom 2300 5000ms
+	Fork party[1] fork[3]:
+		CamPers 334 5000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkWait party[0] fork[0]
+	Sleep 500ms
+	TextTalk name[8] {
+		#1079F#6PIf I remember rightly, this was the warehouse
+		that tank was hidden in.{wait}
+	} {
+		This is my first time seeing the inside, though.{wait}
+	}
+	TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#176F#6PIt's currently being rented out by a new
+			owner, as far as I'm aware.{wait}
+		} {
+			#170FNaturally, they've been given a thorough
+			background checking this time.{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1060F#5POh, right. Probably for the best after what
+			went down before.{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#063F#6PI'm amazed they managed to keep it hidden here
+			for so long...{wait}
+		} {
+			Doing maintenance on it without drawing attention
+			must've been really difficult.{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1066F#5PWell, the woman leading their little group and
+			her men seemed REALLY dedicated. Folks like
+			that would've found a way.{wait}
+		}
+		TextWait
+	BgmStop 2000ms
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase name[14] chip[3]
+	CharSetChipPattern name[14] 0
+	FadeWait
+	Sleep 300ms
+	TextTalk name[14] {
+		#1441F#5PKevin!{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1063F#6P...!{wait}
+	}
+	TextWait
+	BgmPlay bgm[151] 0
+	Fork party[0] fork[0]:
+		CamLookPos (-2100, 0, 7530) 1500ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 5110 -10000 1500ms
+	Fork party[0] fork[2]:
+		CamZoom 2670 1500ms
+	Fork party[1] fork[3]:
+		CamPers 364 1500ms
+	ForkWait party[0] fork[0]
+	SoundPlay sound[814] 0 0 100
+	ForkFunc char[0] fork[0] fn[0,3]
+	Sleep 100ms
+	ForkFunc char[1] fork[0] fn[0,4]
+	Sleep 100ms
+	ForkFunc char[2] fork[0] fn[0,5]
+	Sleep 100ms
+	ForkFunc char[3] fork[0] fn[0,6]
+	ForkWait char[3] fork[0]
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase name[8] chip[2]
+	CharSetChipPattern name[8] 0
+	Sleep 100ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase party[2] chip[4]
+	CharSetChipPattern party[2] 0
+	Sleep 100ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[3] chip[5]
+	CharSetChipPattern party[3] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#1069F#6PWhat a mess... Now we're up against GHOSTS?!{wait}
+	}
+	TextWait
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#271F#6PThey're going to attack!{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#065F#6POh, no!{wait}
+		}
+		TextWait
+	system[28] = 1
+	Sleep 300ms
+	Fork party[0] fork[0]:
+		CamLookPos (-1970, 0, 5880) 300ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 4830 -10000 300ms
+	Fork party[0] fork[2]:
+		CamZoom 2130 300ms
+	Fork party[1] fork[3]:
+		CamPers 329 300ms
+	ForkLoop char[0] fork[3]:
+		CharAnimation self 0 7 2500ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (-940, 500, 3560) 8000mm/s 0
+	Sleep 20ms
+	ForkLoop char[1] fork[3]:
+		CharAnimation self 0 7 2500ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-80, 500, 3790) 8000mm/s 0
+	Sleep 10ms
+	ForkLoop char[2] fork[3]:
+		CharAnimation self 0 7 2500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos2 self (-1770, 500, 4640) 8000mm/s 0
+	Sleep 20ms
+	ForkLoop char[3] fork[3]:
+		CharAnimation self 0 7 2500ms
+	Fork char[3] fork[1]:
+		CharWalkToPos2 self (120, 500, 4130) 8000mm/s 0
+	ForkWait party[0] fork[0]
+	ED6Battle battle[242] null 0 0 null
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-1700, 0, 7510) 0ms
+	CamSetDistance 0 6130 -10000 0ms
+	CamZoom 2400 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 340 0ms
+	ForkQuit char[0] fork[1]
+	ForkQuit char[1] fork[1]
+	ForkQuit char[2] fork[1]
+	ForkQuit char[3] fork[1]
+	CharFlagsSet char[0] 0x0080
+	CharFlagsSet char[1] 0x0080
+	CharFlagsSet char[2] 0x0080
+	CharFlagsSet char[3] 0x0080
+	CharSetPos name[8] (-90, 0, 5130) 0deg
+	CharSetPos name[14] (-1410, 0, 5000) 0deg
+	CharSetPos party[2] (470, 0, 3450) 0deg
+	CharSetPos party[3] (-1320, 0, 3450) 0deg
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	EffLoad eff[0] "map\\mp257_00.eff"
+	EffPlay eff[0] eff_instance[0] null 0 (-100, 300, 7900) 0 0 0 800 800 800 null (0, 0, 0) 0ms
+	FlagSet flag[9995]
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	CharSetPos self (-1180, 500, 8070) 180deg
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	ForkLoop self fork[3]:
+		CharAnimation self 0 7 1500ms
+	SoundPlay sound[153] 0 0 100
+	Sleep 200ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	ForkWait self fork[1]
+	Return
+
+fn[4]:
+	CharSetPos self (500, 500, 8430) 180deg
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	ForkLoop self fork[3]:
+		CharAnimation self 0 7 1500ms
+	SoundPlay sound[153] 0 0 100
+	Sleep 200ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	ForkWait self fork[1]
+	Return
+
+fn[5]:
+	CharSetPos self (-2980, 500, 9390) 180deg
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	ForkLoop self fork[3]:
+		CharAnimation self 0 7 1500ms
+	SoundPlay sound[153] 0 0 100
+	Sleep 200ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	ForkWait self fork[1]
+	Return
+
+fn[6]:
+	CharSetPos self (1240, 500, 9950) 180deg
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	ForkLoop self fork[3]:
+		CharAnimation self 0 7 1500ms
+	SoundPlay sound[153] 0 0 100
+	Sleep 200ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 1500ms
+	ForkWait self fork[1]
+	Return
+
+fn[7]:
+	EventBegin 0
+	CrossFade 500ms
+	CharSetPos name[8] (-340, 0, 6840) 0deg
+	CharSetPos name[14] (-600, 0, 5420) 0deg
+	CharSetPos party[2] (-1040, 0, 3950) 0deg
+	CharSetPos party[3] (380, 0, 4010) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookPos (-1260, 0, 8050) 0ms
+	CamSetDistance 0 5800 -10000 0ms
+	CamZoom 2500 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 322 0ms
+	FadeWait
+	Sleep 500ms
+	CharWalkToPos name[8] (-280, 0, 7160) 500mm/s 0
+	Sleep 300ms
+	CrossFade 500ms
+	CharSetChipBase name[8] chip[1]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 300ms
+	EffStop eff_instance[0] 2
+	Sleep 500ms
+	SoundPlay sound[17] 0 0 100
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Found {item item[809]}{color 5}.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	ItemAdd item[809] 1
+	Sleep 500ms
+	TextTalk name[14] {
+		#1444F#6PCould that be the key to the airship?{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 300ms
+	Fork party[0] fork[0]:
+		CamLookPos (-1440, 0, 6750) 1200ms
+	CharTurnTo name[8] 180deg 400deg/s
+	ForkWait party[0] fork[0]
+	TextTalk name[8] {
+		#1065F#2PCan't think of anything else it'd be good for.{wait}
+	} {
+		#1063FWhat's it doing here, though?{wait}
+	}
+	TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#176F#6PSolve one mystery and find two more right
+			around the corner...{wait}
+		} {
+			#170FStill, at least now we should be able to get
+			inside that ship.{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1060F#2PYeah. Let's make our way back.{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#560F#6PI haven't got a clue...{wait}
+		} {
+			Still, at least now we should be able to get
+			inside that ship.{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1060F#2PYeah. Let's make our way back.{wait}
+		}
+		TextWait
+	FlagSet flag[9996]
+	QuestTaskSet quest[44] 0x0010
+	LookPointFlagsSet look_point[0] 0x0001
+	Sleep 300ms
+	EventEnd 0
+	Return

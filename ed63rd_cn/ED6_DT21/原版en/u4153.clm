@@ -1,0 +1,87 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4153.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14450._ch" "mons2/ch14450p._cp"
+chip[1] "mons2/ch14451._ch" "mons2/ch14451p._cp"
+chip[2] "mons2/ch14730._ch" "mons2/ch14730p._cp"
+chip[3] "mons2/ch14730._ch" "mons2/ch14730p._cp"
+chip[4] "mons2/ch14790._ch" "mons2/ch14790p._cp"
+chip[5] "mons2/ch14791._ch" "mons2/ch14791p._cp"
+
+monster char[0]:
+	name ""
+	pos (4500, 0, 40200)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[216]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-4240, 0, 49590)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[217]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-22550, 0, 49960)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[215]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (12800, 0, 63090)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[216]
+	flag flag[0]
+	unk3 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-138000, null, -78000) "mt4103._ch"
+	if !flag[10005]:
+		SystemFlagsSet 0x02000000
+	if !flag[9999]:
+		EntranceSetDisabled entrance[4] 0
+	else:
+		ObjFlagsSet object[41] 0x0004
+	char[1].36 = 239
+	Return

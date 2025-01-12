@@ -1,0 +1,188 @@
+calmare sc scena
+scena:
+	name "Rolent" "C0301.x"
+	town town[19]
+	bgm bgm[21]
+	item fn[0,65535]
+
+entry:
+	pos (35000, 0, 16000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[19]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons/ch10240._ch" "mons/ch10240p._cp"
+chip[1] "mons/ch10241._ch" "mons/ch10241p._cp"
+chip[2] file[0x002603D2] file[0x002603D7]
+
+npc char[0]:
+	name "Monster"
+	pos (51470, 0, 20950)
+	angle 315deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 17:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharColor name[0] 0x00FFFFFF 0ms
+	CamLookPos (9680, -300, -6520) 0ms
+	CamSetDistance 0 5470 -10000 0ms
+	CamZoom 4030 0ms
+	CamRotate 257000mdeg 0ms
+	CamPers 262 0ms
+	EffLoad eff[0] "map\\\\mp287_00.eff"
+	Fog 0xFF786E46 20000 80000 0
+	system[27] = 1
+	PartyClear
+	PartyAdd name[0] party[0] 255
+	CharColor name[0] 0x00FFFFFF 0ms
+	CharSetPos name[0] (8080, -40, -14430) 0deg
+	ED6_12 30000 80000 4000
+	Fork char[9] fork[0]:
+		CamLookPos (8610, -330, -6740) 4000ms
+	Fork char[9] fork[1]:
+		CamZoom 3530 4000ms
+	Fork char[9] fork[2]:
+		CamSetDistance 0 4970 -10000 4000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[9] fork[0]
+	CrossFade 500ms
+	CharColor name[0] 0xFFFFFFFF 0ms
+	CharSetChipBase name[0] chip[2]
+	CharSetChipPattern name[0] 0
+	CharSetPos name[0] (8080, -40, -14430) 0deg
+	Fork name[0] fork[1]:
+		CharWalkToPos self (10770, -330, -6270) 2000mm/s 0
+	ForkWait name[0] fork[1]
+	Sleep 500ms
+	TextTalk name[0] {
+		#290FHeheh. I can smell the scent of my prey!{wait}
+	}
+	TextWait
+	CharTurnTo name[0] 120deg 400deg/s
+	Sleep 800ms
+	CharTurnTo name[0] 310deg 400deg/s
+	Sleep 800ms
+	TextTalk name[0] {
+		#296FHmm... Somewhere around here should
+		be good.{wait}
+	}
+	TextWait
+	CharFlagsSet name[0] 0x0040
+	CharFlagsSet name[0] 0x0004
+	CharTurnTo name[0] 260deg 400deg/s
+	Fork name[0] fork[1]:
+		CharWalkToPos self (6970, 70, -8220) 2000mm/s 0
+	ForkWait name[0] fork[1]
+	CharTurnTo name[0] 210deg 400deg/s
+	Sleep 1500ms
+	CharTurnTo name[0] 300deg 400deg/s
+	Sleep 300ms
+	Fork name[0] fork[1]:
+		CharWalkToPos2 self (5800, 300, -6140) 2000mm/s 0
+	ForkWait name[0] fork[1]
+	Sleep 500ms
+	TextTalk name[0] {
+		#291F#6PI'm going with this one! It's just screaming,
+		'Pick me!'{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[35] 0 0 100
+	CrossFade 500ms
+	EffPlay eff[0] eff_instance[0] null 0 (5280, 1300, -5560) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	TextTalk name[0] {
+		#291F#6PLa la laaa...{wait}
+	} {
+		#290FAaand done.{wait}
+	}
+	TextWait
+	CharTurnTo name[0] 35deg 400deg/s
+	Fork name[0] fork[1]:
+		CharWalkToPos self (13120, 300, 3130) 2000mm/s 0
+	Sleep 2500ms
+	CrossFade 2000ms
+	CamLookPos (13730, 300, 5680) 0ms
+	CamSetDistance 0 2870 -10000 0ms
+	CamZoom 3630 0ms
+	CamRotate 13000mdeg 0ms
+	CamPers 262 0ms
+	ForkWait name[0] fork[1]
+	Sleep 300ms
+	CharTurnTo name[0] 220deg 400deg/s
+	Sleep 300ms
+	TextTalk name[0] {
+		#292FToday's the day Joshua loves bugs.{wait}
+	} {
+		I mean, this bug is legendary! 
+		He's in for the shock of his life!{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#291FHeeheehee...{wait}
+	}
+	Fork char[9] fork[0]:
+		CamLookPos (15860, 300, 7490) 3000ms
+	Fork char[9] fork[1]:
+		CamSetDistance 0 2510 -10000 3000ms
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos char[8] (23860, 100, 13050) 220deg
+	CharColor char[8] 0xFF000000 0ms
+	CharSetChipBase char[8] chip[1]
+	CharSetChipPattern char[8] 0
+	Fork char[8] fork[1]:
+		CharWalkToPos2 self (16650, 100, 5220) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	CharSetChipBase char[8] chip[0]
+	CharSetChipPattern char[8] 0
+	ForkWait char[9] fork[0]
+	TextWait
+	BgmStop 3000ms
+	Fork char[9] fork[2]:
+		CamZoom 3530 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 2000ms
+	SystemFlagsUnset 0x02000000
+	NewScene "t0310._sn" 100 0 0
+	Hcf
+	Return

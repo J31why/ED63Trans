@@ -1,0 +1,603 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4145.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+chip[1] "npl2/ch03590._ch" "npl2/ch03590p._cp"
+chip[2] "apl2/ch20373._ch" "apl2/ch20373p._cp"
+chip[3] "apl/ch20020._ch" "apl/ch20020p._cp"
+
+npc char[0]:
+	name "Erika Russell"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Lt. Colonel Cid"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,4]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset name[8] 0x0080
+	PartyAdd name[80] null 255
+	PartyAdd name[78] null 255
+	CharSetPos name[8] (-860, 0, -5920) 270deg
+	CharSetPos name[80] (810, 250, -4590) 270deg
+	CharSetPos name[78] (-770, 0, -4740) 270deg
+	CharSetChipBase name[80] chip[1]
+	CharSetChipBase name[78] chip[0]
+	ForkFunc name[8] fork[0] fn[0,3]
+	ForkFunc name[80] fork[0] fn[0,3]
+	ForkFunc name[78] fork[0] fn[0,3]
+	CamLookPos (840, 350, -4190) 0ms
+	CamSetDistance 0 7940 -10000 0ms
+	CamZoom 2560 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 448 0ms
+	Fork char[0] fork[1]:
+		CamZoom 1970 8000ms
+	Fork char[0] fork[2]:
+		CamSetDistance 0 3180 -10000 8000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[0] fork[1]
+	ForkWait char[0] fork[2]
+	Sleep 300ms
+	TextTalk name[8] {
+		#1060F#6P#100PStill, I sure didn't expect to run into little
+		Tita's mother here.{wait}
+	} {
+		I'd heard you and your husband were both
+		living abroad. What brought you back?{wait}
+	}
+	TextWait
+	TextTalkNamed name[78] "Erika Russell" {
+		#1452F#5P#100PWhat do you think? After all that went down here,
+		there was no way I was staying out of the country
+		any longer than I had to.{wait}
+	} {
+		#1457FThough with how remote the region we were in is,
+		it was all over by the time word reached us.{wait}
+	}
+	TextWait
+	Sleep 400ms
+	TextTalkNamed name[78] "Erika Russell" {
+		#1832F#5P#100PHad we found out sooner, I sure wouldn't have let
+		that maniac pull half the crap he did.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1066F#6P#100PDoesn't sound like you're too happy with
+		the professor nowadays, huh?{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalkNamed name[78] "Erika Russell" {
+		#1455F#5P#100P#3STalk about an understatement!#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 500ms
+	TextTalkNamed name[78] "Erika Russell" {
+		#1459F#5P#100P#2SThat whack job actually took my little girl
+		to that floating city with him!{wait}
+	} {
+		I get that he's soft towards her, but that's
+		no excuse for exposing her to danger!{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1064F#6P#100PTh-That's fair...{wait}
+	}
+	TextWait
+	TextTalkNamed name[78] "Erika Russell" {
+		#1830F#5P#100PAnd as if that isn't bad enough, he let that
+		redheaded scumbag get near her, too!{wait}
+	} {
+		That utter cretin isn't fit to be within fifty
+		arge of my darling Tita, never mind actually
+		getting friendly with her!{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#1066F#6P#100PSo, uh...you don't like Agate, huh?{wait}
+	}
+	TextWait
+	TextTalkNamed name[78] "Erika Russell" {
+		#1830F#5P#100PDon't you speak that filthy name in front of me
+		ever again!{wait}
+	} {
+		#1458FOooh, when I'm finished with him, he'll wish he'd
+		never been BORN...{wait}
+	} {
+		He might've survived that last onslaught, but we'll
+		see how he fares against an even more powerful
+		unit, won't we? Heheh...{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	Fork name[8] fork[1]:
+		CamLookPos (1600, 500, -4140) 2000ms
+	CharWalkToPos2 name[8] (430, 250, -5980) 1000mm/s 0
+	ForkWait name[8] fork[1]
+	TextTalk name[8] {
+		#1066F#4P#100P(I-I get the feeling this is a matter we're better
+		off not prying into...){wait}
+	}
+	TextWait
+	TextTalkNamed name[80] "Lt. Colonel Cid" {
+		#701F#5P#100P(I thought the same, so I don't know any more
+		about it than you do.){wait}
+	} {
+		(Incidentally, the Professor Russell you're more
+		familiar with is currently vacationing abroad.){wait}
+	} {
+		(As such, she has been assisting us with this 
+		case in his place.){wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1060F#4P#100P(Oh, I see...){wait}
+	}
+	TextWait
+	ObjFlagsUnset object[0] 0x0020
+	ObjFlagsUnset object[0] 0x0008
+	ObjFlagsUnset object[1] 0x0020
+	ObjFlagsUnset object[1] 0x0008
+	ObjFlagsUnset object[3] 0x0020
+	ObjFlagsUnset object[3] 0x0008
+	ForkQuit name[78] fork[0]
+	CharSetChipPattern name[78] 0
+	CharTurnTo name[78] 90deg 600deg/s
+	ForkQuit name[8] fork[0]
+	CharSetChipPattern name[8] 0
+	ForkQuit name[80] fork[0]
+	CharSetChipPattern name[80] 0
+	TextTalkNamed name[78] "Erika Russell" {
+		#1830F#3S#6P#100PAre you two listening to me?!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk name[8] {
+		#1064F#4P#100PS-Sorry!{wait}
+	}
+	TextTalkNamed name[80] "Lt. Colonel Cid" {
+		#702F#5P#100PO-Of course!{wait}
+	}
+	TextClose 1
+	_59
+	TextWait
+	Sleep 400ms
+	TextTalkNamed name[78] "Erika Russell" {
+		#1832F#6P#100PHmph. Well, whatever.{wait}
+	}
+	TextWait
+	CharTurnTo name[78] 270deg 400deg/s
+	Fork name[8] fork[1]:
+		CamLookPos (840, 350, -4190) 2000ms
+	Fork name[78] fork[0]:
+		CharWalkToPos2 self (-1880, -250, -4600) 1000mm/s 0
+	Sleep 100ms
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (-860, 0, -5920) 2000mm/s 0
+	Sleep 200ms
+	ForkFunc name[8] fork[0] fn[0,3]
+	ForkFunc name[80] fork[0] fn[0,3]
+	ForkFunc name[78] fork[0] fn[0,3]
+	ObjFlagsSet object[0] 0x0020
+	ObjFlagsSet object[0] 0x0008
+	ObjFlagsSet object[1] 0x0020
+	ObjFlagsSet object[1] 0x0008
+	ObjFlagsSet object[3] 0x0020
+	ObjFlagsSet object[3] 0x0008
+	Sleep 3000ms
+	TextTalkNamed name[78] "Erika Russell" {
+		#1452F#5P#100PThis staircase sure is long, though.{wait}
+	} {
+		How much farther do we have to go?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1060F#2P#100PNot much, as far as I know.{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 38 38 250ms 1
+	Sleep 1500ms
+	TextTalk name[8] {
+		#1062F#2P#100PYup. There we go.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	PartyRemove name[80] 255
+	PartyRemove name[78] 255
+	FlagSet flag[9477]
+	NewScene "t4145._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset name[8] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[8] (-79990, 0, -3600) 0deg
+	CharSetPos char[1] (-79300, 0, -6300) 0deg
+	CharSetPos char[0] (-80660, 0, -5340) 0deg
+	CamLookPos (-77590, 500, -15350) 0ms
+	CamSetDistance 0 6530 -10000 0ms
+	CamZoom 2940 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 359 0ms
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0010
+	ObjFlagsUnset object[3] 0x0008
+	ObjFlagsUnset object[3] 0x0020
+	ObjFrame object[3] 0
+	ObjFlagsSet object[4] 0x0004
+	EffLoad eff[0] "map\\mp082_00.eff"
+	EffLoad eff[1] "scraft\\sc008_02.eff"
+	EffLoad eff[2] "map\\mp259_02.eff"
+	EffLoad eff[3] "map\\mpP90_00.eff"
+	EffLoad eff[4] "map\\mpP90_01.eff"
+	EffLoad eff[5] "map\\mpP90_04.eff"
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-80040, 0, 19560) 2000mm/s 0
+	Sleep 50ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (-79360, 0, 17510) 2000mm/s 0
+	Sleep 50ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-80660, 0, 17550) 2000mm/s 0
+	Fork name[8] fork[1]:
+		CamLookPos (-77890, 500, 21500) 10000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[8] fork[1]
+	Sleep 1000ms
+	CrossFade 1000ms
+	CamLookPos (-78410, 0, 20750) 0ms
+	CamSetDistance 0 4860 -10000 0ms
+	CamZoom 2550 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 322 0ms
+	ForkWait name[8] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[0]
+	Sleep 300ms
+	TextTalk char[1] {
+		#702FA dead end?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1459F#6PI hope you've got a good explanation for this.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#1065F#5PI do.{wait}
+	} {
+		#1063FThis isn't a dead end, but to go any farther,
+		I'm going to need you to undertake a ritual
+		of sorts for me.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#700FHmm...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1452F#6PWell, this certainly took a turn for the
+		strange.{wait}
+	} {
+		Is this an example of the church's famous
+		Thaumaturgy?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1075F#5PSomething like that, yes.{wait}
+	} {
+		#1060FSpecifically, I would like you to undertake
+		a form of suggestion.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#702FI'm...not sure I follow.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1459F#6PYou want us to promise not to tell anyone
+		what we see here, right?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1060F#5PThat's a little extreme, so no. The colonel is
+		obviously going to need to report what
+		happened here to his superiors, for one thing.{wait}
+	} {
+		#1075FAll I want you to promise is that you won't tell
+		anyone who you aren't certain you can trust.{wait}
+	} {
+		#1066FI don't need you to say it. I just need you to
+		think and believe it.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1457F#6PWeird, but all right.{wait}
+	} {
+		#1456FIf that's all you want us to do, so be it.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#701FI feel the same way.{wait}
+	} {
+		Should we deliberately repeat it in our minds,
+		then?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1060F#5PYou don't even need to do that. It should just
+		come completely naturally to you.{wait}
+	} {
+		#1075FAll right, here goes...{wait}
+	}
+	TextWait
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[2]
+	CharSetChipPattern name[8] 0
+	Sleep 500ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipPattern name[8] 1
+	Sleep 500ms
+	TextTalk name[8] {
+		#1063F#5PIn the name of She Who Dwells Above do I hold
+		this consecrated septium.{wait}
+	}
+	TextWait
+	EffPlay eff[0] eff_instance[0] name[8] 0 (-150, 800, 400) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[201] 0 0 100
+	Sleep 1500ms
+	TextTalk name[8] {
+		#1065F#5PSpace's golden glow... Consciousness' silver glow...{wait}
+	} {
+		By your opposing natures, reveal to them the path
+		that leads to your sacrament!{wait}
+	}
+	TextWait
+	Sleep 200ms
+	EffPlay eff[1] eff_instance[255] null 0 (-80040, 1000, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundStop sound[201]
+	EffStop eff_instance[0] 2
+	Sleep 2000ms
+	CrossFade 1000ms
+	SoundPlay sound[215] 0 0 100
+	EffPlay eff[2] eff_instance[1] char[0] 0 (0, 800, 0) 0 0 0 1400 2400 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[2] char[1] 0 (0, 800, 0) 0 0 0 1400 2400 1000 null (0, 0, 0) 0ms
+	FadeWait
+	TextTalk char[0] {
+		#1454F#6P...!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#702FHmm?{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CamLookPos (-78920, 500, 22990) 0ms
+	CamSetDistance 0 4260 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 33000mdeg 0ms
+	CamPers 330 0ms
+	SoundPlay sound[215] 0 0 100
+	SoundPlay sound[326] 100 0 1
+	EffPlay eff[3] eff_instance[7] null 0 (-80000, 0, 21950) 0 0 0 2300 1600 1500 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[6] null 0 (-80000, 0, 21950) 0 0 0 2300 1600 1500 null (0, 0, 0) 0ms
+	EffPlay eff[5] eff_instance[5] null 0 (-80000, 0, 21950) 0 0 0 2300 1600 1500 null (0, 0, 0) 0ms
+	FadeWait
+	Sleep 1000ms
+	CrossFade 1000ms
+	Fork name[8] fork[0]:
+		CamZoom 2640 800ms
+	SoundPlay sound[279] 0 0 100
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	EffStop eff_instance[7] 0
+	EffStop eff_instance[6] 0
+	EffStop eff_instance[5] 0
+	FadeWait
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#1455F#6PWha...?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#702FHow did that door appear?!{wait}
+	}
+	TextWait
+	CrossFade 1000ms
+	EffStop eff_instance[1] 2
+	EffStop eff_instance[2] 2
+	FadeWait
+	Fork name[8] fork[0]:
+		CamLookPos (-78410, 0, 20750) 1500ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 4860 -10000 1500ms
+	Fork name[8] fork[2]:
+		CamZoom 2550 1500ms
+	Fork name[8] fork[3]:
+		CamRotate 45000mdeg 1500ms
+	Fork char[1] fork[1]:
+		CamPers 322 1500ms
+	ForkWait name[8] fork[0]
+	CharSetChipPattern name[8] 0
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	Sleep 500ms
+	TextTalk name[8] {
+		#1075F#5PThank you both for your assistance.{wait}
+	} {
+		#1060FI can see that you were true to your
+		word.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1457F#6P...Ahh, I see.{wait}
+	} {
+		#1459FSo if we just said it but didn't really mean it,
+		we wouldn't be able to see anything, right?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#703FAnd yet I can hardly believe what happened...{wait}
+	} {
+		#700FI imagine it would be uncouth of me to ask
+		how all of this works?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1066F#5PYeeeah, I'd really rather you didn't.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharFlagsSet name[8] 0x0004
+	CharFlagsSet char[1] 0x0004
+	CharFlagsSet char[0] 0x0004
+	CharTurnTo name[8] 0deg 400deg/s
+	Sleep 300ms
+	Fork name[8] fork[0]:
+		CamLookPos (-78410, 0, 21400) 1200ms
+	CharWalkToPos name[8] (-80130, 0, 21400) 2000mm/s 0
+	Sleep 500ms
+	SoundPlay sound[112] 0 0 100
+	ObjFrame object[3] 0
+	ObjPlay object[3] 270
+	ObjWait object[3]
+	CharTurnTo name[8] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#1060F#5PAnyway, come on in.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 0deg 400deg/s
+	Fork party[0] fork[1]:
+		CamLookPos (-77850, 0, 23770) 4000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-79870, 0, 24490) 2000mm/s 0
+	Sleep 150ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-80660, 0, 24490) 2000mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (-79360, 0, 24490) 2000mm/s 0
+	Sleep 1500ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[8] fork[1]
+	ForkQuit name[8] fork[0]
+	ForkQuit char[1] fork[0]
+	ForkQuit char[0] fork[0]
+	FlagSet flag[9478]
+	NewScene "t4144._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return

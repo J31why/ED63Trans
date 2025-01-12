@@ -1,0 +1,139 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4102.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14500._ch" "mons2/ch14500p._cp"
+chip[1] "mons2/ch14501._ch" "mons2/ch14501p._cp"
+chip[2] "mons2/ch14510._ch" "mons2/ch14510p._cp"
+chip[3] "mons2/ch14511._ch" "mons2/ch14511p._cp"
+chip[4] "mons2/ch14520._ch" "mons2/ch14520p._cp"
+chip[5] "mons2/ch14521._ch" "mons2/ch14521p._cp"
+
+monster char[0]:
+	name ""
+	pos (-42290, 0, -4190)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[203]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-38330, 40, -37890)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[210]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-74650, -3500, -24560)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[203]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-79070, 0, -3000)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[210]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-76990, -3500, -30450)
+	radius 800mm
+	bubble_pos (-76990, -2500, -30450)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	MapSet 4000 (-185000, null, -131000) "mt4102._ch"
+	if flag[10017]:
+		OpLoad "U4102_y"
+	else:
+		OpLoad "U4102_n"
+	if !flag[9999]:
+		EntranceSetDisabled entrance[1] 0
+	else:
+		ObjFlagsSet object[17] 0x0004
+	Return
+
+fn[2]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (-68150, 1250, 4980) 0ms
+	CamSetDistance 0 11130 -10000 0ms
+	CamZoom 4690 0ms
+	CamRotate 57000mdeg 0ms
+	CamPers 421 0ms
+	ImageShow "c_vis499._ch" 0 0 1500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	FlagSet flag[9476]
+	system[67] = 3000
+	NewScene "u4152._sn" 0 1 0
+	Hcf
+	Return
+
+fn[3]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextMessage null {
+		{color 5}The door is locked.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

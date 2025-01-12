@@ -1,0 +1,277 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M4302.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+trigger[0]:
+	pos1 (0, -5000, -62000)
+	pos2 (3000, 1500, 0)
+	flags 0x0040
+	func fn[0,4]
+	unk1 0
+
+look_point[0]:
+	pos (6830, 0, 38980)
+	radius 1000mm
+	bubble_pos (6830, 2000, 38980)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		if !flag[10015]:
+			SystemFlagsSet 0x10000000
+		Event fn[0,5]
+	if flag[10014] && !flag[10015]:
+		SystemFlagsSet 0x10000000
+	Return
+
+fn[1]:
+	EntranceSetDisabled entrance[0] 0
+	EntranceSetDisabled entrance[2] 0
+	if !flag[9609]:
+		EffStop eff_instance[128] 0
+		EffStop eff_instance[129] 0
+		EffStop eff_instance[131] 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ObjFrame object[0] 1100
+	ObjPlay object[0] 1100
+	NextFrame
+	CharSetPos2 field_party[0] (800, 40000, -61200) 0deg
+	CharSetPos2 field_party[1] (-800, 40000, -61200) 0deg
+	CharSetPos2 field_party[2] (-800, 40000, -62800) 0deg
+	CharSetPos2 field_party[3] (800, 40000, -62800) 0deg
+	CamLookPos (630, 12220, -60170) 0ms
+	CamSetDistance 0 13130 -10000 0ms
+	CamZoom 3540 0ms
+	CamRotate 21000mdeg 0ms
+	CamPers 322 0ms
+	Sleep 1000ms
+	Fork name[8] fork[0]:
+		CamLookPos (550, -3980, -61520) 7500ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 9260 -10000 7500ms
+	Fork name[8] fork[2]:
+		CamZoom 2930 7500ms
+	Fork name[8] fork[3]:
+		CamRotate 45000mdeg 7500ms
+	Fork name[14] fork[1]:
+		CamPers 290 7500ms
+	ObjFrame object[0] 1150
+	ObjPlay object[0] 1600
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	PlaceSetName town[227]
+	SystemFlagsUnset 0x10000000
+	PlaceSetName town[227]
+	system[49] = 227
+	ObjWait object[0]
+	ForkWait name[8] fork[0]
+	Sleep 500ms
+	TextTalk name[13] {
+		#178F#6PThis just isn't possible...{wait}
+	} {
+		How are we on the lowest floor of the ruin
+		already?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1802F#6PCould the space we're in be distorted?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1065F#5PNah. That alone wouldn't explain how the
+		entire layout of the place has changed.{wait}
+	} {
+		#1063FLet's just keep up the pace.{wait}
+	} {
+		I've got a feeling there's gonna be something--
+		or someone--waiting for us not far ahead.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1443F#6P...All right.{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1502F#6PLet's just be sure we're ready.{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#062F#6PLet's just make sure we're ready first,
+			okay?{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#212F#6PWell, if you say so...but we'd better be sure
+			we're ready.{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#272F#6PHmm... I just hope we're ready for it.{wait}
+		}
+		TextWait
+	Sleep 300ms
+	FlagSet flag[10015]
+	QuestTaskSet quest[46] 0x0008
+	QuestTaskSet quest[46] 0x0010
+	CrossFade 1000ms
+	CharSetPos field_party[0] (0, -4000, -58600) 0deg
+	CharSetPos field_party[1] (0, -4000, -58600) 0deg
+	CharSetPos field_party[2] (0, -4000, -58600) 0deg
+	CharSetPos field_party[3] (0, -4000, -58600) 0deg
+	EventEnd 0
+	Return
+
+fn[3]:
+	if !flag[9609]:
+		EventBegin 1
+		system[40] = 65535
+		Sleep 500ms
+		SoundPlay sound[353] 0 0 100
+		CrossFade 1000ms
+		EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+		EffPlay eff[129] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+		EffPlay eff[131] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+		FadeWait
+		TcMonumentOpen 6 0 0
+		Sleep 500ms
+	else:
+		TextStart null
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		{color 5}Select an Option{0x18}{wait}
+	}
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 150 1
+			"Restore HP/EP" // 0
+			"Shop" // 1
+			"Synthesize Quartz" // 2
+			"End" // 3
+		MenuWait var[0]
+		MenuClose menu[1]
+		TextClose 0
+		switch var[0]:
+			case 0:
+				FadeIn 300ms 0x00000000
+				system[40] = 65535
+				Sleep 300ms
+				BgmStop 1000ms
+				SoundPlay sound[12] 0 0 100
+				FadeOut 1000ms 0x00000000 255
+				FadeWait
+				SoundPlay sound[13] 0 0 100
+				Minigame 21 0 0 0 0 0 0 0 0
+				_30 1
+				Sleep 3500ms
+				BgmPlay bgm[221] 0
+				system[40] = 24
+				FadeIn 1000ms 0x00000000
+				var[0] = 255
+				break
+			case 1:
+				ShopOpen shop[24]
+				FadeOut 300ms 0x00000000 100
+				TextSetPos -1 60 -1 -1
+				TextMessage null {
+					{color 5}Select an Option{0x18}{wait}
+				}
+				break
+			case 2:
+				ShopOpen shop[3]
+				FadeOut 300ms 0x00000000 100
+				TextSetPos -1 60 -1 -1
+				TextMessage null {
+					{color 5}Select an Option{0x18}{wait}
+				}
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[1]
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	var[0] = 0
+	if !flag[9609]:
+		FlagSet flag[9609]
+		EventEnd 1
+	else:
+		TextEnd null
+	Return
+
+fn[4]:
+	EventBegin 0
+	CrossFade 1000ms
+	CharSetPos2 field_party[0] (-800, 20000, -62800) 180deg
+	CharSetPos2 field_party[1] (800, 20000, -62800) 180deg
+	CharSetPos2 field_party[2] (800, 20000, -61200) 180deg
+	CharSetPos2 field_party[3] (-800, 20000, -61200) 180deg
+	CamLookPos (0, -4000, -62000) 1500ms
+	Sleep 100ms
+	_ObjB0 object[0] 90
+	SystemFlagsSet 0x00100000
+	SoundPlay sound[235] 0 0 100
+	ObjFrame object[0] 1600
+	ObjPlay object[0] 1000
+	Sleep 2000ms
+	FlagSet flag[9476]
+	NewScene "m4308._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	if flag[10014] && !flag[10015]:
+		Call fn[0,2]
+		Return
+	EventBegin 0
+	PlaceSetName town[227]
+	system[49] = 227
+	ObjFrame object[0] 1300
+	ObjPlay object[0] 1600
+	NextFrame
+	CharSetPos2 field_party[0] (800, 20000, -61200) 0deg
+	CharSetPos2 field_party[1] (-800, 20000, -61200) 0deg
+	CharSetPos2 field_party[2] (-800, 20000, -62800) 0deg
+	CharSetPos2 field_party[3] (800, 20000, -62800) 0deg
+	CamLookPos (0, -4000, -62000) 0ms
+	ObjWait object[0]
+	Sleep 100ms
+	CrossFade 1000ms
+	CharSetPos field_party[0] (0, -4000, -58600) 0deg
+	CharSetPos field_party[1] (0, -4000, -58600) 0deg
+	CharSetPos field_party[2] (0, -4000, -58600) 0deg
+	CharSetPos field_party[3] (0, -4000, -58600) 0deg
+	EventEnd 0
+	Return

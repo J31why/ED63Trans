@@ -1,0 +1,329 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7410.x"
+	town town[1]
+	bgm bgm[225]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[1] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[2] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[3] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[4] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[5] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[6] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[7] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[8] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[9] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+
+monster char[0]:
+	name ""
+	pos (17160, 0, -108660)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[802]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (16990, 0, -193200)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (20720, 0, -196940)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (17050, 0, -200750)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (13260, 0, -197040)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (19650, 0, 171100)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[800]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (69000, 0, 63000)
+	radius 1000mm
+	bubble_pos (69000, 1000, 63000)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (69000, 0, 113000)
+	radius 1000mm
+	bubble_pos (69000, 1000, 113000)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (18500, 0, -197000)
+	radius 1000mm
+	bubble_pos (18500, 1000, -197000)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (15500, 0, -197000)
+	radius 1000mm
+	bubble_pos (15500, 1000, -197000)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	char[0].36 = 223
+	char[1].36 = 215
+	char[2].36 = 215
+	char[3].36 = 215
+	char[4].36 = 215
+	char[5].36 = 223
+	char[5].40 = 8
+	if !flag[11396]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[11397]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[11398]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	if !flag[11399]:
+		ObjFrame object[31] 0
+	else:
+		ObjFrame object[31] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11396]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[518] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[518]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11396]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[518]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[518]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}I hope you took away a lot of happy memories from this.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11397]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[375] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[375]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11397]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[375]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[375]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Thank you!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11398]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 30
+		ObjWait object[2]
+		ObjFrame object[2] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,24]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11398]
+	else:
+		TextMessage null {
+			{color 5}Think I can get a stained glass window installed on me?{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[11399]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[31] 60
+		Sleep 500ms
+		if ItemAdd item[386] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[386]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11399]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[386]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[386]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[31] 60
+			ObjPlay object[31] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Maybe I should take a little journey of my own. What do you think?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

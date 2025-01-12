@@ -1,0 +1,455 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4110.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01030._ch" "npl/ch01030p._cp"
+chip[1] "npl/ch01043._ch" "npl/ch01043p._cp"
+chip[2] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[3] "npl/ch01490._ch" "npl/ch01490p._cp"
+chip[4] "npl/ch01180._ch" "npl/ch01180p._cp"
+chip[5] "npl/ch01460._ch" "npl/ch01460p._cp"
+chip[6] "npl/ch01140._ch" "npl/ch01140p._cp"
+
+npc char[0]:
+	name "Seagaro"
+	pos (7220, 200, 53570)
+	angle 269deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0115
+	init fn[65535,65535]
+	talk fn[0,8]
+
+npc char[1]:
+	name "Patty"
+	pos (-29600, 4000, 1830)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[2]:
+	name "Ralph"
+	pos (-27310, 0, -4370)
+	angle 81deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[3]:
+	name "Bill"
+	pos (26900, 4000, -470)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,5]
+
+npc char[4]:
+	name "Ilene"
+	pos (26830, 4000, -1620)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,6]
+
+npc char[5]:
+	name "Duncan"
+	pos (91740, 0, -1110)
+	angle 23deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,7]
+
+npc char[6]:
+	name "Melony"
+	pos (51810, 0, 56250)
+	angle 225deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,10]
+
+npc char[7]:
+	name "Pesca"
+	pos (51250, 0, 55180)
+	angle 270deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,9]
+
+fn[0]:
+	if system[66] == 7:
+		CharFlagsSet char[11] 0x0010
+		CharFlagsSet char[12] 0x0010
+	Return
+
+fn[1]:
+	OpLoad "t4110_n"
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (-30880, null, 4000) (-29430, null, 0) 2000mm/s
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[0]:
+			TextTalk self {
+				I can't believe he actually bought us a house
+				here after I said I wanted to live in the city!{wait}
+			}
+			TextWait
+			TextTalk self {
+				He must really love me, mustn't he? ㈱{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I was the one who first said I wanted to live
+				in the city, but I don't regret it.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I mean, if we're going to buy ourselves a new
+				house, it's best to try and get as much of what
+				you want as possible from it, right?{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[0]:
+			TextTalk self {
+				It sure is nice being able to live in a big city!{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's especially convenient when I need to get
+				some shopping in, too.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Teehee. Begging my husband to buy us
+				a house here finally paid off. ㈱{wait}
+			}
+			TextWait
+			TextTalk self {
+				I've always wanted to live here in the capital.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[1]:
+			TextTalk self {
+				I can't help but feel like my wife's got me 
+				wrapped around her little finger.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Not only did I buy this house, but I'm the
+				one who's doing all of the chores, too...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Is this really how things should be...?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				The price of property seems to be creeping
+				up and up lately.{wait}
+			}
+			TextWait
+			TextTalk self {
+				So on a logical level, this does seem like
+				a sound time to be buying a house.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I can't help but feel like my wife's got me 
+				wrapped around her little finger, though.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[1]:
+			TextTalk self {
+				I ended up buying this house in a moment
+				of great weakness.{wait}
+			}
+			TextWait
+			TextTalk self {
+				...My poor wallet is still reeling from it, too.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				What do you think? Pretty nice house, huh?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I sure think so, which is just as well, seeing as
+				I'm the one who bought it.{wait}
+			}
+			TextWait
+			TextTalk self {
+				...Against my own better judgment.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		TextTalk self {
+			Perhaps we should go over to the royal villa?{wait}
+		}
+		TextWait
+		TextTalk self {
+			That area is perfect for a nice, relaxing walk.{wait}
+		}
+		TextWait
+	elif flag[12107]:
+	elif flag[12106]:
+		TextTalk self {
+			It certainly is a fine day, isn't it?{wait}
+		}
+		TextWait
+		TextTalk self {
+			Here's hoping this is just another peaceful
+			day here in Grancel.{wait}
+		}
+		TextWait
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		TextTalk self {
+			Oh, I quite agree! It really is stunning.{wait}
+		}
+		TextWait
+		TextTalk self {
+			Let me know if you start feeling tired, though.
+			We wouldn't want to strain your back.{wait}
+		}
+		TextWait
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[2]:
+			TextTalk self {
+				It's only thanks to Her Majesty that we were
+				able to pick ourselves up after that war.{wait}
+			}
+			TextWait
+			TextTalk self {
+				As a nation, we truly owe a precious amount
+				to her.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I completely agree. Nothing beats peace.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[12112]:
+		if flag[4]:
+			TextTalk self {
+				I work over at the port. You ever been by there?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Today's weather is so nice, we might even get to
+				see some mirages over there!{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo self 23deg 0deg/s
+			TextTalk self {
+				Phew! That's the leak all fixed...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Now to head out and do a good day's work!{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12112]:
+		if flag[5]:
+			TextTalk self {
+				It's almost time for the archbishop's sermon
+				to begin.{wait}
+			}
+			TextWait
+			TextTalk self {
+				His sermons're always worth listening to.
+				He says some real thought-provoking things
+				in them.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Why don't you two come along and listen?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Hey. Did you know it's almost time for the 
+				archbishop's sermon to begin?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I should get going over to the cathedral.{wait}
+			}
+			TextWait
+			FlagSet flag[5]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12112]:
+		if flag[6]:
+			TextTalk self {
+				See, look at this cultivar. Pretty promising,
+				huh?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'd love to be able to loan a proper farm from
+				someone to test out all of my research.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I do research on the cultivation of crops,
+				you know.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's not a full-time occupation or anything,
+				though. It's just something I do as a hobby.{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12112]:
+		if flag[7]:
+			TextTalk self {
+				If you ask me, being able to spend time surrounded
+				by natural greenery is the definition of bliss.{wait}
+			}
+			TextWait
+			TextTalk self {
+				...I'm so glad I met him.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Heehee. My husband's hobby is quite an unusual
+				one, isn't it?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I think it's lovely, though.{wait}
+			}
+			TextWait
+			TextTalk self {
+				If you ask me, being able to spend time surrounded
+				by natural greenery is the definition of bliss.{wait}
+			}
+			TextWait
+			FlagSet flag[7]
+	elif flag[12108]:
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return

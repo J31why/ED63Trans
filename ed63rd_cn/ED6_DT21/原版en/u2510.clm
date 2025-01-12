@@ -1,0 +1,458 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U2510.x"
+	town town[1]
+	bgm bgm[231]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch15140._ch" "mons2/ch15140p._cp"
+chip[1] "mons2/ch15141._ch" "mons2/ch15141p._cp"
+chip[2] "mons2/ch14650._ch" "mons2/ch14650p._cp"
+chip[3] "mons2/ch14651._ch" "mons2/ch14651p._cp"
+
+monster char[0]:
+	name ""
+	pos (5400, 250, 2110)
+	angle 270deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[625]
+	flag flag[11076]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (42050, 0, 460)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[626]
+	flag flag[11077]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (41670, 0, 30020)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11078]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (5400, 250, 2110)
+	angle 270deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11076]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (42050, 0, 460)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11077]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (41670, 0, 30020)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11078]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (22790, 0, 29760)
+	angle 90deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11078]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (86070, 0, 35000)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[624]
+	flag flag[11078]
+	unk3 0
+
+monster char[8]:
+	name ""
+	pos (22790, 0, 29760)
+	angle 90deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[697]
+	flag flag[11130]
+	unk3 0
+
+monster char[9]:
+	name ""
+	pos (86070, 0, 35000)
+	angle 0deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[698]
+	flag flag[11131]
+	unk3 0
+
+trigger[0]:
+	pos1 (0, 0, 0)
+	pos2 (0, 0, 0)
+	flags 0x0020
+	func fn[0,4]
+	unk1 0
+
+look_point[0]:
+	pos (92570, 1000, 35320)
+	radius 1000mm
+	bubble_pos (92570, 1000, 35320)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (82740, 1000, 2730)
+	radius 1000mm
+	bubble_pos (82740, 1000, 2730)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		_B6 0
+		Event fn[0,7]
+	if flag[11014]:
+		CharFlagsSet char[0] 0x0080
+		CharFlagsSet char[1] 0x0080
+		CharFlagsSet char[2] 0x0080
+		CharFlagsSet char[8] 0x0080
+		CharFlagsSet char[9] 0x0080
+	elif !flag[11079]:
+		CharFlagsSet char[3] 0x0080
+		CharFlagsSet char[4] 0x0080
+		CharFlagsSet char[5] 0x0080
+		CharFlagsSet char[6] 0x0080
+		CharFlagsSet char[7] 0x0080
+	else:
+		CharFlagsSet char[0] 0x0080
+		CharFlagsSet char[1] 0x0080
+		CharFlagsSet char[2] 0x0080
+		CharFlagsSet char[3] 0x0080
+		CharFlagsSet char[4] 0x0080
+		CharFlagsSet char[6] 0x0080
+		CharFlagsSet char[7] 0x0080
+		CharFlagsSet char[8] 0x0080
+		CharFlagsSet char[9] 0x0080
+	if !flag[11014]:
+		if flag[11076]:
+			CharFlagsSet char[0] 0x0080
+		if flag[11077]:
+			CharFlagsSet char[1] 0x0080
+		if flag[11130]:
+			CharFlagsSet char[8] 0x0080
+		if flag[11131]:
+			CharFlagsSet char[9] 0x0080
+	Return
+
+fn[1]:
+	OpLoad "U2510_n"
+	if !flag[11014]:
+		if system[41] == 625:
+			global[3] = 0
+		if system[41] == 626:
+			global[3] = 1
+		if system[41] == 624:
+			global[3] = 2
+		if system[41] == 697:
+			global[3] = 3
+		if system[41] == 698:
+			global[3] = 4
+		if flag[11076] && flag[11077] && flag[11130] && flag[11131]:
+			if !flag[11079]:
+				Event fn[0,5]
+		if flag[11078]:
+			if flag[11079]:
+				Event fn[0,6]
+			else:
+				CharFlagsSet char[0] 0x0080
+				CharFlagsSet char[1] 0x0080
+				CharFlagsSet char[3] 0x0080
+				CharFlagsSet char[4] 0x0080
+				CharFlagsSet char[8] 0x0080
+				CharFlagsSet char[9] 0x0080
+				FlagUnset flag[11076]
+				FlagUnset flag[11077]
+				FlagUnset flag[11130]
+				FlagUnset flag[11131]
+				FlagUnset flag[11078]
+	if !flag[11168]:
+		ObjFrame object[7] 0
+	else:
+		ObjFrame object[7] 60
+	if !flag[11169]:
+		ObjFrame object[8] 0
+	else:
+		ObjFrame object[8] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11168]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[7] 60
+		Sleep 500ms
+		if ItemAdd item[516] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[516]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11168]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[516]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[516]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[7] 60
+			ObjPlay object[7] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Victim's Memoirs: I ate my friend today. What else was I supposed to do?
+			I was starving. We both were. And there's no food here. So we decided,
+			together, that one of us should try to live just a little bit longer.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 234 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11169]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[8] 60
+		Sleep 500ms
+		if ItemAdd item[376] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[376]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11169]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[376]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[376]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[8] 60
+			ObjPlay object[8] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}We ran out of ideas for messages, so take this treasure instead.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 235 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	if flag[11079]:
+		Minigame 31 1 0 0 0 0 0 0 0
+	else:
+		Minigame 31 0 0 0 0 0 0 0 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11076]
+	FlagUnset flag[11077]
+	FlagUnset flag[11130]
+	FlagUnset flag[11131]
+	FlagUnset flag[11078]
+	FlagSet flag[11079]
+	QuestTaskSet quest[55] 0x0020
+	FlagSet flag[9476]
+	NewScene "u2510._sn" 100 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[6]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11076]
+	FlagUnset flag[11077]
+	FlagUnset flag[11130]
+	FlagUnset flag[11131]
+	FlagUnset flag[11078]
+	FlagUnset flag[11079]
+	QuestTaskSet quest[55] 0x0040
+	FlagSet flag[9476]
+	NewScene "u2510._sn" 100 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	if !flag[11014]:
+		if flag[11075] && flag[11079] && flag[11083] && flag[11087] && flag[11091] && flag[11095]:
+			global[4] = 1
+			FlagSet flag[9478]
+			NewScene "u2500._sn" 100 0 1
+			Hcf
+			Return
+	if global[3] == 0:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (5400, 250, 2110) 270deg
+		CharSetPos field_party[1] (5400, 250, 2110) 270deg
+		CharSetPos field_party[2] (5400, 250, 2110) 270deg
+		CharSetPos field_party[3] (5400, 250, 2110) 270deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 1:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (42050, 0, 460) 180deg
+		CharSetPos field_party[1] (42050, 0, 460) 180deg
+		CharSetPos field_party[2] (42050, 0, 460) 180deg
+		CharSetPos field_party[3] (42050, 0, 460) 180deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 2:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (41670, 0, 30020) 0deg
+		CharSetPos field_party[1] (41670, 0, 30020) 0deg
+		CharSetPos field_party[2] (41670, 0, 30020) 0deg
+		CharSetPos field_party[3] (41670, 0, 30020) 0deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 3:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (22790, 0, 29760) 90deg
+		CharSetPos field_party[1] (22790, 0, 29760) 90deg
+		CharSetPos field_party[2] (22790, 0, 29760) 90deg
+		CharSetPos field_party[3] (22790, 0, 29760) 90deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 4:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (86070, 0, 35000) 0deg
+		CharSetPos field_party[1] (86070, 0, 35000) 0deg
+		CharSetPos field_party[2] (86070, 0, 35000) 0deg
+		CharSetPos field_party[3] (86070, 0, 35000) 0deg
+		CamLookChar field_party[0] 0ms
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return

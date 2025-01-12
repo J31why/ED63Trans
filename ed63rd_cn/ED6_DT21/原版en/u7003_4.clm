@@ -1,0 +1,829 @@
+calmare fc scena
+scena:
+	name "Gaiden2" "U7003.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	if flag[11296]:
+		field_party[0].5 = char[18].4
+		char[18].5 = char[18].4
+		TextStart char[18]
+		CharFlagsUnset char[18] 0x0010
+		CharTurnToChar char[18] field_party[0] 0deg/s
+		char[18].4 = (char[18].4 + 360) % 360
+		char[18].4 = char[18].4 + 360 - char[18].5
+		char[18].5 = char[18].4 / 180
+		if char[18].4 <= 45 | char[18].4 >= 315 && char[18].4 <= 405 | char[18].4 >= 675:
+		elif char[18].5 < 1:
+			char[18].8 = 2
+		elif char[18].5 > 2:
+			char[18].8 = 1
+		else:
+			char[18].8 = char[18].5
+		char[18].4 = field_party[0].5
+		field_party[0].5 = 0
+		char[18].5 = 0
+		CharFlagsSet char[18] 0x0010
+		if !flag[13]:
+			TextTalk char[18] {
+				#074FAfter we leave this garden, we'll never be able
+				to return again.{wait}
+			} {
+				#072FIt's probably best to assume there won't be
+				anywhere for us to buy new equipment, either.{wait}
+			} {
+				#070FSo make sure you've got everything you think
+				you'll need, okay?{wait}
+			}
+			TextWait
+			if !flag[11297]:
+				TextTalk char[18] {
+					#073FOh, yeah...{wait}
+				} {
+					#070FIt sounds like Celeste has found a new area
+					that we can access, too.{wait}
+				} {
+					I'd ask her about that if I were you.{wait}
+				}
+				TextWait
+			FlagSet flag[13]
+		elif !flag[11297]:
+			TextTalk char[18] {
+				#074FIt's only thanks to the power of this garden
+				that we're able to buy new equipment and goods,
+				or synthesize new quartz for our orbments.{wait}
+			} {
+				#070FAfter we leave here, there's no guarantee we'll be
+				able to do any of those things.{wait}
+			} {
+				Make sure you've got everything you think you'll
+				need before leaving, okay?{wait}
+			} {
+				#573FOh, yeah... It sounds like Celeste has found a new
+				area that we can access, too.{wait}
+			} {
+				#070FI'd ask her about that if I were you. Might come in
+				handy.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[18] {
+				#074FIt's only thanks to the power of this garden
+				that we're able to buy new equipment and goods,
+				or synthesize new quartz for our orbments.{wait}
+			} {
+				#070FAfter we leave here, there's no guarantee we'll be
+				able to do any of those things.{wait}
+			} {
+				Make sure you've got everything you think you'll
+				need before leaving, okay?{wait}
+			}
+			TextWait
+		CharSetChipPattern char[18] 0
+		TextEnd char[18]
+	elif flag[11051]:
+		if !flag[13]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[18] {
+				#074F...{wait}
+			} {
+				*sigh* No matter how much I think on it, I can't
+				find an answer.{wait}
+			} {
+				#072FIf the Lord of Phantasma is the reason all of this
+				is happening...what are they trying to achieve?{wait}
+			} {
+				#074FThey have control of a world that can grant
+				humanity's every wish... What else could they
+				want from it?{wait}
+			}
+			TextWait
+			FlagSet flag[13]
+		else:
+			TextStart self
+			TextTalk char[18] {
+				#075F*sigh* Heavy thinking like this isn't my strong
+				point, I've gotta admit.{wait}
+			} {
+				#070FI wish Kilika was here to take on this job.{wait}
+			}
+			TextWait
+			if PartyPosition name[0] != -1:
+				TextTalk name[0] {
+					#1001FAhaha... Yeah.{wait}
+				}
+				TextWait
+			elif PartyPosition name[1] != -1:
+				TextTalk name[1] {
+					#1501FShe'd certainly be helpful...{wait}
+				}
+				TextWait
+			elif PartyPosition name[2] != -1:
+				TextTalk name[2] {
+					#1536FHaha. True enough.{wait}
+				}
+				TextWait
+		CharFlagsUnset self 0x0010
+		TextEnd self
+	elif flag[11040]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[13]:
+			if !flag[11049]:
+				TextTalk char[18] {
+					#074FMaster Cassius' ability in combat is basically
+					unparalleled...{wait}
+				} {
+					#072FIt isn't his strength that makes him so incredible,
+					though. It's his ability to see the true nature of
+					things.{wait}
+				} {
+					That's why he's able to function equally well in
+					both the army and as part of the Bracer Guild.{wait}
+				} {
+					#573FHe is a master in every sense of the word.{wait}
+				}
+				TextWait
+				if PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#1513FYeah...{wait}
+					}
+					TextWait
+				elif PartyPosition name[12] != -1:
+					TextTalk name[12] {
+						#278FSo it seems...{wait}
+					}
+					TextWait
+			elif flag[9799]:
+				TextTalk char[18] {
+					#074FI wonder what Walter's even doing out in the
+					real world these days?{wait}
+				} {
+					#070FHe should be in a position where he can hear
+					what's going on in Kilika's life, at least...{wait}
+				} {
+					#573F*sigh* If he's got something he wants to tell her,
+					he should just go and tell her himself instead of
+					asking me, though.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[18] {
+					#572FSo you ran into Walter, huh?{wait}
+				} {
+					#075F*sigh* I wonder what he's even doing in the
+					real world these days.{wait}
+				}
+				TextWait
+			FlagSet flag[13]
+		elif !flag[11049]:
+			TextTalk char[18] {
+				#074FHow long will it take me to be able to reach
+				his level...?{wait}
+			} {
+				#070F*sigh* Well, I know one thing: I'm gonna need
+				to put a whole lot of work into getting there.{wait}
+			}
+			TextWait
+		elif PartyPosition name[1] != -1:
+			TextTalk char[18] {
+				#074FAnyway, next up is the fourth and final guardian.{wait}
+			} {
+				#070FGood luck out there, Joshua.{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#1500FThank you!{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[18] {
+				#070FAnyway, next up is the fourth and final guardian.{wait}
+			} {
+				#573FHeh. It's probably not even worth saying anything
+				at this point. We've just got to keep doing what
+				we've been doing.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[11029]:
+		field_party[0].5 = self.4
+		self.5 = self.4
+		TextStart self
+		CharFlagsUnset self 0x0010
+		CharTurnToChar self field_party[0] 0deg/s
+		self.4 = (self.4 + 360) % 360
+		self.4 = self.4 + 360 - self.5
+		self.5 = self.4 / 180
+		if self.4 <= 45 | self.4 >= 315 && self.4 <= 405 | self.4 >= 675:
+		elif self.5 < 1:
+			self.8 = 2
+		elif self.5 > 2:
+			self.8 = 1
+		else:
+			self.8 = self.5
+		self.4 = field_party[0].5
+		field_party[0].5 = 0
+		self.5 = 0
+		CharFlagsSet self 0x0010
+		if !flag[13]:
+			if flag[9793]:
+				TextTalk char[18] {
+					#075F*sigh* Oh, boy...{wait}
+				} {
+					I have a horrible feeling I'm gonna get a real
+					earful from Kilika when I get out of here. I hope
+					I'm wrong...{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[18] {
+					#573FSo you fought Kilika, huh?{wait}
+				} {
+					#070FHaha. She's a nasty fight, isn't she?{wait}
+				} {
+					If you let her fight with her chakram, she's even
+					stronger than Walter.{wait}
+				} {
+					#075FIf she doesn't inherit the Taito style, she's gonna
+					have trouble finding a husband for herself.{wait}
+				}
+				TextWait
+			FlagSet flag[13]
+		elif flag[9793]:
+			TextTalk char[18] {
+				#074FKilika's not a great loser... Take it from me.{wait}
+			} {
+				#075FI see a whole lot of yelling in my future next
+				time I see her.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[18] {
+				#070FThat said, she's been working as a guild
+				receptionist for ages now...{wait}
+			} {
+				It's possible she's gotten a bit rusty.{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#1068F...She hasn't. Trust me.{wait}
+			}
+			TextWait
+		CharSetChipPattern self 0
+		TextEnd self
+	elif flag[10501]:
+		TextStart self
+		if !flag[13]:
+			TextTalk char[18] {
+				#074FThe guild has facilities in both Calvard and Erebonia,
+				and yet it's Le Locle that's been recreated here.{wait}
+			} {
+				There's got to be some kind of meaning to that
+				choice.{wait}
+			} {
+				#072FCould the Lord of Phantasma be intentionally
+				recreating places that're connected to our group
+				in some way?{wait}
+			}
+			TextWait
+			FlagSet flag[13]
+		else:
+			TextTalk char[18] {
+				#572FLeman State is far from Liberl, which makes me
+				curious why it's Le Locle that was recreated here
+				and not anywhere else...{wait}
+			} {
+				#074FCould the Lord of Phantasma be intentionally
+				recreating places that're connected to our group
+				in some way?{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10496]:
+		TextStart self
+		if !flag[9825]:
+			CharTurnToChar self name[1] 0deg/s
+			TextTalk char[18] {
+				#070FIt sure has been a long time since we last met, huh,
+				Joshua?{wait}
+			} {
+				You've been to Erebonia and Crossbell now, right?
+				Why not make your way over to Calvard?{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#1513FOh, it's something I'd like to do eventually.{wait}
+			} {
+				#1503FEstelle and I are currently looking for someone,
+				though.{wait}
+			}
+			TextWait
+			TextTalk char[18] {
+				#074FHmm... Fair enough.{wait}
+			}
+			TextWait
+			Emote name[1] 0mm 2000mm 38 38 250ms 1
+			Sleep 1000ms
+			TextTalk name[1] {
+				#1504FIncidentally, I heard from Schera in one of her
+				letters that Kilika returned to the Republic?{wait}
+			} {
+				#1500FShe mentioned something about her retiring from
+				the guild after being scouted by the Calvardian
+				government.{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#1079FWhat? That lady who used to look after the
+				Zeiss branch?{wait}
+			} {
+				#1078FFor real? Never would've seen that coming.{wait}
+			}
+			TextWait
+			TextTalk char[18] {
+				#070FYeah, it's all true. I hear she's up to her eyes in
+				work these days.{wait}
+			} {
+				#075FAnd you know how she is--taking it easy isn't an
+				option for her. She gives her all to everything she
+				does.{wait}
+			} {
+				She's doing a hell of a job, though. Her coworkers
+				and subordinates're all terrified of her already.{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#1509FHaha... I wouldn't have Kilika any other way.{wait}
+			}
+			TextWait
+			FlagSet flag[9825]
+		elif !flag[13]:
+			TextTalk char[18] {
+				#074FStill, who could've pictured anything like this
+				happening? Or that I'd find myself smack dab
+				in the middle of it!{wait}
+			} {
+				#070FOn the plus side, at least you guys have
+				been doing a fine job with your investigating,
+				so we've got some idea what we're doing.{wait}
+			} {
+				We'll just have to keep using that as a guide
+				to try and press on.{wait}
+			}
+			TextWait
+			FlagSet flag[13]
+		else:
+			TextTalk char[18] {
+				#070FAt least you guys have been doing a fine job with
+				your investigating, so we've got some kind of idea
+				what we need to do to get ourselves out of here.{wait}
+			} {
+				All we can do is keep believing we're going about
+				this the right way and press on.{wait}
+			}
+			TextWait
+		TextEnd self
+	Return
+
+fn[3]:
+	if flag[11051]:
+		TextStart self
+		if !flag[10]:
+			TextTalk char[23] {
+				#119FHaha. I can't sit around idly, now.{wait}
+			} {
+				#110FNot when I have work to be doing.{wait}
+			} {
+				The time to take on the Lord of Phantasma
+				and bring all of this to an end seems to be
+				almost upon us, too. We're almost there.{wait}
+			}
+			TextWait
+			FlagSet flag[10]
+		else:
+			TextTalk char[23] {
+				#110FNow that we've defeated the Schwarzritter,
+				we should have taken all of the enemy's pieces.{wait}
+			} {
+				#115FAll that remains is to settle the score with the
+				Lord of Phantasma.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11040]:
+		if !flag[10]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[23] {
+				#115F...Oh, hello.{wait}
+			}
+			TextWait
+			CharTurnToChar self field_party[0] 400deg/s
+			Sleep 300ms
+			TextTalk char[23] {
+				#110FI truly cannot thank you all enough.{wait}
+			} {
+				I feel as though I can finally start to
+				move forward again.{wait}
+			} {
+				#111FSo let's keep going. Together.{wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[10]
+			TextEnd self
+		else:
+			TextStart self
+			TextTalk char[23] {
+				#115FEver since the coup d'etat, I have found myself
+				hesitating to commit to anything and everything.{wait}
+			} {
+				#116FI think I spent so long admiring the brigadier 
+				general that when the time came to begin a new
+				path away from him, I...wasn't sure what to do.{wait}
+			} {
+				#110FWith all that's transpired here, however, I feel
+				like I can finally dedicate myself to doing just
+				that.{wait}
+			}
+			TextWait
+			TextEnd self
+	elif flag[11016]:
+		TextStart self
+		if !flag[10]:
+			if flag[9792]:
+				TextTalk char[23] {
+					#115FI'm astounded at just how skilled Phillip still is
+					despite retiring from the front lines over two
+					decades ago.{wait}
+				} {
+					#111FHaha. That was the most exciting fight I have
+					experienced in quite some time.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[23] {
+					#110FWe looked into Philip's history back during the
+					time the Intelligence Division was active, too.{wait}
+				} {
+					He has an interesting background--being known
+					as the Sword Fox and possessing five exceptional
+					techniques in combat.{wait}
+				} {
+					#119FThat said, he's been away from the front lines
+					for over twenty years now.{wait}
+				}
+				TextWait
+			FlagSet flag[10]
+		else:
+			TextTalk char[23] {
+				#115FPhilip retired from the Royal Guard over twenty
+				years ago in order to focus his efforts on Duke
+				Dunan's upbringing.{wait}
+			} {
+				His skills don't seem to have grown at all rusty
+				in that time, however...{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[11008]:
+		TextStart self
+		if !flag[10]:
+			TextTalk char[23] {
+				#115FSo, Father...{wait}
+			} {
+				How are you feeling now?{wait}
+			}
+			TextWait
+			TextTalk name[8] {
+				#1060FFine, thanks.{wait}
+			} {
+				#1840FSorry about worrying you guys so much.{wait}
+			}
+			TextWait
+			TextTalk char[23] {
+				#111FOh, don't be.{wait}
+			} {
+				#110FI wasn't there to see you collapse, so I was
+				simply curious how you were doing.{wait}
+			}
+			TextWait
+			FlagSet flag[10]
+		else:
+			TextTalk char[23] {
+				#115FIf not even Celeste knows how the Lord of
+				Phantasma managed to get in here...{wait}
+			} {
+				...I'm not sure any amount of speculating is
+				going to let us reach the answer.{wait}
+			}
+			TextWait
+		TextEnd self
+	elif flag[10759]:
+		if !flag[9835]:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[23] {
+				#115F(I can't deny that there's still a part of me
+				that refuses to move on from the past.){wait}
+			} {
+				#116F(Sooner or later, I'll have to completely put
+				it behind me and move on...){wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#1015FUmm... Is something up, Colonel?{wait}
+			}
+			TextWait
+			Emote self 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			CharTurnToChar self name[0] 400deg/s
+			Sleep 300ms
+			if PartyPosition name[15] != -1:
+				TextTalk char[23] {
+					#110FNothing major, no. I was just lost in thought.{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#260FAre you still thinking about what I said earlier?{wait}
+				}
+				TextWait
+				TextTalk char[23] {
+					#111FHaha. You really are a perceptive one.{wait}
+				} {
+					#110F...You wouldn't be interested in coming to
+					work at R&A Research, would you?{wait}
+				} {
+					I'm sure someone with your level of foresight
+					would be a valuable asset to us.{wait}
+				}
+				TextWait
+				TextTalk name[15] {
+					#267FHmm...{wait}
+				} {
+					#260FMaybe I'll give it some thought if you play with
+					me again? Maaaybe.{wait}
+				} {
+					#261FOur playtime at Grancel Castle ended up getting
+					interrupted before it'd really started...so I'm up
+					for another try if you are!{wait}
+				}
+				TextWait
+				if PartyPosition name[6] != -1:
+					Emote name[6] 0mm 2000mm 40 43 100ms 3
+					Sleep 1000ms
+					TextTalk name[6] {
+						#562FR-Renne, please...{wait}
+					}
+					TextWait
+				if PartyPosition name[4] != -1:
+					TextTalk name[4] {
+						#1165F(I-I'd forgotten that the two of them ended
+						up fighting when Ouroboros tried attacking
+						the capital...){wait}
+					}
+					TextWait
+					TextTalk name[0] {
+						#1016F(Y-Yeah...){wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					TextTalk name[1] {
+						#1514F(I nearly forgot they ended up fighting when
+						the Enforcers attacked the capital...){wait}
+					}
+					TextWait
+				else:
+					TextTalk name[0] {
+						#1016F(I-I totally forgot they ended up fighting when
+						Ouroboros tried attacking the capital...){wait}
+					}
+					TextWait
+				TextTalk char[23] {
+					#111FHa...haha... I'll think about it.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[23] {
+					#111FNothing major, no. I was just lost in thought.{wait}
+				} {
+					#110FIn any case, I'd heard rumors about how intelligent
+					young Renne was...{wait}
+				} {
+					Having spoken with her personally, however, they
+					may have been underselling her.{wait}
+				} {
+					#115F*sigh* I almost wish I could hire her to work at 
+					R&A Research. She'd be quite the asset.{wait}
+				}
+				TextWait
+				TextTalk name[0] {
+					#1016FAhaha...{wait}
+				}
+				TextWait
+			CharFlagsUnset self 0x0010
+			FlagSet flag[9835]
+			TextEnd self
+		else:
+			CharFlagsSet self 0x0010
+			TextStart self
+			TextTalk char[23] {
+				#115F(I can't deny that there's still a part of me
+				that refuses to move on from the past.){wait}
+			} {
+				#116F(Sooner or later, I'll have to completely put
+				it behind me and move on...){wait}
+			}
+			TextWait
+			CharFlagsUnset self 0x0010
+			TextEnd self
+	elif !flag[9834]:
+		CharFlagsSet self 0x0010
+		TextStart self
+		TextTalk char[23] {
+			#115F*sigh* This place is full of peculiar things.{wait}
+		} {
+			It appears to be a dimensional space of its
+			own...{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#1011FYou still finding all of this hard
+			to take in?{wait}
+		}
+		TextWait
+		Emote self 0mm 2000mm 38 38 250ms 1
+		Sleep 1000ms
+		CharTurnToChar self name[0] 400deg/s
+		TextTalk char[23] {
+			#110FOh, it's you, Estelle.{wait}
+		} {
+			#119FYou could put it that way, yes.{wait}
+		} {
+			I fear it's going to take me a while longer
+			to come up with an effective enough plan
+			to conquer this place.{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#1016FC-Conquer...?{wait}
+		} {
+			There was me thinking you might still be trying
+			to process the situation you're in, but you're
+			already one step ahead. That's our colonel!{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#495FAs I believe I have told you several times already,
+			I'm not a colonel anymore...{wait}
+		} {
+			I'm not even part of the army anymore.{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#1015FOh. Oops.{wait}
+		} {
+			You're running a research company for
+			civilians these days, right?{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#111FIndeed. We're still a relatively insignificant
+			startup, though.{wait}
+		} {
+			#110FWe operate out of a small office in Ruan.{wait}
+		} {
+			The only employees at present are myself
+			and Kanone. {wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#1004FWhat?! Captain Amalthea's working with you,
+			too?{wait}
+		} {
+			#1007FSomehow I can't imagine her sitting behind a 
+			desk doing normal people work...{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#111FHahaha... I suppose that's hardly surprising.{wait}
+		} {
+			#119FStill, she's also changed since the coup.{wait}
+		} {
+			We've been living a rather relaxed life since
+			our new business began.{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#1008FReally?{wait}
+		} {
+			#1012FI can believe it, though. You've got this whole
+			different aura about you now.{wait}
+		} {
+			#1001FMaybe this was actually the right career choice 
+			for you after all.{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#111FHaha. I certainly hope so.{wait}
+		}
+		TextWait
+		Sleep 300ms
+		TextTalk char[23] {
+			#110F...Regardless, returning to work is just another
+			reason I can't afford to remain here any longer
+			than necessary.{wait}
+		} {
+			We need to strive to return to our world as soon
+			as possible.{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#1006F...Yeah. Agreed.{wait}
+		} {
+			#1018FWe'll be counting on you, Colonel!{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#495F(Did that entire conversation fly right over her
+			head...?){wait}
+		}
+		TextWait
+		CharFlagsUnset self 0x0010
+		FlagSet flag[9834]
+		TextEnd self
+	else:
+		TextStart self
+		if !flag[10]:
+			FlagSet flag[10]
+			TextTalk char[23] {
+				#115FThis world we are in clearly operates by its own
+				set of rules...{wait}
+			} {
+				And as such, it seems reasonable to conclude
+				that they exist because it was created for a
+				specific purpose.{wait}
+			} {
+				#110FIf I can work out what that purpose is, I may be
+				able to think of an effective way of conquering
+				it...but therein lies the real challenge.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[23] {
+				#115FThis world we are in clearly operates by its own
+				set of rules, and therefore must have a specific
+				purpose for existing.{wait}
+			} {
+				If I can work out what that purpose is, I may be
+				able to think of an effective way of conquering
+				it...but therein lies the real challenge.{wait}
+			}
+			TextWait
+		TextEnd self
+	Return

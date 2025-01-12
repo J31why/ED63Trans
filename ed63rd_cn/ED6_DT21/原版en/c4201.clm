@@ -1,0 +1,917 @@
+calmare tc scena
+scena:
+	name "Grancel" "C4201.x"
+	town town[1]
+	bgm bgm[31]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (123780, 0, 19220)
+	radius 1000mm
+	bubble_pos (122910, 1500, 19200)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+look_point[1]:
+	pos (103870, 0, 24400)
+	radius 1000mm
+	bubble_pos (103830, 1500, 24960)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+look_point[2]:
+	pos (136410, 0, -112150)
+	radius 1000mm
+	bubble_pos (137180, 1500, -112180)
+	flags 0x007C
+	func fn[0,11]
+	unk1 0
+
+look_point[3]:
+	pos (128250, 0, -152730)
+	radius 1000mm
+	bubble_pos (127270, 1500, -152920)
+	flags 0x007C
+	func fn[0,12]
+	unk1 0
+
+look_point[4]:
+	pos (130400, 0, -145890)
+	radius 3000mm
+	bubble_pos (130400, 3000, -145890)
+	flags 0x007C
+	func fn[0,13]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	ObjFrame object[0] 0
+	ObjFrame object[3] 0
+	LookPointFlagsSet look_point[4] 0x0001
+	if system[66] == 7:
+		_1B look_point[0] fn[0,14]
+		if flag[12110]:
+			ObjFrame object[0] 240
+			ObjFrame object[3] 120
+		else:
+			LookPointFlagsUnset look_point[4] 0x0001
+	if !flag[12272]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[12273]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	if !flag[12274]:
+		ObjFrame object[4] 0
+	else:
+		ObjFrame object[4] 60
+	if !flag[12275]:
+		ObjFrame object[5] 0
+	else:
+		ObjFrame object[5] 60
+	SoundPlay sound[461] 1 0 100
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	Sc_C4Set 536870912
+	CrossFade 1000ms
+	CamLookPos (129300, 0, -151840) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[2] (129199, 0, -152700) 270deg
+	CharSetPos name[80] (129199, 0, -151240) 225deg
+	Sleep 1000ms
+	TextTalk name[80] {
+		#1653FIs it not budging?{wait}
+	} {
+		#1656FHmm...{wait}
+	}
+	TextWait
+	CharTurnTo name[80] 135deg 400deg/s
+	Sleep 600ms
+	CharTurnTo name[80] 315deg 400deg/s
+	Sleep 600ms
+	TextTalk name[2] {
+		#1648FStay quiet for a minute. I'll handle this.{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos self (128560, 0, -152700) 1000mm/s 0
+	Fork name[80] fork[2]:
+		CharTurnTo self 225deg 400deg/s
+	ForkWait name[2] fork[1]
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}Scherazard removed a rock from the bottom of the device and placed her
+		hand inside.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	Sleep 1000ms
+	SoundPlay sound[115] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[115] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[100] 0 0 100
+	ObjFrame object[3] 65
+	ObjPlay object[3] 120
+	ObjWait object[3]
+	ObjFrame object[3] 120
+	Sleep 500ms
+	CamLookPos (128919, 0, -146150) 2000ms
+	SoundPlay sound[208] 0 0 100
+	ObjPlay object[0] 240
+	Sleep 200ms
+	Fork name[80] fork[2]:
+		CharTurnTo self 0deg 400deg/s
+	Sleep 100ms
+	Fork name[2] fork[2]:
+		CharTurnTo self 0deg 400deg/s
+	ObjWait object[0]
+	ObjFrame object[0] 240
+	CamLookPos (129300, 0, -151840) 2000ms
+	TextTalk name[80] {
+		#1653F#1PWow...{wait}
+	} {
+		#1651FHeehee. You really are amazing!{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1646FBut not for this. This isn't all that different
+		from breaking into a safe, to be honest.{wait}
+	} {
+		#1648F...Really, though.{wait}
+	} {
+		You shouldn't be impressed by these kinds of
+		things. Or getting used to them.{wait}
+	}
+	TextWait
+	Fork name[80] fork[2]:
+		CharTurnToChar self name[2] 400deg/s
+	Sleep 300ms
+	Emote name[80] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1500ms
+	Fork name[2] fork[2]:
+		CamZoom 2600 10000ms
+	TextTalk name[80] {
+		#1653FWhy?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1648FThere are some things in life you're just better
+		off not knowing...{wait}
+	}
+	TextWait
+	Fork name[2] fork[2]:
+		CamZoom 2600 3000ms
+	BgmStop 4000ms
+	FadeOut 2000ms 0x00000000 255
+	SoundSetVolume sound[461] 90
+	Sleep 300ms
+	SoundSetVolume sound[461] 80
+	Sleep 300ms
+	SoundSetVolume sound[461] 70
+	Sleep 300ms
+	SoundSetVolume sound[461] 60
+	Sleep 300ms
+	SoundSetVolume sound[461] 50
+	Sleep 300ms
+	SoundSetVolume sound[461] 40
+	Sleep 300ms
+	SoundSetVolume sound[461] 30
+	Sleep 300ms
+	SoundSetVolume sound[461] 20
+	Sleep 300ms
+	SoundStop sound[461]
+	BgmWait
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W...and some things you're better off not being
+		able to do.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	BgmWait
+	SoundPlay sound[371] 0 0 100
+	Sleep 4000ms
+	BgmPlay bgm[26] 0
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThe entire town smelled like a rotting open drain
+		and was reviled even for a slum.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThe people who ended up there were largely
+		those who couldn't be accommodated in a prison,
+		those who had been driven out of the cities...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W...or children who had been abandoned there like
+		yesterday's garbage.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WI did whatever I had to in order to survive and 
+		to live to see another day.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1200ms
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W
+		Picking pockets at every opportunity was a habit
+		I picked up from a very young age; anything that
+		caught my eye, I took. {wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WBut even then, I didn't end up with enough to live
+		on. There were always men there who made their
+		living by taking from people like me.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThe surest way to make money was stealing from
+		the safes of the rich when they were out of their
+		mansions.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThe residential area full of wealthy people on the
+		other side of the river, accessible through an
+		underground sewer, was a perfect target for this.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WEvery time I felt hungry, I sneaked inside one of
+		the mansions and made use of the skills I felt like
+		I'd known since the day I was born.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThe most important thing to remember when doing
+		this was not to take everything in one go.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WInstead, the key was to take only a small amount
+		each time--enough to get by, but not enough for
+		the mansion's owner to notice anything was gone.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WWith a simple piece of wire, I had access to enough
+		mira to live for a couple more weeks.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WBefore I knew it, I was doing it every day, building up
+		a stockpile of money instead of simply taking what
+		I needed in the short term.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W...And boy, I paid the price for it. I had it all taken
+		from me by the men of the slums and ended up being
+		kicked and stomped on until I coughed up blood.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WEveryone did what they did--or they said they did as
+		much, anyway--so that they could keep living on.{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[457] 1 0 10
+	Sleep 300ms
+	SoundSetVolume sound[457] 20
+	Sleep 300ms
+	SoundSetVolume sound[457] 30
+	Sleep 300ms
+	SoundSetVolume sound[457] 40
+	Sleep 300ms
+	SoundSetVolume sound[457] 50
+	Sleep 300ms
+	SoundSetVolume sound[457] 60
+	Sleep 300ms
+	SoundSetVolume sound[457] 70
+	Sleep 300ms
+	SoundSetVolume sound[457] 80
+	Sleep 300ms
+	SoundSetVolume sound[457] 90
+	VisShow vis[0] -512 -512 512 512 320 240 1024 1024 0 0 1024 1024 0x00FFFFFF 0 "C_VIS353._CH"
+	VisSet vis[0] 1 800 800 0ms 0
+	VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+	ForkFunc name[2] fork[3] fn[0,4]
+	Sleep 4500ms
+	VisSet vis[0] 3 0xFF888888 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WAlways pretending to be desperate as an excuse to
+		live by any means, but always taking the easiest road
+		they could find.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThe town I lived in was devoid of energy, but full of
+		filthy humans like them...and like me.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WAgain and again, I thought about giving it up.
+		Again and again, I said to myself that I wanted
+		to stop...but I couldn't do it.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WI hated myself for what I was doing.
+		I hated the fact that I couldn't stop.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00888888 2000ms 0 0
+	Sleep 200ms
+	SoundSetVolume sound[457] 80
+	Sleep 200ms
+	SoundSetVolume sound[457] 60
+	Sleep 200ms
+	SoundSetVolume sound[457] 40
+	Sleep 200ms
+	SoundSetVolume sound[457] 20
+	Sleep 200ms
+	SoundStop sound[457]
+	VisWait vis[0] 3
+	ForkQuit name[2] fork[3]
+	VisHide vis[0] 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WIt was because I didn't want to return to that life
+		that I ended up becoming a bracer.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W...Because if I didn't, I was scared I would end up
+		right back where I was.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThe troupe had saved me from that place and had
+		made me into a respectable human being...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W...but when I lost them, I was afraid. One thought
+		stood out above all the rest.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WNo matter how much I tried to forget,
+		no matter how used I became to my new life,
+		no matter how much I tried to deny it...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W...I was yesterday's garbage from the slums,
+		and nothing I could do would change that.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WAnd that's it, really.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WOne day, I'm sure I'll end up returning there.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WThat's why I need to be strong. To STAY strong.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WWhat job I do doesn't even matter. Anything I can
+		pour my heart into that'll let me live an honest life
+		is fine.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WAnything that keeps my mind off the past...
+		Anything that lets me keep the ugliness in my heart
+		at bay...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WIf it makes me strong without relying on others,
+		then it's fine. It's fine...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WI need to be strong. Stronger than anyone.
+		Stronger than anyone!{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40W...But am I?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WAm I really doing all right in my new life?
+		Am I really getting stronger?{wait}
+		...Am I, Luci?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	CamLookPos (127220, 0, -150380) 0ms
+	CamSetDistance 0 7100 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[2] (126600, 0, -151000) 270deg
+	CharSetPos name[80] (128639, 0, -151000) 270deg
+	Sc_C4Unset 2048
+	BgmStop 5000ms
+	Fork name[2] fork[2]:
+		CamZoom 2800 4000ms
+	FadeIn 5000ms 0x00000000
+	Sleep 300ms
+	SoundPlay sound[461] 1 0 10
+	Sleep 300ms
+	SoundSetVolume sound[461] 20
+	Sleep 300ms
+	SoundSetVolume sound[461] 30
+	Sleep 300ms
+	SoundSetVolume sound[461] 40
+	Sleep 300ms
+	SoundSetVolume sound[461] 50
+	Sleep 300ms
+	SoundSetVolume sound[461] 60
+	Sleep 300ms
+	SoundSetVolume sound[461] 70
+	Sleep 300ms
+	SoundSetVolume sound[461] 80
+	Sleep 300ms
+	SoundSetVolume sound[461] 90
+	Sleep 300ms
+	SoundSetVolume sound[461] 100
+	FadeWait
+	ForkWait name[2] fork[2]
+	Sleep 300ms
+	TextTalk name[80] {
+		#1653F#2PMiss Scherazard...?{wait}
+	} {
+		Are you all right? You're looking very gloomy
+		all of a sudden...{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1648F...It's nothing. I'm fine.{wait}
+	} {
+		#1646F(As soon as I finish this job, Kurt will give me
+		the last recommendation I need.){wait}
+	} {
+		(I can finally become a real bracer.){wait}
+	} {
+		(Then no one will be able to tell me I'm not
+		strong. I won't let them! I WILL be strong!){wait}
+	}
+	TextWait
+	CharTurnTo name[2] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#1648FAnyway, we're leaving.{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos self (140740, 0, -151000) 2000mm/s 0
+	ForkLoop name[80] fork[2]:
+		CharTurnToChar self name[2] 400deg/s
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (128639, 0, -152200) 1000mm/s 0
+	ForkWait name[80] fork[1]
+	Sleep 1000ms
+	TextTalk name[80] {
+		#1653F#3PW-Wait a second!{wait}
+	} {
+		Miss Scherazard!{wait}
+	}
+	TextWait
+	ForkQuit name[80] fork[2]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (129900, 0, -151000) 3000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (140740, 0, -151000) 3000mm/s 0
+	ForkWait name[80] fork[1]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 12}#40WAs soon as I finish this job...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	PartySetAttr name[2] 254 0
+	PartySetAttr name[80] 254 0
+	LookPointFlagsSet look_point[5] 0x0001
+	LookPointFlagsSet look_point[4] 0x0001
+	Sc_C4Unset 2048
+	FlagSet flag[12110]
+	NewScene "c4203._sn" 115 0 0
+	Hcf
+	Return
+
+fn[4]:
+	while 1:
+		VisSet vis[0] 2 -360000 250000 0ms 0
+		VisWait vis[0] 2
+		VisSet vis[0] 2 0 0 0ms 0
+	Return
+
+fn[5]:
+	Return
+
+fn[6]:
+	Return
+
+fn[7]:
+	switch system[0]:
+		case 112:
+			break
+		case 114:
+			break
+	Return
+
+fn[8]:
+	SystemFlagsSet 0x08000000
+	if !flag[12272]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[517] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[517]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12272]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[517]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[517]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Estelle used Thief! But it failed!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 12 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[9]:
+	SystemFlagsSet 0x08000000
+	if !flag[12273]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12273]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Do you take joy in yanking out others' insides?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 13 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[10]:
+	SystemFlagsSet 0x08000000
+	if !flag[12274]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[4] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12274]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[4] 60
+			ObjPlay object[4] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Sorry, but the legendary item drop is in another chest.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 14 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[11]:
+	SystemFlagsSet 0x08000000
+	if !flag[12275]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[5] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12275]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[5] 60
+			ObjPlay object[5] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}If you want it that badly, you could've asked.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 15 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[12]:
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}The lever won't move.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	if system[66] == 7:
+		if !flag[12110]:
+			Call fn[0,3]
+	Return
+
+fn[13]:
+	if flag[0]:
+		TextTalk name[2] {
+			#1640FThere should be some way to open this door nearby.
+			Let's start looking.{wait}
+		}
+		TextWait
+	else:
+		EventBegin 1
+		CrossFade 500ms
+		CharSetPos name[2] (132300, 0, -145380) 255deg
+		CharSetPos name[80] (133360, 0, -145880) 255deg
+		FadeWait
+		Fork name[2] fork[1]:
+			CamLookPos (133140, 0, -144700) 2000ms
+		Fork name[2] fork[2]:
+			CamSetDistance 0 8000 -10000 2000ms
+		Fork name[2] fork[3]:
+			CamRotate 18000mdeg 2000ms
+		ForkWait name[2] fork[1]
+		TextTalk name[80] {
+			#1650FI'm guessing we'll need to find some way through
+			this door to get to the west block.{wait}
+		}
+		TextWait
+		TextTalk name[2] {
+			#1646F#1PThere should be some way to open it nearby.{wait}
+		} {
+			Let's start looking...and stick close to me.{wait}
+		}
+		TextWait
+		TextTalk name[80] {
+			#1650FOh, my. That's kind of...{wait}
+		} {
+			#1651F...romantic, don't you think? ㈱{wait}
+		}
+		TextWait
+		CharTurnToChar name[2] name[80] 500deg/s
+		Sleep 200ms
+		TextTalk name[2] {
+			#1644F#1PIn what way is anything in this situation romantic?!{wait}
+		}
+		TextWait
+		_59
+		FlagSet flag[0]
+		EventEnd 5
+	TextEnd null
+	Return
+
+fn[14]:
+	EventBegin 1
+	NewScene "c4200._sn" 114 0 0
+	Hcf
+	Return

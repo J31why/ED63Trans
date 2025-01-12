@@ -1,0 +1,349 @@
+calmare tc scena
+scena:
+	name "Event" "E0610.x"
+	town town[1]
+	bgm bgm[1]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20396._ch" "apl2/ch20396p._cp"
+chip[1] "apl2/ch20760._ch" "apl2/ch20760p._cp"
+
+npc char[0]:
+	name "Enhanced Jaeger"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Enhanced Jaeger"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Enhanced Jaeger"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Gilbert"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 1:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			system[1] = 0
+			Event fn[0,3]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			system[1] = 82
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	SoundPlay sound[122] 1 0 70
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundSetVolume sound[122] 70
+	CamLookPos (-72100, 1000, 980) 0ms
+	CamSetDistance 0 5680 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 320000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[3] (-70600, 1200, -160) 270deg
+	CharSetPos char[1] (-70600, 1200, 2150) 270deg
+	CharSetPos char[2] (-70600, 1200, -2500) 270deg
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[3] 0x0004
+	CharFlagsSet char[1] 0x0004
+	CharFlagsSet char[2] 0x0004
+	CharSetChipPattern char[3] 0
+	CharSetChipPattern char[1] 0
+	CharSetChipPattern char[2] 0
+	CharFlagsSet char[3] 0x0002
+	_76 4 0 1 -6 -3 0 0 0
+	_76 4 1 1 -8 -5 0 0 0
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	FadeIn 1500ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[2] {
+		#6PThe Bobcat, huh?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#6PYou familiar with it?{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		You could say that.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		I'm surprised by what I'm seeing here,
+		though.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		Last I saw them, they were sky bandits,
+		but it looks like they're running a delivery
+		service now.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		Heh. Really, now? Talk about simpletons.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Anyway, looks like they have no interest
+		in fighting us.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Let's just leave 'em be.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		...Not so fast. Have you forgotten our mission?{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		I'd say they're the perfect target for carrying
+		it out, wouldn't you?{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[39] 0 0 100
+	Emote char[2] 200mm 1700mm 2 7 100ms 1
+	Sleep 50ms
+	SoundPlay sound[39] 0 0 100
+	Emote char[1] 200mm 1700mm 2 7 100ms 1
+	Sleep 1000ms
+	CharSetChipPattern char[1] 1
+	Sleep 50ms
+	CharSetChipPattern char[2] 2
+	Sleep 300ms
+	TextTalk char[1] {
+		...Wait. You're pulling my leg, right?
+		Attacking THEM?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#6PWe only need to test whether they operate
+		properly today. There's no reason to actually
+		use them in combat.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		Puh-lease, my comrade. You're never going to
+		move up the ranks with that attitude.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		If our target was a Royal Army ship, I'd agree
+		with you...{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		...but it's just an isolated ship full of ex-bandits.
+		There's no risk to be had here.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		W-Well, I suppose that's true...{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		Besides, the Thirteen Factories want accurate
+		combat data.{wait}
+	}
+	TextWait
+	TextTalkNamed char[3] "Blue-Haired Jaeger" {
+		There's no way we're going to get punished for
+		doing this! We might even earn ourselves a nice
+		reward.{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 0
+	Sleep 300ms
+	TextTalk char[1] {
+		...All right. You talk a good game.{wait}
+	}
+	TextWait
+	CharSetChipPattern char[2] 0
+	Sleep 300ms
+	TextTalk char[2] {
+		#6PBut if this thing backfires, you're taking
+		responsibility for whatever happens.{wait}
+	}
+	TextWait
+	system[28] = 1
+	ForkLoop char[0] fork[3]:
+		Shake 50 50 3000 1000ms
+	SoundSetVolume sound[122] 80
+	Sleep 200ms
+	SoundSetVolume sound[122] 90
+	Sleep 200ms
+	SoundSetVolume sound[122] 100
+	Sleep 600ms
+	Fork char[4] fork[0]:
+		CamLookPos (-32100, 1000, 980) 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	system[28] = 0
+	FlagSet flag[9477]
+	NewScene "e0110._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundSetVolume sound[122] 70
+	CamLookPos (-72100, 1000, 980) 0ms
+	CamSetDistance 0 5680 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 320000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[1] (-70600, 1200, 2150) 270deg
+	CharSetPos char[2] (-70600, 1200, -2500) 270deg
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsSet char[1] 0x0004
+	CharFlagsSet char[2] 0x0004
+	CharSetChipPattern char[1] 0
+	CharSetChipPattern char[2] 0
+	_76 4 0 1 -6 -3 0 0 0
+	_76 4 1 1 -8 -5 0 0 0
+	ObjFlagsSet object[3] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	ObjFlagsSet object[5] 0x0004
+	Emote char[2] 200mm 1500mm 24 27 250ms 0
+	Emote char[1] 200mm 1500mm 24 27 250ms 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EmoteStop char[2]
+	EmoteStop char[1]
+	Sleep 500ms
+	CharSetChipPattern char[2] 2
+	Sleep 300ms
+	TextTalk char[2] {
+		#6PWhat should we do? Should we go down and 
+		recover him?{wait}
+	}
+	TextWait
+	CharSetChipPattern char[1] 1
+	Sleep 300ms
+	TextTalk char[1] {
+		What? Oh...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Forget it. I say we just leave him.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#6PLord Campanella seems to have taken quite
+		a liking to him, though... You sure?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		I think that's all the more reason we should
+		leave him.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		You know what Lord Campanella's personality
+		is like.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		He'll probably find the whole thing much more 
+		entertaining this way.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#6P...{wait}
+	}
+	TextWait
+	CharSetChipPattern char[2] 0
+	Sleep 500ms
+	TextTalk char[2] {
+		#6PI guess you're right.{wait}
+	}
+	TextWait
+	_59
+	CharSetChipPattern char[1] 0
+	Sleep 300ms
+	Fork char[4] fork[0]:
+		CamLookPos (-32100, 1000, 980) 7000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9479]
+	NewScene "e0810._sn" 100 0 0
+	Hcf
+	Return

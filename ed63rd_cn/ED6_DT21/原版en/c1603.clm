@@ -1,0 +1,818 @@
+calmare tc scena
+scena:
+	name "Bose" "C1603.x"
+	town town[1]
+	bgm bgm[125]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl/ch20053._ch" "apl/ch20053p._cp"
+chip[1] "npl/ch00050._ch" "npl/ch00050p._cp"
+chip[2] "npl/ch00150._ch" "npl/ch00150p._cp"
+chip[3] "apl/ch20137._ch" "apl/ch20137p._cp"
+chip[4] "npl/ch00154._ch" "npl/ch00154p._cp"
+chip[5] "npl/ch00151._ch" "npl/ch00151p._cp"
+chip[6] "npl/ch00450._ch" "npl/ch00450p._cp"
+chip[7] "npl/ch00460._ch" "npl/ch00460p._cp"
+chip[8] "npl/ch00470._ch" "npl/ch00470p._cp"
+chip[9] "npl/ch00454._ch" "npl/ch00454p._cp"
+chip[10] "npl/ch00464._ch" "npl/ch00464p._cp"
+chip[11] "npl/ch00474._ch" "npl/ch00474p._cp"
+chip[12] "npl/ch00451._ch" "npl/ch00451p._cp"
+chip[13] "npl/ch00461._ch" "npl/ch00461p._cp"
+chip[14] "npl/ch00471._ch" "npl/ch00471p._cp"
+
+npc char[0]:
+	name "Agate"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 13:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[0] 0x0004
+	ObjFlagsSet object[1] 0x0004
+	ObjFlagsUnset object[3] 0x0002
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CamLookPos (2260, 0, -14860) 0ms
+	CamSetDistance 0 3660 -10000 0ms
+	CamZoom 4200 0ms
+	CamRotate 332000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (2600, 0, -31760) 30deg
+	CharSetPos name[16] (2600, 0, -21000) 30deg
+	CharSetPos name[18] (4260, 0, -21340) 30deg
+	CharSetPos name[17] (940, 0, -20660) 30deg
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[16] {
+		#1743F#6PWhoa... This is way more roomy than
+		the other caves we've been in.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1750F#6PYou think this is the end of the line?{wait}
+	} {
+		It sure looks that way.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6PI don't see anything here, though...
+		or anyone.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1742F#6PMaybe we haven't finished exploring?{wait}
+	}
+	TextWait
+	BgmStop 1500ms
+	Sleep 500ms
+	SoundPlay sound[123] 0 0 100
+	Sleep 1000ms
+	TextTalkNamed char[0] "Man's Voice" {
+		#2PNah. You're done. Nice work, guys.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[18] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 800ms
+	Fork name[16] fork[2]:
+		CharTurnTo self 200deg 500deg/s
+	Sleep 50ms
+	Fork name[17] fork[2]:
+		CharTurnTo self 200deg 500deg/s
+	Sleep 50ms
+	Fork name[18] fork[2]:
+		CharTurnTo self 200deg 500deg/s
+	Sleep 300ms
+	TextTalk name[16] {
+		#1743F#11PWha...?!{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#11PWhere'd YOU come from?!{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1767F#11PYou were tailin' us the whole time, weren't you?{wait}
+	}
+	TextWait
+	_59
+	CrossFade 1000ms
+	CamLookPos (4000, 0, -29800) 0ms
+	CamSetDistance 0 3820 -10000 0ms
+	CamZoom 4000 0ms
+	CamRotate 180000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[0] (4000, 0, -32259) 0deg
+	CharSetPos name[16] (4000, 0, -22880) 180deg
+	CharSetPos name[17] (2500, 0, -22980) 180deg
+	CharSetPos name[18] (5500, 0, -22980) 180deg
+	Fork char[0] fork[1]:
+		CharWalkToPos self (4000, 0, -28660) 2000mm/s 0
+	ForkWait char[0] fork[1]
+	Sleep 500ms
+	TextTalk char[0] {
+		#051F#5PBingo. I've seen everything that's happened on
+		the way here.{wait}
+	} {
+		#053FI figured you wouldn't find it easy, but I wasn't
+		expecting you all to split up partway through.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[16] {
+		#1747F#6PTh-That was your fault for picking this place!{wait}
+	} {
+		#1749FWe wouldn't've split up if you picked somewhere
+		less complicated...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#051F#5PHeh. That's WHY I picked this place, numbnuts.{wait}
+	} {
+		#053FI wanted to see how you'd react when you found
+		yourselves in a complex situation.{wait}
+	} {
+		#050FAnd I got exactly what I wanted out of it.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#6PHuh... Yeah, I can buy that.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1763F#6PThanks a lot.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PYou guys're already squared away in battle,
+		I'll give you that.{wait}
+	} {
+		On that front, you're already ahead of your
+		average junior bracer.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[18] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[16] {
+		#1743F#6PReally...?{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#6PYou really think so...?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1762F#6P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#551F#5PBut that's only in terms of strength.{wait}
+	} {
+		#051FUnfortunately, you need more than that to be
+		a good bracer, junior or senior.{wait}
+	} {
+		What I saw today really helped me make up my
+		mind on whether you're cut out for this line of
+		work.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1763F#6PHmph. Good for you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PI still don't have enough to go on to make
+		the final call, though.{wait}
+	} {
+		If you want to prove to me that you've got
+		what it takes...{wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 100ms
+	CrossFade 500ms
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	Fork char[1] fork[0]:
+		CamZoom 3800 500ms
+	Fork char[1] fork[1]:
+		CamLookPos (4000, 0, -29300) 500ms
+	SoundPlay sound[505] 0 0 100
+	FadeWait
+	Sleep 300ms
+	BgmWait
+	BgmPlay bgm[196] 0
+	Sleep 500ms
+	TextTalk char[0] {
+		#054F#5P...then you're gonna have to prove it to my
+		heavy blade first!{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk name[16] {
+		#1749F#6P*sigh* How did I know this is how it was gonna
+		go...?{wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase name[16] chip[6]
+	CharSetChipPattern name[16] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk name[17] {
+		#1756F#6PDuh! 'Cause it was obvious.{wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase name[17] chip[7]
+	CharSetChipPattern name[17] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk name[18] {
+		#1761F#6PYou wanna see what we've got?
+		Then we'd be happy to show you!{wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase name[18] chip[8]
+	CharSetChipPattern name[18] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#051F#5PCome at me!{wait}
+	}
+	TextWait
+	_59
+	ED6Battle battle[932] null 0 0 null
+	BgmStop 0ms
+	Call fn[0,3]
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (2600, 0, -27040) 0ms
+	CamSetDistance 0 4460 -10000 0ms
+	CamZoom 3600 0ms
+	CamRotate 225000mdeg 0ms
+	CamPers 262 0ms
+	CharSetChipBase name[16] chip[65535]
+	CharSetChipPattern name[16] 0
+	CharSetChipBase name[17] chip[65535]
+	CharSetChipPattern name[17] 0
+	CharSetChipBase name[18] chip[65535]
+	CharSetChipPattern name[18] 0
+	CharFlagsUnset char[0] 0x0080
+	CharSetChipBase char[0] chip[4]
+	CharSetChipPattern char[0] 3
+	CharSetPos char[0] (4000, 0, -27500) 0deg
+	CharSetPos name[16] (4000, 0, -24100) 180deg
+	CharSetPos name[17] (3000, 0, -24000) 180deg
+	CharSetPos name[18] (5000, 0, -24200) 180deg
+	Fork char[1] fork[0]:
+		CamZoom 3400 2000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[16] {
+		#1743F#12PW-We did it?{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#12PNo joke? We seriously beat him?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1762F#6PNo way...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PWell, well... I'm impressed.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharAnimation char[0] 3 1 500ms
+	CrossFade 500ms
+	SoundPlay sound[505] 0 0 100
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 300ms
+	TextTalk name[16] {
+		#1749F#12P...Yeah...{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1755F#12POf COURSE it was too good to be true...{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6PFigures.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#051F#5PHeh. Don't go gettin' too down in the dumps.{wait}
+	} {
+		You managed to get one over me. You should
+		still feel proud of yourselves.{wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#053F#5P...Anyway, now I'm confident I've got a good 
+		handle on what you're capable of.{wait}
+	} {
+		#051FSo let me break down how you did.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1742F#12PNow?{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#12PYou're gonna tell us our exam results, then?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1763F#6PHere it comes...{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#050F#5PFirst up: Deen.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1743F#12PI-I'm first?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#051F#5PAs a plus, your judgment ain't anything
+		to sniff at.{wait}
+	} {
+		#053FOn the other hand, you have a tendency
+		to play it safe even when you don't have
+		to.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1745F#12P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#050F#5PYou're next, Rais.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1752F#12PLay it on me!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PYour forte is your intuition. In that department,
+		there's solid potential.{wait}
+	} {
+		#555FAs far as negatives go, it's hard to overlook
+		how careless you can be when a situation calls
+		for critical thinking.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1755F#12P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#050F#5PFinally, there's you, Rocco.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6PHmph...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PI'll give you credit for your determination and
+		unrelenting drive to get the job done...{wait}
+	} {
+		...but I really can't praise your inability to make
+		calm, rational decisions.{wait}
+	} {
+		#051FStick those two qualities together and you're
+		a walking accident waiting to happen on your
+		own.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1763F#6P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#551F#5PSo as I'm sure you can already tell, the three
+		of you just aren't there yet. You're all missing
+		something before I could call you 'ready.'{wait}
+	} {
+		#555FWatching you all work, I was on tenterhooks
+		the whole time.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1749F#12PI hate to admit it, but...{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1754F#12P...he's probably right.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6PGuess we're done, then.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PThat's just if I rate the three of you as individuals.{wait}
+	} {
+		#051FIf I rate you as a team, then my verdict becomes
+		a little different.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 38 38 250ms 1
+	Emote name[17] 0mm 2000mm 38 38 250ms 1
+	Emote name[18] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	TextTalk name[16] {
+		#1743F#12P...Huh?{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#12PWait...{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1762F#6PWhat...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#051F#5PWatching you take on that last monster
+		on the way here was when I was finally
+		able to stake my confidence in you.{wait}
+	} {
+		Individually, none of you meet the mark...
+		but slap the three of you together,
+		and you just about squeeze over the line.{wait}
+	} {
+		#053FAnd that's why I'm gonna give you a passing
+		grade--on one condition.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[18] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	BgmPlay bgm[1] 0
+	Sleep 500ms
+	TextTalk name[17] {
+		#1750F#12PW-We passed...?{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1743F#12PWhat's the condition?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PYou can be bracers, but you can only accept
+		jobs as a group of three. Not individually.{wait}
+	} {
+		#050FNot until you become senior bracers, anyway.
+		We'll see where you stand then.{wait}
+	} {
+		I'll be passing the news on to Jean, so once
+		that's done and over with, he can throw all
+		the work you can handle your way.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1762F#6PTogether?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PThat's right. I want you to build up experience
+		working together as a group, work on each of
+		your weaknesses...{wait}
+	} {
+		#051F...then by the time you hit senior level, you'll
+		hopefully be ready to take on the kind of solo
+		work that you can't do now.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1761F#6PHeh. I see.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1749F#12PI can't help but feel lame for only getting
+		a conditional pass...{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1751F#12PSure, but it beats flunking out completely.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5PExactly. Well, I'll be expecting a lot
+		of improvement from you guys.{wait}
+	} {
+		#051FBy the way, you planning on stickin'
+		to stun rods as your main weapons?{wait}
+	} {
+		I'll buy you all new ones from the weapon
+		shop over in Bose in honor of you passing.
+		Just a little somethin' from me.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[18] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[16] {
+		#1747F#12PY-You're gonna buy us something?!{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#12PThat's awesome!{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6P...I think I'm gonna be sick.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 14 15 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#551F#5PFor cryin' out loud... My rep with you guys
+		is even worse than I thought.{wait}
+	} {
+		#555FI'm not some kinda evil monster that feeds
+		off of pain and suffering, you know.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1761F#6PHeh. Could've fooled me.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1756F#12PHe might be right, though. I mean, he's always nice
+		to that little girl. He's gotta have a soft spot hidden
+		in there somewhere!{wait}
+	} {
+		#1751FWhat was her name? Tita?{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#057F#5P#4SYou wanna run that by me again?{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Emote name[16] 0mm 2000mm 40 43 100ms 3
+	Sleep 500ms
+	TextTalk name[16] {
+		#1745F#6P(C-Crap... Why'd you have to go and bring
+		her up?){wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#11P(Oops.){wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#053F#5P...So that's how you guys wanna play this,
+		huh?{wait}
+	} {
+		#051FI should've known bein' nice wasn't gonna
+		get me anywhere.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6P*sigh* Way to frickin' go, Rais...{wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#054F#5PNo more messin' around! Your asses're gonna be
+		running your way back to the entrance!{wait}
+	} {
+		Anyone who falls behind any more than I'm willing
+		to allow gets my blade chucked in the back of their
+		head!{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 40 43 100ms 3
+	Sleep 500ms
+	CharTurnToChar name[16] name[18] 400deg/s
+	Sleep 300ms
+	TextTalk name[16] {
+		#1747F#11PArgh... Right. You're the one with the most
+		stamina here, Rocco!{wait}
+	} {
+		You gotta lead the way so he doesn't catch
+		up with us!{wait}
+	}
+	TextWait
+	CharTurnToChar name[18] name[16] 400deg/s
+	Sleep 300ms
+	TextTalk name[18] {
+		#1761F#6PHeh. That was the plan all along.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1751F*sigh* Exhausting right to the very end, huh...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#054F#5PLess talking, more running!{wait}
+	}
+	TextWait
+	CharTurnTo name[16] 180deg 0deg/s
+	CharTurnTo name[17] 180deg 0deg/s
+	CharTurnTo name[18] 180deg 0deg/s
+	Sleep 300ms
+	TextTalk name[16] {
+		#1743F#5PY-Yes, sir!{wait}
+	}
+	TextTalk name[17] {
+		#1752F#4PO-Okay!{wait}
+	}
+	TextTalk name[18] {
+		#1762F#3PR-Right!{wait}
+	}
+	TextClose 1
+	_59
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self name[16] 500deg/s
+	Emote name[18] 0mm 2000mm 40 43 100ms 3
+	ForkFunc name[18] fork[3] fn[0,4]
+	Sleep 100ms
+	Emote name[16] 0mm 2000mm 40 43 100ms 3
+	ForkFunc name[16] fork[3] fn[0,4]
+	Sleep 100ms
+	Emote name[17] 0mm 2000mm 40 43 100ms 3
+	ForkFunc name[17] fork[3] fn[0,4]
+	Sleep 100ms
+	Sc_C4Unset 536870912
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[18] fork[255]
+	ForkQuit name[16] fork[255]
+	ForkQuit name[17] fork[255]
+	ForkQuit char[0] fork[255]
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 6 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Training, Agate-Style] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_E6_1 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[12] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[12] 0x10
+		QuestFlagsSet quest[12] 0x20
+		ItemAdd item[328] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[328]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 100
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}100 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9476]
+	NewScene "m5513._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	CharTurnTo self 90deg 500deg/s
+	Fork self fork[1]:
+		CharWalkToPos self (6000, 0, -24300) 5000mm/s 0
+	ForkWait self fork[1]
+	Fork self fork[1]:
+		CharWalkToPos self (6000, 0, -39300) 5000mm/s 0
+	ForkWait self fork[1]
+	Return

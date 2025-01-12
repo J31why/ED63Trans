@@ -1,0 +1,1361 @@
+calmare tc scena
+scena:
+	name "Bose" "T1101.x"
+	town town[1]
+	bgm bgm[11]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02360._ch" "npl/ch02360p._cp"
+chip[1] "npl/ch02370._ch" "npl/ch02370p._cp"
+chip[2] "npl/ch01000._ch" "npl/ch01000p._cp"
+chip[3] "npl/ch01160._ch" "npl/ch01160p._cp"
+chip[4] "npl/ch01170._ch" "npl/ch01170p._cp"
+chip[5] "npl/ch01120._ch" "npl/ch01120p._cp"
+chip[6] "npl/ch01150._ch" "npl/ch01150p._cp"
+chip[7] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[8] "npl/ch01050._ch" "npl/ch01050p._cp"
+chip[9] "npl/ch01410._ch" "npl/ch01410p._cp"
+chip[10] "npl/ch01270._ch" "npl/ch01270p._cp"
+chip[11] "npl2/ch03090._ch" "npl2/ch03090p._cp"
+
+npc char[0]:
+	name "Mayor Maybelle"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Lila"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Jacob"
+	pos (48310, 0, 46460)
+	angle 262deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,4]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Harry"
+	pos (35880, 0, 53880)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0191
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Mina"
+	pos (35880, 0, 52760)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0191
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Orvid"
+	pos (49430, 0, 47820)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0191
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "Elegia"
+	pos (63060, 0, 49000)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[0,3]
+	talk fn[65535,65535]
+
+npc char[7]:
+	name "Letta"
+	pos (68240, 0, 53360)
+	angle 180deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[8]:
+	name "Fannie"
+	pos (68240, 0, 51940)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[9]:
+	name "Sister Rosa"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[9]
+	frame 0
+	ch chip[9]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[10]:
+	name "Lenard"
+	pos (26500, 0, 12600)
+	angle 0deg
+	x 0
+	cp chip[10]
+	frame 0
+	ch chip[10]
+	flags 0x0101
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[11]:
+	name "Anelace"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[11]
+	frame 0
+	ch chip[11]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[12]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 18:
+		system[1] = 25
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,14]
+	if system[66] == 19:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,15]
+		elif flag[9477]:
+			FlagUnset flag[9477]
+			system[1] = 191
+			SystemFlagsSet 0x10000000
+			Event fn[0,16]
+		elif flag[9478]:
+			system[1] = 0
+			FlagUnset flag[9478]
+			SystemFlagsSet 0x10000000
+			Event fn[0,17]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	while 1:
+		CharWalkToPos self (63060, 0, 72180) 2500mm/s 0
+		CharWalkToPos self (62120, 0, 74260) 2500mm/s 0
+		CharWalkToPos self (61300, 0, 74790) 2500mm/s 0
+		CharWalkToPos self (35350, 0, 74790) 2500mm/s 0
+		CharWalkToPos self (33690, 0, 73890) 2500mm/s 0
+		CharWalkToPos self (32840, 0, 73270) 2500mm/s 0
+		CharWalkToPos self (32840, 0, 48230) 2500mm/s 0
+		CharWalkToPos self (33380, 0, 46100) 2500mm/s 0
+		CharWalkToPos self (34280, 0, 45030) 2500mm/s 0
+		CharWalkToPos self (60310, 0, 45030) 2500mm/s 0
+		CharWalkToPos self (61730, 0, 45510) 2500mm/s 0
+		CharWalkToPos self (63060, 0, 47220) 2500mm/s 0
+	Return
+
+fn[4]:
+	while 1:
+		CharWalkToPos self (36420, 0, 46460) 2000mm/s 0
+		CharWalkToPos self (35060, 0, 46960) 2000mm/s 0
+		CharWalkToPos self (34640, 0, 47580) 2000mm/s 0
+		CharWalkToPos self (34640, 0, 71890) 2000mm/s 0
+		CharWalkToPos self (35010, 0, 72960) 2000mm/s 0
+		CharWalkToPos self (35610, 0, 73290) 2000mm/s 0
+		CharWalkToPos self (59910, 0, 73290) 2000mm/s 0
+		CharWalkToPos self (60980, 0, 72890) 2000mm/s 0
+		CharWalkToPos self (61510, 0, 72290) 2000mm/s 0
+		CharWalkToPos self (61510, 0, 47940) 2000mm/s 0
+		CharWalkToPos self (60770, 0, 46830) 2000mm/s 0
+		CharWalkToPos self (60290, 0, 46460) 2000mm/s 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (49340, 0, 59250) 0ms
+	CamSetDistance 0 19070 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 171000mdeg 0ms
+	CamPers 683 0ms
+	Fog 0xFFFFB7A4 25000 170000 0
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[6] 0x0080
+	CharFlagsUnset char[7] 0x0080
+	CharFlagsUnset char[8] 0x0080
+	Sleep 500ms
+	ED6_12 38000 85000 15000
+	Fork field_party[0] fork[0]:
+		CamLookPos (46310, 0, 55980) 3000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 5680 -10000 15000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2530 15000ms
+	Fork field_party[0] fork[3]:
+		CamRotate 90000mdeg 8000ms
+	Fork field_party[1] fork[1]:
+		CamPers 380 15000ms
+	BgmPlay bgm[11] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait field_party[0] fork[0]
+	Fork field_party[0] fork[0]:
+		CamLookPos (74510, 500, 44650) 9000ms
+	ForkWait field_party[0] fork[0]
+	CharFlagsSet char[2] 0x0080
+	CharFlagsSet char[6] 0x0080
+	_Char4A char[2] 255
+	_Char4A char[6] 255
+	Sleep 3000ms
+	ObjFlagsUnset object[0] 0x0010
+	ObjFrame object[0] 0
+	ObjPlay object[0] 59
+	ObjWait object[0]
+	Fork field_party[0] fork[0]:
+		CamLookPos (70000, 0, 45120) 4500ms
+	ForkFunc char[0] fork[0] fn[0,11]
+	ForkFunc char[9] fork[0] fn[0,12]
+	ForkWait char[0] fork[0]
+	ForkWait char[9] fork[0]
+	ForkWait field_party[0] fork[0]
+	TextTalk char[9] {
+		#5PThank you very much for coming today.{wait}
+	} {
+		I would like it very much if you would be able to
+		start coming to pray like this more often, though.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610F*sigh* I'm afraid it looks as though I'm not
+		going to have much choice in that matter.{wait}
+	} {
+		If I show any signs of skipping mass lately, 
+		Lila gives me a serious lecturing.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PHeehee. You're rather fortunate to have someone
+		like that by your side, if you ask me.{wait}
+	} {
+		The ideal partner is someone who isn't afraid to
+		criticize your choices, rather than someone who
+		just blindly supports them.{wait}
+	} {
+		I'm so glad that she's well now, though.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610FAs am I...{wait}
+	} {
+		The market's back to normal, that flying city has
+		gone...{wait}
+	} {
+		Everything is basically back to normal here now,
+		and what a relief that is.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PIndeed. Let us both offer our prayers to the
+		Goddess, that this peace might continue.{wait}
+	} {
+		...And on that note, I will be looking forward to
+		seeing you again here soon.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610FIndeed. Please give my regards to Father Holstein,
+		too.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PI shall. Goodbye for today, then.{wait}
+	}
+	TextWait
+	ForkFunc char[9] fork[0] fn[0,10]
+	ForkWait char[9] fork[0]
+	ObjFrame object[0] 59
+	ObjPlay object[0] 0
+	SoundStop sound[6]
+	SoundPlay sound[7] 0 0 100
+	ObjWait object[0]
+	Sleep 300ms
+	CharTurnTo char[0] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#610F#5PRight...{wait}
+	} {
+		Next, I should make my way over to the market.
+		Inspecting that is next in my schedule.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (67100, 0, 45120) 1500ms
+	CharWalkToPos char[0] (64569, 0, 44910) 2000mm/s 0
+	ForkWait char[0] fork[0]
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 600ms
+	CharTurnTo char[0] 0deg 400deg/s
+	ForkWait field_party[0] fork[0]
+	TextTalk char[0] {
+		#610F#5PWait, isn't that...?{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[0]:
+		CamLookPos (62800, 0, 61880) 4000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 4950 -10000 4000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2360 4000ms
+	Fork field_party[0] fork[3]:
+		CamRotate 0mdeg 4000ms
+	Fork field_party[1] fork[1]:
+		CamPers 392 4000ms
+	Sleep 2000ms
+	ForkFunc char[1] fork[0] fn[0,9]
+	ForkFunc char[10] fork[0] fn[0,8]
+	ForkWait char[1] fork[0]
+	ForkWait char[10] fork[0]
+	ForkWait field_party[0] fork[0]
+	Sleep 300ms
+	CharSetPos char[0] (69740, 0, 46480) 0deg
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PThanks so much. I had a whole lot of fun today.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620FAs did I.{wait}
+	}
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PGet in touch again soon, okay?{wait}
+	} {
+		My little sister's been eagerly looking forward
+		to the big day, too.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620FOf course.{wait}
+	} {
+		And with that, I'm afraid I must get going.{wait}
+	}
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5POh, yeah. It's about time for mass to end,
+		huh?{wait}
+	} {
+		Later!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620FIndeed.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo char[10] 0deg 400deg/s
+	Sleep 200ms
+	Fork char[10] fork[0]:
+		CharWalkToPos self (62750, 0, 70450) 2000mm/s 0
+	Sleep 3000ms
+	CrossFade 500ms
+	CamLookPos (70600, 0, 47820) 0ms
+	CamSetDistance 0 8550 -10000 0ms
+	CamZoom 1880 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 392 0ms
+	FadeWait
+	Sleep 300ms
+	ForkQuit char[10] fork[0]
+	ForkQuit char[1] fork[0]
+	CharFlagsSet char[10] 0x0080
+	TextTalk char[0] {
+		#610F#5PD-Did I just witness what I think I did...?{wait}
+	} {
+		...{wait}
+	} {
+		Still, I suppose it shouldn't come as much of a
+		surprise, given her age.{wait}
+	} {
+		While she might be kind of cold towards people,
+		she's a wonderful girl, and an attractive one,
+		too.{wait}
+	} {
+		If anything, I'm surprised it's taken her this
+		long to find someone.{wait}
+	} {
+		I can't deny that I do feel a little lonely at
+		the thought, but she's going to want my support.
+		It wouldn't be right for me not to give her it.{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[0]:
+		CamLookPos (68530, 0, 47650) 4000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 8770 -10000 4000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 1780 4000ms
+	CharSetPos char[1] (63970, 0, 53590) 180deg
+	Fork char[1] fork[1]:
+		CharWalkToPos self (65600, 0, 46620) 2000mm/s 0
+	ForkWait char[1] fork[1]
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 600ms
+	CharTurnTo char[1] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#620F#6PUmm...{wait}
+	} {
+		Might I ask exactly what you are doing?{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Emote char[0] 0mm 2000mm 40 43 100ms 3
+	Fork char[0] fork[0]:
+		CharWalkToPos2 self (69770, 0, 46130) 2000mm/s 0
+	CharTurnTo char[0] 270deg 500deg/s
+	ForkWait char[0] fork[0]
+	Sleep 200ms
+	TextTalk char[0] {
+		#610FO-Oh... It's you, Lila...{wait}
+	} {
+		H-How long have you been there?{wait}
+	}
+	TextWait
+	Sleep 300ms
+	TextTalk char[1] {
+		#620F...{wait}
+	} {
+		You appear to be rather tired.{wait}
+	} {
+		This is why I keep telling you that you need to
+		stop overexerting yourself...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610FOh, no, I'm not, I assure you.{wait}
+	} {
+		Well, shall we be going to the market?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620FWell, if you say so...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[0] fork[0] fn[0,7]
+	ForkLoop char[1] fork[0]:
+		CharTurnToChar self char[0] 400deg/s
+	Sleep 3000ms
+	ForkFunc char[1] fork[0] fn[0,6]
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9477]
+	NewScene "t1111._sn" 100 0 0
+	Hcf
+	Return
+
+fn[6]:
+	CharWalkToPos self (63280, 0, 59210) 2000mm/s 0
+	Return
+
+fn[7]:
+	CharWalkToPos2 self (64930, 0, 47860) 2000mm/s 0
+	CharWalkToPos self (63280, 0, 59210) 2000mm/s 0
+	Return
+
+fn[8]:
+	CharFlagsUnset self 0x0080
+	CharSetPos self (58570, 0, 60450) 90deg
+	Fork self fork[1]:
+		CharWalkToPos self (62750, 0, 60450) 2000mm/s 0
+	ForkWait self fork[1]
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[9]:
+	CharFlagsUnset self 0x0080
+	CharSetPos self (58390, 0, 58930) 90deg
+	Fork self fork[1]:
+		CharWalkToPos self (62750, 0, 58700) 2000mm/s 0
+	ForkWait self fork[1]
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[10]:
+	CharTurnTo self 90deg 400deg/s
+	Fork self fork[2]:
+		CharWalkToPos self (73050, 500, 44510) 2000mm/s 0
+	ForkWait self fork[2]
+	Fork self fork[2]:
+		CharWalkToPos self (73960, 500, 44520) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait self fork[2]
+	ForkWait self fork[1]
+	CharFlagsSet self 0x0080
+	Return
+
+fn[11]:
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	CharSetPos self (74570, 500, 44500) 270deg
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	Fork self fork[2]:
+		CharWalkToPos self (67160, 0, 44910) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	CharTurnTo self 90deg 400deg/s
+	Return
+
+fn[12]:
+	Sleep 900ms
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	CharSetPos self (74570, 500, 44500) 270deg
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	Fork self fork[2]:
+		CharWalkToPos self (69800, 0, 44970) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	Return
+
+fn[13]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (22300, 0, 55980) 0ms
+	CamSetDistance 0 9330 -10000 0ms
+	CamZoom 2790 0ms
+	CamRotate 212000mdeg 0ms
+	CamPers 405 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[6] 0x0080
+	CharFlagsUnset char[7] 0x0080
+	CharFlagsUnset char[8] 0x0080
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Several days later...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 500ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (19230, 0, 57650) 6000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 7970 -10000 6000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3040 6000ms
+	Fork field_party[0] fork[3]:
+		CamRotate 270000mdeg 6000ms
+	Fork field_party[1] fork[1]:
+		CamPers 372 6000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait field_party[0] fork[0]
+	Fork field_party[0] fork[0]:
+		CamZoom 2900 2000ms
+	Fork field_party[1] fork[1]:
+		CamPers 355 2000ms
+	Sleep 1000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9479]
+	NewScene "t1111._sn" 100 0 0
+	Hcf
+	Return
+
+fn[14]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CamLookPos (48000, 0, 60000) 0ms
+	CamSetDistance 0 18700 -10000 0ms
+	CamZoom 2160 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 746 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[6] 0x0080
+	CharFlagsUnset char[7] 0x0080
+	CharFlagsUnset char[8] 0x0080
+	Sc_C8 512 70 "C_PLAC15._CH" 0 2000
+	FadeIn 2000ms 0x00000000
+	Fork char[12] fork[0]:
+		CamLookPos (59000, 0, 84600) 9000ms
+	Fork char[12] fork[1]:
+		CamSetDistance 0 6000 -10000 9000ms
+	Fork char[12] fork[2]:
+		CamZoom 2000 9000ms
+	Fork char[12] fork[3]:
+		CamPers 616 9000ms
+	Fork field_party[0] fork[0]:
+		CamRotate 0mdeg 9000ms
+	ForkWait char[12] fork[0]
+	Sleep 500ms
+	Fork char[12] fork[2]:
+		CamZoom 1900 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "t1121._sn" 100 0 0
+	Hcf
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CamLookPos (49340, 0, 59250) 0ms
+	CamSetDistance 0 19070 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 171000mdeg 0ms
+	CamPers 683 0ms
+	Fog 0xFFFFB7A4 25000 170000 0
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[6] 0x0080
+	CharFlagsUnset char[7] 0x0080
+	CharFlagsUnset char[8] 0x0080
+	ED6_12 38000 85000 15000
+	Fork field_party[0] fork[0]:
+		CamLookPos (46310, 0, 55980) 3000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 5680 -10000 15000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2530 15000ms
+	Fork field_party[0] fork[3]:
+		CamRotate 90000mdeg 8000ms
+	Fork field_party[1] fork[1]:
+		CamPers 380 15000ms
+	Sc_C8 512 70 "C_PLAC15._CH" 0 2000
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait field_party[0] fork[0]
+	Fork field_party[0] fork[0]:
+		CamLookPos (74510, 500, 44650) 9000ms
+	ForkWait field_party[0] fork[0]
+	CharFlagsSet char[2] 0x0080
+	CharFlagsSet char[6] 0x0080
+	_Char4A char[2] 255
+	_Char4A char[6] 255
+	Sleep 3000ms
+	ObjFlagsUnset object[0] 0x0010
+	ObjFrame object[0] 0
+	ObjPlay object[0] 59
+	ObjWait object[0]
+	Fork field_party[0] fork[0]:
+		CamLookPos (70000, 0, 45120) 4500ms
+	ForkFunc char[0] fork[0] fn[0,11]
+	ForkFunc char[9] fork[0] fn[0,12]
+	ForkWait char[0] fork[0]
+	ForkWait char[9] fork[0]
+	ForkWait field_party[0] fork[0]
+	TextTalk char[9] {
+		#5PThank you very much for coming today.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		I'd love it if you would be able to start coming
+		to pray like this more often.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#615F#6P*sigh* I'm afraid it looks as though I won't
+		have a choice in that matter.{wait}
+	} {
+		#610FIf I show any signs of skipping mass lately, 
+		Lila gives me a stern lecturing.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PYou're rather fortunate to have someone like her
+		by your side, you know.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PNothing is more valuable to a person than someone 
+		who will chide them when they seem to be straying 
+		from the right path.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610F#6POh, I couldn't agree more.{wait}
+	} {
+		#618FI do wish she would go a little easier on me
+		than she currently does, however.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PLook at it this way: the fact that she doesn't
+		shows just how important you are to her.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PFor one thing, I hear you've been exceptionally
+		busy with work these days.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PI wouldn't be surprised if she hoped to make
+		the time you spend here to be a break from all
+		of that.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#617F#6PAs frustrating as it is to admit, that's a scarily
+		sound assessment.{wait}
+	} {
+		#610FBut she can't keep me away from work forever,
+		now, can she? I think I ought to be getting back
+		to it now. So if you'll excuse me...{wait}
+	} {
+		Please give my regards to Father Holstein, too.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PHeehee. Certainly. A good day to you, then.{wait}
+	}
+	TextWait
+	ForkFunc char[9] fork[0] fn[0,10]
+	ForkWait char[9] fork[0]
+	ObjFrame object[0] 59
+	ObjPlay object[0] 0
+	SoundStop sound[6]
+	SoundPlay sound[7] 0 0 100
+	ObjWait object[0]
+	Sleep 300ms
+	CharTurnTo char[0] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#615F#5P*sigh* As if Lila wasn't bad enough, now I have
+		Sister Rosa saying the same things as her...{wait}
+	} {
+		#610FOhhh, well... Next up is inspecting the market,
+		so I should probably get to doing that...{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 315deg 400deg/s
+	Sleep 800ms
+	CharTurnTo char[0] 225deg 400deg/s
+	Sleep 800ms
+	CharTurnTo char[0] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#615F#5PI was expecting Lila to be here to meet me by
+		now, though...{wait}
+	} {
+		#618FShe's been awfully cold to me lately, and I still
+		don't have a clue as to why.{wait}
+	} {
+		I thought she was going to pray with me today,
+		too, but then she up and decided she needed to
+		take care of shopping...{wait}
+	} {
+		#610FMaybe I can grill her on it later.{wait}
+	} {
+		For now, I should hurry and get to the market.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (67100, 0, 45120) 1500ms
+	CharWalkToPos char[0] (64569, 0, 44910) 2000mm/s 0
+	ForkWait char[0] fork[0]
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[0] 0deg 400deg/s
+	ForkWait field_party[0] fork[0]
+	Sleep 300ms
+	TextTalk char[0] {
+		#613F#11POh! Isn't that Lila...?{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[0]:
+		CamLookPos (62800, 0, 61880) 4000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 4950 -10000 4000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2360 4000ms
+	Fork field_party[0] fork[3]:
+		CamRotate 0mdeg 4000ms
+	Fork field_party[1] fork[1]:
+		CamPers 392 4000ms
+	Sleep 2000ms
+	ForkFunc char[1] fork[0] fn[0,9]
+	ForkFunc char[10] fork[0] fn[0,8]
+	ForkWait char[1] fork[0]
+	ForkWait char[10] fork[0]
+	ForkWait field_party[0] fork[0]
+	Sleep 300ms
+	CharSetPos char[0] (69740, 0, 46480) 0deg
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PThanks. I really do appreciate your help today.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620F#6PNot at all. I should be saying the same to you.{wait}
+	}
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PAnyway, if you need anything else, just give me
+		a call.{wait}
+	}
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PI can always worm my way out of whatever's on
+		my schedule to make time for you.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620F#6PI'll certainly keep that in mind.{wait}
+	}
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PPlease do! My little sister's been so excited for
+		the big day already.{wait}
+	}
+	TextWait
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PIt'll surely be one to remember.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#621FHeehee. Yes, I'm sure.{wait}
+	} {
+		For now, however, I really should be going.{wait}
+	}
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5POh, yeah. The mayor should be about done with
+		mass now, right?{wait}
+	}
+	TextWait
+	TextTalkNamed char[10] "Pleasant Man" {
+		#5PUntil next time!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620FFarewell for now.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo char[10] 0deg 400deg/s
+	Sleep 200ms
+	Fork char[10] fork[0]:
+		CharWalkToPos self (62750, 0, 70450) 2000mm/s 0
+	Sleep 3000ms
+	CrossFade 500ms
+	CamLookPos (70600, 0, 47820) 0ms
+	CamSetDistance 0 8550 -10000 0ms
+	CamZoom 1880 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 392 0ms
+	FadeWait
+	ForkQuit char[10] fork[0]
+	ForkQuit char[1] fork[0]
+	CharFlagsSet char[10] 0x0080
+	Sleep 500ms
+	TextTalk char[0] {
+		#613F#12PD-Did I just witness what I think I did...?{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote char[0] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#615F#12PSo that's why she's been acting so distant
+		towards me lately...{wait}
+	} {
+		#618FI wish she had said something... I thought
+		we were supposed to be close...{wait}
+	} {
+		...{wait}
+	} {
+		#610FI suppose it shouldn't come as much of a surprise.
+		She's a grown woman.{wait}
+	} {
+		And she might seem cold towards people on the
+		outside, but she's a wonderful human being...and
+		a rather attractive one, too.{wait}
+	} {
+		If anything, I'm surprised it's taken her this long
+		to find someone.{wait}
+	} {
+		#617F...Well, it wouldn't be fair for me to get in the
+		way of her happiness.{wait}
+	} {
+		#611FI do feel a little lonely at the thought, but she's
+		going to want my support. It wouldn't be right
+		for me not to give her it.{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[0]:
+		CamLookPos (68530, 0, 47650) 4000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 8770 -10000 4000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 1780 4000ms
+	CharSetPos char[1] (63970, 0, 53590) 180deg
+	Fork char[1] fork[1]:
+		CharWalkToPos self (65600, 0, 46620) 2000mm/s 0
+	ForkWait char[1] fork[1]
+	Sleep 300ms
+	TextTalk char[1] {
+		#623F#5P*sigh* I'll have to apologize for being late.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo char[1] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#622F#6PUmm...{wait}
+	} {
+		Might I ask exactly what you are doing?{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Emote char[0] 0mm 2000mm 40 43 100ms 3
+	Fork char[0] fork[0]:
+		CharWalkToPos2 self (69770, 0, 46130) 2000mm/s 0
+	CharTurnTo char[0] 270deg 500deg/s
+	ForkWait char[0] fork[0]
+	Sleep 300ms
+	TextTalk char[0] {
+		#613F#11PO-Oh... It's you, Lila...{wait}
+	} {
+		#617FH-How long have you been there?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#622F#6P...{wait}
+	} {
+		#625FYou appear to be rather tired.{wait}
+	} {
+		This is why I keep telling you that you need
+		to stop overexerting yourself...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#617F#11POh, no! I'm not, I assure you.{wait}
+	} {
+		#611FShall we head to the market?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#622F#6PWell, if you say so...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (65000, 0, 55000) 7000ms
+	Fork field_party[0] fork[1]:
+		CamRotate 33000mdeg 7000ms
+	ForkFunc char[0] fork[0] fn[0,7]
+	ForkLoop char[1] fork[0]:
+		CharTurnToChar self char[0] 400deg/s
+	Sleep 3000ms
+	ForkFunc char[1] fork[0] fn[0,6]
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[0] fork[255]
+	ForkQuit char[1] fork[255]
+	CharFlagsSet char[0] 0x0080
+	CharFlagsSet char[1] 0x0080
+	Sleep 2000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}The next day...{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	CamLookPos (30640, 0, 75000) 0ms
+	CamSetDistance 0 12800 -10000 0ms
+	CamZoom 2600 0ms
+	CamRotate 270000mdeg 0ms
+	CamPers 502 0ms
+	Fork char[12] fork[0]:
+		CamLookPos (55060, 0, 75000) 6000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[12] fork[0]
+	Fork char[12] fork[0]:
+		CamLookPos (55060, 0, 84540) 5000ms
+	Fork char[12] fork[1]:
+		CamSetDistance 0 5500 -10000 5000ms
+	Fork char[12] fork[2]:
+		CamZoom 2600 5000ms
+	Fork char[12] fork[3]:
+		CamPers 482 5000ms
+	Fork field_party[0] fork[0]:
+		CamRotate 320000mdeg 5000ms
+	ForkWait char[12] fork[0]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9476]
+	NewScene "t1121._sn" 100 0 0
+	Hcf
+	Return
+
+fn[16]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (36790, 0, 69390) 0ms
+	CamSetDistance 0 7000 -10000 0ms
+	CamZoom 2700 0ms
+	CamRotate 90000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[7] 0x0080
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsUnset char[11] 0x0080
+	_Char4A char[3] 255
+	_Char4A char[4] 255
+	CharSetPos char[3] (36000, 0, 70120) 225deg
+	CharSetPos char[4] (36000, 0, 68660) 315deg
+	CharSetPos char[11] (34300, 0, 69390) 90deg
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#15A#4STestimony 2{0x18}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 1500ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[4] {
+		#11PYes, I saw them.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#11PI remember the man escorting the maid to
+		the front door of the mayor's mansion.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#5PI was surprised he didn't go inside with her,
+		honestly.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#5PWhenever I take Mina home, I always do!{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#11P...{wait}
+	}
+	TextWait
+	CharTurnTo char[4] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[4] {
+		#2P*sigh* Oh, Harry...{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2PIf you ask me, you're the one behaving improperly.
+		Not the man we're talking about.{wait}
+	}
+	TextWait
+	Emote char[3] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 500ms
+	CharTurnTo char[3] 180deg 400deg/s
+	TextTalk char[3] {
+		#1P...I am?{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2POrdinarily, when a gentleman escorts a lady to
+		her home, he doesn't go inside.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#1P...Really?{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2PReally.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#1PB-But surely the fact I do that is proof that
+		we're that close, right?{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2PI wouldn't be assuming that if I were you.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2PFor one thing, those two seemed awfully
+		close even without that, didn't they?{wait}
+	}
+	TextWait
+	Emote char[3] 0mm 1700mm 20 23 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1200ms
+	TextTalk char[3] {
+		#1P*sniffle*{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2PI'm not saying that it's always wrong
+		to go inside, per se.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2PIf that's what you want to keep doing,
+		you won't see me stopping you.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#1PO-Okay...{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#1PI-I will, then!{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#2P(*sigh* Why does everything have to be
+		so much work when it comes to you...?){wait}
+	}
+	TextWait
+	TextTalk char[11] {
+		#819F#6PAhaha... Thanks for the info, anyway.{wait}
+	}
+	TextWait
+	FadeOut 1500ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "t1110._sn" 100 0 0
+	Hcf
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (22300, 0, 55980) 0ms
+	CamSetDistance 0 9330 -10000 0ms
+	CamZoom 2790 0ms
+	CamRotate 212000mdeg 0ms
+	CamPers 405 0ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharFlagsUnset char[6] 0x0080
+	CharFlagsUnset char[7] 0x0080
+	CharFlagsUnset char[8] 0x0080
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WSeveral days later...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	BgmPlay bgm[11] 0
+	Fork char[12] fork[0]:
+		CamLookPos (19230, 0, 57650) 6000ms
+	Fork char[12] fork[1]:
+		CamSetDistance 0 7970 -10000 6000ms
+	Fork char[12] fork[2]:
+		CamZoom 3040 6000ms
+	Fork char[12] fork[3]:
+		CamRotate 270000mdeg 6000ms
+	Fork field_party[0] fork[0]:
+		CamPers 372 6000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[12] fork[0]
+	Sleep 500ms
+	Fork char[12] fork[0]:
+		CamZoom 2900 2000ms
+	Fork char[12] fork[1]:
+		CamPers 355 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsUnset 0x02000000
+	FlagSet flag[9479]
+	NewScene "t1111._sn" 100 0 0
+	Hcf
+	Return

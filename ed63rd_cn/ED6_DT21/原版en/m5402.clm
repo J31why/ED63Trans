@@ -1,0 +1,853 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M5402.x"
+	town town[1]
+	bgm bgm[234]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch15020._ch" "mons2/ch15020p._cp"
+chip[1] "mons2/ch15021._ch" "mons2/ch15021p._cp"
+
+monster char[0]:
+	name ""
+	pos (-930, 0, 20350)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[665]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (91770, 0, 23560)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[665]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (145970, 0, -97810)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[665]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-91300, 0, 23120)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[665]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (-144320, 0, -55930)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[665]
+	flag flag[0]
+	unk3 0
+
+trigger[0]:
+	pos1 (110, -1000, 82080)
+	pos2 (3000, 3000, 0)
+	flags 0x0040
+	func fn[0,17]
+	unk1 0
+
+look_point[0]:
+	pos (1610, 0, -19170)
+	radius 1000mm
+	bubble_pos (2500, 3000, -19000)
+	flags 0x007C
+	func fn[0,13]
+	unk1 0
+
+look_point[1]:
+	pos (5030, 0, 76990)
+	radius 1000mm
+	bubble_pos (5030, 1000, 76990)
+	flags 0x007C
+	func fn[0,16]
+	unk1 0
+
+look_point[2]:
+	pos (-49300, 0, 17980)
+	radius 1000mm
+	bubble_pos (-49910, 0, 18010)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[3]:
+	pos (-49300, 0, 14500)
+	radius 1000mm
+	bubble_pos (-49920, 0, 14540)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[4]:
+	pos (-49300, 0, 21480)
+	radius 1000mm
+	bubble_pos (-49960, 0, 21520)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[5]:
+	pos (41020, 0, -23700)
+	radius 1000mm
+	bubble_pos (41020, 0, -23040)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+look_point[6]:
+	pos (38540, 0, -23700)
+	radius 1000mm
+	bubble_pos (38540, 0, -23040)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+look_point[7]:
+	pos (43460, 0, -23700)
+	radius 1000mm
+	bubble_pos (43550, 0, -23000)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+look_point[8]:
+	pos (-48700, 0, -27980)
+	radius 1000mm
+	bubble_pos (-48040, 0, -27980)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+look_point[9]:
+	pos (47800, 0, 23490)
+	radius 1000mm
+	bubble_pos (48450, 0, 23510)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+look_point[10]:
+	pos (47790, 0, 19970)
+	radius 1000mm
+	bubble_pos (48410, 0, 19980)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+look_point[11]:
+	pos (47800, 0, 16490)
+	radius 1000mm
+	bubble_pos (48460, 0, 16460)
+	flags 0x007C
+	func fn[0,11]
+	unk1 0
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,15]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[25] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	ObjFrame object[1] 100
+	ObjFlagsUnset object[1] 0x0002
+	Sc_BE 1 1 2 0 1000 0 2 -5600 -1000 -27500 3600 2000 -24500
+	ObjFlagsUnset object[0] 0x0020
+	ObjFlagsUnset object[0] 0x0008
+	ObjFrame object[0] 0
+	ObjFlagsSet object[0] 0x0002
+	ObjFlagsUnset object[2] 0x0020
+	ObjFlagsUnset object[2] 0x0008
+	ObjFrame object[2] 0
+	ObjFlagsSet object[2] 0x0002
+	ObjFlagsUnset object[3] 0x0020
+	ObjFlagsUnset object[3] 0x0008
+	ObjFrame object[3] 0
+	ObjFlagsSet object[3] 0x0002
+	ObjFlagsUnset object[4] 0x0020
+	ObjFlagsUnset object[4] 0x0008
+	ObjFrame object[4] 0
+	ObjFlagsSet object[4] 0x0002
+	char[0].36 = 215
+	char[1].36 = 215
+	char[2].36 = 215
+	char[3].36 = 215
+	char[4].36 = 215
+	if !flag[11216]:
+		ObjFrame object[26] 0
+	else:
+		ObjFrame object[26] 60
+	if !flag[11217]:
+		ObjFrame object[27] 0
+	else:
+		ObjFrame object[27] 60
+	if !flag[11218]:
+		ObjFrame object[28] 0
+	else:
+		ObjFrame object[28] 60
+	if !flag[11219]:
+		ObjFrame object[29] 0
+	else:
+		ObjFrame object[29] 60
+	if !flag[11220]:
+		ObjFrame object[30] 0
+	else:
+		ObjFrame object[30] 60
+	if !flag[11221]:
+		ObjFrame object[31] 0
+	else:
+		ObjFrame object[31] 60
+	if !flag[11222]:
+		ObjFrame object[32] 0
+	else:
+		ObjFrame object[32] 60
+	if !flag[11223]:
+		ObjFrame object[39] 0
+	else:
+		ObjFrame object[39] 60
+	if !flag[11224]:
+		ObjFrame object[40] 0
+	else:
+		ObjFrame object[40] 60
+	if !flag[11225]:
+		ObjFrame object[41] 0
+	else:
+		ObjFrame object[41] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11216]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[26] 30
+		ObjWait object[26]
+		ObjFrame object[26] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 5000
+		TextMessage null {
+			{color 5}Obtained {color 2}5000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11216]
+	else:
+		TextMessage null {
+			{color 5}Mirror, mirror on the wall, where's my loot? Who took it all?{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 67 0
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11217]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[27] 60
+		Sleep 500ms
+		if ItemAdd item[726] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[726]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11217]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[726]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[726]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[27] 60
+			ObjPlay object[27] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}I-I... I can't think of anything to say!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 68 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[11218]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[28] 60
+		Sleep 500ms
+		if ItemAdd item[329] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[329]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11218]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[329]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[329]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[28] 60
+			ObjPlay object[28] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Hey! Nice to see you again!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 69 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	if !flag[11219]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[29] 60
+		Sleep 500ms
+		if ItemAdd item[320] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[320]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11219]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[320]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[320]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[29] 60
+			ObjPlay object[29] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}My brethren warned me of your arrival. You are 'The One Who Checks All
+			Chests Twice,' yes?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 70 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[6]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11220]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[30] 30
+		ObjWait object[30]
+		ObjFrame object[30] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		SepithAdd 0 200
+		SepithAdd 1 200
+		SepithAdd 2 200
+		SepithAdd 3 200
+		SepithAdd 4 200
+		SepithAdd 5 200
+		SepithAdd 6 200
+		TextMessage null {
+			{color 2}Obtained:
+			#56IEarth Sepith x200
+			#57IWater Sepith x200
+			#58IFire Sepith x200
+			#59IWind Sepith x200
+			#62ITime Sepith x200
+			#60ISpace Sepith x200
+			#61IMirage Sepith x200.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11220]
+	else:
+		TextMessage null {
+			{color 5}Have I ever told you the definition of insanity?{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 71 0
+	Return
+
+fn[7]:
+	SystemFlagsSet 0x08000000
+	if !flag[11221]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[31] 60
+		Sleep 500ms
+		if ItemAdd item[507] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[507]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11221]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[507]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[507]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[31] 60
+			ObjPlay object[31] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}At least buy me dinner first!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 72 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[8]:
+	SystemFlagsSet 0x08000000
+	if !flag[11222]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[32] 60
+		Sleep 500ms
+		if ItemAdd item[739] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[739]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11222]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[739]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[739]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[32] 60
+			ObjPlay object[32] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}If a treasure chest is opened in a forest and there's no adventurer there
+			to check it, is it still empty?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 73 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[9]:
+	SystemFlagsSet 0x08000000
+	if !flag[11223]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[39] 60
+		Sleep 500ms
+		if ItemAdd item[508] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[508]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11223]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[508]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[508]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[39] 60
+			ObjPlay object[39] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}By the way, where did you find the key to open me?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 74 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[10]:
+	SystemFlagsSet 0x08000000
+	if !flag[11224]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[40] 60
+		Sleep 500ms
+		if ItemAdd item[723] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[723]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11224]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[723]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[723]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[40] 60
+			ObjPlay object[40] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}There is one thing I wanna know at this time: is Olivier being an idiot again?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 75 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[11]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11225]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[41] 30
+		ObjWait object[41]
+		ObjFrame object[41] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		SepithAdd 0 200
+		SepithAdd 1 200
+		SepithAdd 2 200
+		SepithAdd 3 200
+		SepithAdd 4 200
+		SepithAdd 5 200
+		SepithAdd 6 200
+		TextMessage null {
+			{color 2}Obtained:
+			#56IEarth Sepith x200
+			#57IWater Sepith x200
+			#58IFire Sepith x200
+			#59IWind Sepith x200
+			#62ITime Sepith x200
+			#60ISpace Sepith x200
+			#61IMirage Sepith x200.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11225]
+	else:
+		TextMessage null {
+			{color 5}I have no vocal cords, and I must scream.{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 76 0
+	Return
+
+fn[12]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Open the Door?{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[13]:
+	TextStart null
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (-370, 0, -18710) 90deg
+	CharSetPos field_party[1] (-250, 0, -20250) 90deg
+	CharSetPos field_party[2] (-2290, 0, -18790) 90deg
+	CharSetPos field_party[3] (-2260, 0, -20480) 90deg
+	CamLookPos (240, 0, -19190) 0ms
+	CamSetDistance 0 6300 -10000 0ms
+	CamZoom 4520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	if !QuestFlagsGet quest[25] 0x02:
+		QuestFlagsSet quest[25] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	if QuestFlagsGet quest[25] 0x08:
+		TextMessage null {
+			{color 5}#40WThe path has already been opened...
+			#500W 
+			#40WOpen the door, and step inside.{color 0}{wait}
+		}
+		TextWait
+	else:
+		TextMessage null {
+			{color 5}#40WThe darkness is lit by septium's light,
+			and that light shall act as a guide to
+			all who have lost their way.
+			#500W 
+			#40WPresent for me all of the mystical gems
+			that contain that light.
+			Only then shall the door open...{color 0}{wait}
+		}
+		TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if QuestFlagsGet quest[25] 0x08:
+		Call fn[0,12]
+		if var[0] == 0:
+			Call fn[0,14]
+	elif ItemHas item[661] 0 != 0 && ItemHas item[663] 0 != 0 && ItemHas item[665] 0 != 0 && ItemHas item[667] 0 != 0 && ItemHas item[669] 0 != 0 && ItemHas item[671] 0 != 0 && ItemHas item[673] 0 != 0 && ItemHas item[675] 0 != 0 && ItemHas item[679] 0 != 0 && ItemHas item[709] 0 != 0 && ItemHas item[716] 0 != 0:
+		Call fn[0,12]
+		if var[0] == 0:
+			Call fn[0,14]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[14]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[42] 0
+	ObjPlay object[42] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[42]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3840 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 10 0 0
+	NewScene "p9002._sn" 100 0 0
+	Hcf
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (-370, 0, -18710) 90deg
+	CharSetPos field_party[1] (-250, 0, -20250) 90deg
+	CharSetPos field_party[2] (-2290, 0, -18790) 90deg
+	CharSetPos field_party[3] (-2260, 0, -20480) 90deg
+	CamLookPos (240, 0, -19190) 0ms
+	CamSetDistance 0 6300 -10000 0ms
+	CamZoom 4520 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return
+
+fn[16]:
+	system[40] = 65535
+	ImageShow "c_vis520._ch" 0 0 500ms
+	Sleep 500ms
+	TextClose 3
+	ImageHide 500ms
+	TextEnd null
+	Return
+
+fn[17]:
+	FlagSet flag[11114]
+	FlagUnset flag[11115]
+	FlagUnset flag[11116]
+	FlagUnset flag[11117]
+	FlagUnset flag[11118]
+	FlagUnset flag[11119]
+	FlagUnset flag[11120]
+	FlagUnset flag[11121]
+	Return

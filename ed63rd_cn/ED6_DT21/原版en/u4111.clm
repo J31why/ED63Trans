@@ -1,0 +1,131 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4111.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (124330, 0, 67840)
+	radius 1000mm
+	bubble_pos (124330, 1000, 67840)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-6220, 0, 61170)
+	radius 1000mm
+	bubble_pos (-6220, 1000, 61170)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if flag[10017]:
+		OpLoad "U4111_y"
+	else:
+		OpLoad "U4111_n"
+	if !flag[10172]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	if !flag[10173]:
+		ObjFrame object[3] 0
+	else:
+		ObjFrame object[3] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10172]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 30
+		ObjWait object[2]
+		ObjFrame object[2] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		SepithAdd 0 50
+		SepithAdd 1 50
+		SepithAdd 2 50
+		SepithAdd 3 50
+		TextMessage null {
+			{color 2}Obtained:
+			#56IEarth Sepith x50
+			#57IWater Sepith x50
+			#58IFire Sepith x50
+			#59IWind Sepith x50.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10172]
+	else:
+		TextMessage null {
+			{color 5}If you stare into this chest and say 'Ouroboros' five times, Bleublanc will
+			visit you this night.{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 249 0
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10173]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[3] 30
+		ObjWait object[3]
+		ObjFrame object[3] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		SepithAdd 0 50
+		SepithAdd 1 50
+		SepithAdd 2 50
+		SepithAdd 3 50
+		TextMessage null {
+			{color 2}Obtained:
+			#56IEarth Sepith x50
+			#57IWater Sepith x50
+			#58IFire Sepith x50
+			#59IWind Sepith x50.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10173]
+	else:
+		TextMessage null {
+			{color 5}Pssst... Your survival hinges on what I have to say. Run! Run now!{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 250 0
+	Return

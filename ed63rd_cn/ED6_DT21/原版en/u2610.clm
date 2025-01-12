@@ -1,0 +1,864 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U2610.x"
+	town town[1]
+	bgm bgm[231]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02470._ch" "npl/ch02470p._cp"
+chip[1] "apl2/ch20714._ch" "apl2/ch20714p._cp"
+chip[2] "npl2/ch04410._ch" "npl2/ch04410p._cp"
+chip[3] "npl2/ch04411._ch" "npl2/ch04411p._cp"
+chip[4] "npl2/ch04414._ch" "npl2/ch04414p._cp"
+chip[5] "npl2/ch04419._ch" "npl2/ch04419p._cp"
+
+npc char[0]:
+	name "Butler Phillip"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (-80200, 300, 32200)
+	radius 1000mm
+	bubble_pos (-80200, 1300, 32200)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		_B6 0
+		Event fn[0,7]
+	elif flag[11015] && !flag[11016]:
+		system[1] = 0
+		Event fn[0,3]
+	Return
+
+fn[1]:
+	if !flag[11179]:
+		ObjFrame object[11] 0
+	else:
+		ObjFrame object[11] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11179]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[11] 30
+		ObjWait object[11]
+		ObjFrame object[11] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		SepithAdd 0 200
+		SepithAdd 1 200
+		SepithAdd 2 200
+		SepithAdd 3 200
+		SepithAdd 4 200
+		SepithAdd 5 200
+		SepithAdd 6 200
+		TextMessage null {
+			{color 2}Obtained:
+			#56IEarth Sepith x200
+			#57IWater Sepith x200
+			#58IFire Sepith x200
+			#59IWind Sepith x200
+			#62ITime Sepith x200
+			#60ISpace Sepith x200
+			#61IMirage Sepith x200.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11179]
+	else:
+		TextMessage null {
+			{color 5}The words 'Renne,' 'Rend,' and 'End' combine to make...what, exactly?
+			Be sure to keep this hint in mind.{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 244 0
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Call fn[0,5]
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	BgmStop 2000ms
+	Tc_E0 party[0] 70 2
+	Tc_E0 party[0] 71 3
+	Tc_E0 party[1] 72 2
+	Tc_E0 party[1] 73 3
+	Tc_E0 party[2] 74 2
+	Tc_E0 party[2] 75 3
+	Tc_E0 party[3] 76 2
+	Tc_E0 party[3] 77 3
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (0, 2000, 24770) 180deg
+	CharFlagsSet char[0] 0x0002
+	CharFlagsSet char[0] 0x0020
+	CharSetChipBase char[0] chip[1]
+	CharSetChipPattern char[0] 0
+	CharSetPos name[8] (-970, 0, 3040) 0deg
+	if CharInSlot 0 party[1] == 4:
+		CharSetPos party[1] (570, 0, 2840) 0deg
+		CharSetPos party[2] (-1170, 0, 1320) 0deg
+		CharSetPos party[3] (590, 0, 1090) 0deg
+	elif CharInSlot 0 party[2] == 4:
+		CharSetPos party[2] (570, 0, 2840) 0deg
+		CharSetPos party[1] (-1170, 0, 1320) 0deg
+		CharSetPos party[3] (590, 0, 1090) 0deg
+	elif CharInSlot 0 party[3] == 4:
+		CharSetPos party[3] (570, 0, 2840) 0deg
+		CharSetPos party[1] (-1170, 0, 1320) 0deg
+		CharSetPos party[2] (590, 0, 1090) 0deg
+	CamLookPos (920, 0, 3200) 0ms
+	CamSetDistance 0 6880 -10000 0ms
+	CamZoom 2340 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 304 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	TextTalkNamed char[0] "Man's Voice" {
+		#4PI have been anticipating your arrival.{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork name[8] fork[0]:
+		CamLookPos (860, 2000, 25480) 3000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 5630 -10000 3000ms
+	Fork name[8] fork[2]:
+		CamZoom 2770 3000ms
+	Fork name[8] fork[3]:
+		CamRotate 45000mdeg 3000ms
+	Fork party[1] fork[1]:
+		CamPers 256 3000ms
+	ForkWait name[8] fork[0]
+	TextTalk name[8] {
+		#1064F#1PWhat the...?!{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#1164F#1PPh-Phillip?!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 1000ms
+	CamLookPos (1910, 50, 21210) 0ms
+	CamSetDistance 0 5890 -10000 0ms
+	CamZoom 2470 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 395 0ms
+	CharSetPos name[8] (-1210, 0, 8970) 0deg
+	if CharInSlot 0 party[1] == 4:
+		CharSetPos party[1] (550, 0, 8340) 0deg
+		CharSetPos party[2] (-1530, 0, 7100) 0deg
+		CharSetPos party[3] (620, 0, 6370) 0deg
+	elif CharInSlot 0 party[2] == 4:
+		CharSetPos party[2] (550, 0, 8340) 0deg
+		CharSetPos party[1] (-1530, 0, 7100) 0deg
+		CharSetPos party[3] (620, 0, 6370) 0deg
+	elif CharInSlot 0 party[3] == 4:
+		CharSetPos party[3] (550, 0, 8340) 0deg
+		CharSetPos party[1] (-1530, 0, 7100) 0deg
+		CharSetPos party[2] (620, 0, 6370) 0deg
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (-710, 0, 16530) 5000mm/s 0
+	Sleep 100ms
+	if CharInSlot 0 party[1] == 4:
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (700, 0, 16500) 5000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (-1240, 0, 14840) 5000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (970, 0, 15080) 5000mm/s 0
+	elif CharInSlot 0 party[2] == 4:
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (700, 0, 16500) 5000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-1240, 0, 14840) 5000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (970, 0, 15080) 5000mm/s 0
+	elif CharInSlot 0 party[3] == 4:
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (700, 0, 16500) 5000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-1240, 0, 14840) 5000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (970, 0, 15080) 5000mm/s 0
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#720FCongratulations on your victory outside.{wait}
+	} {
+		And now that you have done so, I will be
+		serving as your next opponent.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1063F#6PI'm assuming you're a copy of the real Phillip,
+		too?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#722FIndeed, I am.{wait}
+	} {
+		And because of that, I've no choice but to point
+		my blade at even you, Your Highness, knowing
+		full well how unforgivable that act is.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	Fork party[0] fork[0]:
+		CamLookPos (1500, 500, 22210) 300ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 5890 -10000 300ms
+	Fork party[0] fork[2]:
+		CamZoom 2200 300ms
+	Fork party[1] fork[1]:
+		CamPers 395 300ms
+	ForkWait party[0] fork[0]
+	SoundPlay sound[501] 0 0 100
+	CharAnimation char[0] 1 7 1200ms
+	SoundPlay sound[504] 0 0 100
+	CharAnimation char[0] 7 8 1200ms
+	Sleep 500ms
+	CrossFade 500ms
+	CamLookPos (0, 1800, 22110) 0ms
+	CamSetDistance 0 2160 -10000 0ms
+	CamZoom 6150 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 158 0ms
+	CharFlagsUnset char[0] 0x0002
+	CharFlagsUnset char[0] 0x0020
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	CharSetPos name[8] (-630, 0, 17050) 0deg
+	if CharInSlot 0 party[1] == 4:
+		CharSetPos name[4] (650, 0, 16900) 0deg
+		CharSetPos party[2] (-1230, 0, 14540) 0deg
+		CharSetPos party[3] (1270, 0, 14310) 0deg
+	elif CharInSlot 0 party[2] == 4:
+		CharSetPos name[4] (650, 0, 16900) 0deg
+		CharSetPos party[1] (-1230, 0, 14540) 0deg
+		CharSetPos party[3] (1270, 0, 14310) 0deg
+	elif CharInSlot 0 party[3] == 4:
+		CharSetPos name[4] (650, 0, 16900) 0deg
+		CharSetPos party[1] (-1230, 0, 14540) 0deg
+		CharSetPos party[2] (1270, 0, 14310) 0deg
+	FadeWait
+	BgmPlay bgm[153] 0
+	Sleep 500ms
+	TextTalk char[0] {
+		#721F#5PAs the first guardian...{wait}
+	} {
+		...I, Phillip Runall, the Sword Fox and former
+		captain of the Royal Guard, challenge you to
+		battle!{wait}
+	}
+	TextWait
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[0] chip[6]
+	CharSetChipPattern party[0] 0
+	Sleep 50ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[1] chip[8]
+	CharSetChipPattern party[1] 0
+	Sleep 80ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase party[2] chip[10]
+	CharSetChipPattern party[2] 0
+	Sleep 50ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[3] chip[12]
+	CharSetChipPattern party[3] 0
+	FadeWait
+	Sleep 500ms
+	if PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#065F#5PO-Oh, no!{wait}
+		}
+		TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#216F#5PI don't think I've met someone so polite who
+			was so intimidating before...{wait}
+		}
+		TextWait
+	if PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#1317F#5PI can't see a single opening in his stance!{wait}
+		}
+		TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1002F#5PI-I never thought I'd see the day we'd have
+			to fight against Phillip...{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#722F#5PI prayed this day would never come... After all 
+			you've done for Duke Dunan, it brings me great
+			pain to be forced into this position.{wait}
+		} {
+			#721FStill, this is apparently how fate would have it...
+			I beg that you don't hold back on my account.{wait}
+		}
+		TextWait
+		TextTalk name[0] {
+			#1006F#5PWouldn't dream of it!{wait}
+		} {
+			If it's something we gotta do anyway,
+			then I'm gonna go all out!{wait}
+		}
+		TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#178F#5PI wasn't expecting to ever have to put my skills to
+			the test against the famed Demon Commander...{wait}
+		} {
+			#177F...but now that I have this chance, I gladly won't
+			hold back!{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#720FHaha... I cast off that name long ago.{wait}
+		} {
+			Still, I hope to give you a fight worthy
+			of the name.{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1505F#5PWell, you WERE able to hold your own against
+			four Enforcers at once, so your skill must be
+			something worth boasting...{wait}
+		} {
+			#1502F...and that's why I won't be holding back!{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#720FHaha... I think you overestimate my abilities.{wait}
+		} {
+			Still, I'll do what I can to be a worthy opponent
+			for you.{wait}
+		}
+		TextWait
+	if PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#115F#5PI was aware of your history from my time leading
+			the Intelligence Division...{wait}
+		} {
+			#118F...but it's clear that you're every bit the fearsome
+			opponent your file suggested from your stance
+			alone.{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#720FI could say the same to you.{wait}
+		} {
+			I look forward to witnessing the skills you have
+			inherited from the Divine Blade first hand.{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#1306F#5PHeehee. It's been quite a while since we last
+			saw each other, huh?{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#721FSo it has... I remember you well, fair lady.{wait}
+		}
+		TextWait
+		TextTalk name[15] {
+			#1305F#5POh, I bet you do. The way you fought was
+			veeery impressive.{wait}
+		} {
+			#266FBut you spent all your time fighting Walter
+			and Bleublanc! You didn't spare any playtime
+			for me at all.{wait}
+		} {
+			#1306FI hope you're going to make up for that this
+			time.{wait}
+		}
+		TextWait
+		TextTalk char[0] {
+			#722FI can only hope that I don't disappoint.{wait}
+		}
+		TextWait
+	if PartyPosition name[14] != -1:
+		TextTalk name[14] {
+			#1446F#5PAnd yet again, we have no choice but to fight.{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#074F#5PAnd yet again, we have no choice but to fight.{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#053F#5PSure would be great if we didn't HAVE to fight
+			every time, but no use bitchin' about it now.{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1526F#5PLooks like we've got no choice but to fight
+			this time, too.{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#272F#5PLooks like we've got no choice but to fight
+			this time, too.{wait}
+		}
+		TextWait
+	if PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1541F#5PAnd yet again, we have no choice but to fight.{wait}
+		}
+		TextWait
+	TextTalk name[4] {
+		#1162F#5P...Very well. If this is how it must be, I won't
+		hesitate.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1069F#5PWe accept your challenge!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	system[28] = 1
+	Fork party[0] fork[1]:
+		CamLookPos (0, 250, 22010) 300ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 3380 -10000 300ms
+	Fork party[0] fork[3]:
+		CamZoom 2700 300ms
+	Fork party[1] fork[3]:
+		CamPers 280 300ms
+	CharSetChipBase char[0] chip[5]
+	CharSetChipPattern char[0] 7
+	SoundPlay sound[163] 0 0 100
+	Fork char[0] fork[0]:
+		_Char96 self (0, -50, 19700) 500 8000
+	Fork party[0] fork[0]:
+		_Char91 self 0 0 8000 8000 0
+	Fork party[1] fork[0]:
+		_Char91 self 0 0 8000 8000 0
+	Fork party[2] fork[0]:
+		_Char91 self 0 0 8000 8000 0
+	Fork party[3] fork[0]:
+		_Char91 self 0 0 8000 8000 0
+	ForkWait party[0] fork[1]
+	ForkWait party[0] fork[2]
+	ForkWait party[0] fork[3]
+	ForkWait party[1] fork[3]
+	ED6Battle battle[671] null 0 0 null
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ForkQuit char[0] fork[0]
+	ForkQuit party[0] fork[0]
+	ForkQuit party[1] fork[0]
+	ForkQuit party[2] fork[0]
+	ForkQuit party[3] fork[0]
+	system[28] = 0
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (0, 0, 20340) 180deg
+	CharSetChipBase char[0] chip[4]
+	CharSetChipPattern char[0] 3
+	CharFlagsSet char[0] 0x0800
+	ForkFunc char[0] fork[3] fn[0,6]
+	EffLoad eff[0] "map\\mp259_02.eff"
+	EffLoad eff[1] "map\\mp256_00.eff"
+	SoundPlay sound[326] 1 0 60
+	EffPlay eff[0] eff_instance[0] char[0] 0 (0, 600, 100) 0 0 0 2200 2300 1000 null (0, 0, 0) 0ms
+	CharSetPos name[8] (-830, -50, 17700) 0deg
+	if CharInSlot 0 party[1] == 4:
+		CharSetPos party[1] (470, 0, 17700) 0deg
+		CharSetPos party[2] (-1190, 0, 16200) 0deg
+		CharSetPos party[3] (690, 0, 16200) 0deg
+	elif CharInSlot 0 party[2] == 4:
+		CharSetPos party[2] (470, 0, 17980) 0deg
+		CharSetPos party[1] (-1190, 0, 16379) 0deg
+		CharSetPos party[3] (690, 0, 16620) 0deg
+	elif CharInSlot 0 party[3] == 4:
+		CharSetPos party[3] (470, 0, 17980) 0deg
+		CharSetPos party[1] (-1190, 0, 16379) 0deg
+		CharSetPos party[2] (690, 0, 16620) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookPos (2029, -900, 20500) 0ms
+	CamSetDistance 0 6320 -10000 0ms
+	CamZoom 2550 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 316 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#724F#5PPerhaps this was inevitable... I'm simply not
+		young enough to pose a challenge to you any
+		more, I fear.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1068F#6PY-You've gotta be kidding me...{wait}
+	} {
+		I can only hope age is that kind to me...
+		Your strength is nuts.{wait}
+	}
+	TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1007F#6PY-Yeah. That was unbelievable...{wait}
+		}
+		TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#176F#6PThe fabled rumors about you were in no way
+			exaggerated.{wait}
+		} {
+			#175FAs a fellow officer in the Royal Guard, I can't
+			help but feel quite inadequate in comparison.{wait}
+		}
+		TextWait
+	if PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#111F#6PI fear I might have underestimated you. 
+			You were an exceptional opponent.{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1514F#6PIt's no surprise those Enforcers struggled
+			against you, that's for sure...{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#261F#6PWell! I'd say that qualifies as making up for
+			last time.{wait}
+		}
+		TextWait
+	TextTalk char[0] {
+		#724F#5PHaha... There's no need to try and flatter me.{wait}
+	}
+	TextWait
+	Sleep 400ms
+	TextTalk char[0] {
+		#721F#5PRegardless, while I may not have been able to
+		pose a challenge to you, I am sure the other
+		guardians will.{wait}
+	} {
+		Be sure not to let your guard down against them
+		even for a moment.{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#1382F#6PWe'll bear that in mind, Phillip. Thank you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#724F#5PNow, if you will all excuse me, I think it's time
+		for me to depart...{wait}
+	} {
+		Once I disappear, the next path should open.{wait}
+	} {
+		It is my hope that you will all overcome the
+		remaining trials and return from this place
+		safe and well.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundStop sound[326]
+	SoundPlay sound[312] 0 0 100
+	Fork name[8] fork[0]:
+		CamZoom 3000 6000ms
+	EffPlay eff[1] eff_instance[1] char[0] 0 (-100, -700, 0) 0 0 0 1800 1800 1800 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	ForkQuit char[0] fork[3]
+	Fork char[0] fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Sleep 800ms
+	CrossFade 1000ms
+	EffStop eff_instance[0] 0
+	EffStop eff_instance[1] 0
+	FadeWait
+	CharFlagsSet char[0] 0x0080
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[8] fork[0]
+	FlagSet flag[9476]
+	NewScene "m4111._sn" 100 0 0
+	Hcf
+	Return
+
+fn[6]:
+	var[1] = random % 14
+	if var[1] == 0:
+		Sleep 100ms
+	elif var[1] == 1:
+		Sleep 200ms
+	elif var[1] == 2:
+		Sleep 300ms
+	elif var[1] == 3:
+		Sleep 400ms
+	elif var[1] == 4:
+		Sleep 500ms
+	elif var[1] == 5:
+		Sleep 600ms
+	elif var[1] == 6:
+		Sleep 700ms
+	while 1:
+		CharColor self 0x78FFFFFF 1500ms
+		CharColor self 0xFFFFFFFF 1500ms
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-830, -50, 18010) 0deg
+	if CharInSlot 0 party[1] == 4:
+		CharSetPos party[1] (570, 0, 17980) 0deg
+		CharSetPos party[2] (-1190, 0, 16379) 0deg
+		CharSetPos party[3] (690, 0, 16620) 0deg
+	elif CharInSlot 0 party[2] == 4:
+		CharSetPos party[2] (570, 0, 17980) 0deg
+		CharSetPos party[1] (-1190, 0, 16379) 0deg
+		CharSetPos party[3] (690, 0, 16620) 0deg
+	elif CharInSlot 0 party[3] == 4:
+		CharSetPos party[3] (570, 0, 17980) 0deg
+		CharSetPos party[1] (-1190, 0, 16379) 0deg
+		CharSetPos party[2] (690, 0, 16620) 0deg
+	CamLookPos (990, -50, 18490) 0ms
+	CamSetDistance 0 6450 -10000 0ms
+	CamZoom 2400 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 303 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#1840F#6PHe's one hell of a tough butler.{wait}
+	}
+	TextWait
+	TextTalk name[4] {
+		#1165F#11PIndeed...{wait}
+	}
+	TextWait
+	if CharInSlot 0 party[1] == 4:
+		Fork name[4] fork[0]:
+			CharTurnTo self 225deg 400deg/s
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharTurnTo self 45deg 400deg/s
+		Sleep 100ms
+		CharTurnTo name[8] 90deg 400deg/s
+	elif CharInSlot 0 party[2] == 4:
+		Fork name[4] fork[0]:
+			CharTurnTo self 225deg 400deg/s
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharTurnTo self 45deg 400deg/s
+		Sleep 100ms
+		CharTurnTo name[8] 90deg 400deg/s
+	elif CharInSlot 0 party[3] == 4:
+		Fork name[4] fork[0]:
+			CharTurnTo self 225deg 400deg/s
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharTurnTo self 45deg 400deg/s
+		Sleep 100ms
+		CharTurnTo name[8] 90deg 400deg/s
+	Sleep 500ms
+	TextTalk name[4] {
+		#1160F#5PIs everyone ready to move on to the next area?{wait}
+	} {
+		I'm guessing we'll be able to access that from
+		the scenic route like we did this one. Let's go
+		see which of the other monuments has activated.{wait}
+	}
+	TextWait
+	if PartyPosition name[14] != -1:
+		TextTalk name[14] {
+			#1448FAll right, then.{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1006FGot it!{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1500FRight.{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#210FGot it!{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#260FThat sounds like a plan.{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#560FRight!{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#816FRight!{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1536FThat sounds like a plan.{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#051FGot it.{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#070FRight.{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#170FUnderstood.{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1545FAnd away we go, then.{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#277FThat sounds wise.{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#111FThat sounds wise.{wait}
+		}
+		TextWait
+	FlagSet flag[11016]
+	if PartyPosition name[10] != -1:
+		FlagSet flag[9790]
+	if PartyPosition name[9] != -1:
+		FlagSet flag[9791]
+	if PartyPosition name[11] != -1:
+		FlagSet flag[9792]
+	QuestFlagsSet quest[56] 0x04
+	QuestFlagsSet quest[56] 0x08
+	Sleep 300ms
+	EventEnd 0
+	Return

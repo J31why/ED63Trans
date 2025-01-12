@@ -1,0 +1,760 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4206.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 0 file[0x0021012E]
+	scp 1 file[0x0021049C]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	TextStart self
+	if flag[32]:
+		TextTalk char[37] {
+			#843FStill, I'm feeling keenly these days just how much
+			I need to improve myself.{wait}
+		} {
+			I'd love to go on some kind of extensive training
+			program, but this hardly seems the time for that.{wait}
+		} {
+			#840FPerhaps I'll bring up the matter with Elnan once
+			things have calmed down a little.{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[37] {
+			#840FGreetings, Joshua.{wait}
+		} {
+			You've done some fine work these past couple
+			of weeks.{wait}
+		} {
+			The damage reports on the regions of Liberl
+			you've been providing have proved invaluable
+			in allocating personnel.{wait}
+		} {
+			I really can't thank you enough.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1040FOh, you needn't thank me...{wait}
+		} {
+			#1035FBy the way, Kurt...I feel like I need to say
+			something regarding my bracer badge.{wait}
+		}
+		TextWait
+		Emote name[1] 0mm 2000mm 24 27 250ms 0
+		Sleep 1000ms
+		EmoteStop name[1]
+		Sleep 500ms
+		TextTalk name[1] {
+			#1043FAs you probably already know, what power
+			I have was given to me by the society.{wait}
+		} {
+			Before becoming a bracer, I used it to commit
+			many unforgivable crimes, too...{wait}
+		} {
+			No matter how much I think about it, I just can't
+			see how someone like me is fit to call himself a
+			a bracer.{wait}
+		}
+		TextWait
+		TextTalk char[37] {
+			#843FYou know, Joshua...{wait}
+		} {
+			...I've always seen power as an imperfect
+			concept.{wait}
+		} {
+			And that's why I believe people are able to
+			use it.{wait}
+		} {
+			#842FAm I wrong?{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1044F...No, I suppose not...{wait}
+		}
+		TextWait
+		TextTalk char[37] {
+			#845FThen what difference is there between us?{wait}
+		} {
+			We are both keenly aware of our flaws, and yet
+			we both use what limited power we have to do
+			what we believe to be right. I see no difference.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1054F...Well, I can't really argue with that logic.{wait}
+		} {
+			I still can't pretend to be completely confident
+			in myself, though...{wait}
+		}
+		TextWait
+		TextTalk char[37] {
+			#841FBe that as it may, that's nothing to be ashamed of--
+			you should simply continue striving to overcome it.{wait}
+		} {
+			#840FAnd while this is but my personal opinion...{wait}
+		} {
+			...I'd say you're a model bracer.{wait}
+		}
+		TextWait
+		FlagSet flag[32]
+	TextEnd self
+	Return
+
+fn[1]:
+	TextStart self
+	if flag[33]:
+		TextTalk char[38] {
+			#820FIt's wild just how much energy these two
+			have.{wait}
+		} {
+			Are they always like this?{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[38] {
+			#821FHaha. After all the work we've been doing lately,
+			it's great to be able to come to a swanky place
+			like this and put our feet up.{wait}
+		} {
+			#823FThe food's pretty good, too! *munch*{wait}
+		}
+		TextWait
+		FlagSet flag[33]
+	TextEnd self
+	Return
+
+fn[2]:
+	TextStart self
+	TextTalk char[39] {
+		#835FI swear, it's like watching two children squabble.{wait}
+	} {
+		It's great that we're peaceful again and all, but
+		I think these two are taking things a little TOO
+		easy.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12189]:
+		if flag[9]:
+			TextTalk char[17] {
+				#811FSeriously! They'd both look amazing in dresses
+				if they took my advice!{wait}
+			} {
+				Maybe they'll let me test my theory if I ask them
+				nicely!{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo char[17] 270deg 0deg/s
+			TextTalk char[17] {
+				#818FHmm... Well, if you ask me...{wait}
+			} {
+				...throw some red earrings and a little ribbon on
+				Josette, then top it off with a nice, white dress.{wait}
+			} {
+				Same goes for Estelle if she let her hair down.{wait}
+			}
+			TextWait
+			CharTurnToChar char[17] name[1] 500deg/s
+			Sleep 300ms
+			TextTalk char[17] {
+				#816FWhat do you think, Joshua?{wait}
+			}
+			TextWait
+			TextTalk name[1] {
+				#1048FWhat are you asking me for?{wait}
+			}
+			TextWait
+			FlagSet flag[9]
+	else:
+		TextTalk char[17] {
+			#814FWow! I didn't know Josette was from the nobility.{wait}
+		} {
+			I always pictured Erebonian nobles as being real
+			stuffy and scary...{wait}
+		} {
+			#1311FHeehee. But maybe there are a few cute ones mixed
+			in there?{wait}
+		}
+		TextWait
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[26]:
+		TextTalk char[35] {
+			#1110FSpeaking of the Republic, parliament is still
+			very much in confusion over the Orbal Shutdown
+			Phenomenon.{wait}
+		} {
+			To say nothing of those steam tanks of Erebonia's.{wait}
+		} {
+			It's going to be quite a while before things 
+			settle down there, too, I'd wager.{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[35] {
+			#1111FIt's nice to be able to attend a banquet like this.{wait}
+		} {
+			It truly drives home the point that this nation is
+			back at peace again.{wait}
+		} {
+			#1113FThe trouble regarding the Liber Ark and subsequent
+			restoration efforts have really shown me anew how
+			capable a ruler Queen Alicia is.{wait}
+		} {
+			She's handled all that's happened impeccably.{wait}
+		} {
+			If all of this had happened in the Republic,
+			it wouldn't have been resolved anywhere near
+			as smoothly, let me tell you.{wait}
+		}
+		TextWait
+		FlagSet flag[26]
+	TextEnd self
+	Return
+
+fn[5]:
+	_Char4A char[30] 0
+	_Char4A char[31] 0
+	CharTurnToChar char[30] name[1] 0deg/s
+	CharTurnToChar char[31] name[1] 0deg/s
+	Sleep 300ms
+	TextTalk char[30] {
+		#221FAh! Just the man, just the man!{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#1044F#2PPardon...?{wait}
+	}
+	TextWait
+	TextTalk char[31] {
+		#1101FOh?{wait}
+	} {
+		Is this the boy you were speaking of earlier?{wait}
+	}
+	TextWait
+	TextTalk char[30] {
+		#225FThat's correct. This is Joshua.{wait}
+	} {
+		#220FI was just telling the ambassador here about
+		your various accomplishments, Joshua.{wait}
+	}
+	TextWait
+	TextTalk char[31] {
+		#1100FIt's an honor to finally meet you.{wait}
+	} {
+		I'm the resident Erebonian ambassador here
+		in Liberl, Davil Crainagh.{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#1054F#2PI-It's nice to meet you...{wait}
+	}
+	TextWait
+	TextTalk char[31] {
+		#1102FThe tale of how you flew on top of that flying city
+		all while knowing it may be the last thing you did
+		brought tears to my eyes.{wait}
+	} {
+		How you were able to participate in an operation
+		that may have brought your death, casting aside 
+		even your girlfriend's objections, I don't know...{wait}
+	} {
+		#1100F...but I know this: Liberl needs more young men and
+		women like you.{wait}
+	}
+	TextWait
+	TextTalk name[1] {
+		#1049F#2PTh-Thank you for saying so, sir...{wait}
+	} {
+		(Just what has the duke been telling him?){wait}
+	}
+	TextWait
+	CharTurnTo char[30] 180deg 0deg/s
+	CharTurnTo char[31] 0deg 0deg/s
+	_Char4B char[30] 0
+	_Char4B char[31] 0
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[21]:
+		CharTurnTo char[30] 180deg 0deg/s
+		TextTalk char[30] {
+			#225FBut all was well that ended well, for by 
+			miraculous chance, the two were able to
+			reunite...{wait}
+		}
+		TextWait
+	else:
+		Call fn[1,5]
+		FlagSet flag[21]
+		FlagSet flag[22]
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[22]:
+		TextTalk char[31] {
+			#1102FIt should go without saying how touched
+			I am to see such spirit from our youths of
+			today.{wait}
+		} {
+			#1100FYou are truly Liberl's greatest treasures.{wait}
+		}
+		TextWait
+	else:
+		CharTurnTo self 0deg 0deg/s
+		Call fn[1,5]
+		FlagSet flag[21]
+		FlagSet flag[22]
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[10]:
+		TextTalk char[21] {
+			#115FThanks to Brigadier General Bright's mercy,
+			I was able to receive a full pardon for my
+			actions...{wait}
+		} {
+			...but I still feel as though I need to settle things
+			within myself after what I did.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#1040FYou were able to make it, Richard?{wait}
+		}
+		TextWait
+		TextTalk char[21] {
+			#110FThanks to Brigadier General Bright's generosity,
+			yes.{wait}
+		} {
+			I've received an official pardon from Her Majesty
+			for my actions.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1040FProbably for foiling the society's attack
+			on Grancel, right?{wait}
+		} {
+			That's good news. I'm happy for you.{wait}
+		}
+		TextWait
+		TextTalk char[21] {
+			#115FI wish I could say the same...but I don't feel
+			as though I deserve to be pardoned at all.{wait}
+		} {
+			Now that the nation is at peace, I feel this is
+			the time I should be facing up to my crimes--
+			not having them swept under the rug.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1043FI can't say I don't understand, but still...{wait}
+		}
+		TextWait
+		TextTalk char[21] {
+			#111FHaha. Please, Joshua. You needn't look so
+			concerned.{wait}
+		} {
+			#115FI have no intention of refusing Her Majesty's 
+			kindness or going against her will.{wait}
+		} {
+			I merely feel a strong desire to settle things
+			within myself, and I fully intend on following
+			through.{wait}
+		} {
+			#110FThat is all.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1040F...All right, then.{wait}
+		}
+		TextWait
+		FlagSet flag[10]
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[14]:
+		TextTalk char[23] {
+			#183FI-I presume your business here is finished?
+			Then kindly begone.{wait}
+		} {
+			You'll get in His Excellency's way standing
+			around here.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[1] {
+			#1044FOh. I wasn't expecting to find you here...{wait}
+		} {
+			#1040FStill, thank you very much for your support
+			during the attack on Grancel. It really did
+			help us all.{wait}
+		}
+		TextWait
+		TextTalk char[23] {
+			#183FOh, please. I only did what I did because it
+			was one of His Excellency's bail conditions.{wait}
+		} {
+			Make no mistake: I wouldn't have helped any
+			of you worthless drecks otherwise.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1048F(You wouldn't think it would be so hard to
+			accept a thank you...){wait}
+		}
+		TextWait
+		FlagSet flag[14]
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart char[34]
+	if flag[25]:
+		TextTalk char[34] {
+			#311FScree! Scree!{wait}
+		}
+		TextWait
+	else:
+		TextTalk char[34] {
+			#310FScree! Scree!{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1040FWell, well, Sieg! It's good to see you.{wait}
+		}
+		TextWait
+		TextTalk char[34] {
+			#311FScreeeee! ☆{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1054F(After all he did, I'd say he deserves a good
+			party as much as any human.){wait}
+		}
+		TextWait
+		FlagSet flag[25]
+	TextEnd char[34]
+	Return
+
+fn[11]:
+	TextStart self
+	TextTalk self {
+		It was an honor to be able to put my skills to
+		the test making tonight's many dishes.{wait}
+	}
+	TextWait
+	TextTalk self {
+		I do hope they will be to your satisfaction.
+		Please, have your fill.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[12]:
+	TextStart self
+	TextTalk self {
+		Is there enough food available for you?{wait}
+	}
+	TextWait
+	TextTalk self {
+		If there's anything you would like more of,
+		please feel free to let me know.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[13]:
+	TextStart self
+	CharTurnTo self 180deg 0deg/s
+	TextTalk self {
+		U-Umm...{wait}
+	}
+	TextWait
+	TextTalk self {
+		Could you two stop fighting?{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[14]:
+	TextStart self
+	if flag[45]:
+		TextTalk self {
+			I normally work as a chef over at Sanktheim Gate,
+			but I was called over here to help.{wait}
+		}
+		TextWait
+		TextTalk self {
+			It's a real huge honor to be able to help out at
+			an occasion this spectacular. I doubt I'll ever
+			get an opportunity like THIS again.{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			Man, this is one hell of a party!{wait}
+		}
+		TextWait
+		TextTalk self {
+			I normally work as a chef over at Sanktheim Gate,
+			but I was called over here to help.{wait}
+		}
+		TextWait
+		TextTalk self {
+			It's a real huge honor to be able to help out at
+			an occasion this spectacular. I doubt I'll ever
+			get an opportunity like THIS again.{wait}
+		}
+		TextWait
+		FlagSet flag[45]
+	TextEnd self
+	Return
+
+fn[15]:
+	TextStart self
+	if flag[46]:
+		TextTalk self {
+			You're always welcome to the castle, Joshua.{wait}
+		}
+		TextWait
+		TextTalk self {
+			I'd be more than happy to help you get dolled
+			up for the occasion, too. ㈱{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			Oh!{wait}
+		}
+		TextWait
+		Emote self 0mm 2000mm 10 11 250ms 2
+		SoundPlay sound[15] 0 0 100
+		Sleep 1000ms
+		TextTalk self {
+			You're always welcome back to the castle
+			any time.{wait}
+		}
+		TextWait
+		TextTalk self {
+			I'd be more than happy to help you get dolled
+			up for the occasion, too. ㈱{wait}
+		}
+		TextWait
+		Emote name[1] 0mm 2000mm 16 19 250ms 1
+		SoundPlay sound[49] 0 0 100
+		Sleep 1000ms
+		TextTalk name[1] {
+			#1048FI'm never wearing a maid outfit again. Just so
+			you know.{wait}
+		}
+		TextWait
+		FlagSet flag[46]
+	TextEnd self
+	Return
+
+fn[16]:
+	TextStart self
+	if flag[47]:
+		TextTalk self {
+			Now that everything's back to normal, it feels
+			like all that happened that day was some sort
+			of dream.{wait}
+		}
+		TextWait
+		TextTalk self {
+			Dream or real life, though, I'm just relieved it's
+			all finally over.{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			*sigh* Now that everything's back to normal,
+			it feels like all that happened that day was
+			some sort of dream.{wait}
+		}
+		TextWait
+		TextTalk self {
+			I'd certainly rather believe it was... Seeing the 
+			castle gates fall and those scary people charging
+			through was like a nightmare...{wait}
+		}
+		TextWait
+		TextTalk self {
+			I thought I was going to faint at the sight of it all.{wait}
+		}
+		TextWait
+		FlagSet flag[47]
+	TextEnd self
+	Return
+
+fn[17]:
+	TextStart self
+	if flag[48]:
+		TextTalk self {
+			I don't know what those society people were trying
+			to achieve by causing us so much trouble...{wait}
+		}
+		TextWait
+		TextTalk self {
+			...but that was an experience I hope I never have to
+			go through again.{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			Holding a party like this makes it feel like peace
+			has finally returned to the castle.{wait}
+		}
+		TextWait
+		TextTalk self {
+			It certainly hasn't felt like that in the days leading
+			up to it. We were all busy clearing things up until
+			a few days ago.{wait}
+		}
+		TextWait
+		FlagSet flag[48]
+	TextEnd self
+	Return
+
+fn[18]:
+	TextStart self
+	TextTalk self {
+		Right! Next up, I need to give that guest their
+		drink...{wait}
+	}
+	TextWait
+	TextTalk self {
+		Umm... But what did I need to do after that?{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[19]:
+	TextStart self
+	if flag[49]:
+		TextTalk self {
+			Erm... Excuse me...{wait}
+		}
+		TextWait
+		TextTalk self {
+			Have I given you some food already?{wait}
+		}
+		TextWait
+	else:
+		TextTalk self {
+			Whew... There sure are a lot of guests today!{wait}
+		}
+		TextWait
+		TextTalk self {
+			By all means, help yourself to any of the food
+			here.{wait}
+		}
+		TextWait
+		TextTalk self {
+			It'll all taste much better while it's still hot!{wait}
+		}
+		TextWait
+		FlagSet flag[49]
+	TextEnd self
+	Return
+
+fn[20]:
+	TextStart self
+	TextTalk self {
+		Do you need something to drink, sir?{wait}
+	}
+	TextWait
+	TextTalk self {
+		We have plenty available, alcoholic or otherwise.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[21]:
+	TextStart self
+	TextTalk self {
+		We're delighted to see you were able
+		to attend tonight's banquet.{wait}
+	}
+	TextWait
+	TextTalk self {
+		Please do enjoy yourself.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[22]:
+	TextStart self
+	TextTalk self {
+		The whole garden terrace is accessible to
+		guests of tonight's party.{wait}
+	}
+	TextWait
+	TextTalk self {
+		So please don't feel restricted, and do enjoy
+		yourself.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[23]:
+	TextStart self
+	TextTalk self {
+		Please, do enjoy yourself at the banquet.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return
+
+fn[24]:
+	TextStart self
+	TextTalk self {
+		I'm terribly sorry, but I'm afraid you may not
+		pass beyond this point. These stairs lead to
+		Her Highness' private chamber.{wait}
+	}
+	TextWait
+	TextEnd self
+	Return

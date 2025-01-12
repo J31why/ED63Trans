@@ -1,0 +1,882 @@
+calmare tc scena
+scena:
+	name "map" "T0001.x"
+	town town[1]
+	bgm bgm[10]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,2]
+
+fn[0]:
+	while var[0] != 255:
+		Menu menu[1] 10 100 1
+			"Test" // 0
+			"Flying Feline" // 1
+			"Helmet Crab" // 2
+			"Flying Feline 3" // 3
+			"Human Boss" // 4
+			"Big Boss" // 5
+			"Other Boss" // 6
+			"Choose Monster" // 7
+			"Fight Chosen Monster" // 8
+			"Demonstration 1" // 9
+			"Demonstration 2" // 10
+			"Demonstration 3" // 11
+			"Auto Battle" // 12
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[919] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2004] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2005] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2007] null 0 0 null
+				break
+			case 4:
+				Call fn[2,12]
+				break
+			case 5:
+				Call fn[2,13]
+				break
+			case 6:
+				Call fn[2,14]
+				break
+			case 7:
+				if Minigame 33 0 0 0 0 0 0 0 0:
+					ED6Battle battle[2001] null 0 0 null
+				break
+			case 8:
+				ED6Battle battle[2001] null 0 0 null
+				break
+			case 9:
+				ED6Battle battle[2010] null 0 0 null
+				break
+			case 10:
+				ED6Battle battle[2011] null 0 0 null
+				break
+			case 11:
+				ED6Battle battle[2012] null 0 0 null
+				break
+			case 12:
+				ED6Battle battle[10000] "bs00010._dt" 0 0 null
+				break
+			default:
+				break
+		var[0] = 255
+		FadeWait
+		switch system[3]:
+			case 1:
+				PartySetAttr name[0] 254 0
+				PartySetAttr name[1] 254 0
+				PartySetAttr name[2] 254 0
+				PartySetAttr name[3] 254 0
+				PartySetAttr name[4] 254 0
+				PartySetAttr name[5] 254 0
+				PartySetAttr name[6] 254 0
+				PartySetAttr name[7] 254 0
+				break
+	MenuClose menu[1]
+	var[0] = 0
+	Return
+
+fn[1]:
+	TextMessage null {
+		{0x06}Select a section.{wait}
+	}
+	while var[0] != 255:
+		Menu menu[1] 10 100 1
+			"Test" // 0
+			"Rolent" // 1
+			"Bose" // 2
+			"Ruan" // 3
+			"Zeiss" // 4
+			"Grancel" // 5
+			"Others" // 6
+			"Gaiden 1" // 7
+			"Gaiden 2" // 8
+			"Gaiden 3" // 9
+			"Cancel" // 10
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				Call fn[2,2]
+				break
+			case 1:
+				Call fn[2,3]
+				break
+			case 2:
+				Call fn[2,4]
+				break
+			case 3:
+				Call fn[2,5]
+				break
+			case 4:
+				Call fn[2,6]
+				break
+			case 5:
+				Call fn[2,7]
+				break
+			case 6:
+				Call fn[2,8]
+				break
+			case 7:
+				Call fn[2,9]
+				break
+			case 8:
+				Call fn[2,10]
+				break
+			case 9:
+				Call fn[2,11]
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[1]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[2]:
+	while var[0] != 255:
+		Menu menu[2] 10 100 1
+			"Map 1 BTTEST01" // 0
+			"Map 2 BTTEST02" // 1
+			"Map 3 BTTEST03" // 2
+			"Map 4 BTTEST04" // 3
+			"Map 5 BTTEST05" // 4
+			"Cancel" // 5
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2091] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2092] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2093] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2094] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[2095] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	TextClose 0
+	var[0] = 0
+	Return
+
+fn[3]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BC0300 Mistwald" // 0
+			"Cancel" // 1
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				Sc_C4Set 4
+				ED6Battle battle[2100] null 0 0 null
+				Sc_C4Unset 4
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[4]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BC1300 Airship" // 0
+			"Cancel" // 1
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2200] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[5]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BC2401 Old Schoolhouse Basement Boss" // 0
+			"BT2500 Schoolyard" // 1
+			"BT2510 Schoolhouse Hall" // 2
+			"BT2511 Boys' Dorm" // 3
+			"BT2512 Girls' Dorm" // 4
+			"Cancel" // 5
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2300] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2301] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2302] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2303] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[2304] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[6]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BR3400 Kaldia Tunnel" // 0
+			"BC3300 Kaldia Limestone Cave" // 1
+			"Cancel" // 2
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2400] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2401] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[7]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BT4100 Town (Evening)" // 0
+			"BT4404 Wharf (Evening)" // 1
+			"BT4105 Grand Arena (Evening)" // 2
+			"BT4210 Castle Halls" // 3
+			"BC4100 Erbe Scenic Route" // 4
+			"BC4303 Sealed Area" // 5
+			"BT4138 Erebonian Embassy" // 6
+			"BT4139 Calvardian Embassy" // 7
+			"Cancel" // 8
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2500] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2501] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2502] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2503] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[2504] null 0 0 null
+				break
+			case 5:
+				ED6Battle battle[2505] null 0 0 null
+				break
+			case 6:
+				ED6Battle battle[2506] null 0 0 null
+				break
+			case 7:
+				ED6Battle battle[2507] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[8]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BC5303 Axis Pillar" // 0
+			"Cancel" // 1
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2600] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[9]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BE0310 1st Plane Arseille" // 0
+			"BM7000 1st Plane Jade Corridor" // 1
+			"BM7001 1st Plane Boss" // 2
+			"BU4138 2nd Plane Erebonian Embassy" // 3
+			"BU4403 2nd Plane Wharf Warehouse (Evening)" // 4
+			"BU4166 2nd Plane Grand Arena (Night)" // 5
+			"BU4250 2nd Plane Castle Hall (Night)" // 6
+			"BU4204 2nd Plane Castle Garden (Night)" // 7
+			"BM7100 3rd Plane Gold Road" // 8
+			"BM7101 3rd Plane Gold Road Boss" // 9
+			"BM7102 3rd Plane Silver Road" // 10
+			"BM7103 3rd Plane Silver Road Boss" // 11
+			"BM5500 4th Plane Balstar Channel" // 12
+			"BM5501 4th Plane Balstar Channel Boss" // 13
+			"BM5502 4th Plane Saint-Croix Forest" // 14
+			"BM5503 4th Plane Saint-Croix Forest Boss" // 15
+			"BU5102 4th Plane Le-Locle Lodge (Astarte)" // 16
+			"BM7200 5th Plane Labyrinth of Light" // 17
+			"BM7201 5th Plane Labyrinth of Shadows" // 18
+			"BM7202 5th Plane Labyrinth of Light Boss" // 19
+			"Cancel" // 20
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2700] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2701] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2702] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2703] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[2704] null 0 0 null
+				break
+			case 5:
+				ED6Battle battle[2705] null 0 0 null
+				break
+			case 6:
+				ED6Battle battle[2706] null 0 0 null
+				break
+			case 7:
+				ED6Battle battle[2707] null 0 0 null
+				break
+			case 8:
+				ED6Battle battle[2708] null 0 0 null
+				break
+			case 9:
+				ED6Battle battle[2709] null 0 0 null
+				break
+			case 10:
+				ED6Battle battle[2710] null 0 0 null
+				break
+			case 11:
+				ED6Battle battle[2711] null 0 0 null
+				break
+			case 12:
+				ED6Battle battle[2712] null 0 0 null
+				break
+			case 13:
+				ED6Battle battle[2713] null 0 0 null
+				break
+			case 14:
+				ED6Battle battle[2714] null 0 0 null
+				break
+			case 15:
+				ED6Battle battle[2715] null 0 0 null
+				break
+			case 16:
+				ED6Battle battle[2716] null 0 0 null
+				break
+			case 17:
+				ED6Battle battle[2716] null 0 0 null
+				break
+			case 18:
+				ED6Battle battle[2717] null 0 0 null
+				break
+			case 19:
+				ED6Battle battle[2718] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[10]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BM4120 6th Plane Erbe Scenic Route" // 0
+			"BM3200 6th Plane Leiston Fortress" // 1
+			"BM3201 6th Plane Leiston Fortress Barracks" // 2
+			"BM3202 6th Plane Leiston Fortress Boss 1" // 3
+			"BM3203 6th Plane Leiston Fortress Boss 2" // 4
+			"BM3204 6th Plane Leiston Fortress Boss 3" // 5
+			"BM5400 6th Plane Glorious Hall" // 6
+			"BM5401 6th Plane Glorious Sanctuary" // 7
+			"BM5406 6th Plane Glorious Hangar" // 8
+			"BM5408 6th Plane Glorious Deck" // 9
+			"BM5415 6th Plane Dimensional Road" // 10
+			"BU2501 6th Plane Old Schoolhouse Path" // 11
+			"BM5600 6th Plane Laboratory Roof" // 12
+			"BM7300 7th Plane Purgatory" // 13
+			"BM7301 7th Plane Purgatory Boss" // 14
+			"BM7302 7th Plane Abyss" // 15
+			"BM7303 7th Plane Abyss (Midboss)" // 16
+			"BM7304 7th Plane Abyss (Boss)" // 17
+			"BM7400 8th Plane Phantasmagoria" // 18
+			"BM7401 8th Plane Phantasmagoria (Midboss)" // 19
+			"BM7402 8th Plane Phantasmagoria (Regnamodoki)" // 20
+			"BM7403 8th Plane Phantasmagoria (Last Boss)" // 21
+			"Cancel" // 22
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2750] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2751] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2752] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2753] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[2754] null 0 0 null
+				break
+			case 5:
+				ED6Battle battle[2755] null 0 0 null
+				break
+			case 6:
+				ED6Battle battle[2756] null 0 0 null
+				break
+			case 7:
+				ED6Battle battle[2757] null 0 0 null
+				break
+			case 8:
+				ED6Battle battle[2758] null 0 0 null
+				break
+			case 9:
+				ED6Battle battle[2759] null 0 0 null
+				break
+			case 10:
+				ED6Battle battle[2760] null 0 0 null
+				break
+			case 11:
+				ED6Battle battle[2761] null 0 0 null
+				break
+			case 12:
+				ED6Battle battle[2762] null 0 0 null
+				break
+			case 13:
+				ED6Battle battle[2770] null 0 0 null
+				break
+			case 14:
+				ED6Battle battle[2771] null 0 0 null
+				break
+			case 15:
+				ED6Battle battle[2772] null 0 0 null
+				break
+			case 16:
+				ED6Battle battle[2773] null 0 0 null
+				break
+			case 17:
+				ED6Battle battle[2774] null 0 0 null
+				break
+			case 18:
+				ED6Battle battle[2775] null 0 0 null
+				break
+			case 19:
+				ED6Battle battle[2776] null 0 0 null
+				break
+			case 20:
+				ED6Battle battle[2777] null 0 0 null
+				break
+			case 21:
+				ED6Battle battle[2778] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[11]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select a map.{wait}
+		}
+		Menu menu[2] 10 80 1
+			"BP9000 Moon Door" // 0
+			"BP9001 Star Door" // 1
+			"BP9002 Sun Door" // 2
+			"BE1110 Lusitania" // 3
+			"BE1111 Lusitania Room" // 4
+			"BE1100 Lusitania Deck" // 5
+			"BE0820 Field (Sky Map)" // 6
+			"Cancel" // 7
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2780] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2781] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2782] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2783] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[2784] null 0 0 null
+				break
+			case 5:
+				ED6Battle battle[2785] null 0 0 null
+				break
+			case 6:
+				ED6Battle battle[2786] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[12]:
+	var[0] = 0
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select an enemy.{wait}
+		}
+		Menu menu[2] 10 100 1
+			"Bleublanc" // 0
+			"Walter" // 1
+			"Lucciola" // 2
+			"Weissmann" // 3
+			"Cassius" // 4
+			"Kilika" // 5
+			"Phillip" // 6
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[2050] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[2051] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[2052] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[2055] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[2056] null 0 0 null
+				break
+			case 5:
+				ED6Battle battle[2057] null 0 0 null
+				break
+			case 6:
+				ED6Battle battle[2058] null 0 0 null
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[13]:
+	var[0] = 0
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}Select an enemy.{wait}
+		}
+		Menu menu[2] 10 100 1
+			"Tromelais II Gespenst" // 0
+			"Storm Bringer" // 1
+			"Tromelais Dragon" // 2
+			"Ragnard" // 3
+			"Orgueille" // 4
+			"Lostrum" // 5
+			"Astarte" // 6
+			"Last Boss" // 7
+			"Last Boss (Skip Intro)" // 8
+			"Last Boss Party Setup" // 9
+		MenuWait var[0]
+		switch var[0]:
+			case 0:
+				ED6Battle battle[821] null 0 0 null
+				break
+			case 1:
+				ED6Battle battle[3601] null 0 0 null
+				break
+			case 2:
+				ED6Battle battle[3605] null 0 0 null
+				break
+			case 3:
+				ED6Battle battle[822] null 0 0 null
+				break
+			case 4:
+				ED6Battle battle[3603] null 0 0 null
+				break
+			case 5:
+				ED6Battle battle[249] null 0 0 null
+				break
+			case 6:
+				ED6Battle battle[422] null 0 0 null
+				break
+			case 7:
+				ED6Battle battle[3606] "bs00000._dt" 0 0 null
+				break
+			case 8:
+				ED6Battle battle[3606] null 0 0 null
+				Sleep 1000ms
+				break
+			case 9:
+				TcTeamAddMember 0 name[8]
+				TcTeamAddMember 0 name[14]
+				TcTeamAddMember 0 name[5]
+				TcTeamAddMember 0 name[4]
+				TcTeamUse 0
+				PartySetAttr name[8] 0 136
+				PartySetAttr name[14] 0 136
+				PartySetAttr name[5] 0 136
+				PartySetAttr name[4] 0 136
+				PartyAddCraft name[8] magic[0]
+				PartyAddCraft name[14] magic[0]
+				PartyAddCraft name[5] magic[0]
+				PartyAddCraft name[4] magic[0]
+				PartyEquip name[8] item[1371] 255
+				PartyEquip name[8] item[1560] 255
+				PartyEquip name[8] item[110] 255
+				PartyEquip name[14] item[1461] 255
+				PartyEquip name[14] item[1560] 255
+				PartyEquip name[14] item[110] 255
+				PartyEquip name[5] item[1235] 255
+				PartyEquip name[5] item[1560] 255
+				PartyEquip name[5] item[110] 255
+				PartyEquip name[4] item[1191] 255
+				PartyEquip name[4] item[1560] 255
+				PartyEquip name[4] item[110] 255
+				PartySetSlot name[8] 127 3
+				PartySetSlot name[14] 127 3
+				PartySetSlot name[5] 127 3
+				PartySetSlot name[4] 127 3
+				PartySetAttr name[8] 5 150
+				PartySetAttr name[14] 5 150
+				PartySetAttr name[5] 5 150
+				PartySetAttr name[4] 5 150
+				TcTeamMember_2 255
+				break
+			default:
+				var[0] = 255
+	MenuClose menu[2]
+	var[0] = 0
+	Return
+
+fn[14]:
+	Return
+
+fn[15]:
+	Return
+
+fn[16]:
+	Return
+
+fn[17]:
+	while var[0] != 255:
+		TextMessage null {
+			{0x06}This is a debug testing jump.
+			To check the minigames within context,
+			please use the Episode List instead.{wait}
+		}
+		Menu menu[1] 10 100 1
+			"00 Roulette" // 0
+			"01 Slots" // 1
+			"02 Blackjack" // 2
+			"03 Fishing" // 3
+			"04 Poker" // 4
+			"05 Shooting" // 5
+			"06 Bug Catching" // 6
+			"07 Sugoroku" // 7
+			"08 Quiz" // 8
+			"09 Vs Fishing" // 9
+			"10 Vs Poker" // 10
+			"11 Vs Blackjack" // 11
+		MenuWait var[0]
+		MenuClose menu[255]
+		TextClose 0
+		switch var[0]:
+			case 0:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 11 0 0 0 0 0 0 0 0
+				FadeIn 300ms 0x00000000
+				break
+			case 1:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 12 10 0 0 0 0 0 0 0
+				FadeIn 300ms 0x00000000
+				break
+			case 2:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 13 0 0 0 0 0 0 0 0
+				FadeIn 300ms 0x00000000
+				break
+			case 3:
+				ItemAdd item[590] 10
+				ItemAdd item[591] 10
+				ItemAdd item[592] 10
+				ItemAdd item[593] 10
+				ItemAdd item[594] 10
+				ItemAdd item[595] 10
+				ItemAdd item[596] 10
+				ItemAdd item[980] 10
+				ItemAdd item[981] 10
+				ItemAdd item[982] 10
+				ItemAdd item[983] 10
+				ItemAdd item[984] 10
+				ItemAdd item[985] 10
+				ItemAdd item[986] 10
+				ItemAdd item[987] 10
+				ItemAdd item[988] 10
+				ItemAdd item[989] 10
+				ItemAdd item[990] 10
+				ItemAdd item[991] 10
+				ItemAdd item[992] 10
+				ItemAdd item[993] 10
+				ItemAdd item[994] 10
+				ItemAdd item[995] 10
+				TextMessage null {
+					ブライト家へ移動しますので、
+					裏手の池のルックポイントを探して
+					釣りをしてください。{wait}
+				}
+				TextWait
+				NewScene "t0300._sn" 100 0 0
+				Hcf
+				break
+			case 4:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 15 0 0 0 0 0 0 0 0
+				FadeIn 300ms 0x00000000
+				break
+			case 5:
+				Menu menu[1] 10 100 1
+					"Basic Enemies" // 0
+					"Boss" // 1
+				MenuWait var[0]
+				MenuClose menu[255]
+				if var[0] == 0:
+					FadeOut 300ms 0x00000000 255
+					FadeWait
+					TcEpisodeStart 1 1024 0
+					Minigame 17 0 0 0 0 0 0 0 0
+					FadeIn 300ms 0x00000000
+				elif var[0] == 1:
+					FadeOut 300ms 0x00000000 255
+					FadeWait
+					TcEpisodeStart 1 1024 0
+					Minigame 17 1 0 0 0 0 0 0 0
+					FadeIn 300ms 0x00000000
+				break
+			case 6:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 24 0 0 0 0 0 0 0 0
+				FadeIn 300ms 0x00000000
+				break
+			case 7:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 25 0 0 0 0 0 0 0 0
+				NewScene "t0001._sn" 0 0 0
+				Hcf
+				FadeIn 300ms 0x00000000
+				break
+			case 8:
+				TcEpisodeStart 10 0 0
+				NewScene "e1000._sn" 100 0 0
+				Hcf
+				break
+			case 9:
+				Sc_D6 0
+				TcEpisodeStart 12 1 0
+				PartyClear
+				PartyAdd name[0] party[0] 255
+				QuestFlagsSet quest[28] 0x20
+				QuestFlagsSet quest[29] 0x20
+				FlagSet flag[9476]
+				NewScene "t1500._sn" 100 0 0
+				Hcf
+				break
+			case 10:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 28 0 0 0 0 0 0 0 0
+				FadeIn 300ms 0x00000000
+				break
+			case 11:
+				FadeOut 300ms 0x00000000 255
+				FadeWait
+				Minigame 29 0 0 0 0 0 0 0 0
+				FadeIn 300ms 0x00000000
+				break
+		var[0] = 255
+	MenuClose menu[1]
+	TextClose 0
+	var[0] = 0
+	Return

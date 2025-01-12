@@ -1,0 +1,188 @@
+calmare tc scena
+scena:
+	name "Bose" "C1401.x"
+	town town[60]
+	bgm bgm[22]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 13:
+	if system[66] == 13:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 0
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[1] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40W'Why don't you guys try becoming bracers?'
+		#500W 
+		#40WThose words were all it took to set the
+		wheels in motion.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WThe three young men Estelle had spoken to,
+		Deen, Rais, and Rocco, were the leaders of a
+		group of delinquents who spent most of their
+		time in the warehouse district of Ruan...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WIn light of the unprecedented chaos that
+		swept over Liberl, they soon began
+		reexamining themselves and their lives...
+		#500W 
+		#40Wand after much thought, they agreed that
+		the path of a bracer--a protector of the land's
+		peace and its people's safety--may be the best
+		road forward for them.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WThat's not to say, however, that they didn't
+		have any ulterior motives.
+		#500W 
+		#40WNo, no, no. They did think it would also give
+		them the opportunity to be trained directly by
+		the guild's Carna.
+		#500W 
+		#40WWith this hope in their hearts, they made
+		their way to the Ruan Bracer Guild and expressed
+		interest in joining.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WBut the guild's crafty receptionist, Jean,
+		had other ideas swirling in his brain...
+		#500W 
+		#40Wand unfortunately for them, they were
+		to receive their training from their longtime
+		sworn enemy and former Raven group leader,
+		Agate Crosner.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WTheir grueling training began in earnest under 
+		his strict guidance.
+		#500W 
+		#40WAfter roughly three months of pure hell,
+		the end was finally in sight.
+		#500W 
+		#40WOnly today's final examination remained...{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	CamLookPos (-6340, 2000, 107480) 0ms
+	CamSetDistance 0 16000 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 135000mdeg 0ms
+	CamPers 450 0ms
+	BgmPlay bgm[22] 0
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	Fork char[0] fork[0]:
+		CamSetDistance 0 8000 -10000 10000ms
+	Fork char[0] fork[1]:
+		CamPers 356 10000ms
+	ForkWait char[0] fork[0]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "c1410._sn" 100 0 0
+	Hcf
+	Return

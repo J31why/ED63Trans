@@ -1,0 +1,756 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P7012.x"
+	town town[1]
+	bgm bgm[174]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "apl2/ch20373._ch" "apl2/ch20373p._cp"
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,3]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (480, -140, -4930) 90deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-470, 280, -5370) 90deg
+		CharSetPos party[2] (-1820, 900, -5500) 90deg
+		CharSetPos party[3] (-1960, 840, -4500) 90deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-470, 280, -5370) 90deg
+		CharSetPos party[1] (-1820, 900, -5500) 90deg
+		CharSetPos party[3] (-1960, 840, -4500) 90deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-470, 280, -5370) 90deg
+		CharSetPos party[1] (-1820, 900, -5500) 90deg
+		CharSetPos party[2] (-1960, 840, -4500) 90deg
+	ForkFunc party[0] fork[0] fn[0,4]
+	ForkFunc party[1] fork[0] fn[0,4]
+	ForkFunc party[2] fork[0] fn[0,4]
+	ForkFunc party[3] fork[0] fn[0,4]
+	CamLookPos (-300, 830, -4800) 0ms
+	CamSetDistance 0 7940 -10000 0ms
+	CamZoom 2560 0ms
+	CamRotate 327000mdeg 0ms
+	CamPers 448 0ms
+	ED6_12 10000 63000 8000
+	Fork name[8] fork[3]:
+		CamZoom 1970 8000ms
+	Fork name[14] fork[3]:
+		CamSetDistance 0 3180 -10000 8000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait name[8] fork[3]
+	ForkWait name[14] fork[3]
+	TextTalk name[8] {
+		#1067F#100P#6PI'm sure you remember...{wait}
+	} {
+		The day it all happened, Rufina and I were due to
+		come back here for the first time in a while.{wait}
+	} {
+		We were both coming from different places we'd
+		been sent, so we wanted to meet up in town and
+		come the rest of the way here together.{wait}
+	} {
+		#1065FBut then her train was delayed, leaving me in town
+		to wait for her alone.{wait}
+	} {
+		That was when I got word of what happened.{wait}
+	}
+	TextWait
+	ImageShow "c_vis474._ch" 0 0 300ms
+	Sleep 2000ms
+	TextSetPos 72 320 56 3
+	TextSetName "Kevin"
+	TextMessage null {
+		{color 12}#40WAll I could think was that you and the other kids were in danger...and so I
+		decided to try and take out the jaegers here alone.{wait}
+	} {
+		They weren't all that experienced, so fighting them wasn't even hard for a
+		squire like me.{wait}
+	} {
+		Before long, I was able to disable them all and free the matron and the
+		other kids.{wait}
+	} {
+		Or so I thought. You were nowhere to be seen.{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	ImageHide 300ms
+	Sleep 2000ms
+	TextTalk name[8] {
+		#1065F#100P#6PI asked the other kids where you were. They told
+		me one of the jaegers had taken you somewhere
+		else and that you were unconscious.{wait}
+	} {
+		I looked frantically all over trying to find you before
+		eventually stumbling across this place.{wait}
+	} {
+		#1840FAs for how...{wait}
+	} {
+		You remember how you didn't have your ribbon
+		in your hair when you woke up, Ries? {wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1802F#100P#5PI-I do...{wait}
+	} {
+		What does that have to do with anything?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1075F#100P#6PI found that ribbon in front of the secret passage
+		we've just gone through.{wait}
+	} {
+		And there were new footprints near it, too. Made it
+		easy to find the entrance.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1444F#100P#5POh...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1067F#100P#6PAnyway...{wait}
+	} {
+		...after getting in here, I made my way down this
+		staircase in pursuit of the jaeger that had taken
+		you.{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1500ms
+	FlagSet flag[9477]
+	NewScene "p7012._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ED6_12 33000 63000 0
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsUnset object[3] 0x0010
+	ObjFlagsUnset object[3] 0x0008
+	ObjFlagsUnset object[3] 0x0020
+	ObjFrame object[3] 0
+	ObjFlagsSet object[4] 0x0004
+	CharSetPos name[8] (79760, 0, -8450) 0deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (79840, 0, -10580) 0deg
+		CharSetPos party[2] (80570, 0, -12380) 0deg
+		CharSetPos party[3] (79500, 0, -12590) 0deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (79840, 0, -10580) 0deg
+		CharSetPos party[1] (80570, 0, -12380) 0deg
+		CharSetPos party[3] (79500, 0, -12590) 0deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (79840, 0, -10580) 0deg
+		CharSetPos party[1] (80570, 0, -12380) 0deg
+		CharSetPos party[2] (79500, 0, -12590) 0deg
+	CamLookPos (78260, 1050, -16040) 0ms
+	CamSetDistance 0 6500 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 325 0ms
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (80160, 0, 19230) 2000mm/s 0
+	Sleep 50ms
+	if CharInSlot 0 party[1] == 14:
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (80250, 0, 17320) 2000mm/s 0
+		Sleep 50ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (81150, 0, 15490) 2000mm/s 0
+		Sleep 50ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (79680, 0, 15540) 2000mm/s 0
+	elif CharInSlot 0 party[2] == 14:
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (80250, 0, 17320) 2000mm/s 0
+		Sleep 50ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (81150, 0, 15690) 2000mm/s 0
+		Sleep 50ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (79680, 0, 15740) 2000mm/s 0
+	elif CharInSlot 0 party[3] == 14:
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (80250, 0, 17320) 2000mm/s 0
+		Sleep 50ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (81150, 0, 15690) 2000mm/s 0
+		Sleep 50ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (79680, 0, 15740) 2000mm/s 0
+	Sleep 1500ms
+	Fork party[0] fork[1]:
+		CamLookPos (78260, 1050, 20160) 11000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[1]
+	CrossFade 500ms
+	CamLookPos (78430, 0, 19800) 0ms
+	CamSetDistance 0 4800 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 297 0ms
+	FadeWait
+	Sleep 300ms
+	CharTurnTo name[8] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#1065F#11PHey, Ries?{wait}
+	} {
+		#1063FDo you remember what I was like back
+		when you first met me?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1445F#6P...Yeah.{wait}
+	} {
+		#1446FI was still young at the time, but it's as
+		fresh as if it were only yesterday.{wait}
+	}
+	TextWait
+	Sleep 150ms
+	ImageShow "c_vis473._ch" 0 0 300ms
+	Sleep 2000ms
+	TextSetPos 72 320 56 3
+	TextSetName "Ries"
+	TextMessage null {
+		{color 12}#40WYou looked like you'd been swallowed by blackness. Like there wasn't a single
+		thread of hope bound to you.{wait}
+	} {
+		It was...scary.{wait}
+	} {
+		I kept wondering what must have happened to you--what you must have seen
+		to make you end up that way.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	ImageHide 300ms
+	Sleep 1500ms
+	TextTalk name[8] {
+		#1840F#11PHaha... What must have happened to me, huh?{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[8]
+	Sleep 500ms
+	TextTalk name[8] {
+		#1067F#11PRufina seemed like she knew...{wait}
+	} {
+		#1840FBefore I met you, I killed my mom.{wait}
+	}
+	TextWait
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#1444F#6P...?!{wait}
+	}
+	TextWait
+	if PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1543F#6P...{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1504F#6P...{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#216F#6P...{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#055F#6PWha...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#178F#6PWha...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1523F#6PWha...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1004F#6PWha...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1163F#6PWha...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#264F#6P...{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#1317F#6P...{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#270F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#072F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#065F#6P...Wha...?{wait}
+		}
+		TextWait
+	if PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#113F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#065F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#072F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#270F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#1317F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#264F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1163F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1004F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1523F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#178F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#055F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#216F#6P...?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1504F#6P...?!{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#1840F#11PMaybe 'killed' isn't the right expression.
+		It's not like I directly did it.{wait}
+	} {
+		#1075FI still let her die, though. I've still got a 
+		responsibility for what happened.{wait}
+	}
+	TextWait
+	FadeOut 1500ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	ImageShow "c_vis460._ch" 0 0 100ms
+	Sleep 3000ms
+	TextSetPos 72 320 56 3
+	TextSetName "Kevin"
+	TextMessage null {
+		{color 12}#40WGrowing up, it was basically me and my mom for the most part.{wait}
+	} {
+		My father showed his face from time to time, but not that much. From what
+		I understand, he had another family elsewhere.{wait}
+	} {
+		But even without him, she did her best to look after me on her own. I loved
+		her dearly.{wait}
+	} {
+		Kids in the neighborhood used to make fun of me for how I talked,
+		which I got from her...but I just beat them up most of the time.{wait}
+	} {
+		She was always kind, she loved cooking, and...yeah. I thought the world of
+		her.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	CamLookPos (123020, 0, 12050) 0ms
+	CamSetDistance 0 4960 -10000 0ms
+	CamZoom 2510 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 325 0ms
+	ImageHide 200ms
+	Sleep 2000ms
+	TextSetPos 72 320 56 3
+	TextSetName "Kevin"
+	TextMessage null {
+		{color 12}#40WWhen I was seven, my father, who had all the money in the world, chose to
+		abandon her.{wait}
+	} {
+		At the best of times, she was always a frail person...and after that, she grew
+		more and more despondent. Her health suffered...{wait}
+	} {
+		I tried everything a kid could do to cheer her up, but nothing I did worked.{wait}
+	} {
+		And during one winter's day when she must have finally had enough.{wait}
+	} {
+		She came over while I was sleeping and tried to strangle me.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	TextSetName "Ries"
+	TextMessage null {
+		{color 12}#3S...!!{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS461._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2500ms
+	VisSet vis[0] 3 0xFFAAAAAA 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 200 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#50W#15AI'm so sorry, Kevin...{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}#50W#15AI failed as your mother...{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}#50W#20A...but I'm so tired...
+		I'm so, so tired...{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}#50W#20A...At least this way...{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}#50W#25A...At least this way,
+		the two of us can...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 150ms
+	VisSet vis[0] 3 0x00FFFFFF 1500ms 0 0
+	Sleep 2000ms
+	VisHide vis[255] 0
+	FadeIn 0ms 0x00000000
+	Sc_C4Unset 2048
+	TextSetPos 72 320 56 3
+	TextSetName "Kevin"
+	TextMessage null {
+		{color 12}#40WI guess she figured that if we were both going to suffer, we might as well
+		take the easy way out as a family.{wait}
+	} {
+		But I wouldn't let her take me with her.{wait}
+	} {
+		Before I knew what I was doing, I'd pushed her aside and ran barefoot out
+		into the snow.{wait}
+	} {
+		I wandered around for a while after that. I couldn't understand what had
+		happened or what she'd been trying to do...{wait}
+	} {
+		Eventually, I could feel myself getting hungry. I thought that maybe she'd
+		been able to clear her head.{wait}
+	} {
+		I made my way back home, nervous as could be, and...{color 0}{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	ImageShow "c_vis462._ch" 0 0 100ms
+	Sleep 3000ms
+	Sleep 500ms
+	FadeOut 0ms 0x00FFFFFF 255
+	FadeWait
+	ImageHide 100ms
+	Sleep 3000ms
+	CamLookPos (78090, -200, 19770) 0ms
+	CamSetDistance 0 4800 -10000 0ms
+	CamZoom 2760 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 297 0ms
+	Sleep 1000ms
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	Sleep 1000ms
+	TextTalk name[14] {
+		#1960F#6P#60W...I...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1844F#11P#40WHaha. Sorry for making you listen to all this.{wait}
+	} {
+		#1843FStill, I think that's probably when it happened.{wait}
+	} {
+		#1845FWhen my Stigma was carved inside me.{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#1809F#6P...What?!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork party[0] fork[0]:
+		CamLookPos (78520, 0, 21620) 1500ms
+	Fork party[0] fork[1]:
+		CamSetDistance 0 4840 -10000 1500ms
+	Fork party[0] fork[2]:
+		CamZoom 2600 1500ms
+	Fork party[0] fork[3]:
+		CamPers 330 1500ms
+	CharTurnTo name[8] 0deg 400deg/s
+	ForkWait party[0] fork[0]
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[0]
+	CharSetChipPattern name[8] 0
+	Sleep 500ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipPattern name[8] 1
+	Sleep 600ms
+	EffLoad eff[0] "map\\mp058_00.eff"
+	EffLoad eff[1] "scraft\\sc008_02.eff"
+	EffLoad eff[2] "map\\mpP90_00.eff"
+	EffLoad eff[3] "map\\mpP90_01.eff"
+	EffLoad eff[4] "map\\mpP90_04.eff"
+	EffPlay eff[1] eff_instance[255] null 0 (80170, 1000, 19900) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundStop sound[201]
+	EffStop eff_instance[0] 2
+	Sleep 2000ms
+	CrossFade 1000ms
+	SoundPlay sound[215] 0 0 100
+	SoundPlay sound[326] 100 0 1
+	EffPlay eff[2] eff_instance[0] null 0 (80130, 0, 21750) 0 0 0 1800 1500 1500 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[1] null 0 (80130, 0, 21750) 0 0 0 1800 1500 1500 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[2] null 0 (80130, 0, 21750) 0 0 0 1800 1500 1500 null (0, 0, 0) 0ms
+	FadeWait
+	Sleep 1000ms
+	CrossFade 1000ms
+	SoundPlay sound[279] 0 0 100
+	ObjFlagsSet object[2] 0x0004
+	ObjFlagsUnset object[4] 0x0004
+	SoundStop sound[326]
+	EffStop eff_instance[0] 0
+	EffStop eff_instance[1] 0
+	EffStop eff_instance[2] 0
+	FadeWait
+	CharSetChipPattern name[8] 0
+	Sleep 150ms
+	CrossFade 250ms
+	CharSetChipBase name[8] chip[65535]
+	CharSetChipPattern name[8] 0
+	FadeWait
+	Sleep 500ms
+	Fork party[0] fork[1]:
+		CamLookPos (77520, 0, 23520) 3000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (80060, 0, 21340) 1000mm/s 0
+	ForkWait name[8] fork[0]
+	Sleep 500ms
+	SoundPlay sound[112] 0 0 100
+	ObjFrame object[3] 0
+	ObjPlay object[3] 270
+	ObjWait object[3]
+	CharFlagsSet field_party[0] 0x0004
+	CharFlagsSet field_party[1] 0x0004
+	CharFlagsSet field_party[2] 0x0004
+	CharFlagsSet field_party[3] 0x0004
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (80130, 0, 26480) 2000mm/s 0
+	Sleep 500ms
+	Fork party[0] fork[1]:
+		CamLookPos (77520, 0, 25000) 5000ms
+	if CharInSlot 0 party[1] == 14:
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (80130, 0, 26480) 2000mm/s 0
+		Sleep 300ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (80640, 0, 26470) 2000mm/s 0
+		Sleep 600ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (79680, 0, 26440) 2000mm/s 0
+	elif CharInSlot 0 party[2] == 14:
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (80130, 0, 26480) 2000mm/s 0
+		Sleep 300ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (80640, 0, 26470) 2000mm/s 0
+		Sleep 600ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (79680, 0, 26440) 2000mm/s 0
+	elif CharInSlot 0 party[3] == 14:
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (80130, 0, 26480) 2000mm/s 0
+		Sleep 300ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (80640, 0, 26470) 2000mm/s 0
+		Sleep 600ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (79680, 0, 26440) 2000mm/s 0
+	Sleep 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit party[0] fork[1]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "p7013._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return

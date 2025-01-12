@@ -1,0 +1,1001 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7404.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "Gespenst"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C4
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Gespenst"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C4
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9479]:
+		FlagUnset flag[9479]
+		SystemFlagsSet 0x10000000
+		Event fn[0,4]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 177
+		Event fn[0,3]
+	elif flag[11298] && !flag[11300]:
+		SystemFlagsSet 0x10000000
+		system[1] = 212
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[6] 0x0004
+	ObjFlagsSet object[23] 0x0004
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	EffLoad eff[0] "map\\mp271_00.eff"
+	EffLoad eff[1] "monster\\ms30105a.eff"
+	EffLoad eff[2] "monster\\ms30803a.eff"
+	EffLoad eff[3] "map\\mp277_00.eff"
+	Tc_E0 party[4] 64 2
+	Tc_E0 party[4] 65 3
+	Tc_E0 party[5] 66 2
+	Tc_E0 party[5] 67 3
+	Tc_E0 party[6] 68 2
+	Tc_E0 party[6] 69 3
+	Tc_E0 party[7] 70 2
+	Tc_E0 party[7] 71 3
+	CharSetPos party[4] (-840, 0, -10480) 0deg
+	CharSetPos party[5] (550, 0, -10450) 0deg
+	CharSetPos party[6] (-1260, 0, -12070) 0deg
+	CharSetPos party[7] (610, 0, -12180) 0deg
+	CamLookPos (5130, -28700, 26260) 0ms
+	CamSetDistance 0 4490 -10000 0ms
+	CamZoom 7270 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 672 0ms
+	Fork party[4] fork[1]:
+		CamLookPos (5130, -100, 26260) 8000ms
+	Fork party[5] fork[1]:
+		CamSetDistance 0 6470 -10000 8000ms
+	Fork party[4] fork[0]:
+		CharWalkToPos self (-1190, 0, 12190) 2000mm/s 0
+	Sleep 100ms
+	Fork party[5] fork[0]:
+		CharWalkToPos self (530, 0, 12220) 2000mm/s 0
+	Sleep 100ms
+	Fork party[6] fork[0]:
+		CharWalkToPos self (-1720, 0, 10300) 2000mm/s 0
+	Sleep 100ms
+	Fork party[7] fork[0]:
+		CharWalkToPos self (490, 0, 10320) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait party[4] fork[1]
+	ForkWait party[5] fork[1]
+	Fork party[6] fork[1]:
+		CamZoom 7500 3000ms
+	Fork party[7] fork[1]:
+		CamPers 700 3000ms
+	ForkWait party[4] fork[0]
+	ForkWait party[5] fork[0]
+	ForkWait party[6] fork[0]
+	ForkWait party[7] fork[0]
+	ForkWait party[6] fork[1]
+	ForkWait party[7] fork[1]
+	CrossFade 1000ms
+	CamLookPos (1300, 0, 13000) 0ms
+	CamSetDistance 0 4650 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	FadeWait
+	Sleep 300ms
+	if CharInSlot 0 party[4] == 0:
+		TextTalk name[0] {
+			#1004F#5PI...guess this is the end of this wing?{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 1:
+		TextTalk name[1] {
+			#1503F#5PI guess this must be the end of this wing.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 10:
+		TextTalk name[10] {
+			#212F#5PI...guess this is the end of this wing?{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 15:
+		TextTalk name[15] {
+			#1305F#5POh... This looks like the end of this wing.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 6:
+		TextTalk name[6] {
+			#065F#5PI...guess this is the end of this wing?{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 9:
+		TextTalk name[9] {
+			#814F#5PI...guess this is the end of this wing?{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 4:
+		TextTalk name[4] {
+			#1164F#5PThis must be the end of this wing.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 2:
+		TextTalk name[2] {
+			#1523F#5PI...guess this is the end of this wing?{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 5:
+		TextTalk name[5] {
+			#555F#5PI guess this must be the end of this wing?{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 7:
+		TextTalk name[7] {
+			#072F#5POh... This looks like the end of this wing.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 13:
+		TextTalk name[13] {
+			#178F#5POh... This appears to be the end of this wing.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 3:
+		TextTalk name[3] {
+			#1542F#5PHmm... This appears to be the end of this wing.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 12:
+		TextTalk name[12] {
+			#276F#5P...This appears to be the end of this wing.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[4] == 11:
+		TextTalk name[11] {
+			#112F#5PHmm... This appears to be the end of this wing.{wait}
+		}
+		TextWait
+	if CharInSlot 0 party[5] == 0:
+		TextTalk name[0] {
+			#1015F#5PThere's nothing here, though.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 1:
+		TextTalk name[1] {
+			#1503F#5PThat's strange. I would've expected there
+			to be something here waiting for us.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 10:
+		TextTalk name[10] {
+			#212F#5PThere's nothing here, though.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 15:
+		TextTalk name[15] {
+			#1305F#5PStrange... I can't sense anything here at all.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 6:
+		TextTalk name[6] {
+			#063F#5PBut there's nothing here...{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 9:
+		TextTalk name[9] {
+			#812F#5PIt's empty, though.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 4:
+		TextTalk name[4] {
+			#1163F#5PThere's nothing here, though.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 2:
+		TextTalk name[2] {
+			#1532F#5PThat's strange. I would've expected there
+			to be something here waiting for us.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 5:
+		TextTalk name[5] {
+			#552F#5PBah. Wonder why there's nothing here.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 7:
+		TextTalk name[7] {
+			#572F#5PStrange... I can't sense anything here at all.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 13:
+		TextTalk name[13] {
+			#178F#5PStrange... I can't sense anything here at all.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 3:
+		TextTalk name[3] {
+			#1540F#5PHow peculiar... I would have expected there
+			to be something waiting here for us.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 12:
+		TextTalk name[12] {
+			#276F#5PStrange... I can't sense anything here at all.{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[5] == 11:
+		TextTalk name[11] {
+			#112F#5PHmm... And yet there's nothing here.{wait}
+		}
+		TextWait
+	Sleep 500ms
+	BgmStop 1500ms
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 80 100 -1 -1
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#12ADisengaging standby mode...{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	Sleep 150ms
+	if CharInSlot 0 party[4] == 7:
+		Emote party[4] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[4] == 6:
+		Emote party[4] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[4] == 15:
+		Emote party[4] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[4] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[5] == 7:
+		Emote party[5] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[5] == 6:
+		Emote party[5] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[5] == 15:
+		Emote party[5] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[5] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[6] == 7:
+		Emote party[6] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[6] == 6:
+		Emote party[6] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[6] == 15:
+		Emote party[6] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[6] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[7] == 7:
+		Emote party[7] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[7] == 6:
+		Emote party[7] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[7] == 15:
+		Emote party[7] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[7] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	if CharInSlot 0 party[6] == 0:
+		TextTalk name[0] {
+			#1020F#6PWh-What was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 1:
+		TextTalk name[1] {
+			#1502F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 15:
+		TextTalk name[15] {
+			#264F#6PWas that a synthesized voice...?{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 10:
+		TextTalk name[10] {
+			#216F#6PWh-What was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 6:
+		TextTalk name[6] {
+			#065F#6PWh-What was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 9:
+		TextTalk name[9] {
+			#1317F#6PWh-What was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 4:
+		TextTalk name[4] {
+			#1163F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 2:
+		TextTalk name[2] {
+			#1523F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 5:
+		TextTalk name[5] {
+			#052F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 7:
+		TextTalk name[7] {
+			#072F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 13:
+		TextTalk name[13] {
+			#172F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 3:
+		TextTalk name[3] {
+			#1543F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 12:
+		TextTalk name[12] {
+			#273F#6PWhat was that?!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[6] == 11:
+		TextTalk name[11] {
+			#113F#6PWhat was that?!{wait}
+		}
+		TextWait
+	Fork party[6] fork[1]:
+		CamZoom 4000 16000ms
+	BgmPlay bgm[45] 0
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 80 100 -1 -1
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#12ARebooting systems...{0x05}{wait}
+	}
+	TextWait
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#15AReboot process complete.{0x05}{wait}
+	}
+	TextWait
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#15ALocation confirmed.{0x05}{wait}
+	}
+	TextWait
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#15ACurrently situated in the left wing
+		of Phantasmagoria.{0x05}{wait}
+	}
+	TextWait
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#15AConfirming the presence of intruders.{0x05}{wait}
+	}
+	TextWait
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#15ACommencing materialization process.{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	CrossFade 500ms
+	ForkQuit party[6] fork[1]
+	system[28] = 1
+	ObjFlagsSet object[21] 0x0004
+	ObjFlagsSet object[22] 0x0004
+	CamLookPos (220, 0, 19000) 0ms
+	CamSetDistance 0 3000 -10000 0ms
+	CamZoom 4200 0ms
+	CamRotate 55000mdeg 0ms
+	CamPers 450 0ms
+	Fork party[4] fork[1]:
+		CamLookPos (3440, 1050, 27500) 5500ms
+	Fork party[5] fork[1]:
+		CamSetDistance 0 5000 -10000 5500ms
+	Fork party[6] fork[1]:
+		CamZoom 3200 5500ms
+	Fork party[6] fork[2]:
+		CamRotate 45000mdeg 5500ms
+	Fork party[7] fork[1]:
+		CamPers 500 5500ms
+	FadeWait
+	SoundPlay sound[443] 0 0 100
+	SoundPlay sound[444] 0 0 100
+	EffPlay eff[3] eff_instance[0] null 0 (0, 2800, 24000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[0] eff_instance[1] null 0 (0, 2800, 24000) 0 0 0 1300 1300 1300 null (0, 0, 0) 0ms
+	CharSetPos char[0] (0, 0, 24000) 0deg
+	CharAttachObj char[0] object[6]
+	_ObjB0 object[6] 30
+	ObjFrame object[6] 50
+	ObjPlay object[6] 50
+	CharSetPos char[1] (0, 0, 24000) 0deg
+	CharAttachObj char[1] object[23]
+	_ObjB0 object[23] 30
+	ObjFrame object[23] 50
+	ObjPlay object[23] 50
+	ForkWait party[4] fork[1]
+	ForkWait party[5] fork[1]
+	ForkWait party[6] fork[1]
+	ForkWait party[7] fork[1]
+	Sleep 500ms
+	Fork party[5] fork[1]:
+		CamSetDistance 0 4500 -10000 8000ms
+	Fork party[6] fork[1]:
+		CamZoom 3200 8000ms
+	Fork party[7] fork[1]:
+		CamPers 360 8000ms
+	EffStop eff_instance[1] 2
+	CrossFade 2000ms
+	SoundPlay sound[958] 0 0 100
+	ObjFlagsUnset object[23] 0x0004
+	FadeWait
+	Sleep 1000ms
+	EffStop eff_instance[0] 2
+	CrossFade 2000ms
+	EffStop eff_instance[0] 0
+	SoundPlay sound[655] 0 0 100
+	ObjFlagsUnset object[6] 0x0004
+	ObjFlagsSet object[23] 0x0004
+	FadeWait
+	SoundStop sound[329]
+	CrossFade 1000ms
+	ForkQuit party[4] fork[1]
+	ForkQuit party[5] fork[1]
+	ForkQuit party[6] fork[1]
+	ForkQuit party[7] fork[1]
+	CamLookPos (0, 0, 31750) 0ms
+	CamSetDistance 0 5250 -10000 0ms
+	CamZoom 3530 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 483 0ms
+	Fork party[4] fork[1]:
+		CamLookPos (0, 1000, 31750) 2000ms
+	Fork party[5] fork[1]:
+		CamSetDistance 0 2000 -10000 2000ms
+	Fork party[6] fork[1]:
+		CamZoom 2630 2000ms
+	Fork party[7] fork[1]:
+		CamPers 480 2000ms
+	_ObjB0 object[6] 35
+	ObjFrame object[6] 640
+	ObjPlay object[6] 680
+	ObjWait object[6]
+	CrossFade 200ms
+	Fork party[7] fork[1]:
+		CamPers 395 200ms
+	ObjFlagsUnset object[6] 0x0020
+	_ObjB0 object[6] 35
+	ObjFrame object[6] 680
+	ObjPlay object[6] 705
+	Sleep 100ms
+	SoundPlay sound[242] 0 0 100
+	Shake 250 250 3000 100ms
+	ObjWait object[6]
+	ForkWait party[4] fork[1]
+	ForkWait party[5] fork[1]
+	ForkWait party[6] fork[1]
+	ForkWait party[7] fork[1]
+	CrossFade 500ms
+	EffPlay eff[1] eff_instance[7] char[0] 0 (-10, 3230, 800) 180 -32 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[243] 0 0 100
+	Sleep 2000ms
+	ObjFrame object[6] 706
+	ObjPlay object[6] 730
+	CharSetPos party[4] (-570, 0, 12740) 0deg
+	CharSetPos party[5] (640, 0, 12760) 0deg
+	CharSetPos party[6] (-1100, 0, 10550) 0deg
+	CharSetPos party[7] (1250, 0, 10750) 0deg
+	Fork party[4] fork[1]:
+		CamLookPos (0, 300, 32049) 3000ms
+	Fork party[5] fork[1]:
+		CamSetDistance 0 1460 -10000 3000ms
+	Fork party[6] fork[1]:
+		CamZoom 5700 3000ms
+	Fork party[7] fork[1]:
+		CamPers 310 3000ms
+	ObjWait object[6]
+	ObjFlagsSet object[6] 0x0020
+	_ObjB0 object[6] 15
+	ObjFrame object[6] 50
+	ObjPlay object[6] 89
+	FadeWait
+	ForkWait party[4] fork[1]
+	ForkWait party[5] fork[1]
+	ForkWait party[6] fork[1]
+	ForkWait party[7] fork[1]
+	Sleep 150ms
+	if CharInSlot 0 party[7] == 0:
+		TextTalk name[0] {
+			#1005F#5PUgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 1:
+		TextTalk name[1] {
+			#1502F#5PUgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 15:
+		TextTalk name[15] {
+			#265F#5POh my...{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 10:
+		TextTalk name[10] {
+			#216F#5PEeek!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 6:
+		TextTalk name[6] {
+			#065F#5PEeek!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 9:
+		TextTalk name[9] {
+			#1317F#5PWhoa!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 4:
+		TextTalk name[4] {
+			#1162F#5PUgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 2:
+		TextTalk name[2] {
+			#1533F#5PUgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 5:
+		TextTalk name[5] {
+			#057F#5PGah!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 7:
+		TextTalk name[7] {
+			#072F#5PUgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 13:
+		TextTalk name[13] {
+			#178F#5PUgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 3:
+		TextTalk name[3] {
+			#1546F#5PNgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 12:
+		TextTalk name[12] {
+			#270F#5PUgh...!{wait}
+		}
+		TextWait
+	elif CharInSlot 0 party[7] == 11:
+		TextTalk name[11] {
+			#112F#5PUgh...!{wait}
+		}
+		TextWait
+	if CharInSlot 0 party[4] == 7:
+		Emote party[4] 0mm 2300mm 40 43 100ms 3
+	elif CharInSlot 0 party[4] == 6:
+		Emote party[4] 0mm 1700mm 40 43 100ms 3
+	elif CharInSlot 0 party[4] == 15:
+		Emote party[4] 0mm 1700mm 40 43 100ms 3
+	else:
+		Emote party[4] 0mm 2000mm 40 43 100ms 3
+	if CharInSlot 0 party[5] == 7:
+		Emote party[5] 0mm 2300mm 40 43 100ms 3
+	elif CharInSlot 0 party[5] == 6:
+		Emote party[5] 0mm 1700mm 40 43 100ms 3
+	elif CharInSlot 0 party[5] == 15:
+		Emote party[5] 0mm 1700mm 40 43 100ms 3
+	else:
+		Emote party[5] 0mm 2000mm 40 43 100ms 3
+	if CharInSlot 0 party[6] == 7:
+		Emote party[6] 0mm 2300mm 40 43 100ms 3
+	elif CharInSlot 0 party[6] == 6:
+		Emote party[6] 0mm 1700mm 40 43 100ms 3
+	elif CharInSlot 0 party[6] == 15:
+		Emote party[6] 0mm 1700mm 40 43 100ms 3
+	else:
+		Emote party[6] 0mm 2000mm 40 43 100ms 3
+	if CharInSlot 0 party[7] == 7:
+		Emote party[7] 0mm 2300mm 40 43 100ms 3
+	elif CharInSlot 0 party[7] == 6:
+		Emote party[7] 0mm 1700mm 40 43 100ms 3
+	elif CharInSlot 0 party[7] == 15:
+		Emote party[7] 0mm 1700mm 40 43 100ms 3
+	else:
+		Emote party[7] 0mm 2000mm 40 43 100ms 3
+	Fork party[7] fork[0]:
+		CharWalkToPos2 self (1250, 0, 9750) 2000mm/s 0
+	Sleep 100ms
+	Fork party[6] fork[0]:
+		CharWalkToPos2 self (-1100, 0, 9550) 2000mm/s 0
+	Sleep 100ms
+	Fork party[5] fork[0]:
+		CharWalkToPos2 self (640, 0, 11760) 2000mm/s 0
+	Sleep 100ms
+	Fork party[4] fork[0]:
+		CharWalkToPos2 self (-570, 0, 11740) 2000mm/s 0
+	ForkWait party[4] fork[0]
+	ForkWait party[5] fork[0]
+	ForkWait party[6] fork[0]
+	ForkWait party[7] fork[0]
+	CrossFade 250ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[4] chip[0]
+	CharSetChipPattern party[4] 0
+	Sleep 50ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[5] chip[2]
+	CharSetChipPattern party[5] 0
+	Sleep 80ms
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase party[6] chip[4]
+	CharSetChipPattern party[6] 0
+	Sleep 50ms
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[7] chip[6]
+	CharSetChipPattern party[7] 0
+	FadeWait
+	Sleep 300ms
+	Sleep 500ms
+	Fork party[6] fork[0]:
+		CamZoom 5200 9000ms
+	TextSetPos -1 200 -1 -1
+	TextSetName "Synthesized Voice"
+	TextMessage null {
+		{color 2}#15ASwitching to Genocide mode.{0x05}{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextMessage null {
+		{color 2}#20AReverie Mk.2, Gespenst...{0x05}{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextMessage null {
+		{color 2}#20ACommencing elimination of intruders.{0x05}{wait}
+	}
+	SoundPlay sound[133] 1 0 100
+	ForkLoop party[4] fork[3]:
+		Shake 0 150 3000 300ms
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeOut 1500ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	ForkQuit party[4] fork[3]
+	SoundSetVolume sound[133] 90
+	Sleep 150ms
+	SoundSetVolume sound[133] 80
+	Sleep 150ms
+	SoundSetVolume sound[133] 70
+	Sleep 150ms
+	SoundSetVolume sound[133] 60
+	Sleep 150ms
+	SoundSetVolume sound[133] 50
+	Sleep 150ms
+	SoundSetVolume sound[133] 40
+	Sleep 150ms
+	SoundSetVolume sound[133] 30
+	Sleep 150ms
+	SoundSetVolume sound[133] 20
+	Sleep 150ms
+	SoundSetVolume sound[133] 10
+	Sleep 150ms
+	SoundSetVolume sound[133] 0
+	Sleep 150ms
+	SoundStop sound[133]
+	BgmWait
+	Sleep 1000ms
+	FlagSet flag[11300]
+	Tc_E6_0 1
+	BgmPlay bgm[225] 0
+	Sleep 1000ms
+	TextSetPos -1 80 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Select a route.{0x18}{wait}
+	}
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		ED6MenuNew menu[0] 65535 170 0
+		if flag[11299]:
+			ED6MenuAdd menu[0] "Right Gate Path"
+			ED6MenuSetDisabled menu[0] 0
+		else:
+			ED6MenuAdd menu[0] "Right Gate Path"
+		if flag[11300]:
+			ED6MenuAdd menu[0] "Left Gate Path"
+			ED6MenuSetDisabled menu[0] 1
+		else:
+			ED6MenuAdd menu[0] "Left Gate Path"
+		if flag[11301]:
+			ED6MenuAdd menu[0] "Main Gate Path"
+			ED6MenuSetDisabled menu[0] 2
+		else:
+			ED6MenuAdd menu[0] "Main Gate Path"
+		if flag[11299] && flag[11300] && flag[11301]:
+			ED6MenuAdd menu[0] "Giant Gate Path"
+		else:
+			ED6MenuAdd menu[0] "Giant Gate Path"
+			ED6MenuSetDisabled menu[0] 3
+		ED6MenuShow menu[0]
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[0]
+		switch var[0]:
+			case 0:
+				if !flag[11299]:
+					TextClose 0
+					if global[4] == 0:
+						global[4] = 1
+					elif global[5] == 0:
+						global[5] = 1
+					else:
+					TcTeamUse 0
+					FlagSet flag[9476]
+					NewScene "m7409._sn" 100 0 0
+					Hcf
+					var[0] = 255
+					break
+			case 1:
+				if !flag[11300]:
+					TextClose 0
+					if global[4] == 0:
+						global[4] = 2
+					elif global[5] == 0:
+						global[5] = 2
+					else:
+					TcTeamUse 1
+					FlagSet flag[9476]
+					NewScene "m7413._sn" 100 0 0
+					Hcf
+					var[0] = 255
+					break
+			case 2:
+				if !flag[11301]:
+					TextClose 0
+					if global[4] == 0:
+						global[4] = 3
+					elif global[5] == 0:
+						global[5] = 3
+					else:
+					TcTeamUse 2
+					FlagSet flag[9476]
+					NewScene "m7418._sn" 100 0 0
+					Hcf
+					var[0] = 255
+					break
+			case 3:
+				if flag[11299] && flag[11300] && flag[11301]:
+					TextClose 0
+					TcTeamUse 3
+					FlagSet flag[9476]
+					NewScene "m7422._sn" 100 0 0
+					Hcf
+					var[0] = 255
+					break
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Tc_E0 party[4] 64 2
+	Tc_E0 party[4] 65 3
+	Tc_E0 party[5] 66 2
+	Tc_E0 party[5] 67 3
+	Tc_E0 party[6] 68 2
+	Tc_E0 party[6] 69 3
+	Tc_E0 party[7] 70 2
+	Tc_E0 party[7] 71 3
+	CharSetPos party[4] (-530, 0, 13480) 0deg
+	CharSetPos party[5] (1320, 0, 13560) 0deg
+	CharSetPos party[6] (-370, 0, 11580) 0deg
+	CharSetPos party[7] (1940, 0, 11420) 0deg
+	CharSetChipBase party[4] chip[0]
+	CharSetChipPattern party[4] 0
+	CharSetChipBase party[5] chip[2]
+	CharSetChipPattern party[5] 0
+	CharSetChipBase party[6] chip[4]
+	CharSetChipPattern party[6] 0
+	CharSetChipBase party[7] chip[6]
+	CharSetChipPattern party[7] 0
+	ObjFlagsSet object[21] 0x0004
+	ObjFlagsSet object[22] 0x0004
+	CharSetPos char[0] (0, 0, 24000) 0deg
+	CharAttachObj char[0] object[6]
+	ObjFlagsUnset object[6] 0x0004
+	ObjFlagsSet object[6] 0x0020
+	_ObjB0 object[6] 15
+	ObjFrame object[6] 50
+	ObjPlay object[6] 89
+	EffStop eff_instance[132] 0
+	CamLookPos (-4640, 10, 31070) 0ms
+	CamSetDistance 0 3570 -10000 0ms
+	CamZoom 2990 0ms
+	CamRotate 325000mdeg 0ms
+	CamPers 472 0ms
+	Fork party[4] fork[0]:
+		CamLookPos (-1590, 1000, 20570) 3500ms
+	Fork party[4] fork[1]:
+		CamSetDistance 0 3990 -10000 3500ms
+	Fork party[4] fork[2]:
+		CamZoom 3300 3500ms
+	Fork party[4] fork[3]:
+		CamRotate 315000mdeg 3500ms
+	Fork party[5] fork[1]:
+		CamPers 450 3500ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkWait party[4] fork[0]
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 2}#60W#20AShould a single group of them fail, the future
+		will be closed forever...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	TcTeamUse 2
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "m7406._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Tc_E0 party[4] 64 2
+	Tc_E0 party[4] 65 3
+	Tc_E0 party[5] 66 2
+	Tc_E0 party[5] 67 3
+	Tc_E0 party[6] 68 2
+	Tc_E0 party[6] 69 3
+	Tc_E0 party[7] 70 2
+	Tc_E0 party[7] 71 3
+	CharSetPos party[4] (-570, 0, 12740) 0deg
+	CharSetPos party[5] (640, 0, 12760) 0deg
+	CharSetPos party[6] (-1100, 0, 10550) 0deg
+	CharSetPos party[7] (1250, 0, 10750) 0deg
+	CharSetChipBase party[4] chip[0]
+	CharSetChipPattern party[4] 0
+	CharSetChipBase party[5] chip[2]
+	CharSetChipPattern party[5] 0
+	CharSetChipBase party[6] chip[4]
+	CharSetChipPattern party[6] 0
+	CharSetChipBase party[7] chip[6]
+	CharSetChipPattern party[7] 0
+	CharSetPos char[0] (0, 0, 24000) 0deg
+	CharAttachObj char[0] object[6]
+	ObjFlagsUnset object[6] 0x0004
+	_ObjB0 object[6] 15
+	ObjFrame object[6] 50
+	ObjPlay object[6] 89
+	CamLookPos (0, 600, 25240) 0ms
+	CamSetDistance 0 2210 -10000 0ms
+	CamZoom 4860 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 285 0ms
+	FadeIn 500ms 0x00000000
+	FadeWait
+	ED6Battle battle[821] null 0 0 null
+	FlagSet flag[11307]
+	FadeOut 0ms 0x00000000 255
+	EventBegin 0
+	if flag[11306] && flag[11308] && flag[11307]:
+		TcTeamUse 3
+		FlagSet flag[9479]
+		NewScene "m7408._sn" 100 0 0
+		Hcf
+	elif flag[11306] | flag[11308]:
+		if global[5] == 1:
+			TcTeamUse 0
+			FlagSet flag[9479]
+			NewScene "m7402._sn" 100 0 0
+			Hcf
+		elif global[5] == 2:
+			TcTeamUse 1
+			FlagSet flag[9479]
+			NewScene "m7404._sn" 100 0 0
+			Hcf
+		elif global[5] == 3:
+			TcTeamUse 2
+			FlagSet flag[9479]
+			NewScene "m7406._sn" 100 0 0
+			Hcf
+	elif !flag[11306] && !flag[11308]:
+		if global[4] == 1:
+			TcTeamUse 0
+			FlagSet flag[9479]
+			NewScene "m7402._sn" 100 0 0
+			Hcf
+		elif global[4] == 2:
+			TcTeamUse 1
+			FlagSet flag[9479]
+			NewScene "m7404._sn" 100 0 0
+			Hcf
+		elif global[4] == 3:
+			TcTeamUse 2
+			FlagSet flag[9479]
+			NewScene "m7406._sn" 100 0 0
+			Hcf
+	Return

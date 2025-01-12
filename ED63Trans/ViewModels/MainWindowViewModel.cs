@@ -153,12 +153,12 @@ public partial class MainWindowViewModel : ViewModelBase
         //     "C:\\Users\\Jelly\\Desktop\\ED6SCRIPT\\ED6_DT21_初版1\\raw_u7002.clm",
         //     "C:\\Users\\Jelly\\Desktop\\ED6SCRIPT\\ED6_DT21_初版1\\u7002.clm");
 
-        //foreach (var sn in Directory.EnumerateFiles("C:\\Users\\Jelly\\Desktop\\scena"))
+        //foreach (var sn in Directory.EnumerateFiles("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT21\\raw"))
         //{
-        //    //Process.Start(Path.Combine(AureoleToolPath, "calmare.exe"), $"\"{sn}\"");
-        //    File.Move(sn,
-        //   Path.Combine("C:\\Users\\Jelly\\Desktop\\scena",
-        //   Path.GetFileName(sn).Replace(" ", "").ToLower()));
+        //    Process.Start(Path.Combine(AureoleToolPath, "calmare.exe"), $"\"{sn}\"");
+        //   // File.Move(sn,
+        //   //Path.Combine("F:\\源码\\C#\\ED63Trans\\ed63rd_cn\\ED6_DT21\\原版en",
+        //   //Path.GetFileName(sn).Replace(" ", "").ToLower()));
         //}
 
         //OpenClmFile("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT21\\e1110.clm");

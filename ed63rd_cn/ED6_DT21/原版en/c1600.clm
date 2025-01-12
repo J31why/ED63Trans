@@ -1,0 +1,834 @@
+calmare sc scena
+scena:
+	name "Bose" "C1600.x"
+	town town[60]
+	bgm bgm[125]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch12450._ch" "mons2/ch12450p._cp"
+chip[1] "mons2/ch12451._ch" "mons2/ch12451p._cp"
+chip[2] "mons/ch10840._ch" "mons/ch10840p._cp"
+chip[3] "mons/ch10841._ch" "mons/ch10841p._cp"
+chip[4] "mons2/ch12460._ch" "mons2/ch12460p._cp"
+chip[5] "mons2/ch12461._ch" "mons2/ch12461p._cp"
+chip[6] "mons/ch10550._ch" "mons/ch10550p._cp"
+chip[7] "mons/ch10551._ch" "mons/ch10551p._cp"
+chip[8] "mons2/ch12500._ch" "mons2/ch12500p._cp"
+chip[9] "mons2/ch12501._ch" "mons2/ch12501p._cp"
+chip[10] "mons2/ch12560._ch" "mons2/ch12560p._cp"
+chip[11] "mons2/ch12561._ch" "mons2/ch12561p._cp"
+chip[12] "npl/ch02530._ch" "npl/ch02530p._cp"
+chip[13] "npl/ch00450._ch" "npl/ch00450p._cp"
+chip[14] "npl/ch00460._ch" "npl/ch00460p._cp"
+chip[15] "npl/ch00470._ch" "npl/ch00470p._cp"
+chip[16] "npl/ch00454._ch" "npl/ch00454p._cp"
+chip[17] "npl/ch00464._ch" "npl/ch00464p._cp"
+chip[18] "npl/ch00474._ch" "npl/ch00474p._cp"
+chip[19] "npl/ch00451._ch" "npl/ch00451p._cp"
+chip[20] "npl/ch00461._ch" "npl/ch00461p._cp"
+chip[21] "npl/ch00471._ch" "npl/ch00471p._cp"
+chip[22] "npl/ch00462._ch" "npl/ch00462p._cp"
+
+npc char[0]:
+	name "Cryon Bit"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x01C1
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Master Cryon"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Rocco"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[12]
+	frame 0
+	ch chip[12]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[4]:
+	name ""
+	pos (-5230, 4000, -12590)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[936]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (28010, 6000, -9400)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[936]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (21830, 6560, -1430)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[936]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (-35520, 16000, 14970)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[936]
+	flag flag[0]
+	unk3 0
+
+monster char[8]:
+	name ""
+	pos (8390, 16000, -3360)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[936]
+	flag flag[0]
+	unk3 0
+
+monster char[9]:
+	name ""
+	pos (25620, 22000, 15270)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[936]
+	flag flag[0]
+	unk3 0
+
+trigger[0]:
+	pos1 (-11880, 4000, -6460)
+	pos2 (-10050, 8000, -14430)
+	flags 0x0000
+	func fn[0,3]
+	unk1 0
+
+trigger[1]:
+	pos1 (18300, 17460, 8020)
+	pos2 (21370, 22460, 1710)
+	flags 0x0000
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 13:
+		if !flag[12183]:
+			CharFlagsSet char[17] 0x0080
+		if !flag[12180]:
+			CharFlagsSet char[12] 0x0080
+			CharFlagsUnset char[8] 0x0080
+			CharSetPos char[8] (-5030, 4000, -13130) 270deg
+	if system[66] == 13:
+	Return
+
+fn[1]:
+	char[13].36 = 191
+	char[16].36 = 191
+	TriggerFlagsSet trigger[0] 0x0080
+	TriggerFlagsSet trigger[1] 0x0080
+	if system[66] == 13:
+		TriggerFlagsUnset trigger[0] 0x0080
+		TriggerFlagsUnset trigger[1] 0x0080
+		if flag[12183]:
+			TriggerFlagsSet trigger[1] 0x0080
+		if flag[12180]:
+			TriggerFlagsSet trigger[0] 0x0080
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	Sc_C4Set 536870912
+	CrossFade 1500ms
+	CamLookPos (-11540, 4000, -8180) 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 262 0ms
+	Fork char[11] fork[0]:
+		CamLookPos (-9000, 4000, -10140) 2500ms
+	Fork char[11] fork[1]:
+		CamRotate 330000mdeg 2500ms
+	Fork char[11] fork[2]:
+		CamSetDistance 0 5860 -10000 2500ms
+	Fork char[11] fork[3]:
+		CamZoom 3420 2500ms
+	Fog 0xFFFFFFFF 34700 65400 0
+	CharSetPos name[16] (-11540, 4000, -11370) 124deg
+	CharSetPos name[18] (-10550, 4000, -9690) 124deg
+	CharSetPos name[17] (-10570, 4000, -11060) 124deg
+	ForkWait char[11] fork[0]
+	TextTalk name[18] {
+		#1765F#5PHmph. Here's our next one, I guess.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1756F#5PThere's no way we'll struggle against this guy!{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1744F#5PDon't be so sure. After the other fights here, 
+		there's no way I'm letting my guard down this
+		time.{wait}
+	} {
+		#1742FStay cautious, guys.{wait}
+	}
+	TextWait
+	CharFlagsSet name[18] 0x1000
+	CharFlagsSet name[16] 0x1000
+	CharFlagsSet name[17] 0x1000
+	Fork char[11] fork[0]:
+		CamLookPos (-7000, 3500, -10140) 1000ms
+	Fork char[11] fork[1]:
+		CamZoom 2920 1000ms
+	CharSetChipBase name[17] chip[20]
+	CharSetChipPattern name[17] 0
+	Fork name[17] fork[1]:
+		CharWalkToPos self (-6080, 4000, -12760) 6000mm/s 0
+	Sleep 50ms
+	CharSetChipBase name[16] chip[19]
+	CharSetChipPattern name[16] 0
+	Fork name[16] fork[1]:
+		CharWalkToPos self (-6080, 4000, -13060) 6000mm/s 0
+	Sleep 50ms
+	CharSetChipBase name[18] chip[21]
+	CharSetChipPattern name[18] 0
+	Fork name[18] fork[1]:
+		CharWalkToPos self (-6080, 4000, -12060) 6000mm/s 0
+	Sleep 450ms
+	ForkQuit name[18] fork[255]
+	ForkQuit name[16] fork[255]
+	ForkQuit name[17] fork[255]
+	ForkQuit char[11] fork[255]
+	CharFlagsUnset name[18] 0x1000
+	CharFlagsUnset name[16] 0x1000
+	CharFlagsUnset name[17] 0x1000
+	ED6Battle battle[928] null 0 0 null
+	Call fn[0,4]
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-6440, 4000, -11720) 0ms
+	CamSetDistance 0 5580 -10000 0ms
+	CamZoom 3600 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	Fog 0xFFFFFFFF 36700 65400 0
+	CharFlagsSet char[8] 0x0080
+	CharSetPos name[16] (-5050, 4000, -11660) 225deg
+	CharSetPos name[18] (-4540, 4000, -13610) 315deg
+	CharSetPos name[17] (-6490, 4000, -13030) 45deg
+	CharSetChipBase name[16] chip[65535]
+	CharSetChipPattern name[16] 0
+	CharSetChipBase name[17] chip[65535]
+	CharSetChipPattern name[17] 0
+	CharSetChipBase name[18] chip[65535]
+	CharSetChipPattern name[18] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[17] {
+		#1755F#5PWhew... That's that.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1749F#11PYeah... That one ended up being tough,
+		too, but nothin' we couldn't handle.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6P#1SBah... If only there was three of me.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 800ms
+	ForkLoop name[17] fork[2]:
+		CharTurnToChar self name[18] 400deg/s
+	Sleep 100ms
+	ForkLoop name[16] fork[2]:
+		CharTurnToChar self name[18] 400deg/s
+	Sleep 300ms
+	TextTalk name[17] {
+		#1753F#5PHuh?{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1743F#11PYou say somethin'?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1762FCouldn't you hear me?{wait}
+	} {
+		#1763FI meant what I said.{wait}
+	} {
+		#1761FIf only there was three of me instead of just me
+		and you two jokes, I'd've been done by now.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#5P*sigh* If you say so, man...{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1745F#11P...{wait}
+	} {
+		#1749FWell, unfortunately for you, this is the group
+		we've got, and we're gonna have to stick with
+		it.{wait}
+	} {
+		#1742FKeep your shit-talkin' to yourself, all right?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6PHmph...{wait}
+	} {
+		#1763FJust don't drag me down.{wait}
+	}
+	TextWait
+	CharTurnTo name[18] 90deg 500deg/s
+	Sleep 100ms
+	Fork name[18] fork[1]:
+		CharWalkToPos self (4670, 4000, -13000) 2500mm/s 0
+	Sleep 1500ms
+	Fork name[18] fork[0]:
+		CharColor self 0x00FFFFFF 2000ms
+	TextTalk name[17] {
+		#1752F#5PWhat's gotten into him? Seriously.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1742F#5P...{wait}
+	}
+	TextWait
+	ForkQuit name[16] fork[2]
+	ForkQuit name[17] fork[2]
+	Fork name[17] fork[1]:
+		CharWalkToPos self (4670, 4000, -13000) 2000mm/s 0
+	Sleep 100ms
+	Fork name[16] fork[1]:
+		CharWalkToPos self (4670, 4000, -13000) 2000mm/s 0
+	Sleep 500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[16] fork[255]
+	ForkQuit name[17] fork[255]
+	ForkQuit name[18] fork[255]
+	CamLookPos (2240, 4000, -12100) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 3800 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 262 0ms
+	Fog 0xFFFFFFFF 43700 65400 0
+	CharColor name[18] 0xFFFFFFFF 0ms
+	CharSetPos name[16] (2240, 4000, -12100) 90deg
+	CharSetPos name[17] (2240, 4000, -12100) 90deg
+	CharSetPos name[18] (2240, 4000, -12100) 90deg
+	CharSetChipPattern name[16] 0
+	CharSetChipPattern name[17] 0
+	CharSetChipPattern name[18] 0
+	Sleep 1500ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sc_C4Unset 536870912
+	FlagSet flag[12180]
+	TriggerFlagsSet trigger[0] 0x0080
+	EventEnd 4
+	Return
+
+fn[5]:
+	EventBegin 0
+	Sc_C4Set 536870912
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsSet char[9] 0x0004
+	CharSetPos char[9] (23480, 22200, 18920) 150deg
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[10] (27400, 22000, 15240) 315deg
+	CharSetChipBase char[10] chip[18]
+	CharSetChipPattern char[10] 3
+	EffLoad eff[0] "Condition\\\\freeze.eff"
+	EffLoad eff[1] "battle\\\\mgaria0.eff"
+	EffLoad eff[2] "battle\\\\mgaria1.eff"
+	EffLoad eff[3] "magic\\\\mg030_0.eff"
+	EffLoad eff[4] "monster\\ms00300.eff"
+	EffPlay eff[0] eff_instance[1] char[10] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	CrossFade 1000ms
+	CamLookPos (19100, 19040, 5460) 0ms
+	CamSetDistance 0 5260 -10000 0ms
+	CamZoom 3500 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 262 0ms
+	Fog 0xFFFFFFFF 32700 65400 0
+	CharSetPos name[16] (19330, 18450, 4490) 45deg
+	CharSetPos name[17] (18590, 18490, 5380) 45deg
+	Sleep 1000ms
+	BgmStop 2000ms
+	CharTurnTo name[17] 45deg 0deg/s
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[17] {
+		#1752F#6PYo, Deen! That looks like him!{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1743F#6PYou see him?{wait}
+	}
+	TextWait
+	CharTurnTo name[16] 45deg 0deg/s
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	BgmWait
+	BgmPlay bgm[41] 0
+	Sleep 500ms
+	TextTalk name[16] {
+		#1747F#6PWhat's that idiot doing?!{wait}
+	}
+	TextWait
+	Fork char[11] fork[0]:
+		CamLookPos (25960, 22000, 19140) 2500ms
+	Fork char[11] fork[1]:
+		CamRotate 8000mdeg 2500ms
+	Fork char[11] fork[2]:
+		CamSetDistance 0 5260 -10000 2500ms
+	Fork char[11] fork[3]:
+		CamZoom 3500 2500ms
+	ForkWait char[11] fork[0]
+	Sleep 1000ms
+	TextTalk char[10] {
+		#1767F#12P#40WUgh... Damn it!{wait}
+	} {
+		I can't move... Ngh...{wait}
+	} {
+		#1764FLooks like this...is the end of the line
+		for me...{wait}
+	}
+	TextWait
+	CharSetPos name[17] (19330, 18450, 4490) 45deg
+	CharSetPos name[16] (18590, 18490, 5380) 45deg
+	Fork char[11] fork[0]:
+		CamLookPos (26100, 22000, 15260) 2000ms
+	Fork char[11] fork[1]:
+		CamSetDistance 0 4380 -10000 2000ms
+	Fork name[16] fork[1]:
+		CharWalkToPos self (24400, 21570, 11860) 5000mm/s 0
+	Sleep 100ms
+	Fork name[17] fork[1]:
+		CharWalkToPos2 self (25720, 21600, 10560) 5000mm/s 0
+	ForkWait name[16] fork[1]
+	ForkLoop name[17] fork[2]:
+		CharTurnToChar self char[10] 500deg/s
+	Sleep 300ms
+	TextTalk name[16] {
+		#1747F#6PRocco!{wait}
+	} {
+		#1743FThis ain't good! He's frozen!{wait}
+	} {
+		#1742FCan you handle it, Rais?{wait}
+	}
+	TextWait
+	ForkWait name[17] fork[1]
+	ForkQuit name[17] fork[2]
+	TextTalk name[17] {
+		#1756F#6PSure thing!{wait}
+	}
+	TextWait
+	_59
+	CrossFade 100ms
+	CharSetChipBase name[17] chip[22]
+	CharSetChipPattern name[17] 0
+	Fork name[17] fork[2]:
+		CharAnimation self 0 6 1500ms
+	Sleep 400ms
+	EffPlay eff[4] eff_instance[2] name[17] 0 (500, 300, 700) 0 0 0 1000 1000 1000 char[10] (0, 700, 0) 0ms
+	Sleep 1500ms
+	TextTalk char[10] {
+		#1767F#3S#11PAggghhhhhh!#2S{wait}
+	}
+	Shake 0 150 3000 500ms
+	TextWait
+	EffStop eff_instance[2] 2
+	EffStop eff_instance[1] 2
+	Emote char[10] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#1762F#11P...I-I can move.{wait}
+	}
+	TextWait
+	Fork char[11] fork[0]:
+		CamLookPos (25520, 22000, 19500) 1500ms
+	Fork char[11] fork[1]:
+		CamZoom 3640 1500ms
+	Fork name[16] fork[1]:
+		CharWalkToPos self (26360, 22000, 16180) 4000mm/s 0
+	Sleep 100ms
+	CharSetChipBase name[17] chip[65535]
+	CharSetChipPattern name[17] 0
+	Fork name[17] fork[1]:
+		CharWalkToPos self (25380, 22000, 14580) 4000mm/s 0
+	ForkWait name[16] fork[1]
+	CharTurnTo name[16] 315deg 500deg/s
+	CharSetChipBase name[16] chip[13]
+	CharSetChipPattern name[16] 0
+	ForkWait name[17] fork[1]
+	CharTurnTo name[17] 315deg 500deg/s
+	CharSetChipBase name[17] chip[14]
+	CharSetChipPattern name[17] 0
+	Sleep 300ms
+	TextTalk name[16] {
+		#1741F#5PHeh. You're a real sorry sight, man!{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1756F#6PSorry for keepin' you waiting.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1762F#12PTh-The hell are you guys doing here?!{wait}
+	} {
+		#1767FI thought you bailed!{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1751F#6PMore like we came to bail you out! ♪{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1747F#5PBut we can talk later! We've got a fight
+		on our hands!{wait}
+	}
+	TextWait
+	Fork char[10] fork[0]:
+		CharShake self 15 0 500 3000ms
+	Sleep 200ms
+	CrossFade 500ms
+	CharAnimation char[10] 3 2 500ms
+	Sleep 100ms
+	CharSetChipBase char[10] chip[15]
+	CharSetChipPattern char[10] 0
+	FadeWait
+	Sleep 300ms
+	TextTalk char[10] {
+		#1766FRrgh... Fine!{wait}
+	}
+	TextWait
+	_59
+	PartyAdd name[18] party[2] 255
+	CharSetPos name[18] (27400, 22000, 15240) 315deg
+	CharSetChipBase name[18] chip[15]
+	CharSetChipPattern name[18] 0
+	CharFlagsSet char[10] 0x0080
+	CharSetPos name[17] (25380, 22000, 14580) 315deg
+	CharSetChipBase name[17] chip[14]
+	CharSetChipPattern name[17] 0
+	CharSetChipBase name[16] chip[13]
+	CharSetChipPattern name[16] 0
+	ED6Battle battle[931] null 0 0 null
+	Call fn[0,6]
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CharFlagsSet char[9] 0x0080
+	CharFlagsSet char[10] 0x0080
+	CamLookPos (25120, 22000, 18540) 0ms
+	CamSetDistance 0 4820 -10000 0ms
+	CamZoom 3560 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 262 0ms
+	Fog 0xFFFFFFFF 33700 65400 0
+	CharSetPos name[16] (25020, 22000, 16970) 315deg
+	CharSetPos name[18] (25940, 22000, 15420) 315deg
+	CharSetPos name[17] (24210, 22000, 15900) 315deg
+	CharSetChipBase name[16] chip[65535]
+	CharSetChipPattern name[16] 0
+	CharSetChipBase name[17] chip[65535]
+	CharSetChipPattern name[17] 0
+	CharSetChipBase name[18] chip[65535]
+	CharSetChipPattern name[18] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[16] {
+		#1749F#5PWhew... Good thing we made it in time.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1750F#5PSeriously... You really bit off more than you
+		could chew this time, Rocky.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1767F#12PWhat're you two doing here?! Why'd you come
+		after me?!{wait}
+	} {
+		Even without guys, I could've handled that jus--{wait}
+	}
+	TextWait
+	Fork name[16] fork[2]:
+		CharTurnTo self 135deg 500deg/s
+	Sleep 100ms
+	CharTurnTo name[17] 135deg 500deg/s
+	Sleep 300ms
+	TextTalk name[16] {
+		#1747F#4S#5PNo, you couldn't, you dumbass!#2S{wait}
+	}
+	Shake 0 300 3000 100ms
+	TextWait
+	TextTalk name[18] {
+		#1762F#12PWhat was that?!{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1747F#5PFor once in your life, stop being so stubborn!{wait}
+	} {
+		If we hadn't come when we did, you would've
+		been dead!{wait}
+	} {
+		And you know it, too! You just don't wanna say it!{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1767F#12PWh-What was that?!{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1745F#5P...Nah. I guess I haven't got the right to be
+		gettin' all angry.{wait}
+	} {
+		#1749FSorry, man.{wait}
+	} {
+		I shouldn't've told you to go on alone like I did.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1762F#12P...{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1744F#5PI might've said earlier that I was only trying to
+		become a bracer because you pushed us into it...{wait}
+	} {
+		#1742F...but I swear, that's not the only reason.{wait}
+	} {
+		There's no way I could've made it through all
+		that insane training we got put through and
+		not quit partway if that was the only reason.{wait}
+	} {
+		I would've thrown in the towel a long time ago
+		if I wasn't serious about this.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1754F#5PWhat he said.{wait}
+	} {
+		#1750FI'm just as serious about this as you are,
+		you know.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1749F#5PI know you're in a rush to try and be as tough
+		as Agate and everythin', and I can't blame you...{wait}
+	} {
+		#1740F...but whether it's how you'd want things or not, 
+		the three of us are in this together.{wait}
+	} {
+		It wouldn't hurt to rely on us at least a little,
+		would it?{wait}
+	}
+	TextWait
+	Emote name[18] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[18]
+	Sleep 500ms
+	TextTalk name[18] {
+		#1763F#12PHeh...{wait}
+	} {
+		#1764F...All right. You got me.{wait}
+	} {
+		And I ain't no dumbass, Deen. I know my limits.{wait}
+	} {
+		#1760FYou're probably right. I was just in so much of
+		a rush to try and narrow the gap between us
+		that I lost sight of myself.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1743F#5PRocco...{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#12PBut that last fight was enough to open my eyes.
+		I'm not up for the task of getting through this
+		place alone.{wait}
+	} {
+		#1763FI know now that I need you guys with me every
+		step of the way.{wait}
+	} {
+		#1760F...So, sorry.{wait}
+	} {
+		Would you two let me stick with you again?{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1746F#5PHeh. Come ON. Really?{wait}
+	} {
+		#1741FAs if you even need to ask!{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1761F#12P...Thanks.{wait}
+	}
+	TextWait
+	Emote name[17] 0mm 2000mm 8 9 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Sleep 1000ms
+	TextTalk name[17] {
+		#1751F#5PHahaha! What's gotten into you two? Anyone'd
+		look at you two now and think smooching and
+		wedding bells're in your future!{wait}
+	} {
+		#1756FYou've made up, so make with the kissing!{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1763F#12POh, shove it up your ass!{wait}
+	} {
+		#1767FBesides, YOU still owe me an apology!{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#5PHuh? For what?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1765F#12PWhen someone's frozen, you're s'posed to use an
+		item on them or something! You know, like a Curia
+		Balm!{wait}
+	} {
+		#1763FWere you TRYING to kill me?!{wait}
+	}
+	TextWait
+	Emote name[17] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1200ms
+	TextTalk name[17] {
+		#1751F#5PH-Hey! It did the trick, right?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1765F#12PUgh... I guess.{wait}
+	} {
+		#1763FMaybe I do owe you one.{wait}
+	} {
+		#1761FThanks.{wait}
+	}
+	TextWait
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[17] {
+		#1753F#5PWh-What's gotten into you?{wait}
+	} {
+		#1755FW-Wait... Am I the one you wanna smooch?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1767F#12PIn your dreams.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1751F#5PKidding, kidding!{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1741F#5PHaha. Well, anyway. Let's get going!{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1761F#4PRight!{wait}
+	}
+	TextTalk name[17] {
+		#1756F#3PYou got it!{wait}
+	}
+	TextClose 1
+	_59
+	Sc_C4Unset 536870912
+	FlagSet flag[12183]
+	TriggerFlagsSet trigger[1] 0x0080
+	ED6_12 43700 65400 1000
+	EventEnd 0
+	Return

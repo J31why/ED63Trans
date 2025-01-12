@@ -1,0 +1,921 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4210.x"
+	town town[1]
+	bgm bgm[17]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01320._ch" "npl/ch01320p._cp"
+chip[1] "npl/ch02140._ch" "npl/ch02140p._cp"
+chip[2] "npl/ch02470._ch" "npl/ch02470p._cp"
+chip[3] "npl2/ch03585._ch" "npl2/ch03585p._cp"
+chip[4] "apl/ch20127._ch" "apl/ch20127p._cp"
+chip[5] "apl/ch20129._ch" "apl/ch20129p._cp"
+chip[6] "npl/ch02460._ch" "npl/ch02460p._cp"
+chip[7] "npl/ch02540._ch" "npl/ch02540p._cp"
+chip[8] "npl/ch01400._ch" "npl/ch01400p._cp"
+
+npc char[0]:
+	name "Royal Guardsman"
+	pos (5000, 0, -5000)
+	angle 182deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Royal Guardsman"
+	pos (-5000, 0, -5000)
+	angle 182deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Butler Phillip"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Duke Dunan"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Head Maid Hilda"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Shea"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "Archbishop Currant"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[7]:
+	name "Dummy"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x00C8
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[8]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 0:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			Event fn[0,9]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	OpLoad "t4210_n"
+	ObjFlagsSet object[0] 0x0002
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (-1790, null, 6330) (1580, null, 2190) 2000mm/s
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (18400, 2500, 5420) 0ms
+	CamSetDistance 0 8320 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 90000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (5040, 0, -6080) 0deg
+	CharSetPos name[13] (14140, 4500, 9980) 135deg
+	ForkFunc name[13] fork[3] fn[0,4]
+	Fork char[8] fork[0]:
+		CamLookPos (9800, 0, -5180) 11500ms
+	Fork char[8] fork[1]:
+		CamSetDistance 0 4059 -10000 11500ms
+	Fork char[8] fork[2]:
+		CamZoom 3000 11500ms
+	Fork char[8] fork[3]:
+		CamRotate 45000mdeg 11500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#176F#6P#18A(A promotion...){0x05}{wait}
+	} {
+		#18A(Ordinarily, receiving one would be a cause
+		for celebration, but for me...){wait}
+	}
+	TextWait
+	Sleep 1000ms
+	Emote name[13] 0mm 2000mm 24 27 250ms 0
+	Sleep 2400ms
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 50ms
+	Emote char[0] 0mm 2000mm 38 38 250ms 1
+	Fork char[1] fork[2]:
+		CharTurnToChar self name[13] 500deg/s
+	Sleep 50ms
+	Fork char[0] fork[2]:
+		CharTurnToChar self name[13] 500deg/s
+	Sleep 500ms
+	Fork char[1] fork[1]:
+		CharWalkToPos self (7180, 0, -7560) 3500mm/s 0
+	Sleep 100ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (7380, 0, -6200) 3000mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[2]:
+		CharTurnToChar self name[13] 500deg/s
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[2]:
+		CharTurnToChar self name[13] 500deg/s
+	ForkWait name[13] fork[3]
+	EmoteStop name[13]
+	Sleep 300ms
+	CrossFade 100ms
+	CharSetChipBase char[0] chip[4]
+	CharSetChipPattern char[0] 0
+	CharSetChipBase char[1] chip[4]
+	CharSetChipPattern char[1] 0
+	Sleep 300ms
+	TextTalk char[0] {
+		Good morning, Captain!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Good morning, Captain!{wait}
+	}
+	TextWait
+	CrossFade 120ms
+	CharSetChipBase char[1] chip[0]
+	CharSetChipPattern char[1] 0
+	Sleep 150ms
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	Sleep 280ms
+	TextTalk char[1] {
+		I hear you've been given the rest of the day off.{wait}
+	}
+	TextWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#172F#2PTh-That's right, yes...{wait}
+	} {
+		#170FI'm amazed you already know that when
+		I was just told myself.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		It's not all that amazing, really.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Leon was trying to make sure everyone knew over
+		the communications network from Leiston.{wait}
+	} {
+		I hear Echo appealed directly to Her Majesty, even.{wait}
+	}
+	TextWait
+	Emote name[13] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#173F#2P#3SD-Directly?!#2S{wait}
+	} {
+		#176F(I can't believe it... He did look like he had
+		something he wanted to say to me the last
+		time I saw him...){wait}
+	} {
+		(What is it with them?!){wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		*sigh* I still wish we could have helped with
+		repairing the Arseille, too, though...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		I hear the repairs are running a little behind
+		schedule, too.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		I wonder how things are going over there?{wait}
+	}
+	TextWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#176F#2PYou needn't worry about the Arseille's repairs.{wait}
+	} {
+		The only reason those three are still there at
+		Leiston Fortress is that they wouldn't take no
+		for an answer and insisted on staying.{wait}
+	} {
+		#170FThe repairs are currently being carried under 
+		Gustav, the maintenance chief from ZCF.
+		They'll be completed properly.{wait}
+	}
+	TextWait
+	Emote name[13] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop name[13]
+	Sleep 500ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#176F#2PIncidentally...{wait}
+	} {
+		#178F...do you know if Her Highness left already?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Y-Yes, in fact...{wait}
+	}
+	TextWait
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (17100, 1750, 4240) 180deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (17500, 1750, 4240) 180deg
+	TextTalkNamed char[3] "Man's Voice" {
+		#4PKlaudia left not that long ago, if you're looking
+		for her.{wait}
+	}
+	TextWait
+	Fork char[8] fork[0]:
+		CamLookPos (12260, 0, -4620) 5500ms
+	Fork char[8] fork[1]:
+		CamRotate 36000mdeg 5500ms
+	ForkFunc char[3] fork[3] fn[0,5]
+	Emote name[13] 0mm 2000mm 38 38 250ms 1
+	Emote char[0] 0mm 2000mm 38 38 250ms 1
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	CharSetChipBase char[1] chip[0]
+	CharSetChipPattern char[1] 0
+	Sleep 300ms
+	ForkLoop name[13] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	Sleep 100ms
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	ForkLoop char[1] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	Sleep 300ms
+	ForkFunc char[2] fork[3] fn[0,6]
+	ForkWait char[3] fork[3]
+	ForkQuit name[13] fork[2]
+	ForkQuit char[0] fork[2]
+	ForkQuit char[1] fork[2]
+	Sleep 500ms
+	TextTalk char[3] {
+		#220F#2PShe's gone to inspect the royal villa.{wait}
+	} {
+		Were you not aware of this?{wait}
+	}
+	TextWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#170FYour Grace...{wait}
+	} {
+		#176FI-I was not...{wait}
+	} {
+		I would very much have liked to accompany
+		her over there, if I am truthful...{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#220F#2PHmm... I suppose that comes as no surprise.{wait}
+	} {
+		You always have been one to put yourself forward
+		to escort her at every opportunity.{wait}
+	} {
+		I can't say I understand why... Simple escort jobs
+		are well below your current rank.{wait}
+	}
+	TextWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#175FI-I suppose so...{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#225F#2PStill, I'm sure she's well. She has a number
+		of trustworthy guardsmen with her.{wait}
+	} {
+		Try not to fret over her too much.{wait}
+	}
+	TextWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#178F...Of course. You're right.{wait}
+	} {
+		Thank you, Your Grace.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#220F#2PAnd with that, we're leaving, Phillip.
+		There is work to be done.{wait}
+	}
+	TextWait
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	ForkLoop char[1] fork[2]:
+		CharTurnToChar self char[3] 500deg/s
+	Fork char[2] fork[2]:
+		CharTurnTo self 215deg 500deg/s
+	ForkFunc char[3] fork[3] fn[0,7]
+	Sleep 500ms
+	TextTalk char[2] {
+		#721F#15AAh... Just a moment, Your Grace...{wait}
+	}
+	TextWait
+	Fork char[2] fork[1]:
+		CharWalkToPos self (12300, 0, -6600) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (11200, 0, -6600) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Sleep 100ms
+	TextTalk char[2] {
+		#720F#2P(Please, try not to be too downhearted.){wait}
+	}
+	TextWait
+	ForkWait char[3] fork[3]
+	ForkQuit char[0] fork[2]
+	ForkQuit char[1] fork[2]
+	CharSetPos char[3] (-1020, 0, -11000) 0deg
+	TextTalk char[3] {
+		#224F#2PWhat are you doing, Phillip? I said that there
+		is work to be done!{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 2000mm 40 43 100ms 3
+	TextTalk char[2] {
+		#721F#2PM-My apologies.{wait}
+	}
+	TextWait
+	ForkFunc char[2] fork[3] fn[0,8]
+	Sleep 2000ms
+	Fork char[8] fork[0]:
+		CamLookPos (10860, 0, -4920) 2500ms
+	ForkWait char[8] fork[1]
+	Emote name[13] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[13]
+	Sleep 500ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#176F#6P*sigh*...{wait}
+	} {
+		(It looks as though I missed Her Highness
+		yet again.){wait}
+	} {
+		#175F(Still, we're both so busy with our duties that
+		it's no wonder it keeps happening...){wait}
+	}
+	TextWait
+	Emote name[13] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	CharFlagsSet char[3] 0x0080
+	CharFlagsSet char[2] 0x0080
+	TextTalk char[0] {
+		#1PIt's incredible how much Duke Dunan's changed.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Tell me about it. Apparently, he's often seen in the
+		administrative room working genuinely hard lately.{wait}
+	} {
+		He was the one who proposed paying compensation
+		out a while back, too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1PI always thought of him as a good-for-nothing slob,
+		but maybe there's more to him than that.{wait}
+	} {
+		He's finally showing that he shares Her Majesty's
+		blood after all!{wait}
+	}
+	TextWait
+	EmoteStop name[13]
+	Sleep 500ms
+	Emote name[13] 0mm 2000mm 38 38 250ms 1
+	Sleep 700ms
+	CharTurnTo name[13] 270deg 500deg/s
+	Sleep 300ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#177F#2PYou're on duty! Enough idle chatter!{wait}
+	}
+	TextWait
+	Fork char[0] fork[2]:
+		CharTurnTo self 90deg 600deg/s
+	Fork char[1] fork[2]:
+		CharTurnTo self 90deg 600deg/s
+	ForkWait char[0] fork[2]
+	Sleep 100ms
+	TextTalk char[0] {
+		#1PM-My apologies, Captain!{wait}
+	}
+	TextTalk char[1] {
+		M-My apologies, Captain!{wait}
+	}
+	TextClose 1
+	_59
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#176F#2P...As you are seemingly aware, I will be absent
+		from the castle for the remainder of the day.{wait}
+	} {
+		#170FI expect the two of you to take care of things
+		here in my absence.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Yes, ma'am!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1PTake care, ma'am!{wait}
+	}
+	TextWait
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self name[13] 500deg/s
+	ForkLoop char[1] fork[2]:
+		CharTurnToChar self name[13] 500deg/s
+	CharTurnTo name[13] 180deg 400deg/s
+	Fork name[13] fork[1]:
+		CharWalkToPos self (9600, 0, -14700) 2000mm/s 0
+	Sleep 300ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 1000ms
+	BgmWait
+	FlagSet flag[9477]
+	NewScene "t4200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	Fork name[13] fork[1]:
+		CharWalkToPos self (17200, 2250, 4700) 2000mm/s 0
+	ForkWait name[13] fork[1]
+	Fork name[13] fork[1]:
+		CharWalkToPos self (17200, 0, -600) 2000mm/s 0
+	ForkWait name[13] fork[1]
+	Fork name[13] fork[1]:
+		CharWalkToPos self (11200, 0, -6660) 2000mm/s 0
+	ForkWait name[13] fork[1]
+	Fork name[13] fork[1]:
+		CharWalkToPos self (9600, 0, -6660) 2000mm/s 0
+	ForkWait name[13] fork[1]
+	Return
+
+fn[5]:
+	Fork char[3] fork[1]:
+		CharWalkToPos self (17100, 0, -900) 2500mm/s 0
+	ForkWait char[3] fork[1]
+	Fork char[3] fork[1]:
+		CharWalkToPos self (12000, 0, -6000) 2500mm/s 0
+	ForkWait char[3] fork[1]
+	CharTurnTo char[3] 270deg 500deg/s
+	Return
+
+fn[6]:
+	Fork char[2] fork[1]:
+		CharWalkToPos self (17500, 0, -900) 2500mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (13500, 0, -4900) 2500mm/s 0
+	ForkWait char[2] fork[1]
+	CharTurnTo char[2] 270deg 500deg/s
+	Return
+
+fn[7]:
+	CharTurnTo char[3] 215deg 500deg/s
+	Fork char[3] fork[1]:
+		CharWalkToPos self (9720, 0, -9000) 2500mm/s 0
+	ForkWait char[3] fork[1]
+	Fork char[8] fork[0]:
+		CamLookPos (8900, 0, -5200) 3000ms
+	Fork char[3] fork[1]:
+		CharWalkToPos self (20, 0, -9000) 2500mm/s 0
+	ForkWait char[3] fork[1]
+	CharColor char[3] 0x00FFFFFF 500ms
+	Return
+
+fn[8]:
+	CharTurnTo char[2] 215deg 500deg/s
+	Fork char[2] fork[1]:
+		CharWalkToPos self (9460, 0, -9000) 5500mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-460, 0, -9000) 4500mm/s 0
+	ForkWait char[2] fork[1]
+	Return
+
+fn[9]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (1300, 0, -17300) 0ms
+	CamSetDistance 0 6080 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	CharSetPos name[13] (240, 0, -18340) 0deg
+	CharSetChipBase name[13] chip[3]
+	CharSetChipPattern name[13] 0
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[0] (9150, 0, -10190) 225deg
+	CharSetPos char[1] (8530, 0, -9330) 225deg
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#175F*pant*...*pant*...{wait}
+	}
+	TextWait
+	Fork char[1] fork[1]:
+		CharWalkToPos self (1530, 0, -16329) 5800mm/s 0
+	Sleep 100ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (2150, 0, -17190) 5800mm/s 0
+	ForkWait char[1] fork[1]
+	TextTalk char[1] {
+		Captain Schwarz!{wait}
+	}
+	TextWait
+	ForkWait char[0] fork[0]
+	TextTalk char[0] {
+		We've locked the castle gates for the time being.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		You aren't hurt, are you?{wait}
+	}
+	TextWait
+	CharSetChipPattern name[13] 2
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#172FN-No... I'm fine...{wait}
+	}
+	TextWait
+	_59
+	Sleep 100ms
+	CrossFade 500ms
+	CharSetChipBase name[13] chip[65535]
+	CharSetChipPattern name[13] 0
+	Sleep 500ms
+	CharTurnTo name[13] 45deg 400deg/s
+	Sleep 500ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#178FWhat just happened?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		W-Well...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		...they appear to be some rather...ardent fans
+		of yours, Captain.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		You know, we DID have a rather large number
+		of fan letters arrive at the castle this morning...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		I wonder if that could be related to all of this.{wait}
+	}
+	TextWait
+	Emote name[13] 0mm 2000mm 40 43 100ms 3
+	Sleep 800ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#174FF-Fan letters...?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		Apparently, some magazine company put together
+		a special feature on you yesterday.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		It was full of information on what you were up to 
+		on that flying city.{wait}
+	}
+	TextWait
+	Emote name[13] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1400ms
+	TextTalk char[0] {
+		Oh, that reminds me!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		A few people who claimed to be from the Liberl
+		News came here while you were away.{wait}
+	} {
+		They said they were putting together a feature 
+		to capitalize on your popularity, so they wanted
+		to gather material for it...{wait}
+	}
+	TextWait
+	Sleep 200ms
+	Emote name[13] 0mm 2000mm 20 23 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1700ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#176FI-I think I've heard enough...{wait}
+	} {
+		I can probably fill in the rest myself.{wait}
+	}
+	TextWait
+	Sleep 200ms
+	CharTurnTo name[13] 180deg 400deg/s
+	Sleep 500ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#178F(Why am I getting this kind of attention?){wait}
+	} {
+		#176F(Fan letters? Magazine articles?){wait}
+	} {
+		#176F(Why am I being treated like someone special?
+		I'm not... Not at all...){wait}
+	} {
+		(First Her Majesty praising me more than
+		I deserve, and now this...){wait}
+	}
+	TextWait
+	Emote name[13] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[13]
+	Sleep 500ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#175F(All I really wanted to do was to protect Her
+		Highness. That's all...){wait}
+	} {
+		(That's what I want to do now, too...but the
+		opportunity to actually go with her and escort
+		her rarely seems to present itself anymore.){wait}
+	} {
+		#175F(Must I be forced to accept that this is how
+		things will be going forward?){wait}
+	}
+	TextWait
+	CharFlagsUnset char[6] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharColor char[6] 0x00FFFFFF 0ms
+	CharColor char[4] 0x00FFFFFF 0ms
+	CharColor char[5] 0x00FFFFFF 0ms
+	CharSetPos char[6] (220, 0, -6920) 0deg
+	CharSetPos char[4] (-180, 0, -5280) 180deg
+	CharSetPos char[5] (820, 0, -4860) 180deg
+	Fork char[6] fork[0]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[4] fork[0]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[5] fork[0]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[8] fork[0]:
+		CamLookPos (1420, 0, -4840) 2000ms
+	Fork char[8] fork[1]:
+		CamSetDistance 0 4780 -10000 2000ms
+	Fork char[8] fork[2]:
+		CamZoom 2800 2000ms
+	ForkWait char[8] fork[0]
+	Sleep 300ms
+	TextTalk char[4] {
+		#710F#1PThank you for your time today, Archbishop.{wait}
+	}
+	TextWait
+	TextTalk char[6] {
+		I will conduct mass again tomorrow at eight o'clock.
+		Could I ask you to pass that on to Her Majesty?{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#713F#1PIt would be my pleasure.{wait}
+	}
+	TextWait
+	CharTurnTo char[6] 180deg 400deg/s
+	Fork char[8] fork[0]:
+		CamLookPos (1620, 0, -15900) 4000ms
+	Fork char[6] fork[1]:
+		CharWalkToPos self (220, 0, -15920) 2000mm/s 0
+	Sleep 200ms
+	Fork char[4] fork[1]:
+		CharWalkToPos self (-180, 0, -14280) 2000mm/s 0
+	Fork char[5] fork[1]:
+		CharWalkToPos self (820, 0, -13860) 2000mm/s 0
+	ForkWait char[4] fork[1]
+	Emote char[4] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	TextTalk char[4] {
+		#712F#1POh, if it isn't Julia... I wasn't expecting to
+		find you here.{wait}
+	} {
+		Is something the matter?{wait}
+	}
+	TextWait
+	Emote name[13] 0mm 2000mm 38 38 250ms 1
+	Emote char[0] 0mm 2000mm 38 38 250ms 1
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 300ms
+	ForkLoop name[13] fork[2]:
+		CharTurnToChar self char[6] 500deg/s
+	Sleep 100ms
+	Fork char[0] fork[2]:
+		CharTurnTo self 270deg 500deg/s
+	Sleep 50ms
+	ForkLoop char[1] fork[2]:
+		CharTurnToChar self char[6] 500deg/s
+	Sleep 300ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#173FOh, not at all...{wait}
+	} {
+		#176FAnd good day to you, Archbishop.{wait}
+	}
+	TextWait
+	TextTalk char[6] {
+		#5PIt's good to see you again, Julia.{wait}
+	}
+	TextWait
+	TextTalk char[6] {
+		#5PI haven't seen you for some time.
+		You had me a little concerned.{wait}
+	}
+	TextWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#178FI-I'm terribly sorry for worrying you.{wait}
+	} {
+		I'd also like to apologize for not attending
+		mass at all of late...{wait}
+	}
+	TextWait
+	TextTalk char[6] {
+		#5POh, it's no trouble. I'm well aware of how busy
+		you are.{wait}
+	}
+	TextWait
+	TextTalk char[6] {
+		#5PAll I'll ask of you in the busy times you face
+		is this: no matter how busy you may become,
+		you must never lose sight of yourself.{wait}
+	}
+	TextWait
+	TextTalk char[6] {
+		#5PWhat matters to you most is always close at hand.{wait}
+	}
+	TextWait
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#170FThank you, Archbishop. I'll take what you
+		have said to heart.{wait}
+	}
+	TextWait
+	TextTalk char[6] {
+		#5PHaha. Excellent. Now if you'll excuse me,
+		I should really be on my way.{wait}
+	}
+	TextWait
+	CrossFade 100ms
+	CharSetChipBase char[0] chip[4]
+	CharSetChipPattern char[0] 0
+	CharSetChipBase char[1] chip[4]
+	CharSetChipPattern char[1] 0
+	Sleep 300ms
+	CharSetPos char[7] (2620, 0, -17500) 0deg
+	TextTalkNamed char[7] "Royal Guardsman" {
+		#2PGood day, Archbishop!{wait}
+	}
+	TextTalk char[1] {
+		#1PGood day, Archbishop!{wait}
+	}
+	TextClose 1
+	_59
+	Fork char[8] fork[0]:
+		CamLookPos (1620, 0, -18000) 2000ms
+	Fork char[6] fork[1]:
+		CharWalkToPos self (220, 0, -23900) 1320mm/s 0
+	Sleep 200ms
+	Fork name[13] fork[1]:
+		CharWalkToPos2 self (-780, 0, -18340) 1500mm/s 0
+	ForkWait name[13] fork[1]
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self char[6] 500deg/s
+	Sleep 300ms
+	Emote name[13] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop name[13]
+	Sleep 700ms
+	ForkQuit name[13] fork[2]
+	Emote name[13] 0mm 2000mm 38 38 250ms 1
+	Sleep 300ms
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#173F#15A(Actually...there is one way I may be
+		able to get out of here...){0x05}{wait}
+	}
+	TextWait
+	Sleep 200ms
+	CharWalkToPos name[13] (-740, 0, -19000) 2500mm/s 0
+	Sleep 300ms
+	SystemFlagsSet 0x00000020
+	TextTalkNamed name[13] "Captain Schwarz" {
+		#178F#5PArchbishop Currant, please wait!{wait}
+	}
+	Shake 0 80 3000 100ms
+	TextWait
+	Emote char[6] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 800ms
+	CharTurnToChar char[6] name[13] 400deg/s
+	Fork name[13] fork[1]:
+		CharWalkToPos2 self (-120, 0, -22340) 1900mm/s 0
+	Sleep 300ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	Sleep 1000ms
+	FlagSet flag[9478]
+	NewScene "t4200._sn" 100 0 0
+	Hcf
+	Return

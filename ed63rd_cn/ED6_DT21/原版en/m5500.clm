@@ -1,0 +1,405 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M5500.x"
+	town town[1]
+	bgm bgm[233]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14540._ch" "mons2/ch14540p._cp"
+chip[1] "mons2/ch14541._ch" "mons2/ch14541p._cp"
+chip[2] "mons2/ch14860._ch" "mons2/ch14860p._cp"
+chip[3] "mons2/ch14861._ch" "mons2/ch14861p._cp"
+chip[4] "mons2/ch15000._ch" "mons2/ch15000p._cp"
+chip[5] "mons2/ch15000._ch" "mons2/ch15000p._cp"
+
+monster char[0]:
+	name ""
+	pos (-33200, 0, 54880)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[400]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-4400, 0, 53380)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[401]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-50400, 0, 61050)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[400]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-49910, 0, 99480)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[401]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-32900, 0, 84900)
+	radius 1700mm
+	bubble_pos (-32900, 2500, 84900)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[1]:
+	pos (-13900, 0, 73100)
+	radius 1700mm
+	bubble_pos (-13900, 2500, 73100)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+look_point[2]:
+	pos (-50080, 0, 52990)
+	radius 1000mm
+	bubble_pos (-49780, 1000, 52490)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[3]:
+	pos (-10560, 0, 99890)
+	radius 1000mm
+	bubble_pos (-10560, 1000, 99890)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	SoundPlay sound[133] 1 0 75
+	SystemFlagsSet 0x00100000
+	ObjFlagsUnset object[0] 0x0028
+	ObjFlagsUnset object[1] 0x0028
+	ObjFlagsUnset object[2] 0x0028
+	ObjFlagsUnset object[3] 0x0028
+	ObjFlagsUnset object[4] 0x0028
+	if flag[10592]:
+		ObjFrame object[1] 60
+	if flag[10593]:
+		ObjFrame object[0] 120
+		ObjFrame object[1] 160
+	if flag[10594]:
+		ObjFrame object[3] 120
+		ObjFrame object[4] 60
+	if flag[10595]:
+		ObjFrame object[2] 120
+		ObjFrame object[4] 160
+	if !flag[10627]:
+		ObjFrame object[7] 0
+	else:
+		ObjFrame object[7] 60
+	if !flag[10628]:
+		ObjFrame object[8] 0
+	else:
+		ObjFrame object[8] 60
+	if !flag[10607]:
+		LookPointFlagsSet look_point[2] 0x0001
+		ObjFlagsSet object[7] 0x0004
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10627]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[7] 60
+		Sleep 500ms
+		if ItemAdd item[116] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[116]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10627]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[116]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[116]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[7] 60
+			ObjPlay object[7] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Didn't Sunday school teach you not to steal? I bet you were one of those
+			kids who slept through lessons...{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 105 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[10628]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[8] 60
+		Sleep 500ms
+		if ItemAdd item[406] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[406]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10628]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[406]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[406]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[8] 60
+			ObjPlay object[8] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}I am content without my contents.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 106 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	EventBegin 1
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}There is a lever. Move it?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	if !flag[10592] && !flag[10593]:
+		Menu menu[0] 10 100 1
+			"Push to the Right" // 0
+			"Push to the Left" // 1
+			"Cancel" // 2
+		MenuWait var[0]
+		MenuClose menu[0]
+		TextClose 0
+		system[40] = 65535
+		if var[0] == 0:
+			ObjFrame object[1] 0
+			ObjPlay object[1] 60
+			SoundPlay sound[250] 0 0 100
+			ObjWait object[1]
+			FlagSet flag[10592]
+			if !flag[10607]:
+				Sleep 500ms
+				EffLoad eff[0] "craft\\\\cr162_02.eff"
+				CamLookPos (-50120, 0, 52390) 2000ms
+				Sleep 300ms
+				EffPlay eff[0] eff_instance[1] null 0 (-50080, 1000, 52390) 0 0 0 2000 2000 2000 null (0, 0, 0) 0ms
+				ObjFlagsUnset object[7] 0x0004
+				FlagSet flag[10607]
+				LookPointFlagsUnset look_point[2] 0x0001
+				Sleep 1500ms
+				CrossFade 500ms
+				CamLookChar field_party[0] 0ms
+			else:
+				Sleep 300ms
+				TextSetName ""
+				TextMessage null {
+					{color 5}Nothing happened.{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+		elif var[0] == 1:
+			ObjFrame object[1] 100
+			ObjPlay object[1] 160
+			SoundPlay sound[250] 0 0 100
+			ObjWait object[1]
+			FlagSet flag[10593]
+			Sleep 500ms
+			CamLookPos (-32340, -60, 91590) 1000ms
+			Sleep 300ms
+			ObjFrame object[0] 0
+			ObjPlay object[0] 120
+			SoundPlay sound[251] 0 0 100
+			ObjWait object[0]
+			Sleep 1000ms
+			CrossFade 500ms
+			CamLookChar field_party[0] 0ms
+	else:
+		Menu menu[0] 10 100 1
+			"Return to Original Position" // 0
+			"Cancel" // 1
+		MenuWait var[0]
+		MenuClose menu[0]
+		TextClose 0
+		system[40] = 65535
+		if var[0] == 0:
+			if flag[10592]:
+				ObjFrame object[1] 60
+				ObjPlay object[1] 0
+				SoundPlay sound[250] 0 0 100
+				ObjWait object[1]
+				FlagUnset flag[10592]
+			elif flag[10593]:
+				ObjFrame object[1] 160
+				ObjPlay object[1] 100
+				SoundPlay sound[250] 0 0 100
+				ObjWait object[1]
+				Sleep 500ms
+				CamLookPos (-32340, -60, 91590) 1000ms
+				Sleep 300ms
+				ObjFrame object[0] 120
+				ObjPlay object[0] 0
+				SoundPlay sound[251] 0 0 100
+				ObjWait object[0]
+				Sleep 1000ms
+				CrossFade 500ms
+				CamLookChar field_party[0] 0ms
+				FlagUnset flag[10593]
+	EventEnd 1
+	SystemFlagsSet 0x00100000
+	Return
+
+fn[5]:
+	EventBegin 1
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}There is a lever. Move it?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	if !flag[10594] && !flag[10595]:
+		Menu menu[0] 10 100 1
+			"Push to the Right" // 0
+			"Push to the Left" // 1
+			"Cancel" // 2
+		MenuWait var[0]
+		MenuClose menu[0]
+		TextClose 0
+		system[40] = 65535
+		if var[0] == 0:
+			ObjFrame object[4] 0
+			ObjPlay object[4] 60
+			SoundPlay sound[250] 0 0 100
+			ObjWait object[4]
+			FlagSet flag[10594]
+			ObjFrame object[3] 0
+			ObjPlay object[3] 120
+			SoundPlay sound[251] 0 0 100
+			ObjWait object[3]
+		elif var[0] == 1:
+			ObjFrame object[4] 100
+			ObjPlay object[4] 160
+			SoundPlay sound[250] 0 0 100
+			ObjWait object[4]
+			FlagSet flag[10595]
+			ObjFrame object[2] 0
+			ObjPlay object[2] 120
+			SoundPlay sound[251] 0 0 100
+			ObjWait object[2]
+		CamLookChar field_party[0] 600ms
+	else:
+		Menu menu[0] 10 100 1
+			"Return to Original Position" // 0
+			"Cancel" // 1
+		MenuWait var[0]
+		MenuClose menu[0]
+		TextClose 0
+		system[40] = 65535
+		if var[0] == 0:
+			if flag[10594]:
+				ObjFrame object[4] 60
+				ObjPlay object[4] 0
+				SoundPlay sound[250] 0 0 100
+				ObjWait object[4]
+				ObjFrame object[3] 120
+				ObjPlay object[3] 0
+				SoundPlay sound[251] 0 0 100
+				ObjWait object[3]
+				FlagUnset flag[10594]
+			elif flag[10595]:
+				ObjFrame object[4] 160
+				ObjPlay object[4] 100
+				SoundPlay sound[250] 0 0 100
+				ObjWait object[4]
+				ObjFrame object[2] 120
+				ObjPlay object[2] 0
+				SoundPlay sound[251] 0 0 100
+				ObjWait object[2]
+				FlagUnset flag[10595]
+	EventEnd 1
+	SystemFlagsSet 0x00100000
+	Return

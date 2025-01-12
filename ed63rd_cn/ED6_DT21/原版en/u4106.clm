@@ -1,0 +1,168 @@
+calmare fc scena
+scena:
+	name "Gaiden2" "U4106.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] file[0x0029064D] file[0x00290651]
+chip[1] file[0x0029064E] file[0x00290652]
+chip[2] file[0x00290657] file[0x0029065B]
+chip[3] file[0x00290658] file[0x0029065C]
+chip[4] file[0x00290661] file[0x00290665]
+chip[5] file[0x00290662] file[0x00290666]
+
+monster char[0]:
+	name ""
+	pos (50880, 0, 122190)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (58590, 0, 142390)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (60040, -3000, 160180)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (86370, 1500, 142850)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[200]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (50880, 0, 122190)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[203]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (58590, 0, 142390)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[210]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (60040, -3000, 160180)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[203]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (86370, 1500, 142850)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[210]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (53710, 250, 137720)
+	radius 800mm
+	bubble_pos (53710, 2450, 137720)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-43000, null, 29000) file[0x0023005F]
+	if flag[10017]:
+		OpLoad "U4106_y"
+	else:
+		OpLoad "U4106_n"
+	if flag[10017]:
+		CharFlagsSet char[8] 0x0080
+		CharFlagsSet char[9] 0x0080
+		CharFlagsSet char[10] 0x0080
+		CharFlagsSet char[11] 0x0080
+	else:
+		CharFlagsSet char[12] 0x0080
+		CharFlagsSet char[13] 0x0080
+		CharFlagsSet char[14] 0x0080
+		CharFlagsSet char[15] 0x0080
+	Return
+
+fn[2]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Airship Arrivals & Departures
+		⇒ To Rolent
+		⇒ To Zeiss
+		⇒ To Calvard{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}※Dangerous/combustible objects prohibited.
+		　　　　《Liberl Orbalship Co.》{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

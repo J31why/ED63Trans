@@ -1,0 +1,387 @@
+calmare sc scena
+scena:
+	name "Grancel" "T4106.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01540._ch" "npl/ch01540p._cp"
+chip[1] "npl/ch01000._ch" "npl/ch01000p._cp"
+chip[2] "npl/ch01010._ch" "npl/ch01010p._cp"
+chip[3] "npl/ch01020._ch" "npl/ch01020p._cp"
+chip[4] "npl/ch01030._ch" "npl/ch01030p._cp"
+chip[5] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[6] "npl/ch01050._ch" "npl/ch01050p._cp"
+chip[7] "npl2/ch03026._ch" "npl2/ch03026p._cp"
+chip[8] file[0x00260307] file[0x0026030C]
+
+npc char[0]:
+	name "Man in Black"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Man in Black"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Grancel - East Block"
+	pos (51050, 0, 83440)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (56800, 250, 136940)
+	radius 800mm
+	bubble_pos (58770, 1750, 137000)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (53710, 250, 137720)
+	radius 800mm
+	bubble_pos (53710, 2450, 137720)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+look_point[2]:
+	pos (71160, -10000, 151550)
+	radius 800mm
+	bubble_pos (71160, -8500, 151550)
+	flags 0x007C
+	func fn[0,11]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 41
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	MapSet 4000 (-43000, null, 29000) "mt4105._ch"
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (49660, 0, 123640) 0ms
+	CamSetDistance 0 6260 -10000 0ms
+	CamZoom 3800 0ms
+	CamRotate 328000mdeg 0ms
+	CamPers 302 0ms
+	CharSetPos name[2] (51820, 0, 105560) 0deg
+	CharSetPos name[80] (50340, 0, 107960) 0deg
+	CharFlagsSet name[80] 0x0040
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsSet char[8] 0x0040
+	CharFlagsSet char[9] 0x0040
+	CharSetPos char[8] (51660, 0, 104060) 0deg
+	CharSetPos char[9] (50520, 0, 103100) 0deg
+	CharSetChipBase char[8] chip[8]
+	CharSetChipBase char[9] chip[8]
+	Fork char[10] fork[1]:
+		CamZoom 3400 7000ms
+	Fork char[10] fork[2]:
+		CamPers 262 7000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Fork name[80] fork[1]:
+		CharWalkToPos self (50340, 0, 147960) 8000mm/s 0
+	Sleep 10ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (51820, 0, 145560) 8000mm/s 0
+	Sleep 2000ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (51660, 0, 144060) 8000mm/s 0
+	Sleep 10ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (50520, 0, 143100) 8000mm/s 0
+	Sleep 3500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[80] fork[1]
+	ForkQuit name[2] fork[1]
+	ForkQuit char[8] fork[1]
+	ForkQuit char[9] fork[1]
+	CamLookPos (58980, 0, 142640) 0ms
+	CamSetDistance 0 6410 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 240000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[80] (51700, 0, 139060) 45deg
+	CharSetPos name[2] (51200, 0, 134820) 0deg
+	CharSetPos char[8] (51500, 0, 133460) 0deg
+	CharSetPos char[9] (50360, 0, 132480) 0deg
+	Sleep 500ms
+	Fork char[10] fork[0]:
+		CamLookPos (57580, 0, 143960) 6000ms
+	Fork char[10] fork[1]:
+		CamRotate 210000mdeg 6000ms
+	FadeIn 1000ms 0x00000000
+	ForkFunc name[80] fork[3] fn[0,5]
+	Sleep 500ms
+	ForkFunc name[2] fork[3] fn[0,6]
+	Sleep 4000ms
+	ForkFunc char[8] fork[3] fn[0,7]
+	ForkFunc char[9] fork[3] fn[0,8]
+	Sleep 2000ms
+	Fork char[10] fork[0]:
+		CamLookPos (58000, -3000, 160020) 2500ms
+	ForkWait char[10] fork[0]
+	Sleep 2000ms
+	CrossFade 500ms
+	CamLookPos (58980, -2250, 151240) 0ms
+	Sleep 6600ms
+	Emote char[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Fork char[8] fork[2]:
+		CharTurnTo self 180deg 500deg/s
+	Sleep 200ms
+	Emote char[9] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Fork char[9] fork[2]:
+		CharTurnTo self 180deg 500deg/s
+	Sleep 600ms
+	CharSetChipBase char[8] chip[8]
+	CharSetChipPattern char[8] 0
+	Fork char[8] fork[1]:
+		CharWalkToPos self (59660, 0, 140160) 8000mm/s 0
+	Sleep 200ms
+	CharSetChipBase char[9] chip[8]
+	CharSetChipPattern char[9] 0
+	Fork char[9] fork[1]:
+		CharWalkToPos self (58560, 0, 140640) 8000mm/s 0
+	Sleep 1000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t4101._sn" 100 0 0
+	Hcf
+	Return
+
+fn[5]:
+	Fork name[80] fork[1]:
+		CharWalkToPos self (54700, 0, 143100) 7000mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (58640, 0, 143100) 7000mm/s 0
+	ForkWait name[80] fork[1]
+	CharTurnTo name[80] 180deg 500deg/s
+	Sleep 1000ms
+	CharTurnTo name[80] 0deg 500deg/s
+	Sleep 1200ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (59340, -3000, 156480) 7000mm/s 0
+	ForkWait name[80] fork[1]
+	CharSetPos name[80] (59700, -3000, 149960) 0deg
+	Sleep 6800ms
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (61400, -3000, 150000) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (61400, -3000, 153500) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (59600, -3000, 153500) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (59600, 0, 142940) 8000mm/s 0
+	ForkWait name[80] fork[1]
+	Return
+
+fn[6]:
+	Fork name[2] fork[1]:
+		CharWalkToPos self (51440, 0, 138780) 7000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (53760, 0, 141700) 7000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (56340, 0, 141700) 7000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (58640, 0, 144780) 7000mm/s 0
+	ForkWait name[2] fork[1]
+	CharTurnTo name[2] 180deg 500deg/s
+	Sleep 400ms
+	CharTurnTo name[2] 0deg 500deg/s
+	Sleep 200ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (59340, -3000, 156480) 7000mm/s 0
+	ForkWait name[2] fork[1]
+	CharSetPos name[2] (59700, -3000, 149960) 0deg
+	Sleep 6500ms
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (61400, -3000, 150000) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (61400, -3000, 153500) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (58560, -3000, 153500) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (58560, 0, 142940) 8000mm/s 0
+	ForkWait name[2] fork[1]
+	Return
+
+fn[7]:
+	Fork char[8] fork[1]:
+		CharWalkToPos self (51500, 0, 139040) 7000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (55100, 0, 142180) 7000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (58340, 0, 142180) 7000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (59660, 0, 143500) 7000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (59660, -3000, 156160) 7000mm/s 0
+	ForkWait char[8] fork[1]
+	CharSetChipBase char[8] chip[7]
+	CharSetChipPattern char[8] 0
+	Sleep 500ms
+	Emote char[8] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[8] 45deg 500deg/s
+	Sleep 500ms
+	CharTurnTo char[8] 315deg 500deg/s
+	Sleep 500ms
+	CharTurnTo char[8] 0deg 500deg/s
+	Sleep 500ms
+	Return
+
+fn[8]:
+	Fork char[9] fork[1]:
+		CharWalkToPos self (50360, 0, 139520) 7000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (53000, 0, 141440) 7000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (57400, 0, 141440) 7000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (58560, 0, 142700) 7000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (58560, -3000, 155640) 7000mm/s 0
+	ForkWait char[9] fork[1]
+	CharSetChipBase char[9] chip[7]
+	CharSetChipPattern char[9] 0
+	Sleep 500ms
+	Emote char[9] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	Return
+
+fn[9]:
+	Sleep 2000ms
+	Sc_C8 512 70 "C_PLAC04._CH" 0 1000
+	Return
+
+fn[10]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Airship Arrivals & Departures
+		⇒ To Rolent
+		⇒ To Zeiss
+		⇒ To Calvard Republic{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}※Dangerous/combustible objects prohibited.
+		　　　　《Liberl Orbalship Co.》{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[11]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}Traffic Control Tower
+		※All unauthorized personnel are prohibited.
+		《Liberl Orbalship Co.》{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

@@ -1,0 +1,2014 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4121.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02580._ch" "npl/ch02580p._cp"
+chip[1] "npl/ch00070._ch" "npl/ch00070p._cp"
+chip[2] "npl/ch02710._ch" "npl/ch02710p._cp"
+chip[3] "npl/ch01620._ch" "npl/ch01620p._cp"
+chip[4] "npl/ch01200._ch" "npl/ch01200p._cp"
+chip[5] "npl/ch01020._ch" "npl/ch01020p._cp"
+chip[6] "npl/ch01450._ch" "npl/ch01450p._cp"
+chip[7] "npl/ch01460._ch" "npl/ch01460p._cp"
+chip[8] "npl/ch00071._ch" "npl/ch00071p._cp"
+
+npc char[0]:
+	name "Elnan"
+	pos (-4460, 0, 960)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Zin"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Aina"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Kurt"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,7]
+
+npc char[4]:
+	name "Cassius"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Fisher"
+	pos (26440, 0, 59870)
+	angle 90deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,10]
+
+npc char[6]:
+	name "Lloyd"
+	pos (32080, 0, 63600)
+	angle 270deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,11]
+
+npc char[7]:
+	name "Mover"
+	pos (32080, 0, 61480)
+	angle 270deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,12]
+
+npc char[8]:
+	name "Percy"
+	pos (33280, 0, 63470)
+	angle 270deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0191
+	init fn[0,2]
+	talk fn[0,13]
+
+npc char[9]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (-3480, 0, -450)
+	radius 800mm
+	bubble_pos (-4480, 1500, -550)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[1]:
+	pos (28140, 0, 61240)
+	radius 800mm
+	bubble_pos (27820, 1500, 62520)
+	flags 0x007E
+	func fn[0,4]
+	unk1 0
+
+look_point[2]:
+	pos (4970, 0, -1040)
+	radius 1400mm
+	bubble_pos (4970, 2000, -1040)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+look_point[3]:
+	pos (-3370, 0, 40)
+	radius 1400mm
+	bubble_pos (-3370, 1600, 40)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+fn[0]:
+	LookPointFlagsSet look_point[0] 0x0001
+	LookPointFlagsSet look_point[1] 0x0001
+	LookPointFlagsSet look_point[2] 0x0001
+	LookPointFlagsSet look_point[3] 0x0001
+	if system[66] == 7:
+		EntranceSetDisabled entrance[6] 0
+		LookPointFlagsUnset look_point[2] 0x0001
+		LookPointFlagsUnset look_point[3] 0x0001
+		if flag[12112]:
+		elif flag[12108]:
+			CharFlagsUnset char[3] 0x0080
+			if flag[12117]:
+				CharSetPos char[3] (-5880, 0, -3660) 270deg
+			else:
+				CharSetPos char[3] (-5600, 0, 100) 270deg
+			CharFlagsUnset char[8] 0x0080
+			CharSetPos char[7] (34270, 0, 56020) 90deg
+			CharSetPos char[6] (32080, 0, 63600) 90deg
+		elif flag[12107]:
+		elif flag[12106]:
+			LookPointFlagsUnset look_point[0] 0x0001
+			CharFlagsUnset char[3] 0x0080
+			CharSetPos char[3] (-4480, 0, -550) 90deg
+	if system[66] == 2:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 0
+			Event fn[0,15]
+	if system[66] == 7:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			Event fn[0,17]
+	Return
+
+fn[1]:
+	if system[66] != 255:
+		OpLoad "t4121_n"
+	else:
+		OpLoad "t4121_y"
+	if system[66] != 255:
+		ObjFlagsSet object[0] 0x0004
+		ObjFlagsSet object[1] 0x0004
+	if system[66] == 7:
+		if flag[12108]:
+			if !flag[12117]:
+				EffLoad eff[1] "map\\\\mp001_01.eff"
+				EffPlay eff[1] eff_instance[1] null 0 (-6030, 2000, -270) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	Call fn[0,7]
+	Return
+
+fn[4]:
+	Return
+
+fn[5]:
+	if system[66] == 7:
+		FadeOut 300ms 0x00000000 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}There are no requests on the board.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextTalk name[2] {
+			#1642FBah...{wait}
+		}
+		TextWait
+		TextEnd null
+	Return
+
+fn[6]:
+	if flag[5]:
+		TextTalk name[2] {
+			#1646FOne day, I'll be able to handle this much, too...{wait}
+		} {
+			Just you watch...{wait}
+		}
+		TextWait
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}◆ Requests ◆
+			6:02 Changing Road Lamps (in front of Grancel)  K
+			6:14 Royal Avenue Monster Extermination         K
+			6:17 Parcel Delivery (Gurune Gate)              K
+			7:44 Elize Highway Safety Check                 K
+			9:32 Help With Moving (Neighbors?)              S
+			9:33 Medicinal Herb Procurement                 K
+			9:55 Traveler Escort (Sanktheim to Capital)     K
+			10:02 Lost Property Search (Calvardian Embassy)   K
+			10:28 Parcel Delivery (Grancel + Erbe Villa)    S
+			10:32 Fix Roof (West Block House)               K
+			10:58 Oversee Dangerous Goods Transport (Port)  K{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextTalk name[2] {
+			#1646F(Wow...){wait}
+		} {
+			(It never stops amazing me just how much
+			work Kurt can burn through.){wait}
+		} {
+			#1642F(What's something like changing road lamps
+			even doing on here?){wait}
+		} {
+			#1645FHe sure knows how to take on the dull
+			stuff... *sigh*{wait}
+		}
+		TextWait
+		CharTurnToChar name[80] name[2] 0deg/s
+		Emote name[80] 0mm 2000mm 0 1 250ms 2
+		SoundPlay sound[38] 0 0 100
+		Sleep 1500ms
+		FlagSet flag[5]
+	TextEnd null
+	Return
+
+fn[7]:
+	TextStart char[3]
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[12117]:
+			if flag[12118]:
+				if flag[0]:
+					CharTurnTo char[3] 270deg 0deg/s
+					TextTalk char[3] {
+						#840FThese books are out of their proper order.{wait}
+					} {
+						I'm going to have to sort that out right away.{wait}
+					}
+					TextWait
+				else:
+					CharTurnTo char[3] 270deg 0deg/s
+					TextTalk char[3] {
+						#842F...Oh?{wait}
+					} {
+						93.6... 95.2... 93.4...{wait}
+					} {
+						#843FThese books are out of order.{wait}
+					}
+					TextWait
+					TextTalk name[2] {
+						#1643F(Oops...){wait}
+					}
+					TextWait
+					FlagSet flag[0]
+			else:
+				CharTurnTo char[3] 270deg 0deg/s
+				TextTalk char[3] {
+					#841FThere. All done.{wait}
+				}
+				TextWait
+				TextTalk name[2] {
+					#1643FWhat were you doing?{wait}
+				}
+				TextWait
+				CharTurnToChar char[3] name[2] 500deg/s
+				Sleep 300ms
+				TextTalk char[3] {
+					#840FOh, just some light cleaning.{wait}
+				} {
+					There are always so many people shuffling
+					in and out of here that dust starts to build
+					up very easily.{wait}
+				}
+				TextWait
+				TextTalk name[2] {
+					#1645F(Unbelievable...){wait}
+				}
+				TextWait
+				FlagSet flag[12118]
+		else:
+			CharTurnTo char[3] 270deg 0deg/s
+			EventBegin 0
+			CrossFade 500ms
+			CharSetPos name[2] (-5560, 0, -1440) 0deg
+			CharSetPos name[80] (-4440, 0, -1480) 315deg
+			CamLookPos (-5600, 0, 100) 0ms
+			CamSetDistance 0 8000 -10000 0ms
+			CamZoom 2600 0ms
+			CamRotate 315000mdeg 0ms
+			CamPers 262 0ms
+			CharSetChipPattern char[3] 0
+			Sleep 500ms
+			TextTalk char[3] {
+				#841F#2P...Haha. Yes, you're right.{wait}
+			} {
+				Yes. I'm in contact with Lugran, too...{wait}
+			}
+			TextWait
+			Emote char[3] 0mm 2000mm 38 38 250ms 1
+			Sleep 500ms
+			CharTurnToChar char[3] name[2] 500deg/s
+			Sleep 300ms
+			TextTalk char[3] {
+				#840F#2PAh, Scherazard. You came at the perfect time.{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				{color 0}#1643FI did?{wait}
+			}
+			TextWait
+			CharTurnTo char[3] 270deg 500deg/s
+			Sleep 300ms
+			TextTalk char[3] {
+				#840F#2PIt's Scherazard.{wait}
+			} {
+				...Yes, I'll put her on.{wait}
+			}
+			TextWait
+			CharTurnToChar char[3] name[2] 500deg/s
+			Sleep 300ms
+			TextTalk char[3] {
+				#840F#2PIt's Cassius.{wait}
+			}
+			TextWait
+			Emote name[2] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			Fork char[3] fork[1]:
+				CharWalkToPos2 self (-5600, 0, 1500) 1000mm/s 0
+			Sleep 300ms
+			Fork name[2] fork[1]:
+				CharWalkToPos self (-5600, 0, 100) 1500mm/s 0
+			ForkWait name[2] fork[1]
+			CharTurnTo name[2] 270deg 500deg/s
+			Sleep 300ms
+			TextTalk name[2] {
+				#1640F#4PU-Umm... Hello.{wait}
+			}
+			TextWait
+			CharFlagsUnset char[4] 0x0080
+			CharSetPos char[4] (-6760, 0, -40) 0deg
+			TextSetPos 80 50 -1 -1
+			TextSetName "Cassius"
+			TextMessage null {
+				{color 5}Hello, Schera.{wait}
+			}
+			TextWait
+			TextMessage null {
+				{color 5}How are you doing? I hear you're working hard
+				over there in Grancel.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextTalk name[2] {
+				#1640F#4PI-I'm fine, thank you! {wait}
+			} {
+				Umm... Are you still in Rolent? I'm actually going
+				to become a se--{wait}
+			}
+			TextWait
+			TextSetPos 80 50 -1 -1
+			TextSetName "Cassius"
+			TextMessage null {
+				{color 5}Actually, no. I've ended up coming to Calvard,
+				I'm afraid. I doubt I'll be able to return to
+				Liberl for some time, either.{wait}
+			}
+			TextWait
+			TextMessage null {
+				{color 5}I've left everything in the hands of the other
+				veteran bracers for the time being, so things
+				should be fine even without me, but...{wait}
+			}
+			TextWait
+			TextClose 0
+			TextTalk name[2] {
+				#1640F#4P...{wait}
+			} {
+				#1645F...{wait}
+			}
+			TextWait
+			TextSetPos 80 50 -1 -1
+			TextSetName "Cassius"
+			TextMessage null {
+				{color 5}Schera? Are you still there?{wait}
+			}
+			TextWait
+			TextClose 0
+			TextTalk name[2] {
+				#1640F#4PY-Yes... Sorry. I'm still here.{wait}
+			} {
+				#1641FIf you spend too long away on work, though,
+				Estelle's going to be really mad at you.{wait}
+			} {
+				I'd probably try and get that job wrapped up
+				as soon as possible, unless you WANT to face
+				her wrath.{wait}
+			}
+			TextWait
+			TextSetPos 80 50 -1 -1
+			TextSetName "Cassius"
+			TextMessage null {
+				{color 5}Yeah...and hell hath no fury like an angry Estelle.{wait}
+			}
+			TextWait
+			TextMessage null {
+				{color 5}Oh! There was one more thing I wanted to ask of
+				you.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextTalk name[2] {
+				#1643F#4PReally...?{wait}
+			} {
+				#1640FO-Of me?{wait}
+			}
+			TextWait
+			TextSetPos 80 50 -1 -1
+			TextSetName "Cassius"
+			TextMessage null {
+				{color 5}Next time you swing by Rolent, you might be in
+				for a little surprise...{wait}
+			}
+			TextWait
+			TextMessage null {
+				{color 5}...but, well, I'm guessing I'm going to be away for
+				a while, angry daughter or no, so if you could look
+				after things at home, it'd help.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextTalk name[2] {
+				#1642F#4PHmm? S-Sure...{wait}
+			}
+			TextWait
+			TextSetPos 80 50 -1 -1
+			TextSetName "Cassius"
+			TextMessage null {
+				{color 5}...Oops. I think I'm about out of time. Could you
+				put Kurt on the line again for me?{wait}
+			}
+			TextWait
+			TextClose 0
+			TextTalk name[2] {
+				#1643F#4POh... Okay. Bye.{wait}
+			}
+			TextWait
+			CharFlagsSet char[4] 0x0080
+			TextSetPos 72 320 56 3
+			CharTurnTo name[2] 0deg 400deg/s
+			Sleep 200ms
+			Fork name[2] fork[1]:
+				CharWalkToPos2 self (-5560, 0, -1440) 1000mm/s 0
+			Sleep 300ms
+			Fork char[3] fork[1]:
+				CharWalkToPos self (-5600, 0, 100) 1500mm/s 0
+			ForkWait char[3] fork[1]
+			CharTurnTo char[3] 270deg 500deg/s
+			Sleep 300ms
+			TextTalk char[3] {
+				#840F#2PYes... Yes...{wait}
+			} {
+				Leave everything to me. I'll have the job wrapped
+				up within the next few days.{wait}
+			} {
+				Oh, and as for the documents I sent you...{wait}
+			}
+			TextWait
+			Emote name[2] 0mm 2000mm 24 27 250ms 0
+			Sleep 1000ms
+			ForkLoop name[80] fork[2]:
+				CharTurnToChar self name[2] 400deg/s
+			Sleep 1000ms
+			EmoteStop name[2]
+			ForkFunc name[2] fork[3] fn[0,8]
+			Sleep 2000ms
+			Emote name[80] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			ForkQuit name[80] fork[2]
+			ForkFunc name[80] fork[3] fn[0,9]
+			Sleep 1000ms
+			FadeOut 2000ms 0x00000000 255
+			FadeWait
+			FlagSet flag[12117]
+			FlagSet flag[9479]
+			NewScene "t4100._sn" 103 0 0
+			Hcf
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[12113]:
+			if flag[12114]:
+				if flag[0]:
+					TextTalk char[3] {
+						#840FYou don't need to worry about taking on any other
+						work for now, Scherazard.{wait}
+					} {
+						Just focus on the task at hand.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[3] {
+						#840FCome and let me know as soon as you've
+						finished that job, Scherazard.{wait}
+					} {
+						Until then, you don't need to worry about
+						taking on any other work.{wait}
+					}
+					TextWait
+					TextTalk name[2] {
+						#1645FFine, fine...{wait}
+					}
+					TextWait
+					FlagSet flag[0]
+			else:
+				CharTurnTo char[3] 90deg 0deg/s
+				TextTalk name[80] {
+					#1653FBut here's what I'M wondering.{wait}
+				} {
+					Are you not the one putting the details
+					of these wanted monsters on the board
+					to begin with?{wait}
+				} {
+					#1650FIs there really any point in doing that if
+					you're just going to defeat them yourself?{wait}
+				}
+				TextWait
+				Emote char[3] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+				Sleep 50ms
+				Emote name[2] 0mm 2000mm 16 19 250ms 1
+				SoundPlay sound[49] 0 0 100
+				Sleep 1000ms
+				CharTurnToChar char[3] name[80] 500deg/s
+				Sleep 300ms
+				TextTalk char[3] {
+					#845FP-Perhaps not...but such are the rules of
+					this organization.{wait}
+				}
+				TextWait
+				TextTalk name[2] {
+					#1645F...Look at this guy. Such a stickler.{wait}
+				}
+				TextWait
+				FlagSet flag[12114]
+		else:
+			CharTurnTo char[3] 90deg 0deg/s
+			TextTalk name[80] {
+				#1650FThank you very much again for agreeing to take
+				my request.{wait}
+			}
+			TextWait
+			CharTurnToChar char[3] name[80] 500deg/s
+			Sleep 300ms
+			TextTalk char[3] {
+				#840FOh, not at all. I should be apologizing that
+				there were no bracers here to take it when
+				you first arrived.{wait}
+			} {
+				Speaking of, I should have introduced myself
+				sooner. My name is Kurt Nardin.{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#1650FIt's a pleasure to meet you, Mr. Nardin.{wait}
+			} {
+				#1651FMy name is Aina, and I--{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#1645FYou can save the long introductions for later.
+				You're fine as just 'the client.'{wait}
+			} {
+				#1640FBy the way, Kurt, can I have the key to get
+				into the sewers for a while?{wait}
+			} {
+				I'll go take care of that monster under the
+				west block while I'm out.{wait}
+			} {
+				Shouldn't take long at all.{wait}
+			}
+			TextWait
+			CharTurnToChar char[3] name[2] 500deg/s
+			Sleep 300ms
+			TextTalk char[3] {
+				#843F...I was under the impression you were in the
+				middle of escorting this young lady around the
+				city?{wait}
+			} {
+				I also seem to recall saying that you should
+				disregard all of the other jobs on the board
+				until that was done.{wait}
+			} {
+				#840FI sincerely hope you weren't ready to take a
+				civilian on a monster extermination request.{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#1642FCrap...{wait}
+			} {
+				#1645FN-No! I wouldn't dream of it... I was just thinking
+				I might drop by the sewers on my way back after
+				finishing this job.{wait}
+			}
+			TextWait
+			TextTalk char[3] {
+				#843F...{wait}
+			} {
+				#843FI've explained this several times to you before,
+				Scherazard.{wait}
+			} {
+				A bracer's worth is not defined by their 
+				strength in battle.{wait}
+			} {
+				#842FIt's defined by their ability to help others.
+				If that strength isn't being used for the good
+				of the community, it serves no purpose.{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#1646FBah...{wait}
+			}
+			TextWait
+			TextTalk char[3] {
+				#843FI feel as though I'm repeating myself here,
+				Scherazard, but--{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#1645FOkay, okay! I get it.{wait}
+			} {
+				You want me to focus on helping people and
+				not just getting stronger. I hear you.{wait}
+			} {
+				...Though that's easy for you to say when you're
+				super strong already.{wait}
+			}
+			TextWait
+			TextTalk name[80] {
+				#1653FOh? Is he?{wait}
+			}
+			TextWait
+			CharTurnToChar name[2] name[80] 500deg/s
+			Sleep 300ms
+			TextTalk name[2] {
+				#1645FHe sure is.{wait}
+			} {
+				There was one time a while back where he just
+				walked past a wanted monster and beat it just
+				like that. A single strike.{wait}
+			} {
+				He didn't even change the speed he was walking.
+				Just...done.{wait}
+			} {
+				It was insane! I couldn't believe my eyes.{wait}
+			}
+			TextWait
+			TextTalk char[3] {
+				#843FAhh, I remember that one.{wait}
+			} {
+				#840FI wouldn't have done that if not for the fact
+				I'd arranged to meet with someone soon after.{wait}
+			} {
+				If more time had been available to me, I would
+				have fought it using more ordinary tactics.{wait}
+			} {
+				One shouldn't fight carelessly just because his
+				or her foe is a simple monster.{wait}
+			}
+			TextWait
+			TextTalk name[2] {
+				#1645F(Not as insane as how stubborn he is, though.){wait}
+			}
+			TextWait
+			FlagSet flag[12113]
+	TextEnd char[3]
+	Return
+
+fn[8]:
+	CharTurnTo name[2] 180deg 400deg/s
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-5660, 0, -2620) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-4740, 0, -3400) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-680, 0, -3400) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (-680, -500, -7240) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Return
+
+fn[9]:
+	Fork name[80] fork[1]:
+		CharWalkToPos self (-4440, 0, -3400) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (-680, 0, -3400) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (-680, -500, -7240) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[1]:
+			TextTalk self {
+				From today, this shall be our guild's new base
+				of operations!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I am filled with excitement at the prospect.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				The capital is absolutely the perfect place to be
+				our guild's new base of operations in my humble
+				opinion.{wait}
+			}
+			TextWait
+			TextTalk self {
+				The port itself is ideal for fishing, while the
+				landing port gives us easy access to other spots
+				throughout the country.{wait}
+			}
+			TextWait
+			TextTalk self {
+				What more could we ask for?{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[1]:
+			TextTalk self {
+				I once had a house in the outskirts of Grancel,
+				but no longer.{wait}
+			}
+			TextWait
+			TextTalk self {
+				From today, I shall be living here!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				It's time for our Fisherman's Guild to finally
+				establish a presence here in the capital itself.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I had to sell my house to make this a reality...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but no matter!{wait}
+			}
+			TextWait
+			TextTalk self {
+				All I need to do is live here in this building.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return
+
+fn[11]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[2]:
+			CharTurnTo self 90deg 0deg/s
+			TextTalk self {
+				Yes! Our leader will explain all of that to you.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's all common sense stuff, so not to worry!{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo self 90deg 0deg/s
+			TextTalk self {
+				So you're interested in joining, are you?{wait}
+			}
+			TextWait
+			TextTalk self {
+				But of course! You'd be MORE than welcome!{wait}
+			}
+			TextWait
+			TextTalk self {
+				You will have to undertake a simple test before
+				you can actually become a member, and then
+				poof! You're one of us.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[2]:
+			CharTurnTo self 270deg 0deg/s
+			TextTalk self {
+				I need to get all this work here finished and go 
+				and have a look!{wait}
+			}
+			TextWait
+			TextTalk self {
+				N-No... I need to be calm. Fishing is all about
+				being cautious and patient.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Did you hear the news about the Masters
+				of Valleria Lake?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Apparently, they've made their way out of the lake
+				and have made the Grancel area their new feeding 
+				ground.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I-I need to get all this work here finished and
+				go take a look!{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd self
+	Return
+
+fn[12]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[3]:
+			TextTalk self {
+				There're some really strange people in the world.{wait}
+			}
+			TextWait
+			TextTalk self {
+				These guys are proof of that.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				This is easily the longest amount of time I've had
+				to spend handling fishing gear--and nothing but it,
+				too.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I've been doing this job for a while now,
+				but today's felt like no other.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12107]:
+	elif flag[12106]:
+		CharTurnTo self 270deg 0deg/s
+		if flag[3]:
+			_Char4A char[6] 255
+			CharTurnToChar char[6] self 500deg/s
+			Sleep 300ms
+			TextTalk char[6] {
+				Be careful!{wait}
+			}
+			TextWait
+			TextTalk char[6] {
+				Those break really easily!{wait}
+			}
+			TextWait
+			CharTurnToChar self char[6] 500deg/s
+			Sleep 300ms
+			TextTalk self {
+				Wh-What?!{wait}
+			}
+			TextWait
+			TextTalk self {
+				O-Okay... I will...{wait}
+			}
+			TextWait
+			CharTurnTo char[6] 270deg 500deg/s
+			_Char4B char[6] 255
+		else:
+			TextTalk self {
+				Am I okay leaving these here?{wait}
+			}
+			TextWait
+			TextTalk self {
+				These, uh, rod thingies...{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd self
+	Return
+
+fn[13]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[4]:
+			TextTalk self {
+				Oh... I do have one question.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Are there any rules and regulations that need to
+				be followed as part of the guild?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Yes, I am...{wait}
+			}
+			TextWait
+			TextTalk self {
+				I do feel uncertain whether I'm good enough
+				at fishing to be a member...{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12107]:
+	elif flag[12106]:
+	TextEnd self
+	Return
+
+fn[14]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[0] (-4600, 0, 560) 90deg
+	CharSetPos char[1] (-2320, 0, 450) 270deg
+	CamLookPos (4390, -250, 910) 0ms
+	CamSetDistance 0 7460 -10000 0ms
+	CamZoom 2400 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 328 0ms
+	Sleep 500ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (-4830, -250, 1680) 3500ms
+	BgmPlay bgm[14] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait field_party[0] fork[0]
+	CrossFade 500ms
+	CamLookPos (-5060, 0, 2040) 0ms
+	CamSetDistance 0 4780 -10000 0ms
+	CamZoom 2420 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 338 0ms
+	FadeWait
+	Sleep 300ms
+	TextTalk char[0] {
+		#760F#5PI see...{wait}
+	} {
+		I sort of expected it would only be a matter of
+		time before you returned to the Republic...
+		Your mind is made up, then?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#070F'Fraid so. I've made the guys over there take
+		care of everything without me long enough.{wait}
+	} {
+		Call it an A-Rank bracer's duty to his peers and
+		society, I guess.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#760F#5PWell, I suppose when you put it that way...{wait}
+	} {
+		I can't deny that I would like you to stay here
+		a while longer, but if that is your decision,
+		I'll have to respect it.{wait}
+	} {
+		So, when are you planning on returning there?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#070FWell, I was planning on heading back right away,
+		but then something came up.{wait}
+	} {
+		Ambassador Cochrane over at the embassy invited
+		me on a little trip, you see. So I'm not going
+		back just yet.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#760F#5P...She did?{wait}
+	} {
+		I wonder what made her want to do that?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#070FWell, by the sounds of it, it's not really me
+		she's after, it's Kilika.{wait}
+	} {
+		I'm just needed there, too, for some reason or
+		another.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#760F#5PThat makes me even less sure what she might want
+		you for, though...{wait}
+	} {
+		Well, either way, have fun, I suppose.{wait}
+	} {
+		Hopefully it'll make for a nice final memory in
+		Liberl before you head back.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#070FHaha. Here's hoping.{wait}
+	} {
+		I dunno what to expect either, but it can't hurt
+		to go along.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	BgmStop 2000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene "t3200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[0] (-4600, 0, 560) 90deg
+	CharSetPos char[1] (-2320, 0, 450) 270deg
+	ObjFlagsSet object[3] 0x0004
+	CamLookPos (4390, -250, 910) 0ms
+	CamSetDistance 0 7460 -10000 0ms
+	CamZoom 2600 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 338 0ms
+	BgmPlay bgm[14] 0
+	Sleep 500ms
+	Fork char[9] fork[0]:
+		CamLookPos (-4830, -250, 1680) 3500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[9] fork[0]
+	CrossFade 1000ms
+	CamLookPos (-5060, 0, 2040) 0ms
+	CamSetDistance 0 4780 -10000 0ms
+	CamZoom 2420 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 338 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#764F#5PI see...{wait}
+	} {
+		#760FI sort of expected it would only be a matter
+		of time before you returned to the Republic...
+		Your mind is made up, then?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#573F#12P'Fraid so. I've made the guys over there take
+		care of everything without me long enough.{wait}
+	} {
+		#070FCall it an A-rank bracer's duty to his peers and
+		society, I guess.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#764F#5PWell, I suppose when you put it that way...{wait}
+	} {
+		I do wish you could stay here a while longer,
+		but if that is your decision, I'll respect it.{wait}
+	} {
+		#760FSo when are you planning on returning?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#074F#12PWell, there's no point in lingering here any
+		longer than I have to now that I've made up
+		my mind to leave...{wait}
+	} {
+		#070F...so, honestly, I was thinking about tomorrow.{wait}
+	} {
+		Think I could ask you to arrange a ticket
+		to Calvard for me?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#763F#5PWell, certainly...{wait}
+	} {
+		#760FAre you not planning to go and visit Kilika first,
+		though? I would have thought you'd want to...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#075F#12PThat WAS part of the original plan...{wait}
+	} {
+		...but she wouldn't have any of it.
+		Surprise, surprise.{wait}
+	} {
+		#072FHer stance was, 'If you're going to waste time
+		coming to see me, use it to go back to Calvard
+		earlier and get some work done.'{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#761F#5PHaha... Very well, then.{wait}
+	} {
+		#760FThat doesn't sound like a position you'll be able
+		to talk her out of.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#573F#12PIt's no big deal, though.{wait}
+	} {
+		#070FI mean, it's not like we'll never see
+		each other again.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#760F#5PI suppose that's very true.{wait}
+	} {
+		#761FI'm not sure there's anything in Zemuria
+		that could keep you two apart forever.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#071F#12PHaha. It feels like that to me sometimes, too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#761F#5PHaha...{wait}
+	} {
+		#760FWell, regardless, I won't keep you any longer.{wait}
+	} {
+		So that's one ticket to Calvard for tomorrow,
+		coming right up!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	EffLoad eff[0] "map\\\\mp001_00.eff"
+	EffPlay eff[0] eff_instance[0] null 0 (-6030, 2000, -270) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[195] 1 0 100
+	Sleep 800ms
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[1] 0mm 2300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#763F#5PSorry. Let me just get this.{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 225deg 400deg/s
+	Fork char[9] fork[0]:
+		CamLookPos (-5400, 0, 1800) 1200ms
+	CharWalkToPos char[0] (-5600, 0, 0) 1500mm/s 0
+	CharTurnTo char[0] 270deg 400deg/s
+	Sleep 300ms
+	SoundPlay sound[131] 0 0 100
+	SoundStop sound[195]
+	EffStop eff_instance[0] 0
+	EffLoad eff[1] "map\\\\mp001_01.eff"
+	EffPlay eff[1] eff_instance[1] null 0 (-6030, 2000, -270) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 800ms
+	TextTalk char[0] {
+		#760F#11PYes, this is the Grancel branch of the
+		Bracer Guild.{wait}
+	} {
+		#764F...Ah, yes.{wait}
+	} {
+		#763FYes...{wait}
+	} {
+		#760FHe's here as we speak, actually.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2300mm 38 38 250ms 1
+	Sleep 1000ms
+	Fork char[9] fork[0]:
+		CamLookPos (-5060, 0, 2040) 1000ms
+	CharTurnTo char[0] 90deg 400deg/s
+	Sleep 500ms
+	TextTalk char[0] {
+		#760F#5PZin?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#073F#12PSomething up?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#760F#5PIt's Ambassador Cochrane at the Calvardian
+		embassy.{wait}
+	} {
+		#761FShe'd like to invite you on a hot springs trip...{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Sleep 100ms
+	TextTalk char[1] {
+		#073F#11P#4SWHAT?!{wait}
+	}
+	Shake 0 500 3000 100ms
+	TextWait
+	Sleep 300ms
+	Fork char[9] fork[0]:
+		CamZoom 2820 3000ms
+	FadeOut 2000ms 0x00000000 255
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self char[1] 500deg/s
+	ForkFunc char[1] fork[3] fn[0,16]
+	Sleep 500ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (-5600, 0, 1240) 1500mm/s 0
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	FlagSet flag[9477]
+	NewScene "t3200._sn" 100 0 0
+	Hcf
+	Return
+
+fn[16]:
+	CharTurnTo char[1] 180deg 500deg/s
+	CharSetChipBase char[1] chip[8]
+	CharSetChipPattern char[1] 0
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-2320, 0, -3100) 3500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-4600, 0, -3100) 3500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-5600, 0, 0) 3500mm/s 0
+	ForkWait char[1] fork[1]
+	CharSetChipBase char[1] chip[1]
+	CharSetChipPattern char[1] 0
+	CharTurnTo char[1] 270deg 500deg/s
+	Return
+
+fn[17]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#150WGrancel City, 1197...#20W{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}Five years had passed since the Hundred Days War
+		came to an end. The scars it left were slowly healing,
+		and life was returning to Liberl.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		{color 0}People gathered in the cities and towns that had
+		returned to their former state, and the revived
+		orbment trade brought the kingdom prosperity.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		{color 0}Peace was becoming normal once again.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}Not all that was happening in Liberl at the time
+		was so positive, however; this was also a period
+		in which corruption was rife in the military.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		{color 0}Many of the army's officers at the time cared for
+		nothing but lining their own pockets or gaining
+		power and prestige.{wait}
+	}
+	TextWait
+	TextSetName ""
+	TextMessage null {
+		{color 0}Between the development of orbal technology
+		and booming prosperity, much was forgotten...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 100ms
+	Sc_C4Unset 2048
+	CamLookPos (0, 2000, 0) 0ms
+	CamSetDistance 0 5500 -10000 0ms
+	CamZoom 3560 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[2] (-8300, 0, -3300) 90deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (0, -500, -7700) 0deg
+	CharColor char[2] 0x00FFFFFF 0ms
+	FadeIn 2000ms 0x00000000
+	Fork char[9] fork[0]:
+		CamLookPos (0, 0, 0) 4000ms
+	ForkWait char[9] fork[0]
+	SoundPlay sound[6] 0 0 100
+	Sleep 1000ms
+	Fork char[9] fork[0]:
+		CamLookPos (0, 0, -2340) 2000ms
+	Fork char[9] fork[1]:
+		CamZoom 3060 2000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (0, -250, -5320) 1300mm/s 0
+	Fork char[2] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	ForkWait char[2] fork[1]
+	SoundPlay sound[7] 0 0 100
+	Sleep 1000ms
+	TextTalkNamed char[2] "Woman" {
+		#1653F...Hmm?{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 45deg 400deg/s
+	Sleep 800ms
+	CharTurnTo char[2] 315deg 400deg/s
+	Sleep 800ms
+	CharTurnTo char[2] 0deg 400deg/s
+	Sleep 500ms
+	TextTalkNamed char[2] "Woman" {
+		#1653FIs there no one here...?{wait}
+	}
+	TextWait
+	Fork char[9] fork[0]:
+		CamLookPos (0, 0, -400) 1600ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (0, 0, -2540) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Sleep 500ms
+	CharTurnTo char[2] 315deg 400deg/s
+	Sleep 200ms
+	Emote char[2] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	Fork char[9] fork[0]:
+		CamLookPos (-1380, 0, 1300) 2000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-2380, 0, 0) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	CharTurnTo char[2] 270deg 500deg/s
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}If you have a request, please write it on one of 
+		the forms to the right and place it in this box.
+		{}                    Bracer Guild - Grancel Branch{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	FadeWait
+	Emote char[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	CharTurnTo char[2] 90deg 400deg/s
+	Sleep 300ms
+	Fork char[9] fork[0]:
+		CamLookPos (3280, 0, 1600) 5000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (1900, 0, 0) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (4460, 0, 3760) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (6060, 0, 3760) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	CharTurnTo char[2] 180deg 500deg/s
+	Sleep 500ms
+	Emote char[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (3360, 0, 4900) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (1860, 250, 4900) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Sleep 500ms
+	Emote char[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop char[2]
+	Sleep 500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos2 self (3360, 0, 4800) 1500mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[9] fork[0]:
+		CamLookPos (-300, 0, 300) 4000ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (3360, 0, 1500) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (0, 0, 0) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	CharTurnTo char[2] 180deg 500deg/s
+	Sleep 300ms
+	TextTalkNamed char[2] "Woman" {
+		#1654F(It looks like it.){wait}
+	}
+	TextWait
+	CharTurnTo char[2] 270deg 500deg/s
+	Sleep 300ms
+	TextTalkNamed char[2] "Woman" {
+		#1652F(I wonder if they'd mind if I used their phone?){wait}
+	}
+	TextWait
+	CharSetPos name[2] (0, -500, -7700) 0deg
+	CharColor name[2] 0x00FFFFFF 0ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-1560, 0, 0) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	Fork char[2] fork[3]:
+		CharTurnToChar self name[2] 400deg/s
+	Fork char[9] fork[0]:
+		CamLookPos (0, 500, -1920) 2000ms
+	Fork char[9] fork[1]:
+		CamZoom 3160 2000ms
+	Fork char[9] fork[2]:
+		CamSetDistance 0 5000 -10000 2000ms
+	Sleep 1500ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (0, -250, -5320) 1300mm/s 0
+	Fork name[2] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	ForkWait name[2] fork[1]
+	SoundPlay sound[7] 0 0 100
+	Sleep 500ms
+	TextTalk name[2] {
+		#1645FUgh... I'm pooped...{wait}
+	} {
+		I feel more like a slave than a bracer with all
+		this menial work getting dumped on me...{wait}
+	}
+	TextWait
+	CharTurnToChar name[2] char[2] 500deg/s
+	Sleep 300ms
+	Emote name[2] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	TextTalk name[2] {
+		#1643FOh, hello... Are you here to lodge a request?{wait}
+	}
+	TextWait
+	Fork char[9] fork[0]:
+		CamLookPos (-1280, 0, -780) 2000ms
+	Fork char[9] fork[1]:
+		CamZoom 3240 2000ms
+	Fork char[9] fork[2]:
+		CamSetDistance 0 4840 -10000 2000ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (0, 0, -3600) 2000mm/s 0
+	Sleep 400ms
+	CharTurnTo char[2] 135deg 500deg/s
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-520, 0, -1040) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[3]:
+		CharTurnToChar self char[2] 400deg/s
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[3]:
+		CharTurnToChar self name[2] 400deg/s
+	Sleep 300ms
+	TextTalkNamed char[2] "Woman" {
+		#1650F#2PYes, that's right...{wait}
+	} {
+		Umm... Might I ask your name?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1640FI'm Scherazard Harvey. A bracer.{wait}
+	} {
+		I'm still a junior one, but I know what I'm doing.
+		Don't you worry about that.{wait}
+	}
+	TextWait
+	TextTalkNamed char[2] "Woman" {
+		#1653F#2POh, my! Really?{wait}
+	} {
+		#1651FHeehee. You look so young that I had no idea
+		you were an actual bracer.{wait}
+	} {
+		My name is Aina. It's a pleasure to meet you.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1640FSo what's the request you want to make?
+		I don't have all day to stand around chatting.{wait}
+	} {
+		There're only two bracers at this branch right
+		now, so we're VERY busy.{wait}
+	} {
+		#1640FIf you can make it quick, I'd appreciate it.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1653F#2POh, really?{wait}
+	} {
+		I'm terribly sorry. I had no idea you were--{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1645FDid you not hear me?{wait}
+	} {
+		Or do you need me to explain to you what
+		the word 'quick' means?{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1651F#2PO-Oh. My apologies.{wait}
+	} {
+		#1650FWell, you see, it's my first time visiting the city.{wait}
+	} {
+		I thought it might be wise to come here and
+		request that someone give me a tour of the
+		main sights and such.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1642F...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1651F#2PHeehee. The size of the place is rather daunting,
+		as I'm sure you can imagine.{wait}
+	} {
+		But with a bracer who knows their way around
+		at my side, I'd be able to enjoy all that Grancel
+		has to offer without fearing getting lost.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1645FYou've got to be kidding...{wait}
+	} {
+		Please tell me you didn't actually come here
+		for such a worthless request.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1653F#2PPardon?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1646FYou seem to be misconstruing what bracers
+		are actually here for.{wait}
+	} {
+		We're not community volunteers or whatever.
+		We have a serious profession and do serious
+		work.{wait}
+	} {
+		#1642FAnd we're also VERY busy, as I said earlier,
+		so I'm going to have to ask you look elsewhere
+		if you want a buddy for your sightseeing trip.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1650F#2PU-Umm... I... I wasn't trying to...{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1645FOr, hell, just go and look around on your own.
+		Getting lost is probably part of the experience,
+		anyway.{wait}
+	} {
+		#1645F(Has this one lived in a box all her life?
+		Typical rich girl...){wait}
+	}
+	TextWait
+	_59
+	ForkLoop char[2] fork[3]:
+		CharTurnToChar self name[2] 400deg/s
+	Fork name[2] fork[1]:
+		CharWalkToPos self (3260, 0, -340) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	ForkQuit char[2] fork[3]
+	CharTurnTo name[2] 90deg 500deg/s
+	Sleep 400ms
+	TextTalk name[2] {
+		#1646F#3PBesides, I need to focus on doing major jobs so
+		I can get my letter of recommendation from this
+		branch and get promoted to senior bracer.{wait}
+	} {
+		If you find something serious you need help with,
+		by all means come back. Until then, get going.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1656F#5P(*sigh* It looks like this isn't going to work...){wait}
+	} {
+		Umm... I really am sorry for troubling you, but--{wait}
+	}
+	TextWait
+	ForkFunc name[2] fork[3] fn[0,19]
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (200, -500, -7700) 0deg
+	CharColor char[3] 0x00FFFFFF 0ms
+	_Char4A char[3] 255
+	Fork char[2] fork[3]:
+		CharTurnToChar self char[3] 400deg/s
+	Fork char[3] fork[1]:
+		CharWalkToPos self (200, -250, -5320) 1300mm/s 0
+	Fork char[3] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	ForkWait char[3] fork[1]
+	SoundPlay sound[7] 0 0 100
+	Sleep 500ms
+	Emote char[3] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	TextTalk char[3] {
+		#840FOh? Who do we have here? Have you come to make
+		a request, perchance?{wait}
+	} {
+		Pardon us for not properly manning the front desk.
+		That's currently my job, but I'm undertaking other
+		work at the same time.{wait}
+	}
+	TextWait
+	Fork char[3] fork[1]:
+		CharWalkToPos self (200, 0, -3100) 2000mm/s 0
+	ForkWait char[3] fork[1]
+	CharTurnToChar char[3] char[2] 500deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#1653F#2POh, you don't have to apologize.{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[2] {
+		#1646F#3PI'd pay her no mind, if I were you. She's a waste
+		of time.{wait}
+	} {
+		#1642FShe seems to have gotten it into her head that
+		bracers are friends for hire.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1655F#2P...Well, if you'll excuse me. I'll get out of your
+		hair now.{wait}
+	}
+	TextWait
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-500, -250, -5300) 1500mm/s 0
+	Emote char[3] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	EmoteStop char[3]
+	TextTalk char[3] {
+		#843F#15A#5PHmm...{0x05}{wait}
+	}
+	Sleep 500ms
+	TextTalk char[3] {
+		#843F#5PPlease don't leave just yet.{wait}
+	}
+	TextWait
+	ForkWait char[2] fork[1]
+	Emote char[2] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 500ms
+	CharTurnToChar char[2] char[3] 400deg/s
+	Sleep 500ms
+	ForkQuit name[2] fork[3]
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (3260, 0, -40) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Sleep 500ms
+	CharTurnToChar char[3] name[2] 500deg/s
+	Sleep 300ms
+	TextTalk char[3] {
+		#840F#5PScherazard.{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 2000mm 38 38 250ms 1
+	Sleep 500ms
+	CharTurnToChar name[2] char[3] 500deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#1643F...Huh?{wait}
+	} {
+		Wh-What is it?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#840F#5PDo what she wants.{wait}
+	} {
+		Helping people in need is the fundamental mission
+		of us bracers. You've got no reason not to help.{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (2100, 0, -1200) 2500mm/s 0
+	ForkWait name[2] fork[1]
+	TextTalk name[2] {
+		#1642FWh-What...? B-But we're busy here!{wait}
+	} {
+		I don't have time to be playing tour guide!
+		I've got more important things to do!{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#843F#5PDon't worry about the other requests on the board.
+		I'll take care of those.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1644FBut you're even busier than I am! You're even our
+		receptionist on top of it!{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#842F#5PYou needn't worry about me. Besides, you're still a
+		trainee, which means you still have much to learn.{wait}
+	} {
+		#843FSo go.{wait}
+	} {
+		Once you've finished this request, I'll write you
+		your letter of recommendation. {wait}
+	}
+	TextWait
+	Emote name[2] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 500ms
+	TextTalk name[2] {
+		#1643FWhat...? Really?{wait}
+	} {
+		A-Are you sure? This seems like way too simple of
+		a job to be awarding something like that for...{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#840F#5PI thought it was your policy to give 100% to all
+		work you undertake?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1645FW-Well, it is, but...{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#840F#5PThen I'm counting on you with this job, too.{wait}
+	}
+	TextWait
+	ForkLoop char[2] fork[3]:
+		CharTurnToChar self char[3] 400deg/s
+	ForkLoop name[2] fork[3]:
+		CharTurnToChar self char[3] 400deg/s
+	CharTurnTo char[3] 315deg 500deg/s
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-2200, 0, -140) 2000mm/s 0
+	ForkWait char[3] fork[1]
+	ForkQuit name[2] fork[3]
+	ForkQuit char[2] fork[3]
+	CharTurnTo char[3] 270deg 500deg/s
+	Sleep 300ms
+	TextTalk char[2] {
+		#1650FUmm... Thank you very much...{wait}
+	}
+	TextWait
+	CharTurnToChar char[3] char[2] 500deg/s
+	Sleep 300ms
+	TextTalk char[3] {
+		#840F#2PThink nothing of it.{wait}
+	} {
+		Take care, you two.{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1645F...Got it.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1650FI appreciate your assistance.{wait}
+	}
+	TextWait
+	CharTurnTo char[2] 180deg 500deg/s
+	Sleep 300ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-500, -250, -5860) 2000mm/s 0
+	ForkWait char[2] fork[1]
+	Sleep 300ms
+	ForkFunc name[2] fork[3] fn[0,18]
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-500, -500, -7240) 2000mm/s 0
+	Fork char[2] fork[2]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait char[2] fork[1]
+	CharFlagsSet char[2] 0x0080
+	ForkWait name[2] fork[3]
+	Sleep 1500ms
+	Fork char[9] fork[0]:
+		CamLookPos (-2400, 200, 60) 3000ms
+	Fork char[9] fork[1]:
+		CamZoom 3160 3000ms
+	CharTurnTo char[3] 270deg 400deg/s
+	Sleep 3000ms
+	TextTalk char[3] {
+		#843F#6P...This should hopefully do her good.{wait}
+	}
+	TextWait
+	Fork char[9] fork[1]:
+		CamZoom 3060 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t4100._sn" 103 0 0
+	Hcf
+	Return
+
+fn[18]:
+	CharTurnTo name[2] 225deg 500deg/s
+	Sleep 300ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (0, 0, -3300) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (0, -250, -5140) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (0, -250, -5860) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (0, -500, -7240) 2000mm/s 0
+	Fork name[2] fork[2]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait name[2] fork[1]
+	SoundPlay sound[7] 0 0 100
+	Return
+
+fn[19]:
+	while 1:
+		Sleep 2000ms
+		Fork name[2] fork[1]:
+			CharWalkToPos2 self (3260, 0, -940) 2000mm/s 0
+		ForkWait name[2] fork[1]
+		Sleep 2500ms
+		Fork name[2] fork[1]:
+			CharWalkToPos2 self (3260, 0, -340) 2000mm/s 0
+		ForkWait name[2] fork[1]
+		Sleep 2500ms
+		Fork name[2] fork[1]:
+			CharWalkToPos2 self (3260, 0, 260) 2000mm/s 0
+		ForkWait name[2] fork[1]
+	Return

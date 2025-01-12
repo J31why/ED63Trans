@@ -1,0 +1,944 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M3102.x"
+	town town[1]
+	bgm bgm[232]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "Airship"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C4
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Airship's Shadow"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C4
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Searchlight"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C4
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (9240, 0, 18600)
+	radius 1000mm
+	bubble_pos (9430, 1000, 18590)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-1450, 0, 45310)
+	radius 1000mm
+	bubble_pos (-1450, 1000, 45510)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if system[0] == 100:
+		if flag[11040]:
+		elif flag[11032] && !flag[11033]:
+			SystemFlagsSet 0x10000000
+			Event fn[0,4]
+	Return
+
+fn[1]:
+	if !flag[11261]:
+		ObjFrame object[17] 0
+	else:
+		ObjFrame object[17] 60
+	if !flag[11262]:
+		ObjFrame object[18] 0
+	else:
+		ObjFrame object[18] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11261]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[17] 60
+		Sleep 500ms
+		if ItemAdd item[328] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[328]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11261]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[328]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[328]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[17] 60
+			ObjPlay object[17] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}I'm telling my mommy on you!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 26 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11262]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[18] 60
+		Sleep 500ms
+		if ItemAdd item[329] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[329]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11262]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[329]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[329]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[18] 60
+			ObjPlay object[18] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}They say it's what's on the inside that counts. Now look what you've
+			done.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 27 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	EffLoad eff[0] "map\\mp078_00.eff"
+	EffLoad eff[1] "map\\mp003_00.eff"
+	EffLoad eff[2] "map\\mp280_00.eff"
+	EffLoad eff[3] "map\\mp301_00.eff"
+	Tc_E0 party[0] 64 2
+	Tc_E0 party[0] 65 3
+	Tc_E0 party[0] 66 4
+	Tc_E0 party[1] 67 2
+	Tc_E0 party[1] 68 3
+	Tc_E0 party[1] 69 4
+	Tc_E0 party[2] 70 2
+	Tc_E0 party[2] 71 3
+	Tc_E0 party[2] 72 4
+	Tc_E0 party[3] 73 2
+	Tc_E0 party[3] 74 3
+	Tc_E0 party[3] 75 4
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (98690, 30000, 32540) 60deg
+	CharAttachObj char[0] object[0]
+	ObjFlagsSet object[0] 0x0004
+	_ObjB0 object[0] 15
+	ObjFrame object[0] 1000
+	ObjPlay object[0] 1000
+	EffPlay eff[3] eff_instance[6] null 0 (96000, 30000, 31000) 50 -70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (2390, 100, 22000) 90deg
+	CharAttachObj char[1] object[16]
+	ObjFlagsSet object[16] 0x0004
+	CharSetPos name[8] (-18450, 0, 20650) 90deg
+	if CharInSlot 0 party[1] == 11:
+		CharSetPos party[1] (-18850, 0, 22010) 90deg
+		CharSetPos party[2] (-20210, 0, 20210) 90deg
+		CharSetPos party[3] (-20500, 0, 21990) 90deg
+	elif CharInSlot 0 party[2] == 11:
+		CharSetPos party[2] (-18850, 0, 22010) 90deg
+		CharSetPos party[1] (-20210, 0, 20210) 90deg
+		CharSetPos party[3] (-20500, 0, 21990) 90deg
+	elif CharInSlot 0 party[3] == 11:
+		CharSetPos party[3] (-18850, 0, 22010) 90deg
+		CharSetPos party[1] (-20210, 0, 20210) 90deg
+		CharSetPos party[2] (-20500, 0, 21990) 90deg
+	ED6_12 38000 200000 0
+	CamLookPos (5310, 0, 22200) 0ms
+	CamSetDistance 0 7910 -10000 0ms
+	CamZoom 6180 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 285 0ms
+	Fork party[0] fork[3]:
+		CamLookPos (-5220, 0, 23370) 5000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (-6980, 0, 20290) 2000mm/s 0
+	Sleep 100ms
+	if CharInSlot 0 party[1] == 11:
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-6890, 0, 21860) 2000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (-8640, 0, 19930) 2000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (-8750, 0, 21690) 2000mm/s 0
+	elif CharInSlot 0 party[2] == 11:
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (-6890, 0, 21860) 2000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-8640, 0, 19930) 2000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (-8750, 0, 21690) 2000mm/s 0
+	elif CharInSlot 0 party[3] == 11:
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (-6890, 0, 21860) 2000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-8640, 0, 19930) 2000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (-8750, 0, 21690) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	ForkWait party[0] fork[3]
+	CrossFade 500ms
+	ED6_12 38000 130000 0
+	SystemFlagsUnset 0x00000010
+	CamLookPos (-6500, 0, 22060) 0ms
+	CamSetDistance 0 6910 -10000 0ms
+	CamZoom 3390 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 220 0ms
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	Emote name[11] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[11] {
+		#112F#5PWait...{wait}
+	}
+	TextWait
+	SoundPlay sound[121] 0 0 100
+	Sleep 1000ms
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[1] == 11:
+		if CharInSlot 0 party[2] == 7:
+			Emote party[2] 0mm 2300mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[2] == 6:
+			Emote party[2] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[2] == 15:
+			Emote party[2] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		else:
+			Emote party[2] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		Sleep 50ms
+		if CharInSlot 0 party[3] == 7:
+			Emote party[3] 0mm 2300mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[3] == 6:
+			Emote party[3] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[3] == 15:
+			Emote party[3] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		else:
+			Emote party[3] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		Sleep 1000ms
+	elif CharInSlot 0 party[2] == 11:
+		if CharInSlot 0 party[1] == 7:
+			Emote party[1] 0mm 2300mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[1] == 6:
+			Emote party[1] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[1] == 15:
+			Emote party[1] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		else:
+			Emote party[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		Sleep 50ms
+		if CharInSlot 0 party[3] == 7:
+			Emote party[3] 0mm 2300mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[3] == 6:
+			Emote party[3] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[3] == 15:
+			Emote party[3] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		else:
+			Emote party[3] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		Sleep 1000ms
+	elif CharInSlot 0 party[3] == 11:
+		if CharInSlot 0 party[1] == 7:
+			Emote party[1] 0mm 2300mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[1] == 6:
+			Emote party[1] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[1] == 15:
+			Emote party[1] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		else:
+			Emote party[1] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		Sleep 50ms
+		if CharInSlot 0 party[2] == 7:
+			Emote party[2] 0mm 2300mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[2] == 6:
+			Emote party[2] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		elif CharInSlot 0 party[2] == 15:
+			Emote party[2] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		else:
+			Emote party[2] 0mm 2000mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+		Sleep 1000ms
+	TextTalk name[8] {
+		#1079F#6PTh-That sounds like...{wait}
+	}
+	TextWait
+	SoundPlay sound[100] 0 0 100
+	CharSetPos char[2] (-8000, 0, 21000) 90deg
+	CharColor char[2] 0x00FFFFFF 0ms
+	CharFlagsUnset char[2] 0x0080
+	EffPlay eff[2] eff_instance[7] char[2] 0 (0, 0, 0) 0 0 0 1500 1500 1500 null (0, 0, 0) 0ms
+	Sleep 200ms
+	SoundPlay sound[858] 1 0 100
+	Sleep 500ms
+	TextTalk name[11] {
+		#114F#5P#3SEveryone, spread out!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	system[28] = 1
+	Fork party[0] fork[3]:
+		CamLookPos (-7100, 0, 22060) 500ms
+	Fork party[1] fork[3]:
+		CamSetDistance 0 6070 -10000 500ms
+	Fork party[2] fork[3]:
+		CamZoom 3100 500ms
+	Fork party[3] fork[3]:
+		CamPers 243 500ms
+	SoundPlay sound[565] 0 0 100
+	Sleep 70ms
+	ForkFunc party[0] fork[0] fn[0,6]
+	ForkFunc party[1] fork[0] fn[0,7]
+	Sleep 30ms
+	ForkFunc char[0] fork[0] fn[0,8]
+	ForkFunc char[0] fork[1] fn[0,9]
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[0] fork[3]
+	system[28] = 0
+	SoundStop sound[858]
+	Fork party[0] fork[1]:
+		CharTurnTo self 90deg 400deg/s
+	Sleep 100ms
+	Fork party[1] fork[1]:
+		CharTurnTo self 90deg 400deg/s
+	Sleep 100ms
+	Fork party[2] fork[1]:
+		CharTurnTo self 90deg 400deg/s
+	Sleep 100ms
+	CharTurnTo party[3] 90deg 400deg/s
+	Sleep 1000ms
+	Sleep 300ms
+	CrossFade 1000ms
+	CamLookPos (95240, 30000, 29870) 0ms
+	CamSetDistance 0 -9470 -10000 0ms
+	CamZoom 3280 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 659 0ms
+	ObjFlagsUnset object[0] 0x0004
+	Fork party[0] fork[0]:
+		CamZoom 2600 3000ms
+	SoundPlay sound[858] 1 0 100
+	ObjFlagsUnset object[0] 0x0020
+	_ObjB0 object[0] 30
+	ObjFrame object[0] 1000
+	ObjPlay object[0] 941
+	ObjWait object[0]
+	SoundStop sound[858]
+	ObjFrame object[0] 940
+	ObjPlay object[0] 901
+	ObjWait object[0]
+	ObjFlagsSet object[0] 0x0020
+	ObjFrame object[0] 701
+	ObjPlay object[0] 900
+	FadeWait
+	ForkWait party[0] fork[0]
+	if PartyPosition name[14] != -1:
+		TextSetPos 200 400 -1 -1
+		TextSetName "Ries"
+		TextMessage null {
+			{color 0}#1802FOh...{wait}
+		}
+		TextWait
+		TextClose 0
+	elif PartyPosition name[4] != -1:
+		TextSetPos 200 400 -1 -1
+		TextSetName "Kloe"
+		TextMessage null {
+			{color 0}#1164FOh...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[0] != -1:
+		TextSetPos 230 400 -1 -1
+		TextSetName "Estelle"
+		TextMessage null {
+			{color 0}#1020FUh-oh...{wait}
+		}
+		TextWait
+		TextClose 0
+	elif PartyPosition name[10] != -1:
+		TextSetPos 230 400 -1 -1
+		TextSetName "Josette"
+		TextMessage null {
+			{color 0}#216FOh, boy...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[1] != -1:
+		TextSetPos 180 400 -1 -1
+		TextSetName "Joshua"
+		TextMessage null {
+			{color 0}#1506FUgh...{wait}
+		}
+		TextWait
+		TextClose 0
+	elif PartyPosition name[2] != -1:
+		TextSetPos 180 400 -1 -1
+		TextSetName "Scherazard"
+		TextMessage null {
+			{color 0}#1524FUgh...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[6] != -1:
+		TextSetPos 190 400 -1 -1
+		TextSetName "Tita"
+		TextMessage null {
+			{color 0}#065FEeek...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[9] != -1:
+		TextSetPos 220 400 -1 -1
+		TextSetName "Anelace"
+		TextMessage null {
+			{color 0}#1317FUh-oh...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[5] != -1:
+		TextSetPos 250 400 -1 -1
+		TextSetName "Agate"
+		TextMessage null {
+			{color 0}#057FBah...{wait}
+		}
+		TextWait
+		TextClose 0
+	elif PartyPosition name[12] != -1:
+		TextSetPos 250 400 -1 -1
+		TextSetName "Mueller"
+		TextMessage null {
+			{color 0}#271FGah...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[13] != -1:
+		TextSetPos 210 400 -1 -1
+		TextSetName "Julia"
+		TextMessage null {
+			{color 0}#177FUgh...{wait}
+		}
+		TextWait
+		TextClose 0
+	elif PartyPosition name[7] != -1:
+		TextSetPos 210 400 -1 -1
+		TextSetName "Zin"
+		TextMessage null {
+			{color 0}#077FUgh...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[3] != -1:
+		TextSetPos 170 400 -1 -1
+		TextSetName "Olivier"
+		TextMessage null {
+			{color 0}#1542FOh, dear...{wait}
+		}
+		TextWait
+		TextClose 0
+	if PartyPosition name[15] != -1:
+		TextSetPos 240 400 -1 -1
+		TextSetName "Renne"
+		TextMessage null {
+			{color 0}#1305FOh, my...{wait}
+		}
+		TextWait
+		TextClose 0
+	Sleep 300ms
+	CrossFade 500ms
+	CamLookPos (-4720, 0, 22090) 0ms
+	CamSetDistance 0 5670 -10000 0ms
+	CamZoom 4059 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	ObjFlagsUnset object[16] 0x0004
+	FadeWait
+	Sleep 500ms
+	TextTalk name[8] {
+		#1069F#5PGah... We don't stand a chance!{wait}
+	}
+	TextWait
+	TextTalk name[11] {
+		#117F#5PIndeed! We have nothing to gain
+		by staying here any longer!{wait}
+	} {
+		Retreat!{wait}
+	}
+	TextWait
+	Fork party[3] fork[1]:
+		CharTurnTo self 270deg 600deg/s
+	Sleep 100ms
+	Fork party[2] fork[1]:
+		CharTurnTo self 270deg 600deg/s
+	Sleep 100ms
+	Fork party[1] fork[1]:
+		CharTurnTo self 270deg 600deg/s
+	Sleep 100ms
+	Fork party[0] fork[1]:
+		CharTurnTo self 270deg 600deg/s
+	Sleep 100ms
+	SoundPlay sound[858] 1 0 100
+	Fork party[0] fork[3]:
+		CamLookPos (-14870, 2300, 20910) 4500ms
+	if CharInSlot 0 party[1] == 11:
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (-30070, 400, 23880) 7000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (-29640, 400, 22230) 7000mm/s 0
+		Sleep 100ms
+		Fork name[11] fork[0]:
+			CharWalkToPos2 self (-28070, 400, 23780) 7000mm/s 0
+	elif CharInSlot 0 party[2] == 11:
+		Fork party[3] fork[0]:
+			CharWalkToPos2 self (-30070, 400, 23880) 7000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-29640, 400, 22230) 7000mm/s 0
+		Sleep 100ms
+		Fork name[11] fork[0]:
+			CharWalkToPos2 self (-28070, 400, 23780) 7000mm/s 0
+	elif CharInSlot 0 party[3] == 11:
+		Fork party[2] fork[0]:
+			CharWalkToPos2 self (-30070, 400, 23880) 7000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos2 self (-29640, 400, 22230) 7000mm/s 0
+		Sleep 100ms
+		Fork name[11] fork[0]:
+			CharWalkToPos2 self (-28070, 400, 23780) 7000mm/s 0
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (-27830, 400, 22280) 7000mm/s 0
+	Sleep 500ms
+	ForkFunc char[1] fork[0] fn[0,5]
+	Sleep 500ms
+	ForkFunc char[0] fork[3] fn[0,12]
+	Sleep 100ms
+	ForkFunc char[0] fork[0] fn[0,10]
+	ForkFunc char[0] fork[1] fn[0,11]
+	SoundStop sound[858]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	SystemFlagsSet 0x00000010
+	FlagSet flag[9476]
+	NewScene "m3101._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[5]:
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 1000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 1000mm/s 0
+	Sleep 300ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 2000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 2000mm/s 0
+	Sleep 300ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 3000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 3000mm/s 0
+	Sleep 300ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 4000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 4000mm/s 0
+	Sleep 200ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 5000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 5000mm/s 0
+	Sleep 200ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 6000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 6000mm/s 0
+	Sleep 200ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 7000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 7000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 8000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 8000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 9000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 9000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 10000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 10000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 11000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 11000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 12000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 12000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 13000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 13000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 14000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 14000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharWalkToPos2 self (-35000, 0, 21000) 15000mm/s 0
+	Fork char[1] fork[3]:
+		CharWalkToPos2 self (-30000, 100, 22000) 15000mm/s 0
+	Return
+
+fn[6]:
+	SoundPlay sound[163] 0 0 100
+	CharSetChipBase party[0] chip[2]
+	CharSetChipPattern party[0] 0
+	CharTurnTo self 45deg 0deg/s
+	Fork self fork[1]:
+		_Char96 self (-7710, 0, 18550) 500 6000
+	ForkWait self fork[1]
+	SoundPlay sound[164] 0 0 100
+	SoundPlay sound[213] 0 0 100
+	CharSetChipBase party[0] chip[0]
+	CharSetChipPattern party[0] 0
+	Return
+
+fn[7]:
+	CharSetChipBase party[1] chip[5]
+	CharSetChipPattern party[1] 0
+	CharSetChipBase party[2] chip[8]
+	CharSetChipPattern party[2] 0
+	CharSetChipBase party[3] chip[11]
+	CharSetChipPattern party[3] 0
+	if CharInSlot 0 party[1] == 11:
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[1] 135deg 0deg/s
+		Fork party[1] fork[1]:
+			_Char96 self (-7580, 0, 23170) 500 6000
+		Sleep 30ms
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[2] 45deg 0deg/s
+		Fork party[2] fork[1]:
+			_Char96 self (-9800, 0, 18380) 500 6000
+		Sleep 30ms
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[3] 135deg 0deg/s
+		Fork party[3] fork[1]:
+			_Char96 self (-9860, 0, 22840) 500 6000
+	elif CharInSlot 0 party[2] == 11:
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[2] 135deg 0deg/s
+		Fork party[2] fork[1]:
+			_Char96 self (-7580, 0, 23170) 500 6000
+		Sleep 30ms
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[1] 45deg 0deg/s
+		Fork party[1] fork[1]:
+			_Char96 self (-9800, 0, 18380) 500 6000
+		Sleep 30ms
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[3] 135deg 0deg/s
+		Fork party[3] fork[1]:
+			_Char96 self (-9860, 0, 22840) 500 6000
+	elif CharInSlot 0 party[3] == 11:
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[3] 135deg 0deg/s
+		Fork party[3] fork[1]:
+			_Char96 self (-7580, 0, 23170) 500 6000
+		Sleep 30ms
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[1] 45deg 0deg/s
+		Fork party[1] fork[1]:
+			_Char96 self (-9800, 0, 18380) 500 6000
+		Sleep 30ms
+		SoundPlay sound[163] 0 0 100
+		CharTurnTo party[2] 135deg 0deg/s
+		Fork party[2] fork[1]:
+			_Char96 self (-9860, 0, 22840) 500 6000
+	ForkWait party[1] fork[1]
+	ForkWait party[2] fork[1]
+	ForkWait party[3] fork[1]
+	SoundPlay sound[164] 0 0 100
+	SoundPlay sound[213] 0 0 100
+	SoundPlay sound[216] 0 0 100
+	CharSetChipBase party[1] chip[3]
+	CharSetChipPattern party[1] 0
+	CharSetChipBase party[2] chip[6]
+	CharSetChipPattern party[2] 0
+	CharSetChipBase party[3] chip[9]
+	CharSetChipPattern party[3] 0
+	Return
+
+fn[8]:
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-4300, 0, 19850) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork self fork[2]:
+		Shake 100 0 3000 100ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-6300, 0, 19650) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork self fork[2]:
+		Shake 100 0 3000 100ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-8300, 0, 19450) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork self fork[2]:
+		Shake 100 0 3000 100ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-10300, 0, 19250) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork self fork[2]:
+		Shake 100 0 3000 100ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-12300, 0, 19050) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork self fork[2]:
+		Shake 100 0 3000 100ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-14300, 0, 18850) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork self fork[2]:
+		Shake 100 0 3000 100ms
+	Sleep 100ms
+	Return
+
+fn[9]:
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-4300, 0, 21350) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-6300, 0, 21150) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-8300, 0, 20950) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-10300, 0, 20750) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-12300, 0, 20550) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundStop sound[565]
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-14300, 0, 20350) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	Return
+
+fn[10]:
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-8300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-10300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-12300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-14300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-16300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-18300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-20300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-22300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-24300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-26300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-28300, 0, 19000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	Return
+
+fn[11]:
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-8300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-10300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-12300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-14300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-16300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-18300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-20300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-22300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-24300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-26300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	SoundPlay sound[503] 0 0 100
+	EffPlay eff[1] eff_instance[255] null 0 (-28300, 0, 22000) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 100ms
+	ForkQuit char[0] fork[3]
+	Return
+
+fn[12]:
+	while 1:
+		SoundPlay sound[565] 0 0 100
+		Sleep 1500ms
+		SoundStop sound[565]
+		SoundPlay sound[565] 0 0 100
+		Sleep 1500ms
+		SoundStop sound[565]
+		SoundPlay sound[565] 0 0 100
+		Sleep 1500ms
+		SoundStop sound[565]
+	Return

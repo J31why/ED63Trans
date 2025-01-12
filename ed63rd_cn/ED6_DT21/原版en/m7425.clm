@@ -1,0 +1,301 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7425.x"
+	town town[1]
+	bgm bgm[225]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[1] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[2] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[3] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[4] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[5] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[6] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[7] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[8] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[9] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[10] "mons2/ch14610._ch" "mons2/ch14610p._cp"
+chip[11] "mons2/ch14610._ch" "mons2/ch14610p._cp"
+chip[12] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+chip[13] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+
+monster char[0]:
+	name ""
+	pos (200, 8000, 860)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[803]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (110220, 8000, 96970)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (114030, 8000, 100790)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (117790, 8000, 96990)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (114010, 8000, 93200)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (100020, 0, -101270)
+	radius 1000mm
+	bubble_pos (100020, 1000, -101270)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (96240, 0, -105000)
+	radius 1000mm
+	bubble_pos (96240, 1000, -105000)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (103800, 0, -104960)
+	radius 1000mm
+	bubble_pos (103800, 1000, -104960)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (114060, 8000, 97030)
+	radius 1000mm
+	bubble_pos (114060, 9000, 97030)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	char[1].36 = 215
+	char[2].36 = 215
+	char[3].36 = 215
+	char[4].36 = 215
+	if !flag[11464]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[11465]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[11466]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	if !flag[11467]:
+		ObjFrame object[3] 0
+	else:
+		ObjFrame object[3] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11464]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 30
+		ObjWait object[0]
+		ObjFrame object[0] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,28]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11464]
+	else:
+		TextMessage null {
+			{color 5}Your friends will always stand by you. When you're happy, they're happy.
+			And when you're hurt, they'll hurt, too. Try to share all your feelings with
+			your friends so you can be happy and cry together.{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11465]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[513] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[513]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11465]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[513]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[513]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}I only wish I could give more, but you'll have to wait until New Game+.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	if !flag[11466]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[507] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[507]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11466]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[507]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[507]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Do you feel like you're a stronger person now?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11467]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[3] 30
+		ObjWait object[3]
+		ObjFrame object[3] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,24]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11467]
+	else:
+		TextMessage null {
+			{color 5}You're good to go!{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return

@@ -1,0 +1,818 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4221.x"
+	town town[1]
+	bgm bgm[17]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] file[0x00270044] file[0x00270049]
+chip[1] file[0x002701D2] file[0x002701D7]
+chip[2] file[0x00270220] file[0x00270225]
+chip[3] file[0x00270046] file[0x0027004B]
+chip[4] file[0x002603F0] file[0x002603F5]
+chip[5] "apl/ch20020._ch" "apl/ch20020p._cp"
+
+npc char[0]:
+	name "Prince Olivert"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Major Vander"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Chancellor Osborne"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Pot"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 26
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Tea"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 25
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Tea"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 25
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 6:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			system[1] = 230
+			Event fn[0,3]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 230
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	OpLoad "t4221_n"
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (67000, 0, 7200) 180deg
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsSet char[8] 0x0004
+	CharSetPos char[8] (28000, 250, 53040) 90deg
+	CharSetChipBase char[8] chip[3]
+	CharSetChipPattern char[8] 0
+	CharFlagsUnset char[10] 0x0080
+	CharFlagsSet char[10] 0x0004
+	CharSetPos char[10] (30820, 300, 52900) 270deg
+	CharSetChipBase char[10] chip[4]
+	CharSetChipPattern char[10] 0
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharSetPos char[11] (29500, 300, 52600) 0deg
+	CharSetPos char[12] (29900, 300, 53140) 0deg
+	CharSetPos char[13] (28900, 300, 53140) 0deg
+	CamLookPos (84260, 0, 8440) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 280 0ms
+	Fork char[14] fork[0]:
+		CamLookPos (68220, 0, 8440) 8000ms
+	Fork char[14] fork[2]:
+		CamRotate 45000mdeg 8000ms
+	Fork char[14] fork[3]:
+		CamZoom 2800 8000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[14] fork[0]
+	Sleep 500ms
+	Fork char[14] fork[0]:
+		CamLookPos (67820, 0, 18440) 6000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[14] fork[255]
+	CamLookPos (37490, 0, 59950) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Fork char[14] fork[0]:
+		CamLookPos (31190, 0, 54740) 5000ms
+	Fork char[14] fork[1]:
+		CamSetDistance 0 5160 -10000 5000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[14] fork[0]
+	Sleep 500ms
+	TextTalk char[10] {
+		#1485F#11PAhh...{wait}
+	} {
+		It's obvious that Her Majesty is quite the tea 
+		fancier, if this blend is anything to go by.{wait}
+	} {
+		The fragrance, the temperature, the taste...
+		I'd be hard-pressed to find fault with any of it.{wait}
+	} {
+		#1480FI've always been more of a coffee man myself,
+		but I have no doubt that I'd be content with a
+		cup of this at my desk each morning.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1551F#6P...As much as I agree with you, I don't believe
+		we're here to talk about beverages.{wait}
+	} {
+		#1542FSo, shall we get right to the point? What did you
+		want to discuss with me?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1485F#11PHaha...{wait}
+	} {
+		#1481FI see your sojourn in Liberl has proven most
+		fruitful.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1543F#6P...Pardon?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1480F#11PWhen we last spoke, you struck me as a bright,
+		flexible young man...{wait}
+	} {
+		...and no doubt, you still are. But now, I see
+		in you a resilient inner strength girding those
+		aspects.{wait}
+	} {
+		#1485FI'm sure His Majesty will be most delighted with
+		your personal development.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1545F#6PHeh. Meanwhile, I see you're the same fearless
+		man I've always known you to be.{wait}
+	} {
+		#1540FMore so, even. That crushing aura about you
+		seems to have only grown with time.{wait}
+	} {
+		#1541FIt's as if you feed on the resentment of those
+		who live in the territories you annex.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1481F#11PHaha. Such harsh words, Your Highness.{wait}
+	} {
+		#1485FPersonally, I prefer the term 'political unification.' 
+		'Annex' can carry such...negative connotations,
+		you know.{wait}
+	} {
+		Since the end of the Hundred Days War, our army
+		hasn't committed a single act of aggression.
+		All our unifications have been entirely peaceful.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1545F#6POh, you're quite right about that.{wait}
+	} {
+		#1540F...On the surface.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1483F#11POh?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1544F#6PIt's amazing how similar the annexation process
+		is every single time it happens.{wait}
+	} {
+		#1542FIt starts with a small nation or independent state
+		with an array of problems beyond repair.{wait}
+	} {
+		Those problems start to worsen, after which
+		jaegers and other dangerous elements enter,
+		plunging public order to an all-time low...{wait}
+	} {
+		#1551FDesperate for a solution, the local government
+		requests the help of the Imperial Army.
+		Before they know it, they're part of the Empire.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1480F#11PWell, it's not as though I can deny what you're
+		saying. Each instance does share certain
+		commonalities.{wait}
+	} {
+		#1485FStill, it's to be expected--an inevitable
+		consequence of the age of unchecked growth
+		and progress in which we live.{wait}
+	} {
+		The Imperial Army is simply acting in the Empire's
+		best interests, helping to stabilize our neighbors
+		for the good of the Empire.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1540F#6PAnd it's understandable that they would.{wait}
+	} {
+		#1541FI do find myself rather curious why Intelligence
+		Division members are going to such nations with
+		such peculiar frequency...{wait}
+	} {
+		Well before the problems I described worsen, 
+		no less.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1485F#11PHaha. I won't press as to where you came by
+		such information, as curious as I am...{wait}
+	} {
+		#1481F...but I will say this: at its most basic level,
+		these actions are about risk management.{wait}
+	} {
+		It's because we've been acting to minimize such
+		risks beforehand that the army has been able to
+		successfully quell each problem in turn.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1544F#6PWith the small price of earning the disdain of 
+		the people in those nations and an increased
+		risk of terrorism in exchange.{wait}
+	} {
+		#1542FTo tell you the truth, I'm rather astounded that
+		you had the courage to come here to Liberl all
+		on your own to begin with.{wait}
+	} {
+		After all, you've made yourself the biggest
+		target for terrorists in all of Erebonia.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1485F#11PHaha. Your concern is touching, Your Highness.{wait}
+	} {
+		#1480FI would ask that you not trouble yourself with
+		my safety.{wait}
+	} {
+		I employ some very skilled subordinates tasked
+		primarily with eliminating the risk of terrorist
+		attacks against me.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1543F#6PReally, now?{wait}
+		#1542FThat Lechter is one of those, I assume?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1485F#11PHaha. A rather peculiar fellow, isn't he? But
+		a very useful one all the same.{wait}
+	} {
+		Working out the scheduling for this trip and
+		taking all the necessary precautions to ward
+		off terrorist threats were both his doing.{wait}
+	} {
+		#1480FAnd thanks to his commendable efforts, I can
+		depart for Crossbell free from worries as soon
+		as I've finished my business here.{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1200ms
+	TextTalk char[8] {
+		#1543F#6P#3SCrossbell?!{wait}
+	}
+	Shake 0 100 3000 100ms
+	TextWait
+	TextTalk char[10] {
+		#1480F#11PAre you surprised? I'll be participating in a top-
+		secret discussion with a representative of the
+		Crossbell government.{wait}
+	} {
+		Recently, a large amount of funding has been
+		flowing into the country through Republican
+		channels, putting our allies on the defensive.{wait}
+	} {
+		#1485FI'd always meant to visit at some point, and this
+		seemed the perfect opportunity.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1550F#6PA-Are you out of your mind?!{wait}
+	} {
+		#1544FCrossbell is full of enemies and different factions
+		at each other's throats!{wait}
+	} {
+		I hear it's now even a hotbed for terrorists and
+		criminal organizations because of its position as
+		a buffer state...{wait}
+	} {
+		#1542FDoes that really sound like a place the Erebonian
+		chancellor should be going even on an unofficial
+		visit?!{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1481F#11PI'm surprised to hear you advocating caution in
+		the face of potential danger, Your Highness.{wait}
+	} {
+		After all, it was you who flew onto an ancient city--
+		at great risk to your own safety--and returned
+		unharmed after surveying it.{wait}
+	} {
+		#1485FCompared to such rousing risk-taking, my visit to
+		Crossbell will be child's play. {wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1542F#6P...{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1480F#11PAs I'm sure you're aware, you're regarded as
+		something of a hero back in Erebonia now.{wait}
+	} {
+		Ah, to see a hero make a grand return befitting
+		his newly-minted legend...and aboard the famous
+		Arseille, no less.{wait}
+	} {
+		Naturally, our hero has also taken the time to
+		ensure that every well-known newspaper and
+		magazine are aware of his homecoming, too...{wait}
+	} {
+		#1485FOh, I have no doubts that your triumphant arrival
+		will be every bit as glorious as it has played out
+		in your imaginings, Your Highness.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1549F#6P...{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1485F#11PHaha. Do be sure to capitalize on this chance as
+		best you can to build yourself a firm foothold.{wait}
+	} {
+		#1481FI expect great things from you, after all.{wait}
+	}
+	TextWait
+	Fork char[14] fork[0]:
+		CamZoom 3500 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsUnset 0x02000000
+	FlagSet flag[9476]
+	NewScene file[0x0021019F] 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (67000, 0, 7200) 180deg
+	CharFlagsUnset char[8] 0x0080
+	CharFlagsSet char[8] 0x0004
+	CharSetPos char[8] (28000, 250, 53040) 90deg
+	CharSetChipBase char[8] chip[3]
+	CharSetChipPattern char[8] 0
+	CharFlagsUnset char[10] 0x0080
+	CharFlagsSet char[10] 0x0004
+	CharSetPos char[10] (30820, 300, 52900) 270deg
+	CharSetChipBase char[10] chip[4]
+	CharSetChipPattern char[10] 0
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharSetPos char[11] (29500, 300, 52600) 0deg
+	CharSetPos char[12] (29900, 300, 53140) 0deg
+	CharSetPos char[13] (28900, 300, 53140) 0deg
+	CamLookPos (31190, 0, 54740) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Fork char[14] fork[0]:
+		CamZoom 3000 2000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait char[14] fork[0]
+	Sleep 500ms
+	TextTalk char[8] {
+		#1542F#6PDo you, now?{wait}
+	} {
+		#1545FHaha. I have to admit, I never imagined that
+		would be the case.{wait}
+	} {
+		#1540FOn the contrary, I was expecting you to tell
+		me to back off.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1483F#11POh, Aidios forbid. What reason would I have to
+		suggest such a thing?{wait}
+	} {
+		#1481FAfter all, at the end of the day, our positions are
+		functionally the same.{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#1543F#6PI'm not sure I understand.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CharSetPos char[10] (30820, 300, 53040) 270deg
+	CamLookPos (37270, 0, 54090) 0ms
+	CamSetDistance 0 5370 -26010 0ms
+	CamZoom 1800 0ms
+	CamRotate 82000mdeg 0ms
+	CamPers 190 0ms
+	Fork char[14] fork[0]:
+		CamZoom 1600 36000ms
+	FadeWait
+	Sleep 1000ms
+	TextTalk char[10] {
+		#1484F#5PDo you not think so? Personally, I find it
+		difficult to believe that you would not harbor
+		some hatred toward Erebonia as it is today.{wait}
+	} {
+		A grand empire clinging to the glories of a
+		bygone era--ruled by the nobility and shackled
+		by meaningless conventions.{wait}
+	} {
+		#1481FAm I wrong?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1542F#6P...{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1480F#5PPeople call me the Blood and Iron Chancellor
+		as though I hold the whole of Erebonia in the
+		palm of my hand...{wait}
+	} {
+		...but in reality, my position is far more tenuous.{wait}
+	} {
+		#1485FI have supporters and allies in the capital,
+		certainly, but outside its walls, the nobility holds
+		far more sway than any of them.{wait}
+	} {
+		And while it IS true I hold a great amount of
+		power in the form of the Imperial Army, even
+		then, I only truly command around 70% of it.{wait}
+	} {
+		The remainder is loyal to the nobility, who also
+		maintain their own private armies. With those
+		factored in, my 'advantage' shrinks substantially.{wait}
+	} {
+		#1481FSo you see, I'm still very much in the midst of
+		a battle to truly exert control.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1551F#6PWhich is why you're building railways all over the
+		country to expand your area of influence...{wait}
+	} {
+		...and you've been annexing new territory to that
+		same end.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1485F#5PAs I've long thought, you clearly understand me
+		better than anyone else.{wait}
+	} {
+		#1482FThat is why I'll say this once again: work with me,
+		Your Highness.{wait}
+	} {
+		With your support, our nation will be able to bring
+		about real reform faster than ever.{wait}
+	} {
+		The Noble Faction, bloated with its centuries of
+		decadence, can be stopped before they even have
+		the chance to unify against us.{wait}
+	} {
+		#1485FSurely that's what you desire more than anything.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1551F#6P...{wait}
+	} {
+		#1542FLet me just ask a simple question, Chancellor.{wait}
+	} {
+		What connection do you have with Ouroboros?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1485F#5PHmm... I'm afraid I'm not quite sure what you're
+		asking.{wait}
+	} {
+		#1481FI WILL say this, however: I'm a firm believer in
+		using every resource at my disposal in the name
+		of achieving reform.{wait}
+	} {
+		That's the way I believe in handling politics.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1541F#6PI see... Well, it certainly does seem as though
+		we would see eye to eye in many ways.{wait}
+	} {
+		#1540FAnd that's all the more reason why I am afraid
+		I must refuse your offer.{wait}
+	}
+	TextWait
+	Emote char[10] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#1483F#5PIs that so?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1551F#6PYes, I find it difficult to like the rotten Noble
+		Faction that exists in the Empire...{wait}
+	} {
+		Or...perhaps you're right that 'hate' is the more
+		appropriate word.{wait}
+	} {
+		#1542FBut my feelings of fear towards your methods are
+		far greater than my feelings of hatred towards
+		the nobles.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1480F#5P...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1540F#6PWhat you seem to be doing is trying to compel
+		Erebonians with a delusive utopia--to whip them
+		into an enthusiastic frenzy.{wait}
+	} {
+		No doubt by successfully convincing the people,
+		the old guard will fall into the metaphorical
+		firestorm created...{wait}
+	} {
+		#1551F...and yet by then, the gears will have already
+		begun turning; there will be no satisfying a roused
+		populace with a thirst for revolution.{wait}
+	} {
+		The storm will just keep growing larger and more
+		ravenous, engulfing anything and everything in its
+		wake...{wait}
+	} {
+		#1542FYou know this, don't you, Chancellor?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#1486F#5PBut of course!{wait}
+	} {
+		#1481FAfter all, that's what I intend to happen.
+		It's the first stage of my reforms.{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#1549F#6P...{wait}
+	}
+	TextWait
+	_59
+	CrossFade 1000ms
+	ForkQuit char[14] fork[255]
+	CamLookPos (31190, 0, 54740) 0ms
+	CamSetDistance 0 5160 -10000 0ms
+	CamZoom 3000 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos char[10] (30820, 300, 52900) 270deg
+	FadeWait
+	Sleep 500ms
+	TextTalk char[10] {
+		#1485F#11PI'd be more than happy to share further details
+		with you if you were to decide to work with me, 
+		Your Highness.{wait}
+	} {
+		#1480FIn the meantime, I wish you well in strengthening
+		your foothold back in the Empire.{wait}
+	} {
+		Of course, if that's your intention, you'll find
+		it a necessity to work with those nobles you so
+		despise.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1545F#6PHeh. You truly do see through everything,
+		don't you?{wait}
+	}
+	TextWait
+	Sleep 150ms
+	ForkFunc char[8] fork[3] fn[0,4]
+	Sleep 1200ms
+	Emote char[8] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[10] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[10] {
+		#1485F#11PWell, that sounds like the noon bell. The airship
+		should be arriving shortly.{wait}
+	}
+	TextWait
+	_59
+	CrossFade 500ms
+	CharSetPos char[10] (30540, 0, 52900) 270deg
+	CharSetChipBase char[10] chip[2]
+	CharSetChipPattern char[10] 0
+	FadeWait
+	Sleep 500ms
+	Fork char[14] fork[0]:
+		CamLookPos (31500, 0, 54300) 1500ms
+	Fork char[10] fork[1]:
+		CharWalkToPos self (30540, 0, 51400) 1500mm/s 0
+	CharSetChipPattern char[8] 2
+	ForkWait char[10] fork[1]
+	CharTurnTo char[10] 270deg 400deg/s
+	Sleep 500ms
+	TextTalk char[10] {
+		#1480F#11PWhich means it's time for me to take my leave,
+		I'm afraid.{wait}
+	} {
+		#1485FI look forward to seeing you again in the capital
+		in two weeks' time.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo char[10] 90deg 400deg/s
+	Fork char[14] fork[0]:
+		CamLookPos (34750, 0, 54160) 3000ms
+	Fork char[14] fork[1]:
+		CamZoom 3200 3000ms
+	Fork char[10] fork[1]:
+		CharWalkToPos self (34840, 0, 51200) 2000mm/s 0
+	Sleep 800ms
+	Emote char[8] 0mm 1700mm 24 27 250ms 0
+	ForkWait char[10] fork[1]
+	Fork char[10] fork[1]:
+		CharWalkToPos self (34800, 0, 50200) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	Fork char[10] fork[2]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork char[10] fork[1]:
+		CharWalkToPos self (34800, 0, 48500) 2000mm/s 0
+	ForkWait char[10] fork[1]
+	CharFlagsSet char[10] 0x0080
+	SoundPlay sound[7] 0 0 100
+	Sleep 2000ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 500ms
+	CharColor char[9] 0x00FFFFFF 0ms
+	CharSetPos char[9] (34800, 0, 48500) 0deg
+	Fork char[9] fork[2]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (34630, 0, 50730) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[14] fork[0]:
+		CamLookPos (30890, 0, 55120) 4000ms
+	Fork char[9] fork[1]:
+		CharWalkToPos self (31970, 0, 54300) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (30540, 0, 54300) 2000mm/s 0
+	ForkWait char[9] fork[1]
+	CharTurnToChar char[9] char[8] 400deg/s
+	EmoteStop char[8]
+	Sleep 500ms
+	ForkWait char[14] fork[0]
+	TextTalk char[9] {
+		#276F#5PI take it the discussion is over, then?{wait}
+	} {
+		#270FWhat's wrong? You look awfully tired...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1544F#6POh, nothing...{wait}
+	}
+	TextWait
+	Sleep 150ms
+	CharSetChipPattern char[8] 0
+	Sleep 500ms
+	TextTalk char[8] {
+		#1540F#6PI'm just feeling awed anew at what a monster
+		I decided to pick a fight with.{wait}
+	}
+	TextWait
+	Fork char[14] fork[0]:
+		CamZoom 3500 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9477]
+	NewScene file[0x0021019F] 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	while 1:
+		SoundPlay sound[181] 0 0 90
+		Sleep 2500ms
+	Return

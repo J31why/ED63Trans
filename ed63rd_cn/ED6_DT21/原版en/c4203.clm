@@ -1,0 +1,711 @@
+calmare tc scena
+scena:
+	name "Grancel" "C4203.x"
+	town town[1]
+	bgm bgm[31]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01230._ch" "npl/ch01230p._cp"
+chip[1] "mons/ch11120._ch" "mons/ch11120p._cp"
+chip[2] "mons/ch11121._ch" "mons/ch11121p._cp"
+chip[3] "mons/ch11110._ch" "mons/ch11110p._cp"
+chip[4] "mons/ch11111._ch" "mons/ch11111p._cp"
+chip[5] "mons/ch11130._ch" "mons/ch11130p._cp"
+chip[6] "mons/ch11131._ch" "mons/ch11131p._cp"
+chip[7] "mons/ch10040._ch" "mons/ch10040p._cp"
+chip[8] "mons/ch10041._ch" "mons/ch10041p._cp"
+chip[9] "mons/ch11140._ch" "mons/ch11140p._cp"
+chip[10] "mons/ch11141._ch" "mons/ch11141p._cp"
+
+npc char[0]:
+	name "Norche"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[1]:
+	name ""
+	pos (-47360, 0, 42620)
+	angle 180deg
+	chip chip[1]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-121330, 0, 50600)
+	angle 180deg
+	chip chip[5]
+	flags 0x0141
+	unk2 -1
+	battle battle[947]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-88180, 0, 51510)
+	angle 180deg
+	chip chip[9]
+	flags 0x0141
+	unk2 -1
+	battle battle[949]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-91330, 0, 60050)
+	radius 1000mm
+	bubble_pos (-91210, 1500, 60790)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		Event fn[0,3]
+	Return
+
+fn[1]:
+	LookPointFlagsSet look_point[1] 0x0001
+	ObjFlagsUnset object[0] 0x0010
+	if !flag[12279]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if system[66] == 7:
+		SoundPlay sound[461] 1 0 100
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[12279]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12279]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}So I heard you like chests... YOU PERVERT!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 19 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_D6 0
+	TcEpisodeStart 12 1 0
+	PartyClear
+	PartyAdd name[0] party[0] 255
+	QuestFlagsSet quest[29] 0x08
+	Call fn[0,4]
+	Call fn[0,5]
+	Return
+
+fn[4]:
+	BgmStop 0ms
+	SoundStop sound[461]
+	Sc_C4Set 536870912
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-60570, 0, 90980) 90deg
+	CharSetPos char[0] (-59240, 0, 90940) 270deg
+	CamLookPos (-59750, 200, 90940) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	MapColor 0x0070B0EE 0ms
+	EffStop eff_instance[164] 0
+	EffStop eff_instance[166] 0
+	_75 object[255] 0 5
+	_75 object[255] 1 5
+	Sc_C4Set 2048
+	system[40] = 65535
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 0}#15A～Chapter 2 - In the Capital～{0x05}{wait}
+	}
+	TextWait
+	Sleep 2000ms
+	TextClose 0
+	Sleep 500ms
+	BgmResume
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	FadeOut 1000ms 0x00000000 80
+	Sleep 2000ms
+	TextMessage null {
+		{color 0}Today was yet another day in which Estelle found
+		herself roaming the north block of Grancel City's
+		sewers.{wait}
+		Her objective was simple: defeat a wanted monster
+		for the guild.{wait}
+		But down there, she found more than just monsters.{wait}
+		In addition to the nasties she'd become accustomed
+		to braining on a regular basis, she also came face to
+		face with a young noblewoman whose delicate
+		demeanor couldn't have looked more out of place.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}Estelle certainly hadn't expected this!
+		'Wh-What are you doing down here?' she asked.{wait}
+		The woman tittered and responded as if the answer
+		were the most obvious thing in the world:
+		'What else? Fishing, of course!'{wait}
+		The noblewoman's name was Norche, and as it
+		turned out, she was a member of the Fisherman's
+		Guild.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 0}'D-Do you really have to fish HERE of all places,
+		though? I mean, what if monsters find you?'{wait}
+		Estelle made up her mind to try and escort the
+		woman back to the city with her...{wait}
+		but Norche had other ideas, and she refused
+		to budge from what she felt was a prime fishing
+		spot.{wait}
+		The two were soon locked in a battle of pure
+		stubbornness; neither would simply back down
+		gracefully, as it wasn't in their natures.{wait}
+		It was in the middle of a heated argument when
+		the silver lure Estelle kept on her person fell
+		from her pocket.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[461] 1 0 100
+	FadeIn 1000ms 0x00000000
+	Sc_C4Unset 2048
+	Sleep 500ms
+	MapColor 0x00FFFFFF 2500ms
+	_75 object[255] 0 1
+	_75 object[255] 1 1
+	Sleep 4000ms
+	Emote char[0] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		Goodness! Is that the famous silver lure?! One of
+		the three famed fishing tackles?!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Where in Aidios' name did you obtain such a thing?!{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#1015FI-I don't know anything about any famous fishing
+		tackles...but I guess you mean this guy here?{wait}
+	} {
+		I won it from Lloyd...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		...!!!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		So you fought an anglers' duel against him, did
+		you?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		I'd intended to challenge him to one myself
+		when the time was right, but I never imagined
+		he would be defeated before then...{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#1011FOookay... I am so lost right now.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Very well! I shall challenge you to a ten-round
+		anglers' duel in his place!{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#1019FT-Ten rounds?! Listen, lady--{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		I will not accept no for an answer! Let us begin!{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#1004FW-Wait a sec...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	SoundStop sound[461]
+	Sleep 300ms
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 3000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	EffPlay eff[164] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[166] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	BgmStop 3000ms
+	BgmWait
+	Return
+
+fn[5]:
+	BgmPlay bgm[192] 0
+	ImageShow "c_vis506._ch" 0 0 500ms
+	var[0] = 0
+	while var[0] != 255:
+		system[40] = 24
+		Menu menu[0] -1 330 0
+			"Start" // 0
+			"Rules" // 1
+			"Quit" // 2
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[255]
+		TextSetPos 72 320 56 3
+		switch var[0]:
+			case 0:
+				ImageHide 500ms
+				Sleep 1000ms
+				Call fn[0,6]
+				BgmPlay bgm[192] 0
+				ImageShow "c_vis506._ch" 0 0 500ms
+				var[0] = 0
+				break
+			case 1:
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――――――――――――――――――――
+
+					Estelle and Norche will face off in a ten-round duel of the century. Both
+					will take turns at fishing, and whoever has the most points at the end of
+					the ten rounds will be declared the winner.
+
+					When it is Estelle's turn, you will be prompted to choose a rod and a bait
+					to use. Certain baits can only be used with certain rods.
+
+					After choosing, the game begins. When the ! mark appears, quickly press
+					confirm to catch the fish.
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				TextSetPos -1 -1 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}#0W―――――――――――――――――――――――――――
+
+					Certain fish can only be caught with certain baits, and in addition, some
+					fish can be used as bait to catch other fish.
+
+					Different varieties of fish are worth different amounts of points, making
+					trying to catch more valuable ones the key to success.
+
+					More valuable ones are also more likely to escape, but don't let that deter
+					you.
+
+					―――――――――――――――――――――――――――#20W{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				break
+			case 2:
+				ImageHide 500ms
+				MenuClose menu[0]
+				TextClose 0
+				system[40] = 65535
+				Sleep 1000ms
+				Sc_D6 1
+				TcEpisodeEnd 0
+				FlagSet flag[9477]
+				if flag[9999]:
+					NewScene "u4169._sn" 105 0 0
+					Hcf
+				else:
+					NewScene "u4121._sn" 110 0 0
+					Hcf
+				break
+	Return
+
+fn[6]:
+	TextSetPos 72 320 56 3
+	system[40] = 24
+	CamLookPos (-65390, 0, 88950) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-65820, 0, 90500) 180deg
+	CharSetPos char[0] (-58350, 0, 90510) 180deg
+	NextFrame
+	ItemAdd item[591] 1
+	ItemAdd item[592] 1
+	ItemAdd item[590] 1
+	ItemAdd item[595] 1
+	ItemAdd item[980] 3
+	ItemAdd item[981] 3
+	ItemAdd item[982] 3
+	ItemAdd item[983] 3
+	SoundPlay sound[461] 1 0 100
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	if Minigame 27 1 -2960 -2000 32500 180 -2980 -3000 29380:
+		var[0] = 0
+	else:
+		var[0] = 1
+	EventBegin 0
+	CharFlagsUnset name[0] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[0] (-60570, 0, 90980) 90deg
+	CharSetPos char[0] (-59240, 0, 90940) 270deg
+	CamLookPos (-59750, 200, 90940) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Sleep 3000ms
+	switch var[0]:
+		case 1:
+			FadeIn 1000ms 0x00000000
+			BgmResume
+			Sleep 1000ms
+			TextTalk name[0] {
+				#1003FI-I lost...{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				Ohohohoho! The silver lure is mine at last!{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				And soon, I will be able to defeat our guild's
+				leader! I can feel it!{wait}
+			}
+			TextWait
+			TextTalk name[0] {
+				#1009FCrap... I wasn't expecting to feel this frustrated
+				about losing a duel I didn't even want to do in
+				the first place...{wait}
+			}
+			TextWait
+			FadeOut 1000ms 0x00000000 255
+			BgmStop 2000ms
+			FadeWait
+			SoundStop sound[461]
+			Sleep 1000ms
+			TextSetPos -1 80 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{0x18}{color 5}Try again?{wait}
+			}
+			system[40] = 24
+			Menu menu[0] -1 200 0
+				"Try Again" // 0
+				"Leave Door" // 1
+			MenuWait var[0]
+			system[40] = 65535
+			MenuClose menu[0]
+			TextClose 0
+			TextSetPos 72 320 56 3
+			Sleep 1000ms
+			switch var[0]:
+				case 1:
+					Sc_D6 1
+					TcEpisodeEnd 0
+					FlagSet flag[9477]
+					if flag[9999]:
+						NewScene "u4169._sn" 105 0 0
+						Hcf
+					else:
+						NewScene "u4121._sn" 110 0 0
+						Hcf
+					break
+					break
+				case 0:
+					Sc_D6 1
+					Sc_D6 0
+					var[0] = 0
+					Return
+		case 0:
+			break
+	FadeIn 1000ms 0x00000000
+	BgmResume
+	Sc_C4Set 536870912
+	Sleep 1000ms
+	TextTalk char[0] {
+		H-How could this have happened...? 
+		How could I, of all people, be defeated?{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#1000F*sigh* Well? You satisfied now?{wait}
+	} {
+		If you are, it's time you came with me back to
+		the city. Trust me--it's not safe down here.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		You were truly more worried about me than
+		winning the duel, weren't you?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Haha... No wonder I couldn't defeat you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Now, if you will...kindly accept this.{wait}
+	}
+	TextWait
+	CharWalkToPos char[0] (-59910, 0, 90890) 2000mm/s 0
+	Sleep 500ms
+	FadeOut 300ms 0x00000000 100
+	FadeWait
+	SoundPlay sound[17] 0 0 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}Estelle received a golden rod from Norche.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	CharWalkToPos2 char[0] (-59240, 0, 90940) 2000mm/s 0
+	Sleep 500ms
+	TextTalk name[0] {
+		#1004FWow! It's so shiny!{wait}
+	} {
+		#1008FAre you sure I can have this?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		In fact, I insist. I would be more troubled
+		if you didn't accept it--these are the laws
+		behind anglers' duels, as you know.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Still, kindly remember that you have more
+		to fear than just me. No getting complacent
+		simply because I fell in battle.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		There's still our guild's leader to defeat,
+		after all.{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#1011FAww, man. Is he really that good?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Indeed. His name is Mr. Fisher, and he is both this
+		guild's founder and its most capable member.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		Knowing that may incline you to avoid facing him,
+		but don't think you will be so lucky--with the
+		two tackles you now possess, he will come for you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		A duel with him is nigh...whether you desire it or
+		not.{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#1015FA-All righty, then... If you say so.{wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	SoundStop sound[461]
+	BgmStop 3000ms
+	Sleep 3000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}At this point, Estelle still had no idea just how
+		capable this 'Fisher' may prove to be.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{color 5}And while there was a small part of her that couldn't
+		help but regret biting the lure of the Fisherman's
+		Guild, there was a much greater part that couldn't deny
+		wanting to see where this journey would take her...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sc_C4Unset 536870912
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[29] 0x20:
+		Sleep 3000ms
+		QuestFlagsSet quest[29] 0x10
+		QuestFlagsSet quest[29] 0x20
+		QuestFlagsSet quest[30] 0x02
+		ItemAdd item[427] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[427]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 5000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}5,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	Sleep 2000ms
+	TextSetPos -1 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 5}Continue to Chapter 3?{wait}
+	}
+	Sleep 1000ms
+	system[40] = 24
+	Menu menu[0] -1 200 0
+		"Continue" // 0
+		"Leave Door" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 1000ms
+	switch var[0]:
+		case 1:
+			FlagSet flag[9477]
+			if flag[9999]:
+				NewScene "u4169._sn" 105 0 0
+				Hcf
+			else:
+				NewScene "u4121._sn" 110 0 0
+				Hcf
+			break
+		case 0:
+			FlagSet flag[9476]
+			NewScene "r2201._sn" 100 0 0
+			Hcf
+			break
+	Return
+
+fn[7]:
+	EventBegin 1
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}It's locked tightly.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	_Char90 field_party[0] 0 0 1500 3000 0
+	Sleep 50ms
+	EventEnd 4
+	Return
+
+fn[8]:
+	FadeOut 300ms 0x00000000 100
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}The trapdoor is locked tightly.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	Return

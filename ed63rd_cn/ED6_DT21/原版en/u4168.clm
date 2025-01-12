@@ -1,0 +1,480 @@
+calmare tc scena
+scena:
+	name "gaiden2" "U4168.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0180
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (-15730, -1000, -18230)
+	pos2 (-26740, 4000, -10570)
+	flags 0x0000
+	func fn[0,3]
+	unk1 0
+
+look_point[0]:
+	pos (-19450, 0, -15500)
+	radius 1000mm
+	bubble_pos (-20540, -500, -17840)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+look_point[1]:
+	pos (-20540, -700, -17840)
+	radius 1000mm
+	bubble_pos (-19600, 500, -14960)
+	flags 0x007C
+	func fn[0,12]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	MapSet 4000 (-116000, null, -104000) "mt4400._ch"
+	SoundPlay sound[453] 1 0 100
+	_1C object[1] fn[0,2]
+	Return
+
+fn[2]:
+	TextStart null
+	TextEnd null
+	Return
+
+fn[3]:
+	if system[4] >= 3:
+		Return
+	elif PartyPosition name[10] == -1:
+		Return
+	elif flag[10001]:
+		Return
+	EventBegin 0
+	CrossFade 500ms
+	if PartyPosition name[1] != -1:
+		CharSetPos name[8] (-18500, 0, -12300) 180deg
+		CharSetPos name[14] (-19930, 0, -12100) 180deg
+		CharSetPos name[10] (-18970, 0, -14180) 180deg
+		CharSetPos name[1] (-20120, 0, -13800) 180deg
+	else:
+		CharSetPos name[8] (-18790, 0, -12570) 180deg
+		CharSetPos name[14] (-17690, 0, -11000) 180deg
+		if CharInSlot 0 party[2] == 10:
+			CharSetPos name[10] (-18970, 0, -14180) 180deg
+			CharSetPos party[3] (-19380, 0, -10920) 180deg
+		elif CharInSlot 0 party[3] == 10:
+			CharSetPos name[10] (-18970, 0, -14180) 180deg
+			CharSetPos party[2] (-19380, 0, -10920) 180deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookPos (-21040, 0, -16650) 0ms
+	CamSetDistance 0 5000 -10000 0ms
+	CamZoom 2840 0ms
+	CamRotate 224000mdeg 0ms
+	CamPers 362 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk name[10] {
+		#213F#6PH-How did it end up here?{wait}
+	} {
+		#215FMaybe Kyle had to make an emergency landing
+		or something...?{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1513F#12PI'm sure he would've been able to, anyway.{wait}
+		}
+		TextWait
+		CharTurnTo name[1] 90deg 400deg/s
+		Sleep 300ms
+		TextTalk name[1] {
+			#1500F#11PWell, what should we do? Should we go have
+			a look inside together?{wait}
+		}
+		TextWait
+		CharTurnTo name[10] 270deg 400deg/s
+		Sleep 300ms
+		TextTalk name[10] {
+			#210F#6PO-Oh... Yeah, if you wouldn't mind.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#1065F#6PMaybe.{wait}
+		} {
+			#1060FWell, what do you want to do? Do you want
+			to have a look inside?{wait}
+		}
+		TextWait
+		CharTurnTo name[10] 0deg 400deg/s
+		Sleep 300ms
+		TextTalk name[10] {
+			#210F#5P...Yeah. I would.{wait}
+		}
+		TextWait
+	Sleep 300ms
+	Fork name[8] fork[0]:
+		CamLookPos (-22370, 0, -23640) 4000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[8] fork[0]
+	if PartyPosition name[1] != -1:
+		CharSetPos name[8] (-18920, 0, -14160) 180deg
+		CharSetPos name[14] (-17790, 0, -12650) 180deg
+		CharSetPos name[10] (-23540, -610, -23920) 0deg
+		CharSetPos name[1] (-23540, -610, -23920) 0deg
+	else:
+		CharSetPos name[8] (-18920, 0, -14160) 180deg
+		CharSetPos name[14] (-17790, 0, -12650) 180deg
+		if CharInSlot 0 party[2] == 10:
+			CharSetPos name[10] (-23540, -610, -23920) 0deg
+			CharSetPos party[3] (-19650, 0, -13060) 180deg
+		elif CharInSlot 0 party[3] == 10:
+			CharSetPos name[10] (-23540, -610, -23920) 0deg
+			CharSetPos party[2] (-19650, 0, -13060) 180deg
+	CamLookPos (-23270, -610, -24000) 0ms
+	CamSetDistance 0 5840 -10000 0ms
+	CamZoom 3410 0ms
+	CamRotate 224000mdeg 0ms
+	CamPers 273 0ms
+	Sleep 1500ms
+	FadeIn 1000ms 0x00000000
+	Sleep 500ms
+	ObjFlagsUnset object[1] 0x0010
+	ObjFrame object[1] 0
+	ObjPlay object[1] 59
+	ObjWait object[1]
+	if PartyPosition name[1] != -1:
+		Fork name[8] fork[0]:
+			CamLookPos (-20010, 0, -17300) 4500ms
+		Fork name[8] fork[1]:
+			CamZoom 3260 4500ms
+		ForkFunc name[10] fork[0] fn[0,5]
+		ForkFunc name[1] fork[0] fn[0,6]
+		ForkWait name[10] fork[0]
+		ForkWait name[1] fork[0]
+	else:
+		Fork name[8] fork[0]:
+			CamLookPos (-21170, -750, -17200) 4500ms
+		Fork name[8] fork[1]:
+			CamZoom 3260 4500ms
+		ForkFunc name[10] fork[0] fn[0,4]
+		ForkWait name[10] fork[0]
+	ForkWait name[8] fork[0]
+	Sleep 300ms
+	TextTalk name[10] {
+		#413F#5PSorry for the wait.{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[8] {
+			#1067F#6PYou finish up looking everywhere you
+			wanted to?{wait}
+		}
+		TextWait
+		TextTalk name[10] {
+			#215F#5PYeah... I've seen all I need to see.{wait}
+		}
+		TextWait
+		TextTalk name[1] {
+			#1503F#5PThe engines wouldn't respond no matter
+			what we did, either.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#1067F#6PYou finish up looking everywhere you
+			wanted to?{wait}
+		}
+		TextWait
+		TextTalk name[10] {
+			#215F#5PYeah... I've seen all I need to see.{wait}
+		} {
+			The engines won't respond no matter
+			what I do, either...{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#1841F#6PYeah...{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1446F#12PAll we can do for now is keep going.{wait}
+	} {
+		#1448FI'm sure the Goddess will bless us if we do.{wait}
+	}
+	TextWait
+	TextTalk name[10] {
+		#210F#5PI guess so.{wait}
+	} {
+		#211F...Right! Let's get back to work! I'm gonna find
+		them and make sure they never forget they owe
+		me one!{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1514F#5P...I think that's a great idea.{wait}
+		}
+		TextWait
+	if PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#067F#12PHeehee. That's the spirit.{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#179F#12PHaha... That's the spirit.{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#278F#12PHeh. That's the spirit.{wait}
+		}
+		TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CamLookPos (-18680, 0, -12910) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 225000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos field_party[0] (-18680, 0, -12910) 0deg
+	CharSetPos field_party[1] (-18680, 0, -12910) 0deg
+	CharSetPos field_party[2] (-18680, 0, -12910) 0deg
+	CharSetPos field_party[3] (-18680, 0, -12910) 0deg
+	CharSetChipBase field_party[0] chip[65535]
+	CharSetChipBase field_party[1] chip[65535]
+	CharSetChipBase field_party[2] chip[65535]
+	CharSetChipBase field_party[3] chip[65535]
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	CamLookChar field_party[0] 0ms
+	FlagSet flag[10001]
+	QuestTaskSet quest[44] 0x0100
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	SystemFlagsSet 0x02000000
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharWalkToPos self (-23150, -610, -21480) 2000mm/s 0
+	Sleep 500ms
+	SoundPlay sound[106] 0 0 100
+	ObjFrame object[1] 89
+	ObjPlay object[1] 0
+	ForkWait self fork[1]
+	CharWalkToPos self (-20500, -100, -21600) 2000mm/s 0
+	CharWalkToPos self (-20380, -860, -18550) 2000mm/s 0
+	ObjFlagsSet object[1] 0x0010
+	Return
+
+fn[5]:
+	CharWalkToPos self (-23150, -610, -21480) 2000mm/s 0
+	CharWalkToPos self (-20500, -100, -21600) 2000mm/s 0
+	CharWalkToPos self (-20380, -860, -18550) 2000mm/s 0
+	Return
+
+fn[6]:
+	Sleep 700ms
+	Fork self fork[1]:
+		CharWalkToPos self (-23150, -610, -21480) 2000mm/s 0
+	Sleep 500ms
+	SoundPlay sound[106] 0 0 100
+	ObjFrame object[1] 89
+	ObjPlay object[1] 0
+	ForkWait self fork[1]
+	CharWalkToPos self (-20500, -100, -21600) 2000mm/s 0
+	CharWalkToPos self (-19870, -560, -19520) 2000mm/s 0
+	ObjFlagsSet object[1] 0x0010
+	Return
+
+fn[7]:
+	char[0].1 = (field_party[0].1 + field_party[0].1) / 2
+	char[0].2 = (field_party[0].2 + field_party[0].2) / 2
+	char[0].3 = (field_party[0].3 + field_party[0].3) / 2
+	char[1].1 = (field_party[1].1 + field_party[1].1) / 2
+	char[1].2 = (field_party[1].2 + field_party[1].2) / 2
+	char[1].3 = (field_party[1].3 + field_party[1].3) / 2
+	char[2].1 = (field_party[2].1 + field_party[2].1) / 2
+	char[2].2 = (field_party[2].2 + field_party[2].2) / 2
+	char[2].3 = (field_party[2].3 + field_party[2].3) / 2
+	ForkFunc field_party[0] fork[1] fn[0,11]
+	ForkFunc field_party[1] fork[1] fn[0,10]
+	ForkFunc field_party[2] fork[1] fn[0,9]
+	ForkFunc field_party[3] fork[1] fn[0,8]
+	ForkWait field_party[3] fork[1]
+	_30 0
+	TextEnd null
+	Return
+
+fn[8]:
+	CharFlagsSet self 0x0004
+	CharWalkToChar self char[2] 0mm 6000mm/s 0
+	CharWalkToChar self char[1] 0mm 6000mm/s 0
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharTurnTo self 180deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-20290, -680, -17830) 1000 5000
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[9]:
+	CharFlagsSet self 0x0004
+	CharWalkToChar self char[1] 0mm 6000mm/s 0
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharTurnTo self 180deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-20290, -680, -17830) 1000 5000
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[10]:
+	CharFlagsSet self 0x0004
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharTurnTo self 180deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-20290, -680, -17830) 1000 5000
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[11]:
+	CharFlagsSet self 0x0004
+	CharTurnTo self 180deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-20290, -680, -17830) 1000 5000
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[12]:
+	char[0].1 = (field_party[0].1 + field_party[0].1) / 2
+	char[0].2 = (field_party[0].2 + field_party[0].2) / 2
+	char[0].3 = (field_party[0].3 + field_party[0].3) / 2
+	char[1].1 = (field_party[1].1 + field_party[1].1) / 2
+	char[1].2 = (field_party[1].2 + field_party[1].2) / 2
+	char[1].3 = (field_party[1].3 + field_party[1].3) / 2
+	char[2].1 = (field_party[2].1 + field_party[2].1) / 2
+	char[2].2 = (field_party[2].2 + field_party[2].2) / 2
+	char[2].3 = (field_party[2].3 + field_party[2].3) / 2
+	ForkFunc field_party[0] fork[1] fn[0,16]
+	ForkFunc field_party[1] fork[1] fn[0,15]
+	ForkFunc field_party[2] fork[1] fn[0,14]
+	ForkFunc field_party[3] fork[1] fn[0,13]
+	ForkWait field_party[3] fork[1]
+	_30 0
+	TextEnd null
+	Return
+
+fn[13]:
+	CharFlagsSet self 0x0004
+	CharWalkToChar self char[2] 0mm 6000mm/s 0
+	CharWalkToChar self char[1] 0mm 6000mm/s 0
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharTurnTo self 0deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-19550, 0, -14790) 2000 5000
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[14]:
+	CharFlagsSet self 0x0004
+	CharWalkToChar self char[1] 0mm 6000mm/s 0
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharTurnTo self 0deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-19550, 0, -14790) 2000 5000
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[15]:
+	CharFlagsSet self 0x0004
+	CharWalkToChar self char[0] 0mm 6000mm/s 0
+	CharTurnTo self 0deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-19550, 0, -14790) 2000 5000
+	CharFlagsUnset self 0x0004
+	Return
+
+fn[16]:
+	CharFlagsSet self 0x0004
+	CharTurnTo self 0deg 0deg/s
+	CharSetChipPattern self 0
+	_Char96 self (-19550, 0, -14790) 2000 5000
+	CharFlagsUnset self 0x0004
+	Return

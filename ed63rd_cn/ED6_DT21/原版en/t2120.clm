@@ -1,0 +1,244 @@
+calmare fc scena
+scena:
+	name "Ruan" "T2120.x"
+	town town[1]
+	bgm bgm[12]
+	item fn[0,65535]
+	scp 0 file[0x002100FC]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01100._ch" "npl/ch01100p._cp"
+chip[1] "npl/ch02590._ch" "npl/ch02590p._cp"
+
+npc char[0]:
+	name "O'Neil"
+	pos (30000, 0, 4500)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Clem"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 9:
+		if !flag[12055]:
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (30400, 0, 2300) 0deg
+	CharSetPos name[77] (32540, 0, 4580) 0deg
+	CamLookPos (30260, 500, 3220) 0ms
+	CamSetDistance 0 5340 -10000 0ms
+	CamZoom 2560 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 280 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	TextTalk char[9] {
+		#774F#3SA happiness stone?!{wait}
+	}
+	Shake 0 240 3000 100ms
+	TextWait
+	TextTalk char[8] {
+		Indeed. It's a magical stone with a golden glow,
+		said to bring happiness to those who possess it.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		I'm sure you're aware of how the Goddess created
+		this continent in ancient times.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		When that happened, Her power showered down
+		upon the land as an infinite number of particles,
+		their light radiant and divine.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		Most of those lights were fleeting, but not all of
+		them! Some of those particles of light remained,
+		hidden by mist in tall mountains.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		Over time, they grew in size, bit by bit...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		And that is the origin of the happiness stones.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#772F#3STh-That's so cool!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		Heheh! Isn't it?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		Still, as you can imagine, it's exceptionally
+		rare that anyone finds one.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		After all, they only develop in the deepest regions
+		of the tallest mountains. That's not somewhere
+		people go every day.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#772FB-But you say you did?{wait}
+	} {
+		When you went on that expedition to the far
+		north, right?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		You got it!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		It was on the sacred mountain of Tegis, a perilous
+		place full of snow and ice.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		Even the slightest loss of footing would have sent
+		me cascading into the ravines below, and the never-
+		ceasing blizzards assaulted me from morn to night.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		Before I knew it, even my food supply had run out,
+		and I was left wandering that white desert alone,
+		not knowing how much longer I had left...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		At times, I had to fend off the assault of vicious
+		monsters, while at other times, I found myself
+		almost plunged upside down the cliffsides.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		But while the experience may have been enough
+		to take out most ordinary men, it wasn't enough
+		to take ME down!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		I clung desperately to the razor-sharp ice walls,
+		making my way gradually farther into the mountain,
+		never once letting my resolve waver.{wait}
+	}
+	TextWait
+	CharJump char[9] 0 300 0 300 5000mm/s
+	CharJump char[9] 0 300 0 300 5000mm/s
+	TextTalk char[9] {
+		#771FMan, you're so COOL!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		No matter what happens, don't give up!
+		That's my policy, and it should be yours,
+		too!{wait}
+	}
+	TextWait
+	Sleep 400ms
+	TextTalk char[8] {
+		#3SBe like the mighty Captain O'Neil: invincible!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk char[8] {
+		Regardless, after overcoming countless trials and
+		obstacles before me, I finally found that faintly
+		glowing stone!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		My hands shook, but I reached out and picked it
+		up.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		And the second I did, the raging winds stopped
+		as if they had never been blowing at all.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		Then the morning sun began to shine down through
+		the clouds above.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		That light hit the stone, and it began to glow with
+		a glistening, radiant beauty...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		It was like something out of this world.{wait}
+	}
+	TextWait
+	Fork char[10] fork[1]:
+		CamZoom 2860 4000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 2000ms
+	BgmWait
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene file[0x002100FE] 100 0 0
+	Hcf
+	Return

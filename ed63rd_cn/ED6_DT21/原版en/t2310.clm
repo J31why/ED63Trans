@@ -1,0 +1,1157 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2310.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[1] "npl/ch01460._ch" "npl/ch01460p._cp"
+chip[2] "npl/ch02590._ch" "npl/ch02590p._cp"
+chip[3] "npl/ch02640._ch" "npl/ch02640p._cp"
+chip[4] "npl/ch01000._ch" "npl/ch01000p._cp"
+chip[5] "npl/ch01050._ch" "npl/ch01050p._cp"
+chip[6] "npl/ch01150._ch" "npl/ch01150p._cp"
+chip[7] "npl/ch02570._ch" "npl/ch02570p._cp"
+chip[8] "npl/ch01200._ch" "npl/ch01200p._cp"
+chip[9] "npl/ch01010._ch" "npl/ch01010p._cp"
+
+npc char[0]:
+	name "Zack"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "Solomon"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,4]
+
+npc char[2]:
+	name "Clem"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Daniel"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Elder Serge"
+	pos (-28110, 0, 7510)
+	angle 180deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,5]
+
+npc char[5]:
+	name "Amelia"
+	pos (-29710, 0, 42820)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,6]
+
+npc char[6]:
+	name "Sadie"
+	pos (-28520, 0, 41210)
+	angle 270deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,8]
+
+npc char[7]:
+	name "Matron Theresa"
+	pos (-31800, 0, 39140)
+	angle 0deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,9]
+
+npc char[8]:
+	name "Fisher"
+	pos (-31960, 0, 42210)
+	angle 0deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,7]
+
+npc char[9]:
+	name "Creda"
+	pos (-29220, 0, 38160)
+	angle 90deg
+	x 0
+	cp chip[9]
+	frame 0
+	ch chip[9]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[0,10]
+
+npc char[10]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 9:
+		CharFlagsUnset char[0] 0x0080
+		CharSetPos char[0] (-27000, 0, 39020) 270deg
+		CharFlagsUnset char[1] 0x0080
+		CharSetPos char[1] (-30800, 0, 44300) 180deg
+		if flag[12066]:
+			CharSetPos char[4] (-31740, 0, 40230) 180deg
+			CharFlagsUnset char[7] 0x0080
+			CharFlagsUnset char[9] 0x0080
+			CharFlagsUnset char[6] 0x0080
+			CharSetPos char[5] (-29710, 0, 42820) 0deg
+		elif flag[12099]:
+		elif flag[12065]:
+			CharSetPos char[5] (-1740, 0, 7940) 0deg
+		elif flag[12064]:
+		elif flag[12055]:
+	if system[66] == 9:
+		if system[0] == 102:
+			if !flag[12065]:
+				Event fn[0,11]
+	Return
+
+fn[1]:
+	ObjFlagsSet object[0] 0x0004
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	TextStart char[0]
+	if flag[12066]:
+		if flag[1]:
+			TextTalk char[0] {
+				This is the kinda work I was born for, if you ask
+				me!{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				Some of the profits from this bazaar go towards
+				the running costs of the orphanage.{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				Fun to do and for a good cause! This is the kind
+				of work I was born for, if you ask me.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12099]:
+		if flag[1]:
+			TextTalk char[0] {
+				...Well, whatever. {wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				That guy who's always helping us out is pitching in,
+				so we should be fine even without them.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				Come to think of it, we sent a request to the
+				Bracer Guild to help with the bazaar a while back,
+				didn't we?{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				Still haven't seen anyone that meets that description
+				around, though... I wonder if they're even coming.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12065]:
+		if flag[1]:
+			TextTalk char[0] {
+				Everything here costs 20 mira.{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				I'll go as low as 10 mira for you girls, though!{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[0] {
+				Welcome! Go ahead and let me know if anything
+				catches your eye.{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				...Wait. Aren't you the kids from the orphanage?{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				Eh, no biggie. Offer still stands--let me know
+				if you see anything you want!{wait}
+			}
+			TextWait
+			TextTalk char[0] {
+				I'll knock a bit off the price, too, just for you
+				kids.{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd char[0]
+	Return
+
+fn[4]:
+	TextStart char[1]
+	if flag[12066]:
+		if flag[0]:
+			TextTalk char[1] {
+				While you're here, why not take a look around?{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				You don't even need to buy anything if you don't
+				want to. Enjoying festivals is more about taking
+				in the atmosphere than opening your wallet.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[1] {
+				From what I remember, it was originally a Jenis
+				student who thought up the idea of holding the
+				bazaar here.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				It's hard to imagine the town without it now,
+				though. It's one of our major attractions.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				I mean, who doesn't love a good festival?{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12099]:
+		if flag[0]:
+			TextTalk char[1] {
+				Me and Zack are the only real organizers of
+				this event, so it feels kinda weird to call us its
+				organization committee...{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				...but two people's still technically a committee,
+				right? Riiight?{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[1] {
+				This is the third year this bazaar's been held,
+				actually. We have people who come every year,
+				too.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				Makes me really giddy as someone who's been
+				involved in it since its humble beginnings.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12065]:
+		if flag[0]:
+			TextTalk char[1] {
+				Sorry! I've told you all I know about that story.{wait}
+			} {
+				All I know is it's some old legend I picked up
+				from my old man.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[1] {
+				Oh, heya. Come to ask more about that story?{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				If you have, I can't help you, though. Sorry!
+				I've told you all I know.{wait}
+			}
+			TextWait
+			TextTalk char[1] {
+				All I know is it's some old legend I picked up
+				from my old man.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd char[1]
+	Return
+
+fn[5]:
+	TextStart self
+	if flag[12066]:
+		CharTurnTo self 180deg 0deg/s
+		if flag[2]:
+			TextTalk self {
+				I really do think you're worried about nothing,
+				here.{wait}
+			}
+			TextWait
+			TextTalk self {
+				More than anything, the children just want your
+				smile.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I think she's a lovely child, personally.{wait}
+			}
+			TextWait
+			TextTalk self {
+				She's remarkably levelheaded for one her age,
+				too. I don't think you have anything to worry
+				about with her.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Especially as I'm sure she still has plenty of
+				growing and maturing to do. It's what children
+				do.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12099]:
+		if flag[2]:
+			TextTalk self {
+				The young people of the village are so fired up
+				because of the bazaar.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Hoho! That makes me very happy indeed.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				There don't seem to have been many monsters
+				out on the Gull Seaside Way this morning...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...but apparently, that's thanks to someone who
+				took care of them because of the bazaar.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12065]:
+		if flag[2]:
+			TextTalk self {
+				I'm quite interested in seeing what's on sale at
+				this year's bazaar.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I can hardly wait to see!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I think I should go and have a look at how things
+				are doing soon myself.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'm quite interested in seeing what's on sale this
+				year, too.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12064]:
+		if flag[2]:
+			TextTalk self {
+				The cabin the bazaar is taking place in is on the
+				plateau at the edge of town.{wait}
+			}
+			TextWait
+			TextTalk self {
+				If you're interested, I suggest you run along and
+				see what's on offer. I'm sure you'd love it.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Well, well! If it isn't Matron Theresa's children.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Hoho! Surprised how lively it is in town?
+				Well, there's a bazaar being held in the
+				windmill cabin now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				If you're interested, I suggest you run along and see
+				what's on offer. I'm sure you'd love it.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[6]:
+	TextStart self
+	if flag[12066]:
+		if flag[3]:
+			TextTalk self {
+				Now, what should I buy next? ♪{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Heehee. One pot, bought!{wait}
+			}
+			TextWait
+			TextTalk self {
+				I should've known I'd find one here.{wait}
+			}
+			TextWait
+			TextTalk self {
+				You really CAN find anything at a bazaar.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12065]:
+		if flag[3]:
+			TextTalk self {
+				Come to think of it, I could probably do with
+				a new pot after burning the last one.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I wonder if any of those will be on sale at the
+				bazaar...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Zack's been helping out at the bazaar every year.{wait}
+			}
+			TextWait
+			TextTalk self {
+				He wasn't very reliable as a child, what with him
+				always getting lost all the time, but he certainly
+				is now.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12064]:
+		if flag[3]:
+			CharTurnTo self 90deg 0deg/s
+			TextTalk self {
+				I'm sure I had a bunch of my own old clothes
+				somewhere around here...{wait}
+			}
+			TextWait
+			TextTalk self {
+				Where are they, though? I can't find them 
+				anywhere...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Hmm... Do we have anything that could be sold
+				at the bazaar?{wait}
+			}
+			TextWait
+			TextTalk self {
+				There's Zack's old clothes, but I'm guessing no 
+				one would buy those ratty things...{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[7]:
+	TextStart self
+	if flag[12066]:
+		TextTalk self {
+			I'd love to hold fishing classes for children here.{wait}
+		}
+		TextWait
+	elif flag[12099]:
+		if flag[6]:
+			TextTalk self {
+				By my reckoning, the rest of the week will be
+				clear skies.{wait}
+			}
+			TextWait
+			TextTalk self {
+				First-rate fishermen are quite sensitive to small 
+				changes in the weather. It's not hard to tell what
+				it's going to be like in the near future.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Today's weather seems to be quite fine!
+				Yes, indeedy.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I might even take up my rod and do a little
+				fishing near the lighthouse.{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12065]:
+		if flag[6]:
+			TextTalk self {
+				This is a wonderful little village, isn't it?{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's an excellent fishing spot, too!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I come here every year...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...and I always find myself thinking what
+				a lovely place it is.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I hope I can live in a village as peaceful as
+				this when I reach old age.{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12064]:
+		if flag[6]:
+			TextTalk self {
+				I hear there's a very capable fisherman in this
+				region.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'd love to invite them to become a member of
+				our guild. Oh, the things we enthusiasts could
+				learn from one another!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I found the most spectacular rod at this very
+				bazaar one year.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It was handmade, too, and clearly used lovingly
+				for a long time. Glad I snagged it while I could!{wait}
+			}
+			TextWait
+			FlagSet flag[6]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[8]:
+	TextStart self
+	if flag[12066]:
+		if flag[4]:
+			TextTalk self {
+				There are things here today that I donated myself,
+				too, so take a look around. You never know what
+				could sing to you.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Welcome! Great weather today, hmm?{wait}
+			}
+			TextWait
+			TextTalk self {
+				Everything here was donated by the people
+				of Manoria.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Heehee. There are even things here that were
+				donated by me! So do take a look around and
+				see if anything sings to you.{wait}
+			}
+			TextWait
+			FlagSet flag[4]
+	elif flag[12065]:
+	elif flag[12099]:
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12066]:
+		if flag[12090]:
+			CharTurnTo char[7] 0deg 0deg/s
+			if flag[5]:
+				TextTalk char[7] {
+					#754FI can't help but worry she's got it into her
+					head that she might become a burden to me
+					if she doesn't try to do everything she can.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[7] {
+					#754FI know how levelheaded she is better than
+					anyone...{wait}
+				} {
+					#757F...but with the way she is, I'm worried she'll always
+					find herself being relied on. I want her to feel like
+					she can actually act her age from time to time...{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1713F(...){wait}
+				}
+				TextWait
+				FlagSet flag[5]
+		else:
+			TextTalk char[7] {
+				#753FMary? Whatever happened to Polly?{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1713FW-Well...{wait}
+			} {
+				She's...playing with Clem and Daniel right now.{wait}
+			}
+			TextWait
+			TextTalk char[7] {
+				#750FOh...{wait}
+			} {
+				#754FWell, that's all right, but if anything was to
+				happen, you would tell me, wouldn't you?{wait}
+			} {
+				I don't want you thinking you have to bottle things
+				up and deal with them yourself. I'm always here if
+				you need me, all right?{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1714FTh-Thank you!{wait}
+			} {
+				#1712F...{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1713F(I can't... I just can't.){wait}
+			} {
+				(Mentioning the present thing to her is out
+				of the question, and Polly disappearing is all
+				my fault.){wait}
+			} {
+				#1713F(I'll have to see if I can find her myself...){wait}
+			}
+			TextWait
+			FlagSet flag[12090]
+	elif flag[12065]:
+	elif flag[12099]:
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[10]:
+	TextStart self
+	if flag[12066]:
+		if flag[7]:
+			TextTalk self {
+				I'm glad someone wanted that pot I donated.{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's always a relief to see things you donate
+				go to good homes.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Oh, my! I'm surprised the pot I donated sold
+				already.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Someone must have really wanted it.{wait}
+			}
+			TextWait
+			FlagSet flag[7]
+	elif flag[12065]:
+	elif flag[12099]:
+	elif flag[12064]:
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[11]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	_Char4A char[1] 255
+	_Char4A char[0] 255
+	CharFlagsSet name[77] 0x0040
+	CharFlagsSet name[78] 0x0040
+	CharFlagsSet char[8] 0x0008
+	CharFlagsSet char[5] 0x0008
+	CharSetPos name[77] (-30500, -500, 34700) 0deg
+	CharSetPos name[78] (-29780, -500, 34700) 0deg
+	CharColor name[77] 0x00FFFFFF 0ms
+	CharColor name[78] 0x00FFFFFF 0ms
+	CamLookPos (-29140, 0, 47160) 0ms
+	CamSetDistance 0 4800 -10000 0ms
+	CamZoom 3120 0ms
+	CamRotate 55000mdeg 0ms
+	CamPers 280 0ms
+	FadeIn 2000ms 0x00000000
+	Fork char[10] fork[0]:
+		CamLookPos (-29140, 0, 39160) 6000ms
+	Fork char[10] fork[1]:
+		CamZoom 2720 6000ms
+	Fork char[10] fork[2]:
+		CamRotate 45000mdeg 6000ms
+	Sleep 5000ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-30600, 0, 36660) 1500mm/s 0
+	Fork name[77] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Sleep 300ms
+	Fork name[78] fork[1]:
+		CharWalkToPos self (-29880, 0, 36160) 1500mm/s 0
+	Fork name[78] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	FadeWait
+	ForkWait char[10] fork[1]
+	ForkWait name[77] fork[1]
+	ForkWait name[78] fork[1]
+	SoundPlay sound[7] 0 0 100
+	ForkFunc name[77] fork[3] fn[0,12]
+	CharTurnTo name[78] 45deg 400deg/s
+	Sleep 500ms
+	CharTurnTo name[78] 0deg 400deg/s
+	Sleep 500ms
+	CharTurnTo name[78] 45deg 400deg/s
+	Sleep 400ms
+	TextTalk name[78] {
+		#1733FWow... This is so cool!{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1714F#12PYeah... There's so much available here.{wait}
+	} {
+		#1719FI wonder if there's anything that would make
+		a good present for the matron.{wait}
+	} {
+		There has to be with all that's here...{wait}
+	}
+	TextWait
+	Fork char[10] fork[0]:
+		CamLookPos (-28370, 0, 39810) 3000ms
+	ForkFunc name[77] fork[2] fn[0,13]
+	ForkFunc name[78] fork[2] fn[0,14]
+	ForkWait name[78] fork[2]
+	ForkWait char[10] fork[0]
+	CharSetPos char[2] (-30080, -500, 34500) 0deg
+	CharSetPos char[3] (-30080, -500, 34500) 0deg
+	CharFlagsUnset char[2] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsSet char[2] 0x0040
+	CharFlagsSet char[3] 0x0040
+	CharColor char[2] 0x00FFFFFF 0ms
+	CharColor char[3] 0x00FFFFFF 0ms
+	SoundPlay sound[6] 0 0 100
+	ForkFunc char[2] fork[3] fn[0,15]
+	ForkFunc char[3] fork[3] fn[0,16]
+	Emote name[78] 0mm 1600mm 38 39 250ms 1
+	Sleep 1000ms
+	EmoteStop name[78]
+	CharTurnTo name[78] 180deg 400deg/s
+	Sleep 200ms
+	CharTurnTo char[0] 225deg 400deg/s
+	ForkWait char[3] fork[3]
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 100ms
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 500ms
+	Emote char[2] 0mm 1600mm 38 39 200ms 5
+	Sleep 500ms
+	Emote char[0] 0mm 2000mm 38 39 250ms 2
+	Sleep 1000ms
+	EmoteStop char[2]
+	EmoteStop char[0]
+	Sleep 500ms
+	CharTurnTo char[2] 0deg 400deg/s
+	Sleep 500ms
+	CharTurnTo char[3] 0deg 400deg/s
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 100ms
+	CharJump char[2] 0 300 0 300 5000mm/s
+	Sleep 500ms
+	Emote char[2] 0mm 1600mm 38 39 200ms 5
+	Sleep 300ms
+	Emote name[78] 0mm 1600mm 38 39 200ms 2
+	Sleep 1000ms
+	EmoteStop char[2]
+	EmoteStop name[78]
+	Sleep 1000ms
+	ForkFunc char[2] fork[3] fn[0,17]
+	ForkFunc char[3] fork[3] fn[0,18]
+	ForkWait char[3] fork[3]
+	SoundPlay sound[7] 0 0 100
+	Sleep 500ms
+	CharTurnTo char[0] 270deg 400deg/s
+	Sleep 200ms
+	CharTurnTo name[78] 90deg 400deg/s
+	Fork char[10] fork[0]:
+		CamLookPos (-29390, 0, 44230) 5000ms
+	Fork char[10] fork[1]:
+		CamZoom 2730 5000ms
+	Fork char[10] fork[2]:
+		CamRotate 39000mdeg 5000ms
+	ForkWait char[10] fork[0]
+	CharFlagsSet char[2] 0x0080
+	CharFlagsSet char[3] 0x0080
+	ForkQuit name[77] fork[2]
+	EmoteStop name[77]
+	CharTurnTo name[77] 45deg 400deg/s
+	Sleep 500ms
+	TextTalk name[77] {
+		#1900F#12P(A bazaar actually seems like the kind of
+		place you might accidentally stumble upon
+		magical items like the happiness stone...){wait}
+	} {
+		#1900F(...but I wouldn't even know where to start.
+		Nothing I see looks like it, anyway...){wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5PThere something in particular you're looking
+		for that I could help with?{wait}
+	}
+	TextWait
+	Emote name[77] 0mm 1700mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnTo name[77] 0deg 400deg/s
+	TextTalk name[77] {
+		#1714F#12PU-Umm...{wait}
+	} {
+		#1900F(M-Maybe it won't hurt to ask.){wait}
+	} {
+		#1718FSir? Do you happen to know where I can
+		find a happiness stone?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5P...A what?{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1710F#12PIt's a stone that makes people happy just
+		for owning it.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5PI... Uhh...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5PAhaha. I really couldn't tell you. Sorry,
+		sweetie.{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1713F#12PTh-That's all right...{wait}
+	} {
+		#1716FSorry for the trouble.{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 180deg 400deg/s
+	Sleep 300ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-30470, 0, 41190) 1500mm/s 0
+	Fork char[10] fork[0]:
+		CamLookPos (-29590, 0, 43800) 1500ms
+	Emote char[1] 0mm 2000mm 40 43 100ms 3
+	Sleep 300ms
+	TextTalk char[1] {
+		#5PHmm...{wait}
+	}
+	TextWait
+	ForkWait name[77] fork[1]
+	ForkWait char[10] fork[0]
+	TextTalk char[1] {
+		#5PYou know, I do remember hearing a funny story
+		about the Krone mountains one time that might
+		be worth hearing.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5PI've got no idea if it's true or a bunch of hooey,
+		but would you like to hear it?{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 600deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#1718F#12PY-Yes, please!{wait}
+	}
+	TextWait
+	Fork char[10] fork[0]:
+		CamLookPos (-29600, 0, 44770) 1500ms
+	CharWalkToPos name[77] (-30860, 0, 42500) 1500mm/s 0
+	ForkWait char[10] fork[0]
+	Sleep 300ms
+	TextTalk char[1] {
+		#5PIt's an old story I heard from my dad a while back.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5PSomething about them glowing gold all of a sudden
+		once a year. Around this time of the year, as it so
+		happens.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5PApparently if a traveler happens to be walking
+		along them at exactly that time, they undergo
+		what I can only describe as a strange experience...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#5P...and then they become happy. Nice, isn't it?{wait}
+	}
+	TextWait
+	Sleep 400ms
+	FadeOut 2000ms 0x00000000 255
+	Fork char[10] fork[1]:
+		CamZoom 2560 3500ms
+	FadeWait
+	Sleep 2200ms
+	FlagSet flag[9476]
+	NewScene "t2300._sn" 104 0 0
+	Hcf
+	Return
+
+fn[12]:
+	Sleep 500ms
+	CharTurnTo name[77] 45deg 400deg/s
+	Sleep 800ms
+	CharTurnTo name[77] 0deg 400deg/s
+	Return
+
+fn[13]:
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-29380, 0, 39200) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	CharTurnTo name[77] 90deg 400deg/s
+	Sleep 2000ms
+	CharTurnTo name[77] 45deg 400deg/s
+	Sleep 2000ms
+	CharTurnTo name[77] 0deg 400deg/s
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-30280, 0, 42660) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	CharTurnTo name[77] 0deg 400deg/s
+	Sleep 2000ms
+	Emote name[77] 0mm 1600mm 24 27 200ms 0
+	while 1:
+		CharTurnTo name[77] 45deg 400deg/s
+		Sleep 2500ms
+		CharTurnTo name[77] 0deg 400deg/s
+		Sleep 3500ms
+	Return
+
+fn[14]:
+	Sleep 500ms
+	CharTurnTo name[78] 0deg 400deg/s
+	Sleep 400ms
+	CharTurnTo name[78] 45deg 400deg/s
+	Sleep 400ms
+	Fork name[78] fork[1]:
+		CharWalkToPos self (-29180, 0, 38160) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	CharTurnTo name[78] 90deg 400deg/s
+	Sleep 2500ms
+	CharTurnTo name[78] 135deg 400deg/s
+	Sleep 2000ms
+	CharTurnTo name[78] 0deg 400deg/s
+	Fork name[78] fork[1]:
+		CharWalkToPos self (-29140, 0, 39680) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	CharTurnTo name[78] 90deg 400deg/s
+	Sleep 3000ms
+	Return
+
+fn[15]:
+	Fork char[2] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 4000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-29140, 0, 37600) 4000mm/s 0
+	ForkWait char[2] fork[1]
+	Sleep 6000ms
+	Return
+
+fn[16]:
+	Sleep 500ms
+	Fork char[3] fork[2]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 3000mm/s 0
+	ForkWait char[3] fork[1]
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-28840, 0, 36640) 3000mm/s 0
+	ForkWait char[3] fork[1]
+	CharTurnTo char[3] 45deg 400deg/s
+	Sleep 500ms
+	Return
+
+fn[17]:
+	CharTurnTo char[2] 220deg 500deg/s
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 4000mm/s 0
+	ForkWait char[2] fork[1]
+	Fork char[2] fork[1]:
+		CharWalkToPos self (-30080, -500, 34500) 4000mm/s 0
+	Sleep 100ms
+	Fork char[2] fork[2]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait char[2] fork[1]
+	Return
+
+fn[18]:
+	Sleep 500ms
+	CharTurnTo char[3] 220deg 500deg/s
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-29940, 0, 36240) 3000mm/s 0
+	ForkWait char[3] fork[1]
+	Fork char[3] fork[1]:
+		CharWalkToPos self (-30080, -500, 34500) 3000mm/s 0
+	Sleep 100ms
+	Fork char[3] fork[2]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkWait char[3] fork[1]
+	Return

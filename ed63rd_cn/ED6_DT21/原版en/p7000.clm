@@ -1,0 +1,2237 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P7000.x"
+	town town[1]
+	bgm bgm[211]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (0, 250, 8380)
+	radius 800mm
+	bubble_pos (0, 1250, 8380)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+look_point[1]:
+	pos (-5940, 250, 13900)
+	radius 800mm
+	bubble_pos (-5940, 1250, 13900)
+	flags 0x007C
+	func fn[0,6]
+	unk1 0
+
+look_point[2]:
+	pos (15830, 0, 15070)
+	radius 1600mm
+	bubble_pos (15830, 1000, 15070)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 0
+		Event fn[0,4]
+	elif flag[11053] && !flag[11054]:
+		SystemFlagsSet 0x10000000
+		system[1] = 0
+		Event fn[0,3]
+	if !flag[11274] && flag[11265] && flag[11266] && flag[11267] && flag[11268] && flag[11269] && flag[11270] && flag[11271] && flag[11272] && flag[11273]:
+		if system[0] == 102:
+			Event fn[0,8]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -132000) "mp7000._ch"
+	if flag[9602] && system[4] == 6:
+		system[1] = 0
+	_1B look_point[0] fn[0,19]
+	if flag[11279]:
+		LookPointFlagsSet look_point[0] 0x0001
+		ObjFlagsSet object[0] 0x0010
+		_1C object[0] fn[0,2]
+	else:
+		ObjFlagsUnset object[0] 0x0010
+	if system[4] > 7:
+		LookPointFlagsSet look_point[1] 0x0001
+		ObjFlagsSet object[3] 0x0010
+	else:
+		ObjFlagsUnset object[3] 0x0010
+	if flag[11054]:
+		ObjFlagsUnset object[4] 0x0010
+		ObjFrame object[4] 15
+	else:
+		ObjFlagsUnset object[4] 0x0010
+		ObjFrame object[4] 0
+	Return
+
+fn[2]:
+	TextStart null
+	Sleep 500ms
+	TextEnd null
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (500, -250, -38000) 0ms
+	CamSetDistance 0 8500 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 304 0ms
+	CharSetPos name[8] (-680, -250, -37490) 0deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (700, -250, -37780) 0deg
+		CharSetPos party[2] (-640, -250, -39170) 0deg
+		CharSetPos party[3] (960, -250, -39410) 0deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (700, -250, -37780) 0deg
+		CharSetPos party[1] (-640, -250, -39170) 0deg
+		CharSetPos party[3] (960, -250, -39410) 0deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (700, -250, -37780) 0deg
+		CharSetPos party[1] (-640, -250, -39170) 0deg
+		CharSetPos party[2] (960, -250, -39410) 0deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	Sleep 1000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Fork party[0] fork[2]:
+		CamLookPos (800, -250, -29760) 4000ms
+	Fork party[1] fork[2]:
+		CamSetDistance 0 6800 -10000 4000ms
+	Fork party[2] fork[2]:
+		CamZoom 2660 4000ms
+	Fork party[3] fork[2]:
+		CamPers 294 4000ms
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-880, -250, -30180) 2000mm/s 0
+	Fork name[8] fork[1]:
+		CharColor self 0xFFFFFFFF 1000ms
+	Sleep 100ms
+	if CharInSlot 0 party[1] == 14:
+		Fork party[1] fork[0]:
+			CharWalkToPos self (480, -250, -30240) 2000mm/s 0
+		Fork party[1] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos self (-1230, -250, -31830) 2000mm/s 0
+		Fork party[2] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos self (340, -250, -31970) 2000mm/s 0
+		Fork party[3] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+	elif CharInSlot 0 party[2] == 14:
+		Fork party[2] fork[0]:
+			CharWalkToPos self (480, -250, -30240) 2000mm/s 0
+		Fork party[2] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-1230, -250, -31830) 2000mm/s 0
+		Fork party[1] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos self (340, -250, -31970) 2000mm/s 0
+		Fork party[3] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+	elif CharInSlot 0 party[3] == 14:
+		Fork party[3] fork[0]:
+			CharWalkToPos self (480, -250, -30240) 2000mm/s 0
+		Fork party[3] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-1230, -250, -31830) 2000mm/s 0
+		Fork party[1] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos self (340, -250, -31970) 2000mm/s 0
+		Fork party[2] fork[1]:
+			CharColor self 0xFFFFFFFF 1000ms
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[2]
+	Sleep 500ms
+	TextTalk name[14] {
+		#1444F#11PWhere...?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1065F#5P...I knew it.{wait}
+	}
+	TextWait
+	if PartyPosition name[0] != -1:
+		FlagSet flag[0]
+		TextTalk name[0] {
+			#1004F#6PWhere are we now?{wait}
+		} {
+			This doesn't look like Erbe Royal Villa...{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		FlagSet flag[2]
+		TextTalk name[1] {
+			#1502F#6PWhere are we now?{wait}
+		} {
+			It doesn't look like Erbe Royal Villa, at least.{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		FlagSet flag[5]
+		TextTalk name[15] {
+			#1306F#6POh?{wait}
+		} {
+			It's like we've ended up somewhere different
+			entirely.{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		FlagSet flag[1]
+		TextTalk name[6] {
+			#065F#6PWhere are we now?{wait}
+		} {
+			This doesn't look like Erbe Royal Villa...{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		FlagSet flag[3]
+		TextTalk name[9] {
+			#814F#6PHuh? Where are we now?{wait}
+		} {
+			I don't remember the front of Erbe Royal Villa
+			looking like this...{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1162F#6PWhere are we now?{wait}
+		} {
+			This isn't Erbe Royal Villa.{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1522F#6PWhere are we now?{wait}
+		} {
+			This doesn't look like Erbe Royal Villa...{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#555F#6PWhere are we now?{wait}
+		} {
+			This doesn't look like the royal villa as 
+			I remember it.{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#072F#6PWhere are we now?{wait}
+		} {
+			This doesn't look like Erbe Royal Villa...{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#178F#6PWhere are we now?{wait}
+		} {
+			This isn't Erbe Royal Villa.{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1542F#6PWhere are we now?{wait}
+		} {
+			This doesn't look like the royal villa as 
+			I remember it.{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#112F#6PWhere are we now?{wait}
+		} {
+			This doesn't look like Erbe Royal Villa...{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		FlagSet flag[4]
+		TextTalk name[10] {
+			#216F#6PWh-Where are we now?{wait}
+		} {
+			This doesn't seem like somewhere attached
+			to the road we were just on...{wait}
+		}
+		TextWait
+	if flag[0] | flag[1] | flag[2] | flag[3] | flag[4] | flag[5]:
+		TextTalk name[8] {
+			#1840F#5POh, you're right.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#1840F#5POh, you're right.{wait}
+		}
+		TextWait
+	BgmPlay bgm[178] 0
+	Fork party[0] fork[1]:
+		CamLookPos (0, 8000, -26000) 6000ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 3800 -10000 6000ms
+	Fork party[0] fork[3]:
+		CamZoom 2670 6000ms
+	Fork party[1] fork[1]:
+		CamRotate 0mdeg 6000ms
+	Fork party[1] fork[2]:
+		CamPers 335 6000ms
+	Sleep 1000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos2 self (0, -250, -25150) 1500mm/s 0
+	ForkWait party[0] fork[1]
+	ForkWait name[8] fork[0]
+	EffStop eff_instance[128] 0
+	EffStop eff_instance[129] 0
+	EffStop eff_instance[130] 0
+	EffStop eff_instance[131] 0
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (780, -250, -29300) 0deg
+		CharSetPos party[2] (-650, -250, -31120) 0deg
+		CharSetPos party[3] (1260, -250, -31070) 0deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (780, -250, -29300) 0deg
+		CharSetPos party[1] (-650, -250, -31120) 0deg
+		CharSetPos party[3] (1260, -250, -31070) 0deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (780, -250, -29300) 0deg
+		CharSetPos party[1] (-650, -250, -31120) 0deg
+		CharSetPos party[2] (1260, -250, -31070) 0deg
+	if CharInSlot 0 party[1] == 14:
+	elif CharInSlot 0 party[2] == 14:
+	elif CharInSlot 0 party[3] == 14:
+	Sleep 500ms
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#273F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#213F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#113F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1543F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#173F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#073F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#052F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1523F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1164F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#814F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#064F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#264F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1504F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1004F#5PWait... Isn't that the church's emblem?!{wait}
+		}
+		TextWait
+	TextTalk name[14] {
+		#1802F#5PKevin...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1067F#5P...{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CharWalkToPos self (0, -250, -23500) 1000mm/s 0
+	Sleep 500ms
+	CrossFade 1000ms
+	CamLookPos (0, 600, -23500) 0ms
+	CamSetDistance 0 3160 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 345 0ms
+	Fork party[0] fork[1]:
+		CamLookPos (0, 300, -23500) 6000ms
+	Fork party[0] fork[2]:
+		CamSetDistance 0 3220 -10000 6000ms
+	Fork party[0] fork[3]:
+		CamZoom 3000 6000ms
+	Fork party[1] fork[1]:
+		CamPers 312 6000ms
+	ForkWait name[8] fork[0]
+	Sleep 1000ms
+	SoundPlay sound[374] 0 0 100
+	_ObjB0 object[4] 5
+	ObjFrame object[4] 0
+	ObjPlay object[4] 15
+	ObjWait object[4]
+	ForkWait party[0] fork[1]
+	CharTurnTo name[8] 180deg 400deg/s
+	Sleep 300ms
+	if PartyPosition name[4] != -1 | PartyPosition name[13] != -1 | PartyPosition name[12] != -1 | PartyPosition name[2] != -1 | PartyPosition name[5] != -1 | PartyPosition name[11] != -1 | PartyPosition name[7] != -1 | PartyPosition name[3] != -1:
+		TextTalk name[8] {
+			#1075F#5PWelcome to Aster House.{wait}
+		} {
+			#1840FThe place where Ries, Rufina, and I grew up
+			together.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#1075F#5PWelcome to Aster House.{wait}
+		} {
+			#1840FThe place where Ries, Rufina, and I grew up
+			together.{wait}
+		}
+		TextWait
+	Fork party[0] fork[0]:
+		CamZoom 2500 5000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit party[0] fork[0]
+	Sleep 2000ms
+	FlagSet flag[11054]
+	ImageShow "c_vis386._ch" 0 0 100ms
+	ScAchievement 6 0 0
+	Sleep 4000ms
+	TextClose 2
+	FlagSet flag[9602]
+	system[49] = 347
+	Sc_C4Set 16
+	FadeOut 0ms 0x00000000 255
+	system[40] = 24
+	Menu menu[0] 240 180 0
+		"[Save]" // 0
+		"[Next Chapter]" // 1
+	MenuWait var[0]
+	MenuClose menu[0]
+	if var[0] == 0:
+		Save
+	system[40] = 65535
+	FadeOut 0ms 0x00000000 255
+	ImageHide 200ms
+	Sleep 2000ms
+	BgmStop 2000ms
+	BgmWait
+	Sleep 2000ms
+	Sc_C4Unset 16
+	FlagUnset flag[9602]
+	system[4] = 7
+	FlagSet flag[9476]
+	NewScene "p7000._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[4]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sleep 2000ms
+	ImageShow "c_vis377._ch" 0 0 100ms
+	Sleep 4000ms
+	TextClose 2
+	ImageHide 200ms
+	Sleep 2000ms
+	EffStop eff_instance[128] 0
+	EffStop eff_instance[129] 0
+	EffStop eff_instance[130] 0
+	EffStop eff_instance[131] 0
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[129] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[131] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	CharSetPos name[8] (-320, -250, -22480) 0deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-600, -250, -25060) 0deg
+		CharSetPos party[2] (-1000, -250, -27000) 0deg
+		CharSetPos party[3] (470, -250, -27430) 0deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-600, -250, -25060) 0deg
+		CharSetPos party[1] (-1000, -250, -27000) 0deg
+		CharSetPos party[3] (470, -250, -27430) 0deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-600, -250, -25060) 0deg
+		CharSetPos party[1] (-1000, -250, -27000) 0deg
+		CharSetPos party[2] (470, -250, -27430) 0deg
+	CamLookPos (-2170, -450, -17930) 0ms
+	CamSetDistance 0 8520 -10000 0ms
+	CamZoom 3700 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 422 0ms
+	BgmPlay bgm[211] 0
+	Fork name[8] fork[0]:
+		CharWalkToPos self (130, -250, 1790) 2000mm/s 0
+	Sleep 100ms
+	if CharInSlot 0 party[1] == 14:
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 2000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 2000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 2000mm/s 0
+	elif CharInSlot 0 party[2] == 14:
+		Fork party[2] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 2000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 2000mm/s 0
+		Sleep 100ms
+		Fork party[3] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 2000mm/s 0
+	elif CharInSlot 0 party[3] == 14:
+		Fork party[3] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 2000mm/s 0
+		Sleep 100ms
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 2000mm/s 0
+		Sleep 100ms
+		Fork party[2] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 2000mm/s 0
+	Fork party[0] fork[1]:
+		CamZoom 3400 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 2000ms
+	CrossFade 1000ms
+	ForkQuit party[0] fork[1]
+	CamLookPos (-14220, 150, 2220) 0ms
+	CamSetDistance 0 6850 -10000 0ms
+	CamZoom 3820 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 439 0ms
+	Fork party[0] fork[1]:
+		CamLookPos (-14220, 150, -3430) 5000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (130, -250, 1790) 1000mm/s 0
+	if CharInSlot 0 party[1] == 14:
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 1000mm/s 0
+		Fork party[2] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 1000mm/s 0
+		Fork party[3] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 1000mm/s 0
+	elif CharInSlot 0 party[2] == 14:
+		Fork party[2] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 1000mm/s 0
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 1000mm/s 0
+		Fork party[3] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 1000mm/s 0
+	elif CharInSlot 0 party[3] == 14:
+		Fork party[3] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 1000mm/s 0
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 1000mm/s 0
+		Fork party[2] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 1000mm/s 0
+	FadeWait
+	Sleep 3000ms
+	CrossFade 1000ms
+	ForkQuit party[0] fork[1]
+	CamLookPos (11330, -1100, 5620) 0ms
+	CamSetDistance 0 7500 -10000 0ms
+	CamZoom 3840 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 400 0ms
+	Fork party[0] fork[1]:
+		CamZoom 3500 5000ms
+	FadeWait
+	Sleep 3000ms
+	CrossFade 1000ms
+	ForkQuit party[0] fork[1]
+	CamLookPos (-3520, -250, 15320) 0ms
+	CamSetDistance 0 8220 -10000 0ms
+	CamZoom 4250 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 398 0ms
+	Fork party[0] fork[1]:
+		CamLookPos (-3070, -250, 6170) 5000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (130, -250, 1790) 2000mm/s 0
+	if CharInSlot 0 party[1] == 14:
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 2000mm/s 0
+		Fork party[2] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 2000mm/s 0
+		Fork party[3] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 2000mm/s 0
+	elif CharInSlot 0 party[2] == 14:
+		Fork party[2] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 2000mm/s 0
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 2000mm/s 0
+		Fork party[3] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 2000mm/s 0
+	elif CharInSlot 0 party[3] == 14:
+		Fork party[3] fork[0]:
+			CharWalkToPos self (-10, -250, 280) 2000mm/s 0
+		Fork party[1] fork[0]:
+			CharWalkToPos self (-520, -250, -1280) 2000mm/s 0
+		Fork party[2] fork[0]:
+			CharWalkToPos self (900, -250, -1350) 2000mm/s 0
+	Sc_C8 128 70 "C_PLAC36._CH" 1 1000
+	FadeWait
+	Sleep 1000ms
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	Sleep 1000ms
+	CrossFade 1000ms
+	ForkQuit party[0] fork[1]
+	CamLookPos (-1600, -250, 3200) 0ms
+	CamSetDistance 0 4920 -10000 0ms
+	CamZoom 3130 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 270 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk name[14] {
+		#1802F#6PThis is...only a copy of Aster House, yes?{wait}
+	} {
+		B-But it looks so...so...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1065F#5PYeah. I can barely bring myself to accept it's
+		not the real thing.{wait}
+	} {
+		#1840FEverything from the feel of the earth underfoot
+		to the smells in the air are just like the real
+		thing.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1445F#6PYeah...{wait}
+	}
+	TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#1300F#6P...{wait}
+		}
+		TextWait
+	FlagUnset flag[0]
+	FlagUnset flag[1]
+	FlagUnset flag[2]
+	FlagUnset flag[3]
+	FlagUnset flag[4]
+	FlagUnset flag[5]
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1522F#6PThis is where the two of you grew up?{wait}
+		} {
+			Judging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1163F#6PThis is where the two of you grew up?{wait}
+		} {
+			Judging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		FlagSet flag[0]
+		TextTalk name[0] {
+			#1002F#6PSo this is where the two of you grew up, huh?{wait}
+		} {
+			I'm guessing this is somewhere owned by the
+			Septian Church, right?{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		FlagSet flag[2]
+		TextTalk name[1] {
+			#1505F#6PSo this is where the two of you grew up...{wait}
+		} {
+			#1502FJudging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		FlagSet flag[3]
+		TextTalk name[9] {
+			#812F#6PSo this is where the two of you grew up, huh?{wait}
+		} {
+			I'm guessing this is somewhere owned by the
+			Septian Church, right?{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#053F#6PSo this is where the two of you grew up, huh?{wait}
+		} {
+			#050FSo I'm guessing this is some kind of place owned
+			by the Septian Church, right?{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#074F#6PSo this is where the two of you grew up, huh?{wait}
+		} {
+			#072FJudging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#176F#6PSo this is where the two of you grew up?{wait}
+		} {
+			#178FJudging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1545F#6PSo this is where the two of you grew up?{wait}
+		} {
+			#1540FJudging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#272F#6PSo this is where the two of you grew up?{wait}
+		} {
+			#270FJudging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#115F#6PSo this is where the two of you grew up?{wait}
+		} {
+			#112FJudging by the emblem at the entrance, I take it
+			this is a facility operated by the Septian Church?{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		FlagSet flag[1]
+		TextTalk name[6] {
+			#062F#6PUmm...{wait}
+		} {
+			So is this Aster House a church-owned place?{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		FlagSet flag[4]
+		TextTalk name[10] {
+			#212F#6PUmm...{wait}
+		} {
+			So is this Aster House a church-owned place?{wait}
+		}
+		TextWait
+	if flag[0] | flag[2] | flag[4] | flag[3] | flag[1]:
+		TextTalk name[8] {
+			#1075F#5PThat's right. It's what's called a gospel facility.{wait}
+		} {
+			#1840FThink of them as a cross between an orphanage
+			and a monastery.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#1075F#5PThat's right. It's what's called a gospel facility.{wait}
+		} {
+			#1840FThink of them as a cross between an orphanage
+			and a monastery.{wait}
+		}
+		TextWait
+	FlagUnset flag[0]
+	FlagUnset flag[1]
+	FlagUnset flag[2]
+	FlagUnset flag[3]
+	FlagUnset flag[4]
+	FlagUnset flag[5]
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1525F#6PI see...{wait}
+		} {
+			#1532F...{wait}
+		} {
+			#1534FThen...you're an orphan, too?{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1169F#6PI see...{wait}
+		} {
+			#1382FSo that means you must be...{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		FlagSet flag[0]
+		TextTalk name[0] {
+			#1003F#6PI see...{wait}
+		} {
+			#1025FSo does that mean...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		FlagSet flag[2]
+		TextTalk name[1] {
+			#1503F#6PI see...{wait}
+		} {
+			#1500FSo that means you're...{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		FlagSet flag[3]
+		TextTalk name[9] {
+			#1316F#6PI see...{wait}
+		} {
+			#810FSo that means you're...{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#551F#6PRight...{wait}
+		} {
+			#555FSo that means you're...{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#572F#6PI see...{wait}
+		} {
+			#070FSo that means you're...{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#175F#6PI see...{wait}
+		} {
+			#170FSo that means that you are...{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1540F#6PHmm... I see.{wait}
+		} {
+			So am I right in assuming that you must be...{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#270F#6PI see.{wait}
+		} {
+			So am I right in assuming that you must be...{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#110F#6PI see...{wait}
+		} {
+			But then that would make you...{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		FlagSet flag[1]
+		TextTalk name[6] {
+			#561F#6PO-Oh, right...{wait}
+		} {
+			#560FSo does that mean you're...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		FlagSet flag[4]
+		TextTalk name[10] {
+			#215F#6POh, right.{wait}
+		} {
+			#210FSo does that mean you're...?{wait}
+		}
+		TextWait
+	if flag[0] | flag[2] | flag[4] | flag[3] | flag[1]:
+		TextTalk name[8] {
+			#1075F#5PWell, no reason to dance around it, so yep.
+			I'm an orphan.{wait}
+		} {
+			#1840FAnd how I came to be here is a story best
+			saved for another day.{wait}
+		} {
+			#1067FFeels weird being back here again, though...
+			It's been about five years.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#1075F#5PWell, no reason to dance around it, so yep.
+			I'm an orphan.{wait}
+		} {
+			#1840FAnd how I came to be here is a story best
+			saved for another day.{wait}
+		} {
+			#1067FFeels weird being back here again, though...
+			It's been about five years.{wait}
+		}
+		TextWait
+	TextTalk name[14] {
+		#1445F#6PFive very long years...{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[8]
+	Fork field_party[0] fork[1]:
+		CamLookPos (-1600, -250, 2000) 1000ms
+	CharTurnTo name[8] 180deg 400deg/s
+	ForkWait field_party[0] fork[1]
+	Sleep 300ms
+	TextTalk name[8] {
+		#1078F#11PWell, anyway. We're bound to find some kind
+		of clue as to how to get to the seventh plane
+		somewhere in here.{wait}
+	} {
+		You guys up for having a look around the area
+		with me?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1806F#6PYeah. Let's go.{wait}
+	}
+	TextWait
+	Minigame 21 0 0 0 0 0 0 0 0
+	FlagSet flag[11264]
+	QuestFlagsSet quest[55] 0x10
+	QuestFlagsSet quest[55] 0x20
+	QuestFlagsSet quest[56] 0x10
+	QuestFlagsSet quest[56] 0x20
+	QuestFlagsSet quest[57] 0x10
+	QuestFlagsSet quest[57] 0x20
+	QuestFlagsSet quest[58] 0x10
+	QuestFlagsSet quest[58] 0x20
+	QuestFlagsSet quest[59] 0x10
+	QuestFlagsSet quest[59] 0x20
+	QuestFlagsSet quest[60] 0x04
+	QuestFlagsSet quest[60] 0x08
+	QuestTaskSet quest[60] 0x0001
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[5]:
+	if flag[11274]:
+		Call fn[0,13]
+		Return
+	elif !flag[11265]:
+		EventBegin 0
+		CrossFade 500ms
+		CamLookPos (-520, 250, 7630) 0ms
+		CamSetDistance 0 5530 -10000 0ms
+		CamZoom 3570 0ms
+		CamRotate 315000mdeg 0ms
+		CamPers 225 0ms
+		CharSetPos name[8] (240, 250, 7560) 0deg
+		if CharInSlot 0 party[1] == 14:
+			CharSetPos party[1] (280, -250, 6090) 0deg
+			CharSetPos party[2] (-190, -250, 4650) 0deg
+			CharSetPos party[3] (1320, -250, 4570) 0deg
+		elif CharInSlot 0 party[2] == 14:
+			CharSetPos party[2] (280, -250, 6090) 0deg
+			CharSetPos party[1] (-190, -250, 4650) 0deg
+			CharSetPos party[3] (1320, -250, 4570) 0deg
+		elif CharInSlot 0 party[3] == 14:
+			CharSetPos party[3] (280, -250, 6090) 0deg
+			CharSetPos party[1] (-190, -250, 4650) 0deg
+			CharSetPos party[2] (1320, -250, 4570) 0deg
+		FadeWait
+		Sleep 300ms
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextSetPos 72 320 56 3
+		TextMessage null {
+			{color 5}The door is locked.{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		Sleep 300ms
+		TextTalk name[8] {
+			#1067F#5PFigures.{wait}
+		}
+		TextWait
+		TextTalk name[14] {
+			#1802F#6PIs it locked?{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1840F#5PYeah...{wait}
+		} {
+			#1065F...{wait}
+		}
+		TextWait
+		CharTurnTo name[8] 180deg 400deg/s
+		Sleep 300ms
+		TextTalk name[8] {
+			#1078F#11PWell, whatever. We can keep poking around.{wait}
+		}
+		TextWait
+		FlagSet flag[11265]
+		QuestTaskSet quest[60] 0x0002
+		Sleep 300ms
+		EventEnd 0
+	else:
+		TextStart null
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextSetPos 72 320 56 3
+		TextMessage null {
+			{color 5}The door is locked.{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextEnd null
+	Return
+
+fn[6]:
+	if !flag[11266]:
+		EventBegin 0
+		CrossFade 500ms
+		CamLookPos (-6360, 250, 15270) 0ms
+		CamSetDistance 0 6870 -10000 0ms
+		CamZoom 3150 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 248 0ms
+		CharSetPos name[8] (-6690, 250, 13820) 90deg
+		if CharInSlot 0 party[1] == 14:
+			CharSetPos party[1] (-8390, 250, 13620) 90deg
+			CharSetPos party[2] (-9870, 250, 14040) 90deg
+			CharSetPos party[3] (-9820, 250, 12750) 90deg
+		elif CharInSlot 0 party[2] == 14:
+			CharSetPos party[2] (-8390, 250, 13620) 90deg
+			CharSetPos party[1] (-9870, 250, 14040) 90deg
+			CharSetPos party[3] (-9820, 250, 12750) 90deg
+		elif CharInSlot 0 party[3] == 14:
+			CharSetPos party[3] (-8390, 250, 13620) 90deg
+			CharSetPos party[1] (-9870, 250, 14040) 90deg
+			CharSetPos party[2] (-9820, 250, 12750) 90deg
+		FadeWait
+		Sleep 300ms
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextSetPos 72 320 56 3
+		TextMessage null {
+			{color 5}The door is stuck fast and doesn't have a keyhole.{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		Sleep 300ms
+		if PartyPosition name[11] != -1:
+			TextTalk name[11] {
+				#112F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#270F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[3] != -1:
+			TextTalk name[3] {
+				#1543F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[13] != -1:
+			TextTalk name[13] {
+				#178F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[7] != -1:
+			TextTalk name[7] {
+				#073F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[5] != -1:
+			TextTalk name[5] {
+				#555F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[9] != -1:
+			TextTalk name[9] {
+				#814F#6PHuh? How come it won't open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#064F#6PHuh?{wait}
+			}
+			TextWait
+		elif PartyPosition name[15] != -1:
+			TextTalk name[15] {
+				#267F#6PWhy won't it open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1504F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[0] != -1:
+			TextTalk name[0] {
+				#1004F#6PHmm? Won't it open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[2] != -1:
+			TextTalk name[2] {
+				#1522F#6PHow does this door open?{wait}
+			}
+			TextWait
+		elif PartyPosition name[4] != -1:
+			TextTalk name[4] {
+				#1164F#6PHow does this door open?{wait}
+			}
+			TextWait
+		Fork name[14] fork[1]:
+			CharTurnTo self 270deg 400deg/s
+		Sleep 100ms
+		CharTurnTo name[8] 270deg 400deg/s
+		Sleep 300ms
+		TextTalk name[14] {
+			#1448F#11PThis is a side entrance that only opens from
+			the inside. We can't get in from the outside.{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1840F#11PYeah. If we want to get into the chapel,
+			we're gonna have to go through the front.{wait}
+		}
+		TextWait
+		FlagSet flag[11266]
+		Sleep 300ms
+		EventEnd 0
+	else:
+		TextStart null
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		SoundPlay sound[116] 0 0 100
+		Sleep 300ms
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextSetPos 72 320 56 3
+		TextMessage null {
+			{color 5}The door is sealed shut and doesn't have a keyhole.{wait}
+		}
+		TextWait
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextSetPos 72 320 56 3
+		TextEnd null
+	Return
+
+fn[7]:
+	if !flag[11267]:
+		EventBegin 0
+		CrossFade 500ms
+		CamLookPos (15000, 0, 15010) 0ms
+		CamSetDistance 0 6990 -10000 0ms
+		CamZoom 3280 0ms
+		CamRotate 0mdeg 0ms
+		CamPers 221 0ms
+		CharSetPos name[8] (14490, 0, 13580) 45deg
+		if CharInSlot 0 party[1] == 14:
+			CharSetPos party[1] (15370, 0, 12430) 0deg
+			CharSetPos party[2] (13290, 0, 12680) 45deg
+			CharSetPos party[3] (14210, 0, 11570) 45deg
+		elif CharInSlot 0 party[2] == 14:
+			CharSetPos party[2] (15370, 0, 12430) 0deg
+			CharSetPos party[1] (13290, 0, 12680) 45deg
+			CharSetPos party[3] (14210, 0, 11570) 45deg
+		elif CharInSlot 0 party[3] == 14:
+			CharSetPos party[3] (15370, 0, 12430) 0deg
+			CharSetPos party[1] (13290, 0, 12680) 45deg
+			CharSetPos party[2] (14210, 0, 11570) 45deg
+		FadeWait
+		Sleep 300ms
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextSetPos 72 320 56 3
+		TextMessage null {
+			{color 5}There's an empty well.{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		Sleep 300ms
+		TextTalk name[8] {
+			#1060F#5PWe used to get our drinking water out of here.{wait}
+		} {
+			#1068FWe had no fancy orbal pumps, either. We did it
+			all using a good, old-fashioned bucket with string
+			attached... It was a nightmare!{wait}
+		}
+		TextWait
+		TextTalk name[14] {
+			#1446F#6PTell me about it...{wait}
+		} {
+			We would go out on winter mornings and come
+			back with our hands numb and red raw.{wait}
+		} {
+			#1806FBut looking back on the whole experience now,
+			it was fun in its own way.{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1066F#5PHaha. I guess it was.{wait}
+		}
+		TextWait
+		FlagSet flag[11267]
+		QuestTaskSet quest[60] 0x0100
+		Sleep 300ms
+		EventEnd 0
+	else:
+		TextStart null
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextSetPos 72 320 56 3
+		TextMessage null {
+			{color 5}There's an empty well.{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		TextEnd null
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-13380, 250, -9700) 90deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-13380, 250, -9700) 90deg
+		CharSetPos party[2] (-13380, 250, -9700) 90deg
+		CharSetPos party[3] (-13380, 250, -9700) 90deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-13380, 250, -9700) 90deg
+		CharSetPos party[1] (-13380, 250, -9700) 90deg
+		CharSetPos party[3] (-13380, 250, -9700) 90deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-13380, 250, -9700) 90deg
+		CharSetPos party[1] (-13380, 250, -9700) 90deg
+		CharSetPos party[2] (-13380, 250, -9700) 90deg
+	CamLookPos (-12370, 250, -8380) 0ms
+	CamSetDistance 0 6070 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 314000mdeg 0ms
+	CamPers 245 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	ObjFlagsUnset object[1] 0x0010
+	ObjFrame object[1] 0
+	ObjPlay object[1] 15
+	ObjWait object[1]
+	Sleep 300ms
+	Fork party[0] fork[1]:
+		CamLookPos (-7600, -250, -8460) 5000ms
+	Fork party[1] fork[1]:
+		CamSetDistance 0 5330 -10000 5000ms
+	ForkFunc name[8] fork[0] fn[0,9]
+	Sleep 700ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,10]
+		Sleep 600ms
+		ForkFunc party[2] fork[0] fn[0,11]
+		Sleep 700ms
+		ForkFunc party[3] fork[0] fn[0,12]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,10]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,11]
+		Sleep 700ms
+		ForkFunc party[3] fork[0] fn[0,12]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,10]
+		Sleep 600ms
+		ForkFunc party[1] fork[0] fn[0,11]
+		Sleep 700ms
+		ForkFunc party[2] fork[0] fn[0,12]
+	Sleep 1000ms
+	ObjFrame object[1] 15
+	ObjPlay object[1] 0
+	SoundStop sound[6]
+	SoundPlay sound[7] 0 0 100
+	ObjWait object[1]
+	ObjFlagsSet object[1] 0x0010
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[1]
+	TextTalk name[14] {
+		#1445F#5PThere was no sign of anything in there.{wait}
+	} {
+		#1443FOur last hope seems to be the chapel.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1067F#5PSo it seems...{wait}
+	} {
+		#1065F...{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	TextTalk name[14] {
+		#1802F#5PWhat is it, Kevin?{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#1840F#6P...Hey, Ries?{wait}
+	} {
+		You were the one responsible for cleaning
+		the chapel that day, right?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1444F#5PWhat day...?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1067F#6POn Aster House's final day.{wait}
+	} {
+		#1065FWhen Rufina died.{wait}
+	}
+	TextWait
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#1445F#5P...{wait}
+	}
+	TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1020F#5PK-Kevin?{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#065F#5PK-Kevin?{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#1317F#5PK-Kevin?{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1163F#5PK-Kevin?{wait}
+		}
+		TextWait
+	if PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#1305F#5POho?{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#112F#5PHmm...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1542F#5PHmm...?{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1502F#5PYou don't think...?{wait}
+		}
+		TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#212F#5PWh-What...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1522F#5PWhat...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#057F#5PWhat...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#072F#5PWhat...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#178F#5PWhat...?{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#270F#5PWhat...?{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#1063F#6PThat was what I was told when I went to visit
+		the matron afterward, at least.{wait}
+	} {
+		Well? Were you?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1445F#5PY-Yeah...{wait}
+	} {
+		#1802FI was. Why?{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1075F#6PI thought so.{wait}
+	} {
+		#1840FCheck your pockets, Ries.{wait}
+	} {
+		I'm pretty sure the chapel key's in one of them.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1444F#5PHuh?{wait}
+	}
+	TextWait
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}Ries began checking the pockets of her habit.{wait}
+	} {
+		{color 5}Eventually, she found an old brass key.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	FadeWait
+	SoundPlay sound[17] 0 0 100
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Found {item item[824]}{color 5}.{wait}
+	}
+	TextWait
+	ItemAdd item[824] 1
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[14] {
+		#1802F#5PIt can't be...{wait}
+	}
+	TextWait
+	if PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1004F#5PN-No way!{wait}
+		}
+		TextWait
+	if PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1164F#5PIs that the key...?{wait}
+		}
+		TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#216F#5PS-Seriously?{wait}
+		}
+		TextWait
+	if PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#055F#5PWow... There's a twist I didn't see coming.{wait}
+		}
+		TextWait
+	if PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1525F#5PThat's quite the surprise...{wait}
+		}
+		TextWait
+	if PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#173F#5PUnbelievable...{wait}
+		}
+		TextWait
+	if PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#814F#5PWh-What's that doing there?!{wait}
+		}
+		TextWait
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#276F#5PHmm...{wait}
+		}
+		TextWait
+	if PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#074F#5PHaha... Interesting.{wait}
+		}
+		TextWait
+	if PartyPosition name[3] != -1:
+		if PartyPosition name[11] != -1:
+			TextTalk name[11] {
+				#115F#5PI see now...{wait}
+			}
+			TextWait
+		if PartyPosition name[15] != -1:
+			TextTalk name[15] {
+				#1306F#5POh, my...{wait}
+			}
+			TextWait
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1504F#5PAh...{wait}
+			}
+			TextWait
+		if PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#065F#5PHow'd that get there?!{wait}
+			}
+			TextWait
+		TextTalk name[3] {
+			#1545F#5PThis is a surprise...{wait}
+		} {
+			#1540FI suppose this is just another manifestation
+			of this world's ability to make thoughts into 
+			reality.{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		if PartyPosition name[15] != -1:
+			TextTalk name[15] {
+				#1306F#5POh, my...{wait}
+			}
+			TextWait
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1504F#5PAh...{wait}
+			}
+			TextWait
+		if PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#065F#5PHow'd that get there?!{wait}
+			}
+			TextWait
+		TextTalk name[11] {
+			#115F#5PI see now...{wait}
+		} {
+			#112FI suppose this is just another manifestation
+			of this world's ability to make thoughts into 
+			reality.{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1504F#5PAh...{wait}
+			}
+			TextWait
+		if PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#065F#5PHow'd that get there?!{wait}
+			}
+			TextWait
+		TextTalk name[15] {
+			#263F#5PThat makes sense.{wait}
+		} {
+			#1306FThis is just another manifestation of this world's
+			ability to make thoughts into reality.{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1504F#5PAh...{wait}
+			}
+			TextWait
+		TextTalk name[6] {
+			#062F#5PW-Wait...{wait}
+		} {
+			Is this another case of this world making
+			thoughts reality?{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1503F#5PI see now...{wait}
+		} {
+			#1502FI guess this is just another manifestation of
+			Phantasma's ability to make thoughts into
+			reality.{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#1841F#6PHonestly, I wasn't entirely sure you'd
+		find it in there.{wait}
+	} {
+		#1840FBut in all the other areas on this plane,
+		there was always a reason to take the
+		person we needed with us.{wait}
+	} {
+		This just goes to show that you really
+		were meant to come here, Ries.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1445F#5PBut... But...{wait}
+	} {
+		...{wait}
+	} {
+		#1443FNo... As disbelieving as I am, this is definitely
+		the chapel's key.{wait}
+	} {
+		I suppose all we can do right now is try to go
+		inside.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1067F#6P...Yeah.{wait}
+	}
+	TextWait
+	FlagSet flag[11274]
+	QuestTaskSet quest[60] 0x0200
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[9]:
+	CharWalkToPos2 self (-5020, -230, -9790) 2000mm/s 0
+	Return
+
+fn[10]:
+	CharWalkToPos2 self (-6690, -250, -9820) 2000mm/s 0
+	Return
+
+fn[11]:
+	CharWalkToPos2 self (-11120, 250, -9710) 2000mm/s 0
+	CharWalkToPos2 self (-7660, -250, -10570) 2000mm/s 0
+	Return
+
+fn[12]:
+	CharWalkToPos2 self (-11120, 250, -9710) 2000mm/s 0
+	CharWalkToPos2 self (-8150, -250, -9100) 2000mm/s 0
+	Return
+
+fn[13]:
+	EventBegin 0
+	CrossFade 500ms
+	CamLookPos (-800, 250, 7630) 0ms
+	CamSetDistance 0 4880 -10000 0ms
+	CamZoom 3460 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 231 0ms
+	CamLookPos (-800, 250, 7630) 0ms
+	CamSetDistance 0 5600 -10000 0ms
+	CamZoom 3270 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 231 0ms
+	CharSetPos name[8] (0, -250, 6090) 0deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (240, 250, 7560) 0deg
+		CharSetPos party[2] (-470, -250, 4550) 0deg
+		CharSetPos party[3] (1040, -250, 4470) 0deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (240, 250, 7560) 0deg
+		CharSetPos party[1] (-190, -250, 4550) 0deg
+		CharSetPos party[3] (1320, -250, 4470) 0deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (240, 250, 7560) 0deg
+		CharSetPos party[1] (-190, -250, 4550) 0deg
+		CharSetPos party[2] (1320, -250, 4470) 0deg
+	FadeWait
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[116] 0 0 100
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}The door is locked.{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	if !flag[11280]:
+		FlagSet flag[11280]
+		TextTalk name[8] {
+			#1065F#6PBefore we go in here, Ries...there's something
+			I should warn you about.{wait}
+		} {
+			#1063FOnce we step through that door, there'll be no
+			going back.{wait}
+		}
+		TextWait
+		Emote name[14] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+		Sleep 1000ms
+		CharTurnTo name[14] 180deg 400deg/s
+		Sleep 300ms
+		TextTalk name[14] {
+			#1444F#11P...{wait}
+		}
+		TextWait
+		TextTalk name[8] {
+			#1840F#6PYou're going to find out the truth about what
+			happened that day--all of it. And you won't like
+			it.{wait}
+		} {
+			Are you sure you're ready for what you're about
+			to find?{wait}
+		}
+		TextWait
+		TextTalk name[14] {
+			#1802F#11P...{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[8] {
+			#1065F#6POnce we step through that door, there'll be no
+			going back.{wait}
+		} {
+			#1840FYou're going to find out the truth about what
+			happened that day--all of it. And you won't like
+			it.{wait}
+		} {
+			Are you sure you're ready for what you're about
+			to find?{wait}
+		}
+		TextWait
+		CharTurnTo name[14] 180deg 400deg/s
+		Sleep 300ms
+		TextTalk name[14] {
+			#1802F#11P...{wait}
+		}
+		TextWait
+	FadeOut 300ms 0x00000000 100
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 -1 1
+			"Use Key" // 0
+			"Don't" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		FadeIn 300ms 0x00000000
+		FadeWait
+		switch var[0]:
+			case 0:
+				Sleep 300ms
+				TextTalk name[14] {
+					#1443F#11PI'm more than ready.{wait}
+				} {
+					#1445FAll these years, I've never quite been able to
+					accept what happened here.{wait}
+				} {
+					The life I thought I knew just suddenly came
+					to an end--with us all getting moved to other
+					places--and I still don't even know why...{wait}
+				} {
+					I even tried to come back here just before 
+					beginning my training to become a squire,
+					but it had already been demolished.{wait}
+				} {
+					#1446FI've been ready for a long time. I want to
+					know the truth.{wait}
+				} {
+					#1806FAnd more than anything, I feel like knowing
+					will let me get closer to you and Rufina.{wait}
+				}
+				TextWait
+				TextTalk name[8] {
+					#1067F#6P...Okay.{wait}
+				} {
+					#1840FLet's head on in, then.{wait}
+				}
+				TextWait
+				TextTalk name[14] {
+					#1448F#11PRight.{wait}
+				}
+				TextWait
+				CharTurnTo name[14] 0deg 400deg/s
+				Sleep 500ms
+				SoundPlay sound[115] 0 0 100
+				Sleep 1000ms
+				_ObjB0 object[0] 10
+				ObjFrame object[0] 0
+				ObjPlay object[0] 15
+				ObjWait object[0]
+				Sleep 500ms
+				TextTalk name[14] {
+					#1445F#5P...{wait}
+				}
+				TextWait
+				if PartyPosition name[0] != -1:
+					FlagSet flag[0]
+					TextTalk name[0] {
+						#1007F#6PU-Umm...{wait}
+					} {
+						#1025FShould the rest of us wait outside for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[1] != -1:
+					FlagSet flag[2]
+					TextTalk name[1] {
+						#1505F#6P...Kevin.{wait}
+					} {
+						#1502FShould the rest of us stay outside for now?{wait}
+					}
+					TextWait
+				elif PartyPosition name[3] != -1:
+					TextTalk name[3] {
+						#1545F#6PHmm... Kevin?{wait}
+					} {
+						#1540FI can't deny my overwhelming sense of curiosity,
+						but would it be best if the rest of us were to 
+						wait outside?{wait}
+					}
+					TextWait
+				elif PartyPosition name[15] != -1:
+					FlagSet flag[5]
+					TextTalk name[15] {
+						#267F#6PSay...{wait}
+					} {
+						...would it be best if the rest of us stayed
+						outside?{wait}
+					}
+					TextWait
+				elif PartyPosition name[6] != -1:
+					FlagSet flag[1]
+					TextTalk name[6] {
+						#065F#6PU-Umm...{wait}
+					} {
+						#067FShould the rest of us wait outside for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[13] != -1:
+					TextTalk name[13] {
+						#176F#6P...Kevin?{wait}
+					} {
+						#178FWould it best if the rest of us stayed outside
+						for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[4] != -1:
+					TextTalk name[4] {
+						#1169F#6PUmm... Kevin...{wait}
+					} {
+						#1382FWould you prefer for the rest of us to wait 
+						outside for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[2] != -1:
+					TextTalk name[2] {
+						#1526F#6PUmm...{wait}
+					} {
+						#1534FShould the rest of us wait outside for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[5] != -1:
+					TextTalk name[5] {
+						#053F#6PHey, Kevin?{wait}
+					} {
+						#050FYou want the rest of us to wait outside
+						for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[10] != -1:
+					FlagSet flag[4]
+					TextTalk name[10] {
+						#215F#6PU-Umm...{wait}
+					} {
+						#212FShould the rest of us wait outside for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[9] != -1:
+					FlagSet flag[3]
+					TextTalk name[9] {
+						#813F#6PU-Umm...{wait}
+					} {
+						#810FShould the rest of us wait outside for this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[7] != -1:
+					TextTalk name[7] {
+						#074F#6PHmm...{wait}
+					} {
+						#070FDo you want the rest of us to wait outside for 
+						this?{wait}
+					}
+					TextWait
+				elif PartyPosition name[11] != -1:
+					TextTalk name[11] {
+						#115F#6PIf I might ask...{wait}
+					} {
+						#110F...would you prefer for the rest of us to wait 
+						outside for this?{wait}
+					}
+					TextWait
+				Fork party[0] fork[0]:
+					CamLookPos (-800, 250, 7000) 800ms
+				CharTurnTo name[8] 180deg 400deg/s
+				ForkWait name[8] fork[0]
+				Sleep 300ms
+				if flag[0] | flag[2] | flag[4] | flag[3] | flag[1] | flag[5]:
+					TextTalk name[8] {
+						#1075F#11PNo... Actually, I'd prefer if you came in with me.{wait}
+					} {
+						#1840FThis is relevant to you guys, too, in a sense.{wait}
+					}
+					TextWait
+				else:
+					TextTalk name[8] {
+						#1075F#11PNo... Actually, I'd prefer if you came in with me.{wait}
+					} {
+						#1840FThis is relevant to you guys, too, in a sense.{wait}
+					}
+					TextWait
+				Sleep 300ms
+				CrossFade 500ms
+				CamLookPos (0, 2500, 7460) 0ms
+				CamSetDistance 0 3900 -10000 0ms
+				CamZoom 3360 0ms
+				CamRotate 0mdeg 0ms
+				CamPers 291 0ms
+				CharSetPos name[8] (40, -250, 5730) 180deg
+				if CharInSlot 0 party[1] == 14:
+					CharSetPos party[1] (0, 250, 7770) 0deg
+					CharSetPos party[2] (-570, -250, 4050) 0deg
+					CharSetPos party[3] (770, -250, 4000) 0deg
+				elif CharInSlot 0 party[2] == 14:
+					CharSetPos party[2] (0, 250, 7770) 0deg
+					CharSetPos party[1] (-570, -250, 4050) 0deg
+					CharSetPos party[3] (770, -250, 4000) 0deg
+				elif CharInSlot 0 party[3] == 14:
+					CharSetPos party[3] (0, 250, 7770) 0deg
+					CharSetPos party[1] (-570, -250, 4050) 0deg
+					CharSetPos party[2] (770, -250, 4000) 0deg
+				FadeWait
+				CharTurnTo name[8] 0deg 400deg/s
+				Fork party[0] fork[3]:
+					CamLookPos (0, 2250, 7460) 6000ms
+				Fork party[1] fork[3]:
+					CamSetDistance 0 3420 -10000 6000ms
+				Fork party[2] fork[3]:
+					CamZoom 2730 6000ms
+				Fork party[3] fork[3]:
+					CamPers 302 6000ms
+				if CharInSlot 0 party[1] == 14:
+					ForkFunc party[1] fork[0] fn[0,15]
+					Sleep 200ms
+					ForkFunc name[8] fork[0] fn[0,16]
+					Sleep 300ms
+					ForkFunc party[2] fork[0] fn[0,17]
+					Sleep 600ms
+					ForkFunc party[3] fork[0] fn[0,18]
+				elif CharInSlot 0 party[2] == 14:
+					ForkFunc party[2] fork[0] fn[0,15]
+					Sleep 100ms
+					ForkFunc name[8] fork[0] fn[0,16]
+					Sleep 300ms
+					ForkFunc party[1] fork[0] fn[0,17]
+					Sleep 600ms
+					ForkFunc party[3] fork[0] fn[0,18]
+				elif CharInSlot 0 party[3] == 14:
+					ForkFunc party[3] fork[0] fn[0,15]
+					Sleep 100ms
+					ForkFunc name[8] fork[0] fn[0,16]
+					Sleep 300ms
+					ForkFunc party[1] fork[0] fn[0,17]
+					Sleep 600ms
+					ForkFunc party[2] fork[0] fn[0,18]
+				ForkWait party[0] fork[0]
+				ForkWait party[1] fork[0]
+				ForkWait party[2] fork[0]
+				ForkWait party[3] fork[0]
+				SoundPlay sound[376] 0 0 100
+				SoundStop sound[375]
+				_ObjB0 object[0] 8
+				ObjFrame object[0] 15
+				ObjPlay object[0] 0
+				SoundStop sound[375]
+				ObjWait object[0]
+				FadeOut 2000ms 0x00000000 255
+				FadeWait
+				BgmStop 3000ms
+				BgmWait
+				Sleep 1000ms
+				ForkQuit party[0] fork[3]
+				ForkQuit party[1] fork[3]
+				ForkQuit party[2] fork[3]
+				ForkQuit party[3] fork[3]
+				Call fn[0,14]
+				FlagSet flag[9476]
+				NewScene "p7010._sn" 100 0 0
+				Hcf
+				var[0] = 255
+				break
+			default:
+				var[0] = 255
+				break
+	EventEnd 0
+	Return
+
+fn[14]:
+	global[4] = 0
+	if PartyPosition name[11] != -1:
+		global[4] = 1
+	elif PartyPosition name[12] != -1:
+		global[4] = 2
+	elif PartyPosition name[13] != -1:
+		global[4] = 3
+	elif PartyPosition name[7] != -1:
+		global[4] = 4
+	elif PartyPosition name[5] != -1:
+		global[4] = 5
+	elif PartyPosition name[2] != -1:
+		global[4] = 6
+	elif PartyPosition name[4] != -1:
+		global[4] = 7
+	elif PartyPosition name[9] != -1:
+		global[4] = 8
+	elif PartyPosition name[6] != -1:
+		global[4] = 9
+	elif PartyPosition name[15] != -1:
+		global[4] = 10
+	elif PartyPosition name[10] != -1:
+		global[4] = 11
+	elif PartyPosition name[1] != -1:
+		global[4] = 12
+	elif PartyPosition name[0] != -1:
+		global[4] = 13
+	Return
+
+fn[15]:
+	CharWalkToPos2 self (0, 250, 9390) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharFlagsSet self 0x0004
+	CharWalkToPos2 self (0, 250, 10890) 2000mm/s 0
+	Return
+
+fn[16]:
+	CharWalkToPos2 self (0, 250, 9390) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharFlagsSet self 0x0004
+	CharWalkToPos2 self (0, 250, 10890) 2000mm/s 0
+	Return
+
+fn[17]:
+	CharWalkToPos2 self (0, 250, 9390) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharFlagsSet self 0x0004
+	CharWalkToPos2 self (0, 250, 10890) 2000mm/s 0
+	Return
+
+fn[18]:
+	CharWalkToPos2 self (0, 250, 9390) 2000mm/s 0
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	CharFlagsSet self 0x0004
+	CharWalkToPos2 self (0, 250, 10890) 2000mm/s 0
+	Return
+
+fn[19]:
+	EventBegin 1
+	SystemFlagsSet 0x00000080
+	system[40] = 65535
+	FadeOut 1000ms 0x00FFFFFF 255
+	Fork field_party[0] fork[0]:
+		_Char90 field_party[0] 0 0 -10000 1300 0
+	SoundPlay sound[153] 0 0 100
+	SoundPlay sound[184] 0 0 100
+	FadeWait
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	NewScene "m4111._sn" 101 0 0
+	Hcf
+	Return

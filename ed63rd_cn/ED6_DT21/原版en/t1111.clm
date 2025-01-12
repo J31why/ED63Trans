@@ -1,0 +1,1082 @@
+calmare tc scena
+scena:
+	name "Bose" "T1111.x"
+	town town[1]
+	bgm bgm[11]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02360._ch" "npl/ch02360p._cp"
+chip[1] "npl/ch02370._ch" "npl/ch02370p._cp"
+chip[2] "npl/ch01350._ch" "npl/ch01350p._cp"
+chip[3] "npl/ch02363._ch" "npl/ch02363p._cp"
+chip[4] "npl/ch01560._ch" "npl/ch01560p._cp"
+chip[5] "npl2/ch03090._ch" "npl2/ch03090p._cp"
+
+npc char[0]:
+	name "Mayor Maybelle"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Lila"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Sarah"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Butler Mayner"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Anelace"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 19:
+		if flag[9479]:
+			FlagUnset flag[9479]
+			SystemFlagsSet 0x10000000
+			Event fn[0,8]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet char[3] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[0] (-120710, 200, 68600) 180deg
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos char[3] (-120260, 0, 65470) 0deg
+	CamLookPos (-121830, 0, 68600) 0ms
+	CamSetDistance 0 4550 -10000 0ms
+	CamZoom 2550 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 322 0ms
+	Sleep 1000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk char[3] {
+		#6PHmm...{wait}
+	} {
+		Have I noticed anything strange in Lila's
+		behavior lately, you say?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610F#2PWell, have you?{wait}
+	} {
+		For example, have you seen her with anyone you
+		don't recognize?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#6PHmm... Actually, now that you mention it, I have
+		on one occasion.{wait}
+	} {
+		It was when I went to visit Trino at his home the
+		other day.{wait}
+	} {
+		I saw her walking side-by-side with a young man
+		I'd never seen before.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610F#2PWhat kind of person was he?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#6PHe looked like a bar waiter, or like a man of 
+		some other similar profession.{wait}
+	} {
+		He was a well-kept, pleasant-looking young man.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[0] 0x0004
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[0] (-62700, -3000, 65960) 270deg
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (-64050, -3000, 65990) 90deg
+	CharFlagsSet char[3] 0x0080
+	CamLookPos (-64500, -3000, 66970) 0ms
+	CamSetDistance 0 5580 -10000 0ms
+	CamZoom 2750 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 275 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk char[2] {
+		#5POh, come to think of it...{wait}
+	} {
+		I think I've seen the man we're talking about
+		escorting Lila back home once before, too.{wait}
+	} {
+		As well as shopping together one time, too...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610FI see...{wait}
+	} {
+		It sounds like there's no mistaking it, then.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5PWait... Is this what I think it is?{wait}
+	} {
+		A-Are you suggesting he's her...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610FPlease just watch over her for now, Sarah.{wait}
+	} {
+		That's what I intend to do, too.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#5PO-Of course... All right, then.{wait}
+	} {
+		Still, the day's finally come, huh? Oh my...{wait}
+	} {
+		This world is just full of surprises...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t1101._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	SoundPlay sound[6] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-118040, 0, 64269) 1500mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharWalkToPos self (-119830, 0, 65660) 1500mm/s 0
+	Return
+
+fn[4]:
+	Fork self fork[2]:
+		CharWalkToPos self (-118040, 0, 64269) 1500mm/s 0
+	ForkWait self fork[2]
+	CharTurnTo self 180deg 400deg/s
+	Sleep 300ms
+	SoundPlay sound[6] 0 0 100
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 1000ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117780, 0, 62500) 1500mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharFlagsSet self 0x0080
+	Return
+
+fn[5]:
+	CharTurnTo self 90deg 400deg/s
+	CharWalkToPos2 self (-117840, 0, 64440) 2000mm/s 0
+	CharTurnTo self 180deg 400deg/s
+	Sleep 300ms
+	SoundPlay sound[6] 0 0 100
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117910, 0, 62510) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	CharFlagsSet self 0x0080
+	SoundPlay sound[7] 0 0 100
+	Return
+
+fn[6]:
+	SoundPlay sound[6] 0 0 100
+	Sleep 300ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117780, 0, 64519) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharWalkToPos self (-119260, 0, 64519) 2000mm/s 0
+	CharWalkToPos self (-120260, 0, 65519) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[7]:
+	Emote self 0mm 2000mm 40 43 100ms 3
+	Fork self fork[2]:
+		CharWalkToPos self (-118040, 0, 64269) 4000mm/s 0
+	ForkWait self fork[2]
+	CharTurnTo self 180deg 500deg/s
+	Sleep 200ms
+	SoundPlay sound[6] 0 0 100
+	Fork self fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	Fork self fork[2]:
+		CharWalkToPos self (-117780, 0, 62500) 4000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	SoundPlay sound[7] 0 0 100
+	CharFlagsSet self 0x0080
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharSetPos field_party[0] (-120000, 0, 65800) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[0] (-120710, 200, 68600) 180deg
+	CharColor char[3] 0x00FFFFFF 0ms
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsSet char[3] 0x0040
+	CharSetPos char[3] (-115800, 0, 60820) 0deg
+	CharFlagsUnset char[4] 0x0080
+	CharSetPos char[4] (-120510, 0, 66280) 0deg
+	CamLookPos (-122340, 0, 69030) 0ms
+	CamSetDistance 0 4550 -10000 0ms
+	CamZoom 2850 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 322 0ms
+	FadeIn 2000ms 0x00000000
+	CamZoom 2550 2000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#615F#11PI see... So the man in question is Lenard
+		from the Kingfisher Inn?{wait}
+	} {
+		#610FI wonder how those two came to know
+		each other...{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#814F#6POh, you know Lenard already?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#610F#11POnly by name. I can't say I've ever spoken
+		to him in person as such.{wait}
+	} {
+		The Kingfisher Inn has really made a name
+		for itself in recent years.{wait}
+	} {
+		#615FIt's been doing quite well financially, too.
+		As things stand, it's a good target for
+		investment.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#816F#6PTrino said that, too. I'm no expert on that
+		kind of stuff, though.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#615F#11PStill, from what I can gather based on your
+		report, their relationship is a healthy one.{wait}
+	} {
+		#611FAnd you seem to think very highly of Lenard.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#819F#6POh, absolutely.{wait}
+	} {
+		#1310FEven his little sister, Sophina, is super sweet.{wait}
+	} {
+		#811FI'd say you don't have anything to worry about
+		with them. From what I've gathered, they'd make
+		for a picture-perfect married couple.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#611F#11PI-I'd like to believe that's still a while off...{wait}
+	} {
+		#618FThen again, if they really are dating, it's a reality
+		I'll have to come to terms with sooner or later.{wait}
+	} {
+		#617FHeehee... I'm happy for her, but at the same time,
+		I'm a little sad, too...{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#1314F#6PI get what you mean...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#615F#11PThank you very much for your report, Anelace.{wait}
+	} {
+		#611FIt sounds like she's made a fine choice.{wait}
+	} {
+		So I suppose all I can do now is wait for her to
+		share the truth with me herself.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#819F#6PThat sounds like a good plan.{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[113] 0 0 100
+	Sleep 800ms
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[0] fork[1]:
+		CamLookPos (-121020, 0, 68070) 1200ms
+	Fork char[4] fork[2]:
+		CharTurnTo self 135deg 400deg/s
+	Sleep 200ms
+	CharSetChipPattern char[0] 1
+	ForkWait char[0] fork[1]
+	Sleep 300ms
+	CharColor char[1] 0x00FFFFFF 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[1] (-115800, 0, 60820) 0deg
+	TextTalkNamed char[1] "Lila's Voice" {
+		#2P...Miss Maybelle? It's me, Lila.{wait}
+	} {
+		Could I have a little of your time?{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#814F#5POh...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#617F#5PHeehee. Speak of the devil.{wait}
+	} {
+		#611FI wonder if the time has finally come?{wait}
+	}
+	TextWait
+	CharTurnToChar char[4] char[0] 500deg/s
+	Sleep 300ms
+	TextTalk char[4] {
+		#819F#6PThat'd be one funny coincidence, but maybe
+		it has!{wait}
+	} {
+		#1310FAnd if it has, then it's just about time I made
+		my exit. I wouldn't want to get in the way.{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CharSetChipPattern char[0] 0
+	Sleep 200ms
+	TextTalk char[0] {
+		#615F#11PNonsense. I'd actually prefer if you stayed.{wait}
+	} {
+		#610FIf she does tell us what I expect her to, I don't
+		intend to hide the truth of what I asked you to
+		do.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#814F#6POh, I see...{wait}
+	} {
+		#816FWell, okay, then!{wait}
+	}
+	TextWait
+	TextTalkNamed char[1] "Lila's Voice" {
+		#2P...Miss Maybelle?{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CharSetChipPattern char[0] 1
+	Sleep 200ms
+	TextTalk char[0] {
+		#610F#5POh! Sorry, Lila.{wait}
+	} {
+		Come on in.{wait}
+	}
+	TextWait
+	TextTalkNamed char[1] "Lila's Voice" {
+		#2PAs you wish.{wait}
+	}
+	TextWait
+	_59
+	Fork char[0] fork[1]:
+		CamLookPos (-121830, 0, 68600) 3000ms
+	CharSetPos char[1] (-117780, 0, 62500) 0deg
+	ForkFunc char[1] fork[0] fn[0,3]
+	Sleep 200ms
+	ForkLoop char[4] fork[2]:
+		CharTurnToChar self char[1] 500deg/s
+	Sleep 300ms
+	Fork char[4] fork[1]:
+		CharWalkToPos2 self (-122000, 0, 66020) 1500mm/s 0
+	Sleep 1500ms
+	CharSetChipPattern char[0] 0
+	ForkWait char[1] fork[0]
+	Emote char[1] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnToChar char[1] char[4] 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#622F#12POh... Miss Anelace?{wait}
+	} {
+		#623FPlease do accept my apologies. I didn't realize
+		I was intruding.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#819F#5PYou're not, you're not! Don't mind me.{wait}
+	} {
+		#816FI was just here to give my report on an
+		investigation on behalf of the mayor.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#622F#12PI see...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#615F#11PSo, what brings you here, Lila?{wait}
+	} {
+		#610FDo you have something you want to talk
+		to me about?{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#620F#6PYou could say that, yes.{wait}
+	} {
+		I have an important request I wish to
+		make of you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#617F#11PR-Really, now? What would it happen to be?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#621F#6PWell, it concerns the Kingfisher Inn near
+		Valleria Lake...{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#610F#11PMy...{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#816F#5PWe were right!{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk char[1] {
+		#622F#6P...Excuse me?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#617F#11PHeehee...{wait}
+	} {
+		#611FDid you think I had no idea what was happening?{wait}
+	} {
+		I already know everything there is to know.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[1] {
+		#625F#6PHow could you possibly...?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#615F#11PI'm sorry. I actually had Anelace here look into
+		it for me.{wait}
+	} {
+		I was worried about you, you see... You'd been 
+		behaving so strangely lately.{wait}
+	} {
+		#618FI'm sorry that I did it, but I just couldn't help
+		myself.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#621F#6PI see...{wait}
+	} {
+		#620FThere's no need for you to apologize, however.
+		I didn't mean to worry you... Perhaps I should 
+		have been more open from the start.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#613F#11PS-So...umm...{wait}
+	} {
+		#617F...is Lenard being good to you?{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[4] {
+		#1317F#5P(D-Damn...){wait}
+	} {
+		#819F(Cut right to the chase, why don'cha?){wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#622F#6PHe's a very kind man, yes. Why do you ask?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#618F#11PTh-That wasn't what I was asking... Oooh!
+		You know what I mean, Lila.{wait}
+	} {
+		#612FSo...is there anything else you want to say
+		on the matter?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#623F#6PWell, yes...{wait}
+	} {
+		#621FIf it's all right with you, I'd like to get right
+		to discussing the date for the big day.{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Sleep 300ms
+	TextTalk char[4] {
+		#1317F#5P#4SAlready?!{wait}
+	}
+	Shake 0 500 3000 100ms
+	TextWait
+	TextTalk char[0] {
+		#613F#11PTH-THE big day?!{wait}
+	} {
+		#614F#3SYou've already started mapping it out?!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#620F#6PWe have. We were hoping to keep it a
+		secret for as long as possible in order to
+		surprise you.{wait}
+	} {
+		Naturally, I've made sure everything fits
+		into your schedule.{wait}
+	} {
+		#621FDo I have your okay to begin making the
+		necessary arrangements?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#618F#11P#40W...{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 24 27 250ms 0
+	Sleep 1000ms
+	ForkQuit char[4] fork[255]
+	Emote char[4] 0mm 2000mm 40 43 100ms 3
+	CharTurnToChar char[4] char[0] 500deg/s
+	Sleep 400ms
+	CharTurnToChar char[4] char[1] 500deg/s
+	Sleep 200ms
+	TextTalk char[4] {
+		#819F#5PUmm... Wooowie...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#622F#6PIs something wrong?{wait}
+	}
+	TextWait
+	EmoteStop char[0]
+	Sleep 300ms
+	TextTalk char[0] {
+		#618F#11P#60W#1S...Yo.. ..mmy...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#625F#6PWhat was that?{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#616F#11P#5SYou dummy!{wait}
+	}
+	Shake 0 500 3000 100ms
+	TextWait
+	TextTalk char[1] {
+		#628F#6P#3S...!!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#618F#11PI-I can see why you might've wanted to
+		surprise me. I can!{wait}
+	} {
+		#619FBut did you really have to keep this from
+		me until THIS late in the process?!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#625F#6PUmm...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#616F#11PI mean, you've got a right to your own private
+		life, and you don't have to share everything in
+		that with me. I'm not saying you have to.{wait}
+	} {
+		But I can't believe you would decide something
+		so important without consulting me even once!{wait}
+	} {
+		#619FDo I mean THAT little to you?!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#622F#6P...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#618F#11PB-Besides, you've only been going out for
+		about a month!{wait}
+	} {
+		Aren't wedding bells at this stage a LITTLE
+		premature?!{wait}
+	} {
+		#619FThis decision is going to impact you for the
+		rest of your life, Lila!{wait}
+	} {
+		You understand that, right?!{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#1317F#5PI-I think you should calm down and listen to
+		what she has to say, Mayor Maybelle...{wait}
+	} {
+		I'm sure she does understand, and has her
+		own reasons for decidi--{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#627F#6PUmm...{wait}
+	} {
+		#625FI have a horrible feeling that there is a very
+		grave misunderstanding taking place here...{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#814F#5P...? You serious?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#618F#11P#40WJust what are we misunderstanding?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#621F#6PThe arrangements I have been making are for
+		your next vacation.{wait}
+	} {
+		You've been so busy lately that I thought you
+		really ought to have one, so I've been making
+		the necessary arrangements in secret.{wait}
+	}
+	TextWait
+	Emote char[4] 0mm 2000mm 24 27 250ms 0
+	Emote char[0] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[4]
+	EmoteStop char[0]
+	Sleep 300ms
+	TextTalk char[4] {
+		#1317F#1P#3SWhat?!{wait}
+	}
+	TextTalk char[0] {
+		#613F#2P#3SWhat?!{wait}
+	}
+	TextClose 1
+	_59
+	TextWait
+	Sleep 300ms
+	TextTalk char[1] {
+		#627F#6PYou mentioned before that you would like to
+		visit the famous Kingfisher Inn once, you see...{wait}
+	} {
+		So when Lenard needed to come to Bose Market
+		to do some shopping, we decided to use the
+		chance to meet and discuss how to go about this.{wait}
+	} {
+		#623FI hadn't realized my actions were causing so many
+		problems for you...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#613F#11P...{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#819F#5P...Whoopsie...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#625F#6P*sigh* I worry about you sometimes...{wait}
+	} {
+		#624FBesides, I have no intention of getting married
+		before a certain mistress of mine.{wait}
+	} {
+		Which doesn't seem to be any time soon since she
+		makes a hobby of turning down countless marriage
+		proposals in favor of devoting herself to work.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#618F#11PI-It's not a hobby! It's because I have so much
+		work on my plate that I don't have time for
+		marriage to be on the brain!{wait}
+	} {
+		#617F...So there's nothing between you and Lenard?
+		Nothing at all?{wait}
+	} {
+		Everyone says you two have been getting along
+		so well...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#623F#6PI'll admit that he's a lovely man, and one I have a
+		very positive impression of...{wait}
+	} {
+		...but I've never considered him a potential partner.
+		Not once.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#612F#11PWh-Why?{wait}
+	} {
+		All girls your age experience romance at least
+		once. It wouldn't be right for you not to do the
+		same...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#621F#6PThis isn't something I intended to come out and
+		say, but it seems you leave me with no choice.{wait}
+	} {
+		Right now, the most important thing in my life is
+		your happiness; I will put that over anything and
+		everything else.{wait}
+	} {
+		Ensuring it is my greatest joy. My very reason for
+		being.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#613F#11P...!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#621F#6PUntil you've decided upon a partner to supplement
+		that happiness, I have absolutely no intention of
+		looking at anyone but you.{wait}
+	} {
+		#623FI do appreciate you worrying about me...{wait}
+	} {
+		If it's my happiness you want, I ask that you focus
+		on your own happiness first and foremost.{wait}
+	} {
+		#627FAnd yet like clockwork, I see you disregarding your
+		well-being and taking on far more work than is
+		humanly possib--{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#616F#11PFine! Fine! I get it, I get it!{wait}
+	} {
+		Now that we can put the whole marriage
+		thing behind us, I will accept your offer of
+		a vacation!{wait}
+	} {
+		So feel free to proceed with your plan--
+		I leave arranging the schedule to you!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#621F#6PHeehee. As you wish...{wait}
+	} {
+		#620FThen if you will permit me to excuse myself,
+		I shall.{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] char[4] 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#621F#12PGood day to you, too, Miss Anelace.{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#814F#5POh...{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 135deg 400deg/s
+	ForkLoop char[4] fork[2]:
+		CharTurnToChar self char[1] 400deg/s
+	Fork char[0] fork[1]:
+		CamLookPos (-121430, 0, 68300) 2000ms
+	ForkFunc char[1] fork[0] fn[0,4]
+	Sleep 1500ms
+	CharSetChipPattern char[0] 1
+	ForkWait char[1] fork[0]
+	ForkQuit char[4] fork[2]
+	Sleep 1000ms
+	Fork char[0] fork[1]:
+		CamLookPos (-122340, 0, 69030) 1200ms
+	ForkQuit char[4] fork[255]
+	CharTurnToChar char[4] char[0] 400deg/s
+	ForkWait char[0] fork[1]
+	Sleep 300ms
+	TextTalk char[4] {
+		#1317F#5PU-Umm...{wait}
+	} {
+		#1316FI'm reeeally sorry... It looks like my research
+		may have been a tad incomplete.{wait}
+	}
+	TextWait
+	Sleep 100ms
+	CharSetChipPattern char[0] 0
+	Sleep 300ms
+	TextTalk char[0] {
+		#617F#11PDon't worry about it. I don't think anything
+		was wrong with your report.{wait}
+	} {
+		#618FAll of this was due to me foolishly jumping to
+		conclusions.{wait}
+	} {
+		*sigh* I can't believe I ended up giving her yet
+		another excuse to lecture me...{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#819F#5PAww! It's no big deal.{wait}
+	} {
+		#1314FI gotta admit, though. I am jealous.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#613F#11P...Jealous?{wait}
+	}
+	TextWait
+	TextTalk char[4] {
+		#1310F#5PHa! You never heard that. Anyway, I'm sure I'll
+		see you around!{wait}
+	} {
+		#819FUmm... You two look great together!{wait}
+	}
+	TextWait
+	CharTurnTo char[4] 135deg 500deg/s
+	Fork char[0] fork[1]:
+		CamLookPos (-121430, 0, 68300) 1200ms
+	ForkFunc char[4] fork[0] fn[0,7]
+	Sleep 500ms
+	ForkFunc char[0] fork[0] fn[0,9]
+	TextTalk char[0] {
+		#613F#5P#25AOh...{wait}
+	}
+	TextWait
+	ForkWait char[4] fork[0]
+	Sleep 300ms
+	Fork char[0] fork[0]:
+		CamLookPos (-122700, 0, 70040) 1500ms
+	ForkWait char[0] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#618F#5P*sigh* Oh, Anelace...{wait}
+	} {
+		#615F...{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 1700mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 300ms
+	CharSetChipPattern char[0] 0
+	Sleep 500ms
+	TextTalk char[0] {
+		#617F#11PHeehee... What a day.{wait}
+	} {
+		I feel almost ashamed to be this relieved
+		over all of this...{wait}
+	} {
+		#618F*sigh* I don't know if I'll ever be able to
+		manage without her at my side...{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	Fork char[0] fork[0]:
+		CamZoom 2350 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 9 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Like a Mother] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[11] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[11] 0x10
+		QuestFlagsSet quest[11] 0x20
+		ItemAdd item[495] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[495]}{color 5}.{wait}
+		}
+		TextWait
+		if ItemHas item[525] 0 != 0:
+			if RecipeLearn 68:
+			else:
+				SoundPlay sound[17] 0 0 100
+				TextMessage null {
+					{color 5}Learned the recipe for {item item[495]}{color 5}.{wait}
+				}
+				TextWait
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 50000
+		MiraAdd 50000
+		SoundPlay sound[17] 0 0 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {color 2}100,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9478]
+	NewScene "u2512._sn" 109 0 0
+	Hcf
+	Return
+
+fn[9]:
+	CharSetChipPattern char[0] 0
+	Sleep 1000ms
+	CharSetChipPattern char[0] 1
+	Return

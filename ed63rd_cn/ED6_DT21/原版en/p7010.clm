@@ -1,0 +1,565 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "P7010.x"
+	town town[1]
+	bgm bgm[211]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		system[1] = 174
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	ObjFlagsUnset object[1] 0x0010
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (1010, -300, -2200) 0deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-240, -300, -2200) 0deg
+		CharSetPos party[2] (1010, -300, -2200) 0deg
+		CharSetPos party[3] (-240, -300, -2200) 0deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-240, -300, -2200) 0deg
+		CharSetPos party[1] (1010, -300, -2200) 0deg
+		CharSetPos party[3] (-240, -300, -2200) 0deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-240, -300, -2200) 0deg
+		CharSetPos party[1] (1010, -300, -2200) 0deg
+		CharSetPos party[2] (-240, -300, -2200) 0deg
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (-790, 4300, 20090) 0ms
+	CamSetDistance 0 3640 -10000 0ms
+	CamZoom 2520 0ms
+	CamRotate 338000mdeg 0ms
+	CamPers 346 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Fork party[0] fork[2]:
+		CamLookPos (1360, 4300, 1740) 7500ms
+	Fork party[0] fork[3]:
+		CamSetDistance 0 5800 -10000 7500ms
+	Fork party[1] fork[2]:
+		CamZoom 2520 7500ms
+	Fork party[2] fork[2]:
+		CamRotate 326000mdeg 7500ms
+	Fork party[3] fork[2]:
+		CamPers 346 7500ms
+	Sleep 4500ms
+	SoundPlay sound[375] 0 0 100
+	Sleep 1000ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,13]
+		Sleep 600ms
+		ForkFunc name[8] fork[0] fn[0,12]
+		Sleep 700ms
+		ForkFunc party[2] fork[0] fn[0,14]
+		Sleep 200ms
+		ForkFunc party[3] fork[0] fn[0,15]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,13]
+		Sleep 600ms
+		ForkFunc name[8] fork[0] fn[0,12]
+		Sleep 700ms
+		ForkFunc party[1] fork[0] fn[0,14]
+		Sleep 200ms
+		ForkFunc party[3] fork[0] fn[0,15]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,13]
+		Sleep 600ms
+		ForkFunc name[8] fork[0] fn[0,12]
+		Sleep 700ms
+		ForkFunc party[1] fork[0] fn[0,14]
+		Sleep 200ms
+		ForkFunc party[2] fork[0] fn[0,15]
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[2]
+	CrossFade 500ms
+	CamLookPos (-800, 0, 4500) 0ms
+	CamSetDistance 0 6040 -10000 0ms
+	CamZoom 2450 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 303 0ms
+	FadeWait
+	Sleep 500ms
+	TextTalk name[14] {
+		#1802F#5P...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1065F#6PIt all started five years ago. A jaeger corps
+		someone had hired took this place over out
+		of nowhere.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 270deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#1840F#12PBy the way, how much do you remember of
+		that day, Ries?{wait}
+	} {
+		Just so I know.{wait}
+	}
+	TextWait
+	CharTurnTo name[14] 90deg 400deg/s
+	Sleep 300ms
+	TextTalk name[14] {
+		#1802F#5PI...{wait}
+	} {
+		#1445FI just remember a group of men in black forcing
+		their way through the gate and charging in here.{wait}
+	} {
+		They tied everyone up, took the matron up to the
+		second floor...{wait}
+	} {
+		...and then...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1065F#12PNext thing you knew, you were in a bed
+		in the hospital in town, right?{wait}
+	} {
+		#1067FAfter which you found out that Rufina and
+		I had come to rescue everyone...{wait}
+	} {
+		...and that she had died in the process.{wait}
+	} {
+		#1840FThat about right?{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1446F#5P...Mm-hmm.{wait}
+	} {
+		#1802FJust what happened, Kevin?{wait}
+	} {
+		All I've heard is that it was the work of
+		someone who opposed the church...{wait}
+	} {
+		#1445F...but I haven't had a chance to meet you
+		since then, much less to ask you about it.{wait}
+	} {
+		I tried asking Instructor Selnate, but she
+		wouldn't say a word.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1075F#12PThat doesn't surprise me.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#1067F#6PThe Gralsritter's commander can't admit this
+		orphanage was being used as a smokescreen 
+		for an artifact that needed sealing away.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1802F#5P...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[14] {
+		#1444F#5P#4SIt what...?{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Fork party[0] fork[1]:
+		CamLookPos (-700, 0, 11410) 4000ms
+	ForkFunc name[8] fork[0] fn[0,8]
+	ForkLoop party[1] fork[0]:
+		CharTurnToChar self name[8] 400deg/s
+	ForkLoop party[2] fork[0]:
+		CharTurnToChar self name[8] 400deg/s
+	ForkLoop party[3] fork[0]:
+		CharTurnToChar self name[8] 400deg/s
+	Sleep 2000ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,9]
+		Sleep 300ms
+		ForkFunc party[2] fork[0] fn[0,10]
+		Sleep 700ms
+		ForkFunc party[3] fork[0] fn[0,11]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,9]
+		Sleep 300ms
+		ForkFunc party[1] fork[0] fn[0,10]
+		Sleep 700ms
+		ForkFunc party[3] fork[0] fn[0,11]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,9]
+		Sleep 300ms
+		ForkFunc party[1] fork[0] fn[0,10]
+		Sleep 700ms
+		ForkFunc party[2] fork[0] fn[0,11]
+	ForkWait party[0] fork[1]
+	Fork party[0] fork[1]:
+		CamLookPos (-5400, 0, 14960) 4000ms
+	Fork party[1] fork[1]:
+		CamSetDistance 0 5610 -10000 4000ms
+	Fork party[2] fork[1]:
+		CamZoom 2450 4000ms
+	Fork party[3] fork[1]:
+		CamPers 322 4000ms
+	ForkWait party[0] fork[0]
+	ForkWait party[1] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait party[0] fork[1]
+	Sleep 300ms
+	TextTalk name[8] {
+		#1063F#5PHere we go.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[100] 0 0 100
+	Sleep 1000ms
+	ForkFunc name[8] fork[0] fn[0,7]
+	Sleep 500ms
+	if CharInSlot 0 party[1] == 7:
+		Emote party[1] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 6:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[1] == 15:
+		Emote party[1] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[2] == 7:
+		Emote party[2] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 6:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[2] == 15:
+		Emote party[2] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[2] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	if CharInSlot 0 party[3] == 7:
+		Emote party[3] 0mm 2300mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 6:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif CharInSlot 0 party[3] == 15:
+		Emote party[3] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	else:
+		Emote party[3] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1500ms
+	TextTalk name[14] {
+		#1802F#6P...?!{wait}
+	}
+	TextWait
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#270F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[11] != -1:
+		TextTalk name[11] {
+			#112F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[3] != -1:
+		TextTalk name[3] {
+			#1542F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[13] != -1:
+		TextTalk name[13] {
+			#172F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[7] != -1:
+		TextTalk name[7] {
+			#072F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[5] != -1:
+		TextTalk name[5] {
+			#057F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[2] != -1:
+		TextTalk name[2] {
+			#1522F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[4] != -1:
+		TextTalk name[4] {
+			#1163F#6PA-A secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[9] != -1:
+		TextTalk name[9] {
+			#812F#6PA-A secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[6] != -1:
+		TextTalk name[6] {
+			#065F#6PA-A secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[15] != -1:
+		TextTalk name[15] {
+			#1305F#6PA secret passage, huh?{wait}
+		}
+		TextWait
+	elif PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#216F#6PA-A secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1502F#6PA secret passage?!{wait}
+		}
+		TextWait
+	elif PartyPosition name[0] != -1:
+		TextTalk name[0] {
+			#1020F#6PA-A secret passage?!{wait}
+		}
+		TextWait
+	ForkWait name[8] fork[0]
+	Sleep 300ms
+	Fork party[0] fork[1]:
+		CamLookPos (-6400, 0, 14960) 2000ms
+	Fork name[8] fork[0]:
+		CharWalkToPos self (-7500, 0, 14130) 1500mm/s 0
+	Sleep 500ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[8] fork[0]
+	ForkQuit party[0] fork[1]
+	Tc_E0 party[1] 64 1
+	Tc_E0 party[2] 65 1
+	Tc_E0 party[3] 66 1
+	CharSetPos name[8] (-35730, 0, 8770) 270deg
+	if CharInSlot 0 party[1] == 14:
+		CharSetPos party[1] (-35730, 0, 8770) 270deg
+		CharSetPos party[2] (-35730, 0, 8770) 270deg
+		CharSetPos party[3] (-35730, 0, 8770) 270deg
+	elif CharInSlot 0 party[2] == 14:
+		CharSetPos party[2] (-35730, 0, 8770) 270deg
+		CharSetPos party[1] (-35730, 0, 8770) 270deg
+		CharSetPos party[3] (-35730, 0, 8770) 270deg
+	elif CharInSlot 0 party[3] == 14:
+		CharSetPos party[3] (-35730, 0, 8770) 270deg
+		CharSetPos party[1] (-35730, 0, 8770) 270deg
+		CharSetPos party[2] (-35730, 0, 8770) 270deg
+	CharSetChipBase party[1] chip[0]
+	CharSetChipBase party[2] chip[1]
+	CharSetChipBase party[3] chip[2]
+	CharColor field_party[0] 0x00FFFFFF 0ms
+	CharColor field_party[1] 0x00FFFFFF 0ms
+	CharColor field_party[2] 0x00FFFFFF 0ms
+	CharColor field_party[3] 0x00FFFFFF 0ms
+	CamLookPos (-42080, 1500, 11170) 0ms
+	CamSetDistance 0 6300 -10000 0ms
+	CamZoom 2820 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 295 0ms
+	Fork party[0] fork[3]:
+		CamLookPos (-42080, -1500, 11170) 4000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkFunc name[8] fork[0] fn[0,3]
+	Sleep 3000ms
+	if CharInSlot 0 party[1] == 14:
+		ForkFunc party[1] fork[0] fn[0,4]
+		Sleep 700ms
+		ForkFunc party[2] fork[0] fn[0,5]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,6]
+	elif CharInSlot 0 party[2] == 14:
+		ForkFunc party[2] fork[0] fn[0,4]
+		Sleep 700ms
+		ForkFunc party[1] fork[0] fn[0,5]
+		Sleep 800ms
+		ForkFunc party[3] fork[0] fn[0,6]
+	elif CharInSlot 0 party[3] == 14:
+		ForkFunc party[3] fork[0] fn[0,4]
+		Sleep 700ms
+		ForkFunc party[1] fork[0] fn[0,5]
+		Sleep 800ms
+		ForkFunc party[2] fork[0] fn[0,6]
+	ForkWait name[14] fork[0]
+	TextTalk name[14] {
+		#1449F#11PW-Wait!{wait}
+	} {
+		If there was an artifact here...you don't 
+		mean...?!{wait}
+	}
+	TextWait
+	ForkWait party[0] fork[3]
+	Sleep 300ms
+	TextTalk name[8] {
+		#1840F#5PYup.{wait}
+	}
+	TextWait
+	CharTurnTo name[8] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk name[8] {
+		#1065F#6PBelow here is a primal ground used to seal
+		artifacts away.{wait}
+	} {
+		#1063FJust like the one under Grancel Cathedral.{wait}
+	}
+	TextWait
+	Sleep 400ms
+	TextTalk name[14] {
+		#1802F#11P#3S...!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 300ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 2000ms
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "p7012._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (-37850, 0, 8860) 2000mm/s 0
+	CharWalkToPos self (-37880, 0, 10880) 2000mm/s 0
+	CharWalkToPos self (-41440, -1000, 10840) 2000mm/s 0
+	CharWalkToPos self (-41810, -2000, 7040) 2000mm/s 0
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-37850, 0, 8860) 4000mm/s 0
+	CharWalkToPos self (-37880, 0, 10880) 4000mm/s 0
+	CharWalkToPos self (-41440, -1000, 10840) 4000mm/s 0
+	CharSetChipBase self chip[65535]
+	CharSetChipPattern self 0
+	CharTurnTo self 180deg 600deg/s
+	Return
+
+fn[5]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-37850, 0, 8860) 4000mm/s 0
+	CharWalkToPos self (-37880, 0, 10880) 4000mm/s 0
+	CharWalkToPos self (-40140, -570, 10860) 4000mm/s 0
+	CharSetChipBase self chip[65535]
+	CharSetChipPattern self 0
+	CharTurnTo self 180deg 600deg/s
+	Return
+
+fn[6]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-37850, 0, 8860) 4000mm/s 0
+	CharWalkToPos self (-37880, 0, 10880) 4000mm/s 0
+	CharWalkToPos self (-38450, 0, 10750) 4000mm/s 0
+	CharSetChipBase self chip[65535]
+	CharSetChipPattern self 0
+	CharTurnTo self 180deg 600deg/s
+	Return
+
+fn[7]:
+	SoundPlay sound[108] 0 0 100
+	Sleep 200ms
+	ObjFrame object[1] 0
+	ObjPlay object[1] 360
+	ObjWait object[1]
+	SoundStop sound[112]
+	Return
+
+fn[8]:
+	CharWalkToPos self (80, 0, 6930) 2000mm/s 0
+	CharWalkToPos self (-110, 0, 10980) 2000mm/s 0
+	CharTurnTo self 315deg 0deg/s
+	CharWalkToPos2 self (-4700, 0, 13940) 2000mm/s 0
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[9]:
+	CharTurnTo self 0deg 0deg/s
+	CharWalkToPos self (80, 0, 6930) 2000mm/s 0
+	CharWalkToPos self (-110, 0, 10980) 2000mm/s 0
+	CharWalkToPos self (-3270, 0, 13290) 2000mm/s 0
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[10]:
+	CharWalkToPos self (80, 0, 6930) 2000mm/s 0
+	CharWalkToPos self (-110, 0, 10980) 2000mm/s 0
+	CharWalkToPos self (-2760, 0, 11900) 2000mm/s 0
+	CharTurnTo self 315deg 400deg/s
+	Return
+
+fn[11]:
+	CharWalkToPos self (80, 0, 6930) 2000mm/s 0
+	CharWalkToPos self (-110, 0, 10980) 2000mm/s 0
+	CharWalkToPos self (-1640, 0, 12610) 2000mm/s 0
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[12]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (860, 0, 3260) 2000mm/s 0
+	Return
+
+fn[13]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-640, 0, 3190) 2000mm/s 0
+	Return
+
+fn[14]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (1290, 0, 1380) 2000mm/s 0
+	Return
+
+fn[15]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos2 self (-480, 0, 1340) 2000mm/s 0
+	Return

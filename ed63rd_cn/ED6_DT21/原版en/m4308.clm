@@ -1,0 +1,315 @@
+calmare fc scena
+scena:
+	name "Gaiden3" "M4308.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+trigger[0]:
+	pos1 (-3000, -1000, 156000)
+	pos2 (3000, 1500, 0)
+	flags 0x0040
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if flag[9476]:
+		FlagUnset flag[9476]
+		Event fn[0,8]
+	if flag[10013] && !flag[10014]:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	EntranceSetDisabled entrance[18] 0
+	EntranceSetDisabled entrance[21] 0
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-3150, 0, 144900) 0deg
+	CharSetPos name[14] (-3150, 0, 144900) 0deg
+	CharSetPos party[2] (-3150, 0, 144900) 0deg
+	CharSetPos party[3] (-3150, 0, 144900) 0deg
+	CharColor name[8] 0x00FFFFFF 0ms
+	CharColor name[14] 0x00FFFFFF 0ms
+	CharColor party[2] 0x00FFFFFF 0ms
+	CharColor party[3] 0x00FFFFFF 0ms
+	CamLookPos (-2270, 0, 146900) 0ms
+	CamSetDistance 0 7460 -10000 0ms
+	CamZoom 3120 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	ForkFunc name[8] fork[0] fn[0,3]
+	ForkFunc name[14] fork[0] fn[0,4]
+	ForkFunc party[2] fork[0] fn[0,5]
+	ForkFunc party[3] fork[0] fn[0,6]
+	Fork name[8] fork[2]:
+		CamLookPos (-2670, 0, 148880) 3000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait name[8] fork[2]
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[13] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	if PartyPosition name[1] != -1:
+		Sleep 50ms
+		Emote name[1] 0mm 2000mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	elif PartyPosition name[6] != -1:
+		Sleep 50ms
+		Emote name[6] 0mm 1700mm 2 7 80ms 1
+		SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#1064F#5PThis can't be right...{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#173F#6PImpossible!{wait}
+	}
+	TextWait
+	Fork name[8] fork[0]:
+		CamLookPos (-3110, 300, 155720) 3000ms
+	Fork name[8] fork[1]:
+		CamSetDistance 0 10740 -10000 3000ms
+	Fork name[8] fork[2]:
+		CamZoom 3560 4000ms
+	Fork name[8] fork[3]:
+		CamRotate 45000mdeg 3000ms
+	Fork name[14] fork[1]:
+		CamPers 305 3000ms
+	ForkWait name[8] fork[0]
+	ForkWait name[8] fork[2]
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (-2340, 0, 149550) 0ms
+	CamSetDistance 0 6600 -10000 0ms
+	CamZoom 3150 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Emote name[14] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnToChar name[14] name[8] 400deg/s
+	Sleep 300ms
+	TextTalk name[14] {
+		#1444F#5PIs something wrong?{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1 | PartyPosition name[6] != -1:
+		TextTalk name[8] {
+			#1841F#5PSomething's wrong, all right...{wait}
+		}
+		TextWait
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1503F#6PHas the entire layout of this area changed?{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#065F#6PTh-This isn't how I remember this place being...
+				Has the ruin's layout changed?{wait}
+			}
+			TextWait
+	else:
+		TextTalk name[8] {
+			#1841F#5PSomething's wrong, all right...{wait}
+		} {
+			#1063FUnless my memory's mistaken, the inner layout
+			of this place is completely different.{wait}
+		}
+		TextWait
+	TextTalk name[13] {
+		#176F#6PIt is. Without a doubt.{wait}
+	} {
+		#178FThis area should be a corridor that leads
+		to the first three-way junction.{wait}
+	} {
+		How is this even possible?{wait}
+	}
+	TextWait
+	if PartyPosition name[10] != -1:
+		TextTalk name[10] {
+			#215F#6PI don't think there's any chance you're
+			mistaken.{wait}
+		}
+		TextWait
+	elif PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#270F#6PI don't think you're mistaken.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[14] {
+			#1802F#5PI don't think you're mistaken.{wait}
+		}
+		TextWait
+	TextTalk name[8] {
+		#1067F#5P...{wait}
+	} {
+		#1075FHeh. Now it all makes sense.{wait}
+	}
+	TextWait
+	if PartyPosition name[1] != -1:
+		TextTalk name[1] {
+			#1502F#6PYou're probably on the right track,
+			Kevin.{wait}
+		}
+		TextWait
+		CharTurnTo name[8] 90deg 400deg/s
+		CharTurnTo name[8] 180deg 400deg/s
+		Sleep 300ms
+		TextTalk name[8] {
+			#1840F#5PYou noticed, too, huh?{wait}
+		} {
+			Well, if you're backing me up,
+			I'm more than confident now.{wait}
+		}
+		TextWait
+		TextTalk name[13] {
+			#173F#6PWhat is it? Have you discovered something?{wait}
+		}
+		TextWait
+	else:
+		if PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#064F#6PWhat is it, Kevin?{wait}
+			}
+			TextWait
+		elif PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#212F#6PWell, come on! Don't keep us all in suspense.{wait}
+			}
+			TextWait
+		elif PartyPosition name[12] != -1:
+			TextTalk name[12] {
+				#273F#6PHmm?{wait}
+			}
+			TextWait
+		TextTalk name[13] {
+			#173F#6PHave you worked something out?{wait}
+		}
+		TextWait
+		CharTurnTo name[8] 90deg 400deg/s
+		CharTurnTo name[8] 180deg 400deg/s
+		Sleep 300ms
+	TextTalk name[8] {
+		#1060F#5PMaybe...but let's head down on the elevator
+		first.{wait}
+	} {
+		I'm almost sure the answer's going to be
+		waiting for us somewhere ahead.{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#178F#6PAll right.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1446F#5PLet's be sure we're ready for anything.{wait}
+	}
+	TextWait
+	FlagSet flag[10014]
+	QuestTaskSet quest[46] 0x0004
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-3360, 0, 146000) 2000mm/s 0
+	CharWalkToPos self (-3980, 0, 149520) 2000mm/s 0
+	Return
+
+fn[4]:
+	Sleep 600ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-3120, 0, 146420) 2000mm/s 0
+	CharWalkToPos self (-2520, 0, 149280) 2000mm/s 0
+	Return
+
+fn[5]:
+	Sleep 1100ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-3860, 0, 147150) 2000mm/s 0
+	CharWalkToPos self (-4110, 0, 147950) 2000mm/s 0
+	Return
+
+fn[6]:
+	Sleep 1700ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-2750, 0, 147700) 2000mm/s 0
+	Return
+
+fn[7]:
+	EventBegin 0
+	CrossFade 1000ms
+	CharSetPos2 field_party[0] (-2200, 20000, 156800) 0deg
+	CharSetPos2 field_party[1] (-3800, 20000, 156800) 0deg
+	CharSetPos2 field_party[2] (-3800, 20000, 155200) 0deg
+	CharSetPos2 field_party[3] (-2200, 20000, 155200) 0deg
+	CamLookPos (-3000, 0, 156000) 1500ms
+	Sleep 100ms
+	_ObjB0 object[0] 90
+	SystemFlagsSet 0x00100000
+	SoundPlay sound[235] 0 0 100
+	ObjFrame object[0] 0
+	ObjPlay object[0] 500
+	Sleep 2000ms
+	FlagSet flag[9476]
+	NewScene file[0x002101C2] 100 0 0
+	Hcf
+	Return
+
+fn[8]:
+	EventBegin 0
+	PlaceSetName town[224]
+	system[49] = 224
+	ObjFrame object[0] 300
+	ObjPlay object[0] 0
+	NextFrame
+	CharSetPos2 field_party[0] (-3800, 0, 155200) 180deg
+	CharSetPos2 field_party[1] (-2200, 0, 155200) 180deg
+	CharSetPos2 field_party[2] (-2200, 0, 156800) 180deg
+	CharSetPos2 field_party[3] (-3800, 0, 156800) 180deg
+	CamLookPos (-3000, 0, 156000) 0ms
+	ObjWait object[0]
+	Sleep 100ms
+	CrossFade 1000ms
+	CharSetPos2 field_party[0] (-3030, 0, 152600) 180deg
+	CharSetPos2 field_party[1] (-3030, 0, 152600) 180deg
+	CharSetPos2 field_party[2] (-3030, 0, 152600) 180deg
+	CharSetPos2 field_party[3] (-3030, 0, 152600) 180deg
+	EventEnd 0
+	Return

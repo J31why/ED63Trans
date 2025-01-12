@@ -1,0 +1,98 @@
+calmare fc scena
+scena:
+	name "Ruan" "T2813.x"
+	town town[1]
+	bgm bgm[183]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] file[0x00070585] file[0x0007058A]
+chip[1] file[0x00070585] file[0x0007058A]
+
+npc char[0]:
+	name "Rigel"
+	pos (-2330, 0, 4680)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[0,2]
+
+fn[0]:
+	if system[66] == 8:
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	TextStart self
+	if flag[12142]:
+		if flag[12159]:
+			if flag[0]:
+				TextTalk char[8] {
+					(She's looking really down...){wait}
+				}
+				TextWait
+				TextTalk char[8] {
+					If you're not feeling well, you should
+					go and rest, Kloe.{wait}
+				}
+				TextWait
+			else:
+				TextTalk char[8] {
+					...What's up, Kloe?{wait}
+				}
+				TextWait
+				TextTalk name[4] {
+					#047FOh... It's nothing...{wait}
+				}
+				TextWait
+				TextTalk char[8] {
+					W-Well, if you say so...{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			TextTalk char[8] {
+				Kloe?{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				What're you doing here this late in the evening?{wait}
+			}
+			TextWait
+			TextTalk name[4] {
+				#043FWell...{wait}
+			} {
+				#047F...nothing in particular, really.{wait}
+			} {
+				Sorry. I didn't mean to get in the way
+				of your practice.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Oh, no! It's not like that.{wait}
+			}
+			TextWait
+			FlagSet flag[12159]
+	TextEnd self
+	Return

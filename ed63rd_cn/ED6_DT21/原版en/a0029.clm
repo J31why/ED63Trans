@@ -1,0 +1,37 @@
+calmare sc scena
+scena:
+	name "Rolent" "R0100.x"
+	town town[23]
+	bgm bgm[29]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 0, 0)
+	cam_at (0, 0, 10000)
+	cam_zoom 2800
+	cam_pers 1400
+	cam_deg 0deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+fn[0]:
+	Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	system[40] = 24
+	SystemFlagsSet 0x00000080
+	SystemFlagsUnset 0x00000001
+	Minigame 24 0 0 0 0 0 0 0 0
+	FadeIn 300ms 0x00000000
+	Return

@@ -1,0 +1,313 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7424.x"
+	town town[1]
+	bgm bgm[225]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[1] "mons2/ch14040._ch" "mons2/ch14040p._cp"
+chip[2] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[3] "mons2/ch14880._ch" "mons2/ch14880p._cp"
+chip[4] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[5] "mons2/ch14890._ch" "mons2/ch14890p._cp"
+chip[6] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[7] "mons2/ch14870._ch" "mons2/ch14870p._cp"
+chip[8] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[9] "mons2/ch14820._ch" "mons2/ch14820p._cp"
+chip[10] "mons2/ch14610._ch" "mons2/ch14610p._cp"
+chip[11] "mons2/ch14610._ch" "mons2/ch14610p._cp"
+chip[12] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+chip[13] "mons2/ch14840._ch" "mons2/ch14840p._cp"
+
+monster char[0]:
+	name ""
+	pos (-114960, 0, 260)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[800]
+	flag flag[0]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-115000, 0, 121180)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (-118770, 0, 125050)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (-114970, 0, 128789)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (-111200, 0, 125000)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[804]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (116470, 0, 29870)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[802]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (18540, 0, 1050)
+	angle 180deg
+	chip chip[12]
+	flags 0x0141
+	unk2 -1
+	battle battle[806]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (100080, 0, -105000)
+	angle 180deg
+	chip chip[10]
+	flags 0x0141
+	unk2 -1
+	battle battle[805]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (-114960, 0, 124990)
+	radius 1000mm
+	bubble_pos (-114960, 1000, 124990)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (118800, 0, 30000)
+	radius 1000mm
+	bubble_pos (118800, 1000, 30000)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (0, 0, 0)
+	radius 1000mm
+	bubble_pos (0, 2000, 0)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	char[0].36 = 223
+	char[1].36 = 215
+	char[2].36 = 215
+	char[3].36 = 215
+	char[4].36 = 215
+	char[5].36 = 223
+	char[6].36 = 223
+	char[7].36 = 223
+	char[0].40 = 8
+	char[5].40 = 8
+	char[6].40 = 8
+	char[7].40 = 8
+	if !flag[11462]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[11463]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[11462]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 30
+		ObjWait object[0]
+		ObjFrame object[0] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		Call fn[6,24]
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[11462]
+	else:
+		TextMessage null {
+			{color 5}I've never seen so many heroes up close and personal before...{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 0 0
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11463]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[517] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[517]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11463]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[517]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[517]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Go kick some butt!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 0 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	TextStart null
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		{color 5}Select an Option{0x18}{wait}
+	}
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 150 1
+			"Restore HP/EP" // 0
+			"Shop" // 1
+			"Synthesize Quartz" // 2
+			"End" // 3
+		MenuWait var[0]
+		MenuClose menu[1]
+		TextClose 0
+		switch var[0]:
+			case 0:
+				FadeIn 300ms 0x00000000
+				system[40] = 65535
+				Sleep 300ms
+				BgmStop 1000ms
+				SoundPlay sound[12] 0 0 100
+				FadeOut 1000ms 0x00000000 255
+				FadeWait
+				SoundPlay sound[13] 0 0 100
+				Minigame 21 0 0 0 0 0 0 0 0
+				_30 1
+				Sleep 3500ms
+				BgmPlay bgm[225] 0
+				system[40] = 24
+				FadeIn 1000ms 0x00000000
+				var[0] = 255
+				break
+			case 1:
+				ShopOpen shop[50]
+				FadeOut 300ms 0x00000000 100
+				TextSetPos -1 60 -1 -1
+				TextMessage null {
+					{color 5}Select an Option{0x18}{wait}
+				}
+				break
+			case 2:
+				ShopOpen shop[14]
+				FadeOut 300ms 0x00000000 100
+				TextSetPos -1 60 -1 -1
+				TextMessage null {
+					{color 5}Select an Option{0x18}{wait}
+				}
+				break
+			default:
+				var[0] = 255
+				break
+	MenuClose menu[1]
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	Sleep 300ms
+	var[0] = 0
+	TextEnd null
+	Return

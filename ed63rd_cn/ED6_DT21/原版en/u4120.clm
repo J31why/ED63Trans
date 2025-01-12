@@ -1,0 +1,154 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4120.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (117490, 0, 3960)
+	radius 1000mm
+	bubble_pos (116610, 1000, 4230)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-70, 0, 129500)
+	radius 1000mm
+	bubble_pos (-780, 1000, 129490)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if flag[10017]:
+		OpLoad "U4120_y"
+	else:
+		OpLoad "U4120_n"
+	if !flag[10119]:
+		ObjFrame object[3] 0
+	else:
+		ObjFrame object[3] 60
+	if !flag[10116]:
+		ObjFrame object[4] 0
+	else:
+		ObjFrame object[4] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10119]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[3] 60
+		Sleep 500ms
+		if ItemAdd item[601] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[601]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10119]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[601]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[601]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[3] 60
+			ObjPlay object[3] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}[12/36] The place looked less like a shop and more like the newest
+			secret playground for the local children, long abandoned after the
+			passing of its owner. But no; to clarify, it was very much 'in business.'{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 251 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[10116]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[4] 60
+		Sleep 500ms
+		if ItemAdd item[1184] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1184]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10116]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[1184]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[1184]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[4] 60
+			ObjPlay object[4] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}[17/36] 'Good riddance,' the son coldly muttered as he turned the key to
+			lock the shop. This would be the last time he would be forced to ever
+			step inside. 'I'll bet I can fetch a pretty mira for his tools at the market.'{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 252 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return

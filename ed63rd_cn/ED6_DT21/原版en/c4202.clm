@@ -1,0 +1,799 @@
+calmare tc scena
+scena:
+	name "Grancel" "C4202.x"
+	town town[1]
+	bgm bgm[31]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons/ch11120._ch" "mons/ch11120p._cp"
+chip[1] "mons/ch11121._ch" "mons/ch11121p._cp"
+chip[2] "mons/ch11110._ch" "mons/ch11110p._cp"
+chip[3] "mons/ch11111._ch" "mons/ch11111p._cp"
+chip[4] "mons/ch11130._ch" "mons/ch11130p._cp"
+chip[5] "mons/ch11131._ch" "mons/ch11131p._cp"
+chip[6] "mons/ch10040._ch" "mons/ch10040p._cp"
+chip[7] "mons/ch10041._ch" "mons/ch10041p._cp"
+chip[8] "mons/ch11140._ch" "mons/ch11140p._cp"
+chip[9] "mons/ch11141._ch" "mons/ch11141p._cp"
+
+npc char[0]:
+	name "Man in Black"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+monster char[2]:
+	name ""
+	pos (13590, 0, 67390)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (13650, 0, 73480)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[946]
+	flag flag[0]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (13600, 0, 79600)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[947]
+	flag flag[0]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (13660, 0, 83670)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[948]
+	flag flag[0]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (13620, 0, 90730)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[949]
+	flag flag[0]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (60960, 0, 94820)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+monster char[8]:
+	name ""
+	pos (100830, 0, 20580)
+	angle 180deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[946]
+	flag flag[0]
+	unk3 0
+
+monster char[9]:
+	name ""
+	pos (38210, 0, -520)
+	angle 180deg
+	chip chip[4]
+	flags 0x0141
+	unk2 -1
+	battle battle[947]
+	flag flag[0]
+	unk3 0
+
+monster char[10]:
+	name ""
+	pos (15760, 0, -10320)
+	angle 180deg
+	chip chip[6]
+	flags 0x0141
+	unk2 -1
+	battle battle[948]
+	flag flag[0]
+	unk3 0
+
+monster char[11]:
+	name ""
+	pos (34200, 0, 7700)
+	angle 180deg
+	chip chip[8]
+	flags 0x0141
+	unk2 -1
+	battle battle[949]
+	flag flag[0]
+	unk3 0
+
+monster char[12]:
+	name ""
+	pos (30560, 0, -65610)
+	angle 180deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[945]
+	flag flag[0]
+	unk3 0
+
+look_point[0]:
+	pos (43930, 0, -6210)
+	radius 1000mm
+	bubble_pos (43860, 1500, -5600)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+look_point[1]:
+	pos (41920, 450, 124030)
+	radius 1000mm
+	bubble_pos (41950, 1950, 123110)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+look_point[2]:
+	pos (29340, 0, 130710)
+	radius 1000mm
+	bubble_pos (28570, 1500, 130759)
+	flags 0x007C
+	func fn[0,9]
+	unk1 0
+
+look_point[3]:
+	pos (40750, 0, 60500)
+	radius 1000mm
+	bubble_pos (40450, -1000, 56090)
+	flags 0x007C
+	func fn[0,10]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		if !flag[12109]:
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	LookPointFlagsSet look_point[3] 0x0001
+	if !flag[12276]:
+		ObjFrame object[0] 0
+	else:
+		ObjFrame object[0] 60
+	if !flag[12277]:
+		ObjFrame object[1] 0
+	else:
+		ObjFrame object[1] 60
+	if !flag[12278]:
+		ObjFrame object[2] 0
+	else:
+		ObjFrame object[2] 60
+	EntranceSetDisabled entrance[21] 1
+	EntranceSetDisabled entrance[22] 0
+	if system[66] == 7:
+		_1B look_point[21] fn[0,6]
+	SoundPlay sound[461] 1 0 100
+	EffStop eff_instance[179] 0
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (86520, 0, 156020) 0ms
+	CamSetDistance 0 5560 -10000 0ms
+	CamZoom 2900 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	CharSetPos name[2] (84560, 0, 155000) 270deg
+	CharSetPos name[80] (87460, 0, 156140) 270deg
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0008
+	CharFlagsSet char[0] 0x0004
+	CharSetPos char[0] (80000, 0, 153080) 90deg
+	ED6LoadChip "apl2/ch20689._ch" "apl2/ch20689p._cp" chip[10]
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (85440, 0, 155000) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	SoundPlay sound[394] 0 0 100
+	Sleep 800ms
+	TextTalk char[0] {
+		#2PIt's no use... It's locked.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#2POutta the way! I'll get it open!{wait}
+	}
+	TextWait
+	SoundPlay sound[394] 0 0 100
+	Sleep 800ms
+	ForkFunc char[0] fork[3] fn[0,4]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (86560, 0, 156140) 1000mm/s 0
+	ForkWait name[80] fork[1]
+	CharTurnToChar name[80] name[2] 400deg/s
+	Sleep 300ms
+	CrossFade 500ms
+	CharSetChipBase name[80] chip[10]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 315deg 0deg/s
+	Sleep 800ms
+	TextTalk name[80] {
+		#1652F(Should I use another of those canisters?
+		I've got pepper ones, too.){wait}
+	}
+	TextWait
+	CharTurnToChar name[2] name[80] 400deg/s
+	Sleep 300ms
+	TextTalk name[2] {
+		#1643F(P-Pepper?! Do you make these things
+		yourself?!){wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#1650F(I've got a few original blends of my own, yes.
+		They were originally just white smoke grenades.){wait}
+	} {
+		(For example, there's this one...){wait}
+	}
+	TextWait
+	CrossFade 250ms
+	CharSetChipBase name[80] chip[65535]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 225deg 0deg/s
+	Sleep 1000ms
+	CrossFade 250ms
+	CharSetChipBase name[80] chip[10]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 315deg 0deg/s
+	Sleep 500ms
+	TextTalk name[80] {
+		#1651F(It contains powdered laughing mushrooms.){wait}
+	} {
+		(Never tried it, though. You think it works?){wait}
+	}
+	TextWait
+	_59
+	CrossFade 250ms
+	CharSetChipBase name[80] chip[65535]
+	CharSetChipPattern name[80] 0
+	CharTurnTo name[80] 225deg 0deg/s
+	Sleep 500ms
+	ForkLoop name[2] fork[2]:
+		CharTurnToChar self name[80] 400deg/s
+	Fork name[80] fork[1]:
+		CharWalkToPos self (84600, 0, 156140) 1800mm/s 0
+	Sleep 500ms
+	Emote name[2] 0mm 2000mm 40 43 100ms 3
+	Sleep 800ms
+	TextTalk name[2] {
+		#1644F(Y-You don't need to find out now!
+		It might get blown back in here!){wait}
+	}
+	TextWait
+	ForkQuit name[2] fork[2]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (84900, 0, 155500) 2000mm/s 0
+	ForkWait name[2] fork[1]
+	CharTurnTo name[2] 270deg 500deg/s
+	Fork name[2] fork[1]:
+		CharWalkToPos2 self (86980, 0, 155500) 1000mm/s 0
+	Fork name[80] fork[1]:
+		CharWalkToPos2 self (86680, 0, 156140) 1000mm/s 0
+	ForkWait name[2] fork[1]
+	TextTalk char[0] {
+		#2PUgh... It won't budge...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#2PSomeone bring an axe! We're gonna have
+		to smash it open!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#2PThat damn bitch!{wait}
+	}
+	TextWait
+	ForkQuit char[0] fork[3]
+	ForkFunc char[0] fork[3] fn[0,5]
+	Sleep 3000ms
+	Sleep 500ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (86500, 0, 155000) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (84560, 0, 155000) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	Sleep 1000ms
+	TextTalk name[2] {
+		#1645FWhew...{wait}
+	} {
+		It looks like we've bought ourselves some time.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharTurnTo name[2] 90deg 400deg/s
+	Sleep 500ms
+	TextTalk name[2] {
+		#1644FWhat were you thinking?! What kind of insane
+		maniac just uses a smoke grenade or mustard
+		gas canister or whatever it was?!{wait}
+	} {
+		You shouldn't even be making that kind of stuff!
+		I thought you were a high-class lady!{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#1650F#2PTruly?{wait}
+	} {
+		#1651FBut it helped us get to safety, didn't it?{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1645FWell, yeah...but still!{wait}
+	} {
+		#1642FWhere did you even learn to make those things?{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#1651F#2PHeehee. My grandfather loved collecting books.
+		He had his own personal library in the mansion...{wait}
+	} {
+		I learned all kinds of useful things from there.{wait}
+	} {
+		#1650FI take it you're not much of a book enthusiast
+		yourself, so you probably wouldn't have read
+		any of the things I have...{wait}
+	} {
+		...but there's a famous spy novel I remember
+		reading, and it has a scene in it where the
+		protagonist makes their own smoke grenade...{wait}
+	}
+	TextWait
+	Emote name[2] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[2] {
+		#1645F(...She learned it from a book? I take it back.
+		'Miss Rich' is written all over her naive face.){wait}
+	} {
+		#1642FLook. Let me make this very clear for your own
+		good.{wait}
+	} {
+		You might have gotten us out of a dangerous
+		situation earlier, but you got lucky. Don't expect
+		that to happen a second time.{wait}
+	} {
+		Don't go getting cocky just because you picked
+		up some mildly useful knowledge from a book
+		that may or may not have even worked.{wait}
+	} {
+		I don't want to see you doing anything like that
+		again.{wait}
+	} {
+		Are we clear?{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#1652F#2PY-Yes! Of course...{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1646FThat's all. Let's get going.{wait}
+	}
+	TextWait
+	Fork char[1] fork[0]:
+		CamLookPos (87520, 0, 158020) 2500ms
+	Fork name[2] fork[1]:
+		CharWalkToPos self (84560, 0, 157140) 1500mm/s 0
+	Sleep 500ms
+	ForkLoop name[80] fork[2]:
+		CharTurnToChar self name[2] 400deg/s
+	ForkWait name[2] fork[1]
+	Fork name[2] fork[1]:
+		CharWalkToPos self (86340, 0, 158940) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	CharTurnTo name[2] 90deg 400deg/s
+	ForkQuit name[80] fork[2]
+	TextTalk name[2] {
+		#1646F...{wait}
+	}
+	TextWait
+	BgmStop 3000ms
+	Sleep 500ms
+	Emote name[80] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1500ms
+	Emote name[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[2]
+	TextTalk name[2] {
+		#1646F(Ugh.){wait}
+	} {
+		(Being in sewers like these always brings
+		back unpleasant memories...){wait}
+	}
+	TextWait
+	Emote name[2] 0mm 2000mm 24 27 250ms 0
+	Sleep 3000ms
+	EmoteStop name[2]
+	TextTalk name[80] {
+		#1653F#4PU-Umm...{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1648F(...It feels like my instincts are coming
+		right back, though.){wait}
+	} {
+		...{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#1652F#4P(Wh-Why did she suddenly go silent?
+		Did I say something to annoy her?){wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1646FLet's move.{wait}
+	} {
+		When they come back, they'll get that
+		door open in no time.{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos self (87440, 0, 158940) 1500mm/s 0
+	ForkWait name[2] fork[1]
+	TextTalk name[2] {
+		#1642FBut be careful, and stay close to me.
+		There're bound to be monsters here.{wait}
+	}
+	TextWait
+	TextTalk name[80] {
+		#1653F#4PR-Right...{wait}
+	}
+	TextWait
+	TextTalk name[2] {
+		#1648F...{wait}
+	}
+	TextWait
+	Fork name[2] fork[1]:
+		CharWalkToPos self (90640, -2000, 158940) 1500mm/s 0
+	Sleep 100ms
+	Fork name[80] fork[1]:
+		CharWalkToPos self (86680, 0, 158840) 1500mm/s 0
+	ForkWait name[80] fork[1]
+	Fork name[80] fork[1]:
+		CharWalkToPos self (90680, 0, 158840) 1500mm/s 0
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	CharFlagsSet char[0] 0x0080
+	SystemFlagsUnset 0x10000000
+	FlagSet flag[12109]
+	NewScene "c4202._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	while 1:
+		Sleep 2000ms
+		SoundPlay sound[394] 0 0 100
+		Sleep 800ms
+	Return
+
+fn[5]:
+	SoundPlay sound[26] 0 0 100
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 100
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 90
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 90
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 80
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 80
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 70
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 70
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 60
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 60
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 50
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 50
+	Sleep 400ms
+	SoundPlay sound[26] 0 0 40
+	Sleep 400ms
+	SoundPlay sound[27] 0 0 40
+	Sleep 400ms
+	Return
+
+fn[6]:
+	EventBegin 2
+	if flag[12110]:
+		if flag[0]:
+			CharTurnTo name[2] 90deg 500deg/s
+			Sleep 200ms
+			TextTalk name[2] {
+				#1646FWe've got no business here.{wait}
+			}
+			TextWait
+		else:
+			CharTurnTo name[2] 90deg 500deg/s
+			Sleep 200ms
+			TextTalk name[2] {
+				#1642FWe've got no business here.{wait}
+			} {
+				We need to head to the west block.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[0]:
+		CharTurnTo name[2] 90deg 500deg/s
+		Sleep 200ms
+		TextTalk name[2] {
+			#1646FLet's get going.{wait}
+		}
+		TextWait
+	else:
+		CharTurnTo name[2] 90deg 500deg/s
+		Sleep 200ms
+		TextTalk name[2] {
+			#1642FLet's get going.{wait}
+		} {
+			They'll have this door open in no time.{wait}
+		}
+		TextWait
+		FlagSet flag[0]
+	_Char90 party[0] 1500 0 0 2000 0
+	EventEnd 2
+	Return
+
+fn[7]:
+	SystemFlagsSet 0x08000000
+	if !flag[12276]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[0] 60
+		Sleep 500ms
+		if ItemAdd item[517] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[517]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12276]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[517]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[517]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[0] 60
+			ObjPlay object[0] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Awesome! Let's chest bump!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 16 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[8]:
+	SystemFlagsSet 0x08000000
+	if !flag[12277]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[1] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12277]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[1] 60
+			ObjPlay object[1] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}So tell me, how effective was that expired medicine?{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 17 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[9]:
+	SystemFlagsSet 0x08000000
+	if !flag[12278]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[2] 60
+		Sleep 500ms
+		if ItemAdd item[515] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[12278]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[515]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[515]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[2] 60
+			ObjPlay object[2] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}I'm empty now, but when I was younger? Adventurers couldn't keep
+			their hands off me!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 18 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[10]:
+	EventBegin 1
+	TextTalk name[0] {
+		#1001FThis looks like a good spot to fish.{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[1]:
+		CamLookPos (40170, 0, 57370) 1500ms
+	Fork field_party[0] fork[2]:
+		CamSetDistance 0 9500 -10000 1500ms
+	Fork field_party[1] fork[1]:
+		CamZoom 2800 1500ms
+	Fork field_party[1] fork[2]:
+		CamRotate 45000mdeg 1500ms
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 5}Fish?{color 0}{wait}
+	}
+	system[40] = 24
+	Menu menu[0] 10 32 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	ForkWait field_party[0] fork[1]
+	if var[0] == 0:
+		Minigame 14 41 40830 0 60500 180 40150 -500 55100
+		FadeWait
+		EventEnd 1
+	elif var[0] != 0:
+		EventEnd 1
+	Return

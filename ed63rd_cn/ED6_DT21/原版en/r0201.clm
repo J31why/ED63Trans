@@ -1,0 +1,325 @@
+calmare sc scena
+scena:
+	name "Rolent" "R0201.x"
+	town town[22]
+	bgm bgm[29]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02750._ch" "npl/ch02750p._cp"
+
+npc char[0]:
+	name "Joshua"
+	pos (44200, 240, 18540)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Fog Adjustment"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Rolent"
+	pos (-131580, 0, -18130)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Verte Bridge - Checkpoint"
+	pos (-224350, 20, -16180)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Perzel Farm"
+	pos (-184980, 0, -81290)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (-179550, 0, -15360)
+	radius 1500mm
+	bubble_pos (-179550, 1500, -15360)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	if system[66] == 17:
+		SystemFlagsSet 0x10000000
+		system[1] = 0
+		Event fn[0,3]
+	Return
+
+fn[1]:
+	system[58] = 1
+	EffStop eff_instance[128] 0
+	EffStop eff_instance[129] 0
+	EffStop eff_instance[130] 0
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	system[58] = 0
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{0x18}{color 0}#35A#40WSeveral weeks later...{0x05}{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetName ""
+	TextMessage null {
+		{color 0}Several peaceful weeks passed.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}Joshua's injuries continued to heal, and it wasn't
+		long before he was able to walk with ease again.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}Estelle was jumping for joy at this fact, using it as
+		an excuse to drag him out to play with her at every
+		possible opportunity.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}For him, however, it meant more than deciding what
+		game to play next--he had to decide what course of
+		action he was to take.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetName ""
+	TextMessage null {
+		{color 0}The time for him to make his choice was drawing
+		near...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 100ms
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	BgmPlay bgm[88] 0
+	CamLookPos (-152800, 0, -17910) 0ms
+	CamSetDistance 0 8980 -10000 0ms
+	CamZoom 3810 0ms
+	CamRotate 237000mdeg 0ms
+	CamPers 262 0ms
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos name[0] (-148950, 0, -17700) 270deg
+	CharSetPos char[8] (-147000, 0, -17700) 270deg
+	ForkFunc name[0] fork[3] fn[0,4]
+	ForkFunc char[8] fork[3] fn[0,4]
+	Fork char[9] fork[0]:
+		CamLookPos (-179410, 0, -15260) 10000ms
+	Fork char[9] fork[1]:
+		CamSetDistance 0 5500 -10000 10000ms
+	Fork char[9] fork[2]:
+		CamZoom 2900 10000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[9] fork[0]
+	ForkQuit name[0] fork[255]
+	ForkQuit char[8] fork[255]
+	CharSetPos name[0] (-171150, 0, -10350) 240deg
+	CharSetPos char[8] (-170520, 0, -9030) 240deg
+	Fork name[0] fork[1]:
+		CharWalkToPos self (-177530, -10, -14510) 2000mm/s 0
+	Sleep 100ms
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-177290, -10, -13430) 2000mm/s 0
+	ForkWait name[0] fork[1]
+	ForkWait char[8] fork[1]
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}South: Perzel Farm{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextTalk char[8] {
+		#1678F#6PPerzel?{wait}
+	} {
+		#1676FThat's the short-haired girl's last name,
+		right?{wait}
+	}
+	TextWait
+	CharTurnToChar name[0] char[8] 400deg/s
+	TextTalk name[0] {
+		#290F#5PUh-huh! This is where Tio lives.{wait}
+	} {
+		Guess what, though?{wait}
+	} {
+		#291FHer mom had twins!{wait}
+	}
+	TextWait
+	CharTurnToChar char[8] name[0] 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#1677F#12P...As if I needed to guess anything. You wouldn't
+		shut up about it when you first heard the news.{wait}
+	} {
+		#1671FYou've also been to see them over and over as it
+		is... Are they still exciting enough to want to keep
+		visiting?{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#291F#5POh, we're not here to visit them today.
+		We're here to help at the farm!{wait}
+	}
+	TextWait
+	Emote char[8] 0mm 1700mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	TextTalk name[0] {
+		#290F#5PRight now, it's harvesting time.{wait}
+	} {
+		But Miss Hannah's kind of stuck with the babies,
+		so they need some help.{wait}
+	} {
+		#291FAnd when Elissa told me about it, I wanted that
+		help to be ME.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#1677F#12P...Well, it's nice of you to offer...{wait}
+	} {
+		#1675F...but why do I have to come, too?{wait}
+	}
+	TextWait
+	TextTalk name[0] {
+		#292F#5PBecause I said so. No complaining!{wait}
+	} {
+		Let's gooo!{wait}
+	}
+	TextWait
+	Fork name[0] fork[1]:
+		CharWalkToPos self (-177430, -10, -14020) 2000mm/s 0
+	ForkWait name[0] fork[1]
+	CharTurnTo name[0] 180deg 500deg/s
+	Fork name[0] fork[1]:
+		CharWalkToPos self (-177430, -10, -24020) 1500mm/s 0
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-177290, -10, -23430) 1500mm/s 0
+	Sleep 400ms
+	TextTalk name[0] {
+		#294F#2P#15AThis is part of your rear-hillbilly process!{wait}
+	}
+	Sleep 1800ms
+	TextTalk char[8] {
+		#1677F#4P#15A...I told you, it's 'rehabilitation.'{wait}
+	}
+	Sleep 1800ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	NewScene "t0400._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharWalkToPos self (-155460, 0, -17700) 2000mm/s 0
+	ForkWait self fork[1]
+	Fork self fork[1]:
+		CharWalkToPos self (-158750, 10, -13380) 2000mm/s 0
+	ForkWait self fork[1]
+	Fork self fork[1]:
+		CharWalkToPos self (-169460, 0, -13380) 2000mm/s 0
+	ForkWait self fork[1]
+	Return
+
+fn[5]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}South: Perzel Farm{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return

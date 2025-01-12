@@ -1,0 +1,640 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U4241.x"
+	town town[1]
+	bgm bgm[230]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+npc char[0]:
+	name "Elevator"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[8]
+	frame 0
+	ch chip[8]
+	flags 0x01C4
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+look_point[0]:
+	pos (0, 100, -60610)
+	radius 1000mm
+	bubble_pos (0, 900, -60610)
+	flags 0x007C
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if system[0] == 100:
+		if flag[10011] && !flag[10012]:
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	if system[0] == 101:
+		Event fn[0,10]
+	Return
+
+fn[1]:
+	OpLoad "U4241_1"
+	EntranceSetDisabled entrance[1] 0
+	ObjFlagsSet object[1] 0x0002
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (-780, 0, -77630) 0deg
+	CharSetPos name[14] (460, 0, -77990) 0deg
+	CharSetPos party[2] (-780, 0, -77630) 0deg
+	CharSetPos party[3] (460, 0, -77990) 0deg
+	CharColor name[8] 0x00FFFFFF 0ms
+	CharColor name[14] 0x00FFFFFF 0ms
+	CharColor party[2] 0x00FFFFFF 0ms
+	CharColor party[3] 0x00FFFFFF 0ms
+	CamLookPos (160, 1350, -61500) 0ms
+	CamSetDistance 0 7990 -10000 0ms
+	CamZoom 3020 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 297 0ms
+	Fork name[8] fork[2]:
+		CamLookPos (1100, 0, -67410) 5000ms
+	Fork name[8] fork[3]:
+		CamSetDistance 0 5830 -10000 5000ms
+	Fork name[14] fork[2]:
+		CamZoom 2950 5000ms
+	Fork name[14] fork[3]:
+		CamPers 280 5000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkFunc name[8] fork[0] fn[0,3]
+	ForkFunc name[14] fork[0] fn[0,4]
+	ForkFunc party[2] fork[0] fn[0,5]
+	ForkFunc party[3] fork[0] fn[0,6]
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait party[2] fork[0]
+	ForkWait party[3] fork[0]
+	ForkWait name[8] fork[1]
+	Sleep 500ms
+	TextTalk name[14] {
+		#1444F#5PIs this some form of elevator?{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#173F#6PYes. It connects the castle and a ruin
+		500 arge below it, but...{wait}
+	} {
+		#178F...this doesn't make any sense...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1067F#5PYou're tellin' me. What's going on here?{wait}
+	}
+	TextWait
+	if PartyPosition name[12] != -1:
+		TextTalk name[12] {
+			#270F#6PWhat exactly do you find strange?{wait}
+		}
+		TextWait
+		Fork name[8] fork[0]:
+			CharTurnTo self 180deg 400deg/s
+		Sleep 100ms
+		CharTurnTo name[14] 225deg 400deg/s
+		Sleep 300ms
+		ForkWait name[8] fork[1]
+		TextTalk name[8] {
+			#1063F#5PWell, when I first came to Liberl, Julia led me
+			through this room and into the area below...{wait}
+		} {
+			...but this isn't how this room was. It was way
+			tidier.{wait}
+		}
+		TextWait
+	else:
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1504F#6PI'm not following.{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			TextTalk name[6] {
+				#064F#6PWhat do you mean?{wait}
+			}
+			TextWait
+		elif PartyPosition name[10] != -1:
+			TextTalk name[10] {
+				#213F#6PWhat's bothering you?{wait}
+			}
+			TextWait
+		Fork name[8] fork[0]:
+			CharTurnTo self 180deg 400deg/s
+		Sleep 100ms
+		CharTurnTo name[14] 225deg 400deg/s
+		Sleep 300ms
+		ForkWait name[8] fork[1]
+		TextTalk name[8] {
+			#1063F#5PWell, when I first came to Liberl, Julia led me
+			through this room and into the area below...{wait}
+		} {
+			...but this isn't how this room was. It was way
+			tidier.{wait}
+		}
+		TextWait
+	if PartyPosition name[1] != -1 | PartyPosition name[6] != -1:
+		TextTalk name[13] {
+			#176F#6PIndeed. To my knowledge, the room was put
+			in order and then locked, and I was under
+			the impression it was to remain that way.{wait}
+		} {
+			#178FI have seen it this way once before, though...{wait}
+		}
+		TextWait
+		if PartyPosition name[1] != -1:
+			TextTalk name[1] {
+				#1503F#6PYeah. So have I.{wait}
+			} {
+				#1502FIt's exactly how I remember it being when
+				we came here during the coup d'etat.{wait}
+			}
+			TextWait
+		elif PartyPosition name[6] != -1:
+			Emote name[6] 0mm 1700mm 2 7 80ms 1
+			SoundPlay sound[39] 0 0 100
+			Sleep 1000ms
+			TextTalk name[6] {
+				#065F#6PM-My memories of it are getting kinda hazy, but...{wait}
+			} {
+				...wasn't this the way it was when we all gathered
+				here during the coup d'etat?{wait}
+			}
+			TextWait
+		TextTalk name[13] {
+			#176F#6PThat's what I was thinking of as well.{wait}
+		}
+		TextWait
+	else:
+		TextTalk name[13] {
+			#176F#6PIndeed. To my knowledge, the room was put
+			in order and then locked, and I was under the
+			impression it was to remain that way...{wait}
+		} {
+			#178FIt's almost as if it's returned to the same way it
+			was back during the coup d'etat.{wait}
+		} {
+			That's the last time I remember it being in this
+			state.{wait}
+		}
+		TextWait
+	TextTalk name[14] {
+		#1802F#5PAre you trying to suggest that we may have gone
+		back in time?{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#175F#6PI find it impossible to believe that may have been
+		the case...but how else could I explain this?{wait}
+	} {
+		Of course, I could be mistaken. And yet...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1063F#5P...{wait}
+	} {
+		#1065FWell, if we're going to follow what that ghost
+		seems to want us to do, then we'll keep it up
+		and hope for more answers along the way.{wait}
+	} {
+		#1060FTime to climb on board and see what's waiting
+		for us.{wait}
+	}
+	TextWait
+	TextTalk name[13] {
+		#172F#6PRight!{wait}
+	}
+	TextWait
+	FlagSet flag[10012]
+	QuestTaskSet quest[45] 0x0100
+	QuestFlagsSet quest[46] 0x04
+	QuestFlagsSet quest[46] 0x08
+	QuestTaskSet quest[46] 0x0001
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-870, 0, -68010) 2000mm/s 0
+	Return
+
+fn[4]:
+	Sleep 100ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (640, 0, -68060) 2000mm/s 0
+	Return
+
+fn[5]:
+	Sleep 900ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (-1160, 0, -69760) 2000mm/s 0
+	Return
+
+fn[6]:
+	Sleep 900ms
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 300ms
+	CharWalkToPos self (120, 0, -69850) 2000mm/s 0
+	Return
+
+fn[7]:
+	if flag[10013]:
+		Call fn[0,9]
+	else:
+		Call fn[0,8]
+	Return
+
+fn[8]:
+	EventBegin 0
+	CrossFade 500ms
+	CharFlag2Set name[8] 0x0020
+	CharFlag2Set name[14] 0x0020
+	CharFlag2Set party[2] 0x0020
+	CharFlag2Set party[3] 0x0020
+	CharSetPos2 name[8] (-90, 100, -61250) 0deg
+	CharSetPos2 name[14] (750, 100, -62230) 0deg
+	CharSetPos2 party[2] (-1230, 100, -62300) 0deg
+	CharSetPos2 party[3] (-280, 100, -63320) 0deg
+	CamLookPos (400, 100, -61120) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 120 -1 -1
+	TextMessage null {
+		{color 5}Activate the Elevator?{0x18}{wait}
+	}
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 -1 1
+			"Yes" // 0
+			"No" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		switch var[0]:
+			case 0:
+				SoundPlay sound[156] 0 0 100
+				ObjFlagsSet object[1] 0x0004
+				Sleep 1000ms
+				CharAttachObj char[0] object[0]
+				CharSetPos char[0] (0, 0, -62000) 0deg
+				NextFrame
+				Fork name[8] fork[0]:
+					CamSetDistance 0 6000 -10000 5000ms
+				Fork name[8] fork[1]:
+					CamZoom 2700 5000ms
+				SoundPlay sound[247] 0 0 100
+				SoundPlay sound[104] 1 0 100
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 1000mm/s 0
+				Sleep 300ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 1500mm/s 0
+				Sleep 500ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 2000mm/s 0
+				Sleep 800ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 3000mm/s 0
+				Sleep 1000ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 4000mm/s 0
+				FadeOut 2000ms 0x00000000 255
+				FadeWait
+				ForkQuit name[8] fork[0]
+				ForkQuit name[8] fork[1]
+				ForkQuit char[0] fork[255]
+				CharAttachObj char[0] object[2]
+				CharSetPos char[0] (0, 170000, 0) 0deg
+				Fog 0xFF000000 30000 40000 0
+				SystemFlagsSet 0x00000010
+				NextFrame
+				_Char6A char[0]
+				CamSetDistance 0 7410 -10000 0ms
+				CamZoom 1980 0ms
+				CamRotate 36000mdeg 0ms
+				CamPers 450 0ms
+				CharSetPos2 name[8] (-290, 190100, 470) 0deg
+				CharSetPos2 name[14] (510, 190100, -670) 0deg
+				CharSetPos2 party[2] (-1180, 190100, -570) 0deg
+				CharSetPos2 party[3] (-370, 190100, -1410) 0deg
+				Sleep 500ms
+				Fork name[8] fork[0]:
+					CamSetDistance 0 11400 -10000 10000ms
+				Fork name[8] fork[1]:
+					CamZoom 1310 10000ms
+				Fork name[8] fork[2]:
+					CamRotate 55000mdeg 10000ms
+				Fork name[8] fork[3]:
+					CamPers 776 10000ms
+				Fork char[0] fork[0]:
+					CharWalkToPos2 self (0, 60000, 0) 8000mm/s 0
+				Sleep 300ms
+				FadeIn 2000ms 0x00000000
+				ForkWait char[0] fork[0]
+				FadeOut 2000ms 0x00000000 255
+				Fork char[0] fork[0]:
+					CharWalkToPos2 self (0, 0, 0) 8000mm/s 0
+				SoundSetVolume sound[104] 90
+				Sleep 400ms
+				SoundSetVolume sound[104] 85
+				Sleep 400ms
+				SoundSetVolume sound[104] 80
+				Sleep 400ms
+				SoundSetVolume sound[104] 75
+				Sleep 400ms
+				SoundSetVolume sound[104] 70
+				Sleep 400ms
+				SoundSetVolume sound[104] 65
+				Sleep 400ms
+				SoundSetVolume sound[104] 60
+				Sleep 400ms
+				SoundStop sound[104]
+				FadeWait
+				FlagSet flag[9476]
+				NewScene "m4300._sn" 101 0 0
+				Hcf
+				var[0] = 255
+				break
+			default:
+				var[0] = 255
+				break
+	EventEnd 0
+	Return
+
+fn[9]:
+	EventBegin 0
+	CrossFade 500ms
+	CharFlag2Set field_party[0] 0x0020
+	CharFlag2Set field_party[1] 0x0020
+	CharFlag2Set field_party[2] 0x0020
+	CharFlag2Set field_party[3] 0x0020
+	CharSetPos2 field_party[0] (-90, 100, -61250) 0deg
+	CharSetPos2 field_party[1] (750, 100, -62230) 0deg
+	CharSetPos2 field_party[2] (-1230, 100, -62300) 0deg
+	CharSetPos2 field_party[3] (-280, 100, -63320) 0deg
+	CamLookPos (400, 100, -61120) 0ms
+	CamSetDistance 0 8000 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 300ms
+	FadeOut 300ms 0x00000000 100
+	TextSetPos -1 120 -1 -1
+	TextMessage null {
+		{color 5}Activate the Elevator?{0x18}{wait}
+	}
+	system[40] = 24
+	var[0] = 0
+	while var[0] != 255:
+		Menu menu[1] -1 -1 1
+			"Yes " // 0
+			"No" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		FadeWait
+		switch var[0]:
+			case 0:
+				SoundPlay sound[156] 0 0 100
+				ObjFlagsSet object[1] 0x0004
+				Sleep 1000ms
+				CharAttachObj char[0] object[0]
+				CharSetPos char[0] (0, 0, -62000) 0deg
+				NextFrame
+				Fork field_party[0] fork[0]:
+					CamSetDistance 0 6000 -10000 5000ms
+				Fork field_party[0] fork[1]:
+					CamZoom 2700 5000ms
+				SoundPlay sound[247] 0 0 100
+				SoundPlay sound[104] 1 0 100
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 1000mm/s 0
+				Sleep 300ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 1500mm/s 0
+				Sleep 500ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 2000mm/s 0
+				Sleep 800ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 3000mm/s 0
+				Sleep 1000ms
+				Fork char[0] fork[1]:
+					CharWalkToPos2 self (0, -40000, -60000) 4000mm/s 0
+				FadeOut 2000ms 0x00000000 255
+				FadeWait
+				ForkQuit field_party[0] fork[0]
+				ForkQuit field_party[0] fork[1]
+				ForkQuit char[0] fork[255]
+				CharAttachObj char[0] object[2]
+				CharSetPos char[0] (0, 170000, 0) 0deg
+				Fog 0xFF000000 30000 40000 0
+				SystemFlagsSet 0x00000010
+				NextFrame
+				_Char6A char[0]
+				CamSetDistance 0 7410 -10000 0ms
+				CamZoom 1980 0ms
+				CamRotate 36000mdeg 0ms
+				CamPers 450 0ms
+				CharSetPos2 field_party[0] (-290, 190100, 470) 0deg
+				CharSetPos2 field_party[1] (510, 190100, -670) 0deg
+				CharSetPos2 field_party[2] (-1180, 190100, -570) 0deg
+				CharSetPos2 field_party[3] (-370, 190100, -1410) 0deg
+				Sleep 500ms
+				Fork field_party[0] fork[0]:
+					CamSetDistance 0 11400 -10000 8000ms
+				Fork field_party[0] fork[1]:
+					CamZoom 1310 8000ms
+				Fork field_party[0] fork[2]:
+					CamRotate 55000mdeg 8000ms
+				Fork field_party[0] fork[3]:
+					CamPers 776 8000ms
+				Fork char[0] fork[0]:
+					CharWalkToPos2 self (0, 60000, 0) 8000mm/s 0
+				Sleep 300ms
+				FadeIn 2000ms 0x00000000
+				Sleep 5000ms
+				FadeOut 2000ms 0x00000000 255
+				Fork char[0] fork[0]:
+					CharWalkToPos2 self (0, 0, 0) 8000mm/s 0
+				SoundSetVolume sound[104] 90
+				Sleep 400ms
+				SoundSetVolume sound[104] 85
+				Sleep 400ms
+				SoundSetVolume sound[104] 80
+				Sleep 400ms
+				SoundSetVolume sound[104] 75
+				Sleep 400ms
+				SoundSetVolume sound[104] 70
+				Sleep 400ms
+				SoundSetVolume sound[104] 65
+				Sleep 400ms
+				SoundSetVolume sound[104] 60
+				Sleep 400ms
+				SoundStop sound[104]
+				FadeWait
+				ForkQuit char[0] fork[0]
+				NewScene "m4300._sn" 101 0 0
+				Hcf
+				var[0] = 255
+				break
+			default:
+				var[0] = 255
+				break
+	EventEnd 0
+	Return
+
+fn[10]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	ObjFlagsSet object[1] 0x0004
+	CharAttachObj char[0] object[2]
+	CharSetPos char[0] (0, 70000, 0) 0deg
+	Fog 0xFF000000 30000 40000 0
+	SystemFlagsSet 0x00000010
+	NextFrame
+	_Char6A char[0]
+	CamSetDistance 0 11400 -10000 0ms
+	CamZoom 1310 0ms
+	CamRotate 55000mdeg 0ms
+	CamPers 776 0ms
+	CharFlag2Set field_party[0] 0x0020
+	CharFlag2Set field_party[1] 0x0020
+	CharFlag2Set field_party[2] 0x0020
+	CharFlag2Set field_party[3] 0x0020
+	CharSetPos2 field_party[0] (-290, 90100, 470) 0deg
+	CharSetPos2 field_party[1] (510, 90100, -670) 0deg
+	CharSetPos2 field_party[2] (-1180, 90100, -570) 0deg
+	CharSetPos2 field_party[3] (-370, 90100, -1410) 0deg
+	Sleep 500ms
+	Fork field_party[0] fork[0]:
+		CamSetDistance 0 7410 -10000 10000ms
+	Fork field_party[0] fork[1]:
+		CamZoom 1980 10000ms
+	Fork field_party[0] fork[2]:
+		CamRotate 36000mdeg 10000ms
+	Fork field_party[0] fork[3]:
+		CamPers 450 10000ms
+	ForkFunc char[0] fork[3] fn[0,11]
+	Fork char[0] fork[0]:
+		CharWalkToPos2 self (0, 160000, 0) 8000mm/s 0
+	Sleep 300ms
+	FadeIn 2000ms 0x00000000
+	Sleep 5000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[0] fork[0]
+	_Char6A null
+	ForkQuit field_party[0] fork[0]
+	ForkQuit field_party[0] fork[1]
+	ForkQuit field_party[0] fork[2]
+	ForkQuit field_party[0] fork[3]
+	SystemFlagsUnset 0x00000010
+	Sleep 300ms
+	CharAttachObj char[0] object[0]
+	CharSetPos char[0] (0, -10000, -62000) 0deg
+	NextFrame
+	Sleep 100ms
+	CharFlag2Set field_party[0] 0x0020
+	CharFlag2Set field_party[1] 0x0020
+	CharFlag2Set field_party[2] 0x0020
+	CharFlag2Set field_party[3] 0x0020
+	CharSetPos2 field_party[0] (-90, -5100, -61450) 0deg
+	CharSetPos2 field_party[1] (750, -5100, -62430) 0deg
+	CharSetPos2 field_party[2] (-1230, -5100, -62500) 0deg
+	CharSetPos2 field_party[3] (-280, -5100, -63520) 0deg
+	CamLookPos (400, 100, -61120) 0ms
+	CamSetDistance 0 6000 -10000 0ms
+	CamZoom 2700 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Sleep 500ms
+	Fork field_party[0] fork[0]:
+		CamSetDistance 0 8000 -10000 5000ms
+	Fork field_party[0] fork[1]:
+		CamZoom 2800 5000ms
+	FadeIn 1000ms 0x00000000
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (0, 0, -62000) 4000mm/s 0
+	Sleep 1000ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (0, 0, -62000) 3000mm/s 0
+	Sleep 800ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (0, 0, -62000) 2000mm/s 0
+	Sleep 600ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (0, 0, -62000) 1500mm/s 0
+	Sleep 300ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (0, 0, -62000) 1000mm/s 0
+	ForkWait char[0] fork[1]
+	SoundPlay sound[247] 0 0 100
+	SoundStop sound[104]
+	ObjFlagsUnset object[1] 0x0004
+	Sleep 300ms
+	EventEnd 0
+	Return
+
+fn[11]:
+	SoundPlay sound[104] 1 0 0
+	Sleep 100ms
+	SoundSetVolume sound[104] 10
+	Sleep 100ms
+	SoundSetVolume sound[104] 20
+	Sleep 100ms
+	SoundSetVolume sound[104] 30
+	Sleep 100ms
+	SoundSetVolume sound[104] 40
+	Sleep 100ms
+	SoundSetVolume sound[104] 50
+	Sleep 100ms
+	SoundSetVolume sound[104] 60
+	Sleep 100ms
+	SoundSetVolume sound[104] 70
+	Sleep 100ms
+	SoundSetVolume sound[104] 80
+	Sleep 100ms
+	SoundSetVolume sound[104] 90
+	Sleep 100ms
+	SoundSetVolume sound[104] 100
+	Return

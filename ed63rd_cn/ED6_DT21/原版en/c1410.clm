@@ -1,0 +1,319 @@
+calmare fc scena
+scena:
+	name "Bose" "C1410.x"
+	town town[62]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01680._ch" "npl/ch01680p._cp"
+chip[1] "npl/ch00050._ch" "npl/ch00050p._cp"
+
+npc char[0]:
+	name "Whemler"
+	pos (3200, 0, 33900)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Agate"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 13:
+	if system[66] == 13:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			system[1] = 22
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SystemFlagsUnset 0x02000000
+	CamLookPos (3000, 1500, 39360) 0ms
+	CamSetDistance 0 5300 -10000 0ms
+	CamZoom 3140 0ms
+	CamRotate 50000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsUnset char[9] 0x0080
+	CharFlagsSet char[9] 0x0040
+	CharSetPos char[9] (2800, 0, 38100) 270deg
+	CharSetPos char[8] (3140, 0, 36980) 270deg
+	CharSetPos name[17] (540, 0, 37040) 90deg
+	CharSetPos name[16] (440, 0, 37840) 90deg
+	CharSetPos name[18] (340, 0, 38640) 90deg
+	Fork char[10] fork[0]:
+		CamLookPos (3000, 0, 39360) 3000ms
+	Fork char[10] fork[1]:
+		CamSetDistance 0 4800 -10000 3000ms
+	FadeIn 2000ms 0x00000000
+	ForkWait char[10] fork[0]
+	Sleep 500ms
+	TextTalk name[16] {
+		#1749F#6PWhen I found out we were gonna be doing our
+		final exam outside Ruan, I was so excited...
+		Didn't think it was gonna be a place like this.{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1765F#6PSame here. Who'd have figured we'd end up
+		dragged out to a cabin in the middle of this
+		misty-ass swamphole?{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1755F#6PHave any of us even been outside of Ruan
+		before?{wait}
+	} {
+		#1754FWhy'd our first taste of fresh air have to be
+		somewhere so WEIRD?{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1744F#6PIt's not like we're here on vacation.{wait}
+	} {
+		#1740FWe're here as part of our training! Can't expect
+		to get taken to a theme park or somethin'.{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1751F#6PI guess. Wow, that's so grown up of you!{wait}
+	}
+	TextWait
+	Fork char[10] fork[0]:
+		CamLookPos (3500, 0, 39360) 2000ms
+	Emote char[9] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	ForkWait char[10] fork[0]
+	EmoteStop char[9]
+	Sleep 500ms
+	TextTalk char[9] {
+		#051F#11PHeh. Glad one of you's got his head screwed on.{wait}
+	} {
+		#053FI thought I was gonna have to give you guys
+		a lecture on why you're here, but maybe I can
+		spare myself the boring crap after all.{wait}
+	} {
+		#050FAnyway, that's enough shootin' the shit here.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1742F#6PS-Sorry...{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1763F#6PBah. Always gotta talk down to us...{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#053F#11PAs you know, this final exam is what determines
+		whether you pass your training or not.{wait}
+	} {
+		It all hinges on this. Pass, and you're all junior
+		bracers from here on. Fail, and you ain't.{wait}
+	} {
+		#051FEither way, let me say this.{wait}
+	} {
+		I'm impressed you've made it this far without
+		dropping out. I wasn't sure you had it in you,
+		but you sure as hell proved me wrong.{wait}
+	}
+	TextWait
+	Emote name[16] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[17] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 50ms
+	Emote name[18] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[16] {
+		#1743F#6PD-Did he just praise us...?{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#6PWh-What's gotten into him?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1764F#6PI think I'm gonna be sick.{wait}
+	}
+	TextWait
+	Emote char[9] 0mm 2000mm 12 13 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[9] {
+		#555F#11PWhat kinda heartless monster do you guys
+		think I am?{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1761FJust hurry up and spill the details.{wait}
+	} {
+		I'm gettin' sick of standing around
+		here. I wanna get started.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#051F#11PThat shows balls. Good.{wait}
+	} {
+		#053FAll right. Let's get down to it, then.{wait}
+	} {
+		#050FYour task's simple enough. You're gonna make your
+		way through a cave full of monsters. Get to the end,
+		and you pass.{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1743F#6PA-A cave?{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1753F#6PI thought our exam was gonna be in this valley...
+		We gotta go somewhere else now?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#051F#11PQuit whinin'. It's not far from here.{wait}
+	} {
+		#053FIt'll be harder than it sounds, but if you get to
+		the end in one piece, you get your badges.{wait}
+	} {
+		I'm not giving you a strict time limit, but the
+		longer you take, the longer you keep me waitin',
+		so don't push your luck.{wait}
+	} {
+		#050FThat's it. Any questions?{wait}
+	}
+	TextWait
+	TextTalk name[16] {
+		#1744F#6PSounds easy.{wait}
+	} {
+		#1741FAll we have to do is go for a walk
+		while beating up some monsters!{wait}
+	}
+	TextWait
+	TextTalk name[17] {
+		#1756F#6PThis exam was made for us!{wait}
+	}
+	TextWait
+	TextTalk name[18] {
+		#1761F#6PThis should be kinda fun.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#551F#11P...That's a no to the questions, I guess.{wait}
+	}
+	TextWait
+	CharTurnToChar char[9] char[8] 400deg/s
+	Sleep 300ms
+	TextTalk char[9] {
+		#051F#5PWell, Whemler?{wait}
+	} {
+		I'll be countin' on you to back 'em up for me.{wait}
+	}
+	TextWait
+	CharTurnToChar char[8] char[9] 400deg/s
+	Sleep 300ms
+	TextTalk char[8] {
+		#12PWell, if you insist...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#12PYou're sure they're up for this, though?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#053F#5PIt'll be fine. Trust me.{wait}
+	} {
+		#051FOkay. Let's get our butts over to that cave.{wait}
+	}
+	TextWait
+	Fork char[9] fork[1]:
+		CharWalkToPos self (140, 0, 35960) 2000mm/s 0
+	Sleep 300ms
+	ForkLoop name[16] fork[2]:
+		CharTurnToChar self char[9] 400deg/s
+	ForkLoop name[17] fork[2]:
+		CharTurnToChar self char[9] 400deg/s
+	ForkLoop name[18] fork[2]:
+		CharTurnToChar self char[9] 400deg/s
+	Fork name[17] fork[1]:
+		CharWalkToPos2 self (0, 0, 37010) 1000mm/s 0
+	Sleep 600ms
+	FadeOut 2000ms 0x00000000 255
+	ForkFunc char[8] fork[3] fn[0,4]
+	ForkWait char[9] fork[1]
+	Fork char[9] fork[1]:
+		CharWalkToPos self (-5400, 0, 35960) 2000mm/s 0
+	FadeWait
+	Sleep 1000ms
+	FlagSet flag[9476]
+	NewScene file[0x002100A8] 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	Fork char[8] fork[1]:
+		CharWalkToPos self (1340, 0, 36980) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (140, 0, 35960) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Fork char[8] fork[1]:
+		CharWalkToPos self (-5400, 0, 35960) 2000mm/s 0
+	ForkWait char[8] fork[1]
+	Return

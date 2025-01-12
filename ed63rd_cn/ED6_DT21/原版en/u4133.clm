@@ -1,0 +1,220 @@
+calmare tc scena
+scena:
+	name "gaiden2" "U4133.x"
+	town town[1]
+	bgm bgm[221]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+look_point[0]:
+	pos (67050, 0, -2510)
+	radius 1000mm
+	bubble_pos (67000, 1000, -3250)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[1]:
+	pos (-24840, 0, 52550)
+	radius 1000mm
+	bubble_pos (-24950, 1000, 53250)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (34990, 0, 114350)
+	radius 1000mm
+	bubble_pos (34900, 1000, 115070)
+	flags 0x007C
+	func fn[0,4]
+	unk1 0
+
+look_point[3]:
+	pos (99160, 0, 114590)
+	radius 1000mm
+	bubble_pos (99120, 1000, 115300)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	Return
+
+fn[1]:
+	if !flag[10126]:
+		ObjFrame object[25] 0
+	else:
+		ObjFrame object[25] 60
+	if !flag[10127]:
+		ObjFrame object[26] 0
+	else:
+		ObjFrame object[26] 60
+	if !flag[10128]:
+		ObjFrame object[27] 0
+	else:
+		ObjFrame object[27] 60
+	if !flag[10129]:
+		ObjFrame object[28] 0
+	else:
+		ObjFrame object[28] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[10126]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[25] 60
+		Sleep 500ms
+		if ItemAdd item[360] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[360]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[10126]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[360]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[360]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[25] 60
+			ObjPlay object[25] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}[5/36] 'My Dearest Genevieve,' the letter within began, the handwriting
+			noticeably delicate and imperfect from what must have been nerves,
+			'I present two gifts: this chest, of which there is no other, and my love.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 267 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10127]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[26] 30
+		ObjWait object[26]
+		ObjFrame object[26] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 500
+		TextMessage null {
+			{color 5}Received {color 2}500 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10127]
+	else:
+		TextMessage null {
+			{color 5}[10/36] There was a time when it had the polish of its products…and, oh,
+			if only that continued to be the case! One might quip that it had character
+			now, but that was only the polite way of saying it was in shambles.{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 268 0
+	Return
+
+fn[4]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10128]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[27] 30
+		ObjWait object[27]
+		ObjFrame object[27] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 500
+		TextMessage null {
+			{color 5}Received {color 2}500 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10128]
+	else:
+		TextMessage null {
+			{color 5}Roses are red, violets are blue.
+			A tear I have just shed, since I've got nothing more for you.{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 269 0
+	Return
+
+fn[5]:
+	SystemFlagsSet 0x08000000
+	FadeOut 300ms 0x00000000 100
+	if !flag[10129]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[28] 30
+		ObjWait object[28]
+		ObjFrame object[28] 30
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		MiraAdd 500
+		TextMessage null {
+			{color 5}Received {color 2}500 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FlagSet flag[10129]
+	else:
+		TextMessage null {
+			{color 5}(9/12) And this was in spite of a messy divorce with her spouse eating
+			up what little she had. Her children were taken from her as a result, and
+			her life took a turn for the worse. Now, she lived in a tiny one-room...{wait}
+		}
+		TextWait
+		TextClose 0
+	FadeIn 300ms 0x00000000
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	ScAchievement 25 270 0
+	Return

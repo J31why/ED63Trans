@@ -1,0 +1,748 @@
+calmare tc scena
+scena:
+	name "Gaiden2" "U2512.x"
+	town town[1]
+	bgm bgm[231]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch15140._ch" "mons2/ch15140p._cp"
+chip[1] "mons2/ch15141._ch" "mons2/ch15141p._cp"
+chip[2] "mons2/ch14650._ch" "mons2/ch14650p._cp"
+chip[3] "mons2/ch14651._ch" "mons2/ch14651p._cp"
+
+monster char[0]:
+	name ""
+	pos (30970, 0, 450)
+	angle 0deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[629]
+	flag flag[11084]
+	unk3 0
+
+monster char[1]:
+	name ""
+	pos (-5500, 0, -820)
+	angle 90deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[630]
+	flag flag[11085]
+	unk3 0
+
+monster char[2]:
+	name ""
+	pos (5580, 4000, -810)
+	angle 90deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[628]
+	flag flag[11086]
+	unk3 0
+
+monster char[3]:
+	name ""
+	pos (30970, 0, 450)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[628]
+	flag flag[11084]
+	unk3 0
+
+monster char[4]:
+	name ""
+	pos (-5500, 0, -820)
+	angle 90deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[628]
+	flag flag[11085]
+	unk3 0
+
+monster char[5]:
+	name ""
+	pos (5580, 4000, -810)
+	angle 90deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[628]
+	flag flag[11086]
+	unk3 0
+
+monster char[6]:
+	name ""
+	pos (-61400, 0, 29000)
+	angle 0deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[633]
+	flag flag[11088]
+	unk3 0
+
+monster char[7]:
+	name ""
+	pos (-121050, 0, 50)
+	angle 0deg
+	chip chip[0]
+	flags 0x0141
+	unk2 -1
+	battle battle[634]
+	flag flag[11089]
+	unk3 0
+
+monster char[8]:
+	name ""
+	pos (-60820, 0, -1580)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[632]
+	flag flag[11090]
+	unk3 0
+
+monster char[9]:
+	name ""
+	pos (-61400, 0, 29000)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[632]
+	flag flag[11088]
+	unk3 0
+
+monster char[10]:
+	name ""
+	pos (-121050, 0, 50)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[632]
+	flag flag[11089]
+	unk3 0
+
+monster char[11]:
+	name ""
+	pos (-60820, 0, -1580)
+	angle 0deg
+	chip chip[2]
+	flags 0x0141
+	unk2 -1
+	battle battle[632]
+	flag flag[11090]
+	unk3 0
+
+trigger[0]:
+	pos1 (0, 0, 0)
+	pos2 (0, 0, 0)
+	flags 0x0020
+	func fn[0,4]
+	unk1 0
+
+look_point[0]:
+	pos (-120540, 0, 29700)
+	radius 1000mm
+	bubble_pos (-120540, 3000, 30510)
+	flags 0x007C
+	func fn[0,12]
+	unk1 0
+
+look_point[1]:
+	pos (29540, 0, 30490)
+	radius 1000mm
+	bubble_pos (29540, 1000, 30490)
+	flags 0x007C
+	func fn[0,2]
+	unk1 0
+
+look_point[2]:
+	pos (-59080, 0, 25630)
+	radius 1000mm
+	bubble_pos (-59080, 1000, 25630)
+	flags 0x007C
+	func fn[0,3]
+	unk1 0
+
+fn[0]:
+	if flag[9478]:
+		FlagUnset flag[9478]
+		SystemFlagsSet 0x10000000
+		Event fn[0,14]
+	elif flag[9476]:
+		FlagUnset flag[9476]
+		SystemFlagsSet 0x10000000
+		_B6 0
+		Event fn[0,9]
+	elif flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		_B6 0
+		Event fn[0,10]
+	if system[0] == 100 | system[0] == 101 | system[0] == 102 | system[0] == 103 | system[0] == 104 | system[0] == 105 | system[0] == 106 | system[0] == 107 | system[0] == 108:
+		if flag[11014]:
+			CharFlagsSet char[0] 0x0080
+			CharFlagsSet char[1] 0x0080
+			CharFlagsSet char[2] 0x0080
+		elif !flag[11087]:
+			CharFlagsSet char[3] 0x0080
+			CharFlagsSet char[4] 0x0080
+			CharFlagsSet char[5] 0x0080
+		else:
+			CharFlagsSet char[0] 0x0080
+			CharFlagsSet char[1] 0x0080
+			CharFlagsSet char[2] 0x0080
+			CharFlagsSet char[3] 0x0080
+			CharFlagsSet char[4] 0x0080
+		if !flag[11014]:
+			if flag[11084]:
+				CharFlagsSet char[0] 0x0080
+			if flag[11085]:
+				CharFlagsSet char[1] 0x0080
+	elif system[0] == 109 | system[0] == 110 | system[0] == 111 | system[0] == 112 | system[0] == 113 | system[0] == 114 | system[0] == 115 | system[0] == 116 | system[0] == 118 | system[0] == 107:
+		if flag[11014]:
+			CharFlagsSet char[6] 0x0080
+			CharFlagsSet char[7] 0x0080
+			CharFlagsSet char[8] 0x0080
+		elif !flag[11091]:
+			CharFlagsSet char[9] 0x0080
+			CharFlagsSet char[10] 0x0080
+			CharFlagsSet char[11] 0x0080
+		else:
+			CharFlagsSet char[6] 0x0080
+			CharFlagsSet char[7] 0x0080
+			CharFlagsSet char[8] 0x0080
+			CharFlagsSet char[9] 0x0080
+			CharFlagsSet char[10] 0x0080
+		if !flag[11014]:
+			if flag[11088]:
+				CharFlagsSet char[6] 0x0080
+			if flag[11089]:
+				CharFlagsSet char[7] 0x0080
+	Return
+
+fn[1]:
+	OpLoad "U2512_n"
+	EffStop eff_instance[128] 0
+	if QuestFlagsGet quest[11] 0x02:
+		EffStop eff_instance[129] 0
+	else:
+		EffStop eff_instance[130] 0
+	if !flag[11014]:
+		if system[41] == 629:
+			global[3] = 0
+		if system[41] == 630:
+			global[3] = 1
+		if system[41] == 628:
+			global[3] = 2
+		if system[41] == 633:
+			global[3] = 10
+		if system[41] == 634:
+			global[3] = 11
+		if system[41] == 632:
+			global[3] = 12
+		if flag[11084] && flag[11085]:
+			if !flag[11087]:
+				Event fn[0,5]
+		if flag[11088] && flag[11089]:
+			if !flag[11091]:
+				Event fn[0,6]
+		if flag[11086]:
+			if flag[11087]:
+				Event fn[0,7]
+			else:
+				CharFlagsSet char[0] 0x0080
+				CharFlagsSet char[1] 0x0080
+				CharFlagsSet char[3] 0x0080
+				CharFlagsSet char[4] 0x0080
+				FlagUnset flag[11084]
+				FlagUnset flag[11085]
+				FlagUnset flag[11086]
+		if flag[11090]:
+			if flag[11091]:
+				Event fn[0,8]
+			else:
+				CharFlagsSet char[0] 0x0080
+				CharFlagsSet char[1] 0x0080
+				CharFlagsSet char[3] 0x0080
+				CharFlagsSet char[4] 0x0080
+				FlagUnset flag[11088]
+				FlagUnset flag[11089]
+				FlagUnset flag[11090]
+	if !flag[11172]:
+		ObjFrame object[21] 0
+	else:
+		ObjFrame object[21] 60
+	if !flag[11173]:
+		ObjFrame object[22] 0
+	else:
+		ObjFrame object[22] 60
+	Return
+
+fn[2]:
+	SystemFlagsSet 0x08000000
+	if !flag[11172]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[21] 60
+		Sleep 500ms
+		if ItemAdd item[441] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[441]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11172]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[441]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[441]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[21] 60
+			ObjPlay object[21] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}Did you know? Trails in the Sky's Japanese name is 'Sora no Kiseki,'
+			but the Japanese team has fully endorsed the English name to the point
+			where it's used on the cover of the Sora no Kiseki manga in Japan!{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 238 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[3]:
+	SystemFlagsSet 0x08000000
+	if !flag[11173]:
+		SoundPlay sound[43] 0 0 100
+		ObjPlay object[22] 60
+		Sleep 500ms
+		if ItemAdd item[438] 1:
+			FadeOut 300ms 0x00000000 100
+			SoundPlay sound[17] 0 0 100
+			TextSetPos -1 -1 -1 -1
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[438]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			FlagSet flag[11173]
+		else:
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Found {item item[438]}{color 5} in chest.
+				{color 5}Inventory full so gave up {item item[438]}{color 5}.{wait}
+			}
+			TextWait
+			TextClose 0
+			FadeIn 300ms 0x00000000
+			SoundPlay sound[44] 0 0 100
+			ObjFrame object[22] 60
+			ObjPlay object[22] 0
+	else:
+		FadeOut 300ms 0x00000000 100
+		TextSetName ""
+		TextMessage null {
+			{color 5}A spider looks at you angrily for disturbing its living room.{color 0}{wait}
+		}
+		TextWait
+		TextClose 0
+		FadeIn 300ms 0x00000000
+		ScAchievement 25 239 0
+	Sleep 30ms
+	TextEnd null
+	SystemFlagsUnset 0x08000000
+	Return
+
+fn[4]:
+	if system[0] == 100 | system[0] == 101 | system[0] == 102 | system[0] == 103 | system[0] == 104 | system[0] == 105 | system[0] == 106 | system[0] == 107 | system[0] == 108:
+		if flag[11087]:
+			Minigame 31 1 0 0 0 0 0 0 0
+		else:
+			Minigame 31 0 0 0 0 0 0 0 0
+	elif system[0] == 109 | system[0] == 110 | system[0] == 111 | system[0] == 112 | system[0] == 113 | system[0] == 114 | system[0] == 115 | system[0] == 116 | system[0] == 118 | system[0] == 107:
+		if flag[11091]:
+			Minigame 31 1 0 0 0 0 0 0 0
+		else:
+			Minigame 31 0 0 0 0 0 0 0 0
+	Return
+
+fn[5]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11084]
+	FlagUnset flag[11085]
+	FlagUnset flag[11086]
+	FlagSet flag[11087]
+	QuestTaskSet quest[55] 0x0020
+	FlagSet flag[9476]
+	NewScene "u2512._sn" 100 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[6]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11088]
+	FlagUnset flag[11089]
+	FlagUnset flag[11090]
+	FlagSet flag[11091]
+	QuestTaskSet quest[55] 0x0020
+	FlagSet flag[9477]
+	NewScene "u2512._sn" 109 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[7]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11084]
+	FlagUnset flag[11085]
+	FlagUnset flag[11086]
+	FlagUnset flag[11087]
+	QuestTaskSet quest[55] 0x0040
+	FlagSet flag[9476]
+	NewScene "u2512._sn" 100 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[8]:
+	EventBegin 0
+	Sleep 1000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 1000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	FlagUnset flag[11088]
+	FlagUnset flag[11089]
+	FlagUnset flag[11090]
+	FlagUnset flag[11091]
+	QuestTaskSet quest[55] 0x0040
+	FlagSet flag[9477]
+	NewScene "u2512._sn" 109 0 1
+	Hcf
+	EventEnd 0
+	Return
+
+fn[9]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	if !flag[11014]:
+		if flag[11075] && flag[11079] && flag[11083] && flag[11087] && flag[11091] && flag[11095]:
+			global[4] = 3
+			FlagSet flag[9478]
+			NewScene "u2500._sn" 100 0 1
+			Hcf
+			Return
+	if global[3] == 0:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 315000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (30790, 0, -1170) 180deg
+		CharSetPos field_party[1] (30790, 0, -1170) 180deg
+		CharSetPos field_party[2] (30790, 0, -1170) 180deg
+		CharSetPos field_party[3] (30790, 0, -1170) 180deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 1:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 315000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (-2350, 0, -1840) 135deg
+		CharSetPos field_party[1] (-2350, 0, -1840) 135deg
+		CharSetPos field_party[2] (-2350, 0, -1840) 135deg
+		CharSetPos field_party[3] (-2350, 0, -1840) 135deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 2:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 315000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (5580, 4000, -810) 270deg
+		CharSetPos field_party[1] (5580, 4000, -810) 270deg
+		CharSetPos field_party[2] (5580, 4000, -810) 270deg
+		CharSetPos field_party[3] (5580, 4000, -810) 270deg
+		CamLookChar field_party[0] 0ms
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[10]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	if !flag[11014]:
+		if flag[11075] && flag[11079] && flag[11083] && flag[11087] && flag[11091] && flag[11095]:
+			global[4] = 4
+			FlagSet flag[9478]
+			NewScene "u2500._sn" 100 0 1
+			Hcf
+			Return
+	if global[3] == 10:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (-61400, 0, 29000) 180deg
+		CharSetPos field_party[1] (-61400, 0, 29000) 180deg
+		CharSetPos field_party[2] (-61400, 0, 29000) 180deg
+		CharSetPos field_party[3] (-61400, 0, 29000) 180deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 11:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (-121080, 0, 550) 180deg
+		CharSetPos field_party[1] (-121080, 0, 550) 180deg
+		CharSetPos field_party[2] (-121080, 0, 550) 180deg
+		CharSetPos field_party[3] (-121080, 0, 550) 180deg
+		CamLookChar field_party[0] 0ms
+	elif global[3] == 12:
+		CamSetDistance 0 8000 -10000 0ms
+		CamZoom 2800 0ms
+		CamRotate 45000mdeg 0ms
+		CamPers 262 0ms
+		CharSetPos field_party[0] (-60820, 0, 580) 180deg
+		CharSetPos field_party[1] (-60820, 0, 580) 180deg
+		CharSetPos field_party[2] (-60820, 0, 580) 180deg
+		CharSetPos field_party[3] (-60820, 0, 580) 180deg
+		CamLookChar field_party[0] 0ms
+	Sleep 500ms
+	FadeIn 1000ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[11]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Open the Door?{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[12]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (-120000, 0, 28020) 0deg
+	CharSetPos field_party[1] (-121300, 0, 28070) 0deg
+	CharSetPos field_party[2] (-120130, 0, 26350) 0deg
+	CharSetPos field_party[3] (-121510, 0, 26180) 0deg
+	CamLookPos (-121100, 0, 28410) 0ms
+	CamSetDistance 0 5440 -10000 0ms
+	CamZoom 3660 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	if !QuestFlagsGet quest[11] 0x02:
+		QuestFlagsSet quest[11] 0x02
+		EffStop eff_instance[129] 2
+		EffPlay eff[130] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	if QuestFlagsGet quest[11] 0x08:
+		TextMessage null {
+			{color 5}#40WThe path has already been opened...
+			#500W 
+			#40WOpen the door, and step inside.{color 0}{wait}
+		}
+		TextWait
+	else:
+		TextMessage null {
+			{color 5}#40WMira comes, and mira goes...
+			Sometimes, it may be lost...
+			but at times, that loss can be 
+			regained manyfold... 
+			#500W 
+			#40WOffer 50,000 mira to me.
+			Only then shall the door open...{color 0}{wait}
+		}
+		TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if !QuestFlagsGet quest[11] 0x08:
+		TextSetPos -1 90 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Offer up 50,000 Mira to Unlock the Door?{0x18}{wait}
+		}
+		var[0] = 255
+		system[40] = 24
+		Menu menu[1] -1 -1 1
+			"Yes" // 0
+			"No" // 1
+		MenuWait var[0]
+		system[40] = 65535
+		MenuClose menu[1]
+		TextClose 0
+		Sleep 300ms
+		if var[0] == 0:
+			if system[18] >= 50000:
+				MiraSub 50000
+				SoundPlay sound[20] 0 0 100
+				TextSetPos -1 90 -1 -1
+				TextSetName ""
+				TextMessage null {
+					{color 5}Paid 50,000 mira!{0x18}{wait}
+				}
+				TextWait
+				TextClose 0
+				Call fn[0,13]
+			else:
+				TextMessage null {
+					{color 5}Insufficent mira.{wait}
+				}
+				TextWait
+				TextClose 0
+	else:
+		Call fn[0,11]
+		if var[0] == 0:
+			Call fn[0,13]
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	Return
+
+fn[13]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[128] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[20] 0
+	ObjPlay object[20] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[20]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3010 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	TcEpisodeStart 19 0 0
+	NewScene "p9001._sn" 100 0 0
+	Hcf
+	Return
+
+fn[14]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (-120000, 0, 28020) 0deg
+	CharSetPos field_party[1] (-121300, 0, 28070) 0deg
+	CharSetPos field_party[2] (-120130, 0, 26350) 0deg
+	CharSetPos field_party[3] (-121510, 0, 26180) 0deg
+	CamLookPos (-121100, 0, 28410) 0ms
+	CamSetDistance 0 5440 -10000 0ms
+	CamZoom 3660 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	Return

@@ -1,0 +1,3793 @@
+calmare tc scena
+scena:
+	name "Bose" "R1204.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl2/ch03510._ch" "npl2/ch03510p._cp"
+chip[1] "npl2/ch03511._ch" "npl2/ch03511p._cp"
+chip[2] "apl2/ch20662._ch" "apl2/ch20662p._cp"
+chip[3] "apl2/ch20288._ch" "apl2/ch20288p._cp"
+
+npc char[0]:
+	name "Renne"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Pater-Mater"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name " "
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 3:
+		var[2] = 0
+		if flag[9482]:
+			system[1] = 178
+			FlagUnset flag[9482]
+			SystemFlagsSet 0x10000000
+			var[2] = 6
+			Event fn[0,2]
+		elif flag[9481]:
+			FlagUnset flag[9481]
+			SystemFlagsSet 0x10000000
+			var[2] = 5
+			Event fn[0,2]
+		elif flag[9480]:
+			system[1] = 175
+			FlagUnset flag[9480]
+			SystemFlagsSet 0x10000000
+			var[2] = 4
+			Event fn[0,2]
+		elif flag[9479]:
+			FlagUnset flag[9479]
+			SystemFlagsSet 0x10000000
+			var[2] = 3
+			Event fn[0,2]
+		elif flag[9478]:
+			FlagUnset flag[9478]
+			SystemFlagsSet 0x10000000
+			var[2] = 2
+			Event fn[0,2]
+		elif flag[9477]:
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			var[2] = 1
+			Event fn[0,2]
+		elif flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			var[2] = 0
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EffLoad eff[0] "map\\\\mp207_00.eff"
+	EffLoad eff[1] "map\\\\mp207_01.eff"
+	EffLoad eff[2] "map\\\\mp207_02.eff"
+	EffLoad eff[3] "map\\\\mp207_03.eff"
+	CamLookPos (0, 0, 10000000) 0ms
+	CamSetDistance 0 0 -30000 0ms
+	CamZoom 1000 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 276 0ms
+	if var[2] == 0:
+		Call fn[0,3]
+	if var[2] == 1:
+		Call fn[0,4]
+	if var[2] == 2:
+		Call fn[0,5]
+	if var[2] == 3:
+		Call fn[0,6]
+	if var[2] == 4:
+		Call fn[0,7]
+	if var[2] == 5:
+		Call fn[0,8]
+	EffUnload eff[0]
+	EffUnload eff[1]
+	EffUnload eff[2]
+	if var[2] == 6:
+		Call fn[0,15]
+	Return
+
+fn[3]:
+	EventBegin 1
+	CamLookPos (0, 0, 10000000) 0ms
+	CamSetDistance 0 0 -30000 0ms
+	CamZoom 1000 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 276 0ms
+	Sc_C4Set 536870912
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	Sleep 1000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WI wander indifferently in a place that exists
+		beyond good and evil; beyond life and death.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WThere is no fortune or misfortune. 
+		No happiness. No sadness.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WWhite and black tear into me, heaven and earth
+		torment me... I've been defiled.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WWhere does it begin, and where does it end?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WI don't belong anywhere. I'm not going anywhere.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WBut the world just keeps on turning around me...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#20A#0C#4S1. Paradise#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[175] 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos 80 110 -1 -1
+	TextSetName "Voice"
+	TextMessage null {
+		#12CWhich number would you like today?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 280 -1 -1
+	TextSetName "Voice"
+	TextMessage null {
+		#12CFifteen.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 110 -1 -1
+	TextSetName "Voice"
+	TextMessage null {
+		#12CCertainly.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CYou've been nominated, Renne.
+		Be sure to treat our customer with care.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CThe place was simply known as 'Paradise.'#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CNo doubt the building itself had a proper name,
+		but none of us were ever told it.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CNor were we ever told exactly where in the land
+		we were, or what we were doing here...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0COr, indeed, how we ended up there to begin with.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Voice"
+	TextMessage null {
+		#12CMorning.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 300 -1 -1
+	TextSetName "???"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Voice"
+	TextMessage null {
+		#12CMorning, Renne.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 300 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 3000ms 0 0
+	ForkFunc char[0] fork[3] fn[0,14]
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sleep 3500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Boy"
+	TextMessage null {
+		#12COh, you've finally woken up.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 320 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CHi, Cross.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CHeehee...{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CWelcome to Paradise, Renne.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CWelcome to Paradise.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	Sc_C4Unset 2048
+	FadeIn 0ms 0x00000000
+	FadeWait
+	VisSet vis[0] 3 0xFFFFFFFF 3000ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 3000ms 0 0
+	FadeOut 3000ms 0x00FFFFFF 255
+	FadeWait
+	Sleep 500ms
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CI'm going to have to go, Renne. 
+		I've got to go and work.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CAgain?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CYeah. It's fine, though. I'll be back before long.{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CBe a good girl and wait here in the meantime,
+		okay?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	FadeIn 2000ms 0x00FFFFFF
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	FadeIn 1ms 0x00000000
+	FadeWait
+	Sc_C4Set 2048
+	Sleep 500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CCross was always busy with work, and today was no
+		different.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CWhat exactly he did and where he did it, I didn't know,
+		but whatever it was, it was clearly horrible.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CHe wasn't the only one, either.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CThe other children were always going out to work,
+		too.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	EffStop eff_instance[0] 0
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS576._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CBut for some reason, no one ever called me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CThe other children became weaker and more 
+		emaciated by the day, and yet I spent my time
+		eating delicious food and playing with dolls.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CI, and only I, was somehow special.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CCross always referred to me as a princess.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	VisSet vis[0] 3 0x00888888 1000ms 0 0
+	Sleep 2000ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS573._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 290 -1 -1
+	TextSetName "Girl"
+	TextMessage null {
+		#12CMorning, Renne! It sure is beautiful out today,
+		huh? Kinda stuffy in here, though. Let's open a
+		window, okay?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Set 2048
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CThis girl's name is Etta.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CShe was always smiling and brimming with curiosity,
+		poking her nose into anything and everything in the
+		room and earning a scolding from Cross for it.{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 290 -1 -1
+	TextSetName "Etta"
+	TextMessage null {
+		#12CHey, you wanna play with me? I wanna play with dolls,
+		too!#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CI don't mind, but do you even have the time?
+		Don't you have work later? Or do you not have
+		to go and wear any weird clothes today?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 290 -1 -1
+	TextSetName "Etta"
+	TextMessage null {
+		#12CCross is working at the moment, so I've got
+		some free time.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CHeehee. He's sure been getting nominated a
+		lot lately. Maybe that's just what people are
+		into these days?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CEtta was a somewhat precocious girl. She loved
+		making stupid jokes and giggling away at them.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS572._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CAdje, meanwhile, was more polite and mature.
+		Perhaps that was why she was nominated by
+		so many older men.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CAnother thing that stood out about her was the
+		way she never once acted like she hated her work;
+		no matter the day, she always performed with skill
+		and care.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CHow come you never seem to hate your work, Adje?
+		I thought it really hurt?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 280 -1 -1
+	TextSetName "Adje"
+	TextMessage null {
+		#12C...I'm fine. It's nothing you need to worry about,
+		Renne.{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CThere's a few tricks that make it really simple to
+		manage once you know them.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CSo don't worry about me. You just focus on being
+		happy like you always are.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...Okay.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 280 -1 -1
+	TextSetName "Adje"
+	TextMessage null {
+		#12CThat's a good girl. If you're happy, I'm happy.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS574._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CThen there was Quatre, whose small, delicate stature
+		always ended with him being battered and played with
+		roughly like he were some sort of doll.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CDid you seriously end up getting beaten again?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "Quatre"
+	TextMessage null {
+		#12CY-Yeah... I don't know why, either.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CThey said it's some kind of new game,
+		but I don't get it...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 300 -1 -1
+	TextSetName "Quatre"
+	TextMessage null {
+		#12CDon't worry about me, Renne. I'm fine! Honest.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CI'm used to it. It doesn't even hurt me anymore.
+		As long as I can come back and find you here,
+		I can deal with anything.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CQuatre was always bleeding out of our sight.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CMaybe that was part of his charm.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CI'm sure beautiful people must shed beautiful
+		blood.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 1500ms
+	SoundPlay sound[7] 0 0 100
+	Sleep 1000ms
+	VisHide vis[0] 0
+	VisShow vis[0] -320 -480 320 0 320 480 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CI'm back, Renne. Sorry--that ended up taking
+		longer than I thought it would.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CThen, finally, there was Cross. He was basically
+		our leader.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1000ms
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS572._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS573._CH"
+	VisShow vis[4] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS574._CH"
+	VisSet vis[0] 1 800 800 0ms 0
+	VisSet vis[2] 1 600 600 0ms 0
+	VisSet vis[3] 1 700 700 0ms 0
+	VisSet vis[4] 1 500 500 0ms 0
+	VisSet vis[2] 0 300000 200000 0ms 0
+	VisSet vis[3] 0 -120000 150000 0ms 0
+	VisSet vis[4] 0 50000 250000 0ms 0
+	VisSet vis[3] 4 0 0 0 0
+	Sleep 1000ms
+	VisSet vis[3] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 500ms
+	VisSet vis[2] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 500ms
+	VisSet vis[4] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 500ms
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	VisSet vis[2] 3 0xFF888888 500ms 0 0
+	VisSet vis[3] 3 0xFF888888 500ms 0 0
+	VisSet vis[4] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CCross, Etta, Adje, Quatre, and me...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CEach of them were so dear to me, and we spent
+		all the time we could together in this one room.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CTo my understanding, there were other children
+		in the building, but they didn't matter to me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CThe only ones who did were the four friends
+		I spent my days with--the four who lived in
+		Paradise alongside me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00888888 2000ms 0 0
+	VisSet vis[1] 3 0x00888888 2000ms 0 0
+	VisSet vis[2] 3 0x00888888 2000ms 0 0
+	VisSet vis[3] 3 0x00888888 2000ms 0 0
+	VisSet vis[4] 3 0x00888888 2000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	VisWait vis[3] 3
+	VisWait vis[4] 3
+	VisHide vis[255] 0
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	var[2] = 1
+	Return
+
+fn[4]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#20A#0C#4S2. Princess#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	_59
+	Sleep 500ms
+	BgmPlay bgm[183] 0
+	Sleep 500ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CHey, Cross? What happened to the others?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CHow come it's just me and you in here now?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisHide vis[0] 0
+	VisShow vis[0] -320 -480 320 0 320 480 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CAhaha. What are you talking about, Renne?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CWhat others? It's always been just you and me
+		in here.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CReally? Are you sure? I feel like there were
+		more...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CNope, there weren't. It's always been just you
+		and me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	VisSet vis[0] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CIt was only later when I realized it was Cross
+		who had hidden the others from me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CWhether that was so I didn't have to worry about
+		them or because things had gotten so bad he
+		didn't even think I should see them, I don't know.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CBut he always tried to keep my eyes covered from
+		the harsh reality of what was going on around me,
+		so I could keep living in blissful ignorance.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS573._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	Sc_C4Unset 2048
+	TextSetPos -1 290 -1 -1
+	TextSetName "Etta"
+	TextMessage null {
+		#12CLet me give you a useful tip, Renne: always be
+		sure to say, 'It would be my pleasure.'#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CSaying that makes everyone smile!#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CNo matter what you have to do or what people do to
+		you, always respond with, 'It would be my pleasure.'#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CHeehee. Funny how that works, right? After all,
+		it's the customers you're pleasing, not you!#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS572._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 280 -1 -1
+	TextSetName "Adje"
+	TextMessage null {
+		#12CLet me give you one, too, then. I use this all the
+		time.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CThe best thing to do is try to imagine how your
+		customer is feeling. Like, this must feel really good
+		for them, they seem to love me doing this, or...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CIt's not enough to make you stop feeling pain,
+		but it does stop you needing to worry about
+		doing unpleasant things.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CAlways try to think about what you can do to make
+		the customer happy. That's key.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS574._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1500ms
+	TextSetPos -1 300 -1 -1
+	TextSetName "Quatre"
+	TextMessage null {
+		#12CW-Well, I suppose I should say something, too...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CUmm... You should never cry and say you're sorry
+		to a customer.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CSaying sorry just makes them want to hurt you
+		more.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CNo matter how much it hurts, no matter how sad
+		you feel, don't ever cry. Don't ever say sorry,
+		because no one ever forgives you even if you do.{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	VisSet vis[1] 3 0x00FFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS592._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	TextSetPos -1 330 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CThanks, everyone. But I can't see myself needing
+		any of these tips.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CI never have to do any work.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CAll I have to do is sit in here and hug my dolls.
+		I never have to leave this room.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 80 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CAnd that's how it should be.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CYou're our princess, and you're really,
+		really important to us.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1000ms
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#12C#40WWe're all here to protect you, and that's why
+		we make it so you don't need to see a thing.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12C#40W'Renne.'#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	VisHide vis[255] 0
+	var[2] = 2
+	Return
+
+fn[5]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#20A#0C#4S3. Game#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[174] 0
+	Sleep 500ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	VisSet vis[1] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS575._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CWhat are you doing, Renne?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CI'm drawing.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CLook! This is a monster. The monster that's got
+		us locked up in here.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CIt's got golden eyes and black scales, and its
+		mouth's stained red with the blood of all the
+		people it ate.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CThe color of sin, huh? How lovely.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CIts stomach's got to be white, though. Otherwise
+		you wouldn't know which side was the front.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CAhaha. That's very true.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CWhere is everyone? Are they all out working?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12C...Renne.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CThere are no 'others.' There's only me and you
+		here.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	TextSetPos 100 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CReally? Are you sure? I don't know...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 250 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CI'm sure. From the very start, it's just been me
+		and you.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CNo others. Now let's draw together, shall we?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CMaybe we could draw a princess next? That'd be
+		nice.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 2000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CCross was doing a good job at covering my eyes
+		from reality, but there was one thing he couldn't
+		completely keep from me:#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CHe was getting tired.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CAfter the others disappeared, he started taking on
+		all of the work himself. And because of that, slowly,
+		he began to vanish, too.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisHide vis[255] 0
+	VisShow vis[0] 0 0 640 480 0 25 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS578._CH"
+	VisShow vis[1] 0 0 640 480 0 25 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS580._CH"
+	VisShow vis[2] 0 0 640 480 0 25 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS579._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS570._CH"
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisSet vis[3] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos 380 50 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CLet's clean you up, Renne. You're really dirty
+		today.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 330 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CThanks. You're always so kind.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 50 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12C...I'm sorry, Renne.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CIf I wasn't so hopeless...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CI swore I'd protect you, and yet...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 330 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CWhat's wrong, Cross? You're not looking too 
+		good...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 50 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12CIt's nothing. I'm fine.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 330 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...Cross?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 50 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CI just told you that I'm fine!#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12C#40W...This is all your fault.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 4 0 0 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 330 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...Mine?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 300 75 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12C#40WYours. Everything is YOUR fault.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 800ms
+	TextSetPos 50 120 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#12C#40WYou wasted no time in killing all the others.
+		Why are you letting me live for so long?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 800ms
+	TextSetPos -1 200 -1 -1
+	TextSetName "Cross"
+	TextMessage null {
+		#2CIt's all your fault. Why haven't you killed me?
+		It's all your fault. Why haven't you killed me?
+		It's all your fault. Why haven't you killed me?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 1000ms 0 0
+	VisSet vis[3] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[2] 3
+	BgmStop 3000ms
+	BgmWait
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#2C#40WI'm already dead as it is... Why won't you kill me?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	VisHide vis[255] 0
+	var[2] = 3
+	Return
+
+fn[6]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#20A#0C#4S4. Renne#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0CEventually, my first job came.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CThere was no one else to take it. 
+		There was no one else to go out in my place.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CThat's why I had to do it myself. I had to step
+		outside that room for the first time.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[175] 0
+	Sleep 500ms
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS571._CH"
+	VisShow vis[0] 0 0 640 480 0 50 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS580._CH"
+	VisShow vis[1] 0 0 640 480 0 50 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS577._CH"
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisSet vis[2] 3 0xFFFFFFFF 2000ms 0 0
+	Sleep 2000ms
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 2000ms
+	Sc_C4Unset 2048
+	TextSetPos 60 60 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		#12CYou've been nominated, Renne.
+		Be sure to treat our customer with care.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 60 60 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		#12CWhat are you doing, Renne?
+		Just do what you usually do.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 50 -1 -1
+	TextSetName "Customer"
+	TextMessage null {
+		#12CWhat's going on here? I was led to believe number
+		fifteen was special. #0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 60 60 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		#12CShe's not normally like this, I can assure you.
+		She's usually a good girl... I don't know what's
+		gotten into her.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CShe's our little angel, capable of meeting all of
+		our customers' needs no matter what they may
+		be.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CCome on, Renne. Say hello. You've done this
+		enough times, now.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CWhat are you going to be today?
+		A sweet doll? A cool boy?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...That wasn't me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 60 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		#12C...What?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CThat wasn't me.
+		That wasn't me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 350 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C#3SThat wasn't me! That wasn't me!#2S#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12C#3SThat wasn't me!#2S#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12C#3SThat wasn't me!#2S#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	Sleep 1000ms
+	EffStop eff_instance[0] 0
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WSomeone says something. I close my ears like always.
+		Someone does something. I close my eyes like always.
+		I do just as I always do.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#60WI do just as I always do.
+		I do just as I always do.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#80WI do just as I always do and go out to work.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 1ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	SoundPlay sound[357] 0 0 100
+	Sleep 1000ms
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#17CAh, the water of life.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#17CCross once said that even those near to death
+		could be full of energy again if they drank this.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#17CHe said he was made to drink it all the time,
+		and that its taste was sweet and syrupy. #0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	TextSetPos 80 110 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		#12CDrink up, Renne. I mixed quite a lot of syrup
+		in today.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CDrink up, nice and slowly. That's it...
+		That's it... Make sure not to spill any, now.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CDrink up every last drop.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12C...Well, please take your time.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#17C#40WAs the owner went to leave, his head seemed to
+		distort slightly. Maybe he's getting old, or maybe
+		he's just wearing a disguise of some kind...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#17C#60W...Oh, the medicine's started kicking in.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	FadeIn 3000ms 0x00FFFFFF
+	VisSet vis[2] 3 0xFFFFFFFF 3000ms 0 0
+	Sleep 1000ms
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	VisWait vis[2] 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TextSetPos 330 100 -1 -1
+	TextSetName "Customer"
+	TextMessage null {
+		#12CWell, Renne. Why don't we sit and have a little
+		chat together?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 280 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CIt would be my pleasure.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 80 -1 -1
+	TextSetName "Customer"
+	TextMessage null {
+		#12CYou're always such a good girl.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WIt would be my pleasure.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#0C#40WIt would be my pleasure.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#0CIt would be my pleasure. It would be my pleasure.
+		It would be my pleasure. It would be my pleasure.
+		It would be my pleasure. It would be my pleasure.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	var[4] = 70
+	ForkFunc char[3] fork[0] fn[0,10]
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#50W#0CMorning, Renne! It sure is beautiful out today, huh?
+		Kinda stuffy in here, though. Let's open a window,
+		okay? Hey, you wanna play with me? #30WI wanna
+		play with dolls, too! #20WCross is working#10W at
+		the moment, so I've got some free time. Heehee.
+		He sure seems to be getting nominated a lot lately.
+		Maybe that's just what people are into these days?
+		Let me give you a useful tip, Renne: always be sure to
+		say, 'It would be my pleasure.' Saying that makes
+		everyone smile! No matter what you have to do or what
+		people do to you, always say, 'It would be my pleasure.'
+		Heehee. Funny how that works, right? After all, it's the
+		customers you're pleasing, not you! We're all here to
+		protect you and that's why we make it so you don't need
+		to see a thing. 
+		{}                                         'Renne'{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#50W#0C...I'm fine. It's nothing you need to worry about, Renne.
+		#40WThere's a few tricks that make it really #30Wsimple to
+		manage once you know them. So don't worry about me.
+		You just focus on being#20W happy like you always are.
+		That's a good girl.#10W If you're happy, I'm happy. Let me
+		give you one, too, then. I use this all the time. The best
+		thing to do is try to imagine how your customer is feeling.
+		Like, this must feel really good for them, they seem to love
+		me doing this, or... It's not enough to make you stop feeling
+		pain, but it does stop you needing to worry about doing
+		unpleasant things. Always try to think about what you can do 
+		to make the customer happy. That's key. We're all here to
+		protect you, and that's why we make it so you don't need to
+		see a thing.
+		{}                                         'Renne'{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#50W#0CY-Yeah... I don't know why, either... They said#40W it's
+		some kind of new game, but I don't get it...#30W Don't
+		worry about me, though. I'm fine! Honest.#20W I'm used
+		to it. It doesn't even hurt me anymore.#10W As long as I
+		can come back and find you here, I can deal with anything.
+		W-Well, I suppose I should say something, too... Umm...
+		You should never cry and say you're sorry to a customer.
+		Saying sorry just makes them want to hurt you more. No
+		matter how much it hurts, no matter how sad you feel,
+		don't ever cry. Don't ever say sorry, because no one ever
+		forgives you even if you do. We're all here to protect you,
+		and make it so you don't need to see a thing. So don't you
+		worry.                              
+		{}                                         'Renne'{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#40W#0CWhat are you doing, Renne? The color of sin, huh?
+		How lovely. #30WAhaha. That's very true.#20W ...Renne.
+		There are no 'others.' There's only me#10W and you here.
+		I'm sure. From the very start, it's just been me and you.
+		No others. Now let's draw together, shall we? #5WI just told
+		you that I'm fine! ...This is all your fault. This is all your fault.
+		Everything is YOUR fault. You wasted no time in killing all the
+		others. Why are you letting me live for so long? It's all your
+		fault. Why haven't you killed me? It's all your fault. Why haven't 
+		you killed me? It's all your fault. Why haven't you killed me?
+		I'm already dead as it is... Why won't you kill me?#60W
+		{}                                         'Renne'{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundStop sound[398]
+	EffStop eff_instance[0] 0
+	ForkQuit char[3] fork[0]
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#2CAll of them have gone.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[193] 0 0 100
+	VisSet vis[2] 3 0x00FFFFFF 100ms 0 0
+	Sleep 2000ms
+	VisHide vis[255] 0
+	var[2] = 4
+	Return
+
+fn[7]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	Sleep 500ms
+	SoundPlay sound[135] 0 0 100
+	Sleep 2000ms
+	ForkFunc char[0] fork[1] fn[0,23]
+	Sleep 2000ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS581._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	ForkFunc char[0] fork[3] fn[0,14]
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 2000ms
+	EffPlay eff[201] eff_instance[1] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 5000ms
+	Tc_E7 vis[0] 1 0x00000000 0ms
+	Tc_E7 vis[0] 1 0xFFFFFFFF 1500ms
+	Sleep 1000ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 1000ms
+	ForkQuit char[0] fork[1]
+	SoundPlay sound[550] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[911] 0 0 100
+	SoundPlay sound[524] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[550] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 1000ms
+	VisSet vis[0] 3 0x00FFFFFF 1000ms 0 0
+	Tc_E7 vis[0] 1 0x00000000 1000ms
+	VisWait vis[0] 3
+	SoundSetVolume sound[135] 95
+	Sleep 100ms
+	SoundSetVolume sound[135] 90
+	Sleep 100ms
+	SoundSetVolume sound[135] 85
+	Sleep 100ms
+	SoundSetVolume sound[135] 80
+	Sleep 100ms
+	SoundSetVolume sound[135] 75
+	Sleep 100ms
+	SoundSetVolume sound[135] 70
+	Sleep 1500ms
+	VisHide vis[0] 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS582._CH"
+	VisSet vis[0] 3 0xFF777777 2000ms 0 0
+	EffStop eff_instance[1] 0
+	EffPlay eff[202] eff_instance[1] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 5000ms
+	Tc_E7 vis[0] 1 0x00000000 0ms
+	Tc_E7 vis[0] 1 0xFFFFFFFF 1500ms
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	TextSetPos 380 220 -1 -1
+	TextSetName "Silver-Haired Youth"
+	TextMessage null {
+		#12CWhat in...?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CThose subhuman monsters...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 350 -1 -1
+	TextSetName "Black-Haired Boy"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CCan people even keeping living on like this?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CCan you even call someone in this state alive?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 380 220 -1 -1
+	TextSetName "Silver-Haired Youth"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CI'm guessing she inflicted all these cross-like
+		marks on herself.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CProbably in order to maintain her own sanity.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 350 -1 -1
+	TextSetName "Black-Haired Boy"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CShe wanted to keep living that much...?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12C(This is a living human...)#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[0] 3 0x00FFFFFF 3000ms 0 0
+	Fork char[3] fork[0]:
+		Tc_E7 vis[0] 1 0x00000000 3000ms
+	ForkFunc char[0] fork[3] fn[0,13]
+	SoundPlay sound[358] 0 0 100
+	SoundSetVolume sound[135] 60
+	Sleep 100ms
+	SoundSetVolume sound[135] 50
+	Sleep 100ms
+	SoundSetVolume sound[135] 40
+	Sleep 100ms
+	SoundSetVolume sound[135] 30
+	Sleep 100ms
+	SoundSetVolume sound[135] 25
+	Sleep 100ms
+	SoundSetVolume sound[135] 10
+	Sleep 100ms
+	SoundStop sound[135]
+	Sleep 7000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Black-Haired Boy"
+	TextMessage null {
+		#12CI want to see what she's like when she's
+		really alive, Loewe.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CCan we take her in to the society?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	VisHide vis[255] 0
+	EffStop eff_instance[0] 0
+	EffStop eff_instance[1] 0
+	var[2] = 5
+	Return
+
+fn[8]:
+	EventBegin 1
+	FadeOut 0ms 0x00000000 255
+	system[40] = 65535
+	Sc_C4Set 16
+	NextFrame
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#20A#0C#4S5. The Dream Goes On#0C{0x05}{wait}
+	}
+	Sleep 300ms
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmPlay bgm[178] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40W'You're strong, Renne.'
+		That was what Joshua told me one day.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40W...It wasn't something I'd heard before, either.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS583._CH"
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS584._CH"
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS585._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS586._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WYou're strong, Renne.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextMessage null {
+		#0C#40WYes. I am.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 4 0 0 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextMessage null {
+		#0CI'm strong. I'm strong.
+		I'm strong. I'm strong.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	TextMessage null {
+		#0CI'm strong. I'm strong!#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0CAs an Enforcer candidate, 'Renne' proved to be
+		exceptionally capable.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[3] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	VisWait vis[3] 3
+	VisHide vis[255] 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WThen one day, Joshua disappeared.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WAnd the world just kept on turning.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	ForkFunc char[0] fork[3] fn[0,14]
+	EffPlay eff[200] eff_instance[0] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 5000ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS587._CH"
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS588._CH"
+	VisShow vis[2] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS589._CH"
+	VisShow vis[3] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS590._CH"
+	VisShow vis[4] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS591._CH"
+	VisSet vis[0] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	Sc_C4Unset 2048
+	TextSetPos 80 200 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C*sigh* Just where has Joshua gone, anyway?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CAll he said was that he was going away to do a job
+		and it was going to take a while...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CI wanted him to know that I've become a proper
+		Enforcer now.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CI wanted to introduce him to my real Papa and 
+		Mama, too...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CHeehee. But I suppose all of that can wait.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CHe'll come back eventually. I know he will.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CThen he can tell me all about what he did while
+		he was away.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CBut he'll definitely be back... He will...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,9]
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos 400 160 -1 -1
+	TextSetName "Baby"
+	TextMessage null {
+		#12C...*gurgle*#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12C*gurgle* *gurgle*#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 200 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CA baby?#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CHeehee. How sweet.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextWait
+	var[4] = 100
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1500ms
+	TextSetPos 80 200 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C#40WHe's so cute.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[1] 3 0xFF888888 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WA brand new life, clean and pure, untainted by
+		anything.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WHe's probably a good child. He'll be raised well,
+		and grow up to be a fine, respectable adult.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WUnlike me.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WThat path was closed to me long ago.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WI hope you'll find happiness, nameless child.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	Sleep 500ms
+	TextSetPos 80 200 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C#40W...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextWait
+	var[4] = 70
+	TextSetPos 80 200 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C#60W...Wh...y...?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextWait
+	ForkQuit char[0] fork[3]
+	VisSet vis[2] 4 0 0 0 0
+	VisSet vis[2] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	TextSetPos 400 180 -1 -1
+	TextSetName "Familiar Man"
+	TextMessage null {
+		#12CHe really is cute, isn't he? He looks just like
+		his mother.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CThere, there... That's a good boy...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 250 -1 -1
+	TextSetName "Familiar Woman"
+	TextMessage null {
+		#12CHeehee. I still regret what happened to our
+		last child...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12C...but it looks like the Goddess didn't abandon
+		us after all.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 400 180 -1 -1
+	TextSetName "Familiar Man"
+	TextMessage null {
+		#12CNow, now. I thought we weren't going to talk
+		about that anymore?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CWe need to leave the past in the past.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 250 -1 -1
+	TextSetName "Familiar Woman"
+	TextMessage null {
+		#12CI suppose you're right... It's sad, but it's probably
+		what she would want, too.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 230 220 -1 -1
+	TextSetName "Baby"
+	TextMessage null {
+		#12C*gurgle* *gurgle*#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 250 -1 -1
+	TextSetName "Familiar Woman"
+	TextMessage null {
+		#12CThere we go... Who's a good little baby?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	VisSet vis[2] 3 0xFF888888 500ms 0 0
+	Sleep 800ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WRenne.
+		Impure children.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	var[4] = 30
+	Sc_C4Unset 2048
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WThe past.
+		'What happened to our last child.'#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40W...Really?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WThat was what I was?
+		From the very beginning?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	var[4] = 20
+	TextMessage null {
+		#0C#60WI...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WI was...
+		I...
+		From the day I was born, I was...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	VisSet vis[2] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 500ms
+	Sc_C4Unset 2048
+	TextSetPos 200 350 -1 -1
+	TextSetName "Young Man's Voice"
+	TextMessage null {
+		#12C...Renne.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkQuit char[3] fork[0]
+	VisSet vis[3] 4 0 0 0 0
+	VisSet vis[3] 3 0xFFFFFFFF 1500ms 0 0
+	Sleep 2500ms
+	TextSetPos 380 250 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C#40W...Oh...#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12C#40W...Loewe...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 200 -1 -1
+	TextSetName "Loewe"
+	TextMessage null {
+		#12C...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CAs Enforcers, we have the freedom to do whatever
+		we want, whenever we want.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CIt's up to you what you want to do. I won't make
+		that choice for you.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#12CI can't help but wonder whether they're even worth
+		the effort of cutting down, but that is your choice
+		to make.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[2] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[3] 3 0x00FFFFFF 1000ms 0 0
+	VisWait vis[0] 3
+	VisWait vis[1] 3
+	VisWait vis[2] 3
+	VisWait vis[3] 3
+	Sleep 500ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WI wander indifferently in a place that exists
+		beyond good and evil; beyond life and death.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WThere is no fortune or misfortune. 
+		No happiness. No sadness.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WWhite and black tear into me, heaven and earth
+		torment me... I've been defiled.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WWhere does it begin, and where does it end?#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WI don't belong anywhere. I'm not going anywhere.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WBut the world just keeps on turning around me...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WUnbeknownst to me, the world just kept on
+		turning...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#0C#40WBut that's fine.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WThe world is always turning for my sake.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		#0C#40WThat's why...I've got nothing to feel sad about.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sleep 500ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12C...Heehee...#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,14]
+	VisSet vis[4] 4 0 0 0 0
+	VisSet vis[4] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos 380 250 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		#12CI don't care about some silly imposters.#0C{wait}
+	}
+	TextWait
+	TextMessage null {
+		#12CThey're not my real Papa and Mama.
+		I have Pater-Mater now.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	ForkFunc char[0] fork[3] fn[0,13]
+	VisSet vis[4] 3 0x00FFFFFF 2000ms 0 0
+	VisWait vis[4] 3
+	VisHide vis[255] 0
+	EffStop eff_instance[0] 0
+	EffStop eff_instance[1] 0
+	EffStop eff_instance[2] 0
+	EffStop eff_instance[3] 0
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	Sc_C4Unset 16
+	NextFrame
+	var[2] = 6
+	Return
+
+fn[9]:
+	while 1:
+		SoundPlay sound[388] 0 0 100
+		Sleep 1000ms
+		SoundPlay sound[388] 0 0 90
+		Sleep 1100ms
+		SoundPlay sound[388] 0 0 100
+		Sleep 1000ms
+		SoundPlay sound[388] 0 0 100
+		Sleep 1200ms
+		SoundPlay sound[388] 0 0 90
+		Sleep 1000ms
+		SoundPlay sound[388] 0 0 90
+		Sleep 1300ms
+	Return
+
+fn[10]:
+	ForkFunc char[0] fork[0] fn[0,11]
+	EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 2500ms
+	while 1:
+		ForkFunc char[0] fork[0] fn[0,12]
+		EffPlay eff[203] eff_instance[3] null 0 (320, 240, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+		var[3] = random % var[4]
+		if var[3] < 5:
+			Sleep 250ms
+		elif var[3] < 10:
+			Sleep 400ms
+		elif var[3] < 15:
+			Sleep 700ms
+		elif var[3] < 20:
+			Sleep 1000ms
+		elif var[3] < 35:
+			Sleep 1500ms
+		elif var[3] < 40:
+			Sleep 2000ms
+		elif var[3] < 60:
+			Sleep 3000ms
+		elif var[3] < 80:
+			Sleep 4000ms
+		else:
+			Sleep 5000ms
+	Return
+
+fn[11]:
+	SoundPlay sound[960] 0 0 100
+	Sleep 500ms
+	SoundStop sound[960]
+	Return
+
+fn[12]:
+	SoundPlay sound[960] 0 0 50
+	Sleep 500ms
+	SoundStop sound[960]
+	Return
+
+fn[13]:
+	SoundSetVolume sound[398] 90
+	Sleep 300ms
+	SoundSetVolume sound[398] 80
+	Sleep 300ms
+	SoundSetVolume sound[398] 70
+	Sleep 300ms
+	SoundSetVolume sound[398] 60
+	Sleep 300ms
+	SoundSetVolume sound[398] 50
+	Sleep 300ms
+	SoundSetVolume sound[398] 40
+	Sleep 300ms
+	SoundSetVolume sound[398] 30
+	Sleep 300ms
+	SoundSetVolume sound[398] 20
+	Sleep 300ms
+	SoundSetVolume sound[398] 10
+	Sleep 300ms
+	SoundSetVolume sound[398] 0
+	SoundStop sound[398]
+	Return
+
+fn[14]:
+	SoundPlay sound[398] 1 0 0
+	SoundSetVolume sound[398] 0
+	Sleep 50ms
+	SoundSetVolume sound[398] 10
+	Sleep 50ms
+	SoundSetVolume sound[398] 20
+	Sleep 50ms
+	SoundSetVolume sound[398] 30
+	Sleep 50ms
+	SoundSetVolume sound[398] 40
+	Sleep 50ms
+	SoundSetVolume sound[398] 50
+	Sleep 50ms
+	SoundSetVolume sound[398] 60
+	Sleep 50ms
+	SoundSetVolume sound[398] 70
+	Sleep 50ms
+	SoundSetVolume sound[398] 80
+	Sleep 50ms
+	SoundSetVolume sound[398] 90
+	Sleep 50ms
+	SoundSetVolume sound[398] 100
+	Return
+
+fn[15]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	EffLoad eff[0] "map\\mp014_00.eff"
+	EffLoad eff[1] "map\\mp295_00.eff"
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[0] 0x0002
+	CharFlagsSet char[0] 0x0800
+	CharSetPos char[0] (-54650, 100, 42240) 180deg
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[1] (-52420, 100, 44100) 180deg
+	CharAttachObj char[1] object[0]
+	CamLookPos (-55520, 100, 44450) 0ms
+	CamSetDistance 0 5260 -10000 0ms
+	CamZoom 2720 0ms
+	CamRotate 327000mdeg 0ms
+	CamPers 370 0ms
+	Sc_D8 object[0] 500
+	ObjFlagsUnset object[0] 0x0020
+	ObjFrame object[0] 520
+	ObjPlay object[0] 520
+	Sleep 1000ms
+	EffPlay eff[0] eff_instance[255] null 0 (-54650, 100, 42240) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[457] 0 0 100
+	Sleep 1000ms
+	FadeIn 3000ms 0x00000000
+	CamZoom 2520 3000ms
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#1309F#40W#6P...{wait}
+	}
+	TextWait
+	Fork char[0] fork[2]:
+		CamZoom 2320 30000ms
+	char[0].8 = 38
+	Sleep 250ms
+	char[0].8 = 39
+	Sleep 300ms
+	char[0].8 = 38
+	Sleep 300ms
+	char[0].8 = 0
+	Sleep 300ms
+	CharAnimation char[0] 0 6 1000ms
+	char[0].8 = 6
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 18
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 6
+	Sleep 200ms
+	Sleep 300ms
+	CharShake char[0] 15 0 300 4000ms
+	Sleep 1000ms
+	TextTalk char[0] {
+		#268F#6P#40W...It's so cold...{wait}
+	}
+	TextWait
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	SoundPlay sound[397] 1 0 100
+	EffPlay eff[1] eff_instance[1] char[1] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 2000ms
+	char[0].8 = 11
+	Sleep 200ms
+	char[0].8 = 12
+	Sleep 200ms
+	Sleep 1000ms
+	TextTalk char[0] {
+		#264F#6P...{wait}
+	} {
+		#261FThanks, Pater-Mater.{wait}
+	}
+	TextWait
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	EffStop eff_instance[1] 2
+	ForkFunc char[0] fork[0] fn[0,17]
+	Sleep 1000ms
+	Emote char[0] 0mm 1200mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#263F#6PThat's right. I'm in the right. I'm in the right.{wait}
+	} {
+		#265FI'm always happy. I'm always having fun.{wait}
+	} {
+		#261FBecause I'm...{wait}
+	}
+	TextWait
+	FadeOut 500ms 0x00000000 255
+	FadeWait
+	Sc_C4Set 2048
+	TextSetPos 300 100 -1 -1
+	TextSetName ""
+	TextMessage null {
+		#5CThe world doesn't revolve just around you.{wait}
+	} {
+		And it won't always change just because you
+		demand it.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos 100 250 -1 -1
+	TextMessage null {
+		#5CIt should be obvious. Because I really care about you,
+		Renne.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		#5CI won't lecture any more.{wait}
+	} {
+		Renne, you answer how your heart tells you.#0C{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	Sc_C4Unset 2048
+	CharSetChipPattern char[0] 21
+	EffLoad eff[1] "map\\mp021_00.eff"
+	EffLoad eff[2] "map\\mp064_01.eff"
+	EffLoad eff[3] "map\\mp065_01.eff"
+	EffLoad eff[4] "map\\mp064_00.eff"
+	EffLoad eff[5] "map\\mp065_00.eff"
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	TextTalk char[0] {
+		#1309F#6P...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	CrossFade 500ms
+	SoundPlay sound[143] 0 0 100
+	CharFlagsUnset char[0] 0x0002
+	CharFlagsUnset char[0] 0x0800
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 1500ms
+	TextTalk char[0] {
+		#1300F#6PIt's almost dawn.{wait}
+	} {
+		#1302FLet's go.{wait}
+	}
+	TextWait
+	_59
+	ForkQuit char[0] fork[2]
+	Fork char[2] fork[0]:
+		CamLookPos (-55140, 740, 45990) 5000ms
+	Fork char[2] fork[2]:
+		CamZoom 2370 5000ms
+	Fork char[2] fork[1]:
+		CamPers 398 5000ms
+	SoundPlay sound[275] 1 0 60
+	SoundPlay sound[276] 0 0 100
+	EffPlay eff[1] eff_instance[0] char[1] 0 (0, -800, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[204] 0 0 100
+	EffPlay2 eff[4] eff_instance[1] object[0] "Frame86__jet_0" 0 (0, -500, 0) 60 -90 180 1000 1000 1000 0ms
+	EffPlay2 eff[4] eff_instance[2] object[0] "Frame87__jet_1" 0 (0, -500, 0) 30 70 -180 1000 1000 1000 0ms
+	Sleep 1000ms
+	Fork char[1] fork[0]:
+		CharWalkToPos2 self (-52420, 1200, 44100) 1000mm/s 0
+	Sleep 500ms
+	ObjFlagsUnset object[0] 0x0020
+	_ObjB0 object[0] 20
+	ObjFrame object[0] 521
+	ObjPlay object[0] 560
+	ObjWait object[0]
+	CrossFade 500ms
+	EffPlay eff[5] eff_instance[1] char[1] 0 (4950, 2800, 0) 0 0 20 1000 1000 1000 null (0, 0, 0) 1000ms
+	EffPlay eff[5] eff_instance[2] char[1] 0 (-4950, 2800, 0) 0 0 340 1000 1000 1000 null (0, 0, 0) 1000ms
+	Sc_D8 object[0] 1500
+	ObjFlagsSet object[0] 0x0020
+	ObjFrame object[0] 1
+	ObjPlay object[0] 40
+	Fork char[1] fork[0]:
+		CharWalkToPos2 self (-52420, 100, 44100) 1000mm/s 0
+	ForkWait char[1] fork[0]
+	SoundPlay sound[236] 0 0 100
+	Shake 0 200 3000 100ms
+	SoundPlay sound[273] 0 0 100
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1500
+	_ObjB0 object[0] 10
+	ObjFrame object[0] 461
+	ObjPlay object[0] 480
+	ObjWait object[0]
+	ForkWait char[1] fork[0]
+	ForkFunc char[0] fork[0] fn[0,16]
+	ObjFrame object[0] 401
+	ObjPlay object[0] 420
+	ObjWait object[0]
+	ObjFlagsSet object[0] 0x0020
+	ObjFrame object[0] 381
+	ObjPlay object[0] 420
+	ForkWait char[0] fork[0]
+	Sleep 300ms
+	CharFlagsUnset char[0] 0x0010
+	CharFlagsSet char[0] 0x0002
+	CharFlagsSet char[0] 0x0020
+	CharFlagsSet char[0] 0x0004
+	CharSetChipBase char[0] chip[3]
+	CharSetChipPattern char[0] 0
+	CharTurnTo char[0] 0deg 0deg/s
+	Sleep 200ms
+	CharSetChipPattern char[0] 1
+	Sleep 200ms
+	Fork char[0] fork[2]:
+		CharAnimation char[0] 2 7 1000ms
+	Fork char[2] fork[0]:
+		CamLookPos (-54290, 2720, 43500) 1000ms
+	SoundPlay sound[163] 0 0 100
+	_Char96 char[0] (-55190, 3500, 42110) 4000 8000
+	CharFlagsUnset char[0] 0x0004
+	Sc_CF char[0] 0 "Frame85__ren"
+	ForkWait char[0] fork[0]
+	SoundPlay sound[164] 0 0 100
+	char[0].36 = 165
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	CharTurnTo char[0] 315deg 400deg/s
+	ForkWait char[0] fork[0]
+	Sleep 500ms
+	SoundPlay sound[276] 0 0 100
+	EffPlay eff[2] eff_instance[1] char[1] 0 (4600, 2600, 0) 0 0 18 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[2] char[1] 0 (-4600, 2600, 0) 0 0 342 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	Fork char[2] fork[0]:
+		CamLookPos (-52190, 1000, 47820) 4500ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 6920 -10000 4500ms
+	Fork char[2] fork[2]:
+		CamZoom 2860 4500ms
+	Fork char[2] fork[3]:
+		CamRotate 23000mdeg 4500ms
+	Fork char[0] fork[3]:
+		CamPers 407 4500ms
+	ForkFunc char[1] fork[0] fn[0,21]
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2500, 40850) 500mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2500, 40850) 750mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2500, 40850) 1000mm/s 0
+	SoundSetVolume sound[275] 80
+	Sleep 2000ms
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1500
+	ObjFrame object[0] 241
+	ObjPlay object[0] 260
+	ForkWait char[2] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#1304F#5PWe're going to Crossbell.{wait}
+	} {
+		Once we're high enough up, switch off your
+		boosters and switch to your regular flight
+		engines.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	EffStop eff_instance[0] 2
+	Sleep 1000ms
+	SoundSetVolume sound[275] 90
+	Sleep 100ms
+	SoundSetVolume sound[275] 100
+	ForkWait char[1] fork[1]
+	ForkWait char[1] fork[0]
+	CrossFade 500ms
+	CamLookPos (-62040, 1600, 39420) 0ms
+	CamSetDistance 0 4990 -10000 0ms
+	CamZoom 2600 0ms
+	CamRotate 271000mdeg 0ms
+	CamPers 440 0ms
+	Fork char[2] fork[2]:
+		CamZoom 2890 8000ms
+	Fog 0xFFB4E6F0 85000 139000 0
+	FadeWait
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 261
+	ObjPlay object[0] 280
+	SoundPlay sound[278] 0 0 100
+	ObjWait object[0]
+	ObjFlagsSet object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 281
+	ObjPlay object[0] 300
+	EffPlay eff[3] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[276] 0 0 100
+	Sleep 2000ms
+	EffPlay eff[2] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffStop eff_instance[1] 2
+	EffStop eff_instance[2] 2
+	Fork char[2] fork[0]:
+		CamLookPos (-70410, 6250, 39710) 4000ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 6070 -10000 4000ms
+	Fork char[2] fork[2]:
+		CamZoom 3440 6000ms
+	Fork char[2] fork[3]:
+		CamRotate 283000mdeg 6000ms
+	Fork char[0] fork[0]:
+		CamPers 420 6000ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 3000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 4000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 8000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 10000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 13000mm/s 0
+	Sleep 100ms
+	FadeOut 2000ms 0x00000000 255
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 18000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 23000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 28000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 33000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 38000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 43000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 48000mm/s 0
+	FadeWait
+	ForkQuit char[1] fork[1]
+	SystemFlagsSet 0x02000000
+	SystemFlagsSet 0x00100000
+	FlagSet flag[9476]
+	NewScene "e0811._sn" 100 0 0
+	Hcf
+	ForkFunc char[0] fork[0] fn[0,19]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkFunc char[0] fork[1] fn[0,20]
+	BgmStop 5000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 15 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Paradise] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[15] 0x10:
+		Sleep 1000ms
+		QuestFlagsSet quest[15] 0x10
+		QuestFlagsSet quest[15] 0x20
+		ItemAdd item[744] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[744]}{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7313._sn" 100 0 0
+	Hcf
+	Return
+
+fn[16]:
+	CharTurnTo char[0] 90deg 400deg/s
+	Sleep 300ms
+	CharWalkToPos2 char[0] (-52610, 100, 41240) 2000mm/s 0
+	Return
+
+fn[17]:
+	SoundSetVolume sound[397] 90
+	Sleep 150ms
+	SoundSetVolume sound[397] 80
+	Sleep 150ms
+	SoundSetVolume sound[397] 70
+	Sleep 150ms
+	SoundSetVolume sound[397] 60
+	Sleep 150ms
+	SoundSetVolume sound[397] 50
+	Sleep 150ms
+	SoundSetVolume sound[397] 40
+	Sleep 150ms
+	SoundSetVolume sound[397] 30
+	Sleep 150ms
+	SoundSetVolume sound[397] 20
+	Sleep 150ms
+	SoundSetVolume sound[397] 10
+	Sleep 150ms
+	SoundSetVolume sound[397] 0
+	SoundStop sound[397]
+	Return
+
+fn[18]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sleep 500ms
+	BgmPlay bgm[110] 0
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}In one corner of a vast city stood a sturdily-built
+		mansion.{wait}
+	} {
+		Its walls, decorated by marble, shone faintly in
+		the deep darkness, bathed in the cold moonlight.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}It was a gathering spot for residents of the
+		criminal underworld, run by an equally unpleasant
+		organization.{wait}
+	} {
+		The white prison was filled with exceptionally
+		young children...{wait}
+	} {
+		All unfortunate enough to have been given as 
+		offerings to the insatiable lust of those who
+		patronized the building.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	ImageShow "c_vis302._ch" 0 0 500ms
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}Owing to the physical and mental strains of being
+		there, most of the children began to grow weaker
+		and weaker over time...{wait}
+	} {
+		But one girl, by nothing short of a miracle, was
+		somehow able to maintain her own sanity, and 
+		endured all that was forced upon her.{wait}
+	} {
+		She was only five years old at the time, and one
+		of the many unfortunate souls who ended up there,
+		presumably abandoned by her parents.{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}One day, as dark fell, the building's gates were
+		opened once more...{wait}
+	} {
+		And the carriage of a government official came to
+		a halt in front of the building.{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[250] 0 0 100
+	Sleep 3000ms
+	TextSetPos 300 250 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		{color 0}It's a pleasure to see you again, sir.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 100 -1 -1
+	TextSetName "Government Official"
+	TextMessage null {
+		{color 0}Guide me inside at once.{wait}
+	} {
+		I'm in an excellent mood tonight, I'll have you
+		know.{wait}
+	} {
+		I expect to be treated accordingly.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 300 250 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		{color 0}As you wish, sir.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	SoundPlay sound[6] 0 0 100
+	Sleep 1500ms
+	TextSetPos 200 200 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		{color 0}Now, Renne...{wait}
+	} {
+		Come and say hello to your favorite gentleman.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 300ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS303._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1500ms
+	TextSetPos 50 300 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		{color 0}...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 200 60 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		{color 0}My... How wonderful.{wait}
+	} {
+		Come along, Renne.{wait}
+	} {
+		Let me get a good look at that sweet little face
+		of yours.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 300 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		{color 0}...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 200 60 -1 -1
+	TextSetName "Government Official"
+	TextMessage null {
+		{color 0}Haha... There's no need to be so afraid.{wait}
+	} {
+		All you need to do is relax and let whatever
+		happens...happen.{wait}
+	} {
+		That way, when you next open your eyes...{wait}
+	} {
+		It'll aaall be over.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 300 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		{color 0}Eeeek!{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmStop 2000ms
+	SoundPlay sound[581] 0 0 100
+	SoundPlay sound[556] 0 0 100
+	VisSet vis[0] 0 0 10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 -10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 -10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 0 0 -10000 50ms 0
+	VisWait vis[0] 0
+	VisSet vis[0] 3 0x00FFFFFF 200ms 0 0
+	Sleep 1000ms
+	BgmPlay bgm[41] 0
+	ForkFunc field_party[0] fork[1] fn[0,23]
+	Sleep 1000ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[214] 0 0 100
+	Sleep 1000ms
+	ForkQuit field_party[0] fork[1]
+	SoundPlay sound[550] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	TextSetPos 300 150 -1 -1
+	TextSetName "Man's Scream"
+	TextMessage null {
+		{color 0}#3SAaaah!{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[911] 0 0 100
+	TextSetPos 100 250 -1 -1
+	TextSetName "Man's Scream"
+	TextMessage null {
+		{color 0}#3SAaaaah!{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[524] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[135] 0 0 100
+	Sleep 1000ms
+	TextSetPos 200 200 -1 -1
+	TextSetName "Owner"
+	TextMessage null {
+		{color 0}Wh-What's happening?!{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 200 80 -1 -1
+	TextSetName "Government Official"
+	TextMessage null {
+		{color 0}What's going on?!{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	TextSetPos 200 80 -1 -1
+	TextSetName "Government Official"
+	TextMessage null {
+		{color 0}#3SA-Aaaah!{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[550] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[905] 0 0 100
+	Sleep 800ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[911] 0 0 100
+	Sleep 500ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 300ms
+	SoundPlay sound[524] 0 0 100
+	Sleep 1000ms
+	ImageHide 1500ms
+	Sleep 500ms
+	ImageShow "c_vis304._ch" 0 0 500ms
+	Sleep 1000ms
+	TextSetPos 330 300 -1 -1
+	TextSetName "Loewe"
+	TextMessage null {
+		{color 0}...Filthy pigs.{wait}
+	} {
+		Their screams are as unpleasant as their looks.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 180 -1 -1
+	TextSetName "Joshua"
+	TextMessage null {
+		{color 0}...I've finished with the first floor now.{wait}
+	} {
+		Everyone left has fled to the second floor.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Loewe"
+	TextMessage null {
+		{color 0}Like cornered rats.{wait}
+	} {
+		Lead the way, Joshua.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 180 -1 -1
+	TextSetName "Joshua"
+	TextMessage null {
+		{color 0}Got it.{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 2000ms
+	BgmStop 2000ms
+	SoundSetVolume sound[135] 90
+	Sleep 150ms
+	SoundSetVolume sound[135] 80
+	Sleep 150ms
+	SoundSetVolume sound[135] 70
+	Sleep 150ms
+	SoundSetVolume sound[135] 60
+	Sleep 150ms
+	SoundSetVolume sound[135] 50
+	Sleep 150ms
+	SoundSetVolume sound[135] 40
+	Sleep 150ms
+	SoundSetVolume sound[135] 30
+	Sleep 150ms
+	SoundSetVolume sound[135] 20
+	Sleep 150ms
+	SoundSetVolume sound[135] 10
+	Sleep 150ms
+	SoundSetVolume sound[135] 0
+	SoundStop sound[135]
+	Sleep 500ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}The assault of the building was carried out by a
+		mere two members of the society.{wait}
+	} {
+		Between them, they executed every last member of
+		the organization that ran it.{wait}
+	} {
+		The attack was meant to serve as an example to the
+		rest of the underworld there...{wait}
+	} {
+		But as an unintended consequence, that young girl
+		was allowed to escape with her life, albeit only
+		barely.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	BgmPlay bgm[115] 0
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}After being taken in by the group, she proved to
+		be remarkably skilled...{wait}
+	} {
+		...and before long, she had risen to being a
+		candidate for an executive position, and began
+		receiving formal training.{wait}
+	} {
+		Having saved her from the hell she was in,
+		Joshua and Loewe were like brothers to her.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 2000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}Not long after joining the Society, Renne heard
+		that Joshua had left on a special mission.{wait}
+	} {
+		One that he was going to take quite some time.{wait}
+	} {
+		Feeling somewhat lonely at the news, she decided
+		to step out into town for the first time in quite
+		a while.{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageShow "c_vis305._ch" 0 0 500ms
+	Sleep 1000ms
+	TextSetPos 72 320 56 3
+	TextMessage null {
+		{color 5}And after doing so, something caught her eye.{wait}
+	} {
+		A familiar man and woman, a baby in the woman's
+		arms.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 100 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		{color 0}...{wait}
+	} {
+		...{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	TextSetPos 400 80 -1 -1
+	TextSetName "Loewe"
+	TextMessage null {
+		{color 0}...Well, what will you do?{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 500ms
+	VisShow vis[0] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS306._CH"
+	VisShow vis[1] 0 0 640 480 0 0 768 512 0 0 640 480 0x00FFFFFF 0 "C_VIS348._CH"
+	VisSet vis[0] 4 0 0 0 0
+	VisSet vis[0] 3 0xFFFFFFFF 1000ms 0 0
+	Sleep 1000ms
+	TextSetPos 380 60 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		{color 0}I...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 50 200 -1 -1
+	TextSetName "Loewe"
+	TextMessage null {
+		{color 0}I can't help but wonder whether they are even 
+		worth the effort of cutting down...{wait}
+	} {
+		But that is your choice to make, not mine.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1500ms
+	VisSet vis[1] 4 0 0 0 0
+	VisSet vis[1] 3 0xFFFFFFFF 500ms 0 0
+	Sleep 500ms
+	TextSetPos 350 60 -1 -1
+	TextSetName "Renne"
+	TextMessage null {
+		{color 0}...No. I'll leave them.{wait}
+	} {
+		They're not my real Papa and Mama.{wait}
+	} {
+		I have Pater-Mater now.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 1000ms
+	BgmStop 2000ms
+	VisSet vis[0] 3 0x00FFFFFF 0ms 0 0
+	VisSet vis[1] 3 0x00FFFFFF 1000ms 0 0
+	Sleep 1000ms
+	VisHide vis[255] 0
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (-54650, 100, 42240) 180deg
+	CharSetChipBase char[0] chip[2]
+	CharSetChipPattern char[0] 0
+	CharSetPos char[1] (-52420, 100, 44100) 180deg
+	CharAttachObj char[1] object[0]
+	CamLookPos (-55520, 100, 44450) 0ms
+	CamSetDistance 0 5260 -10000 0ms
+	CamZoom 2520 0ms
+	CamRotate 327000mdeg 0ms
+	CamPers 370 0ms
+	Sleep 1000ms
+	EffLoad eff[0] "map\\\\mp014_00.eff"
+	EffPlay eff[0] eff_instance[255] null 0 (-54650, 100, 42240) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[457] 0 0 100
+	BgmPlay bgm[84] 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	TextTalk char[0] {
+		#260F#6P...Oh...{wait}
+	}
+	TextWait
+	char[0].8 = 38
+	Sleep 250ms
+	char[0].8 = 39
+	Sleep 300ms
+	char[0].8 = 38
+	Sleep 300ms
+	char[0].8 = 0
+	Sleep 300ms
+	CharAnimation char[0] 0 6 1000ms
+	char[0].8 = 6
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 18
+	Sleep 200ms
+	char[0].8 = 17
+	Sleep 200ms
+	char[0].8 = 16
+	Sleep 200ms
+	char[0].8 = 15
+	Sleep 200ms
+	char[0].8 = 14
+	Sleep 200ms
+	char[0].8 = 6
+	Sleep 200ms
+	Sleep 300ms
+	CharShake char[0] 15 0 300 4000ms
+	Sleep 1000ms
+	TextTalk char[0] {
+		#260F#6PRight...{wait}
+	} {
+		I thought it was cold... I guess that's because of
+		the rain.{wait}
+	}
+	TextWait
+	SoundPlay sound[980] 0 0 100
+	Sleep 1000ms
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 500
+	ObjFrame object[0] 461
+	ObjPlay object[0] 480
+	ObjWait object[0]
+	Sc_D8 object[0] 500
+	ObjFlagsSet object[0] 0x0020
+	ObjFrame object[0] 381
+	ObjPlay object[0] 420
+	Sleep 1000ms
+	char[0].8 = 11
+	Sleep 200ms
+	char[0].8 = 12
+	Sleep 200ms
+	Sleep 300ms
+	TextTalk char[0] {
+		#260F#6PHeehee. Thanks, Pater-Mater.{wait}
+	} {
+		Well, let's go, shall we?{wait}
+	}
+	TextWait
+	_59
+	CrossFade 500ms
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	FadeWait
+	Sleep 300ms
+	CharWalkToPos2 char[0] (-55170, 60, 39450) 2000mm/s 0
+	Fork field_party[0] fork[0]:
+		CamLookPos (-55780, 1980, 44190) 1000ms
+	Sleep 300ms
+	SoundPlay sound[163] 0 0 100
+	CharSetChipPattern char[0] 0
+	CharSetChipBase char[0] chip[1]
+	Fork char[0] fork[2]:
+		CharAnimation char[0] 0 2 2500ms
+	CharFlagsSet char[0] 0x0004
+	_Char96 char[0] (-55190, 3500, 42110) 4000 8000
+	CharFlagsUnset char[0] 0x0004
+	Sc_CF char[0] 0 "Frame85__ren"
+	CharSetChipPattern char[0] 0
+	CharSetChipBase char[0] chip[0]
+	SoundPlay sound[164] 0 0 100
+	CharFlagsSet char[0] 0x0010
+	CharTurnTo char[0] 180deg 0deg/s
+	Sleep 500ms
+	CharTurnTo char[0] 0deg 400deg/s
+	CharFlagsUnset char[0] 0x0010
+	ForkWait field_party[0] fork[0]
+	EffLoad eff[1] "map\\\\mp021_00.eff"
+	EffLoad eff[2] "map\\\\mp064_01.eff"
+	EffLoad eff[3] "map\\\\mp065_01.eff"
+	EffLoad eff[4] "map\\\\mp064_00.eff"
+	EffLoad eff[5] "map\\\\mp065_00.eff"
+	Sleep 500ms
+	SoundPlay sound[275] 1 0 70
+	SoundPlay sound[276] 0 0 100
+	EffPlay eff[1] eff_instance[0] char[1] 0 (0, -500, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[204] 0 0 100
+	EffPlay eff[4] eff_instance[1] char[1] 0 (4950, 2800, 0) 0 0 20 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[2] char[1] 0 (-4950, 2800, 0) 0 0 340 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 2000ms
+	EffPlay eff[2] eff_instance[1] char[1] 0 (5000, 2500, 0) 0 0 20 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[2] char[1] 0 (-4900, 2500, 0) 0 0 340 1000 1000 1000 null (0, 0, 0) 0ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (-52190, 710, 47820) 4500ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 6920 -10000 4500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2860 4500ms
+	Fork field_party[0] fork[3]:
+		CamRotate 23000mdeg 4500ms
+	Fork field_party[1] fork[1]:
+		CamPers 407 4500ms
+	ForkFunc char[1] fork[0] fn[0,21]
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 500mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 750mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 1000mm/s 0
+	SoundSetVolume sound[275] 80
+	Sleep 100ms
+	Sleep 2000ms
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 500
+	ObjFrame object[0] 241
+	ObjPlay object[0] 260
+	EffStop eff_instance[0] 2
+	Sleep 50ms
+	EffPlay eff[2] eff_instance[1] char[1] 0 (4600, 2600, 0) 0 0 18 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[2] char[1] 0 (-4600, 2600, 0) 0 0 342 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-53150, 2100, 40850) 750mm/s 0
+	SoundSetVolume sound[275] 90
+	Sleep 100ms
+	SoundSetVolume sound[275] 100
+	ForkWait char[1] fork[1]
+	ForkWait char[1] fork[0]
+	ForkWait field_party[0] fork[0]
+	CrossFade 500ms
+	CamLookPos (-62040, 1600, 39420) 0ms
+	CamSetDistance 0 4990 -10000 0ms
+	CamZoom 2890 0ms
+	CamRotate 271000mdeg 0ms
+	CamPers 440 0ms
+	Fog 0xFFB4E6F0 85000 139000 0
+	FadeWait
+	ObjFlagsUnset object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 261
+	ObjPlay object[0] 280
+	SoundPlay sound[278] 0 0 100
+	ObjWait object[0]
+	ObjFlagsSet object[0] 0x0020
+	Sc_D8 object[0] 1000
+	ObjFrame object[0] 281
+	ObjPlay object[0] 300
+	EffPlay eff[3] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[4] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	SoundPlay sound[276] 0 0 100
+	Sleep 2000ms
+	EffPlay eff[2] eff_instance[0] char[1] 0 (500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[2] eff_instance[3] char[1] 0 (-500, -3300, -3600) 0 80 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[4] char[1] 0 (1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[5] char[1] 0 (400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[6] char[1] 0 (-1000, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffPlay eff[3] eff_instance[7] char[1] 0 (-400, -2600, -3000) 0 70 0 1000 1000 1000 null (0, 0, 0) 0ms
+	EffStop eff_instance[1] 2
+	EffStop eff_instance[2] 2
+	Fork field_party[0] fork[0]:
+		CamLookPos (-62040, 2500, 39670) 4000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 3700 -10000 4000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 4050 4000ms
+	Fork field_party[0] fork[3]:
+		CamPers 382 4000ms
+	Sleep 500ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 3000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 4000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 8000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 10000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 13000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 18000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 23000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 28000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 33000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 38000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 43000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (-141470, 17000, 15800) 48000mm/s 0
+	ForkWait char[1] fork[1]
+	ForkFunc char[0] fork[0] fn[0,19]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkFunc char[0] fork[1] fn[0,20]
+	BgmStop 2000ms
+	Sleep 2000ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[15] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[15] 0x10
+		ItemAdd item[744] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[744]}{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7313._sn" 100 0 0
+	Hcf
+	Return
+
+fn[19]:
+	SoundSetVolume sound[275] 90
+	Sleep 200ms
+	SoundSetVolume sound[275] 80
+	Sleep 200ms
+	SoundSetVolume sound[275] 70
+	Sleep 200ms
+	SoundSetVolume sound[275] 60
+	Sleep 200ms
+	SoundSetVolume sound[275] 50
+	Sleep 200ms
+	SoundSetVolume sound[275] 40
+	Sleep 200ms
+	SoundSetVolume sound[275] 30
+	Sleep 200ms
+	SoundSetVolume sound[275] 20
+	Sleep 200ms
+	SoundSetVolume sound[275] 10
+	Sleep 200ms
+	SoundSetVolume sound[275] 0
+	SoundStop sound[275]
+	Return
+
+fn[20]:
+	SoundSetVolume sound[457] 90
+	Sleep 200ms
+	SoundSetVolume sound[457] 80
+	Sleep 200ms
+	SoundSetVolume sound[457] 70
+	Sleep 200ms
+	SoundSetVolume sound[457] 60
+	Sleep 200ms
+	SoundSetVolume sound[457] 50
+	Sleep 200ms
+	SoundSetVolume sound[457] 40
+	Sleep 200ms
+	SoundSetVolume sound[457] 30
+	Sleep 200ms
+	SoundSetVolume sound[457] 20
+	Sleep 200ms
+	SoundSetVolume sound[457] 10
+	Sleep 200ms
+	SoundSetVolume sound[457] 0
+	SoundStop sound[457]
+	Return
+
+fn[21]:
+	Sleep 1000ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 10deg/s
+	Sleep 200ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 15deg/s
+	Sleep 200ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 20deg/s
+	Sleep 500ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 30deg/s
+	Sleep 100ms
+	Fork char[1] fork[2]:
+		CharTurnTo self 250deg 40deg/s
+	Return
+
+fn[22]:
+	CharWalkToPos2 self (-55170, 60, 39450) 2000mm/s 0
+	Sleep 300ms
+	SoundPlay sound[163] 0 0 100
+	CharSetChipPattern self 0
+	CharSetChipBase self chip[1]
+	Fork self fork[2]:
+		CharAnimation self 0 2 2500ms
+	_Char96 self (-55190, 3050, 42110) 3500 8000
+	Sc_CF self 0 "Frame85__ren"
+	CharSetChipPattern self 0
+	CharSetChipBase self chip[0]
+	SoundPlay sound[164] 0 0 100
+	Sleep 300ms
+	CharFlagsSet self 0x0010
+	CharTurnTo self 180deg 400deg/s
+	CharFlagsUnset self 0x0010
+	Return
+
+fn[23]:
+	while 1:
+		SoundPlay sound[565] 0 0 80
+		Sleep 1000ms
+		SoundPlay sound[503] 0 0 80
+		Sleep 1000ms
+		SoundPlay sound[503] 0 0 80
+		Sleep 500ms
+		SoundPlay sound[565] 0 0 80
+		Sleep 800ms
+	Return

@@ -1,0 +1,258 @@
+calmare tc scena
+scena:
+	name "Grancel" "T4151.x"
+	town town[1]
+	bgm bgm[0]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02420._ch" "npl/ch02420p._cp"
+
+npc char[0]:
+	name "Gilbert"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0184
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		system[1] = 173
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[8] (70000, 1720, 14920) 180deg
+	CharSetPos name[14] (70000, 1720, 14920) 180deg
+	CharColor name[8] 0x00FFFFFF 0ms
+	CharColor name[14] 0x00FFFFFF 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (78160, 1250, 13000) 225deg
+	CamLookPos (70110, 3350, 17060) 0ms
+	CamSetDistance 0 6220 -10000 0ms
+	CamZoom 2540 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 390 0ms
+	Fork name[14] fork[2]:
+		CamLookPos (70110, 3350, 13660) 5000ms
+	Fork name[14] fork[3]:
+		CamSetDistance 0 5000 -10000 5000ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[0] 0x0010
+	ObjFlagsUnset object[0] 0x0020
+	ObjFrame object[0] 0
+	ObjPlay object[0] 59
+	ObjWait object[0]
+	ForkFunc name[8] fork[0] fn[0,4]
+	Sleep 800ms
+	ForkFunc name[14] fork[0] fn[0,3]
+	Sleep 500ms
+	ObjFrame object[0] 59
+	ObjPlay object[0] 0
+	Sleep 3000ms
+	ForkQuit name[14] fork[2]
+	CrossFade 1000ms
+	CamLookPos (70700, 250, 5590) 0ms
+	CamSetDistance 0 5500 -10000 0ms
+	CamZoom 2300 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 344 0ms
+	FadeWait
+	ForkWait name[8] fork[0]
+	ForkWait name[14] fork[0]
+	ForkWait name[14] fork[3]
+	TextTalk name[8] {
+		#1068F#6PI thought you were joking when you said you
+		were going to buy everything they had left...{wait}
+	} {
+		The girl behind the counter looked like she
+		thought you were a freak of nature.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1442F#2PThis is just another example of Aidios' divine
+		providence.{wait}
+	} {
+		It's better that they're bought by someone who
+		intends to consume them than to have the poor
+		things be thrown away.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1840F#6PYeah, yeah. You're a real bleeding heart.
+		But THAT much?{wait}
+	} {
+		I hope you're not spending your entire salary
+		on food.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1447F#2PI'll have you know that you have nothing to
+		worry about.{wait}
+	} {
+		There are few people in this world who know
+		how to make better use of sales and special
+		offers than I.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1840F#6P*sigh* Well, whatever makes you happy. It's not
+		my business how you blow your mira at the end
+		of the day.{wait}
+	} {
+		#1068FStill, while I'll give you that my getup is right up
+		the top of the 'suspicious' charts...{wait}
+	} {
+		...I'm pretty sure anyone would be confused if
+		a woman in a sister's habit came wandering into
+		their shop after dark to buy out the leftovers.{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1801F#2POh, stop your grumbling.{wait}
+	} {
+		#1447F...And it's almost time for us to leave. We should
+		make our way over to the landing port.{wait}
+	} {
+		I'm not sure how much longer my stomach can
+		wait.{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1840F#6PYes, ma'am.{wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#1063F#6P...{wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1444F#2PIs someth...?{wait}
+	}
+	TextWait
+	Emote name[14] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (79250, 1250, 14670) 0ms
+	CamSetDistance 0 6500 -10000 0ms
+	CamZoom 2300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 344 0ms
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (78160, 1250, 15220) 2000mm/s 0
+	FadeWait
+	Sleep 1500ms
+	Fork char[0] fork[2]:
+		CamSetDistance 0 5500 -10000 3000ms
+	CamLookPos (70700, 250, 5590) 3000ms
+	Sleep 300ms
+	TextTalk name[14] {
+		#1801F#2P...{wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1840F#6P(Sorry. That stomach of yours is gonna
+		have to wait a little longer.){wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1446F#2P(Unforgivable...){wait}
+	} {
+		#1801F(I don't know who this fiend is, but as long
+		as I don't kill them, I can go as far as I like,
+		right?){wait}
+	}
+	TextWait
+	Emote name[8] 0mm 2000mm 16 19 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk name[8] {
+		#1068F#6P(I sympathize, but you...uh...might wanna
+		calm down a little.){wait}
+	} {
+		#1060F(Still, whoever they are, they're not very good
+		at tailing people.){wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1443F#2P(Quite. I doubt they have much experience.){wait}
+	} {
+		(They do seem to have undergone some degree
+		of training, however.){wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1065F#6P(Yeah...){wait}
+	} {
+		#1063F(Oh, well. Sad to say, but we're going to have
+		to skip today's last airship out of here.){wait}
+	}
+	TextWait
+	TextTalk name[14] {
+		#1443F#2P(Do you know of a good place to strike?){wait}
+	}
+	TextWait
+	TextTalk name[8] {
+		#1075F#6P(Oh, I do.){wait}
+	} {
+		#1060F(I know the perfect place.){wait}
+	}
+	TextWait
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsUnset 0x02000000
+	FlagSet flag[9476]
+	NewScene "t4404._sn" 100 0 0
+	Hcf
+	EventEnd 0
+	Return
+
+fn[3]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (70240, 1250, 12630) 2000mm/s 0
+	CharWalkToPos self (70650, 250, 4610) 2000mm/s 0
+	Sleep 100ms
+	CharTurnTo self 270deg 400deg/s
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 500ms
+	CharWalkToPos self (69800, 1250, 12630) 2000mm/s 0
+	CharWalkToPos self (68840, 250, 4500) 2000mm/s 0
+	Sleep 100ms
+	CharTurnTo self 90deg 400deg/s
+	Return

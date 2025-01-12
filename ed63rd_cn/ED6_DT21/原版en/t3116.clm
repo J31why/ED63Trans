@@ -1,0 +1,524 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3116.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01190._ch" "npl/ch01190p._cp"
+chip[1] "npl/ch02020._ch" "npl/ch02020p._cp"
+chip[2] "npl/ch00060._ch" "npl/ch00060p._cp"
+chip[3] "npl2/ch03970._ch" "npl2/ch03970p._cp"
+
+npc char[0]:
+	name "Professor Russell"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Erika"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Karl"
+	pos (-2000, 0, 3410)
+	angle 270deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,2]
+
+npc char[3]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[2] 0x0080
+	if system[66] == 25:
+		if flag[9476]:
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,3]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	TextStart self
+	if flag[12165]:
+		if flag[0]:
+			CharTurnTo self 270deg 0deg/s
+			TextTalk self {
+				Hmm... To cut, or not to cut...{wait}
+			}
+			TextWait
+			TextTalk self {
+				One thing's for sure: if we don't work out a way
+				to cut production costs at least a teeeeeny tiny
+				bit, we won't stack up to the Empire...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				You're looking for Erika Russell?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I haven't seen her today. Sorry!{wait}
+			}
+			TextWait
+			TextTalk self {
+				If I haven't, though, it makes me wonder
+				whether she's finished that project she was
+				plowing through...{wait}
+			}
+			TextWait
+			TextTalk self {
+				She's been hogging all the equipment to herself
+				to work on it lately.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (1280, 0, 12800) 0ms
+	CamSetDistance 0 5000 -10000 0ms
+	CamZoom 2860 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 280 0ms
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsUnset char[1] 0x0080
+	CharSetPos char[0] (-30, 0, 12840) 180deg
+	CharSetPos char[1] (-360, 0, 10320) 0deg
+	CharFlagsSet name[6] 0x0004
+	CharSetPos name[6] (-2800, 0, 3260) 0deg
+	SoundPlay sound[224] 1 0 100
+	ObjFlagsSet object[1] 0x0020
+	ObjFlagsSet object[2] 0x0020
+	ObjPlay object[1] 3
+	ObjPlay object[2] 3
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#101F#5PThis tool here's brand new. It can cut with ten
+		times more precision than the previous model!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1457F#12PBah... I had no idea you had something like this
+		here now.{wait}
+	} {
+		#1456FI think I might have to go over the designs again!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[109] 0 0 100
+	Sleep 500ms
+	TextTalk name[6] {
+		#560F#1POh, Mom!{wait}
+	} {
+		Here you are.{wait}
+	}
+	TextWait
+	_59
+	CharFlagsUnset name[6] 0x0004
+	CharSetPos name[6] (-360, 0, 3120) 0deg
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-360, 0, 8790) 4500mm/s 0
+	Sleep 100ms
+	SoundPlay sound[109] 0 0 100
+	ForkWait name[6] fork[1]
+	Sleep 300ms
+	TextTalk char[1] {
+		#1450F#5PWelcome back, Tita.{wait}
+	} {
+		Did you manage to do what I asked?{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#061F#12PYup. Mr. Murdock said he'll take care of
+		the paperwork right away.{wait}
+	} {
+		He's probably working on it right now.{wait}
+	} {
+		#560FBut now that I've done that, Mom...{wait}
+	} {
+		...I want to be part of the Orbal Gear's
+		development team, too.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 0 1 250ms 2
+	SoundPlay sound[38] 0 0 100
+	Sleep 1000ms
+	CharTurnTo char[1] 180deg 500deg/s
+	ObjFlagsUnset object[1] 0x0020
+	ObjFlagsUnset object[2] 0x0020
+	SoundStop sound[224]
+	SoundPlay sound[154] 0 0 100
+	Sleep 800ms
+	TextTalk char[1] {
+		#1454F#5P...You?{wait}
+	}
+	TextWait
+	ForkFunc char[0] fork[3] fn[0,4]
+	TextTalk name[6] {
+		#063F#12PYeah. I didn't write this in any of my letters...{wait}
+	} {
+		...but I ended up spending some time with
+		Renne while she was in Liberl.{wait}
+	} {
+		#062FAnd even if she's a member of the society,
+		she's also my friend.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1452F#5PRenne...?{wait}
+		#1457FNow, where have I heard that before...?{wait}
+	} {
+		#1453FOh! Wasn't she the girl Pater-Mater belongs to?{wait}
+	}
+	TextWait
+	ForkWait char[0] fork[3]
+	TextTalk char[0] {
+		#100F#5PUmm... Erika... If I might be permitted to say
+		my piece here...{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] char[0] 500deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#1830F#11PSay your piece?!{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (-1660, -120, 12880) 1500ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 4320 -10000 1500ms
+	Fork char[3] fork[2]:
+		CamRotate 36000mdeg 1500ms
+	ForkLoop name[6] fork[2]:
+		CharTurnToChar self char[1] 500deg/s
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 10360) 5000mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 11760) 5000mm/s 0
+	ForkWait char[1] fork[1]
+	Shake 0 100 3000 100ms
+	SoundPlay sound[143] 0 0 100
+	char[0].40 = 1 | 8 | 4
+	CharFlagsSet char[0] 0x0004
+	Fork char[0] fork[2]:
+		CharShake self 15 0 0 3000ms
+	Fork char[0] fork[1]:
+		CharJump self 0 300 0 300 1000mm/s
+	ForkWait char[0] fork[1]
+	Sleep 500ms
+	ForkQuit name[6] fork[2]
+	Emote name[6] 0mm 1700mm 40 43 100ms 3
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-3240, 0, 9600) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-3240, 0, 9900) 4500mm/s 0
+	ForkWait name[6] fork[1]
+	Sleep 300ms
+	TextTalk name[6] {
+		#065FM-Mom?! What are you...?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1457F#6PYou better have a DAMN GOOD explanation
+		for this one, Albert.{wait}
+	} {
+		My daughter ended up making friends with a
+		member of OUROBOROS?!{wait}
+	} {
+		#1459FWhy is this the first I'm hearing of this? This
+		wasn't in any of what you sent me!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#104F#5PWell...{wait}
+	} {
+		...it was kind of hard to say...{wait}
+	}
+	TextWait
+	CharFlagsSet char[0] 0x0020
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 12560) 1000mm/s 0
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (-3200, 300, 13080) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	Sleep 300ms
+	CharFlagsUnset char[0] 0x0020
+	TextTalk char[1] {
+		#1459F#6PDon't you give me that!{wait}
+	} {
+		As if you hadn't already exposed her to enough
+		danger to make me want to strangle you, and
+		now I'm hearing THIS?!{wait}
+	} {
+		#1830F#3SJust what have you been doing with my
+		daughter while I've been away?!#2S{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#062FM-Mom! I'm serious! I want to be involved in the
+		Orbal Gear's development!{wait}
+	} {
+		I'm completely powerless on my own, but I still
+		want to find some way to talk to her.{wait}
+	} {
+		And the Orbal Gear's going to be able to fight
+		on equal terms with Pater-Mater, right?{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[6] {
+		#068FTh-Then I want to be involved! Because I want
+		the kind of power that Estelle has!{wait}
+	}
+	Shake 0 300 3000 100ms
+	TextWait
+	BgmStop 3000ms
+	ForkQuit char[0] fork[2]
+	Sleep 500ms
+	Emote char[1] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#1453F#5P...Tita?{wait}
+	}
+	TextWait
+	CharFlagsUnset char[0] 0x0004
+	Fork char[0] fork[1]:
+		_Char96 self (-3300, 0, 13180) 10 4000
+	ForkWait char[0] fork[1]
+	char[0].40 = 1 | 8
+	SoundPlay sound[142] 0 0 50
+	SoundPlay sound[209] 0 0 100
+	Sleep 300ms
+	CharTurnToChar char[1] name[6] 500deg/s
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos self (-3140, 0, 12060) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	TextTalk char[1] {
+		#1452F#5PCorrect me if I'm wrong, but...{wait}
+	} {
+		...you're not considering using the Orbal Gear
+		to fight Pater-Mater yourself, are you?{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#564F#12PWhat...?{wait}
+	} {
+		Th-That wasn't what I meant... I...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1457F#5PI want to make very sure of this.{wait}
+	} {
+		Do you understand just what we're making here?{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#064F#12PUmm... Well...{wait}
+	} {
+		#560FWell, I only got a quick look at the blueprints,
+		but it looked like a bipedal...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1453F#5PThat's not what I mean.{wait}
+	} {
+		The Orbal Gear is a weapon. No matter how you
+		try to dress that fact up, that's the reality.{wait}
+	} {
+		#1452FIt's a tool designed to be used by people to hurt
+		other people. {wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#063F#12PB-But...{wait}
+	} {
+		But you're not making it because you want to hurt
+		people, are you?{wait}
+	} {
+		Even the patrol airships used by the army are made
+		to protect the country, not to hurt people...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1457F#5PIt doesn't matter what I think. It doesn't matter
+		what the developer of any new weapon thinks.{wait}
+	} {
+		We're not the ones actually going out and using
+		the things we make.{wait}
+	} {
+		#1453FThe devices we pour our hearts into making go
+		on to cause unspeakable suffering to people,
+		and there's nothing we can do to stop it.{wait}
+	} {
+		#1452FHave you ever stopped to think about that?{wait}
+	} {
+		And after having it pointed out to you, can you
+		still say you want power?{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#065F#12PWell...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1453F#5PWe're doing what we're doing fully aware of what
+		the potential consequences may be down the line,
+		but can you?{wait}
+	} {
+		#1457FYou know how much I love you, Tita.{wait}
+	} {
+		And I understand that you care deeply about
+		your friend. I do.{wait}
+	} {
+		But that's all the more reason why I can't
+		permit you to take part in this.{wait}
+	} {
+		#1452FCan you understand where I'm coming from?{wait}
+	}
+	TextWait
+	TextTalk name[6] {
+		#065F#12P#40W...{wait}
+	} {
+		#562FB-But...I...I...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk name[6] {
+		#069F#12P#3SI'm not taking this lightly, either,
+		you know!{wait}
+	}
+	Shake 0 300 3000 150ms
+	TextWait
+	CharTurnTo name[6] 90deg 600deg/s
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-1300, 0, 9600) 5000mm/s 0
+	ForkWait name[6] fork[1]
+	Fork name[6] fork[1]:
+		CharWalkToPos self (-1300, 0, 1000) 5000mm/s 0
+	ForkWait name[6] fork[1]
+	SoundPlay sound[109] 0 0 100
+	Emote char[0] 0mm 2000mm 24 27 250ms 0
+	Sleep 1000ms
+	SoundPlay sound[109] 0 0 100
+	Sleep 1000ms
+	EmoteStop char[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#104F#5PI appreciate how you feel, Erika, but I'm sure
+		Tita's been thinking about this a lot herself,
+		especially after all she went through.{wait}
+	} {
+		#102FWhy not show her a little more respect?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1457F#6PI'm sure she has, but that doesn't mean I can
+		let her be involved in developing a weapon.{wait}
+	} {
+		We researchers don't get a say in how our
+		inventions end up being used down the line.
+		That's just our fate.{wait}
+	} {
+		#1453FThat's what we have to accept when we're
+		doing our jobs.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#104F#5P...That we do.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1452F#6PI know where she's coming from, but I absolutely
+		can't let her be a part of this.{wait}
+	} {
+		#1457FShe doesn't need to be shouldering this kind of
+		burden. Not at her age.{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamZoom 2960 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9476]
+	NewScene "t3112._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-30, 0, 14080) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-2200, 0, 14080) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-3200, 0, 13080) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-3200, 0, 12280) 1500mm/s 0
+	ForkWait char[0] fork[1]
+	ForkLoop char[0] fork[2]:
+		CharTurnToChar self char[1] 500deg/s
+	Return

@@ -1,0 +1,150 @@
+calmare fc scena
+scena:
+	name "Zeiss" "T3117.x"
+	town town[1]
+	bgm bgm[13]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01220._ch" "npl/ch01220p._cp"
+chip[1] "npl/ch01660._ch" "npl/ch01660p._cp"
+chip[2] "npl/ch01050._ch" "npl/ch01050p._cp"
+chip[3] "npl/ch01700._ch" "npl/ch01700p._cp"
+
+npc char[0]:
+	name "Ray"
+	pos (1730, 0, 15000)
+	angle 90deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[1]:
+	name "Terry"
+	pos (1050, 0, 7470)
+	angle 270deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[6,2]
+	talk fn[0,4]
+
+fn[0]:
+	if system[66] == 26:
+		CharFlagsUnset char[8] 0x0080
+		CharFlagsUnset char[9] 0x0080
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (4670, null, 5810) (-4590, null, 550) 1000mm/s
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12165]:
+		if flag[0]:
+			TextTalk self {
+				I can't exactly pretend to be an expert in the
+				field of making archaisms, though.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Maybe I should start by gathering research
+				materials, then. After that, I can get to work
+				on the blueprints.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Well, I think all of the greenhouse experiments
+				are basically done now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Which meeeans it's time to start work
+				on my next project: making an archaism
+				modeled after Tita!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Haha... Time to start with drawing up
+				those blueprints!{wait}
+			}
+			TextWait
+			TextTalk name[5] {
+				#053F(Tita's mom's eyes creeped me out when
+				I saw those, but this guy doesn't seem to
+				be in his right mind, either...){wait}
+			} {
+				#057F(...Maybe I oughtta stop him, too?){wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12165]:
+		if flag[1]:
+			TextTalk self {
+				Now it's my turn to look after the greenhouses.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Which means I can fully dedicate myself to
+				furthering my own research. Which is great...{wait}
+			}
+			TextWait
+			TextTalk self {
+				...except for the bit where I've got no idea what
+				to actually work on right now. Nothing's coming
+				to mind at all!{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				Ray was able to produce a plant capable of
+				soothing people in a mere three months, which
+				is pretty amazing.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I still can't believe he was actually able to do
+				it...{wait}
+			}
+			TextWait
+			TextTalk self {
+				How did he even pull it off? He barely even did
+				any selective breeding at all!{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd self
+	Return

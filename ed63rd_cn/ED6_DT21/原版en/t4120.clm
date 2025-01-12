@@ -1,0 +1,360 @@
+calmare fc scena
+scena:
+	name "Grancel" "T4120.x"
+	town town[1]
+	bgm bgm[14]
+	item fn[0,65535]
+	scp 6 file[0x00210001]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01690._ch" "npl/ch01690p._cp"
+chip[1] "npl/ch01140._ch" "npl/ch01140p._cp"
+chip[2] "npl/ch01040._ch" "npl/ch01040p._cp"
+chip[3] "npl/ch01043._ch" "npl/ch01043p._cp"
+chip[4] "npl/ch01680._ch" "npl/ch01680p._cp"
+
+npc char[0]:
+	name "Chaeli"
+	pos (1260, 0, -240)
+	angle 236deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,6]
+
+npc char[1]:
+	name "Shepard"
+	pos (-500, 0, 129840)
+	angle 0deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[0,2]
+	talk fn[0,9]
+
+npc char[2]:
+	name "Zacharias"
+	pos (58580, 0, 360)
+	angle 102deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+npc char[3]:
+	name "Tom"
+	pos (120030, 0, -1260)
+	angle 10deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,8]
+
+look_point[0]:
+	pos (-10, 0, -1600)
+	radius 800mm
+	bubble_pos (1260, 1500, -240)
+	flags 0x007E
+	func fn[0,5]
+	unk1 0
+
+look_point[1]:
+	pos (60410, 0, 390)
+	radius 800mm
+	bubble_pos (58580, 1500, 360)
+	flags 0x007E
+	func fn[0,3]
+	unk1 0
+
+look_point[2]:
+	pos (119960, 0, 650)
+	radius 800mm
+	bubble_pos (120030, 1500, -1260)
+	flags 0x007E
+	func fn[0,7]
+	unk1 0
+
+fn[0]:
+	if system[66] == 7:
+		if flag[12112]:
+		elif flag[12108]:
+		elif flag[12107]:
+		elif flag[12106]:
+	Return
+
+fn[1]:
+	LookPointFlagsSet look_point[0] 0x0001
+	LookPointFlagsSet look_point[1] 0x0001
+	LookPointFlagsSet look_point[2] 0x0001
+	OpLoad "t4120_n"
+	if system[66] == 7:
+		LookPointFlagsUnset look_point[0] 0x0001
+		LookPointFlagsUnset look_point[1] 0x0001
+		LookPointFlagsUnset look_point[2] 0x0001
+	Return
+
+fn[2]:
+	while 1:
+		CharIdle self (1470, null, 131290) (-1690, null, 128210) 2000mm/s
+	Return
+
+fn[3]:
+	Call fn[0,4]
+	Return
+
+fn[4]:
+	TextStart char[10]
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[0]:
+			TextTalk char[10] {
+				If you're looking for Tom, he's up on the third
+				floor.{wait}
+			}
+			TextWait
+			TextTalk char[10] {
+				Why not go see him? He offers his own special
+				services up there.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[10] {
+				Tom's got a way with his fingers, you know.{wait}
+			}
+			TextWait
+			TextTalk char[10] {
+				He can mend orbments and the like in a flash.{wait}
+			}
+			TextWait
+			TextTalk char[10] {
+				He just seems to have a natural talent for it,
+				you know?{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[0]:
+			TextTalk char[10] {
+				If you're looking for Tom, he's up on the third
+				floor.{wait}
+			}
+			TextWait
+			TextTalk char[10] {
+				Why not go see him? He offers his own special
+				services up there.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[10] {
+				I started this shop with my friend who I go way
+				back with, Tom.{wait}
+			}
+			TextWait
+			TextTalk char[10] {
+				He's got the technical expertise, and I've got the
+				management expertise. Together, I'm sure we'll
+				make this work.{wait}
+			}
+			TextWait
+			FlagSet flag[0]
+	TextEnd char[10]
+	Return
+
+fn[5]:
+	Call fn[0,6]
+	Return
+
+fn[6]:
+	TextStart char[8]
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[1]:
+			TextTalk char[8] {
+				My husband and I only got married recently,
+				as it so happens.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Heehee. He might not talk much, but that's
+				part of why I find him kind of cool.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				La la laaa... La la laaaaaa... ♪{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Oh, hello! Welcome to our store!{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[1]:
+			TextTalk char[8] {
+				All my husband does is stay in the back and
+				deal with stock. He never comes out to sell
+				anything at the counter.{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				So I'll just have to handle things here in his
+				place!{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[8] {
+				Welcome to our store!{wait}
+			}
+			TextWait
+			TextTalk char[8] {
+				Have a look around, and let me know if something
+				catches your eye!{wait}
+			}
+			TextWait
+			FlagSet flag[1]
+	TextEnd char[8]
+	Return
+
+fn[7]:
+	Call fn[0,8]
+	Return
+
+fn[8]:
+	TextStart char[11]
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[2]:
+			TextTalk char[11] {
+				If not for Zacharias, there's no way I would've
+				even dreamed of opening a shop like this.{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				I owe him a hell of a lot, that I do.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[11] {
+				Starting this shop up was all Zacharias' idea.{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				He said it was a good idea to actually get to 
+				see my customers' faces.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[2]:
+			TextTalk char[11] {
+				I-I'm kind of bad at dealing with customers,
+				you see...{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				They make me really nervous... All I want to do
+				is mess with orbments without having to talk to
+				anyone.{wait}
+			}
+			TextWait
+		else:
+			TextTalk char[11] {
+				W-Welcome...{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				Umm... This is the counter where I handle 
+				repairs.{wait}
+			}
+			TextWait
+			TextTalk char[11] {
+				If you have any orbments that need fixing, 
+				I can repair them for you.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	TextEnd char[11]
+	Return
+
+fn[9]:
+	TextStart self
+	if flag[12112]:
+	elif flag[12108]:
+		if flag[3]:
+			TextTalk self {
+				I do feel bad about leaving everything at the
+				front to my wife, but what else can I do?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I always seem to end up leaving manning the 
+				front counter to my wife...{wait}
+			}
+			TextWait
+			TextTalk self {
+				She doesn't seem to mind as such, but it doesn't
+				stop me from feeling bad. We've only just gotten
+				married...{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	elif flag[12107]:
+	elif flag[12106]:
+		if flag[3]:
+			TextTalk self {
+				If you want to buy anything, go and speak to my
+				wife at the counter.{wait}
+			}
+			TextWait
+			TextTalk self {
+				She'll be happy to sell to you.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				...Welcome to our store.{wait}
+			}
+			TextWait
+			TextTalk self {
+				If you're looking to buy something, though,
+				you should head back up the stairs.{wait}
+			}
+			TextWait
+			TextTalk self {
+				My wife's manning the counter at the moment.{wait}
+			}
+			TextWait
+			FlagSet flag[3]
+	TextEnd self
+	Return

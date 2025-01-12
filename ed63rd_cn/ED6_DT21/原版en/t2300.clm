@@ -1,0 +1,1291 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2300.x"
+	town town[86]
+	bgm bgm[15]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01070._ch" "npl/ch01070p._cp"
+chip[1] "npl/ch01260._ch" "npl/ch01260p._cp"
+chip[2] "npl/ch01150._ch" "npl/ch01150p._cp"
+
+npc char[0]:
+	name "Manoria Byroad"
+	pos (-2940, 7990, 68620)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Gull Seaside Way"
+	pos (75410, -40, 20810)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Lucia"
+	pos (37840, -50, 17810)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,2]
+
+npc char[4]:
+	name "Grant"
+	pos (38170, -20, 18890)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,3]
+
+npc char[5]:
+	name "Sadie"
+	pos (45300, 0, 23500)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0101
+	init fn[6,2]
+	talk fn[0,4]
+
+trigger[0]:
+	pos1 (27540, 0, 18980)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,9]
+	unk1 0
+
+trigger[1]:
+	pos1 (53410, 0, 22710)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,10]
+	unk1 0
+
+trigger[2]:
+	pos1 (6000, 4000, 20210)
+	pos2 (1000, 2000, 0)
+	flags 0x0041
+	func fn[0,11]
+	unk1 0
+
+look_point[0]:
+	pos (37770, -10, 19530)
+	radius 1000mm
+	bubble_pos (37770, 1800, 19530)
+	flags 0x007C
+	func fn[0,8]
+	unk1 0
+
+fn[0]:
+	ObjFlagsUnset object[2] 0x0004
+	ObjFlagsSet object[8] 0x0004
+	ObjFlagsSet object[2] 0x0010
+	if system[66] == 9:
+		if flag[12066]:
+			CharFlagsSet char[5] 0x0080
+			CharSetPos char[3] (4510, 6000, -1100) 90deg
+			CharSetPos char[4] (4510, 6000, -100) 90deg
+		elif flag[12065]:
+		elif flag[12064]:
+		elif flag[12055]:
+	if system[66] == 9:
+		if !flag[12065]:
+			if flag[9476]:
+				FlagUnset flag[9476]
+				Event fn[0,5]
+	Return
+
+fn[1]:
+	MapSet 4000 (-108000, null, -126000) "mt2300._ch"
+	SoundPlay sound[453] 1 0 100
+	Return
+
+fn[2]:
+	TextStart self
+	if flag[12066]:
+		if flag[12093]:
+			if flag[12092]:
+				if flag[0]:
+					_Char4A char[4] 255
+					TextTalk self {
+						It's something you get when scary monsters
+						come after you and you almost fall off cliffs...{wait}
+					}
+					TextWait
+					TextTalk self {
+						This riddle is really hard!{wait}
+					}
+					TextWait
+					if flag[12094]:
+						TextTalk char[4] {
+							#823F...Kindly do some work.{wait}
+						}
+						TextWait
+					else:
+						TextTalkNamed char[4] "Man" {
+							#823F...Kindly do some work.{wait}
+						}
+						TextWait
+					_Char4B char[4] 255
+				else:
+					TextTalk self {
+						Why do you have to almost fall off a cliff
+						to get happiness?{wait}
+					}
+					TextWait
+					TextTalk self {
+						It's a mystery...{wait}
+					}
+					TextWait
+					FlagSet flag[0]
+			elif flag[0]:
+				TextTalk self {
+					It'd be really nice if we got as many customers
+					as the department store in Grancel does.{wait}
+				}
+				TextWait
+				TextTalk self {
+					They'd all be very welcome! ♪{wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					I hope lots of people come to the bazaar.{wait}
+				}
+				TextWait
+				TextTalk self {
+					It'd be really nice if we got as many customers
+					as the department store in Grancel does.{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			if flag[12092]:
+				TextTalk self {
+					Huh? Mary?{wait}
+				}
+				TextWait
+				TextTalk self {
+					What happened to Polly? Isn't she with you?{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1713FU-Umm...{wait}
+				} {
+					#1712FShe's playing with Clem and Daniel now.{wait}
+				}
+				TextWait
+				TextTalk self {
+					Aww? Really? I wanted her to tell me more
+					about those happiness stone thingies.{wait}
+				}
+				TextWait
+				TextTalk self {
+					Can you tell me about them instead, then?{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1714FU-Umm...{wait}
+				} {
+					#1713F(...I can't even remember.){wait}
+				} {
+					(I don't even want to think about them
+					right now...){wait}
+				}
+				TextWait
+			else:
+				TextTalk self {
+					Huh? Mary?{wait}
+				}
+				TextWait
+				TextTalk self {
+					What happened to Polly? Isn't she with you?{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1713FU-Umm...{wait}
+				} {
+					#1712FShe's playing with Clem and Daniel now.{wait}
+				}
+				TextWait
+				TextTalk self {
+					Aww? Really?{wait}
+				}
+				TextWait
+				TextTalk self {
+					I hope she comes back to the bazaar later...{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1710FW-Well, I'll let her know you'd like that.{wait}
+				}
+				TextWait
+			FlagSet flag[12093]
+	elif flag[12065]:
+		if flag[12092]:
+			if flag[0]:
+				CharTurnTo self 0deg 0deg/s
+				TextTalk self {
+					It's something you get when scary monsters
+					come after you and you almost fall off cliffs...{wait}
+				}
+				TextWait
+				TextTalk self {
+					...I don't know!{wait}
+				}
+				TextWait
+			else:
+				CharTurnTo self 0deg 0deg/s
+				TextTalk self {
+					A name like happiness stone made it sound
+					so nice...{wait}
+				}
+				TextWait
+				Emote self 0mm 1600mm 24 27 200ms 2
+				Sleep 1600ms
+				EmoteStop self
+				CharTurnToChar self name[78] 400deg/s
+				Sleep 500ms
+				TextTalk self {
+					Scary monsters and dangerous cliffs, not so
+					much... Maybe this is some kind of riddle?{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			TextTalk name[77] {
+				#1710FHey, Lucia? Have you ever heard of a happiness
+				stone?{wait}
+			}
+			TextWait
+			TextTalk self {
+				...A what?{wait}
+			}
+			TextWait
+			Sleep 200ms
+			Emote self 0mm 1600mm 38 39 250ms 2
+			Sleep 1200ms
+			EmoteStop self
+			TextTalk self {
+				Tell me more! Tell me more!{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1714F(W-Wow... That's some smile.){wait}
+			}
+			TextWait
+			TextTalk self {
+				I want to know everything you know!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Tell me! Tell meeeeee!{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1719FI can't. It's a secret!{wait}
+			} {
+				#1711FAlthough, I suppose I could tell you
+				a liiiiiittle bit.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Tell meee!{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1731FUmm... It's something you get when scary
+				monsters come after you and you almost
+				fall off cliffs!{wait}
+			} {
+				#1732FBig, scary cliffs!{wait}
+			}
+			TextWait
+			Emote self 0mm 1600mm 24 27 200ms 0
+			Sleep 1500ms
+			SoundPlay sound[49] 0 0 100
+			Emote name[77] 0mm 1600mm 16 19 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			CharTurnToChar name[77] name[78] 500deg/s
+			Sleep 500ms
+			TextTalk name[77] {
+				#1714F(Umm... She's trying to retell O'Neil's story,
+				isn't she?){wait}
+			} {
+				#1712F(It's somehow got a lot less impact when Polly
+				tells it...){wait}
+			}
+			TextWait
+			Sleep 500ms
+			EmoteStop self
+			Sleep 500ms
+			TextTalk self {
+				Scary monsters?{wait}
+			}
+			TextWait
+			SystemFlagsSet 0x00000020
+			TextTalk self {
+				#4SEeeeeek!{wait}
+			}
+			Shake 0 300 3000 500ms
+			TextWait
+			SystemFlagsUnset 0x00000020
+			Sleep 200ms
+			FlagSet flag[12092]
+			FlagUnset flag[1]
+	elif flag[12064]:
+		if flag[12091]:
+			if flag[0]:
+				CharTurnTo self 0deg 0deg/s
+				_Char4A char[4] 255
+				TextTalk self {
+					Wait! A bit more to the right!{wait}
+				}
+				TextWait
+				CharTurnTo char[4] 45deg 400deg/s
+				Sleep 200ms
+				if flag[12094]:
+					TextTalk char[4] {
+						#822FHmm? What, like here?{wait}
+					}
+					TextWait
+				else:
+					TextTalkNamed char[4] "Man" {
+						#822FHmm? What, like here?{wait}
+					}
+					TextWait
+				TextTalk self {
+					No, that's too far to the right!{wait}
+				}
+				TextWait
+				if flag[12094]:
+					TextTalk char[4] {
+						#822FUmm...{wait}
+					}
+					TextWait
+				else:
+					TextTalkNamed char[4] "Man" {
+						#822FUmm...{wait}
+					}
+					TextWait
+				CharTurnTo char[4] 0deg 400deg/s
+				Sleep 400ms
+				TextTalk self {
+					That's too far to the left now.{wait}
+				}
+				TextWait
+				Sleep 400ms
+				if flag[12094]:
+					TextTalk char[4] {
+						#823FI can't win here, can I...?{wait}
+					}
+					TextWait
+				else:
+					TextTalkNamed char[4] "Man" {
+						#823FI can't win here, can I...?{wait}
+					}
+					TextWait
+				_Char4B char[4] 255
+			else:
+				TextTalk self {
+					I can't reach high enough on my own,
+					so I had to get Mr. Bracer here to help
+					put the posters up.{wait}
+				}
+				TextWait
+				TextTalk self {
+					...I can't remember his name, though.{wait}
+				}
+				TextWait
+				FlagSet flag[0]
+		else:
+			TextTalk self {
+				Oh, you came after all!{wait}
+			}
+			TextWait
+			TextTalk name[78] {
+				#1732FWell, it sounds like fun!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Oh, it is! You'll have loooads of fun.
+				I guarantee it! ★{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1710FWhere in town is it being held, Lucia?{wait}
+			}
+			TextWait
+			TextTalk self {
+				It's in the cabin attached to the windmill!{wait}
+			}
+			TextWait
+			TextTalk self {
+				Go and buy tooons of stuff, okay?{wait}
+			}
+			TextWait
+			FlagSet flag[12091]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[3]:
+	TextStart self
+	if flag[12066]:
+		if flag[12094]:
+			if flag[12096]:
+				if flag[1]:
+					TextTalk char[4] {
+						#820FIf you need help with anything, don't hesitate
+						to ask. Helping people is my job, after all!{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[4] {
+						#820FIf you need help with anything, don't hesitate
+						to ask, all right?{wait}
+					} {
+						I mean, I'm a bracer, after all. Helping people
+						is our job.{wait}
+					}
+					TextWait
+					FlagSet flag[1]
+			else:
+				TextTalk char[4] {
+					#821FWelcome, welcome! ...Oh, wait. You're that girl
+					from earlier.{wait}
+				} {
+					#820FSomething wrong? Can I help you with anything?{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1713FN-No, it's nothing...{wait}
+				} {
+					#1712F(It's not like this is the first time Polly has
+					done something weird...){wait}
+				} {
+					(I'll be able to find her on my own!){wait}
+				}
+				TextWait
+				FlagSet flag[12096]
+		else:
+			CharTurnTo char[4] 90deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "Man" {
+				Umm... Can I help you?{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#1714FWait, I remember now!{wait}
+			} {
+				Your name was Black! ...Wasn't it?{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "Man" {
+				That's not even close...{wait}
+			}
+			TextWait
+			TextTalk char[4] {
+				#823F...The name's Grant, actually. I'd appreciate it
+				if you tried to remember it this time.{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+	elif flag[12065]:
+		if flag[12094]:
+			if flag[12095]:
+				if flag[12092]:
+					CharTurnTo char[4] 0deg 0deg/s
+					if flag[1]:
+						TextTalk char[3] {
+							But you've got to almost fall off a cliff
+							to get one!{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#823F(This story makes less sense to me by the
+							minute...){wait}
+						}
+						TextWait
+					else:
+						TextTalk char[3] {
+							So Mary and Polly were telling me about this
+							happiness stone thingy, right?{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#825FYeah... You've told me a thousand times now...{wait}
+						} {
+							So is this spot okay for the poster?{wait}
+						}
+						TextWait
+						TextTalk char[3] {
+							It's supposed to be really shiny, though!
+							Doesn't that sound so nice? ㈱{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#825F(Girls really do love these kinds of stories,
+							don't they?){wait}
+						}
+						TextWait
+						FlagSet flag[1]
+				else:
+					CharTurnTo char[4] 0deg 0deg/s
+					if flag[1]:
+						TextTalk char[4] {
+							#820FI won't fault someone for being serious about
+							their work, but she's not exactly a very
+							considerate boss...{wait}
+						}
+						TextWait
+					else:
+						TextTalk char[4] {
+							#820FIf you ask me, this spot's just fine for it, but...{wait}
+						}
+						TextWait
+						TextTalk char[3] {
+							No! There'll be no corner cutting on my watch!{wait}
+						}
+						TextWait
+						TextTalk char[4] {
+							#825F*sigh* She really is a demanding mistress...{wait}
+						}
+						TextWait
+						FlagSet flag[1]
+			elif ItemHas item[320] 0 >= 1:
+				TextTalk char[4] {
+					#821FOh...{wait}
+				}
+				TextWait
+				SoundPlay sound[38] 0 0 100
+				Emote name[77] 0mm 1600mm 0 1 200ms 3
+				Sleep 1000ms
+				EmoteStop name[77]
+				FadeOut 300ms 0x00000000 100
+				TextSetName ""
+				TextMessage null {
+					{color 5}Grant looks at the Emergency Puppet that Mary is
+					holding.{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				FadeIn 300ms 0x00000000
+				TextTalk char[4] {
+					#823FN-No, it's nothing...{wait}
+				} {
+					(That was one of the items I donated to the
+					bazaar myself...){wait}
+				} {
+					#825F(I'm not sure she's the best person for it to
+					go to, but oh well...){wait}
+				} {
+					#821FTake good care of that, all right?{wait}
+				}
+				TextWait
+				TextTalk name[77] {
+					#1714FO...kay...?{wait}
+				}
+				TextWait
+				FlagSet flag[12095]
+			elif ItemHas item[313] 0 >= 1:
+				TextTalk char[4] {
+					#821FOh...{wait}
+				}
+				TextWait
+				Emote name[77] 0mm 1600mm 0 1 200ms 3
+				Emote name[78] 0mm 1600mm 0 1 200ms 3
+				Sleep 1000ms
+				EmoteStop name[77]
+				EmoteStop name[78]
+				FadeOut 300ms 0x00000000 100
+				TextSetName ""
+				TextMessage null {
+					{color 5}Grant looks at the Woolly Knit-Hat that Polly is
+					wearing.{wait}
+				}
+				TextWait
+				TextClose 0
+				TextSetPos 72 320 56 3
+				FadeIn 300ms 0x00000000
+				TextTalk char[4] {
+					#823FN-No, it's nothing...{wait}
+				} {
+					#825F(I was the one who donated that...){wait}
+				}
+				TextWait
+				FlagSet flag[12095]
+			elif flag[12092]:
+				CharTurnTo char[4] 0deg 0deg/s
+				_Char4A char[3] 255
+				if flag[1]:
+					TextTalk char[3] {
+						But you've got to almost fall of a cliff to get
+						one!{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#823F(This story makes less sense to me by the
+						minute...){wait}
+					}
+					TextWait
+				else:
+					TextTalk char[3] {
+						So Mary and Polly were telling me about this
+						happiness stone thingy, right?{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#825FYeah... You've told me a thousand times now...{wait}
+					} {
+						So is this spot okay for the poster?{wait}
+					}
+					TextWait
+					TextTalk char[3] {
+						It's supposed to be really shiny, though!
+						Doesn't that sound so nice? ㈱{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#823F(Girls really do love these kinds of stories,
+						don't they?){wait}
+					}
+					TextWait
+					_Char4B char[3] 255
+					FlagSet flag[1]
+			else:
+				CharTurnTo char[4] 0deg 0deg/s
+				if flag[1]:
+					TextTalk char[4] {
+						#825FI won't fault someone for being serious about
+						their work, but she's not exactly a very
+						considerate boss...{wait}
+					}
+					TextWait
+				else:
+					_Char4A char[3] 255
+					TextTalk char[4] {
+						#820FIf you ask me, this spot's just fine for it,
+						but...{wait}
+					}
+					TextWait
+					TextTalk char[3] {
+						No! There'll be no corner cutting on my watch!{wait}
+					}
+					TextWait
+					TextTalk char[4] {
+						#825F*sigh* She really is a demanding mistress...{wait}
+					}
+					TextWait
+					_Char4B char[3] 255
+					FlagSet flag[1]
+		elif flag[12095]:
+			CharTurnTo char[4] 0deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "Man" {
+				Umm... Can I help you?{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#1714FOh, I remember your name now!{wait}
+			} {
+				#1711FIt's Black!{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalk char[4] {
+				#823F...It's Grant. Please try and remember it this
+				time.{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+		elif ItemHas item[320] 0 >= 1:
+			TextTalkNamed char[4] "Man" {
+				Oh...{wait}
+			}
+			TextWait
+			SoundPlay sound[38] 0 0 100
+			Emote name[77] 0mm 1600mm 0 1 200ms 3
+			Sleep 1000ms
+			EmoteStop name[77]
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Grant looks at the Emergency Puppet that Mary is
+				holding.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			TextTalkNamed char[4] "Man" {
+				N-No, it's nothing...{wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "Man" {
+				(That was one of the items I donated to the
+				bazaar myself...){wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "Man" {
+				(I'm not sure she's the best person for it to
+				go to, but oh well...){wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "Man" {
+				Take good care of that, all right?{wait}
+			}
+			TextWait
+			TextTalk name[77] {
+				#1714FO...kay...?{wait}
+			}
+			TextWait
+			FlagSet flag[12095]
+		elif ItemHas item[313] 0 >= 1:
+			TextTalkNamed char[4] "Man" {
+				Oh...{wait}
+			}
+			TextWait
+			SoundPlay sound[38] 0 0 100
+			Emote name[77] 0mm 1600mm 0 1 200ms 3
+			Emote name[78] 0mm 1600mm 0 1 200ms 3
+			Sleep 1000ms
+			EmoteStop name[77]
+			EmoteStop name[78]
+			FadeOut 300ms 0x00000000 100
+			TextSetName ""
+			TextMessage null {
+				{color 5}Grant looks at the Woolly Knit-Hat that Polly is
+				wearing.{wait}
+			}
+			TextWait
+			TextClose 0
+			TextSetPos 72 320 56 3
+			FadeIn 300ms 0x00000000
+			TextTalkNamed char[4] "Man" {
+				N-No, it's nothing...{wait}
+			}
+			TextWait
+			TextTalkNamed char[4] "Man" {
+				(I was the one who donated that...){wait}
+			}
+			TextWait
+			FlagSet flag[12095]
+		else:
+			CharTurnTo char[4] 0deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "Man" {
+				Umm... Can I help you?{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#1711FOh, I remember your name now!{wait}
+			} {
+				It's Black!{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalk char[4] {
+				#823F...It's Grant. Please try and remember it this
+				time.{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+	elif flag[12064]:
+		if flag[12094]:
+			if flag[12091]:
+				CharTurnTo char[4] 0deg 0deg/s
+				if flag[1]:
+					TextTalk char[4] {
+						#820FThis seems like it'll be a good spot.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[4] {
+						#822FHmm... I don't want to put it too high up, or no
+						one will be able to read it.{wait}
+					} {
+						#821FWell, I doubt most adults will have too much
+						trouble, but children and the elderly will want
+						to go, too. A little on the low side seems best.{wait}
+					}
+					TextWait
+					FlagSet flag[1]
+			else:
+				CharTurnTo char[4] 0deg 0deg/s
+				if flag[1]:
+					TextTalk char[4] {
+						#823FI'm supposed to be affiliated with the Bose
+						branch, but I haven't been back there in a
+						month...{wait}
+					} {
+						*sigh* I seem to be spending all my time in
+						Ruan lately.{wait}
+					}
+					TextWait
+				else:
+					TextTalk char[4] {
+						#823FJean sure knows how to work people to the
+						bone...{wait}
+					} {
+						Do I really look like the kind of person who's
+						suited to help out at a bazaar? Really?{wait}
+					} {
+						#824FThis was supposed to be Carna's job! I hope
+						she doesn't think I'm going to forget this.{wait}
+					}
+					TextWait
+					FlagSet flag[1]
+		else:
+			CharTurnTo char[4] 0deg 0deg/s
+			Emote name[77] 0mm 1600mm 24 27 200ms 0
+			Sleep 2000ms
+			CharTurnToChar char[4] name[77] 400deg/s
+			Emote char[4] 0mm 2000mm 0 1 250ms 2
+			SoundPlay sound[38] 0 0 100
+			Sleep 1000ms
+			EmoteStop char[4]
+			TextTalkNamed char[4] "Man" {
+				Umm... Can I help you?{wait}
+			}
+			TextWait
+			Sleep 1000ms
+			EmoteStop name[77]
+			Sleep 500ms
+			SoundPlay sound[39] 0 0 100
+			Emote name[77] 0mm 1600mm 2 7 200ms 1
+			Sleep 1000ms
+			EmoteStop name[77]
+			TextTalk name[77] {
+				#1714FOh, I remember your name now!{wait}
+			} {
+				#1711FIt's Black!{wait}
+			}
+			TextWait
+			Emote char[4] 0mm 2000mm 16 19 250ms 1
+			SoundPlay sound[49] 0 0 100
+			Sleep 1500ms
+			EmoteStop char[4]
+			TextTalk char[4] {
+				#823F...It's Grant. Do me a favor and try remembering
+				it next time.{wait}
+			}
+			TextWait
+			FlagSet flag[12094]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[4]:
+	TextStart self
+	if flag[12066]:
+	elif flag[12099]:
+		if flag[2]:
+			TextTalk self {
+				...I'm guessing he must live here, come to think
+				of it.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I doubt he'd look like he was having as much fun
+				helping with the bazaar as he does if he wasn't
+				from Manoria.{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I wonder who that man with Lucia is, anyway?{wait}
+			}
+			TextWait
+			TextTalk self {
+				I do see him around from time to time, but I've
+				never asked... Maybe he lives here?{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12065]:
+		if flag[2]:
+			TextTalk self {
+				I'm sure at least a few people would want to buy
+				flowers if I sold them over there.{wait}
+			} {
+				I mean, who doesn't feel relaxed looking at pretty
+				flowers?{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				I think it's about noon now.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Time to close up shop and head over to the bazaar!{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12064]:
+		if flag[2]:
+			TextTalk self {
+				I wish the morning would end already.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I just can't seem to relax and focus on my work
+				today...{wait}
+			}
+			TextWait
+		else:
+			TextTalk self {
+				There's a bazaar starting here in town today.{wait}
+			}
+			TextWait
+			TextTalk self {
+				I'm planning to head over there to help out this
+				afternoon.{wait}
+			}
+			TextWait
+			TextTalk self {
+				Heehee. Maybe I should sell a few potted plants
+				there, too.{wait}
+			}
+			TextWait
+			FlagSet flag[2]
+	elif flag[12055]:
+	TextEnd self
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CamLookPos (-1560, 6000, -3200) 0ms
+	CamSetDistance 0 6100 -10000 0ms
+	CamZoom 3340 0ms
+	CamRotate 328000mdeg 0ms
+	CamPers 340 0ms
+	CharFlagsSet name[77] 0x0040
+	CharFlagsSet name[78] 0x0040
+	CharSetPos name[77] (3300, 6500, -2840) 90deg
+	CharSetPos name[78] (3300, 6500, -2840) 90deg
+	Fork char[2] fork[0]:
+		CamLookPos (5100, 6000, 960) 6000ms
+	Fork char[2] fork[1]:
+		CamSetDistance 0 6360 -10000 6000ms
+	Fork char[2] fork[2]:
+		CamZoom 2440 6000ms
+	Fork char[2] fork[3]:
+		CamRotate 318000mdeg 6000ms
+	Fork name[78] fork[1]:
+		CamPers 262 6000ms
+	FadeIn 2000ms 0x00000000
+	Sleep 1000ms
+	SoundPlay sound[450] 0 0 100
+	FadeWait
+	ObjPlay object[2] 29
+	ObjWait object[2]
+	Sleep 200ms
+	ForkFunc name[77] fork[2] fn[0,6]
+	ForkFunc name[78] fork[2] fn[0,7]
+	Sleep 2500ms
+	ObjFlagsUnset object[2] 0x0800
+	ObjFrame object[2] 29
+	SoundPlay sound[7] 0 0 100
+	ObjPlay object[2] 0
+	ForkWait char[2] fork[0]
+	SoundStop sound[450]
+	ForkWait name[77] fork[2]
+	ForkWait name[78] fork[2]
+	TextTalk name[77] {
+		#1719FWhew...{wait}
+	}
+	TextWait
+	Emote name[77] 0mm 1600mm 40 43 100ms 2
+	CharTurnTo name[77] 180deg 500deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#1718FWh-What should we do, Polly?! {wait}
+	} {
+		This actually sounds like it might be true
+		after all!{wait}
+	} {
+		#1903FMaybe there really IS something up in the 
+		mountains!{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#1730FUmm... Mary?{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 500deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#1719F(The golden glow, tall mountains... It all fits.){wait}
+	} {
+		#1711F(Maybe there really is a happiness stone to
+		be found there!){wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#1733FShe's not listening...{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1719F...{wait}
+	} {
+		I-I suppose it wouldn't hurt to go and take
+		a quick peek up there, would it?{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 180deg 400deg/s
+	Sleep 400ms
+	TextTalk name[77] {
+		#1718FSay, Polly...{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#1731FYou know Clem and Daniel came to the
+		bazaar earlier, Mary?{wait}
+	}
+	TextWait
+	SoundPlay sound[39] 0 0 100
+	Emote name[77] 0mm 1600mm 2 7 200ms 1
+	Sleep 1000ms
+	EmoteStop name[77]
+	Sleep 200ms
+	TextTalk name[77] {
+		#1714F#3S...What?!#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk name[78] {
+		#1730FThey came to do some shopping and said they
+		were going into the Krone mountains.{wait}
+	} {
+		They said they're all ready, too!{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1714FSeriously?! I didn't even notice...{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#1731FWell, you are spacing out a lot lately...{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1715FI can't believe they're thinking of heading into
+		the mountains!{wait}
+	} {
+		Matron Theresa is always telling us not to go
+		any farther from the orphanage than Manoria!{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#1733FBut you wanna go into the mountains, too...{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1900FThat's... Uhh...{wait}
+	} {
+		#1903FI-I'm planning on doing it to get her a birthday
+		present! That's very different! And it'll only be
+		for a minute or two!{wait}
+	} {
+		Besides, we've got to go and bring those two home
+		now. That's important enough on its own! Then we
+		can just search for the present while we're there.{wait}
+	}
+	TextWait
+	TextTalk name[78] {
+		#1731F...{wait}
+	} {
+		#1730FWe can't tell the matron about this, right?{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1710FAbsolutely not. She can't know about the birthday
+		present, right?{wait}
+	}
+	TextWait
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5580, 6000, 260) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	TextTalk name[77] {
+		#1718F#11PLet's go! Stick close to me, Polly!{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 400deg/s
+	Sleep 600ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5580, 6000, 8260) 1500mm/s 0
+	Fork name[78] fork[1]:
+		CharWalkToPos self (5700, 6000, 7580) 1500mm/s 0
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit name[77] fork[1]
+	ForkQuit name[78] fork[2]
+	CharSetPos name[77] (4120, 4000, 15700) 0deg
+	CharSetPos name[78] (4120, 4000, 15700) 0deg
+	CharFlagsUnset name[77] 0x0040
+	ObjFlagsSet object[2] 0x0800
+	ObjFrame object[2] 0
+	FlagSet flag[12065]
+	EventEnd 0
+	FadeIn 1000ms 0x00000000
+	Return
+
+fn[6]:
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5700, 6000, -2600) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	Fork name[77] fork[1]:
+		CharWalkToPos self (5700, 6000, 1180) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	Return
+
+fn[7]:
+	Sleep 1200ms
+	Fork name[78] fork[1]:
+		CharWalkToPos self (5700, 6000, -2600) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	Fork name[78] fork[1]:
+		CharWalkToPos self (5700, 6000, -420) 1500mm/s 0
+	ForkWait name[78] fork[1]
+	Return
+
+fn[8]:
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{color 5}     ●3rd Manoria Village Bazaar Now Open!●
+
+		Everyone's favorite time of year is finally upon us!
+		Manoria's famous bazaar will be held in the windmill
+		cabin for the next three days, and all are welcome!
+		If you have any unwanted items you would be willing
+		to donate, please do!
+		Come join us--you never know what you'll find!
+
+		{}            Manoria Bazaar Organization Committee{wait}
+	}
+	TextWait
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	TextEnd null
+	Return
+
+fn[9]:
+	PlaceSetName town[88]
+	Return
+
+fn[10]:
+	PlaceSetName town[87]
+	Return
+
+fn[11]:
+	PlaceSetName town[89]
+	Return

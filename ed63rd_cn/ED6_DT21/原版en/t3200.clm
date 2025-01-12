@@ -1,0 +1,1282 @@
+calmare tc scena
+scena:
+	name "Zeiss" "T3200.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+	scp 6 "sub000._sn"
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00070._ch" "npl/ch00070p._cp"
+chip[1] "npl/ch02610._ch" "npl/ch02610p._cp"
+chip[2] "npl2/ch03720._ch" "npl2/ch03720p._cp"
+chip[3] "npl/ch00071._ch" "npl/ch00071p._cp"
+chip[4] "npl/ch01160._ch" "npl/ch01160p._cp"
+chip[5] "npl/ch01060._ch" "npl/ch01060p._cp"
+chip[6] "npl/ch01140._ch" "npl/ch01140p._cp"
+chip[7] "npl/ch01020._ch" "npl/ch01020p._cp"
+chip[8] "npl/ch01020._ch" "npl/ch01020p._cp"
+chip[9] "apl2/ch20816._ch" "apl2/ch20816p._cp"
+
+npc char[0]:
+	name "Zin"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Kilika"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Ambassador Cochrane"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Lucky"
+	pos (13780, 2500, 18450)
+	angle 90deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Quantay"
+	pos (12020, 2000, 14160)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 0
+	ch chip[5]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Faults"
+	pos (21790, 2000, 5570)
+	angle 90deg
+	x 0
+	cp chip[6]
+	frame 0
+	ch chip[6]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "Tourist"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[7]
+	frame 0
+	ch chip[7]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[7]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 2:
+		if flag[9477]:
+			system[1] = 0
+			SystemFlagsSet 0x10000000
+			Event fn[0,12]
+		elif flag[9480]:
+			SystemFlagsSet 0x10000000
+			Event fn[0,13]
+	Return
+
+fn[1]:
+	if system[66] == 2:
+		if flag[9477]:
+			FlagUnset flag[9477]
+			OpLoad "T3200_y"
+		elif flag[9480]:
+			FlagUnset flag[9480]
+			OpLoad "T3200_n"
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sleep 500ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[5] 0x0080
+	CharSetPos char[5] (13770, 2500, 18460) 90deg
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharSetPos char[3] (18420, 2000, 11830) 270deg
+	CharSetPos char[4] (20510, 2000, 11850) 270deg
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Two days later...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 1000ms
+	CamLookPos (-12560, -2000, 15790) 0ms
+	CamSetDistance 0 8690 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 312 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[1] (-3160, 0, 14840) 90deg
+	CharSetPos char[0] (-2220, 0, 15780) 90deg
+	Fork char[0] fork[0]:
+		CharWalkToPos self (9880, 2000, 15190) 2000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (9010, 2000, 14150) 2000mm/s 0
+	Fork field_party[0] fork[0]:
+		CamLookPos (12680, 2250, 15980) 5500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkFunc char[3] fork[0] fn[0,5]
+	ForkFunc char[4] fork[0] fn[0,6]
+	ForkFunc char[6] fork[0] fn[0,7]
+	ForkWait field_party[0] fork[0]
+	Sleep 1000ms
+	CrossFade 500ms
+	CamLookPos (11200, 2000, 16070) 0ms
+	CamSetDistance 0 5940 -10000 0ms
+	CamZoom 2460 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 340 0ms
+	FadeWait
+	ForkWait char[0] fork[0]
+	ForkWait char[1] fork[0]
+	Sleep 300ms
+	TextTalk char[0] {
+		#070F#5PThis place sure brings back memories.{wait}
+	} {
+		The atmosphere really is relaxing.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#6PYeah...{wait}
+	} {
+		Especially given how similar it is to our 
+		hometown.{wait}
+	}
+	TextWait
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (17420, 2000, 8480) 315deg
+	Sleep 300ms
+	TextTalkNamed char[2] "Woman's Voice" {
+		#1PAh, you've arrived.{wait}
+	}
+	TextWait
+	Fork field_party[0] fork[0]:
+		CamLookPos (11890, 2000, 14110) 2500ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 5090 -10000 2500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2410 2500ms
+	Fork field_party[0] fork[3]:
+		CamRotate 90000mdeg 2500ms
+	Fork field_party[1] fork[1]:
+		CamPers 339 2500ms
+	ForkFunc char[2] fork[0] fn[0,4]
+	Sleep 500ms
+	CharTurnTo char[0] 135deg 400deg/s
+	CharTurnTo char[1] 135deg 400deg/s
+	ForkWait char[2] fork[0]
+	ForkWait field_party[0] fork[0]
+	Sleep 300ms
+	TextTalk char[2] {
+		#1110F#2PHaha. I've been waiting for the two of you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#6PH-Hey, Ambassador.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#6PThank you for inviting us here today.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1110F#2POh, if anything you're doing me a favor by coming.
+		There's no need for such formalities.{wait}
+	} {
+		Well, let's go inside and get to talking.{wait}
+	} {
+		The sooner we finish the work part of this, the
+		sooner we can get to relaxing.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#6PHaha. Sounds good to me.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#6PIndeed.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	FlagSet flag[9478]
+	NewScene "t3221._sn" 100 0 0
+	Hcf
+	Return
+
+fn[4]:
+	CharWalkToPos2 self (11120, 2000, 13100) 2000mm/s 0
+	Return
+
+fn[5]:
+	CharWalkToPos self (11990, 2000, 11670) 6000mm/s 0
+	Fork self fork[1]:
+		CharWalkToPos self (12120, 2000, 22230) 6000mm/s 0
+	Emote self 0mm 1700mm 38 39 250ms 2
+	ForkWait self fork[1]
+	CharWalkToPos self (13920, 4000, 35560) 6000mm/s 0
+	CharFlagsSet self 0x0080
+	Return
+
+fn[6]:
+	CharWalkToPos self (11990, 2000, 11670) 6000mm/s 0
+	Fork self fork[1]:
+		CharWalkToPos self (12120, 2000, 22230) 6000mm/s 0
+	Sleep 300ms
+	Emote self 0mm 1700mm 38 39 250ms 2
+	ForkWait self fork[1]
+	CharWalkToPos self (13920, 4000, 35560) 6000mm/s 0
+	CharFlagsSet self 0x0080
+	Return
+
+fn[7]:
+	ObjFlagsUnset object[0] 0x0008
+	ObjFlagsUnset object[0] 0x0010
+	ObjFrame object[0] 0
+	ObjPlay object[0] 29
+	ObjWait object[0]
+	Sleep 300ms
+	CharSetPos self (1070, 500, 19890) 180deg
+	CharFlagsUnset self 0x0080
+	CharWalkToPos self (900, 0, 17930) 2000mm/s 0
+	Sleep 300ms
+	CharTurnTo self 270deg 400deg/s
+	Sleep 500ms
+	CharTurnTo self 90deg 400deg/s
+	Sleep 500ms
+	CharTurnTo self 180deg 400deg/s
+	Return
+
+fn[8]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	SoundPlay sound[450] 80 0 100
+	Sleep 1500ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (19580, 2000, 5840) 0ms
+	CamSetDistance 0 7880 -10000 0ms
+	CamZoom 3050 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 271 0ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (27070, 2000, 5410) 3500ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 7160 -10000 3500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2330 3500ms
+	Fork field_party[0] fork[3]:
+		CamPers 341 3500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[4] 0x0008
+	ObjFlagsUnset object[4] 0x0010
+	ObjFrame object[4] 0
+	ObjPlay object[4] 29
+	ObjWait object[4]
+	Sleep 200ms
+	ForkFunc char[2] fork[0] fn[0,9]
+	ForkFunc char[1] fork[0] fn[0,10]
+	ForkFunc char[0] fork[0] fn[0,11]
+	ForkWait field_party[0] fork[0]
+	Sleep 1000ms
+	ObjFrame object[4] 29
+	ObjPlay object[4] 0
+	SoundStop sound[6]
+	SoundPlay sound[7] 0 0 100
+	ForkWait char[2] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[0]
+	TextTalk char[2] {
+		#1113F#6PAah... That was the best night's sleep I've had in
+		quite some time.{wait}
+	} {
+		#1110FI hope the two of you enjoyed your stay, too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#071F#5PI know I did!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#11PI'm feeling very energized indeed, thank you.{wait}
+	} {
+		#791FEnergized enough to feel ready to take on a new
+		position in a new environment, even.{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[2] {
+		#1111F#6PThen...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#11P...I'll accept your offer.{wait}
+	} {
+		#791FPlease pass that on to the prime minister.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1111F#6PBut of course!{wait}
+	} {
+		#1110FHaha. Now I'm feeling even better than I did
+		earlier.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#1PStill, I'll need two or three months to get 
+		everything ready for my successor.{wait}
+	} {
+		As such, I won't be able to start work until then.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1110F#6PThat's perfectly understandable.{wait}
+	} {
+		Well... I look forward to meeting you again in the
+		Republic.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#2PLikewise.{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	SoundSetVolume sound[450] 70
+	Sleep 100ms
+	SoundSetVolume sound[450] 60
+	Sleep 100ms
+	SoundSetVolume sound[450] 50
+	Sleep 100ms
+	SoundSetVolume sound[450] 40
+	Sleep 100ms
+	SoundSetVolume sound[450] 30
+	Sleep 100ms
+	SoundSetVolume sound[450] 20
+	Sleep 100ms
+	SoundSetVolume sound[450] 10
+	Sleep 100ms
+	SoundSetVolume sound[450] 0
+	SoundStop sound[450]
+	CamLookPos (-80, 2120, 14670) 0ms
+	CamSetDistance 0 6910 -10000 0ms
+	CamZoom 2330 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 325 0ms
+	CharFlagsSet char[2] 0x0080
+	CharSetPos char[1] (9940, 2000, 14630) 270deg
+	CharSetPos char[0] (10440, 2000, 15880) 270deg
+	Fork char[1] fork[0]:
+		CharWalkToPos self (680, 0, 14580) 2000mm/s 0
+	Sleep 100ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (450, 0, 16140) 2000mm/s 0
+	Fork field_party[0] fork[0]:
+		CamLookPos (1860, 0, 16830) 4000ms
+	Fork field_party[0] fork[1]:
+		CamSetDistance 0 5370 -10000 4000ms
+	Fork field_party[0] fork[2]:
+		CamZoom 2490 4000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 2500ms
+	TextTalk char[0] {
+		#070F#5PHmm...{wait}
+	}
+	TextWait
+	ForkWait field_party[0] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[180]
+	Sleep 100ms
+	CharTurnTo char[1] 0deg 400deg/s
+	TextTalk char[1] {
+		#790F#4P...Is something on your mind?{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 180deg 400deg/s
+	TextTalk char[0] {
+		#070F#5POh, I was just thinking about what you said back
+		there.{wait}
+	} {
+		You said you'll need two or three months to get
+		everything ready for your successor, right?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4PYes, I did...{wait}
+	} {
+		What of it?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5PWell, it's not like there's any urgent work for me
+		here or in Calvard...{wait}
+	} {
+		So I was thinking maybe I could stay here for the
+		next few months while you get things sorted, then
+		head back after that.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4PThere's no reason why you should stay around here 
+		in Liberl with me. Go on back to Calvard.{wait}
+	} {
+		There'll be work waiting for you there, too.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5P...{wait}
+	} {
+		*sigh* There's no need to be that cold with me.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#4PHaha. Well, it's the truth.{wait}
+	} {
+		We'll have more than enough chances to spend time
+		together after I get to Calvard as it is without
+		you going out of your way to make more now.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#5PKilika...{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 270deg 400deg/s
+	CharFlagsSet char[0] 0x0002
+	CharSetChipBase char[0] chip[9]
+	CharSetChipPattern char[0] 0
+	Fork char[1] fork[0]:
+		CharWalkToPos self (-3350, 0, 14800) 2000mm/s 0
+	TextTalk char[0] {
+		#070F#5P...Haha. I suppose you're right.{wait}
+	} {
+		There's no need to rush things...{wait}
+	}
+	TextWait
+	ForkWait char[1] fork[0]
+	Sleep 300ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (-220, 0, 16580) 1500ms
+	CharTurnTo char[1] 90deg 400deg/s
+	ForkWait field_party[0] fork[0]
+	Sleep 200ms
+	TextTalk char[1] {
+		#790F#6PZin?{wait}
+	} {
+		What are you standing there for?{wait}
+	}
+	TextWait
+	CharFlagsUnset char[0] 0x0002
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	TextTalk char[0] {
+		#070F#5P...Oh!{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 270deg 400deg/s
+	TextTalk char[0] {
+		#070F#2PS-Sorry...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (-2290, 0, 16590) 1000ms
+	ForkLoop char[1] fork[1]:
+		CharTurnToChar self char[0] 400deg/s
+	CharSetChipBase char[0] chip[3]
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-3440, 0, 16040) 4000mm/s 0
+	ForkWait char[0] fork[0]
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	CharTurnTo char[0] 180deg 400deg/s
+	ForkQuit char[1] fork[1]
+	Sleep 500ms
+	CharTurnTo char[1] 270deg 400deg/s
+	Fork char[1] fork[0]:
+		CharWalkToPos self (-13710, -2000, 14850) 2000mm/s 0
+	Sleep 200ms
+	CharTurnTo char[0] 270deg 400deg/s
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-13720, -2000, 16170) 2000mm/s 0
+	Sleep 1500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3000 5000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit field_party[0] fork[2]
+	BgmStop 2000ms
+	Sleep 2000ms
+	Sc_D6 1
+	TcEpisodeEnd 0
+	if !QuestFlagsGet quest[9] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[9] 0x10
+		QuestFlagsSet quest[9] 0x20
+		ItemAdd item[727] 1
+		SoundPlay sound[17] 0 0 100
+		FadeOut 300ms 0x00000000 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Obtained {item item[727]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 4000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Obtained {color 2}4,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+		FadeIn 300ms 0x00000000
+	FlagSet flag[9477]
+	NewScene "m7102._sn" 100 0 0
+	Hcf
+	Return
+
+fn[9]:
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	CharSetPos self (31000, 2500, 4000) 270deg
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork self fork[2]:
+		CharWalkToPos self (24540, 2000, 4180) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	Sleep 200ms
+	CharTurnTo self 90deg 400deg/s
+	Return
+
+fn[10]:
+	Sleep 800ms
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	CharSetPos self (31000, 2500, 3870) 270deg
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork self fork[2]:
+		CharWalkToPos self (26510, 2000, 3930) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	Return
+
+fn[11]:
+	Sleep 1500ms
+	CharColor self 0x00FFFFFF 0ms
+	CharFlagsUnset self 0x0080
+	CharSetPos self (31000, 2500, 4000) 270deg
+	Fork self fork[1]:
+		CharColor self 0xFFFFFFFF 400ms
+	Fork self fork[2]:
+		CharWalkToPos self (26740, 2000, 4880) 2000mm/s 0
+	ForkWait self fork[1]
+	ForkWait self fork[2]
+	Return
+
+fn[12]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[4] 0x0080
+	CharSetPos char[3] (18420, 2000, 11830) 270deg
+	CharSetPos char[4] (20510, 2000, 11850) 270deg
+	Sleep 1000ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#40WTwo days later...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	CamLookPos (-12560, -2000, 15790) 0ms
+	CamSetDistance 0 8690 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 312 0ms
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[1] (-3160, 0, 14840) 90deg
+	CharSetPos char[0] (-2220, 0, 15780) 90deg
+	BgmPlay bgm[15] 0
+	Fork char[0] fork[0]:
+		CharWalkToPos self (9880, 2000, 15190) 2000mm/s 0
+	Sleep 100ms
+	Fork char[1] fork[0]:
+		CharWalkToPos self (9010, 2000, 14150) 2000mm/s 0
+	Fork char[7] fork[0]:
+		CamLookPos (12680, 2250, 15980) 6000ms
+	Sc_C8 512 70 "C_PLAC10._CH" 1 2000
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkFunc char[3] fork[0] fn[0,5]
+	ForkFunc char[4] fork[0] fn[0,6]
+	ForkFunc char[6] fork[0] fn[0,7]
+	ForkWait char[7] fork[0]
+	Sleep 500ms
+	CrossFade 500ms
+	CamLookPos (11200, 2000, 16070) 0ms
+	CamSetDistance 0 5940 -10000 0ms
+	CamZoom 2460 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 340 0ms
+	FadeWait
+	ForkWait char[0] fork[0]
+	ForkWait char[1] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#070F#5PThis place sure brings back memories.{wait}
+	} {
+		The atmosphere is so relaxing.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#6PIt certainly is...{wait}
+	} {
+		#791FMaybe because it feels so similar to
+		our hometown.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#075F#5P*sigh* Still, Ambassador Cochrane had me going
+		for a while.{wait}
+	} {
+		When I first heard about this whole trip, I thought
+		it was just gonna be the two of us out here.{wait}
+	}
+	TextWait
+	CharTurnToChar char[1] char[0] 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#791F#6POh, my... You look almost disappointed that it
+		isn't. {wait}
+	} {
+		#792FI'd be happy to take my leave if I'm getting in
+		the way of your dream date with her.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Emote char[0] 0mm 2300mm 40 43 100ms 3
+	CharTurnToChar char[0] char[1] 500deg/s
+	TextTalk char[0] {
+		#072F#5PI'm good, thanks... She's not someone I've ever
+		seen as a potential partner.{wait}
+	} {
+		Besides, it's you she wants to talk to, not me.
+		This meeting might as well not be happening if
+		you're not here.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#794F#6PIt never takes much to put you on the
+		defensive, does it?{wait}
+	} {
+		Is it beyond you to just play along a little?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#075F#5PGah...{wait}
+	} {
+		#072FYou just can't help but mess with people,
+		can you?{wait}
+	} {
+		With you in charge of the Zeiss guild,
+		I'm amazed it still has any bracers left.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#6PCorrection: I can't help but mess with you.
+		I don't do this with anyone else.{wait}
+	} {
+		#791FWould you be happy if that were true?{wait}
+	}
+	TextWait
+	Sleep 400ms
+	TextTalk char[0] {
+		#075F#5P#3SHell no!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	CharFlagsUnset char[2] 0x0080
+	CharSetPos char[2] (17420, 2000, 8480) 315deg
+	Sleep 500ms
+	TextTalkNamed char[2] "Woman's Voice" {
+		#1PAh, you've arrived.{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 100ms
+	Emote char[0] 0mm 2300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	Fork char[7] fork[0]:
+		CamLookPos (11890, 2000, 14110) 2500ms
+	Fork char[7] fork[1]:
+		CamSetDistance 0 5090 -10000 2500ms
+	Fork char[7] fork[2]:
+		CamZoom 2410 2500ms
+	Fork char[7] fork[3]:
+		CamRotate 90000mdeg 2500ms
+	Fork field_party[0] fork[0]:
+		CamPers 339 2500ms
+	ForkFunc char[2] fork[0] fn[0,4]
+	Sleep 500ms
+	CharTurnTo char[0] 135deg 400deg/s
+	CharTurnTo char[1] 135deg 400deg/s
+	ForkWait char[2] fork[0]
+	ForkWait char[7] fork[0]
+	Sleep 500ms
+	TextTalk char[2] {
+		#1111F#11PI've been waiting for you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#070F#6PH-Hey, Ambassador.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#6PThank you for inviting us here today.{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 2000mm 38 38 250ms 1
+	Sleep 1000ms
+	CharTurnToChar char[2] char[0] 400deg/s
+	TextTalk char[2] {
+		#1112F#11PIs something the matter, Zin?{wait}
+	} {
+		You seem oddly flustered.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#071F#6PMe? I-I'm just fine! You're imagining things!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#6PWho could blame him, Ambassador?{wait}
+	} {
+		#791FAfter all, he's a man on a hot springs trip with two
+		beautiful women. That's hardy a recipe for a calm
+		and composed mind, is it?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#072F#5PKnock it off, Kilika...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1113F#11PHaha... I suppose not.{wait}
+	} {
+		#1111FIf I were a little younger, I doubt I would
+		be able to keep my hands off him myself.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#073F#6PErk...{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1110F#11PAll right, I suppose that's enough joking around.
+		We should get our dinner.{wait}
+	} {
+		Mrs. Mao is going to be making tonight's food
+		herself, by the sounds of it.{wait}
+	} {
+		The serious discussion can wait until after that.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#075F#6PY-Yeah... That sounds fantastic.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#791F#6PLikewise.{wait}
+	}
+	TextWait
+	_59
+	Fork char[7] fork[2]:
+		CamZoom 2800 3000ms
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	FlagSet flag[9478]
+	NewScene "t3223._sn" 100 0 0
+	Hcf
+	Return
+
+fn[13]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sleep 1000ms
+	SoundPlay sound[450] 1 0 80
+	Sleep 1000ms
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CamLookPos (19580, 2000, 5840) 0ms
+	CamSetDistance 0 7880 -10000 0ms
+	CamZoom 3050 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 271 0ms
+	Fork char[7] fork[0]:
+		CamLookPos (27070, 2000, 5410) 3500ms
+	Fork char[7] fork[1]:
+		CamSetDistance 0 7160 -10000 3500ms
+	Fork char[7] fork[2]:
+		CamZoom 2330 3500ms
+	Fork char[7] fork[3]:
+		CamPers 341 3500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[4] 0x0008
+	ObjFlagsUnset object[4] 0x0010
+	ObjFrame object[4] 0
+	ObjPlay object[4] 29
+	ObjWait object[4]
+	Sleep 200ms
+	ForkFunc char[2] fork[0] fn[0,9]
+	ForkFunc char[1] fork[0] fn[0,10]
+	ForkFunc char[0] fork[0] fn[0,11]
+	ForkWait char[7] fork[0]
+	Sleep 200ms
+	SoundSetVolume sound[450] 70
+	Sleep 200ms
+	SoundSetVolume sound[450] 60
+	Sleep 200ms
+	SoundSetVolume sound[450] 50
+	Sleep 200ms
+	SoundSetVolume sound[450] 40
+	Sleep 200ms
+	SoundStop sound[450]
+	ObjFlagsUnset object[4] 0x0800
+	ObjFrame object[4] 29
+	ObjPlay object[4] 0
+	SoundPlay sound[7] 0 0 100
+	ForkWait char[2] fork[0]
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[0]
+	Sleep 500ms
+	TextTalk char[2] {
+		#1113F#6PAhh... That was the best night's sleep I've
+		had in some time.{wait}
+	} {
+		#1110FI hope the two of you enjoyed your stay as
+		well.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#071F#5PI know I did!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#11PI'm feeling very refreshed, thank you.{wait}
+	} {
+		#791FRefreshed enough to feel ready to take on
+		a new position in a new environment, even.{wait}
+	}
+	TextWait
+	Emote char[2] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[2] {
+		#1111F#6PTh-Then...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#791F#11PI would like to accept your offer.{wait}
+	} {
+		#792FHowever, I have one condition for doing so.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1112F#6POh? Name it.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#11PWhile I am willing to join the president's new
+		agency, I am not willing to stop living in line
+		with my own beliefs.{wait}
+	} {
+		#790FAs such, if I should end up feeling the slightest
+		doubt about how the agency itself is being run...{wait}
+	} {
+		...I will do everything in my power to correct it
+		from the inside using any means at my disposal.{wait}
+	} {
+		If he still wants my membership after hearing as
+		much, please tell him that I accept his offer.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1111F#6POh, that won't be a problem at all.{wait}
+	} {
+		#1113FI think he may well be encouraging you to take
+		the reins. I believe he chose you expecting you
+		to fulfill that role should it be deemed necessary.{wait}
+	} {
+		#1110FAfter all, you have experience in the guild, an
+		organization which has managed to remain neutral
+		and independent all this time. That's no mean feat.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#11PHaha. I wouldn't be so sure about that.{wait}
+	} {
+		#790FAlso, I'll need to get things ready for my 
+		successor, so I won't be able to return to
+		Calvard for two or three months.{wait}
+	} {
+		As such, I won't be able to start work till
+		then.{wait}
+	}
+	TextWait
+	TextTalk char[2] {
+		#1113F#6PThat's perfectly understandable.{wait}
+	} {
+		#1111FWell...I look forward to meeting you again
+		in the Republic.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#791F#11PLikewise.{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	CamLookPos (-80, 2120, 14670) 0ms
+	CamSetDistance 0 6910 -10000 0ms
+	CamZoom 2330 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 325 0ms
+	CharFlagsSet char[2] 0x0080
+	CharSetPos char[1] (9940, 2000, 14630) 270deg
+	CharSetPos char[0] (10440, 2000, 15880) 270deg
+	Fork char[1] fork[0]:
+		CharWalkToPos self (680, 0, 14580) 2000mm/s 0
+	Sleep 100ms
+	Fork char[0] fork[0]:
+		CharWalkToPos self (450, 0, 16140) 2000mm/s 0
+	Fork char[7] fork[0]:
+		CamLookPos (1860, 0, 16830) 4000ms
+	Fork char[7] fork[1]:
+		CamSetDistance 0 5370 -10000 4000ms
+	Fork char[7] fork[2]:
+		CamZoom 2490 4000ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	ForkWait char[7] fork[0]
+	TextTalk char[0] {
+		#074F#5P#12AHmm...{wait}
+	}
+	TextWait
+	ForkWait char[1] fork[0]
+	ForkWait char[0] fork[180]
+	Sleep 500ms
+	CharTurnTo char[1] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk char[1] {
+		#791F#12PIs something on your mind?{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 180deg 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#070F#5POh, I was just thinking about what you said back
+		there.{wait}
+	} {
+		You said you'll need two or three months to get
+		everything ready for your successor, right?{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#790F#12PYes, I did...{wait}
+	} {
+		What of it?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#573F#5PWell, while I'm guessing it's pretty busy over in 
+		Calvard right now, too, it doesn't sound as though
+		there's anything so urgent I need to be there NOW.{wait}
+	} {
+		#070FSo I was thinking maybe I could stay here for the
+		next few months while you get things sorted out
+		before I head back.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#792F#12PYou can't be serious...{wait}
+	} {
+		#790FThere's no reason why you should stay around
+		here in Liberl with me. Go back to Calvard.{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 14 15 250ms 2
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[0] {
+		#075F#5P*sigh* You don't have to be so cold.
+		It's me, you know.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#791F#12PHeehee. Well, it's the truth.{wait}
+	} {
+		We'll end up spending enough time together whether
+		we like it or not after I'm home. You don't need to go
+		out of your way to make more now.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#073F#5PWell...{wait}
+	}
+	TextWait
+	CharTurnTo char[1] 270deg 400deg/s
+	Sleep 300ms
+	CharFlagsSet char[0] 0x0002
+	CharSetChipBase char[0] chip[9]
+	CharSetChipPattern char[0] 0
+	Fork char[1] fork[0]:
+		CharWalkToPos self (-3350, 0, 14800) 1500mm/s 0
+	Sleep 500ms
+	TextTalk char[0] {
+		#573F#5P#20W#15A...Heh. You win.{wait}
+	} {
+		#20WThere's no need to rush things...{wait}
+	}
+	TextWait
+	ForkWait char[1] fork[0]
+	Sleep 300ms
+	Fork char[7] fork[0]:
+		CamLookPos (-220, 0, 16580) 1500ms
+	CharTurnTo char[1] 90deg 400deg/s
+	ForkWait char[7] fork[0]
+	Sleep 300ms
+	TextTalk char[1] {
+		#790F#6PZin?{wait}
+	} {
+		What are you standing there for?{wait}
+	}
+	TextWait
+	Emote char[0] 0mm 2300mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharFlagsUnset char[0] 0x0002
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	TextTalk char[0] {
+		#073F#5P...Oh!{wait}
+	}
+	TextWait
+	CharTurnToChar char[0] char[1] 400deg/s
+	Sleep 300ms
+	TextTalk char[0] {
+		#075F#11PS-Sorry...{wait}
+	} {
+		#072FYou could say that BEFORE starting to walk off
+		on your own, though!{wait}
+	}
+	TextWait
+	Sc_C4Unset 536870912
+	Fork char[7] fork[0]:
+		CamLookPos (-2290, 0, 16590) 1000ms
+	ForkLoop char[1] fork[1]:
+		CharTurnToChar self char[0] 400deg/s
+	CharSetChipBase char[0] chip[3]
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-3440, 0, 16040) 4000mm/s 0
+	ForkWait char[0] fork[0]
+	CharSetChipBase char[0] chip[0]
+	CharSetChipPattern char[0] 0
+	CharTurnTo char[0] 180deg 400deg/s
+	ForkQuit char[1] fork[1]
+	Sleep 500ms
+	CharTurnTo char[1] 270deg 400deg/s
+	Fork char[1] fork[0]:
+		CharWalkToPos self (-13710, -2000, 14850) 2000mm/s 0
+	Sleep 200ms
+	CharTurnTo char[0] 270deg 400deg/s
+	Fork char[0] fork[0]:
+		CharWalkToPos self (-13720, -2000, 16170) 2000mm/s 0
+	Sleep 1500ms
+	Fork char[7] fork[2]:
+		CamZoom 3000 5000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[7] fork[2]
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	ScAchievement 9 4 0
+	Sc_C4Set 2048
+	TextSetPos 350 400 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Side Story [Journey's End] finished!{wait}
+	}
+	TextWait
+	TextClose 0
+	_59
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sc_D6 1
+	TcEpisodeEnd 0
+	Tc_C2 1 0
+	Call fn[6,25]
+	if !QuestFlagsGet quest[9] 0x20:
+		Sleep 1000ms
+		QuestFlagsSet quest[9] 0x10
+		QuestFlagsSet quest[9] 0x20
+		ItemAdd item[727] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[727]}{color 5}.{wait}
+		}
+		TextWait
+		MiraAdd 4000
+		SoundPlay sound[17] 0 0 100
+		TextMessage null {
+			{color 5}Received {color 2}4,000 mira{color 5}.{wait}
+		}
+		TextWait
+		TextClose 0
+		TextSetPos 72 320 56 3
+	FlagSet flag[9477]
+	NewScene "m7102._sn" 100 0 0
+	Hcf
+	Return

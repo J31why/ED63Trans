@@ -1,0 +1,916 @@
+calmare tc scena
+scena:
+	name "Ruan" "T2402.x"
+	town town[1]
+	bgm bgm[15]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[0]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02590._ch" "npl/ch02590p._cp"
+chip[1] "npl/ch02500._ch" "npl/ch02500p._cp"
+chip[2] "npl/ch02630._ch" "npl/ch02630p._cp"
+chip[3] "npl/ch02640._ch" "npl/ch02640p._cp"
+chip[4] "npl/ch01720._ch" "npl/ch01720p._cp"
+chip[5] "npl/ch02593._ch" "npl/ch02593p._cp"
+chip[6] "npl/ch02503._ch" "npl/ch02503p._cp"
+chip[7] "npl/ch02633._ch" "npl/ch02633p._cp"
+chip[8] "npl/ch02643._ch" "npl/ch02643p._cp"
+
+npc char[0]:
+	name "Clem"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Polly"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Mary"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Daniel"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[0,2]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Chicken"
+	pos (44200, 240, 18540)
+	angle 45deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[0,3]
+	talk fn[0,5]
+
+npc char[5]:
+	name "Chicken"
+	pos (44200, 240, 18540)
+	angle 45deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[0,3]
+	talk fn[0,5]
+
+npc char[6]:
+	name "Chicken"
+	pos (44200, 240, 18540)
+	angle 45deg
+	x 0
+	cp chip[4]
+	frame 0
+	ch chip[4]
+	flags 0x0101
+	init fn[0,3]
+	talk fn[0,5]
+
+npc char[7]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 9:
+		if !flag[12055]:
+			if flag[9477]:
+				FlagUnset flag[9477]
+				Event fn[0,9]
+			elif flag[9476]:
+				FlagUnset flag[9476]
+				Event fn[0,7]
+			else:
+				system[1] = 0
+				SystemFlagsSet 0x10000000
+				Event fn[0,6]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -108000) "mt2400._ch"
+	Return
+
+fn[2]:
+	var[1] = random % 14
+	if var[1] == 0:
+		CharAnimation self 0 7 1650ms
+	elif var[1] == 1:
+		CharAnimation self 1 7 1600ms
+	elif var[1] == 2:
+		CharAnimation self 2 7 1550ms
+	elif var[1] == 3:
+		CharAnimation self 3 7 1500ms
+	elif var[1] == 4:
+		CharAnimation self 4 7 1450ms
+	elif var[1] == 5:
+		CharAnimation self 5 7 1400ms
+	elif var[1] == 6:
+		CharAnimation self 6 7 1350ms
+	elif var[1] == 7:
+		CharAnimation self 0 7 1655ms
+	elif var[1] == 8:
+		CharAnimation self 1 7 1605ms
+	elif var[1] == 9:
+		CharAnimation self 2 7 1555ms
+	elif var[1] == 10:
+		CharAnimation self 3 7 1505ms
+	elif var[1] == 11:
+		CharAnimation self 4 7 1455ms
+	elif var[1] == 12:
+		CharAnimation self 5 7 1405ms
+	elif var[1] == 13:
+		CharAnimation self 6 7 1355ms
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	CharFlagsSet self 0x0040
+	CharFlagsSet self 0x0004
+	CharIdle self (-8760, null, 13210) (8700, null, 24630) 0mm/s
+	self.4 = random % 360
+	while 1:
+		if self.1 + 3000 > field_party[0].1 && self.1 - 3000 < field_party[0].1 && self.3 + 3000 > field_party[0].3 && self.3 - 3000 < field_party[0].3:
+			if -8760 + 1000 < self.1 && 13210 + 1000 < self.3 && 8700 - 1000 > self.1 && 24630 - 1000 > self.3:
+				CharFlagsSet self 0x0020
+				CharTurnToChar self field_party[0] 0deg/s
+				CharFlagsUnset self 0x0020
+				Fork self fork[1]:
+					_94 0 self 180deg 300 6000mm/s 0
+			else:
+				Fork self fork[1]:
+					CharIdle self (-8760, null, 13210) (8700, null, 24630) 6000mm/s
+				Sleep 200ms
+			Sleep 30ms
+		else:
+			Sleep 50ms
+			if random % 40 == 0:
+				ForkQuit self fork[2]
+				Fork self fork[1]:
+					CharIdle self (-8760, null, 13210) (8700, null, 24630) 1500mm/s
+	Return
+
+fn[4]:
+	while var[2] < 7:
+		var[2] += 1
+		NextFrame
+	var[2] = 0
+	Return
+
+fn[5]:
+	if var[2] == 0:
+		ForkFunc self fork[2] fn[0,4]
+		SoundPlay sound[401] 0 0 100
+		if !flag[0] && random % 10 == 0:
+			if ItemAdd item[907] 1:
+				TextStart self
+				FlagSet flag[0]
+				TextSetPos -1 -1 -1 -1
+				FadeOut 300ms 0x00000000 100
+				TextSetName ""
+				SoundPlay sound[17] 0 0 100
+				TextMessage null {
+					{color 5}Found {item item[907]}{color 5}.{wait}
+				}
+				TextWait
+				TextClose 0
+				FadeIn 300ms 0x00000000
+				TextSetPos 72 320 56 3
+				TextEnd self
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharSetPos name[77] (750, 0, 25880) 90deg
+	CharSetPos char[1] (2100, 0, 26320) 270deg
+	CharSetPos char[3] (2150, 0, 25320) 270deg
+	_Char4A char[1] 255
+	_Char4A char[3] 255
+	_Char4A char[4] 255
+	_Char4A char[5] 255
+	_Char4A char[6] 255
+	CamLookPos (740, 0, 2000) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 2800 0ms
+	CamRotate 24000mdeg 0ms
+	CamPers 588 0ms
+	Sc_C4Set 2048
+	Sleep 2000ms
+	TextSetPos -1 -1 -1 -1
+	TextMessage null {
+		{0x18}{color 12}It was almost time for Matron Theresa's birthday.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{0x18}{color 12}The children were keenly aware of this fact, too.
+		One by one, they finished their chores early and
+		gathered to decide what to do for it.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{0x18}{color 12}After all the matron always did for them, they
+		wanted to make it an occasion to remember.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{0x18}{color 12}But they still hadn't decided what to get her as
+		a present.{wait}
+	}
+	TextWait
+	TextMessage null {
+		{0x18}{color 12}There had to be something out there that was
+		perfect for her--something that would make her
+		really happy...but what?{wait}
+	}
+	TextWait
+	TextClose 0
+	BgmPlay bgm[15] 0
+	Sc_C8 512 70 "C_PLAC05._CH" 1 2000
+	FadeIn 2000ms 0x00000000
+	Fork char[7] fork[0]:
+		CamLookPos (740, 500, 32800) 10000ms
+	Fork char[7] fork[1]:
+		CamRotate 38000mdeg 10000ms
+	ForkWait char[7] fork[0]
+	FadeWait
+	Sc_C4Unset 2048
+	CrossFade 1000ms
+	CamLookPos (1600, 500, 25800) 0ms
+	CamSetDistance 0 7540 -10000 0ms
+	CamZoom 2680 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	ForkWait char[7] fork[0]
+	Sleep 1000ms
+	TextTalk name[77] {
+		#1710FCan you finish watering the plants, then,
+		Daniel?{wait}
+	} {
+		You can take care of the flower beds, Polly.{wait}
+	} {
+		#1718FAs for me, I'll go help with the cooking.{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#1720FThen we're gonna decide on what to get the
+		matron as a present?{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1711FYep! ♪{wait}
+	} {
+		#1718FSo let's hop to it!{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#1721FRight!{wait}
+	}
+	TextTalk char[1] {
+		#1732FOkay!{wait}
+	}
+	TextClose 1
+	_59
+	Fork char[3] fork[1]:
+		CharWalkToPos self (6500, 250, 21600) 2000mm/s 0
+	Sleep 300ms
+	Fork char[1] fork[1]:
+		CharWalkToPos self (13000, 0, 20000) 2000mm/s 0
+	Sleep 2000ms
+	CamLookPos (750, 500, 25800) 2500ms
+	CharTurnTo name[77] 180deg 500deg/s
+	Sleep 500ms
+	TextTalk name[77] {
+		#1710F#5PNow this just leaves Clem...{wait}
+	} {
+		#1715FWhere IS he? He should be back by now...
+		This isn't the first time he's taken forever
+		coming back home, either.{wait}
+	} {
+		#1716FI wish he'd grow up...{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 400deg/s
+	Sleep 500ms
+	Fork char[7] fork[0]:
+		CamLookPos (-400, 500, 32800) 6000ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-40, 0, 31660) 2000mm/s 0
+	ForkWait name[77] fork[1]
+	Sleep 200ms
+	ObjPlay object[0] 19
+	ObjWait object[0]
+	Sleep 200ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (-40, 0, 33660) 2000mm/s 0
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	NewScene "t2412._sn" 100 0 0
+	Hcf
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos name[77] (0, 0, 33000) 180deg
+	CharSetPos char[1] (-600, 60, 25300) 1deg
+	CharSetPos char[3] (560, 0, 25420) 0deg
+	CharSetPos char[0] (100, 0, 27020) 180deg
+	_Char4A char[1] 255
+	_Char4A char[3] 255
+	_Char4A char[0] 255
+	_Char4A char[4] 255
+	_Char4A char[5] 255
+	_Char4A char[6] 255
+	CamLookPos (200, 500, 31800) 0ms
+	CamSetDistance 0 6960 -10000 0ms
+	CamZoom 2680 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 262 0ms
+	Emote char[0] 0mm 1600mm 38 39 200ms 0
+	ForkFunc char[0] fork[1] fn[0,8]
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ObjPlay object[0] 19
+	ObjWait object[0]
+	Sleep 200ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (0, 0, 31300) 2000mm/s 0
+	ForkWait name[77] fork[1]
+	TextTalk name[77] {
+		#1714F#1POh! You're back, Clem.{wait}
+	}
+	TextWait
+	ObjFlagsUnset object[0] 0x0800
+	ObjFrame object[0] 19
+	ObjPlay object[0] 0
+	SoundPlay sound[7] 0 0 100
+	Fork char[7] fork[0]:
+		CamLookPos (200, 500, 27600) 2000ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (100, 0, 28580) 1000mm/s 0
+	ForkWait name[77] fork[1]
+	TextTalk name[77] {
+		#1718F#1PWell? Did you manage to buy the decorations
+		we need for Matron's birthday?{wait}
+	}
+	TextWait
+	SoundPlay sound[39] 0 0 100
+	Emote name[77] 0mm 1600mm 2 7 150ms 1
+	Sleep 1000ms
+	EmoteStop name[77]
+	Sleep 400ms
+	TextTalk name[77] {
+		#1717FNo, you didn't! Don't tell me you didn't buy
+		ANYTHING?!{wait}
+	}
+	TextWait
+	FlagSet flag[1]
+	EmoteStop char[0]
+	ForkWait char[0] fork[1]
+	CharTurnTo char[0] 0deg 500deg/s
+	Sleep 500ms
+	TextTalk char[0] {
+		#772FWell, I was gonna...{wait}
+	} {
+		#771F...but I ended up hearing this real
+		interesting story instead!{wait}
+	}
+	TextWait
+	SoundPlay sound[38] 0 0 100
+	Emote name[77] 0mm 1600mm 0 1 200ms 0
+	Sleep 1000ms
+	Fork char[7] fork[1]:
+		CamZoom 3080 4000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	EmoteStop name[77]
+	BgmStop 2000ms
+	BgmWait
+	Sc_C4Set 2048
+	Sleep 1000ms
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Several hours earlier...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sleep 1000ms
+	Sc_C4Unset 2048
+	NewScene "t2100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[8]:
+	while !flag[1]:
+		CharJump char[0] 0 300 0 300 5000mm/s
+		Sleep 1000ms
+	Return
+
+fn[9]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	_Char4A char[1] 255
+	_Char4A char[3] 255
+	_Char4A char[0] 255
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsUnset char[3] 0x0080
+	CharFlagsUnset char[0] 0x0080
+	CharFlagsSet char[1] 0x0004
+	CharFlagsSet char[3] 0x0004
+	CharFlagsSet char[0] 0x0004
+	CharFlagsSet name[77] 0x0004
+	CharFlagsSet char[1] 0x0040
+	CharFlagsSet char[3] 0x0040
+	CharFlagsSet char[0] 0x0040
+	CharFlagsSet name[77] 0x0040
+	CharSetChipBase char[0] chip[5]
+	CharSetChipBase char[1] chip[6]
+	CharSetChipBase name[77] chip[7]
+	CharSetChipBase char[3] chip[8]
+	CharSetPos name[77] (8630, 200, 27230) 270deg
+	CharSetPos char[1] (8710, 200, 28420) 270deg
+	CharSetPos char[3] (8720, 200, 25650) 270deg
+	CharSetPos char[0] (6100, 200, 26960) 90deg
+	_Char4A char[4] 255
+	_Char4A char[5] 255
+	_Char4A char[6] 255
+	CamLookPos (7300, 400, 27260) 0ms
+	CamSetDistance 0 7180 -10000 0ms
+	CamZoom 2780 0ms
+	CamRotate 320000mdeg 0ms
+	CamPers 262 0ms
+	FadeIn 2000ms 0x00000000
+	Fork char[7] fork[1]:
+		CamZoom 2680 2000ms
+	FadeWait
+	ForkWait char[7] fork[1]
+	TextTalk name[77] {
+		#1719FI've never heard of that before...{wait}
+	}
+	TextWait
+	SoundPlay sound[15] 0 0 100
+	Emote name[77] 0mm 1600mm 10 11 200ms 5
+	Sleep 1000ms
+	EmoteStop name[77]
+	TextTalk name[77] {
+		#1903FIt sounds so dreamy... ㈱{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#771FSee? I told you it was amazing!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1732FIt must be so pretty! And so cool...{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1719FI wish I could find a pretty magical stone like
+		that...{wait}
+	} {
+		#1718FHeehee. Mr. O'Neil tells the best stories,
+		doesn't he?{wait}
+	}
+	TextWait
+	TextTalk char[3] {
+		#1721FYeah! That was a great story!{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#770F...{wait}
+	}
+	TextWait
+	CharSetChipBase char[0] chip[0]
+	CharJump char[0] -120 200 0 300 5000mm/s
+	SoundPlay sound[164] 0 0 100
+	TextTalk char[0] {
+		#771F#3SOkay! Move your butt, Daniel!#2S{wait}
+	} {
+		#3SWe're gonna go find a happiness stone!#2S{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	TextTalk char[3] {
+		#1723FWhaaat?!{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 270deg 600deg/s
+	CharFlagsUnset char[0] 0x0004
+	_Char96 char[0] (5080, 0, 26400) 200 5000
+	SoundPlay sound[164] 0 0 100
+	Sleep 100ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (4100, 0, 26100) 2000mm/s 0
+	CharSetChipBase char[3] chip[3]
+	CharFlagsUnset char[3] 0x0004
+	_Char96 char[3] (8780, 0, 24640) 200 5000
+	SoundPlay sound[164] 0 0 60
+	Emote name[77] 0mm 1600mm 40 43 100ms 2
+	Sleep 300ms
+	TextTalk name[77] {
+		#1714FW-Wait a second, Clem! Where do you think
+		you're going?!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	SoundPlay sound[164] 0 0 60
+	CharSetPos name[77] (9400, 0, 26800) 270deg
+	CharFlagsUnset name[77] 0x0004
+	CharSetChipBase name[77] chip[65535]
+	CharFlagsSet name[77] 0x0040
+	Sleep 1000ms
+	ForkWait char[0] fork[1]
+	CharTurnTo char[0] 90deg 500deg/s
+	Sleep 400ms
+	TextTalk char[0] {
+		#772FWhere do you THINK? The only tall mountains
+		around here're the Krone mountains!{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 0deg 500deg/s
+	Sleep 400ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (4100, 0, 27100) 1000mm/s 0
+	ForkWait char[0] fork[1]
+	TextTalk char[0] {
+		#770FKloe said they were the tallest point in Liberl,
+		too...{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 90deg 500deg/s
+	Sleep 400ms
+	TextTalk char[0] {
+		#771FIf we're gonna find ourselves a happiness
+		stone anywhere, it's gotta be there!{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 180deg 500deg/s
+	Sleep 400ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (4100, 0, 26100) 1000mm/s 0
+	ForkWait char[0] fork[1]
+	TextTalk char[0] {
+		#772FAnd we're gonna find one! We are!{wait}
+	}
+	TextWait
+	CharTurnTo char[0] 90deg 500deg/s
+	TextTalk char[0] {
+		#771F#3SI'm gonna be an invincible guy just like
+		Mr. O'Neil was!#2S{wait}
+	}
+	Shake 0 200 3000 200ms
+	TextWait
+	SoundPlay sound[49] 0 0 100
+	Emote name[77] 0mm 1600mm 16 19 200ms 1
+	Sleep 1000ms
+	EmoteStop name[77]
+	TextTalk name[77] {
+		#1716FUmm... Clem, I understand why you're so 
+		desperate to find one. Really, I do...{wait}
+	} {
+		But Mr. O'Neil's stories are...well...{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#770FYou just wait here with Polly, Mary.
+		We'll be back before you know it!{wait}
+	} {
+		#771F#3SLet's get movin', Daniel! #2S{wait}
+	}
+	TextWait
+	Fork char[7] fork[0]:
+		CamLookPos (5800, 200, 26340) 1000ms
+	Fork char[7] fork[1]:
+		CamRotate 312000mdeg 1000ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (600, 0, 22400) 5000mm/s 0
+	CharSetChipPattern char[1] 2
+	Fork name[77] fork[1]:
+		CharTurnToChar self char[0] 500deg/s
+	TextTalk name[77] {
+		#1714F#10AWait, Clem!{wait}
+	}
+	TextWait
+	ForkWait char[0] fork[1]
+	Fork char[0] fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	TextTalk char[3] {
+		#1723F#11A#4PWait for me!{wait}
+	}
+	TextWait
+	Fork char[3] fork[1]:
+		CharWalkToPos self (600, 0, 22400) 3000mm/s 0
+	TextTalk char[3] {
+		#1723F#11A#4PI wanna be an invincible guy, too!{wait}
+	}
+	TextWait
+	ForkWait char[3] fork[1]
+	Fork char[3] fork[1]:
+		CharColor self 0x00FFFFFF 500ms
+	ForkQuit name[77] fork[1]
+	Sleep 2000ms
+	Fork char[0] fork[0]:
+		CharColor self 0xFFFFFFFF 500ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (2500, 0, 25000) 5000mm/s 0
+	ForkWait char[0] fork[1]
+	CharTurnTo char[0] 90deg 500deg/s
+	Sleep 200ms
+	CharTurnTo name[77] 270deg 500deg/s
+	Sleep 400ms
+	TextTalk char[0] {
+		#772FJust make sure the matron doesn't find out
+		about what we're planning for her present,
+		Mary!{wait}
+	} {
+		#770FIt's gotta be a surprise!{wait}
+	}
+	TextWait
+	TextTalk name[77] {
+		#1715FI know that!{wait}
+	}
+	TextWait
+	Fork char[0] fork[0]:
+		CharColor self 0x00FFFFFF 500ms
+	Fork char[0] fork[1]:
+		CharWalkToPos self (-400, 0, 21000) 5000mm/s 0
+	TextTalk name[77] {
+		#1715FBut listen to me, Clem! Mr. O'Neil's stories are...{wait}
+	}
+	Sleep 1000ms
+	TextWait
+	Sleep 500ms
+	TextTalk name[77] {
+		#1717F#3SLISTEN TO ME!#2S{wait}
+	}
+	Shake 0 200 3000 200ms
+	TextWait
+	Sleep 500ms
+	Emote name[77] 0mm 1600mm 24 27 250ms 0
+	Sleep 2400ms
+	EmoteStop name[77]
+	Sleep 500ms
+	CharFlagsSet char[0] 0x0080
+	CharFlagsSet char[3] 0x0080
+	Fork char[7] fork[0]:
+		CamLookPos (7660, 400, 24340) 3000ms
+	Fork char[7] fork[1]:
+		CamRotate 35000mdeg 3000ms
+	Fork name[77] fork[1]:
+		CharWalkToPos self (9700, 0, 26800) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	Fork name[77] fork[1]:
+		CharWalkToPos self (9700, 0, 24200) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	Fork name[77] fork[1]:
+		CharWalkToPos self (7660, 0, 24340) 1500mm/s 0
+	ForkWait name[77] fork[1]
+	ForkWait char[7] fork[0]
+	TextTalk name[77] {
+		#1716F*sigh* He's so stupid...{wait}
+	} {
+		Both for not realizing Mr. O'Neil's stories are all
+		made up and for not listening to me trying to tell
+		him...{wait}
+	} {
+		#1712FWorking some of the Testaments into one doesn't
+		make the rest of what he's saying credible...{wait}
+	} {
+		#1712FIt doesn't matter how long he spends trying to find
+		a happiness stone. He's not going to!{wait}
+	}
+	TextWait
+	Emote name[77] 0mm 1600mm 24 27 200ms 2
+	Sleep 1600ms
+	EmoteStop name[77]
+	TextTalk name[77] {
+		#1719F(Still...){wait}
+	} {
+		#1903F(I wish they really did exist. They sound so
+		lovely...){wait}
+	}
+	TextWait
+	CrossFade 500ms
+	SoundPlay sound[164] 0 0 60
+	CharSetPos char[1] (9300, 0, 27800) 225deg
+	CharFlagsUnset char[1] 0x0004
+	CharSetChipBase char[1] chip[1]
+	Sleep 1000ms
+	ForkFunc char[1] fork[2] fn[0,10]
+	ForkFunc name[77] fork[2] fn[0,11]
+	ForkWait char[1] fork[2]
+	TextTalk char[1] {
+		#1733FMary?{wait}
+	} {
+		Mary? Earth to Mary?{wait}
+	}
+	TextWait
+	ForkWait name[77] fork[2]
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (7600, 160, 23540) 1000mm/s 0
+	ForkWait char[1] fork[1]
+	EmoteStop name[77]
+	Fork name[77] fork[3]:
+		CharShake self 20 0 500 2000ms
+	Sleep 500ms
+	Fork char[1] fork[1]:
+		CharWalkToPos2 self (7500, 160, 23040) 1000mm/s 0
+	Fork name[77] fork[1]:
+		CharJump self 0 300 0 300 5000mm/s
+	SoundPlay sound[39] 0 0 100
+	Emote name[77] 0mm 1600mm 2 7 150ms 1
+	Sleep 1000ms
+	EmoteStop name[77]
+	CharTurnTo name[77] 180deg 500deg/s
+	Sleep 500ms
+	TextTalk name[77] {
+		#1714F#1POh, sorry!{wait}
+	} {
+		#1716FD-Don't make me jump like that... You really
+		scared me.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1730FThey went away now, but we still dunno
+		what to do for the matron's present.{wait}
+	} {
+		What're we gonna do?{wait}
+	}
+	TextWait
+	SoundPlay sound[49] 0 0 100
+	Emote name[77] 0mm 1600mm 16 19 200ms 1
+	Sleep 1000ms
+	EmoteStop name[77]
+	TextTalk name[77] {
+		#1712F#1PI'm surprised that story didn't have any
+		effect on you...{wait}
+	} {
+		#1712FIt might not be real, but I thought it was
+		pretty touching.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1733FTouchy?{wait}
+	}
+	TextWait
+	Emote name[77] 0mm 1600mm 40 43 100ms 2
+	TextTalk name[77] {
+		#1713F#1PU-Umm...{wait}
+	}
+	TextWait
+	CharTurnTo name[77] 0deg 500deg/s
+	Sleep 500ms
+	TextTalk name[77] {
+		#1716F#1P(She'll never be quite all there, will she?){wait}
+	} {
+		#1715F(This is why I need to look out for everyone!){wait}
+	}
+	TextWait
+	CharTurnTo name[77] 180deg 500deg/s
+	Sleep 500ms
+	TextTalk name[77] {
+		#1710F#1PLet's just let Clem and Daniel do what they want!
+		Clem's not going to listen to us even if we go
+		after him, anyway.{wait}
+	} {
+		Which means we're going to have to think up a
+		present ourselves.{wait}
+	} {
+		#1719FIf only I knew what would be good enough...{wait}
+	}
+	TextWait
+	Emote name[77] 0mm 1600mm 24 27 200ms 2
+	Sleep 1600ms
+	EmoteStop name[77]
+	SoundPlay sound[355] 0 0 70
+	Sleep 2500ms
+	Emote name[77] 0mm 1600mm 38 39 250ms 1
+	Sleep 500ms
+	EmoteStop name[77]
+	TextTalk name[77] {
+		#1710F#1PShall we go and have a look along the shore?{wait}
+	} {
+		There might be some pretty shells there.{wait}
+	} {
+		#1711FIf we collect enough of them, we might even be
+		able to make a necklace for her.{wait}
+	} {
+		That sounds like it might make for a good present,
+		right?{wait}
+	} {
+		#1718FOkay! Let's get going!{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#1732FOkaaay!{wait}
+	}
+	TextWait
+	CharFlagsSet char[1] 0x0080
+	CharFlagsSet char[1] 0x0008
+	CharFlagsUnset name[77] 0x0004
+	CharFlagsUnset name[77] 0x0040
+	CharSetChipBase name[77] chip[65535]
+	PartyAdd name[78] null 255
+	CharSetPos name[78] (7500, 160, 23040) 0deg
+	CharSetPos char[4] (-4730, 350, 18080) 0deg
+	CharSetPos char[5] (-4860, 390, 24170) 142deg
+	CharSetPos char[6] (3970, 200, 17310) 307deg
+	_Char4B char[4] 255
+	_Char4B char[5] 255
+	_Char4B char[6] 255
+	FlagSet flag[12055]
+	EventEnd 0
+	Return
+
+fn[10]:
+	Fork char[1] fork[1]:
+		CharWalkToPos self (9700, 0, 27800) 1500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (9700, 0, 24760) 1500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (8480, 0, 23040) 1500mm/s 0
+	ForkWait char[1] fork[1]
+	Fork char[1] fork[1]:
+		CharWalkToPos self (7500, 160, 23040) 1500mm/s 0
+	ForkWait char[1] fork[1]
+	CharTurnTo char[1] 0deg 500deg/s
+	Return
+
+fn[11]:
+	Emote name[77] 0mm 1600mm 24 27 200ms 3
+	Sleep 2400ms
+	EmoteStop name[77]
+	Sleep 1000ms
+	SoundPlay sound[15] 0 0 100
+	Emote name[77] 0mm 1600mm 10 11 200ms 0
+	Sleep 2000ms
+	Return

@@ -1,0 +1,372 @@
+calmare tc scena
+scena:
+	name "Rolent" "T0301.x"
+	town town[15]
+	bgm bgm[84]
+	item fn[0,65535]
+
+entry:
+	pos (2000, 0, -6000)
+	chr 4
+	angle 0deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+entry:
+	pos (9600, 875, 300)
+	chr 4
+	angle 118deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+entry:
+	pos (9600, 875, 300)
+	chr 4
+	angle 118deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+entry:
+	pos (9600, 875, 300)
+	chr 4
+	angle 118deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 0)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 315deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0000
+	town town[15]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch02750._ch" "npl/ch02750p._cp"
+chip[1] "apl/ch20011._ch" "apl/ch20011p._cp"
+chip[2] "apl/ch20021._ch" "apl/ch20021p._cp"
+
+npc char[0]:
+	name "Joshua"
+	pos (44200, 240, 18540)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x01C1
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Cassius"
+	pos (44200, 240, 18540)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x01C5
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Plate"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[2]
+	frame 4
+	ch chip[2]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Elize Highway"
+	pos (4110, -1000, -46140)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x00FF
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 17:
+		if flag[9476]:
+			system[1] = 183
+			FlagUnset flag[9476]
+			SystemFlagsSet 0x10000000
+			Event fn[0,3]
+		else:
+			system[1] = 183
+			SystemFlagsSet 0x10000000
+			Event fn[0,2]
+	Return
+
+fn[1]:
+	EffStop eff_instance[128] 2
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[0] (-4360, 0, -2200) 0deg
+	CamLookPos (-500, -1000, -18840) 0ms
+	CamSetDistance 0 9500 -10000 0ms
+	CamZoom 3490 0ms
+	CamRotate 311000mdeg 0ms
+	CamPers 328 0ms
+	Fork char[3] fork[0]:
+		CamLookPos (-920, 1000, 740) 10000ms
+	Fork char[3] fork[1]:
+		CamRotate 317000mdeg 10000ms
+	FadeIn 3000ms 0x00000000
+	FadeWait
+	ForkWait char[3] fork[0]
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9476]
+	NewScene "t0311._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharSetPos name[0] (-4360, 0, -2200) 0deg
+	CharFlagsUnset char[0] 0x0080
+	CharSetPos char[0] (2100, 450, -1510) 180deg
+	CharFlagsUnset char[1] 0x0080
+	CharFlagsSet char[1] 0x0004
+	CharSetPos char[1] (9600, 620, -2310) 90deg
+	CharSetPos char[2] (10000, 1100, -3300) 0deg
+	CharFlagsUnset char[2] 0x0080
+	CamLookPos (2000, 450, -640) 0ms
+	CamSetDistance 0 8540 -10000 0ms
+	CamZoom 3200 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 262 0ms
+	Fork char[3] fork[0]:
+		CamLookPos (2000, 0, -2280) 6000ms
+	Fork char[3] fork[1]:
+		CamSetDistance 0 6500 -10000 6000ms
+	Fork char[3] fork[2]:
+		CamZoom 2860 6000ms
+	FadeIn 4000ms 0x00000000
+	FadeWait
+	ObjFlagsUnset object[0] 0x0008
+	ObjFlagsUnset object[0] 0x0010
+	ObjFrame object[0] 0
+	ObjPlay object[0] 29
+	ObjWait object[0]
+	Fork char[0] fork[1]:
+		CharWalkToPos2 self (2000, 450, -4350) 1800mm/s 0
+	ForkWait char[0] fork[1]
+	ObjFrame object[0] 29
+	ObjPlay object[0] 0
+	SoundStop sound[6]
+	SoundPlay sound[7] 0 0 100
+	Sleep 500ms
+	TextTalkNamed char[1] "Man's Voice" {
+		...Joshua.{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (4480, 0, -2420) 3500ms
+	Fork char[3] fork[1]:
+		CamRotate 299000mdeg 3500ms
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	TextTalk char[1] {
+		#085F#5PDetermined to sleep outside again, hmm?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1676F...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#080F#5PNot a fan of sleeping in the same room as 
+		Estelle, I take it?{wait}
+	}
+	TextWait
+	Fork char[3] fork[0]:
+		CamLookPos (7130, 450, -2330) 3000ms
+	Fork char[3] fork[1]:
+		CamRotate 298000mdeg 3000ms
+	Fork char[3] fork[2]:
+		CamZoom 2700 3000ms
+	Fork char[3] fork[3]:
+		CamSetDistance 0 5220 -10000 3000ms
+	CharWalkToPos char[0] (6600, 450, -3680) 1500mm/s 0
+	ForkWait char[3] fork[0]
+	Sleep 500ms
+	TextTalk char[0] {
+		#1671F#5P...She's way too much of a meddler.{wait}
+	} {
+		She's also completely clueless.{wait}
+	} {
+		#1675FShe's got no idea how much danger
+		she's willingly exposing herself to...{wait}
+	}
+	TextWait
+	Sleep 500ms
+	TextTalk char[0] {
+		#1670F#5PWhy don't you tell her, Cassius Bright?
+		She has a right to know. {wait}
+	} {
+		Why do you stand by and say nothing?!{wait}
+	}
+	TextWait
+	Emote char[1] 0mm 1700mm 24 27 250ms 0
+	Sleep 1500ms
+	EmoteStop char[1]
+	Sleep 500ms
+	TextTalk char[1] {
+		#085F#6P...The room next to Estelle's has been used
+		as a storage room for a while now, but it could
+		still be converted into a bedroom if need be.{wait}
+	} {
+		#080FIt might actually be perfect for you.{wait}
+	} {
+		Haven't been in there in a while, but I think
+		there might even already be a bed in there.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1676F#5PI'm fine as I am.{wait}
+	} {
+		#1676FI don't need a room.{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#085F#6PHmm...{wait}
+	} {
+		I'll give you that Estelle loves to poke
+		her nose into anything and everything
+		that catches her interest.{wait}
+	} {
+		And I can see how from your perspective,
+		that makes her look like a simpleminded,
+		clueless child.{wait}
+	} {
+		But that's where you're mistaken.{wait}
+	} {
+		#082FIt's not her who's clueless--it's you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1678F#5P...!{wait}
+	}
+	Sleep 100ms
+	Shake 0 100 3000 200ms
+	TextWait
+	TextTalk char[1] {
+		#080F#6PEstelle knows exactly what she wants out
+		of life and what she has to do to get it.{wait}
+	} {
+		Those things are part of what makes her
+		who she is.{wait}
+	} {
+		#083FAlthough, I can't deny that I was hoping
+		to raise her to be a little more of a...well,
+		ordinary girl than she's grown up to be.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1675F#5P...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#085F#6PStill, compare that to you, Joshua.{wait}
+	} {
+		You don't have a clue what you want anymore.
+		You don't know what you should be doing.{wait}
+	} {
+		#082FWhich of you is really in the right here?{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1675F#5P#40WI...{wait}
+	}
+	TextWait
+	TextTalk char[1] {
+		#085F#6PJust so we're clear, whatever you decide to do,
+		I have no intention of indulging you.{wait}
+	} {
+		I'm not going to tell you to leave...but I'm not
+		going to tell you to stay, either.{wait}
+	} {
+		#080FWhat you want to do, where you want to go,
+		who you want to become...{wait}
+	} {
+		Those are all things for you to decide, and you
+		alone.{wait}
+	} {
+		#085FNo one can make that decision for you, and no 
+		one knows what kind of decision you will make.
+		Only you.{wait}
+	}
+	TextWait
+	TextTalk char[0] {
+		#1675F#5P#40W...{wait}
+	} {
+		#40WI...{wait}
+	} {
+		#60W(Just what do I want...?){wait}
+	}
+	TextWait
+	Fork char[3] fork[2]:
+		CamZoom 2600 3000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 4000ms
+	BgmWait
+	Sleep 1000ms
+	NewScene "r0201._sn" 100 0 0
+	Hcf
+	Return

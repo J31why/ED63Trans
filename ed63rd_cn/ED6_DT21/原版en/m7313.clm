@@ -1,0 +1,287 @@
+calmare tc scena
+scena:
+	name "Gaiden3" "M7313.x"
+	town town[1]
+	bgm bgm[224]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "mons2/ch14050._ch" "mons2/ch14050p._cp"
+chip[1] "mons2/ch14051._ch" "mons2/ch14051p._cp"
+
+npc char[0]:
+	name "Tempest Pom"
+	pos (0, 7530, 41000)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0185
+	init fn[0,2]
+	talk fn[65535,65535]
+
+trigger[0]:
+	pos1 (0, 7000, 41000)
+	pos2 (4000, 4000, 0)
+	flags 0x0040
+	func fn[0,3]
+	unk1 0
+
+look_point[0]:
+	pos (-3020, 5530, 7170)
+	radius 1000mm
+	bubble_pos (-4500, 8550, 7500)
+	flags 0x007C
+	func fn[0,5]
+	unk1 0
+
+fn[0]:
+	global[5] = 20
+	if flag[9477]:
+		FlagUnset flag[9477]
+		SystemFlagsSet 0x10000000
+		Event fn[0,7]
+	Return
+
+fn[1]:
+	MapSet 4000 (-128000, null, -128000) "mm7313._ch"
+	SoundPlay sound[379] 1 0 100
+	SystemFlagsSet 0x00100000
+	EffStop eff_instance[137] 0
+	if QuestFlagsGet quest[15] 0x02:
+		EffStop eff_instance[138] 0
+	else:
+		EffStop eff_instance[139] 0
+	TriggerFlagsSet trigger[0] 0x0080
+	if !flag[11288]:
+		if flag[11285] && flag[11286] && flag[11287]:
+			CharFlagsUnset char[0] 0x0080
+			TriggerFlagsUnset trigger[0] 0x0080
+	Return
+
+fn[2]:
+	while 1:
+		CharAnimation self 0 7 1500ms
+	Return
+
+fn[3]:
+	EventBegin 1
+	field_party[0].11 = 0
+	field_party[1].11 = 0
+	field_party[2].11 = 0
+	field_party[3].11 = 0
+	CharSetChipPattern field_party[0] 0
+	CharSetChipPattern field_party[1] 0
+	CharSetChipPattern field_party[2] 0
+	CharSetChipPattern field_party[3] 0
+	TextSetName ""
+	TextMessage null {
+		{color 5}A mysterious monster is lurking here.{wait}
+	}
+	system[40] = 24
+	Menu menu[0] 10 32 0
+		"Fight" // 0
+		"Don't Fight" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[0]
+	TextClose 0
+	switch var[0]:
+		case 1:
+			CrossFade 500ms
+			CharSetPos field_party[0] (0, 7530, 35620) 0deg
+			CharSetPos field_party[1] (0, 7530, 35620) 0deg
+			CharSetPos field_party[2] (0, 7530, 35620) 0deg
+			CharSetPos field_party[3] (0, 7530, 35620) 0deg
+			CamLookChar field_party[0] 0ms
+			_30 0
+			FadeWait
+			EventEnd 0
+			Return
+	ED6Battle battle[749] null 0 0 null
+	switch system[3]:
+		case 2:
+			EventBegin 1
+			CharSetPos field_party[0] (0, 7530, 35620) 0deg
+			CharSetPos field_party[1] (0, 7530, 35620) 0deg
+			CharSetPos field_party[2] (0, 7530, 35620) 0deg
+			CharSetPos field_party[3] (0, 7530, 35620) 0deg
+			CamLookChar field_party[0] 0ms
+			_30 0
+			FadeWait
+			EventEnd 0
+			Return
+	EventBegin 1
+	CharSetPos field_party[0] (-880, 7530, 35170) 0deg
+	CharSetPos field_party[1] (1000, 7530, 34930) 0deg
+	CharSetPos field_party[2] (-710, 7530, 32930) 0deg
+	CharSetPos field_party[3] (1130, 7530, 32800) 0deg
+	CamLookChar field_party[0] 0ms
+	CharFlagsSet char[0] 0x0080
+	TriggerFlagsSet trigger[0] 0x0080
+	FadeWait
+	Sleep 400ms
+	SoundPlay sound[23] 0 0 100
+	TextSetPos -1 -1 -1 -1
+	FadeOut 300ms 0x00000000 100
+	TextSetName ""
+	TextMessage null {
+		{color 5}Defeated the monster!{wait}
+	}
+	TextWait
+	ScAchievement 15 4 0
+	if !flag[11284]:
+		ItemAdd item[827] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[827]}{color 5}.{wait}
+		}
+		TextWait
+		ItemAdd item[387] 1
+		SoundPlay sound[17] 0 0 100
+		TextSetPos -1 -1 -1 -1
+		TextSetName ""
+		TextMessage null {
+			{color 5}Received {item item[387]}{color 5}.{wait}
+		}
+		TextWait
+	FlagSet flag[11284]
+	FlagSet flag[11288]
+	TextClose 0
+	FadeIn 300ms 0x00000000
+	TextSetPos 72 320 56 3
+	_30 0
+	EventEnd 0
+	SystemFlagsSet 0x00100000
+	Return
+
+fn[4]:
+	TextSetPos -1 110 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 5}Open the Door?{0x18}{wait}
+	}
+	var[0] = 255
+	system[40] = 24
+	Menu menu[1] -1 -1 1
+		"Yes" // 0
+		"No" // 1
+	MenuWait var[0]
+	system[40] = 65535
+	MenuClose menu[1]
+	TextClose 0
+	Sleep 300ms
+	Return
+
+fn[5]:
+	EventBegin 0
+	SoundPlay sound[546] 0 0 100
+	CrossFade 500ms
+	CharSetPos field_party[0] (-1860, 5530, 7870) 270deg
+	CharSetPos field_party[1] (-1890, 5530, 6130) 270deg
+	CharSetPos field_party[2] (-170, 5530, 7760) 270deg
+	CharSetPos field_party[3] (-100, 5530, 6090) 270deg
+	CamLookPos (-2670, 5530, 7150) 0ms
+	CamSetDistance 0 5980 -10000 0ms
+	CamZoom 4240 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	if !QuestFlagsGet quest[15] 0x02:
+		QuestFlagsSet quest[15] 0x02
+		EffStop eff_instance[138] 2
+		EffPlay eff[139] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	Sleep 1000ms
+	FadeOut 300ms 0x00000000 100
+	Sc_C4Set 2048
+	TextSetName ""
+	TextSetPos -1 60 -1 -1
+	TextMessage null {
+		{color 5}#40WBring to me the girl loved by the
+		world's darkness.
+		#500W 
+		#40WOnly then shall the door open...{color 0}{wait}
+	}
+	TextWait
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 500ms
+	if PartyPosition name[15] != -1:
+		Call fn[0,4]
+		if var[0] == 0:
+			Call fn[0,6]
+	else:
+	FadeIn 300ms 0x00000000
+	EventEnd 0
+	SystemFlagsSet 0x00100000
+	Return
+
+fn[6]:
+	FadeIn 300ms 0x00000000
+	Sleep 500ms
+	EffPlay eff[137] eff_instance[255] name[65278] 0 (0, 0, 0) 0 0 0 1000 1000 1000 null (0, 0, 0) 0ms
+	ObjFrame object[0] 0
+	ObjPlay object[0] 120
+	Sleep 300ms
+	SoundPlay sound[250] 0 0 100
+	ObjWait object[0]
+	Sleep 500ms
+	Fork field_party[0] fork[2]:
+		CamZoom 3400 3000ms
+	SoundPlay sound[312] 0 0 100
+	FadeOut 2000ms 0x00FFFFFF 255
+	FadeWait
+	Sc_C4Set 16
+	FadeIn 2000ms 0x00FFFFFF
+	FadeWait
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sc_C4Unset 16
+	SystemFlagsUnset 0x00100000
+	SystemFlagsUnset 0x02000000
+	SoundStop sound[379]
+	TcEpisodeStart 3 0 0
+	NewScene "p9001._sn" 100 0 0
+	Hcf
+	Return
+
+fn[7]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	FadeWait
+	Sleep 500ms
+	CharSetPos field_party[0] (-1860, 5530, 7870) 270deg
+	CharSetPos field_party[1] (-1890, 5530, 6130) 270deg
+	CharSetPos field_party[2] (-170, 5530, 7760) 270deg
+	CharSetPos field_party[3] (-100, 5530, 6090) 270deg
+	CamLookPos (-2670, 5530, 7150) 0ms
+	CamSetDistance 0 5980 -10000 0ms
+	CamZoom 4240 0ms
+	CamRotate 315000mdeg 0ms
+	CamPers 262 0ms
+	FadeWait
+	Sleep 500ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sleep 1000ms
+	EventEnd 0
+	SystemFlagsSet 0x00100000
+	Return

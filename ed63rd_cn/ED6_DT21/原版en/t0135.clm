@@ -1,0 +1,1246 @@
+calmare sc scena
+scena:
+	name "Rolent" "T0135.x"
+	town town[7]
+	bgm bgm[84]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch00023._ch" "npl/ch00023p._cp"
+chip[1] "npl/ch00033._ch" "npl/ch00033p._cp"
+chip[2] "npl/ch02560._ch" "npl/ch02560p._cp"
+chip[3] "npl/ch01270._ch" "npl/ch01270p._cp"
+chip[4] "apl/ch20049._ch" "apl/ch20049p._cp"
+chip[5] "apl/ch20020._ch" "apl/ch20020p._cp"
+chip[6] "apl/ch20021._ch" "apl/ch20021p._cp"
+chip[7] "npl/ch00020._ch" "npl/ch00020p._cp"
+
+npc char[0]:
+	name "Scherazard"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Olivier"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[2]:
+	name "Aina"
+	pos (0, 0, 0)
+	angle 180deg
+	x 0
+	cp chip[2]
+	frame 0
+	ch chip[2]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[3]:
+	name "Faulkner"
+	pos (34500, 0, 75200)
+	angle 90deg
+	x 0
+	cp chip[3]
+	frame 0
+	ch chip[3]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[4]:
+	name "Food"
+	pos (40550, 700, 66950)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 1
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[5]:
+	name "Food"
+	pos (39700, 700, 67470)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 4
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[6]:
+	name "Wine Bottle"
+	pos (39300, 700, 67950)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 28
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[7]:
+	name "Wine Bottle"
+	pos (39100, 700, 67050)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 30
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[8]:
+	name "Glass"
+	pos (38900, 700, 68000)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 28
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[9]:
+	name "Glass"
+	pos (40550, 700, 68000)
+	angle 0deg
+	x 0
+	cp chip[5]
+	frame 28
+	ch chip[5]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[10]:
+	name "Glass"
+	pos (38950, 600, 67600)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 5
+	ch chip[6]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[11]:
+	name "Glass"
+	pos (40150, 600, 67950)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 5
+	ch chip[6]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[12]:
+	name "Glass"
+	pos (40100, 600, 66800)
+	angle 0deg
+	x 0
+	cp chip[6]
+	frame 1
+	ch chip[6]
+	flags 0x01E6
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[13]:
+	name "Target Camera"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0080
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 7:
+		SystemFlagsSet 0x10000000
+		Event fn[0,2]
+	Return
+
+fn[1]:
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	Sc_C4Set 536870912
+	CharFlagsSet char[8] 0x0004
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos char[8] (39580, 200, 68570) 180deg
+	CharFlagsSet char[9] 0x0004
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (39710, 200, 66250) 0deg
+	CharFlagsSet char[10] 0x0004
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[10] (38200, 0, 67800) 121deg
+	CharSetChipBase char[9] chip[4]
+	CharSetChipPattern char[9] 0
+	CharFlagsSet char[9] 0x0002
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharFlagsUnset char[14] 0x0080
+	CharFlagsUnset char[18] 0x0080
+	CharFlagsUnset char[19] 0x0080
+	CharFlagsUnset char[20] 0x0080
+	CamLookPos (37640, 0, 68540) 0ms
+	CamSetDistance 0 5060 -10000 0ms
+	CamZoom 3160 0ms
+	CamRotate 302000mdeg 0ms
+	CamPers 286 0ms
+	BgmStop 0ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}#150WYear 1202 of the Septian Calendar, Rolent...#20W{0x05}{wait}
+	}
+	TextWait
+	Sleep 300ms
+	TextClose 0
+	Sleep 1500ms
+	TextSetPos 72 320 56 3
+	Sleep 100ms
+	Sc_C4Unset 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName "Voice"
+	TextMessage null {
+		{color 0}#70W#1S...Scherazard...#40W{wait}
+	}
+	TextWait
+	TextClose 0
+	TextMessage null {
+		{color 0}#40W#2S...Scherazard!#20W{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Fork char[21] fork[0]:
+		CamZoom 2960 7000ms
+	FadeIn 3000ms 0x00000000
+	Sleep 1500ms
+	TextTalk char[8] {
+		#026F...Mm?{wait}
+	}
+	TextWait
+	_59
+	FadeWait
+	Fork char[8] fork[0]:
+		CharShake self 15 0 500 3000ms
+	Sleep 1000ms
+	CharSetChipPattern char[8] 1
+	Sleep 800ms
+	CharSetChipPattern char[8] 0
+	Sleep 100ms
+	CharSetChipPattern char[8] 2
+	Sleep 800ms
+	CharSetChipPattern char[8] 0
+	Sleep 100ms
+	ForkWait char[21] fork[0]
+	Sleep 500ms
+	TextTalk char[8] {
+		#029FHuh? ...Where am I?{wait}
+	}
+	TextWait
+	BgmPlay bgm[191] 0
+	Sleep 500ms
+	TextTalk char[10] {
+		#743F#5PYou feeling all right? Sure you haven't had too 
+		much to drink?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#025FBoy, that dream really brought back memories...{wait}
+	} {
+		Hard to believe I was once that young...{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#741F#5PHeehee. I see you've gotten yourself nice and
+		plastered.{wait}
+	} {
+		#740FYou might want to watch what you're saying,
+		though. You're still young, but no one'll believe
+		it if you start talking like that.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#038F#100WSh-She's...riiight... Scheraaaaaa...{wait}
+	}
+	TextWait
+	CharShake char[9] 20 0 500 2000ms
+	Sleep 500ms
+	CharShake char[9] 20 0 500 3000ms
+	Sleep 1000ms
+	CrossFade 500ms
+	CharSetChipBase char[9] chip[1]
+	CharFlagsUnset char[9] 0x0002
+	Sleep 500ms
+	TextTalk char[9] {
+		#038F#60WI-I-I-I... I-I...{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#743F#5PWow. I thought you'd be out for a while longer,
+		Olivier.{wait}
+	} {
+		#741FHeehee. Let me pour you another glass, then.{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[249] 0 0 100
+	CrossFade 1000ms
+	CharSetChipPattern char[20] 5
+	FadeWait
+	Sleep 300ms
+	Fork char[9] fork[0]:
+		CharShake char[9] 15 0 1500 3000ms
+	TextTalk char[9] {
+		#036F#100WP-Pleeease...#20W Mercyyyyyy...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#026FYou can be such a monster.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharSetChipPattern char[8] 2
+	Sleep 500ms
+	TextTalk char[8] {
+		#520FFaulkner, bring Olivier another bottle over!{wait}
+	}
+	Shake 0 200 3000 100ms
+	TextWait
+	Sleep 500ms
+	Fork char[9] fork[0]:
+		CharShake char[9] 15 0 1500 3000ms
+	TextTalk char[9] {
+		#038F#60W*unintelligible gibberish*{wait}
+	}
+	TextWait
+	Sleep 1000ms
+	TextTalk char[8] {
+		#029FUgh... Looks like Faulkner's gone and left
+		early again.{wait}
+	} {
+		Fine. Guess I'll have to go get the bottle myself.{wait}
+	}
+	TextWait
+	ForkFunc char[9] fork[1] fn[0,5]
+	_59
+	Sleep 300ms
+	CrossFade 800ms
+	CharSetChipBase char[8] chip[7]
+	CharSetChipPattern char[8] 0
+	CharSetPos char[8] (38560, 0, 68740) 270deg
+	SoundPlay sound[26] 0 0 100
+	FadeWait
+	Fork char[21] fork[0]:
+		CamLookPos (35620, 0, 70400) 6000ms
+	ForkFunc char[8] fork[1] fn[0,3]
+	Sleep 500ms
+	TextTalk char[8] {
+		#520F#12PWell, if I'm getting out of my seat, I'm getting
+		the strongest thing in the house!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkWait char[8] fork[1]
+	ForkWait char[21] fork[0]
+	TextTalk char[8] {
+		#521FI spy some brandy!{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#741F#1PScherazard, he's literally only just gotten up.{wait}
+	} {
+		At least start him off on some fruit wine before
+		you start bringing out the big guns.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#520FHe can have both! Problem solved.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#038F#40W#3PSpare meee... I'll dieeeeee...{wait}
+	}
+	TextWait
+	Fork char[21] fork[0]:
+		CamLookPos (37640, 0, 68540) 6000ms
+	ForkFunc char[8] fork[1] fn[0,4]
+	Sleep 1000ms
+	TextTalk char[8] {
+		#026FBy the way, Aina...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkWait char[8] fork[1]
+	ForkWait char[21] fork[0]
+	Sleep 300ms
+	TextTalk char[8] {
+		#027FYou remember when we first met?
+		How much did you down again?{wait}
+	}
+	TextWait
+	CrossFade 500ms
+	CharFlagsUnset char[15] 0x0080
+	CharFlagsUnset char[16] 0x0080
+	CharFlagsUnset char[17] 0x0080
+	SoundPlay sound[130] 0 0 100
+	FadeWait
+	Sleep 500ms
+	ForkQuit char[9] fork[1]
+	TextTalk char[10] {
+		#743F#11PDown? Down what?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#521FBooze! We're talkin' booze, baby!{wait}
+	}
+	TextWait
+	_59
+	SoundPlay sound[370] 0 0 100
+	Sleep 1000ms
+	TextSetName ""
+	TextMessage null {
+		{color 5}Scherazard began pouring alcohol onto Olivier's head.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	SoundPlay sound[249] 0 0 100
+	ForkQuit char[9] fork[255]
+	Fork char[9] fork[0]:
+		CharShake self 25 0 2000 3000ms
+	Fork char[9] fork[2]:
+		CharColor self 0xFF0000FF 2000ms
+	Sleep 2300ms
+	TextTalk char[10] {
+		#741F#11PThat should go in his mouth, Scherazard.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#029FYou schwaaa...?{wait}
+	} {
+		Oh... Silly me.{wait}
+	}
+	TextWait
+	Fork char[9] fork[0]:
+		CharShake self 20 0 500 2000ms
+	Sleep 800ms
+	TextTalk char[9] {
+		#038FEeeeeeek... Glaaargh...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[524] 0 0 100
+	CrossFade 500ms
+	CharSetChipBase char[9] chip[4]
+	CharFlagsSet char[9] 0x0002
+	Sleep 500ms
+	Fork char[21] fork[0]:
+		CamZoom 2760 4000ms
+	Sleep 500ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	BgmStop 3000ms
+	BgmWait
+	ForkQuit char[21] fork[0]
+	Sleep 1000ms
+	FlagSet flag[9477]
+	NewScene "t4100._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	Fork char[8] fork[0]:
+		CharWalkToPos self (33560, 0, 68960) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	Fork char[8] fork[0]:
+		CharWalkToPos self (33720, 0, 74320) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	CharTurnTo char[8] 270deg 500deg/s
+	Return
+
+fn[4]:
+	Fork char[8] fork[0]:
+		CharWalkToPos self (33560, 0, 68960) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	Fork char[8] fork[0]:
+		CharWalkToPos self (36120, 0, 67900) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	Fork char[8] fork[0]:
+		CharWalkToPos self (38500, 0, 66280) 1500mm/s 0
+	ForkWait char[8] fork[0]
+	CharTurnTo char[8] 90deg 500deg/s
+	Return
+
+fn[5]:
+	while 1:
+		Sleep 1500ms
+		Fork char[9] fork[0]:
+			CharShake char[9] 15 0 500 3000ms
+		Sleep 1000ms
+	Return
+
+fn[6]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsSet field_party[0] 0x0080
+	CharFlagsSet field_party[1] 0x0080
+	CharFlagsSet field_party[2] 0x0080
+	CharFlagsSet field_party[3] 0x0080
+	CharFlagsSet char[8] 0x0004
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos char[8] (39580, 200, 68570) 180deg
+	CharFlagsSet char[9] 0x0004
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (39710, 200, 66250) 0deg
+	CharFlagsSet char[10] 0x0004
+	CharFlagsUnset char[10] 0x0080
+	CharSetPos char[10] (38200, 0, 67800) 121deg
+	CharFlagsUnset char[11] 0x0080
+	CharFlagsUnset char[12] 0x0080
+	CharFlagsUnset char[13] 0x0080
+	CharFlagsUnset char[14] 0x0080
+	CharFlagsUnset char[18] 0x0080
+	CharFlagsUnset char[19] 0x0080
+	CharFlagsUnset char[20] 0x0080
+	CamLookPos (37640, 0, 68540) 0ms
+	CamSetDistance 0 5070 -10000 0ms
+	CamZoom 2960 0ms
+	CamRotate 302000mdeg 0ms
+	CamPers 286 0ms
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	TextTalk char[9] {
+		#030FMy... Rolent's cuisine really is exceptional.{wait}
+	} {
+		It makes perfect use of seasonal ingredients,
+		too.{wait}
+	} {
+		If this were Erebonia, you'd be paying a premium
+		at a three star restaurant for food like this.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2PWow. Sounds like you're quite the fan.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030FHeh. But of course.{wait}
+	} {
+		I couldn't ask for a more heavenly situation than
+		the one I find myself in right now.{wait}
+	} {
+		Sampling fine food and fine drink while 
+		accompanied by the finest women... What
+		man wouldn't want to swap with me?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5PHaha...{wait}
+	} {
+		I see the rumors about you were all true.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020FYou'll want to watch yourself around this one,
+		Aina.{wait}
+	} {
+		He really will go after anything that moves.{wait}
+	}
+	TextWait
+	CharSetChipPattern char[8] 2
+	Sleep 200ms
+	Fork field_party[0] fork[0]:
+		CamLookPos (35710, 0, 71540) 1000ms
+	ForkWait field_party[0] fork[0]
+	TextTalk char[8] {
+		#020F#6POh, Faulkner!{wait}
+	} {
+		We're short on wine over here. Bring us another
+		two or three bottles!{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5POh, and throw in some Cognac, too. Preferably
+		Erebonian.{wait}
+	}
+	TextWait
+	CharTurnTo char[11] 135deg 400deg/s
+	TextTalk char[11] {
+		#5PR-Right!{wait}
+	}
+	TextWait
+	Emote char[11] 0mm 2000mm 40 43 100ms 3
+	CharTurnTo char[11] 225deg 400deg/s
+	CharWalkToPos char[11] (33910, 0, 74450) 3000mm/s 0
+	CharWalkToPos char[11] (33160, 0, 74280) 3000mm/s 0
+	Fork field_party[0] fork[0]:
+		CamLookPos (37640, 0, 68540) 1500ms
+	ForkWait field_party[0] fork[0]
+	Sleep 200ms
+	Emote char[9] 0mm 1700mm 20 23 250ms 1
+	SoundPlay sound[49] 0 0 100
+	Sleep 1000ms
+	TextTalk char[9] {
+		#030FW-Wait a second...{wait}
+	} {
+		Can't we ease ourselves in a bit before going for
+		the hard stuff?{wait}
+	}
+	TextWait
+	Sleep 200ms
+	CharSetChipPattern char[8] 0
+	Sleep 200ms
+	TextTalk char[8] {
+		#020F#2PI think we've been taking this a bit TOO easy, if
+		you ask me.{wait}
+	} {
+		We've been talking for ages! Time to get drinking.{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5PWell, I don't mind going with a slower pace for a
+		while.{wait}
+	} {
+		Still...{wait}
+	} {
+		Your glass is completely empty, Olivier. That just
+		won't do.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	SoundPlay sound[249] 0 0 100
+	CrossFade 1000ms
+	CharSetChipPattern char[20] 5
+	FadeWait
+	Sleep 300ms
+	TextTalk char[9] {
+		#030FHa...haha... Th-Thank you...{wait}
+	}
+	TextWait
+	ForkFunc char[11] fork[0] fn[0,10]
+	ForkWait char[11] fork[0]
+	TextTalk char[11] {
+		#5PH-Here you go, here's your drinks.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 500ms
+	CharFlagsUnset char[15] 0x0080
+	CharFlagsUnset char[16] 0x0080
+	CharFlagsUnset char[17] 0x0080
+	FadeWait
+	Sleep 300ms
+	TextTalk char[10] {
+		#740F#2PThanks.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	ForkFunc char[11] fork[1] fn[0,9]
+	Sleep 300ms
+	TextTalk char[10] {
+		#740F#5PWant your Cognac on the rocks, Olivier?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6P...What?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5PIt wouldn't be fair of us to be forcing you to 
+		drink nothing but wine, after all.{wait}
+	} {
+		You're Erebonian, after all. I'm guessing you'd
+		prefer something a lot stronger.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2PWell, that makes sense.{wait}
+	} {
+		No wonder you drink slowly if you're used to 
+		stronger drinks.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6P*cough* *cough*{wait}
+	} {
+		I-Incidentally, Schera...{wait}
+	} {
+		Do you go back quite some time with this Aina
+		lady?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2PYou could say that, yeah.{wait}
+	} {
+		I've known her since back when I was a junior
+		bracer.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6POh my... That must be quite some time, then.{wait}
+	} {
+		Might I ask how you came to meet?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5PIt was six years ago, in Grancel.{wait}
+	} {
+		I went to the guild to ask for an escort, and
+		that was when I first ran into her.{wait}
+	}
+	TextWait
+	ImageShow "c_orb109._ch" 0 0 400ms
+	Sleep 1000ms
+	FadeOut 0ms 0x00000000 255
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FI just happened to be in the guild at the time,
+		you see.{wait}
+	} {
+		I ended up accepting her request, but it really
+		didn't seem like something worth my time at first.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030FStill, I can only assume it turned out to be?
+		Had she gotten herself caught up in some kind
+		of trouble?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FI had. My rich grandfather had died of illness,
+		you see -- and that was the start of it all.{wait}
+	} {
+		Because he had left his entire fortune to me.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FAfter that, I'm sure you can imagine how it all
+		went. {wait}
+	} {
+		One relative after another wanted the mira she had
+		inherited...{wait}
+	} {
+		There were even some who tried to invalidate her
+		right of succession to get it all for themselves.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030FOh dear. They sound like really despicable 
+		fellows.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FIn the end, I found myself a few days before my
+		right of succession was due to expire, with no
+		one to turn to...{wait}
+	} {
+		...and that was why I ended up having to rely on
+		this scary lady here for help.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FOh, that's real nice.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FYou can't deny you were scary, though.{wait}
+	} {
+		I mean, it was pretty clear you hated me at first.
+		You didn't exactly hide it.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030FOh?{wait}
+	} {
+		So you weren't quite this friendly at first,
+		then?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FWell, I was pretty young at the time. I still had
+		a lot to learn about the world.{wait}
+	} {
+		...Although I can't deny I started disliking her
+		the second I found out she was from a rich family.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030FTh-That's quite some prejudice from you...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FOh, quiet. {wait}
+	} {
+		Less talking, more drinking, Mr. 'My Glass is
+		Empty Yet Again.'{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030FO-Oh, is it? Oh dear...{wait}
+	} {
+		Worry not, though. I would much rather focus
+		myself on your story regardless.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FWhat's a good story without a drink to go with it?
+		You can have both! *Pouring*{wait}
+	}
+	TextWait
+	TextClose 0
+	SoundPlay sound[249] 0 0 100
+	Sleep 1000ms
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030FA-Aina?!{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FSo... Umm... Where were we?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030F*Hic* Y-You were telling me about how Schera ended
+		up taking your request.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 120 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FOh, right.{wait}
+	} {
+		Anyway, even with Scherazard's help, we ended up
+		getting chased around the capital by pursuers...{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 1000ms
+	ImageShow "c_orb110._ch" 0 0 400ms
+	Sleep 1000ms
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FIt was exhausting, to be honest.{wait}
+	} {
+		But our little rich girl here didn't have a single
+		complaint to make.{wait}
+	} {
+		I think that was about when we finally started
+		opening up to one another a bit.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FWell, after being together for that long, it was
+		basically inevitable we'd grow more familiar with
+		one another before long.{wait}
+	} {
+		More than anything else, though, you were really
+		fascinating to me. {wait}
+	} {
+		You were like no one I'd met before with my 
+		sheltered upbringing, after all.{wait}
+	} {
+		So while we might not have gotten along very well
+		at first, we did end up hitting it off. We even
+		went out for drinks after all was said and done.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FIt was then that we REALLY started hitting it off,
+		though.{wait}
+	} {
+		After all, all my prejudices towards you were well
+		and truly shattered when I saw how she drank.{wait}
+	} {
+		That was...not a sight I was ever expecting to see
+		from a rich girl. Not at all.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030F*Hic* St-Still... *Hic* If you were drinking six
+		years ago...{wait}
+	} {
+		Were you even legally allowed to?{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020F*sigh* Quiet, drunkard.{wait}
+	} {
+		The most surprising part of all of this is still
+		yet to come.{wait}
+	} {
+		That's what she did with all the money after
+		finally inheriting it -- she donated the lot!{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		#030FR-Really...?{wait}
+	}
+	TextWait
+	TextClose 0
+	ImageHide 500ms
+	Sleep 1000ms
+	ImageShow "c_orb111._ch" 0 0 400ms
+	Sleep 1000ms
+	TextSetPos 100 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FYep. I gave it all to Her Majesty's welfare 
+		foundation.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FThen after all that was done, she just looked like
+		the weight of the world had been lifted from her
+		shoulders and started talking about finding a job.{wait}
+	} {
+		After seeing that, I couldn't bring myself to turn
+		my back on her.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FSo that was when she introduced me to the guild 
+		and I was able to find work there.{wait}
+	} {
+		You really were far too good to me.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FIf that's what you think, perhaps you could act a
+		little more gratefully towards me.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 100 30 -1 -1
+	TextSetName "Aina"
+	TextMessage null {
+		#740FI'm paying you back through my work! Isn't that
+		enough?{wait}
+	} {
+		By joining you for drinks, too.{wait}
+	} {
+		I mean, the only people who don't refuse a request
+		to drink with you are Cassius and I.{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 330 300 -1 -1
+	TextSetName "Scherazard"
+	TextMessage null {
+		#020FHeehee. Not any more! ㈱{wait}
+	} {
+		Now we can add our dear friend Olivier to that
+		list.{wait}
+	} {
+		Can't we, Olivier? ㈱{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 80 320 -1 -1
+	TextSetName "Olivier"
+	TextMessage null {
+		...{wait}
+	}
+	TextWait
+	TextClose 0
+	CharSetChipBase char[9] chip[4]
+	CharSetChipPattern char[9] 0
+	CharFlagsSet char[9] 0x0002
+	ImageHide 500ms
+	FadeIn 1000ms 0x00000000
+	Sleep 1000ms
+	FadeWait
+	TextTalk char[8] {
+		#020F#2PO-Olivier?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#5POh dear...{wait}
+	} {
+		Looks like our dear friend Olivier isn't with us
+		any more.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#2PBut we were only just getting started!{wait}
+	} {
+		The night is only just beginning!{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CrossFade 250ms
+	CharSetChipBase char[8] chip[7]
+	CharSetChipPattern char[8] 0
+	CharSetPos char[8] (38570, 0, 68740) 180deg
+	SoundPlay sound[164] 0 0 100
+	FadeWait
+	Fork field_party[0] fork[0]:
+		CamLookPos (37250, 0, 68190) 2000ms
+	CharTurnTo char[8] 270deg 400deg/s
+	CharWalkToPos char[8] (37210, 0, 68990) 3000mm/s 0
+	CharWalkToPos char[8] (37400, 0, 66440) 3000mm/s 0
+	CharWalkToPos char[8] (38730, 0, 66320) 3000mm/s 0
+	ForkWait field_party[0] fork[0]
+	TextTalk char[8] {
+		#020F#5PStop pretending to be asleep and get back to
+		drinking, Olivier!{wait}
+	} {
+		I know you're not really asleep!{wait}
+	}
+	TextWait
+	ForkFunc char[9] fork[0] fn[0,8]
+	Sleep 1000ms
+	TextTalk char[9] {
+		#030F#6PWh-Wh-What's going on...?{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#2PUmm... Scherazard... It might not be my place to
+		say this...{wait}
+	} {
+		But I think you should probably take better care
+		of willing drinking partners. They're few and far
+		between for you.{wait}
+	}
+	TextWait
+	ForkFunc char[11] fork[0] fn[0,7]
+	ForkWait char[11] fork[0]
+	TextTalk char[11] {
+		#5PSch-Schera?! What are you doing?!{wait}
+	}
+	TextWait
+	ForkQuit char[9] fork[0]
+	Sleep 200ms
+	CharTurnTo char[8] 315deg 400deg/s
+	Sleep 200ms
+	TextTalk char[8] {
+		#020F#6POh, look who it is! ㈱{wait}
+	} {
+		You're just in time to join us for a few drinks in
+		Olivier's place. ♪{wait}
+	}
+	TextWait
+	TextTalk char[11] {
+		#5PI-I couldn't possibly! I'm working ere!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#6PAww, come oooon... You wouldn't really say no,
+		would you?{wait}
+	} {
+		...If you don't join us, I will strip.{wait}
+	}
+	TextWait
+	TextTalk char[11] {
+		#5PWhat?!{wait}
+	}
+	TextWait
+	TextTalk char[10] {
+		#740F#2P*sigh* Here we go again...{wait}
+	}
+	TextWait
+	CharTurnTo char[11] 90deg 400deg/s
+	TextTalk char[11] {
+		#5PD-Don't just sigh, Aina! Help me here!{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#020F#6PBoy... It sure is hot in here... ㈱{wait}
+	}
+	TextWait
+	Emote char[11] 0mm 2000mm 40 43 100ms 3
+	CharTurnTo char[11] 135deg 400deg/s
+	Sleep 500ms
+	TextTalk char[11] {
+		#5PE-Eeeek!{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#030F#6PGuhh... Guhh...{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 300ms
+	TextSetPos 72 320 56 3
+	TextSetName ""
+	TextMessage null {
+		{color 5}Eventually, the night came to an end.{wait}
+	} {
+		The unfortunate traveler who had found himself 
+		involved in this potentially fatal drinking 
+		session was fortunately able to escape alive...{wait}
+	} {
+		But the scars the experience left on his psyche
+		would perhaps never heal.{wait}
+	}
+	TextWait
+	TextClose 0
+	Sleep 500ms
+	BgmStop 2000ms
+	Sleep 2000ms
+	if flag[12032]:
+		NewScene "t0001._sn" 0 0 0
+		Hcf
+	else:
+		NewScene "f1010._sn" 100 0 0
+		Hcf
+	Return
+
+fn[7]:
+	CharTurnTo self 135deg 400deg/s
+	Emote self 0mm 2000mm 40 43 100ms 3
+	Sleep 1000ms
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (32890, 0, 69550) 5000mm/s 0
+	CharWalkToPos self (37070, 0, 67350) 5000mm/s 0
+	Return
+
+fn[8]:
+	while 1:
+		CharShake self 0 30 500 3000ms
+		Sleep 1000ms
+		CharShake self 0 30 500 3000ms
+		Sleep 1500ms
+	Return
+
+fn[9]:
+	CharTurnTo self 315deg 400deg/s
+	Emote self 0mm 2000mm 40 43 100ms 3
+	CharWalkToPos self (33430, 0, 69710) 5000mm/s 0
+	CharWalkToPos self (33830, 0, 75030) 5000mm/s 0
+	CharWalkToPos self (34500, 0, 75200) 3000mm/s 0
+	CharTurnTo self 90deg 400deg/s
+	Return
+
+fn[10]:
+	CharTurnTo self 180deg 400deg/s
+	CharWalkToPos self (33310, 0, 69380) 2000mm/s 0
+	CharWalkToPos self (38010, 0, 66960) 2000mm/s 0
+	CharTurnTo self 90deg 400deg/s
+	Return

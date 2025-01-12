@@ -1,0 +1,583 @@
+calmare sc scena
+scena:
+	name "Zeiss" "C3100.x"
+	town town[1]
+	bgm bgm[16]
+	item fn[0,65535]
+
+entry:
+	pos (0, 0, 0)
+	chr 4
+	angle 5deg
+	cam_from (0, 9500, -10000)
+	cam_at (0, 0, 2500)
+	cam_zoom 2800
+	cam_pers 262
+	cam_deg 45deg
+	cam_limit 0deg 360deg
+	north 0deg
+	flags 0x0001
+	town town[1]
+	init fn[0,0]
+	reinit fn[0,1]
+
+chip[0] "npl/ch01640._ch" "npl/ch01640p._cp"
+chip[1] "npl/ch01310._ch" "npl/ch01310p._cp"
+
+npc char[0]:
+	name "Private Samuel"
+	pos (0, 0, -3230)
+	angle 180deg
+	x 0
+	cp chip[0]
+	frame 0
+	ch chip[0]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+npc char[1]:
+	name "Royal Army Officer"
+	pos (0, 0, 0)
+	angle 0deg
+	x 0
+	cp chip[1]
+	frame 0
+	ch chip[1]
+	flags 0x0181
+	init fn[65535,65535]
+	talk fn[65535,65535]
+
+fn[0]:
+	if system[66] == 18:
+		if flag[9477]:
+			system[1] = 0
+			FlagUnset flag[9477]
+			SystemFlagsSet 0x10000000
+			Event fn[0,5]
+	Return
+
+fn[1]:
+	SoundPlay sound[461] 1 0 90
+	Return
+
+fn[2]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos name[9] (420, 0, -55520) 0deg
+	CamLookPos (250, 3770, -2820) 0ms
+	CamSetDistance 0 8930 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 435 0ms
+	Sc_C4Set 2048
+	TextSetPos -1 -1 -1 -1
+	TextSetName ""
+	TextMessage null {
+		{color 0}Three days later...{wait}
+	}
+	TextWait
+	TextClose 0
+	TextSetPos 72 320 56 3
+	Sc_C4Unset 2048
+	Sleep 1000ms
+	BgmPlay bgm[101] 0
+	Fork name[9] fork[0]:
+		CamLookPos (250, 3770, -42460) 6000ms
+	Fork name[9] fork[1]:
+		CharWalkToPos self (320, 0, -41400) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	Sc_C8 512 70 "C_PLAC10._CH" 0 2000
+	ForkWait name[9] fork[0]
+	CrossFade 500ms
+	CamLookPos (1120, 0, -40520) 0ms
+	CamSetDistance 0 7410 -10000 0ms
+	CamZoom 2580 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 307 0ms
+	FadeWait
+	ForkWait name[9] fork[1]
+	Sleep 500ms
+	TextTalk name[9] {
+		#810F#5PWhew... So this is Leiston Fortress.{wait}
+	} {
+		It definitely looks the part, at least. It's huge.{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 2000mm/s 0
+	Sleep 3000ms
+	CrossFade 1000ms
+	CamLookPos (1190, 0, -3550) 0ms
+	CamSetDistance 0 7940 -10000 0ms
+	CamZoom 2810 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 274 0ms
+	FadeWait
+	ForkQuit name[9] fork[0]
+	CharSetPos name[9] (150, 250, -14360) 0deg
+	Sleep 500ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 2000mm/s 0
+	ForkWait name[9] fork[0]
+	TextTalk char[8] {
+		#5PHmm? Can I help you?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FUmm... Well, I'd like to meet with Brigadier
+		General Bright, if that's possible...{wait}
+	} {
+		He wouldn't happen to be free now, would he?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5PUnfortunately not. He's a very busy man, as you
+		can imagine.{wait}
+	} {
+		Don't expect to be able to meet with him any time
+		soon without getting touch in advance to arrange
+		an appointment.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FWhat, really? Aww...{wait}
+	} {
+		I took time off to come all the way here, too...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5PThat's unfortunate, but there really is nothing
+		I can do here.{wait}
+	} {
+		Still, while I can't imagine it doing any good,
+		I suppose I can at least pass on that you're
+		here and what you came for.{wait}
+	} {
+		So, do you mind if I ask what business you
+		have with the general?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FO-Oh, thank you...{wait}
+	} {
+		Well, you see...{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 1000ms
+	CharSetPos name[9] (3380, 250, -9200) 90deg
+	CamLookPos (4950, 250, -8010) 0ms
+	CamSetDistance 0 5710 -10000 0ms
+	CamZoom 2620 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 294 0ms
+	FadeIn 1000ms 0x00000000
+	FadeWait
+	Sleep 300ms
+	TextTalk name[9] {
+		#810F#5PWhew...{wait}
+	} {
+		I really don't want to have to go back empty
+		handed after coming all the way here...{wait}
+	} {
+		...I suppose if I can't meet with Cassius, I could
+		at least go shopping in the department store over
+		in Grancel.{wait}
+	} {
+		...Yeah! Let's go with that!{wait}
+	} {
+		Nothing cures a depressive slump like
+		some shopping.{wait}
+	}
+	TextWait
+	CharWalkToPos char[8] (820, 0, -5240) 2000mm/s 0
+	TextTalk char[8] {
+		#2PHey, young lady.{wait}
+	} {
+		It looks like he can meet you after all.{wait}
+	}
+	TextWait
+	CharTurnTo name[9] 0deg 400deg/s
+	TextTalk name[9] {
+		#810F#2PReally?{wait}
+	}
+	TextWait
+	Sleep 300ms
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (70, 0, 4000) 180deg
+	SoundPlay sound[108] 0 0 100
+	ObjFrame object[0] 0
+	ObjPlay object[0] 450
+	CrossFade 500ms
+	CamLookPos (40, 2450, -2700) 0ms
+	CamSetDistance 0 2060 -10000 0ms
+	CamZoom 3580 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 365 0ms
+	CharTurnTo char[8] 0deg 400deg/s
+	FadeWait
+	Sleep 1000ms
+	Fork char[8] fork[3]:
+		CamLookPos (570, 0, -3080) 5000ms
+	Fork name[9] fork[1]:
+		CamSetDistance 0 4600 -10000 5000ms
+	Fork name[9] fork[2]:
+		CamZoom 2580 5000ms
+	Fork name[9] fork[3]:
+		CamPers 327 5000ms
+	ForkFunc char[8] fork[0] fn[0,4]
+	Sleep 1000ms
+	ForkFunc name[9] fork[0] fn[0,3]
+	ObjWait object[0]
+	CharWalkToPos2 char[9] (410, 0, -3550) 3000mm/s 0
+	ForkWait name[9] fork[3]
+	TextTalk char[8] {
+		#2PGood day, sir!{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PVery good.{wait}
+	} {
+		You're Anelace, I take it?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FY-Yes, I am...{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PWow... It's hard to believe you're the
+		granddaughter of a legendary swordsman...{wait}
+	} {
+		...but I suppose this isn't the time to be talking
+		about this.{wait}
+	} {
+		The general's waiting for you. Follow me.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FWhat, I can really meet him?{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PYes. He kindly agreed to take time out of his
+		schedule specially to meet you.{wait}
+	} {
+		So let's hurry along. We don't want to keep him
+		waiting.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#810FR-Right!{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 0deg 400deg/s
+	Fork char[8] fork[0]:
+		CamLookPos (80, 0, 4520) 5000ms
+	Fork char[8] fork[1]:
+		CamSetDistance 0 4000 -10000 5000ms
+	Fork char[8] fork[2]:
+		CamZoom 3010 5000ms
+	Fork char[8] fork[3]:
+		CamPers 347 5000ms
+	Fork char[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[8] fork[0]
+	ForkQuit char[8] fork[1]
+	ForkQuit char[8] fork[2]
+	ForkQuit char[8] fork[3]
+	FlagSet flag[9478]
+	NewScene "c3110._sn" 100 0 0
+	Hcf
+	Return
+
+fn[3]:
+	CharWalkToPos self (300, 210, -7210) 2000mm/s 0
+	CharTurnTo self 0deg 400deg/s
+	Return
+
+fn[4]:
+	Fork self fork[1]:
+		CharTurnTo self 270deg 400deg/s
+	CharWalkToPos2 self (2090, 0, -5240) 1500mm/s 0
+	ForkWait self fork[1]
+	Return
+
+fn[5]:
+	EventBegin 0
+	FadeOut 0ms 0x00000000 255
+	CharFlagsUnset char[8] 0x0080
+	CharSetPos name[9] (420, 0, -55520) 0deg
+	CamLookPos (250, 3770, -2820) 0ms
+	CamSetDistance 0 8930 -10000 0ms
+	CamZoom 3300 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 435 0ms
+	BgmPlay bgm[101] 0
+	Sc_C8 512 70 "C_PLAC10._CH" 0 2000
+	Fork name[9] fork[0]:
+		CamLookPos (250, 3770, -42460) 6000ms
+	Fork name[9] fork[1]:
+		CharWalkToPos self (320, 0, -41400) 2000mm/s 0
+	FadeIn 2000ms 0x00000000
+	FadeWait
+	ForkWait name[9] fork[0]
+	CrossFade 500ms
+	CamLookPos (1120, 0, -40520) 0ms
+	CamSetDistance 0 7410 -10000 0ms
+	CamZoom 2580 0ms
+	CamRotate 45000mdeg 0ms
+	CamPers 307 0ms
+	FadeWait
+	ForkWait name[9] fork[1]
+	Sleep 500ms
+	TextTalk name[9] {
+		#1316F#6PWhew... I'm finally here.{wait}
+	} {
+		#816FRight on time, too. Okay! Let's go bug
+		Cassius!{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 3000mm/s 0
+	Sleep 3000ms
+	CrossFade 1000ms
+	CamLookPos (1190, 0, -2550) 0ms
+	CamSetDistance 0 7940 -10000 0ms
+	CamZoom 2810 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 274 0ms
+	ForkQuit name[9] fork[0]
+	CharSetPos name[9] (150, 250, -12360) 0deg
+	FadeWait
+	Sleep 500ms
+	Emote char[8] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	TextTalk char[8] {
+		#5PHmm? Can I help you?{wait}
+	}
+	TextWait
+	Fork name[9] fork[0]:
+		CharWalkToPos self (270, 0, -5510) 3000mm/s 0
+	CamLookPos (1190, 0, -3550) 2300ms
+	ForkWait name[9] fork[0]
+	Sleep 500ms
+	TextTalk name[9] {
+		#1310F#12PUmm... Well, I'm Anelace Elfead, a bracer with
+		the guild.{wait}
+	} {
+		I've come to meet with Brigadier General Bright.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5PAh, I see. I believe we've been expecting you.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5PI'll pass on that you've arrived, then.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5PYou might have to wait a little while before you
+		can meet with the general, though, I'm afraid.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#814F#12PHuh? But I'm right on time...{wait}
+	} {
+		Did something throw his schedule off?{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5PSomething must have. I can't pretend to know
+		much more than you do...{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5P...but the general is a very busy man, so it's not
+		at all unusual for things like this to happen.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#5PAnyway, like I said, I'll pass on that you've
+		arrived, but I'm going to have to ask you to
+		wait out here for a while.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#816F#12PSure. No problem...{wait}
+	}
+	TextWait
+	FadeOut 1000ms 0x00000000 255
+	FadeWait
+	Sleep 2000ms
+	CharSetPos name[9] (3380, 250, -9200) 90deg
+	CamLookPos (4950, 250, -8010) 0ms
+	CamSetDistance 0 5710 -10000 0ms
+	CamZoom 2620 0ms
+	CamRotate 44000mdeg 0ms
+	CamPers 294 0ms
+	FadeIn 1500ms 0x00000000
+	FadeWait
+	Sleep 500ms
+	TextTalk name[9] {
+		#813F#5PThis is taking ages...{wait}
+	} {
+		I hope the meeting isn't going to end up getting
+		canceled or something.{wait}
+	} {
+		#1316F*sigh* I really don't want to have come all this
+		way for nothing...{wait}
+	}
+	TextWait
+	Sleep 300ms
+	Emote name[9] 0mm 2000mm 24 27 250ms 0
+	Sleep 2000ms
+	EmoteStop name[9]
+	Sleep 500ms
+	TextTalk name[9] {
+		#816F#5PI suppose if I can't meet with Cassius, I could
+		at least go shopping in Grancel.{wait}
+	} {
+		They should probably be getting the new lineup
+		of stuffed toys around now...{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 2000mm 10 11 250ms 2
+	SoundPlay sound[15] 0 0 100
+	Sleep 1000ms
+	TextTalk name[9] {
+		#1311F#5PI wonder which one I should get?
+		Maybe the bear? Or a crocodile
+		once in a while would be nice... ㈱{wait}
+	}
+	TextWait
+	CharWalkToPos char[8] (820, 0, -5240) 2000mm/s 0
+	Sleep 300ms
+	TextTalk char[8] {
+		#2PExcuse me, young lady.{wait}
+	}
+	TextWait
+	TextTalk char[8] {
+		#2PThe general can meet with you now.{wait}
+	}
+	TextWait
+	Emote name[9] 0mm 2000mm 2 7 80ms 1
+	SoundPlay sound[39] 0 0 100
+	Sleep 1000ms
+	CharTurnTo name[9] 0deg 400deg/s
+	Sleep 300ms
+	TextTalk name[9] {
+		#814F#11PReally?{wait}
+	}
+	TextWait
+	_59
+	CharFlagsUnset char[9] 0x0080
+	CharSetPos char[9] (0, 0, 4000) 180deg
+	SoundPlay sound[108] 0 0 100
+	ObjFrame object[0] 0
+	ObjPlay object[0] 450
+	CrossFade 500ms
+	CamLookPos (40, 2450, -2700) 0ms
+	CamSetDistance 0 2060 -10000 0ms
+	CamZoom 3580 0ms
+	CamRotate 0mdeg 0ms
+	CamPers 365 0ms
+	CharTurnTo char[8] 0deg 400deg/s
+	FadeWait
+	Sleep 1000ms
+	Fork char[8] fork[3]:
+		CamLookPos (570, 0, -3080) 5000ms
+	Fork name[9] fork[1]:
+		CamSetDistance 0 4600 -10000 5000ms
+	Fork name[9] fork[2]:
+		CamZoom 2580 5000ms
+	Fork name[9] fork[3]:
+		CamPers 327 5000ms
+	ForkFunc char[8] fork[0] fn[0,4]
+	Sleep 1500ms
+	ForkFunc name[9] fork[0] fn[0,3]
+	ObjWait object[0]
+	CharWalkToPos2 char[9] (0, 0, -3550) 3000mm/s 0
+	ForkWait name[9] fork[3]
+	TextTalk char[8] {
+		#2PGood day, sir!{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PThank you.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PAnd you must be Anelace, I assume?{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#814F#6PY-Yes, I am...{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PWelcome to Leiston Fortress.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PThe general is waiting. Please follow me.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#1310F#6POh, thank goodness!{wait}
+	} {
+		#811FI seriously thought I was going to have to
+		go home without getting to see him!{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PI'm terribly sorry for the wait.{wait}
+	}
+	TextWait
+	TextTalk char[9] {
+		#5PWell, please follow me.{wait}
+	}
+	TextWait
+	TextTalk name[9] {
+		#816F#6PYou got it, sir!{wait}
+	}
+	TextWait
+	CharTurnTo char[9] 0deg 400deg/s
+	Fork char[8] fork[0]:
+		CamLookPos (80, 0, 4520) 5000ms
+	Fork char[8] fork[1]:
+		CamSetDistance 0 4000 -10000 5000ms
+	Fork char[8] fork[2]:
+		CamZoom 3010 5000ms
+	Fork char[8] fork[3]:
+		CamPers 347 5000ms
+	Fork char[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 400ms
+	Fork name[9] fork[0]:
+		CharWalkToPos self (70, 0, 8750) 2000mm/s 0
+	Sleep 2000ms
+	FadeOut 2000ms 0x00000000 255
+	FadeWait
+	ForkQuit char[8] fork[0]
+	ForkQuit char[8] fork[1]
+	ForkQuit char[8] fork[2]
+	ForkQuit char[8] fork[3]
+	SystemFlagsSet 0x02000000
+	FlagSet flag[9478]
+	NewScene "c3110._sn" 100 0 0
+	Hcf
+	Return
