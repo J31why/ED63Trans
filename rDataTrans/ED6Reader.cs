@@ -250,6 +250,11 @@ internal class ED6Reader : MemoryStream
             while ((b = (byte)ReadByte()) != 0)
             {
                 //过滤某种垃圾数据
+                if (arr.Count == 0 && (b <0x20 || b == 0x26))
+                {
+                    break;
+                }
+                //过滤某种垃圾数据
                 if (arr.Count == 2 && arr[1] == 0xCB && b == 0x3F)
                 {
                     break;

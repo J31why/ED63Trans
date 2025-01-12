@@ -100,7 +100,7 @@ internal class Program
 #endif
         //foreach (var item in stringList)
         //{
-        //    if (item.Key.Contains("Opening") || item.Key.Contains("Various Shops"))
+        //    if (item.Key.Contains("Failed to steal anything.") || item.Key.Contains("Various Shops"))
         //    {
 
         //    }
