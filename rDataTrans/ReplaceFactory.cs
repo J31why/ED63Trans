@@ -3406,6 +3406,8 @@ public static class ReplaceFactory
             9A8B=報
             9A8C=飓
             9A8D=辐
+            9A8E=喔
+            9A8F=畜
             """;
     }
 }

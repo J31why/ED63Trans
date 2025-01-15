@@ -173,9 +173,10 @@ public partial class MainWindowViewModel : ViewModelBase
         //    CheckChineseAndAddReplaceChars(chars2);
         //}
 
-        //var chars = File.ReadAllText("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\exerdata.json");
-        //CheckChineseAndAddReplaceChars(chars);
-        //SaveReplaceChars();
+        //var chars = File.ReadAllText("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\rdata\\rdata.json");
+        // var chars = File.ReadAllText("F:\\源码\\C#\\ED63Trans\\DatTrans\\bin\\Debug\\net9.0\\as_chars.txt");
+        // CheckChineseAndAddReplaceChars(chars);
+        // SaveReplaceChars();
     }
 
     partial void OnReplaceCharsChanged(string value)

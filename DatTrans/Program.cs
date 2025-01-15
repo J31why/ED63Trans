@@ -1,9 +1,13 @@
 ﻿#region
 
+using System.Net;
 using DatTrans;
 using DatTrans.Dats;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Text.Unicode;
 using static DatTrans.TransChar;
 
 #endregion
@@ -18,12 +22,16 @@ internal class Program
 
     private const string yltDT30Dir = @"E:\Games\ED63RD\ED_SORA3\ED6_DT30";
 
+
     public static void Main(string[] args)
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         ReplaceListFileName = @"F:\源码\C#\ED63Trans\ED63Trans\replace.txt";
-        TransMnsnote();
-        
+        //TransMnsnote();
+        // TransMs();
+        //var xScript = AsDat.ParseDt("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本\\as32200._dt", SjisEncoding);
+        AsDat.Generate("as32200._dt", File.ReadAllText("as32200.txt"));
+        //TransAs();
         // TransMagic();
         // TransItTxt();
         // TransBook();
@@ -76,6 +84,86 @@ internal class Program
         // }
 
         Console.WriteLine("\nDatTrans结束\n");
+    }
+    private static void TransAs()
+    {
+        var chars = "";
+        var files = Directory.EnumerateFiles("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本","as*._dt");
+        foreach (var file in files)
+        {
+            if (file.Contains("asitem._dt"))
+                break;
+     
+            var fileName = Path.GetFileName(file);
+            var xScript = AsDat.ParseDt(file, SjisEncoding);
+            var yScript = AsDat.ParseDt(Path.Combine("E:\\Games\\ED63RD\\ED_SORA3\\ED6_DT30",fileName), GbkEncoding);
+            var xMatches  =  Regex.Matches(xScript, @"Say\([\s\S]*?\""(.*?)\""[\s\S]*?\);|TipText\(\""(.*?)\"",[\s\S]*?\);|OP_30\((.*?)\);");
+            var yMatches  =  Regex.Matches(yScript, @"Say\([\s\S]*?\""(.*?)\""[\s\S]*?\);|TipText\(\""(.*?)\"",[\s\S]*?\);|OP_30\((.*?)\);");
+            if (xMatches.Count == 0)
+            {
+                Console.WriteLine($"{fileName}无文本。");
+                continue;
+            }
+            var newScript = xScript;
+            if (xMatches.Count != yMatches.Count)
+            {
+                if (fileName == "as04640._dt")
+                {
+                    newScript = newScript.Replace("Say(0xFF:b,\"How about you eat THIS!\",0x1F4:i);",
+                        "Say(0xFF:b,\"吃我这招！\",0x1F4:i);");
+                    newScript = newScript.Replace("Say(0xFF:b,\"Hmmhmm, you\\u0027re not getting away!\",0x1F4:i);",
+                        "Say(0xFF:b,\"哼哼，你逃不掉的！\",0x1F4:i);");
+                    goto generate;
+                }
+                Console.WriteLine($"{fileName}数量不符。");
+                Console.ReadKey();
+                continue;
+            }
+
+         
+            for (var i = 0; i < xMatches.Count; i++)
+            {
+                var xMatch = xMatches[i];
+                var yMatch = yMatches[i];
+                var xtexts = Regex.Matches(xMatch.Value, "\"(.*?)\"");
+                var ytexts = Regex.Matches(yMatch.Value, "\"(.*?)\"");
+                if (xtexts.Count != ytexts.Count)
+                {
+                    Console.WriteLine($"{fileName}, {i}数量不符。");
+                    Console.ReadKey();
+                    continue;
+                }
+
+               
+                var scriptLine = xMatch.Value;
+                for (int j = 0; j < xtexts.Count; j++)
+                {
+                    var xText = xtexts[j].Value;
+                    var yText = ytexts[j].Value;
+                    chars += yText;
+                    scriptLine = scriptLine.Replace(xText, yText);
+                }
+                
+                newScript = newScript.Replace(xMatch.Value, scriptLine);
+            }
+            generate:
+            var outDir = Path.Combine(Directory.GetCurrentDirectory(), "as");
+            if(!Directory.Exists(outDir))
+                Directory.CreateDirectory(outDir);
+            var outFile = Path.Combine(outDir, fileName);
+            if(File.Exists(outFile))
+                File.Delete(outFile);
+            File.WriteAllText(Path.Combine(outDir, fileName.Replace("_dt","txt")),newScript);
+            AsDat.Generate(outFile,newScript);
+        }
+        File.WriteAllText("as_chars.txt",chars);
+    }
+    private static void TransMs()
+    {
+        
+        var info1 = MsDat.Parse("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本\\ms14161._dt",TransChar.SjisEncoding);
+        var info2 = MsDat.Parse("E:\\Games\\ED63RD\\ED_SORA3\\ED6_DT30\\ms14161._dt",TransChar.GbkEncoding);
+        MsDat.Generate("ms14161._dt", info1, info2);
     }
 
     public static void TransPoker()

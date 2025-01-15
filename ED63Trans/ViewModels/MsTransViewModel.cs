@@ -33,7 +33,7 @@ public partial class MsTransViewModel: ViewModelBase
     {
         _msDatFiles =Directory.EnumerateFiles("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本").ToList();
         
-        _currentDat = "ms15060._dt";
+        _currentDat = "as04080._dt";
         var index = _msDatFiles.FindIndex(x => x.Contains(_currentDat));
         if (index == -1) return;
         var f1 = _msDatFiles[index];
@@ -188,13 +188,15 @@ public partial class MsTransViewModel: ViewModelBase
             XseedList.RemoveAt(index);
         }
     }
+
+
     public  void GetTexts(string xseedFile, string yltFile)
     {
         DatFile = xseedFile;
         CurrentDat = Path.GetFileName(xseedFile);
         using var xfs= new FileStream(xseedFile, FileMode.Open);
-        using var xreader = new BinaryReader(xfs);
         using var yfs= new FileStream(yltFile, FileMode.Open);
+        using var xreader = new BinaryReader(xfs);
         using var yreader = new BinaryReader(yfs);
         xfs.Seek(0x8b, SeekOrigin.Begin);
         List<byte> bytes = [];
@@ -287,10 +289,10 @@ public partial class MsTransViewModel: ViewModelBase
         for (var index = 0; index < xTexts.Count; index++)
         {
             var text = xTexts[index];
-            if (text.Text.Contains("R-Ty") || text.Text.ToLower().Contains("wind f") )
+            if (text.Text.Contains("end this") || text.Text.ToLower().Contains("end this") )
             {
                 //Rod Angel ms14890
-                
+                //Let's end this. : as04080._dt
             }
             if (index == xTexts.Count - 1)
                 XseedText += $"{Escape(text.Text)}";
@@ -302,10 +304,7 @@ public partial class MsTransViewModel: ViewModelBase
         for (var index = 0; index < yTexts.Count; index++)
         {
             var text = yTexts[index];
-            if (text.Text.Contains("钢鳞"))
-            {
-                
-            }
+     
             if (index == yTexts.Count - 1)
                 YltText += $"{Escape(text.Text)}";
             else        

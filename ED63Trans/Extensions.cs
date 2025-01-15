@@ -1,4 +1,7 @@
-﻿namespace DatTrans;
+﻿using System.Collections.Generic;
+using System.IO;
+
+namespace ED63Trans;
 
 public static class Extensions
 {

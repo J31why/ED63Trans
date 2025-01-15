@@ -97,7 +97,6 @@ internal class Program
         var pos = 0;
 #if CONSOLE
         Console.WriteLine($"allocated base address：{allocAddr:X}\n");
-#endif
         //foreach (var item in stringList)
         //{
         //    if (item.Key.Contains("Failed to steal anything.") || item.Key.Contains("Various Shops"))
@@ -105,11 +104,10 @@ internal class Program
 
         //    }
         //}
+#endif
 
         foreach (var item in replaceDic)
         {
-            //Clothing can be equipped.
-
 
             if (stringList.TryGetValue(item.Key, out var rstr))
             {
