@@ -71,15 +71,15 @@ public static class ItTxtDat
 
                         case 658:
                             //Mirror
-                            yltItem.Name = "镜子";
+                            yltItem.Name = "神镜";
                             yltItem.Desc = "50%机率反射物理伤害。最大HP-20%";
                             Console.WriteLine($"ID: {xseedItem.Id} 已处理");
                             break;
 
                         case 659:
                             //Reflect
-                            yltItem.Name = "反射";
-                            yltItem.Desc = "50%机率反射魔法伤害。最大EP-20%";
+                            yltItem.Name = "魔镜";
+                            yltItem.Desc = "50%机率反射魔法伤害。最大EP-30%";
                             Console.WriteLine($"ID: {xseedItem.Id} 已处理");
                             break;
 

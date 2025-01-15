@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using FluentAvalonia.UI.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -20,13 +21,18 @@ using Avalonia.Threading;
 
 namespace ED63Trans.ViewModels;
 
+public partial class PreviewViewModel : ViewModelBase
+{
+    [ObservableProperty] private byte[] _data=[];
+    [ObservableProperty] private bool _isHalf;
+}
 public partial class MainWindowViewModel : ViewModelBase
 {
     public int[] PixelSizes => [12,16,18,20,24,26,30,32,36,40,44,48,50,54,60,64,72,80,96,128,144,160,192];
     public static MainWindowViewModel? Instance { get; private set; }
-    [ObservableProperty] private float _halfCharXOffset;
+    [ObservableProperty] private float _halfCharXOffset = 1;
     [ObservableProperty] private float _halfCharYOffset = 6;
-    [ObservableProperty] private float _charXOffset;
+    [ObservableProperty] private float _charXOffset = 1;
     [ObservableProperty] private float _charYOffset = 6;
     private SoraTrans? _clm;
     [ObservableProperty] private string _clmCurrentParagraph = "";
@@ -39,8 +45,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private int _fontSize = 38;
     [ObservableProperty] private float _halfCharHeightScale = 1f;
     [ObservableProperty] private int _halfCharSize = 38;
-    [ObservableProperty] private float _halfCharWidthScale = 0.7f;
-    [ObservableProperty] private float _wideHalfCharWidthScale = 0.57f; //针对字符 W、M 的缩放, 这玩意儿太宽了, 其他字符又太窄了
+    [ObservableProperty] private float _halfCharWidthScale = 0.66f;
+    [ObservableProperty] private float _wideHalfCharWidthScale = 0.56f; //针对字符 W、M 的缩放, 这玩意儿太宽了, 其他字符又太窄了
     [ObservableProperty] private bool _isBold = false;
 
     [ObservableProperty] private string _log = "";
@@ -49,10 +55,10 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsTranslating))]
     private string _openedClm = "";
 
-    [ObservableProperty] private int _pixelSize = 40;
+    [ObservableProperty] private int _pixelSize ;
 
-    [ObservableProperty] private byte[]? _previewData;
-    [ObservableProperty] private bool _previewDataIsHalfChar;
+    [ObservableProperty] private ObservableCollection<PreviewViewModel> _previewDatas=[];
+
 
     [ObservableProperty] private string _replaceChars = "";
     [ObservableProperty] private int _replaceCharsLineCount;
@@ -95,7 +101,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         
         Instance = this;
-
+        PixelSize = 40;
         try
         {
             if (File.Exists("settings.json"))
@@ -771,7 +777,33 @@ public partial class MainWindowViewModel : ViewModelBase
         if (!Directory.Exists("fonts")) Directory.CreateDirectory("fonts");
         Process.Start("explorer.exe", "fonts");
     }
-
+    partial void OnPixelSizeChanged(int value)
+    {
+        PreviewDatas.Clear();
+        switch (value)
+        {
+            case >= 128:
+                HalfCharSize = value - 10;
+                FontSize = value - 10;
+                break;
+            case >= 64:
+                HalfCharSize = value - 4;
+                FontSize = value - 4;
+                break;
+            case >= 50:
+                HalfCharSize = value - 3;
+                FontSize = value - 3;
+                break;
+            case >= 24:
+                HalfCharSize = value - 2;
+                FontSize = value - 2;
+                break;
+            default:
+                HalfCharSize = value - 1;
+                FontSize = value - 1;
+                break;
+        }
+    }
     [RelayCommand]
     private void AddCurrentPixelSizeFontFileToGame()
     {
@@ -802,9 +834,9 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void Preview(string text)
     {
+        PreviewDatas.Clear();
         if (string.IsNullOrEmpty(text))
         {
-            PreviewData = null;
             return;
         }
 
@@ -823,10 +855,17 @@ public partial class MainWindowViewModel : ViewModelBase
             CharYOffset = CharYOffset,
             WideHalfCharWidthScale = WideHalfCharWidthScale
         };
-        var c = text.ToCharArray().First();
-        PreviewDataIsHalfChar = font.IsHalfChar(c);
-        var data = font.CreateChar(c, ReplaceChars, AddLog);
-        PreviewData = data;
+        var chars = text.ToCharArray();
+
+        foreach (var c in chars)
+        {
+            var prev = new PreviewViewModel
+            {
+                IsHalf = font.IsHalfChar(c),
+                Data = font.CreateChar(c, ReplaceChars, AddLog)
+            };
+            PreviewDatas.Add(prev);
+        }
     }
 
     public void AddLog(string text)

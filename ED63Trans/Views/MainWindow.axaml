@@ -8,6 +8,7 @@
     xmlns:views="clr-namespace:ED63Trans.Views"
     xmlns:vm="using:ED63Trans.ViewModels"
     xmlns:behaviors="clr-namespace:ED63Trans.Behaviors"
+    xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     Title="ED63Trans"
     Width="1600"
     Height="900"
@@ -52,7 +53,7 @@
                                         Margin="2,0"
                                         Text="{Binding WideHalfCharWidthScale}"
                                         UseFloatingWatermark="True"
-                                        Watermark="宽半角宽度缩放(W/M)" />
+                                        Watermark="宽半角宽度缩放(W/M/@/%)" />
                                     <TextBox
                                         Text="{Binding HalfCharHeightScale}"
                                         UseFloatingWatermark="True"
@@ -89,14 +90,28 @@
                                 </DockPanel>
                                 <CheckBox Content="粗体" IsChecked="{Binding IsBold}" />
                                 <DockPanel>
-                                    <views:SoraFontViewer
-                                        Width="{Binding PixelSize}"
-                                        Height="{Binding PixelSize}"
-                                        Margin="0,2,0,0"
-                                        Data="{Binding PreviewData}"
-                                        DockPanel.Dock="Bottom"
-                                        IsHalfChar="{Binding PreviewDataIsHalfChar}"
-                                        PixelSize="{Binding PixelSize}" />
+                                    <Viewbox Margin="0,2,0,0"    DockPanel.Dock="Bottom" Height="{Binding PixelSize}">
+                                        <Border BorderBrush="White" BorderThickness="0 1 1 1">
+                                            <controls:ItemsRepeater ItemsSource="{Binding PreviewDatas}">
+                                                <controls:ItemsRepeater.Layout>
+                                                    <controls:StackLayout Orientation="Horizontal"/>
+                                                </controls:ItemsRepeater.Layout>
+                                                <controls:ItemsRepeater.ItemTemplate>
+                                                    <DataTemplate DataType="vm:PreviewViewModel">
+                                                        <Border BorderBrush="White" BorderThickness="1 0 0 0">
+                                                            <views:SoraFontViewer
+                                                                Width="{Binding Source={x:Static vm:MainWindowViewModel.Instance},Path=PixelSize}"
+                                                                Height="{Binding Source={x:Static vm:MainWindowViewModel.Instance},Path=PixelSize}"
+                                                                Data="{Binding Data}"
+                                                                IsHalfChar="{Binding IsHalf}"
+                                                                PixelSize="{Binding Source={x:Static vm:MainWindowViewModel.Instance},Path=PixelSize}" />
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </controls:ItemsRepeater.ItemTemplate>
+                                            </controls:ItemsRepeater>
+                                        </Border>
+                                    </Viewbox>
+                  
                                     <Button
                                         Margin="5,0,0,0"
                                         Command="{Binding PreviewCommand}"
@@ -105,7 +120,7 @@
                                         DockPanel.Dock="Right" />
                                     <TextBox
                                         Name="previewTextBox"
-                                        Text="Ⅹ"
+                                        Text="＿。gwfWA组韃1"
                                         UseFloatingWatermark="True"
                                         Watermark="预览文本(单字): " />
                                 </DockPanel>

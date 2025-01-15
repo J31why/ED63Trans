@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Net;
+using System.Security.Cryptography;
 using DatTrans;
 using DatTrans.Dats;
 using System.Text;
@@ -47,9 +48,9 @@ internal class Program
         //}
         //var xScript = AsDat.ParseDt("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本\\as32200._dt", SjisEncoding);
         //AsDat.Generate("as32200._dt", File.ReadAllText("as32200.txt"));
-        TransAs();
+        // TransAs();
         // TransMagic();
-        // TransItTxt();
+        TransItTxt();
         // TransBook();
         // TransName();
         // TransCook();
@@ -63,8 +64,10 @@ internal class Program
         // TransFish();
         // TransPoker();
         //查询语音版修改文件
+        // var xScript = AsDat.ParseDt("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30\\as04090._dt", SjisEncoding);
+        //
         // var a = "E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 战斗语音版\\ED6_DT30";
-        // var b = "E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本";
+        // var b = "E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30";
         // var fs = Directory.EnumerateFiles(a);
         // foreach (var f in fs)
         // {
@@ -77,18 +80,11 @@ internal class Program
         //         ms14390._dt //只是游戏的文本更新 pass
         //         ms14391._dt //只是游戏的文本更新 pass
         //      */
-        //     using var c1 = new FileStream(f, FileMode.Open);
-        //     using var c2 = new FileStream(Path.Combine(b, Path.GetFileName(f)), FileMode.Open);
-        //     for (int i = 0; i < c1.Length; i++)
-        //     {
-        //         var cc = c1.ReadByte();
-        //         var ccc = c2.ReadByte();
-        //         if (cc != ccc)
-        //         {
-        //             Console.WriteLine(f+ $":{c1.Position}");
-        //             break;
-        //         }
-        //     }
+        //      var c1 = File.ReadAllBytes(f);
+        //      var c2 =  File.ReadAllBytes(Path.Combine(b, Path.GetFileName(f)));
+        //     if( BitConverter.ToString(MD5.HashData(c1)) != BitConverter.ToString(MD5.HashData(c2)))
+        //         Console.WriteLine(Path.GetFileName(f));
+        //
         // }
         // 插入魔兽文件
         // var files = Directory.EnumerateFiles("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\data\\ED6_DT30");

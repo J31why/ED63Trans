@@ -31,7 +31,7 @@ public partial class MsTransViewModel: ViewModelBase
     public List<byte[]> BanBytes = [];
     public MsTransViewModel()
     {
-        _msDatFiles =Directory.EnumerateFiles("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本").ToList();
+        _msDatFiles =Directory.EnumerateFiles("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30").ToList();
         
         _currentDat = "as04080._dt";
         var index = _msDatFiles.FindIndex(x => x.Contains(_currentDat));

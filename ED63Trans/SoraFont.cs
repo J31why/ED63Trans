@@ -3,10 +3,13 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Avalonia.Media;
 
 #endregion
 
@@ -43,7 +46,7 @@ public class SoraFont
 
     private bool IsWideHalfChar(char c)
     {
-        return c is 'W' or 'M';
+        return c is 'W' or 'M' or '@' or '%';
     }
 
     private bool IsWideHalfChar(string c)
@@ -107,15 +110,15 @@ public class SoraFont
             IsBold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal, SKFontStyleWidth.Normal,
             SKFontStyleSlant.Upright);
         using var font = new SKFont(typeface, FontSize);
-        using var paint = new SKPaint();
-        paint.Color = SKColors.Red; // 字体颜色
-        paint.IsAntialias = false;
-
+        font.Hinting = SKFontHinting.Full;
+        using var paint = CreatePaint();
         var ms = new MemoryStream();
         try
         {
             var isHalf = IsHalfChar(c);
             var code = GetSJISCode(c);
+            if (code == 0)
+                code = -1;
             if (isHalf)
             {
                 font.Size = HalfCharSize;
@@ -152,9 +155,9 @@ public class SoraFont
             IsBold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal, SKFontStyleWidth.Normal,
             SKFontStyleSlant.Upright);
         using var font = new SKFont(typeface, FontSize);
-        using var paint = new SKPaint();
-        paint.Color = SKColors.Red; // 字体颜色
-        paint.IsAntialias = false;
+        font.Hinting = SKFontHinting.Full;
+        using var paint = CreatePaint();
+       
         var ms = new MemoryStream();
         //single byte
         font.Size = HalfCharSize;
@@ -166,7 +169,7 @@ public class SoraFont
         for (var i = _sjisSingleBytes.min; i <= _sjisSingleBytes.max; i++)
         {
             var ch = JisEncoding.GetString([(byte)i]);
-            if (IsWideHalfChar(ch))
+            if (IsWideHalfChar(ch) )
             {
                 canvas.Restore();
                 canvas.Save();
@@ -206,6 +209,26 @@ public class SoraFont
         return bytes;
     }
 
+    private SKPaint CreatePaint()
+    {
+        var kernel = new float[9] {
+            0, -.1f,    0,
+            -.1f, 1.4f, -.1f,
+            0, -.1f,    0,
+        };
+
+        using var imageFilter = SKImageFilter.CreateMatrixConvolution(new SKSizeI(3, 3), kernel, 1.0F, 0.0F,
+            new SKPointI(1, 1), SKShaderTileMode.Repeat, true);
+        // 创建色彩矩阵来增加亮度
+
+        var paint = new SKPaint
+        {
+            Color = SKColors.White,
+            IsAntialias = true,
+            //ImageFilter = imageFilter,
+        };
+        return paint;
+    }
     private void GenerateSoraChar(int code, string ch, int pixelSize, bool isHalfChar, SKFontMetrics metrics,
         SKBitmap bitmap, SKCanvas canvas,
         SKFont font, SKPaint paint, ref MemoryStream data, ErrorCallback callback)
@@ -226,19 +249,19 @@ public class SoraFont
             }
             else
             {
-                x = 0 + HalfCharXOffset;
+                x = -bounds.Left + HalfCharXOffset;
             }
 
             y = -metrics.Ascent - HalfCharYOffset;
             //检测
             if (IsWideHalfChar(ch))
             {
-                if (bounds.Width * WideHalfCharWidthScale > (float)pixelSize / 2 ||
-                    bounds.Height * HalfCharHeightScale > pixelSize)
+                if (bounds.Width * WideHalfCharWidthScale + HalfCharXOffset > (float)pixelSize / 2 ||
+                    bounds.Height * HalfCharHeightScale  > pixelSize)
                     callback($"out of pixel bounds : {code}, {ch}, HalfChar.");
             }
-            else if (bounds.Width * HalfCharWidthScale > (float)pixelSize / 2 ||
-                     bounds.Height * HalfCharHeightScale > pixelSize)
+            else if (bounds.Width * HalfCharWidthScale + HalfCharXOffset > (float)pixelSize / 2 ||
+                     bounds.Height * HalfCharHeightScale  > pixelSize)
             {
                 callback($"out of pixel bounds : {code}, {ch}, HalfChar.");
             }
@@ -247,8 +270,9 @@ public class SoraFont
         {
             ch = code switch
             {
+                0x889F=>"・",
                 0x88a1 => "\u266a",//⊙ = ♪
-                0x81ef => "♥",//㈱ = ❤
+                0x81ef => "♥",//㈱ = ♥
                 _ => ch
             };
             ch = ch switch
@@ -260,54 +284,58 @@ public class SoraFont
                 "\u2482" => "\u246e",//⒂ = ⑮
                 _ => ch
             };
+            
+            
+            x = 0 + CharXOffset;
+            y = -metrics.Ascent - CharYOffset;
+            // if (code is > 0x889f or -1)
+            // {
+            //     var margin = new SKRect();
+            //     margin.Left += (pixelSize - bounds.Width) / 2;
+            //     margin.Top += (pixelSize - bounds.Height) / 2;
+            // x = -bounds.Left + margin.Left;
+            // y = -bounds.Top + margin.Top;
+            // }
+            // else
+            // {
+            //     x = 0 + CharXOffset;
+            //     y = -metrics.Ascent - CharYOffset;
+            // }
 
-            if (code >= 0x889f)
-            {
-                var margin = new SKRect();
-                margin.Left += (pixelSize - bounds.Width) / 2;
-                margin.Top += (pixelSize - bounds.Height) / 2;
-                x = -bounds.Left + margin.Left;
-                y = -bounds.Top + margin.Top;
-            }
-            else
-            {
-                x = 0 + CharXOffset;
-                y = -metrics.Ascent - CharYOffset;
-            }
-
-            // x = 0 + CharXOffset;
-            // y = -metrics.Ascent - CharYOffset;
-
-            if (bounds.Width > pixelSize || bounds.Height > pixelSize)
+            if (bounds.Left+bounds.Width + CharXOffset > pixelSize || bounds.Height > pixelSize)
                 callback($"out of pixel bounds : {code}, {ch}");
         }
         canvas.Clear();
+        
         canvas.DrawText(ch, x, y, font, paint);
-      
+  
         var width = isHalfChar ? pixelSize / 2 : pixelSize;
         for (var i = 0; i < pixelSize; i++)
             for (var j = 0; j < width; j += 2)
             {
-                var a1 = (double)bitmap.GetPixel(j, i).Alpha ;
-                if (a1 > 0)
-                {//提亮, 低分辨率糊的一笔
-                    a1 += 7 * 0x11;
-                }
-                a1 = (int)Math.Floor(a1 / 0x11);
+                var a1 = (double)bitmap.GetPixel(j, i).Alpha;
+                a1 = Brighten(a1);
+                a1 = Math.Ceiling(a1/ 0x11);
+                var a2 = (double)bitmap.GetPixel(j + 1, i).Alpha;
+                a2 = Brighten(a2);
+                a2 = Math.Ceiling(a2/ 0x11);
+             
                 if (a1 > 15)
                     a1 = 15;
-            
-                var a2 = (double)bitmap.GetPixel(j + 1, i).Alpha;
-                if (a2 > 0)
-                {//提亮, 低分辨率糊的一笔
-                    a2 += 7 * 0x11;
-                }
-                a2 = (int)Math.Floor(a2 / 0x11);
                 if (a2 > 15)
                     a2 = 15;
-
                 var b = ((int)a1 << 4) + (int)a2;
                 data.WriteByte((byte)b);
             }
+    }
+
+    private double Brighten(double value)
+    {
+        value *= 1.1;
+        return value switch
+        {
+            0 => 0,
+            _ => value + 8,
+        };
     }
 }
