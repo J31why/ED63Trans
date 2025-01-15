@@ -29,9 +29,25 @@ internal class Program
         ReplaceListFileName = @"F:\源码\C#\ED63Trans\ED63Trans\replace.txt";
         //TransMnsnote();
         // TransMs();
+        // var t = File.ReadAllText("as32200.txt");
+        //var matches = Regex.Matches(t, "0x\\S*?:");
+        //var list =new List<string>();
+        //foreach (Match m in matches)
+        //{
+        //    if(m.Value is "0xFFFF:" or "0x2328:" or "0x1770:" or "0x3A98:" or "0xFFFFFF:" or "0x270F:" or "0x1194:" or "0x1388:" or "0xBB8:" or "0x2EE0:" or "0x1B58:" or "0x2710:" or "0xA6A:" or "0xFA0:")
+        //    {
+        //        continue;
+        //    }
+        //    var v = m.Value.Replace("0x", "").Replace(":", "");
+        //    var b = Convert.ToInt32(v, 16);
+        //    if (b>0xa1a && b<0x3cc0)
+        //    {
+        //        list.Add(m.Value);
+        //    }
+        //}
         //var xScript = AsDat.ParseDt("E:\\SteamLibrary\\steamapps\\common\\Trails in the Sky the 3rd\\ED6_DT30 - 副本\\as32200._dt", SjisEncoding);
-        AsDat.Generate("as32200._dt", File.ReadAllText("as32200.txt"));
-        //TransAs();
+        //AsDat.Generate("as32200._dt", File.ReadAllText("as32200.txt"));
+        TransAs();
         // TransMagic();
         // TransItTxt();
         // TransBook();

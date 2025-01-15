@@ -299,6 +299,8 @@ public static class AsDat
             @OP_B1 [B1]
             @OP_B2 [B2]
             """;
+        if (!Regex.IsMatch(txt, $"{name} \\[(.*?)\\]"))
+            throw new Exception();
         return Convert.ToByte(Regex.Match(txt, $"{name} \\[(.*?)\\]").Groups[1].Value,16);
     }
     static AsDatData ParseData(string line)
@@ -381,10 +383,6 @@ public static class AsDat
             else if (dat is AsDatAsm asm)
             {
                 asm.Pos = (ushort)ms.Position;
-                if (locDir.ContainsKey(asm.LocName))
-                {
-
-                }
                 locDir[asm.LocName] = asm.Pos;
                 writer.Write(asm.OpCode);
                 if (string.IsNullOrEmpty(asm.Para))
@@ -970,7 +968,7 @@ public static class AsDat
                     b = reader.ReadByte();
                     fs.Position--;
                     if (b == 2)
-                        text += $"OP_A4({ParseParas(reader, "b,s", encoding)});\n";
+                        text += $"OP_A4({ParseParas(reader, "b,sp", encoding)});\n";
                     else
                         text += $"OP_A4({ParseParas(reader, "b", encoding)});\n";
                     break;
