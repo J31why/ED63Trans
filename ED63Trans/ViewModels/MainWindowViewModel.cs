@@ -22,6 +22,7 @@ namespace ED63Trans.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
+    public int[] PixelSizes => [12,16,18,20,24,26,30,32,36,40,44,48,50,54,60,64,72,80,96,128,144,160,192];
     public static MainWindowViewModel? Instance { get; private set; }
     [ObservableProperty] private float _halfCharXOffset;
     [ObservableProperty] private float _halfCharYOffset = 6;
