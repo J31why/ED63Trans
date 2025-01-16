@@ -54,8 +54,7 @@ A：汉化程序被杀毒软件杀了。
 #### 补丁使用方法：  
 直接解压，替换游戏原文件即可。  
 如果你使用了语音补丁，请删除游戏\ voice\ scena内的所有文件，但不要删除scena文件夹。　  
-
-#### 关于补丁：
+  
 [Github](https://github.com/J31why/ED63Trans) [贴吧原帖](https://tieba.baidu.com/p/9387522169)  
 
 ## 感谢：  
