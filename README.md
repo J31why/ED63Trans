@@ -1,13 +1,15 @@
 # ED63Trans  
-[Github](https://github.com/J31why/ED63Trans) [贴吧原帖](https://tieba.baidu.com/p/9387522169)  
+
   
 首先感谢Github上的ZhenjianYang、Kyuuhachi、Sewer56几位大佬的开源项目，才能让我制作出本次3RD的汉化补丁。  
   
 汉化补丁文本以娱乐通版本文本为基础进行汉化，新文本和一些不好提取的文本是我手动翻译的。数据脚本使用Kyuuhachi的LB-ARK插件来进行Mod式汉化，字体文件则是通过内存注入，主程序的文本是修改程序运行时代码来达到汉化目的，所以可能会被杀毒软件报错，还请注意。 
   
 游戏文本版权归娱乐通所有。  
-  
+
 本汉化补丁由Jelly制作，转载请注明作者和出处。  
+[Github](https://github.com/J31why/ED63Trans) [贴吧原帖](https://tieba.baidu.com/p/9387522169)  
+  
 #### 以下是汉化补丁的汉化情况：  
 •	剧情：		100%  
 •	道具/装备：	100%  
