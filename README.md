@@ -56,7 +56,7 @@ A：汉化程序被杀毒软件杀了。
 如果你使用了语音补丁，请删除游戏\ voice\ scena内的所有文件，但不要删除scena文件夹。　  
 
 #### 关于补丁：
-[ED63Trans](https://github.com/J31why/ED63Trans) [贴吧原帖](https://tieba.baidu.com/p/9387522169)  
+[Github](https://github.com/J31why/ED63Trans) [贴吧原帖](https://tieba.baidu.com/p/9387522169)  
 
 ## 感谢：  
 脚本转换、MOD外挂: [Aureole Suite](https://github.com/Aureole-Suite)  
