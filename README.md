@@ -61,7 +61,7 @@ A：汉化程序被杀毒软件杀了。
 ## 感谢：  
 脚本转换、MOD外挂: [Aureole Suite](https://github.com/Aureole-Suite)  
 脚本转换: [EDDecompiler](https://github.com/ZhenjianYang/EDDecompiler)  
-脚本转换: [ASDecompliar](https://github.com/Ouroboros/Falcom/tree/master/ED6/ed63cn)  
+脚本转换: [ASDecomplier](https://github.com/Ouroboros/Falcom/tree/master/ED6/ed63cn)  
 字库解析: [SoraTranslation-Tools](https://github.com/ZhenjianYang/SoraTranslation-Tools)  
 图片转换: [KisekiCHConverter](https://github.com/Sewer56/Kiseki-Texture-Tool)  
 字体：[霞鹜文楷](https://github.com/lxgw/LxgwWenKai)  
