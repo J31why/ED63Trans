@@ -1,14 +1,15 @@
 # ED63Trans  
-  
-贴吧地址： https://tieba.baidu.com/p/9387522169  
+
   
 首先感谢Github上的ZhenjianYang、Kyuuhachi、Sewer56几位大佬的开源项目，才能让我制作出本次3RD的汉化补丁。  
   
 汉化补丁文本以娱乐通版本文本为基础进行汉化，新文本和一些不好提取的文本是我手动翻译的。数据脚本使用Kyuuhachi的LB-ARK插件来进行Mod式汉化，字体文件则是通过内存注入，主程序的文本是修改程序运行时代码来达到汉化目的，所以可能会被杀毒软件报错，还请注意。 
   
 游戏文本版权归娱乐通所有。  
-  
+
 本汉化补丁由Jelly制作，转载请注明作者和出处。  
+[Github](https://github.com/J31why/ED63Trans) [贴吧原帖](https://tieba.baidu.com/p/9387522169)  
+  
 #### 以下是汉化补丁的汉化情况：  
 •	剧情：		100%  
 •	道具/装备：	100%  
@@ -23,8 +24,8 @@
 •	小游戏：		100%  
 •	魔兽数据：	100%  
 •	魔兽手册：	100%  
-•	行为脚本：	100%, 可能会bug，如果战斗时崩溃可以删除 “游戏目录\data\ED6_DT30”下的所有“as___._dt”文件，可以回贴帮助我修复。  
-•	主程序：		汉化了我见到的字符串。  
+•	行为脚本：	100%  
+•	主程序：		汉化了已知字符串。  
 •	图片：		替换的图片有地名、剧情提示两种，其他的都是界面UI和小游戏，我就不替换了。低清的我直接用的娱乐通图片，高清的是我手动PS的。  
 　  
 Q：兼容语音补丁和战斗语音补丁么？  
@@ -56,11 +57,13 @@ A：汉化程序被杀毒软件杀了。
 #### 补丁使用方法：  
 直接解压，替换游戏原文件即可。  
 如果你使用了语音补丁，请删除游戏\ voice\ scena内的所有文件，但不要删除scena文件夹。　  
-　  
+
 ## 感谢：  
 脚本转换、MOD外挂: [Aureole Suite](https://github.com/Aureole-Suite)  
 脚本转换: [EDDecompiler](https://github.com/ZhenjianYang/EDDecompiler)  
+脚本转换: [ASDecomplier](https://github.com/Ouroboros/Falcom/tree/master/ED6/ed63cn)  
 字库解析: [SoraTranslation-Tools](https://github.com/ZhenjianYang/SoraTranslation-Tools)  
 图片转换: [KisekiCHConverter](https://github.com/Sewer56/Kiseki-Texture-Tool)  
 字体：[霞鹜文楷](https://github.com/lxgw/LxgwWenKai)  
+测试: [岡山城✨](https://tieba.baidu.com/home/main?id=tb.1.bbd22b1c.Igr7nGV7aBnsNHXhBRUBcA?t=1452935452&fr=pb)  
   
